@@ -293,6 +293,46 @@
         margin: 0;
         line-height: 1.5;
     }
+    .programacoes-month-day-group {
+        margin-bottom: 20px;
+    }
+
+    .programacoes-month-day-header {
+        font-weight: 900;
+        font-size: 0.95rem;
+        color: #0b2a4a;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 10px;
+        border: 1px solid rgba(2, 132, 199, 0.15);
+    }
+    .programacoes-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: #fff;
+        border: 1px solid rgba(2, 132, 199, 0.25);
+        border-radius: 10px;
+        color: #0369a1;
+        font-weight: 700;
+        font-size: 0.85rem;
+        cursor: pointer;
+        margin-bottom: 12px;
+        transition: all 150ms ease;
+    }
+
+    .programacoes-back-btn:hover {
+        background: rgba(2, 132, 199, 0.08);
+        border-color: rgba(2, 132, 199, 0.45);
+        transform: translateX(-2px);
+    }
+
+    .programacoes-back-btn svg {
+        width: 18px;
+        height: 18px;
+    }
 
     .programacoes-agenda-empty {
         border: 1px dashed rgba(15, 23, 42, 0.18);
@@ -511,6 +551,69 @@ document.addEventListener('DOMContentLoaded', () => {
         agendaListEl.innerHTML = '';
     };
 
+    const renderMonthAgenda = () => {
+        selectedDateIso = null;
+        agendaListEl.innerHTML = '';
+
+        const daysInMonth = monthDaysCount(YEAR, currentMonth);
+        const monthStart = toIso(YEAR, currentMonth + 1, 1);
+        const monthEnd = toIso(YEAR, currentMonth + 1, daysInMonth);
+
+        // Filter events for the current month
+        const monthEvents = EVENTS.filter(e => {
+            return e.start >= monthStart && e.start <= monthEnd;
+        });
+
+        if (monthEvents.length === 0) {
+            agendaTitleEl.textContent = 'Agenda do Mês';
+            agendaSubtitleEl.textContent = MONTHS[currentMonth] + ' de ' + YEAR;
+            agendaSectionEl.style.display = 'block';
+            agendaListEl.innerHTML = '<div class="programacoes-agenda-empty">Nenhum evento neste mês.</div>';
+            return;
+        }
+
+        // Group events by date
+        const eventsByDate = {};
+        for (const e of monthEvents) {
+            if (!eventsByDate[e.start]) {
+                eventsByDate[e.start] = [];
+            }
+            eventsByDate[e.start].push(e);
+        }
+
+        // Sort dates
+        const sortedDates = Object.keys(eventsByDate).sort();
+
+        agendaTitleEl.textContent = 'Agenda do Mês';
+        agendaSubtitleEl.textContent = MONTHS[currentMonth] + ' de ' + YEAR;
+        agendaSectionEl.style.display = 'block';
+
+        for (const date of sortedDates) {
+            const dayEvents = eventsByDate[date];
+            const dayGroup = document.createElement('div');
+            dayGroup.className = 'programacoes-month-day-group';
+
+            const dayHeader = document.createElement('div');
+            dayHeader.className = 'programacoes-month-day-header';
+            dayHeader.textContent = formatDateLong(date);
+            dayGroup.appendChild(dayHeader);
+
+            for (const e of dayEvents) {
+                const colors = eventColor(e);
+                const item = document.createElement('div');
+                item.className = 'programacoes-agenda-item';
+                item.style.setProperty('--event-accent', colors.accent);
+                item.innerHTML = `
+                    <p class="title">${e.title}</p>
+                    ${e.metaHtml ? `<p class="meta">${e.metaHtml}</p>` : ''}
+                `;
+                dayGroup.appendChild(item);
+            }
+
+            agendaListEl.appendChild(dayGroup);
+        }
+    };
+
     const renderAgenda = (isoDate, { scrollIntoView } = { scrollIntoView: false }) => {
         selectedDateIso = isoDate;
         agendaListEl.innerHTML = '';
@@ -529,6 +632,17 @@ document.addEventListener('DOMContentLoaded', () => {
         agendaTitleEl.textContent = 'Agenda';
         agendaSubtitleEl.textContent = formatDateLong(isoDate);
         agendaSectionEl.style.display = 'block';
+
+        // Add back button
+        const backBtn = document.createElement('button');
+        backBtn.className = 'programacoes-back-btn';
+        backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg> Ver agenda do mês';
+        backBtn.addEventListener('click', () => {
+            selectedDateIso = null;
+            renderMonthAgenda();
+            renderCalendar();
+        });
+        agendaListEl.appendChild(backBtn);
 
         for (const e of events) {
             const colors = eventColor(e);
@@ -673,7 +787,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gridEl.appendChild(dayEl);
         }
 
-        if (!selectedDateIso) renderAgenda(null);
+        if (!selectedDateIso) renderMonthAgenda();
     };
 
     // Eventos do toolbar
