@@ -10,13 +10,13 @@
 <div class="slider">
     <div class="list">
         <div class="item">
-            <img src="{{ asset('img/carrousel/1.webp') }}" alt="">
+            <img src="{{ asset('img/carrousel/1.webp') }}?v=2" alt="">
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/2.webp') }}" alt="">
+            <img src="{{ asset('img/carrousel/2.webp') }}?v=2" alt="">
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/3.webp') }}" alt="">
+            <img src="{{ asset('img/carrousel/3.webp') }}?v=2" alt="">
         </div>
         <div class="item">
             <img src="{{ asset('img/carrousel/4.webp') }}" alt="">
