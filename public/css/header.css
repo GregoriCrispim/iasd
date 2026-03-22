@@ -65,8 +65,13 @@ ul li ul.dropdown li{
     margin: 15px 15px;
 }
 
+ul li ul.dropdown li a{
+    white-space: nowrap;
+}
+
 ul li ul.dropdown{
     width: max-content;
+    min-width: 200px;
     background-color: #fff;
     position: absolute;
     z-index: 10;

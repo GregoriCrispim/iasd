@@ -19,10 +19,10 @@
             <img src="{{ asset('img/carrousel/3.webp') }}?v=2" alt="">
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/4.webp') }}" alt="">
+            <img src="{{ asset('img/carrousel/4.webp') }}?v=2" alt="">
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/5.webp') }}" alt="">
+            <img src="{{ asset('img/carrousel/5.webp') }}?v=2" alt="">
         </div>
     </div>
 

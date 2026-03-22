@@ -1,7 +1,4 @@
 <footer>
-    <div class="img_rodape">
-        <img src="{{ asset('img/rodape/img_unidos.webp') }}" alt="">
-    </div>
     <div class="contato">
         <h2>contato</h2>
         <div class="info_contato">
