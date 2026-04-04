@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('title', 'IASD Central de Brasília - Início')
+@section('meta-description', 'IASD Central de Brasília - Uma comunidade de fé, amor e esperança em Brasília. Participe de nossos cultos, estudos bíblicos, eventos e atividades para todas as idades.')
+@section('og-title', 'IASD Central de Brasília - Bem-vindo à Nossa Comunidade')
+@section('og-description', 'Junte-se a nós! Uma comunidade de fé, amor e esperança em Brasília. Cultos, estudos bíblicos, programações e muito mais.')
+@section('twitter-title', 'IASD Central de Brasília')
+@section('twitter-description', 'Uma comunidade de fé, amor e esperança em Brasília. Venha nos visitar!')
+@section('page-name', 'Início')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">

@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('title', 'IASD Central de Brasília - Estudo Bíblico')
+@section('meta-description', 'Solicite seu estudo bíblico gratuito na IASD Central de Brasília. Estudos presenciais, online ou por telefone. Conecte-se com Deus através da Palavra.')
+@section('og-title', 'Estudo Bíblico - IASD Central de Brasília')
+@section('og-description', 'Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais? O Estudo Bíblico é o caminho!')
+@section('og-image', asset('img/cards/estudo_biblico/estudo_biblico_header.webp'))
+@section('twitter-title', 'Estudo Bíblico - IASD Central de Brasília')
+@section('twitter-description', 'Solicite seu estudo bíblico gratuito. Estudos presenciais, online ou por telefone.')
+@section('twitter-image', asset('img/cards/estudo_biblico/estudo_biblico_header.webp'))
+@section('page-name', 'Estudo Bíblico')
 
 @push('styles')
 <style>

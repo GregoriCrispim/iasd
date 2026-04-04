@@ -177,6 +177,14 @@ class PageController extends Controller
     }
 
     /**
+     * Exibe a página de FAQ
+     */
+    public function faq()
+    {
+        return view('pages.faq');
+    }
+
+    /**
      * Processa o formulário de contato
      */
     public function enviarContato(Request $request)
