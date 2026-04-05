@@ -84,6 +84,8 @@
 
 @push('styles')
 <style>
+html { scroll-behavior: smooth; }
+
 .faq-container {
     width: 100%;
     max-width: 900px;
