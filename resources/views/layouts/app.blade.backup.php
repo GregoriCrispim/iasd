@@ -47,7 +47,6 @@
     <link rel="stylesheet" href="{{ asset('css/profecias_inspired.css') }}">
     <link rel="stylesheet" href="{{ asset('css/form_overlay.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/biblical-minimo.css') }}">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" media="print" onload="this.media='all'">
@@ -111,7 +110,6 @@
     <script src="{{ asset('js/por_do_sol.js') }}" defer></script>
     <script src="{{ asset('js/menu_hamburguer.js') }}" defer></script>
     <script src="{{ asset('js/form_overlay.js') }}" defer></script>
-    <script src="{{ asset('js/biblical-isolado.js') }}" defer></script>
     @stack('scripts')
 
     <!-- Organization Schema -->

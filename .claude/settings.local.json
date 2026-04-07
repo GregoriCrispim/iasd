@@ -15,7 +15,8 @@
       "Bash(git pull:*)",
       "Bash(git show-ref:*)",
       "Bash(grep -n \"canais.js\" storage/framework/views/*.php)",
-      "Bash(\"C:\\\\Users\\\\formi\\\\site_iasd\\\\resources\\\\views\\\\pages\\\\faq_new.blade.php\")"
+      "Bash(\"C:\\\\Users\\\\formi\\\\site_iasd\\\\resources\\\\views\\\\pages\\\\faq_new.blade.php\")",
+      "Bash(ls -la database/*.sqlite)"
     ]
   }
 }
