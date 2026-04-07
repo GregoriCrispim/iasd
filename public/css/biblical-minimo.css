@@ -1,0 +1,6 @@
+/* CSS MINIMO para links bíblicos - NÃO afeta layout */
+.biblical-reference {
+    color: #0066cc;
+    text-decoration: underline;
+    cursor: pointer;
+}
