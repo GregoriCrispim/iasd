@@ -775,7 +775,7 @@ html { scroll-behavior: smooth; }
 
             <div class="doctrine-item">
                 <h4>4.2 O que acontece com a pessoa imediatamente após a morte segundo a doutrina adventista? Ela está no céu (ou no inferno) agora (Lucas 23:43)?</h4>
-                <p>Segundo a doutrina adventista, imediatamente após a morte a pessoa entra em estado de inconsciência, comparado ao sono. Ela não está desfrutando conscientemente do céu nem sofrendo conscientemente no inferno. Seu próximo momento consciente será a ressurreição: para vida, no caso dos justos, na volta de Cristo; ou para condenação, após o milênio, no caso dos ímpios (João 5:28-29; 1 Tessalonicenses 4:16-17; Apocalipse 20:5-6, 11-15).</p>
+                <p>Segundo a doutrina adventista, imediatamente após a morte a pessoa entra em estado de inconsciência, comparado ao sono. Ela não está desfrutando conscientemente do céu nem sofrendo conscientemente no inferno. Seu próximo momento consciente será a ressurreição: para vida, no caso dos justos, na volta de Cristo; ou para condenação, após o milênio, no caso dos ímpios (<a href="#" class="biblical-reference" data-reference="João 5:28-29">João 5:28-29</a>; <a href="#" class="biblical-reference" data-reference="1 Tessalonicenses 4:16-17">1 Tessalonicenses 4:16-17</a>; <a href="#" class="biblical-reference" data-reference="Apocalipse 20:5-6">Apocalipse 20:5-6</a>, <a href="#" class="biblical-reference" data-reference="Apocalipse 20:11-15">20:11-15</a>).</p>
                 <p>Quanto a Lucas 23:43, os adventistas entendem que a pontuação do texto em português reflete decisão interpretativa posterior, pois o grego antigo não tinha vírgulas como nas edições modernas. Assim, a frase pode ser entendida como: "Em verdade te digo hoje, estarás comigo no paraíso", preservando a promessa feita naquele dia, sem exigir cumprimento naquele mesmo dia. Essa leitura é vista como coerente com o restante da Bíblia e com o fato de que o próprio Jesus, após a ressurreição, disse ainda não ter subido ao Pai (João 20:17).</p>
             </div>
 
@@ -799,7 +799,7 @@ html { scroll-behavior: smooth; }
 
             <div class="doctrine-item">
                 <h4>4.6 Como Moisés e Elias apareceram no monte da transfiguração conversando com Jesus se os mortos estão inconscientes?</h4>
-                <p>Os adventistas explicam que os dois casos não contradizem a doutrina do estado dos mortos, porque representam exceções redentivas específicas. Elias foi trasladado ao céu sem ver a morte (2 Reis 2:11). Moisés, segundo a compreensão adventista, foi ressuscitado de modo especial, em harmonia com a disputa mencionada em Judas 9 e com sua presença real na transfiguração (Mateus 17:1-3).</p>
+                <p>Os adventistas explicam que os dois casos não contradizem a doutrina do estado dos mortos, porque representam exceções redentivas específicas. Elias foi trasladado ao céu sem ver a morte (<a href="#" class="biblical-reference" data-reference="2 Reis 2:11">2 Reis 2:11</a>). Moisés, segundo a compreensão adventista, foi ressuscitado de modo especial, em harmonia com a disputa mencionada em <a href="#" class="biblical-reference" data-reference="Judas 9">Judas 9</a> e com sua presença real na transfiguração (<a href="#" class="biblical-reference" data-reference="Mateus 17:1-3">Mateus 17:1-3</a>).</p>
                 <p>Assim, a transfiguração não prova que todos os mortos estejam conscientes. Pelo contrário, ela antecipa o reino vindouro e reúne simbolicamente Cristo com representantes dos dois grupos dos salvos: os que serão ressuscitados e os que serão trasladados sem ver a morte. É uma cena excepcional e escatológica, não descrição do estado comum dos mortos.</p>
             </div>
 
@@ -1021,7 +1021,7 @@ html { scroll-behavior: smooth; }
 
             <div class="doctrine-item">
                 <h4>7.3 A IASD ensina que haverá uma lei ou decreto dominical mundial de perseguição (civil/religiosa) dos guardadores do sábado?</h4>
-                <p>Sim. Com base em Apocalipse 13:15-17, os adventistas ensinam que haverá um tempo de angústia em que os poderes da Terra se unirão para impor a observância do domingo. Aqueles que se recusarem a obedecer a esse decreto humano para permanecerem fiéis ao sábado de Deus enfrentarão sanções econômicas ("não poder comprar nem vender") e, por fim, um decreto de morte. Esse evento é visto como o clímax do Grande Conflito entre Cristo e Satanás. Referências: Apocalipse 13:15-17, Daniel 12:1.</p>
+                <p>Sim. Com base em <a href="#" class="biblical-reference" data-reference="Apocalipse 13:15-17">Apocalipse 13:15-17</a>, os adventistas ensinam que haverá um tempo de angústia em que os poderes da Terra se unirão para impor a observância do domingo. Aqueles que se recusarem a obedecer a esse decreto humano para permanecerem fiéis ao sábado de Deus enfrentarão sanções econômicas ("não poder comprar nem vender") e, por fim, um decreto de morte. Esse evento é visto como o clímax do Grande Conflito entre Cristo e Satanás. Referências: <a href="#" class="biblical-reference" data-reference="Apocalipse 13:15-17">Apocalipse 13:15-17</a>, <a href="#" class="biblical-reference" data-reference="Daniel 12:1">Daniel 12:1</a>.</p>
             </div>
 
             <div class="doctrine-item">
@@ -1627,8 +1627,8 @@ html { scroll-behavior: smooth; }
 
             <div class="doctrine-item">
                 <h4>13.1 Qual é a posição da IASD sobre divórcio e novo casamento? A Igreja aceita casamentos de pessoas divorciadas?</h4>
-                <p>A IASD entende que o casamento é uma instituição sagrada e, idealmente, permanente. O Nisto Cremos cita claramente o ensino de Jesus: "O que Deus ajuntou não o separe o homem" (Mateus 19:6; Marcos 10:9).</p>
-                <p>A igreja reconhece, porém, que o pecado feriu profundamente a realidade humana. Por isso, trata o divórcio como tragédia, não como ideal. Em casos bíblicos específicos, especialmente imoralidade sexual (Mateus 5:32; 19:9) e, em discussões pastorais, abandono destrutivo ligado a 1 Coríntios 7:10-15, a igreja admite que houve ruptura real da aliança.</p>
+                <p>A IASD entende que o casamento é uma instituição sagrada e, idealmente, permanente. O Nisto Cremos cita claramente o ensino de Jesus: "O que Deus ajuntou não o separe o homem" (<a href="#" class="biblical-reference" data-reference="Mateus 19:6">Mateus 19:6</a>; <a href="#" class="biblical-reference" data-reference="Marcos 10:9">Marcos 10:9</a>).</p>
+                <p>A igreja reconhece, porém, que o pecado feriu profundamente a realidade humana. Por isso, trata o divórcio como tragédia, não como ideal. Em casos bíblicos específicos, especialmente imoralidade sexual (<a href="#" class="biblical-reference" data-reference="Mateus 5:32">Mateus 5:32</a>; <a href="#" class="biblical-reference" data-reference="Mateus 19:9">19:9</a>) e, em discussões pastorais, abandono destrutivo ligado a <a href="#" class="biblical-reference" data-reference="1 Coríntios 7:10-15">1 Coríntios 7:10-15</a>, a igreja admite que houve ruptura real da aliança.</p>
                 <p>Quanto ao novo casamento, a IASD o trata com seriedade pastoral e análise bíblica. Em muitos casos, sim, a igreja aceita o casamento de pessoas divorciadas, desde que a situação seja tratada conforme os princípios bíblicos e as normas eclesiásticas aplicáveis.</p>
                 <p>Portanto:</p>
                 <p>divórcio não é o ideal de Deus;</p>
@@ -1645,11 +1645,11 @@ html { scroll-behavior: smooth; }
                 <p>doutrina do casamento.</p>
                 <p>A igreja ensina que toda pessoa tem dignidade, valor e deve ser tratada com respeito, compaixão e amor cristão. Ao mesmo tempo, sustenta que o padrão bíblico para a prática sexual e para o casamento é a união entre um homem e uma mulher, dentro da aliança matrimonial.</p>
                 <p>Textos frequentemente citados:</p>
-                <p>Gênesis 1:27</p>
-                <p>Gênesis 2:24</p>
-                <p>Mateus 19:4-6</p>
-                <p>Romanos 1:24-27</p>
-                <p>1 Coríntios 6:9-11</p>
+                <p><a href="#" class="biblical-reference" data-reference="Gênesis 1:27">Gênesis 1:27</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Gênesis 2:24">Gênesis 2:24</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 19:4-6">Mateus 19:4-6</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 1:24-27">Romanos 1:24-27</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 6:9-11">1 Coríntios 6:9-11</a></p>
                 <p>Assim, a IASD não reconhece uniões homoafetivas como casamento bíblico e não aprova prática sexual fora do modelo bíblico que ela entende ser heterossexual e conjugal.</p>
                 <p>Pastoralmente, isso deve ser dito com verdade e graça: a igreja não autoriza redefinir o casamento, mas é chamada a acolher pessoas, anunciar o evangelho e chamar todos ao discipulado.</p>
             </div>
