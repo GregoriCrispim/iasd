@@ -634,11 +634,11 @@ html { scroll-behavior: smooth; }
             <div class="doctrine-item">
                 <h4>2.9 Quais são os critérios bíblicos para testar um profeta, e como Ellen White é avaliada à luz deles?</h4>
                 <p>Os adventistas usam critérios bíblicos clássicos:</p>
-                <p><strong>Concordância com a Palavra de Deus:</strong> Isaías 8:20</p>
-                <p><strong>Exaltação de Cristo encarnado:</strong> 1 João 4:1-3</p>
-                <p><strong>Frutos do ministério e da vida:</strong> Mateus 7:15-20</p>
-                <p><strong>Cumprimento de predições quando aplicável:</strong> Jeremias 28:9</p>
-                <p><strong>Edificação da igreja:</strong> 1 Coríntios 14:3</p>
+                <p><strong>Concordância com a Palavra de Deus:</strong> <a href="#" class="biblical-reference" data-reference="Isaías 8:20">Isaías 8:20</a></p>
+                <p><strong>Exaltação de Cristo encarnado:</strong> <a href="#" class="biblical-reference" data-reference="1 João 4:1-3">1 João 4:1-3</a></p>
+                <p><strong>Frutos do ministério e da vida:</strong> <a href="#" class="biblical-reference" data-reference="Mateus 7:15-20">Mateus 7:15-20</a></p>
+                <p><strong>Cumprimento de predições quando aplicável:</strong> <a href="#" class="biblical-reference" data-reference="Jeremias 28:9">Jeremias 28:9</a></p>
+                <p><strong>Edificação da igreja:</strong> <a href="#" class="biblical-reference" data-reference="1 Coríntios 14:3">1 Coríntios 14:3</a></p>
                 <p>À luz desses critérios, a IASD entende que Ellen White:</p>
                 <p>exaltou constantemente a Bíblia e a centralidade de Cristo;</p>
                 <p>promoveu reforma espiritual, missionária, educacional e de saúde;</p>
@@ -690,12 +690,12 @@ html { scroll-behavior: smooth; }
                 <h4>3.1 O que é o Juízo Investigativo (ou "juízo pré-advento") e onde essa doutrina aparece claramente na Bíblia?</h4>
                 <p>O Juízo Investigativo, na teologia adventista, é a fase pré-advento do juízo divino em que os registros da vida dos que professaram fé em Deus são examinados no céu antes da segunda vinda de Cristo. Não é um processo para informar Deus de algo que Ele não saiba, mas a manifestação pública, justa e transparente de seus juízos perante o universo. Trata-se da etapa final do ministério sacerdotal de Cristo no santuário celestial.</p>
                 <p>Sua base bíblica é construída por convergência de textos:</p>
-                <p>Daniel 7:9-10: tribunal assentado, livros abertos;</p>
-                <p>Daniel 8:14: purificação do santuário;</p>
+                <p><a href="#" class="biblical-reference" data-reference="Daniel 7:9-10">Daniel 7:9-10</a>: tribunal assentado, livros abertos;</p>
+                <p><a href="#" class="biblical-reference" data-reference="Daniel 8:14">Daniel 8:14</a>: purificação do santuário;</p>
                 <p><a href="#" class="biblical-reference" data-reference="Daniel 9:24-27">Daniel 9:24-27</a>: conexão cronológica das 70 semanas com o período maior;</p>
                 <p>Hebreus 8-9: ministério de Cristo no santuário celestial;</p>
-                <p>Apocalipse 14:6-7: anúncio de que "é chegada a hora do seu juízo" antes da volta de Cristo;</p>
-                <p>Apocalipse 22:12: Cristo traz sua recompensa consigo, implicando juízo prévio.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Apocalipse 14:6-7">Apocalipse 14:6-7</a>: anúncio de que "é chegada a hora do seu juízo" antes da volta de Cristo;</p>
+                <p><a href="#" class="biblical-reference" data-reference="Apocalipse 22:12">Apocalipse 22:12</a>: Cristo traz sua recompensa consigo, implicando juízo prévio.</p>
                 <p>A doutrina, portanto, não se baseia em um único verso isolado, mas em uma estrutura profético-tipológica integrada.</p>
             </div>
 
@@ -1097,17 +1097,17 @@ html { scroll-behavior: smooth; }
                 <p><strong>Salvos mortos:</strong> Ressuscitam (primeira ressurreição).</p>
                 <p><strong>Salvos vivos:</strong> São transformados e arrebatados para encontrar o Senhor nos ares.</p>
                 <p><strong>Ímpios vivos:</strong> São destruídos pelo resplendor da vinda de Cristo.</p>
-                <p><strong>Ímpios mortos:</strong> Permanecem na sepultura até o fim do milênio. Referências: 1 Tessalonicenses 4:16-17, 2 Tessalonicenses 2:8, <a href="#" class="biblical-reference" data-reference="Apocalipse 20:5">Apocalipse 20:5</a></p>
+                <p><strong>Ímpios mortos:</strong> Permanecem na sepultura até o fim do milênio. Referências: <a href="#" class="biblical-reference" data-reference="1 Tessalonicenses 4:16-17">1 Tessalonicenses 4:16-17</a>, <a href="#" class="biblical-reference" data-reference="2 Tessalonicenses 2:8">2 Tessalonicenses 2:8</a>, <a href="#" class="biblical-reference" data-reference="Apocalipse 20:5">Apocalipse 20:5</a></p>
             </div>
 
             <div class="doctrine-item">
                 <h4>7.16 Como os adventistas lidam com previsões de datas, se ninguém sabe o dia nem a hora?</h4>
-                <p>A Igreja Adventista proíbe a marcação de datas para a volta de Cristo, baseada em Mateus 24:36. Embora estudem os "sinais dos tempos" para saber que a vinda está próxima, qualquer tentativa de marcar dia ou hora é considerada antibíblica. Referências: <a href="#" class="biblical-reference" data-reference="Marcos 13:32">Marcos 13:32</a>, <a href="#" class="biblical-reference" data-reference="Atos 1:7">Atos 1:7</a></p>
+                <p>A Igreja Adventista proíbe a marcação de datas para a volta de Cristo, baseada em <a href="#" class="biblical-reference" data-reference="Mateus 24:36">Mateus 24:36</a>. Embora estudem os "sinais dos tempos" para saber que a vinda está próxima, qualquer tentativa de marcar dia ou hora é considerada antibíblica. Referências: <a href="#" class="biblical-reference" data-reference="Marcos 13:32">Marcos 13:32</a>, <a href="#" class="biblical-reference" data-reference="Atos 1:7">Atos 1:7</a></p>
             </div>
 
             <div class="doctrine-item">
                 <h4>7.17 Por que Jesus ainda não voltou, se tanto tempo já passou?</h4>
-                <p>Os adventistas entendem que Deus é paciente, não querendo que ninguém pereça (2 Pedro 3:9). A demora também é relacionada à necessidade de o evangelho ser pregado em todo o mundo como testemunho (Mateus 24:14) e ao amadurecimento do caráter do Seu povo. Referências: <a href="#" class="biblical-reference" data-reference="2 Pedro 3:8-12">2 Pedro 3:8-12</a>, <a href="#" class="biblical-reference" data-reference="Apocalipse 14:14-15">Apocalipse 14:14-15</a></p>
+                <p>Os adventistas entendem que Deus é paciente, não querendo que ninguém pereça (<a href="#" class="biblical-reference" data-reference="2 Pedro 3:9">2 Pedro 3:9</a>). A demora também é relacionada à necessidade de o evangelho ser pregado em todo o mundo como testemunho (<a href="#" class="biblical-reference" data-reference="Mateus 24:14">Mateus 24:14</a>) e ao amadurecimento do caráter do Seu povo. Referências: <a href="#" class="biblical-reference" data-reference="2 Pedro 3:8-12">2 Pedro 3:8-12</a>, <a href="#" class="biblical-reference" data-reference="Apocalipse 14:14-15">Apocalipse 14:14-15</a></p>
             </div>
 
             <div class="doctrine-item">
@@ -1177,10 +1177,10 @@ html { scroll-behavior: smooth; }
                 <h4>9.1 A Igreja Adventista acredita na doutrina da Trindade (Pai, Filho e Espírito Santo como um só Deus) da mesma forma que outros cristãos evangélicos?</h4>
                 <p>Sim, a Igreja Adventista do Sétimo Dia crê na Trindade. A posição oficial da IASD é claramente trinitariana: há um só Deus, existente em três Pessoas coeternas — Pai, Filho e Espírito Santo. Isso aparece de forma explícita no Nisto Cremos, ao afirmar: "Há um só Deus: Pai, Filho e Espírito Santo, uma unidade de três Pessoas coeternas."</p>
                 <p>Biblicamente, essa compreensão se apoia em várias passagens:</p>
-                <p>Mateus 28:19 — Jesus manda batizar "em nome do Pai, e do Filho, e do Espírito Santo".</p>
-                <p>2 Coríntios 13:13 — Paulo reúne as três Pessoas na bênção apostólica.</p>
-                <p>Efésios 4:4-6 — um Espírito, um Senhor, um Deus e Pai.</p>
-                <p>1 Pedro 1:2 — eleição segundo a presciência do Pai, santificação do Espírito, obediência a Jesus Cristo.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 28:19">Mateus 28:19</a> — Jesus manda batizar "em nome do Pai, e do Filho, e do Espírito Santo".</p>
+                <p><a href="#" class="biblical-reference" data-reference="2 Coríntios 13:13">2 Coríntios 13:13</a> — Paulo reúne as três Pessoas na bênção apostólica.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Efésios 4:4-6">Efésios 4:4-6</a> — um Espírito, um Senhor, um Deus e Pai.</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Pedro 1:2">1 Pedro 1:2</a> — eleição segundo a presciência do Pai, santificação do Espírito, obediência a Jesus Cristo.</p>
                 <p>A IASD também crê, como os cristãos evangélicos históricos, que:</p>
                 <p>o Pai é Deus;</p>
                 <p>o Filho é Deus;</p>
@@ -1188,8 +1188,8 @@ html { scroll-behavior: smooth; }
                 <p>e, ainda assim, não há três deuses, mas um só Deus.</p>
                 <p>Isso não significa confusão entre as Pessoas. O Pai não é o Filho, o Filho não é o Espírito, e o Espírito não é o Pai. Eles são distintos em pessoa, mas um em essência, propósito, caráter e divindade.</p>
                 <p>Onde os adventistas se aproximam fortemente dos evangélicos clássicos? Na afirmação de que:</p>
-                <p>Jesus é plenamente Deus (João 1:1-3, 14; Colossenses 2:9);</p>
-                <p>o Espírito Santo é Pessoa divina, não mera força impessoal (João 14:16-17, 26; 16:13-14; Atos 5:3-4).</p>
+                <p>Jesus é plenamente Deus (<a href="#" class="biblical-reference" data-reference="João 1:1-3">João 1:1-3</a>, <a href="#" class="biblical-reference" data-reference="João 1:14">14</a>; <a href="#" class="biblical-reference" data-reference="Colossenses 2:9">Colossenses 2:9</a>);</p>
+                <p>o Espírito Santo é Pessoa divina, não mera força impessoal (<a href="#" class="biblical-reference" data-reference="João 14:16-17">João 14:16-17</a>, <a href="#" class="biblical-reference" data-reference="João 14:26">26</a>; <a href="#" class="biblical-reference" data-reference="João 16:13-14">João 16:13-14</a>; <a href="#" class="biblical-reference" data-reference="Atos 5:3-4">Atos 5:3-4</a>).</p>
                 <p>Portanto, sim, os adventistas creem na Trindade em sentido real e ortodoxo. Se houver diferença em relação a certos grupos evangélicos, normalmente não está no fato de crer ou não crer na Trindade, mas na forma de explicar alguns pontos bíblicos ou históricos. Mas, em essência, a IASD é trinitariana.</p>
             </div>
 
@@ -1203,8 +1203,8 @@ html { scroll-behavior: smooth; }
                 <p>a IASD não afirma infalibilidade histórica de todos os pioneiros em cada detalhe;</p>
                 <p>a autoridade final está na Escritura, não nas opiniões iniciais de qualquer líder humano.</p>
                 <p>Textos relevantes para esse princípio:</p>
-                <p>Provérbios 4:18 — "a vereda dos justos é como a luz da aurora".</p>
-                <p>João 16:13 — o Espírito guia "a toda a verdade".</p>
+                <p><a href="#" class="biblical-reference" data-reference="Provérbios 4:18">Provérbios 4:18</a> — "a vereda dos justos é como a luz da aurora".</p>
+                <p><a href="#" class="biblical-reference" data-reference="João 16:13">João 16:13</a> — o Espírito guia "a toda a verdade".</p>
                 <p>Atos 15 — a própria igreja apostólica precisou amadurecer a compreensão de certas questões doutrinárias.</p>
                 <p>Então, sim, houve mudança histórica de formulação e consolidação. Mas a resposta oficial adventista hoje é inequívoca: a IASD é trinitariana.</p>
             </div>
@@ -1226,11 +1226,11 @@ html { scroll-behavior: smooth; }
                 <p>a IASD evita especulações filosóficas sobre a natureza interna de Deus além do que foi revelado.</p>
                 <p>Por isso, o adventista pode dizer sem problema que crê em um Deus triúno, mas normalmente desejará acrescentar: porque a Escritura revela o Pai, o Filho e o Espírito Santo como divinos e coeternos.</p>
                 <p>Passagens centrais:</p>
-                <p>Deuteronômio 6:4 — um só Deus.</p>
-                <p>João 1:1-3 — o Verbo é Deus.</p>
-                <p>Mateus 28:19 — fórmula batismal trinitária.</p>
-                <p>Atos 5:3-4 — o Espírito Santo identificado com Deus.</p>
-                <p>Hebreus 9:14 — o Espírito eterno.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Deuteronômio 6:4">Deuteronômio 6:4</a> — um só Deus.</p>
+                <p><a href="#" class="biblical-reference" data-reference="João 1:1-3">João 1:1-3</a> — o Verbo é Deus.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 28:19">Mateus 28:19</a> — fórmula batismal trinitária.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Atos 5:3-4">Atos 5:3-4</a> — o Espírito Santo identificado com Deus.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Hebreus 9:14">Hebreus 9:14</a> — o Espírito eterno.</p>
                 <p>Portanto, sim, há forte concordância com a formulação nicena no conteúdo central, mas a IASD prefere apresentar a doutrina como ensino bíblico, não como submissão a uma tradição conciliar.</p>
             </div>
 
@@ -1247,11 +1247,11 @@ html { scroll-behavior: smooth; }
                 <p>A lógica adventista é esta: o ser que lidera os anjos, defende o povo de Deus, derrota Satanás e está ligado à ressurreição e à vitória final é o próprio Cristo em sua função de Comandante celestial. "Arcanjo", nessa leitura, não quer dizer "anjo criado", mas chefe dos anjos.</p>
                 <p>Isso é muito diferente da posição das Testemunhas de Jeová. Elas entendem Miguel como um ser criado, o maior dos anjos. A IASD rejeita isso porque afirma claramente que:</p>
                 <p>Cristo é eterno (<a href="#" class="biblical-reference" data-reference="Miquéias 5:2">Miquéias 5:2</a>; <a href="#" class="biblical-reference" data-reference="João 1:1-3">João 1:1-3</a>);</p>
-                <p>Cristo é Criador, não criatura (Colossenses 1:16-17; Hebreus 1:1-8);</p>
-                <p>Cristo é adorado (Mateus 28:17; Hebreus 1:6; Apocalipse 5:11-14);</p>
-                <p>"nele habita corporalmente toda a plenitude da Divindade" (Colossenses 2:9).</p>
+                <p>Cristo é Criador, não criatura (<a href="#" class="biblical-reference" data-reference="Colossenses 1:16-17">Colossenses 1:16-17</a>; <a href="#" class="biblical-reference" data-reference="Hebreus 1:1-8">Hebreus 1:1-8</a>);</p>
+                <p>Cristo é adorado (<a href="#" class="biblical-reference" data-reference="Mateus 28:17">Mateus 28:17</a>; <a href="#" class="biblical-reference" data-reference="Hebreus 1:6">Hebreus 1:6</a>; <a href="#" class="biblical-reference" data-reference="Apocalipse 5:11-14">Apocalipse 5:11-14</a>);</p>
+                <p>"nele habita corporalmente toda a plenitude da Divindade" (<a href="#" class="biblical-reference" data-reference="Colossenses 2:9">Colossenses 2:9</a>).</p>
                 <p>Hebreus 1 é especialmente importante, porque distingue claramente o Filho dos anjos:</p>
-                <p>Hebreus 1:4-8, 13 mostra que o Filho é superior aos anjos e recebe honra que nenhum anjo recebe.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Hebreus 1:4-8, 13">Hebreus 1:4-8, 13</a> mostra que o Filho é superior aos anjos e recebe honra que nenhum anjo recebe.</p>
                 <p>Então a posição adventista é:</p>
                 <p>Jesus não é um anjo criado;</p>
                 <p>Jesus é Deus Filho eterno;</p>
@@ -1280,12 +1280,12 @@ html { scroll-behavior: smooth; }
                 <p>Cristo foi verdadeiramente humano;</p>
                 <p>Cristo foi absolutamente sem pecado.</p>
                 <p>Textos essenciais:</p>
-                <p>João 1:14 — o Verbo se fez carne.</p>
-                <p>Romanos 8:3 — Deus enviou seu Filho "em semelhança de carne pecaminosa".</p>
-                <p>Hebreus 2:14, 17 — participou da carne e sangue e foi semelhante aos irmãos.</p>
-                <p>Hebreus 4:15 — foi tentado em todas as coisas, "mas sem pecado".</p>
-                <p>1 Pedro 2:22 — não cometeu pecado.</p>
-                <p>2 Coríntios 5:21 — não conheceu pecado.</p>
+                <p><a href="#" class="biblical-reference" data-reference="João 1:14">João 1:14</a> — o Verbo se fez carne.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 8:3">Romanos 8:3</a> — Deus enviou seu Filho "em semelhança de carne pecaminosa".</p>
+                <p><a href="#" class="biblical-reference" data-reference="Hebreus 2:14, 17">Hebreus 2:14, 17</a> — participou da carne e sangue e foi semelhante aos irmãos.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Hebreus 4:15">Hebreus 4:15</a> — foi tentado em todas as coisas, "mas sem pecado".</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Pedro 2:22">1 Pedro 2:22</a> — não cometeu pecado.</p>
+                <p><a href="#" class="biblical-reference" data-reference="2 Coríntios 5:21">2 Coríntios 5:21</a> — não conheceu pecado.</p>
                 <p>No debate histórico adventista, surgiram formulações diferentes sobre "pré-queda" e "pós-queda". Mas como você pediu a posição oficial, o ponto seguro é este:</p>
                 <p>Jesus assumiu a humanidade real, enfraquecida pelos efeitos de milênios de pecado;</p>
                 <p>porém, Ele nunca possuiu pecado pessoal, culpa, corrupção moral ou concupiscência consentida.</p>
@@ -1303,15 +1303,15 @@ html { scroll-behavior: smooth; }
             <div class="doctrine-item">
                 <h4>10.1 Por que os adventistas evitam carne de porco e outros animais considerados impuros (Levítico 11)? Isso não fazia parte da lei cerimonial?</h4>
                 <p>Os adventistas entendem que a distinção entre animais puros e impuros não surgiu apenas com a lei cerimonial de Moisés, mas já existia antes, sendo depois reafirmada em <a href="#" class="biblical-reference" data-reference="Levítico 11">Levítico 11</a></p>
-                <p>Um ponto importante é Gênesis 7:2, antes do Sinai: Noé já devia distinguir entre animais limpos e imundos. Isso mostra que a categoria não nasceu meramente com o sistema cerimonial israelita.</p>
-                <p>Levítico 11 e Deuteronômio 14 organizam essa distinção para o povo de Israel. A leitura adventista é que essa diferença possui também caráter sanitário, moral e de santidade prática, não apenas ritual. O Nisto Cremos trata da saúde cristã em conexão com a santidade do corpo e da vida.</p>
+                <p>Um ponto importante é <a href="#" class="biblical-reference" data-reference="Gênesis 7:2">Gênesis 7:2</a>, antes do Sinai: Noé já devia distinguir entre animais limpos e imundos. Isso mostra que a categoria não nasceu meramente com o sistema cerimonial israelita.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Levítico 11">Levítico 11</a> e <a href="#" class="biblical-reference" data-reference="Deuteronômio 14">Deuteronômio 14</a> organizam essa distinção para o povo de Israel. A leitura adventista é que essa diferença possui também caráter sanitário, moral e de santidade prática, não apenas ritual. O Nisto Cremos trata da saúde cristã em conexão com a santidade do corpo e da vida.</p>
                 <p>Textos importantes:</p>
-                <p>Levítico 11</p>
-                <p>Deuteronômio 14</p>
-                <p>Gênesis 7:2</p>
-                <p>1 Coríntios 10:31</p>
-                <p>1 Coríntios 6:19-20</p>
-                <p>1 Tessalonicenses 5:23</p>
+                <p><a href="#" class="biblical-reference" data-reference="Levítico 11">Levítico 11</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Deuteronômio 14">Deuteronômio 14</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Gênesis 7:2">Gênesis 7:2</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 10:31">1 Coríntios 10:31</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 6:19-20">1 Coríntios 6:19-20</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Tessalonicenses 5:23">1 Tessalonicenses 5:23</a></p>
                 <p>Por isso, a IASD não vê a abstinência de porco e de outros animais impuros como mero apego ao cerimonial abolido, mas como parte de um princípio permanente de cuidado com o corpo e distinção entre o que Deus classificou como apropriado ou não para alimento.</p>
                 <p>O argumento adventista é: a lei cerimonial apontava para Cristo por meio de sacrifícios, rituais e festas típicas. Já a distinção alimentar tem um alcance amplo de ordem, saúde e santidade. O Nisto Cremos trata a reforma de saúde como expressão de mordomia cristã.</p>
                 <p>Então, na posição adventista, não se trata de buscar salvação por dieta, mas de honrar a Deus no corpo.</p>
@@ -1321,13 +1321,13 @@ html { scroll-behavior: smooth; }
                 <h4>10.2 Como os adventistas interpretam Atos 10 ("Não chames imundo ao que Deus purificou") e Marcos 7 ("... E, assim, considerou ele puros todos os alimentos") sobre alimentos puros e impuros?</h4>
                 <p>A IASD entende que nem Atos 10 nem Marcos 7 aboliram a distinção bíblica entre animais puros e impuros.</p>
                 <p>Em Atos 10, Pedro tem uma visão com animais diversos e ouve a ordem: "mata e come". Mas o próprio texto interpreta a visão. Quando Pedro entende seu significado, ele declara:</p>
-                <p>Atos 10:28 — "a mim me revelou Deus que a nenhum homem considerasse comum ou imundo".</p>
+                <p><a href="#" class="biblical-reference" data-reference="Atos 10:28">Atos 10:28</a> — "a mim me revelou Deus que a nenhum homem considerasse comum ou imundo".</p>
                 <p>Portanto, o tema central não era dieta, mas aceitação dos gentios no povo de Deus. Deus estava quebrando a barreira étnica e ensinando a Pedro a não tratar os gentios convertidos como impuros.</p>
                 <p>Quanto a Marcos 7, o Nisto Cremos é bem claro no raciocínio: a discussão ali não é sobre declarar o porco ou o camarão próprios para alimento, mas sobre a lavagem ritual das mãos. O conflito era entre Jesus e a tradição farisaica. O problema era comer com mãos "impuras" cerimonialmente, e não a espécie do alimento em si.</p>
                 <p>Textos centrais:</p>
-                <p>Marcos 7:1-23</p>
-                <p>Mateus 15:1-20</p>
-                <p>Atos 10:9-28</p>
+                <p><a href="#" class="biblical-reference" data-reference="Marcos 7:1-23">Marcos 7:1-23</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 15:1-20">Mateus 15:1-20</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Atos 10:9-28">Atos 10:9-28</a></p>
                 <p>Na leitura adventista, Jesus ensinou que a contaminação moral vem do coração, não da falta de rito humano. Isso não equivale a abolir categorias alimentares já definidas por Deus.</p>
                 <p>Portanto:</p>
                 <p>Atos 10 fala principalmente sobre pessoas, não sobre cardápio;</p>
@@ -1337,7 +1337,7 @@ html { scroll-behavior: smooth; }
             <div class="doctrine-item">
                 <h4>10.3 O vegetarianismo é uma doutrina obrigatória ou uma recomendação de saúde?</h4>
                 <p>Não é uma doutrina obrigatória para salvação nem condição universal para membresia. A posição oficial adventista é que o vegetarianismo é fortemente recomendado como ideal de saúde, mas não é imposto como dogma salvífico.</p>
-                <p>A Bíblia apresenta a dieta original em Gênesis 1:29 como vegetal. Depois do dilúvio, Deus permitiu o uso de carne em certas condições (Gênesis 9:3-4). Mais tarde, em Israel, distinguiu-se entre carnes limpas e impuras (Levítico 11).</p>
+                <p>A Bíblia apresenta a dieta original em <a href="#" class="biblical-reference" data-reference="Gênesis 1:29">Gênesis 1:29</a> como vegetal. Depois do dilúvio, Deus permitiu o uso de carne em certas condições (<a href="#" class="biblical-reference" data-reference="Gênesis 9:3-4">Gênesis 9:3-4</a>). Mais tarde, em Israel, distinguiu-se entre carnes limpas e impuras (<a href="#" class="biblical-reference" data-reference="Levítico 11">Levítico 11</a>).</p>
                 <p>A leitura adventista é:</p>
                 <p>o ideal mais elevado aponta para uma alimentação mais simples e saudável;</p>
                 <p>porém, a salvação está em Cristo, não no cardápio.</p>
@@ -1354,7 +1354,7 @@ html { scroll-behavior: smooth; }
             <div class="doctrine-item">
                 <h4>10.4 A reforma de saúde é questão de salvação ou apenas de bem-estar e mordomia cristã?</h4>
                 <p>A resposta oficial precisa ser equilibrada: a reforma de saúde não é o evangelho nem o meio de salvação, mas é uma área importante de santificação, obediência e mordomia cristã.</p>
-                <p>A salvação é somente pela graça, mediante a fé em Cristo (Efésios 2:8-9). Isso a IASD afirma claramente. Porém, a vida salva produz frutos visíveis. Assim como a fé afeta a língua, a sexualidade, as finanças e o caráter, também afeta o uso do corpo.</p>
+                <p>A salvação é somente pela graça, mediante a fé em Cristo (<a href="#" class="biblical-reference" data-reference="Efésios 2:8-9">Efésios 2:8-9</a>). Isso a IASD afirma claramente. Porém, a vida salva produz frutos visíveis. Assim como a fé afeta a língua, a sexualidade, as finanças e o caráter, também afeta o uso do corpo.</p>
                 <p>Por isso, a reforma de saúde é mais do que "bem-estar". Ela envolve:</p>
                 <p>respeito ao corpo como templo do Espírito;</p>
                 <p>clareza mental para a vida espiritual;</p>
@@ -1376,20 +1376,20 @@ html { scroll-behavior: smooth; }
                 <p>Porque a IASD entende que essas substâncias prejudicam o corpo, a mente e a vida espiritual, e que o cristão é chamado à sobriedade, pureza e autocontrole.</p>
                 <p>Álcool: a posição adventista é de abstinência. Ainda que existam debates sobre usos antigos do vinho na Bíblia, a igreja entende que, diante dos males do álcool e do chamado à sobriedade, o caminho mais seguro e coerente é a abstinência.</p>
                 <p>Textos:</p>
-                <p>Provérbios 20:1</p>
-                <p>Provérbios 23:29-32</p>
-                <p>Efésios 5:18</p>
+                <p><a href="#" class="biblical-reference" data-reference="Provérbios 20:1">Provérbios 20:1</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Provérbios 23:29-32">Provérbios 23:29-32</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Efésios 5:18">Efésios 5:18</a></p>
                 <p>Tabaco: não há menção explícita porque o hábito é posterior ao texto bíblico, mas o princípio é claro: não destruir o corpo nem se tornar escravo de vícios.</p>
                 <p>Textos:</p>
-                <p>1 Coríntios 6:12</p>
-                <p>1 Coríntios 6:19-20</p>
-                <p>2 Coríntios 7:1</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 6:12">1 Coríntios 6:12</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 6:19-20">1 Coríntios 6:19-20</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="2 Coríntios 7:1">2 Coríntios 7:1</a></p>
                 <p>Café: tradicionalmente a IASD desaconselha o café por seu efeito estimulante, dependência e impacto sobre o sistema nervoso. O raciocínio é de temperança, domínio próprio e proteção da mente.</p>
                 <p>Textos de princípio:</p>
-                <p>1 Coríntios 10:31</p>
-                <p>Romanos 12:1-2</p>
-                <p>1 Pedro 1:13</p>
-                <p>1 Pedro 5:8</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 10:31">1 Coríntios 10:31</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 12:1-2">Romanos 12:1-2</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Pedro 1:13">1 Pedro 1:13</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Pedro 5:8">1 Pedro 5:8</a></p>
                 <p>O ponto central não é legalismo alimentar, mas vida sóbria e consagrada.</p>
             </div>
 
@@ -1402,10 +1402,10 @@ html { scroll-behavior: smooth; }
                 <p>evitar dependência;</p>
                 <p>preservar clareza mental.</p>
                 <p>Textos-base:</p>
-                <p>1 Coríntios 6:12</p>
-                <p>1 Coríntios 10:31</p>
-                <p>Romanos 12:1-2</p>
-                <p>1 Pedro 5:8</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 6:12">1 Coríntios 6:12</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 10:31">1 Coríntios 10:31</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 12:1-2">Romanos 12:1-2</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Pedro 5:8">1 Pedro 5:8</a></p>
                 <p>É importante distinguir:</p>
                 <p>a posição oficial enfatiza princípios;</p>
                 <p>a prática pastoral local pode variar em rigor e aplicação.</p>
@@ -1416,10 +1416,10 @@ html { scroll-behavior: smooth; }
                 <h4>10.7 É permitido o uso de jóias, piercings, maquiagens e outros adornos?</h4>
                 <p>A posição adventista histórica e oficial tende à simplicidade, modéstia e ausência de ostentação. O princípio é que a beleza cristã deve ser primariamente interior, e não centrada em exibição externa.</p>
                 <p>Textos frequentemente usados:</p>
-                <p>1 Timóteo 2:9-10</p>
-                <p>1 Pedro 3:3-4</p>
-                <p>1 João 2:15-17</p>
-                <p>Romanos 12:1-2</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Timóteo 2:9-10">1 Timóteo 2:9-10</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Pedro 3:3-4">1 Pedro 3:3-4</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 João 2:15-17">1 João 2:15-17</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 12:1-2">Romanos 12:1-2</a></p>
                 <p>No Nisto Cremos, a conduta cristã é apresentada como chamada à modéstia, pureza e simplicidade.</p>
                 <p>Quanto aos itens:</p>
                 <p>jóias: tradicionalmente desaconselhadas, especialmente como ornamento;</p>
@@ -1435,11 +1435,11 @@ html { scroll-behavior: smooth; }
                 <p>Por isso, normalmente a orientação pastoral é instruir o candidato a abandonar adornos incompatíveis com esse ideal. Em muitos lugares, o uso persistente de jóias como adorno é tratado como obstáculo ao preparo batismal.</p>
                 <p>Mas pastoralmente é importante evitar dureza superficial. O foco não é a jóia em si como centro do evangelho, mas o coração submetido a Cristo. O batismo pressupõe arrependimento, fé e disposição de viver em conformidade com a Palavra.</p>
                 <p>Textos de princípio:</p>
-                <p>Mateus 28:19-20</p>
-                <p>Atos 2:38</p>
-                <p>Romanos 6:3-6</p>
-                <p>1 Timóteo 2:9-10</p>
-                <p>1 Pedro 3:3-4</p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 28:19-20">Mateus 28:19-20</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Atos 2:38">Atos 2:38</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 6:3-6">Romanos 6:3-6</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Timóteo 2:9-10">1 Timóteo 2:9-10</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Pedro 3:3-4">1 Pedro 3:3-4</a></p>
                 <p>Então, a resposta curta e honesta é: a igreja espera que o candidato ao batismo aceite o princípio adventista de modéstia, e isso normalmente inclui deixar jóias ornamentais.</p>
             </div>
 
@@ -1447,13 +1447,13 @@ html { scroll-behavior: smooth; }
                 <h4>10.9 Adventistas podem receber transfusão de sangue?</h4>
                 <p>Sim. A Igreja Adventista do Sétimo Dia não proíbe transfusão de sangue como fazem as Testemunhas de Jeová.</p>
                 <p>A IASD valoriza fortemente a vida, a saúde, o cuidado médico responsável e a liberdade de consciência em decisões clínicas. Pode haver discussão sobre tipos de tratamento, riscos, alternativas e preferências pessoais, mas não há doutrina adventista proibindo transfusão.</p>
-                <p>Os textos bíblicos sobre não comer sangue, como Levítico 17 e Atos 15, são entendidos no contexto alimentar, ritual e da reverência à vida, não como proibição absoluta de procedimento médico terapêutico moderno.</p>
+                <p>Os textos bíblicos sobre não comer sangue, como <a href="#" class="biblical-reference" data-reference="Levítico 17">Levítico 17</a> e <a href="#" class="biblical-reference" data-reference="Atos 15">Atos 15</a>, são entendidos no contexto alimentar, ritual e da reverência à vida, não como proibição absoluta de procedimento médico terapêutico moderno.</p>
                 <p>Portanto, sim, adventistas podem receber transfusão de sangue.</p>
             </div>
 
             <div class="doctrine-item">
                 <h4>10.10 Adventista pode comer camarão e mariscos?</h4>
-                <p>Pela posição tradicional adventista, não deve. Camarão, mariscos e outros frutos do mar classificados como impuros em Levítico 11:9-12 e Deuteronômio 14:9-10 não fazem parte da dieta recomendada pela IASD.</p>
+                <p>Pela posição tradicional adventista, não deve. Camarão, mariscos e outros frutos do mar classificados como impuros em <a href="#" class="biblical-reference" data-reference="Levítico 11:9-12">Levítico 11:9-12</a> e <a href="#" class="biblical-reference" data-reference="Deuteronômio 14:9-10">Deuteronômio 14:9-10</a> não fazem parte da dieta recomendada pela IASD.</p>
                 <p>A lógica é a mesma aplicada ao porco e outros animais impuros: a distinção bíblica é respeitada como parte da mordomia do corpo e da santidade prática.</p>
             </div>
 
@@ -1461,10 +1461,10 @@ html { scroll-behavior: smooth; }
                 <h4>10.11 Por que há regras sobre entretenimento, vestimenta e padrões de aparência?</h4>
                 <p>Porque a fé cristã, na visão adventista, não é apenas crença intelectual; ela molda a vida inteira. O Nisto Cremos associa a conduta cristã a uma existência santa, sóbria e distinta do espírito do mundo.</p>
                 <p>Textos-base:</p>
-                <p>Romanos 12:1-2</p>
-                <p>Filipenses 4:8</p>
-                <p>1 João 2:15-17</p>
-                <p>1 Coríntios 10:31</p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 12:1-2">Romanos 12:1-2</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Filipenses 4:8">Filipenses 4:8</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 João 2:15-17">1 João 2:15-17</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 10:31">1 Coríntios 10:31</a></p>
                 <p>A preocupação com entretenimento, vestimenta e aparência existe porque essas áreas afetam:</p>
                 <p>a mente;</p>
                 <p>os desejos;</p>
@@ -1482,31 +1482,31 @@ html { scroll-behavior: smooth; }
                 <h4>11.1 O dízimo é uma prática do Antigo Testamento ou continua válido para os cristãos na Nova Aliança? Ele é obrigatório para a salvação?</h4>
                 <p>A posição adventista é que o dízimo continua válido como princípio de mordomia, embora não seja meio de salvação.</p>
                 <p>A IASD vê o dízimo como anterior ao Sinai:</p>
-                <p>Abraão deu o dízimo a Melquisedeque (Gênesis 14:20);</p>
-                <p>Jacó fez voto relacionado ao dízimo (Gênesis 28:22).</p>
+                <p>Abraão deu o dízimo a Melquisedeque (<a href="#" class="biblical-reference" data-reference="Gênesis 14:20">Gênesis 14:20</a>);</p>
+                <p>Jacó fez voto relacionado ao dízimo (<a href="#" class="biblical-reference" data-reference="Gênesis 28:22">Gênesis 28:22</a>).</p>
                 <p>Depois, o sistema foi regulado em Israel:</p>
-                <p>Levítico 27:30, 32 — o dízimo é santo ao Senhor.</p>
+                <p><a href="#" class="biblical-reference" data-reference="Levítico 27:30, 32">Levítico 27:30, 32</a> — o dízimo é santo ao Senhor.</p>
                 <p>No Novo Testamento, Jesus não o condena:</p>
-                <p>Mateus 23:23 — "devíeis, porém, fazer estas coisas, sem omitir aquelas".</p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 23:23">Mateus 23:23</a> — "devíeis, porém, fazer estas coisas, sem omitir aquelas".</p>
                 <p>O Nisto Cremos afirma que Deus instituiu o sistema de dízimos e ofertas e que a igreja adota esse modelo para sustentar a proclamação do evangelho. O trecho recuperado do anexo diz claramente que o dízimo é "santo ao Senhor" e deve ser devolvido como propriedade divina.</p>
                 <p>Mas isso precisa ser cercado do evangelho:</p>
                 <p>ninguém é salvo por dizimar;</p>
                 <p>ninguém compra favor divino com dinheiro;</p>
                 <p>o dízimo é resposta de fidelidade, não moeda de salvação.</p>
                 <p>Textos centrais:</p>
-                <p>Gênesis 14:20</p>
-                <p>Gênesis 28:22</p>
-                <p>Levítico 27:30</p>
-                <p>Malaquias 3:8-10</p>
-                <p>Mateus 23:23</p>
-                <p>2 Coríntios 9:6-8</p>
+                <p><a href="#" class="biblical-reference" data-reference="Gênesis 14:20">Gênesis 14:20</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Gênesis 28:22">Gênesis 28:22</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Levítico 27:30">Levítico 27:30</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Malaquias 3:8-10">Malaquias 3:8-10</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 23:23">Mateus 23:23</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="2 Coríntios 9:6-8">2 Coríntios 9:6-8</a></p>
             </div>
 
             <div class="doctrine-item">
                 <h4>11.2 O dízimo deve ser "pago" ou "devolvido"?</h4>
                 <p>Na linguagem adventista, o mais correto é dizer "devolvido", não "pago".</p>
                 <p>Isso porque o dízimo não é visto como algo que pertence originalmente ao adorador e depois é oferecido a Deus. Pelo contrário: ele já é entendido como pertencente ao Senhor.</p>
-                <p>O próprio Nisto Cremos enfatiza isso ao dizer que essa porção é "sua efetiva propriedade". Com base em Levítico 27:30, a igreja entende que o dízimo é santo ao Senhor.</p>
+                <p>O próprio Nisto Cremos enfatiza isso ao dizer que essa porção é "sua efetiva propriedade". Com base em <a href="#" class="biblical-reference" data-reference="Levítico 27:30">Levítico 27:30</a>, a igreja entende que o dízimo é santo ao Senhor.</p>
                 <p>Então:</p>
                 <p>pagar sugere quitação de uma dívida ou contribuição voluntária qualquer;</p>
                 <p>devolver expressa melhor a ideia bíblica de mordomia.</p>
@@ -1536,11 +1536,11 @@ html { scroll-behavior: smooth; }
                 <p>o batismo simboliza morte, sepultamento e ressurreição com Cristo;</p>
                 <p>esse simbolismo aparece plenamente na imersão.</p>
                 <p>Textos-chave:</p>
-                <p>Mateus 3:13-17 — o exemplo de Jesus;</p>
-                <p>João 3:23 — havia muita água;</p>
-                <p>Atos 8:38-39 — Filipe e o eunuco descem à água;</p>
-                <p>Romanos 6:3-6</p>
-                <p>Colossenses 2:12</p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 3:13-17">Mateus 3:13-17</a> — o exemplo de Jesus;</p>
+                <p><a href="#" class="biblical-reference" data-reference="João 3:23">João 3:23</a> — havia muita água;</p>
+                <p><a href="#" class="biblical-reference" data-reference="Atos 8:38-39">Atos 8:38-39</a> — Filipe e o eunuco descem à água;</p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 6:3-6">Romanos 6:3-6</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Colossenses 2:12">Colossenses 2:12</a></p>
                 <p>O Nisto Cremos também rejeita a ideia sacramental automática do batismo, como se o rito em si salvasse. O batismo é sinal de fé, arrependimento e união com Cristo.</p>
                 <p>Quanto a batismos por aspersão em outras denominações, a IASD normalmente entende que não correspondem ao modelo bíblico pleno. Por isso, ao unir-se à igreja, a prática esperada é o batismo por imersão, ainda que a pessoa venha de ambiente cristão sincero.</p>
             </div>
@@ -1569,14 +1569,14 @@ html { scroll-behavior: smooth; }
                 <p>não simboliza morte e ressurreição com Cristo;</p>
                 <p>não substitui a futura decisão individual.</p>
                 <p>A base bíblica inclui:</p>
-                <p>1 Samuel 1:27-28 — Ana consagra Samuel;</p>
-                <p>Lucas 2:22 — Jesus foi apresentado.</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Samuel 1:27-28">1 Samuel 1:27-28</a> — Ana consagra Samuel;</p>
+                <p><a href="#" class="biblical-reference" data-reference="Lucas 2:22">Lucas 2:22</a> — Jesus foi apresentado.</p>
                 <p>Portanto, a dedicação é um ato de gratidão, compromisso familiar e oração, mas não é regeneração sacramental nem batismo substituto.</p>
             </div>
 
             <div class="doctrine-item">
                 <h4>12.4 O que é o lava-pés praticado antes da Ceia do Senhor?</h4>
-                <p>É o chamado rito da humildade. Baseia-se no gesto de Jesus em João 13:1-17, quando Ele lavou os pés dos discípulos.</p>
+                <p>É o chamado rito da humildade. Baseia-se no gesto de Jesus em <a href="#" class="biblical-reference" data-reference="João 13:1-17">João 13:1-17</a>, quando Ele lavou os pés dos discípulos.</p>
                 <p>Na IASD, esse ato tem vários significados:</p>
                 <p>humildade;</p>
                 <p>serviço mútuo;</p>
@@ -1599,7 +1599,7 @@ html { scroll-behavior: smooth; }
                 <p>Textos principais:</p>
                 <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 10:16-17">1 Coríntios 10:16-17</a></p>
                 <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 11:23-29">1 Coríntios 11:23-29</a></p>
-                <p>João 6 como pano de fundo cristológico, ainda que não diretamente institucional da Ceia.</p>
+                <p><a href="#" class="biblical-reference" data-reference="João 6">João 6</a> como pano de fundo cristológico, ainda que não diretamente institucional da Ceia.</p>
             </div>
 
             <div class="doctrine-item">
@@ -1607,7 +1607,7 @@ html { scroll-behavior: smooth; }
                 <p>A prática adventista é de comunhão aberta a cristãos que creem em Cristo e participam com reverência, exame próprio e respeito ao significado da ordenança.</p>
                 <p>Ela não é restrita exclusivamente aos membros locais em sentido absoluto. O foco está na relação da pessoa com Cristo, no autoexame e na disposição espiritual adequada.</p>
                 <p>Texto principal:</p>
-                <p>1 Coríntios 11:27-29</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 11:27-29">1 Coríntios 11:27-29</a></p>
             </div>
 
             <div class="doctrine-item">
@@ -1616,8 +1616,8 @@ html { scroll-behavior: smooth; }
                 <p>O argumento principal é que os emblemas da Ceia devem representar a pureza de Cristo. Como a fermentação muitas vezes simboliza corrupção ou decomposição, entende-se que o símbolo mais adequado é o fruto puro da videira, sem fermentação.</p>
                 <p>Além disso, isso harmoniza a Ceia com o princípio adventista de abstinência alcoólica.</p>
                 <p>Textos frequentemente relacionados:</p>
-                <p>Mateus 26:27-29</p>
-                <p>1 Coríntios 11:23-26</p>
+                <p><a href="#" class="biblical-reference" data-reference="Mateus 26:27-29">Mateus 26:27-29</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 11:23-26">1 Coríntios 11:23-26</a></p>
                 <p>referências veterotestamentárias ao fermento como símbolo negativo em certos contextos.</p>
             </div>
         </div>
@@ -1658,9 +1658,9 @@ html { scroll-behavior: smooth; }
                 <h4>13.3 Adventistas podem se casar com pessoas de outras religiões ou denominações?</h4>
                 <p>A orientação oficial é que o crente não deve casar-se com incrédulos ou com quem não compartilha a mesma fé de forma compatível. O anexo traz referência explícita ao cuidado contra casar com descrentes.</p>
                 <p>Base bíblica:</p>
-                <p>2 Coríntios 6:14</p>
-                <p>Amós 3:3</p>
-                <p>1 Coríntios 7:39 — "contanto que seja no Senhor".</p>
+                <p><a href="#" class="biblical-reference" data-reference="2 Coríntios 6:14">2 Coríntios 6:14</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Amós 3:3">Amós 3:3</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 7:39">1 Coríntios 7:39</a> — "contanto que seja no Senhor".</p>
                 <p>A preocupação é espiritual, prática e familiar. Diferenças profundas de fé costumam gerar conflito em culto doméstico, criação dos filhos, prioridades morais e missão da casa.</p>
                 <p>Então, embora a igreja lidere pastoralmente com casos reais já existentes, a orientação é clara: o ideal bíblico é casar-se "no Senhor".</p>
             </div>
@@ -1674,9 +1674,9 @@ html { scroll-behavior: smooth; }
                 <p>o aborto não deve ser trivializado;</p>
                 <p>situações extremas exigem seriedade, oração, princípio bíblico e consciência responsável.</p>
                 <p>Textos de referência moral:</p>
-                <p>Salmo 139:13-16</p>
-                <p>Jeremias 1:5</p>
-                <p>Êxodo 20:13</p>
+                <p><a href="#" class="biblical-reference" data-reference="Salmo 139:13-16">Salmo 139:13-16</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Jeremias 1:5">Jeremias 1:5</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Êxodo 20:13">Êxodo 20:13</a></p>
             </div>
         </div>
 
@@ -1702,10 +1702,10 @@ html { scroll-behavior: smooth; }
                 <p>a base do sábado;</p>
                 <p>a necessidade de redenção como resposta a uma queda real.</p>
                 <p>Textos centrais:</p>
-                <p>Gênesis 1–3</p>
-                <p>Romanos 5:12-21</p>
-                <p>1 Coríntios 15:21-22, 45-49</p>
-                <p>Êxodo 20:8-11</p>
+                <p><a href="#" class="biblical-reference" data-reference="Gênesis 1-3">Gênesis 1–3</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 5:12-21">Romanos 5:12-21</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 15:21-22, 45-49">1 Coríntios 15:21-22, 45-49</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Êxodo 20:8-11">Êxodo 20:8-11</a></p>
                 <p>A evolução teísta é rejeitada porque, na leitura adventista, ela tenta unir dois esquemas que se chocam: um processo longo de morte antes do pecado e a narrativa bíblica que vincula morte humana ao ingresso do pecado.</p>
             </div>
 
@@ -1804,16 +1804,16 @@ html { scroll-behavior: smooth; }
                 <p>a Bíblia mostra mulheres exercendo papéis espirituais importantes;</p>
                 <p>a Bíblia também contém textos usados por muitos para restringir certas funções de governo e ensino autoritativo eclesial.</p>
                 <p>Textos em favor de forte participação feminina:</p>
-                <p>Joel 2:28-29</p>
-                <p>Atos 2:17-18</p>
-                <p>Romanos 16</p>
-                <p>Juízes 4–5</p>
-                <p>Atos 18:26</p>
+                <p><a href="#" class="biblical-reference" data-reference="Joel 2:28-29">Joel 2:28-29</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Atos 2:17-18">Atos 2:17-18</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Romanos 16">Romanos 16</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Juízes 4-5">Juízes 4–5</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Atos 18:26">Atos 18:26</a></p>
                 <p>Textos usados nas restrições:</p>
-                <p>1 Timóteo 2:11-15</p>
-                <p>1 Coríntios 14:34-35</p>
-                <p>1 Timóteo 3</p>
-                <p>Tito 1</p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Timóteo 2:11-15">1 Timóteo 2:11-15</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 14:34-35">1 Coríntios 14:34-35</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="1 Timóteo 3">1 Timóteo 3</a></p>
+                <p><a href="#" class="biblical-reference" data-reference="Tito 1">Tito 1</a></p>
                 <p>Na prática adventista:</p>
                 <p>quanto a pregar, ensinar e liderar, a resposta é claramente sim;</p>
                 <p>quanto a ordenação pastoral, a questão permanece debatida no âmbito mundial;</p>
