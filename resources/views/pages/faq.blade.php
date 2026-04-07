@@ -971,7 +971,7 @@ html { scroll-behavior: smooth; }
             <div class="doctrine-item">
                 <h4>6.6 Guardar a lei, o sábado e a reforma de saúde é necessário para a salvação, santificação ou apenas como fruto de obediência?</h4>
                 <p>Na teologia adventista, esses elementos não são necessários como meio meritório de salvação, mas têm relação importante com a santificação e com os frutos da obediência.</p>
-                <p>A lei moral, incluindo o sábado, expressa a vontade de Deus para a vida humana. A reforma de saúde, por sua vez, não é geralmente tratada como requisito para ser justificado diante de Deus, mas como parte de uma vida cristã de mordomia, santidade e cuidado com o corpo. Textos relevantes incluem Romanos 12:1-2, 1 Coríntios 6:19-20, 1 Coríntios 10:31, 3 João 2, Êxodo 20:8-11, Isaías 58:13-14 e João 14:15.</p>
+                <p>A lei moral, incluindo o sábado, expressa a vontade de Deus para a vida humana. A reforma de saúde, por sua vez, não é geralmente tratada como requisito para ser justificado diante de Deus, mas como parte de uma vida cristã de mordomia, santidade e cuidado com o corpo. Textos relevantes incluem <a href="#" class="biblical-reference" data-reference="Romanos 12:1-2">Romanos 12:1-2</a>, <a href="#" class="biblical-reference" data-reference="1 Coríntios 6:19-20">1 Coríntios 6:19-20</a>, <a href="#" class="biblical-reference" data-reference="1 Coríntios 10:31">1 Coríntios 10:31</a>, <a href="#" class="biblical-reference" data-reference="3 João 2">3 João 2</a>, <a href="#" class="biblical-reference" data-reference="Êxodo 20:8-11">Êxodo 20:8-11</a>, <a href="#" class="biblical-reference" data-reference="Isaías 58:13-14">Isaías 58:13-14</a> e <a href="#" class="biblical-reference" data-reference="João 14:15">João 14:15</a>.</p>
                 <p>A distinção correta, para os adventistas, é esta:</p>
                 <p>salvação: somente pela graça, mediante a fé;</p>
                 <p>santificação: vida transformada pelo Espírito;</p>
@@ -1010,7 +1010,7 @@ html { scroll-behavior: smooth; }
             <div class="doctrine-item">
                 <h4>7.1 O que é a "marca da besta" segundo os adventistas (Apocalipse 13)? Por que a Igreja relaciona isso à observância do domingo?</h4>
                 <p>Para os adventistas, a marca da besta não é um chip físico ou um código de barras, mas um símbolo de lealdade espiritual e autoridade. Segundo o Nisto Cremos, ela representa a aceitação da autoridade de um poder religioso apóstata em oposição direta à autoridade de Deus. A Igreja relaciona isso ao domingo porque identifica o sábado como o selo de Deus (o sinal bíblico de Sua autoridade como Criador).</p>
-                <p>A lógica é que, no conflito final, a questão central será a adoração. O quarto mandamento da lei de Deus (o sábado) é o único que identifica o Legislador pelo Seu nome, título (Criador) e jurisdição (Céu e Terra). Quando um poder humano (a besta) tenta mudar essa lei e impõe o domingo como dia de culto obrigatório por decreto, a observância do domingo torna-se o sinal de submissão a esse poder humano, em vez de a Deus. Referências: Apocalipse 13:16-17, Apocalipse 14:9-11, Êxodo 20:8-11, Ezequiel 20:12, 20.</p>
+                <p>A lógica é que, no conflito final, a questão central será a adoração. O quarto mandamento da lei de Deus (o sábado) é o único que identifica o Legislador pelo Seu nome, título (Criador) e jurisdição (Céu e Terra). Quando um poder humano (a besta) tenta mudar essa lei e impõe o domingo como dia de culto obrigatório por decreto, a observância do domingo torna-se o sinal de submissão a esse poder humano, em vez de a Deus. Referências: <a href="#" class="biblical-reference" data-reference="Apocalipse 13:16-17">Apocalipse 13:16-17</a>, <a href="#" class="biblical-reference" data-reference="Apocalipse 14:9-11">Apocalipse 14:9-11</a>, <a href="#" class="biblical-reference" data-reference="Êxodo 20:8-11">Êxodo 20:8-11</a>, <a href="#" class="biblical-reference" data-reference="Ezequiel 20:12">Ezequiel 20:12</a>, <a href="#" class="biblical-reference" data-reference="Ezequiel 20:20">20</a>.</p>
             </div>
 
             <div class="doctrine-item">
@@ -1293,7 +1293,7 @@ html { scroll-behavior: smooth; }
                 <p>Em termos pastorais, isso é precioso, porque significa duas coisas:</p>
                 <p>Jesus pode realmente nos representar, porque Se fez um de nós;</p>
                 <p>Jesus pode realmente nos salvar, porque permaneceu santo, puro e sem pecado.</p>
-                <p>Ele não foi um homem pecador tentando melhorar. Ele foi o segundo Adão, santo, obediente e vitorioso, vencendo onde o primeiro caiu (Romanos 5:12-19; 1 Coríntios 15:21-22, 45-49).</p>
+                <p>Ele não foi um homem pecador tentando melhorar. Ele foi o segundo Adão, santo, obediente e vitorioso, vencendo onde o primeiro caiu (<a href="#" class="biblical-reference" data-reference="Romanos 5:12-19">Romanos 5:12-19</a>; <a href="#" class="biblical-reference" data-reference="1 Coríntios 15:21-22">1 Coríntios 15:21-22</a>, <a href="#" class="biblical-reference" data-reference="1 Coríntios 15:45-49">45-49</a>).</p>
             </div>
         </div>
 
