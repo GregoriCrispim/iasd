@@ -90,15 +90,22 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #fcfaf7;
     color: #2d2a26;
+    /* Limitar largura para não invadir barra lateral de 50% */
+    max-width: calc(100vw - 50%);
+    margin-left: auto;
 }
 
-/* Garantir layout full-width */
-main, footer {
-    width: 100% !important;
-    max-width: none !important;
+/* Garantir que conteúdo não invada barra lateral */
+main {
+    max-width: calc(100vw - 50%);
+}
+
+footer {
+    max-width: calc(100vw - 50%);
 }
 
 .evidencias-container {
+    width: 100%;
     max-width: 1200px !important;
 }
 
