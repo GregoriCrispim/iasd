@@ -86,13 +86,14 @@
 <style>
 html { scroll-behavior: smooth; }
 
-/* Garantir que o main e footer ocupem largura total */
-main {
-    width: 100% !important;
-    max-width: none !important;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fcfaf7;
+    color: #2d2a26;
 }
 
-footer {
+/* Garantir layout full-width */
+main, footer {
     width: 100% !important;
     max-width: none !important;
 }
@@ -123,7 +124,7 @@ footer {
 
 .faq-container {
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
 }
@@ -461,7 +462,7 @@ footer {
     <p>Encontre respostas para as dúvidas mais comuns sobre nossa igreja e doutrina</p>
 </div>
 
-<div class="faq-container">
+<div class="evidencias-container">
 
     <div class="faq-tabs">
         <button class="faq-tab-button active" data-tab="igreja">IASD Central de Brasília</button>
