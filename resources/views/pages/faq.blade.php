@@ -92,20 +92,20 @@ body {
     color: #2d2a26;
 }
 
-/* Garantir layout full-width e compensar barra lateral */
+/* Garantir layout full-width */
 main, footer {
     width: 100% !important;
     max-width: none !important;
 }
 
-/* Compensar barra lateral fixa */
-body {
-    padding-right: 60px;
+/* Limitar largura da FAQ considerando barra lateral */
+.evidencias-container {
+    max-width: calc(1200px - 50%) !important;
 }
 
-@media (max-width: 768px) {
-    body {
-        padding-right: 40px;
+@media (min-width: 1400px) {
+    .evidencias-container {
+        max-width: 1100px !important;
     }
 }
 

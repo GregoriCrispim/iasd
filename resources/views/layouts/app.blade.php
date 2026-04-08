@@ -74,7 +74,7 @@
 
         @include('partials.footer')
     </main>
-    <aside style="position: fixed; right: 0; width: 60px; z-index: 1000;"><img src="{{ asset('img/logo-7-coluna.svg') }}" alt="" style="width: 100%;" loading="lazy"></aside>
+    <aside style="position: fixed; right: 0;"><img src="{{ asset('img/logo-7-coluna.svg') }}" alt="" style="width: 50%;" loading="lazy"></aside>
 
     @include('partials.form_overlay')
 
