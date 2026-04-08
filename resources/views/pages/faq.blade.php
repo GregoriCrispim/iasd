@@ -1902,7 +1902,9 @@ html { scroll-behavior: smooth; }
         <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
     </div>
 </div>
+@endsection
 
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.faq-tab-button');
@@ -1945,4 +1947,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endsection
+@endpush
