@@ -380,6 +380,78 @@ html { scroll-behavior: smooth; }
         padding: 20px;
     }
 }
+
+/* Seção de Estudo Bíblico */
+.faq-estudo-biblico {
+    margin-top: 40px;
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #003366 0%, #001531 100%);
+    border-radius: 12px;
+    border-top: 3px solid rgba(211, 84, 0, 0.4);
+    color: #fff;
+}
+
+.faq-estudo-biblico h3 {
+    font-family: 'Bebas neue', sans-serif;
+    font-size: 1.8em;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.faq-estudo-biblico p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    color: #f8f9fa;
+    margin-bottom: 15px;
+}
+
+.faq-estudo-biblico a {
+    color: #003366;
+    text-decoration: none;
+    font-weight: 600;
+    background: #fff;
+    padding: 12px 30px;
+    border-radius: 8px;
+    display: inline-block;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.faq-estudo-biblico a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    text-decoration: none;
+}
+
+.btn-estudo-biblico {
+    background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%);
+    border: 2px solid #ba4a00;
+}
+
+.btn-estudo-biblico:hover {
+    background: linear-gradient(135deg, #ba4a00 0%, #9e4100 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(211, 84, 0, 0.4);
+}
+
+/* Full-bleed para o faq-estudo-biblico ocupar largura total */
+.faq-estudo-biblico.acb-fullbleed {
+    position: relative;
+    z-index: 0;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media (max-width: 768px) {
+    .faq-estudo-biblico.acb-fullbleed {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
 </style>
 @endpush
 
@@ -578,6 +650,14 @@ html { scroll-behavior: smooth; }
                 <p>Alguns acusam os adventistas de "judaizar" porque associam a guarda do sábado a práticas distintivamente judaicas do Antigo Testamento. No entanto, a resposta adventista é que guardar o sábado bíblico não é retorno ao judaísmo rabínico nem à lei cerimonial mosaica, mas fidelidade a um mandamento moral instituído na criação e reafirmado por Cristo e pelos apóstolos. O sábado antecede o Sinai e antecede o próprio Israel (<a href="#" class="biblical-reference" data-reference="Gênesis 2:1-3">Gênesis 2:1-3</a>).</p>
                 <p>Além disso, judaizar no sentido neotestamentário implica impor elementos do sistema judaico como condição de salvação, especialmente circuncisão e dependência da lei cerimonial (<a href="#" class="biblical-reference" data-reference="Gálatas 5:1-4">Gálatas 5:1-4</a>; <a href="#" class="biblical-reference" data-reference="Atos 15">Atos 15</a>:1-11). Os adventistas rejeitam isso. Guardam o sábado não como meio de justificação, mas como expressão de obediência da fé. Portanto, para a teologia adventista, chamar a guarda do sábado de "judaização" confunde o mandamento moral universal com o sistema cerimonial temporário.</p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="ellen-white" class="sub-tab-content">
@@ -681,6 +761,14 @@ html { scroll-behavior: smooth; }
                 <p>A teologia adventista, acompanhando uma tradição cristã histórica presente também em outros intérpretes, entende que "Miguel" é um título para Cristo em seu papel de comandante dos exércitos celestiais, e não que Jesus seja um ser criado angélico. "Arcanjo" é entendido como chefe dos anjos, não como afirmação de natureza angelical. Textos usados nessa compreensão incluem <a href="#" class="biblical-reference" data-reference="Daniel 10:13">Daniel 10:13</a>, <a href="#" class="biblical-reference" data-reference="Daniel 12:1">Daniel 12:1</a>, <a href="#" class="biblical-reference" data-reference="Judas 9">Judas 9</a> e <a href="#" class="biblical-reference" data-reference="1 Tessalonicenses 4:16">1 Tessalonicenses 4:16</a>.</p>
                 <p>Assim, quando se afirma que Cristo é Miguel, não se está rebaixando sua divindade, mas identificando-o como líder celestial supremo na guerra contra o mal. Isso é mantido em harmonia com a plena divindade de Cristo ensinada em <a href="#" class="biblical-reference" data-reference="João 1:1-3">João 1:1-3</a>, <a href="#" class="biblical-reference" data-reference="Colossenses 1:15-17">Colossenses 1:15-17</a>, <a href="#" class="biblical-reference" data-reference="Hebreus 1:1-8">Hebreus 1:1-8</a>. Os adventistas rejeitam qualquer ideia de que Jesus seja um anjo criado. Para eles, "Miguel" é título funcional, não definição ontológica inferior.</p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="juizo-investigativo" class="sub-tab-content">
@@ -762,6 +850,14 @@ html { scroll-behavior: smooth; }
                 <p>A principal razão é hermenêutica. Muitas denominações não adotam a leitura historicista das profecias de Daniel e Apocalipse, não aplicam o princípio dia-ano da mesma maneira, ou entendem <a href="#" class="biblical-reference" data-reference="Daniel 8:14">Daniel 8:14</a> em outro contexto histórico. Outras veem em Hebreus uma entrada imediata e plena de Cristo no Santíssimo sem distinção de fases ministeriais posteriores.</p>
                 <p>Além disso, a doutrina adventista está ligada à história específica do movimento milerita e ao desenvolvimento teológico pós-1844, o que leva muitos cristãos a considerá-la uma construção particular da IASD. A resposta adventista é que a verdade bíblica não depende de maioria denominacional, mas de fidelidade exegética. Portanto, a rejeição por outras igrejas é reconhecida como real, mas não considerada decisiva para a validade da doutrina.</p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="estado-mortos" class="sub-tab-content">
@@ -815,6 +911,14 @@ html { scroll-behavior: smooth; }
                 <p>A esperança cristã, então, não se apoia em comunicação com os mortos, mas em comunhão com Cristo vivo, na intercessão sacerdotal de Jesus e na certeza da ressurreição futura. A doutrina adventista entende que isso preserva a centralidade de Cristo, evita práticas não fundamentadas na Escritura e mantém a esperança ancorada no retorno do Senhor.</p>
             </div>
         </div>
+    <div class="faq-estudo-biblico acb-fullbleed">
+        <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+        <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+        <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+        <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+        <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+    </div>
+
 
         <div id="inferno-destruicao" class="sub-tab-content">
             <h2 class="sub-section-title">5. INFERNO E DESTRUIÇÃO FINAL DOS ÍMPIOS</h2>
@@ -881,6 +985,14 @@ html { scroll-behavior: smooth; }
                 <p>não enfraquece a doutrina do pecado;</p>
                 <p>não diminui a justiça de Deus;</p>
                 <p>e, ao contrário, mostra a vitória completa de Deus sobre o mal.</p>
+            </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1002,6 +1114,14 @@ html { scroll-behavior: smooth; }
                 <p>o sistema cerimonial tinha função temporária até a vinda de Cristo;</p>
                 <p>mas a lei moral não foi anulada como padrão divino de vida.</p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="escatologia" class="sub-tab-content">
@@ -1114,6 +1234,14 @@ html { scroll-behavior: smooth; }
                 <h4>7.18 O que é a visão adventista do Grande Conflito entre Cristo e Satanás?</h4>
                 <p>É a moldura teológica que explica a origem do mal como uma rebelião de Lúcifer no céu contra o governo e a lei de Deus. A Terra tornou-se o palco onde o caráter de Deus (amor e justiça) está sendo vindicado perante o universo. A história da salvação é o processo de Deus resolver esse conflito preservando o livre-arbítrio. Referências: <a href="#" class="biblical-reference" data-reference="Apocalipse 12:7-9">Apocalipse 12:7-9</a>, <a href="#" class="biblical-reference" data-reference="Isaías 14:12-14">Isaías 14:12-14</a>, <a href="#" class="biblical-reference" data-reference="Ezequiel 28:12-17">Ezequiel 28:12-17</a></p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="igreja-remanescente" class="sub-tab-content">
@@ -1167,6 +1295,14 @@ html { scroll-behavior: smooth; }
             <div class="doctrine-item">
                 <h4>8.10 As 28 Crenças Fundamentais dos adventistas podem ser revistas por assembleias humanas sem comprometer a autoridade bíblica, ou seja, se a Bíblia é o único credo?</h4>
                 <p>Sim. O preâmbulo das Crenças Fundamentais afirma que a Bíblia é o único credo e que estas declarações podem ser revisadas em assembleias da Associação Geral sempre que a igreja, sob a guia do Espírito Santo, alcançar uma compreensão mais completa da verdade bíblica. Isso demonstra que a autoridade final é sempre a Bíblia, não o documento humano. Referências: Preâmbulo das 28 Crenças Fundamentais.</p>
+            </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1294,6 +1430,14 @@ html { scroll-behavior: smooth; }
                 <p>Jesus pode realmente nos representar, porque Se fez um de nós;</p>
                 <p>Jesus pode realmente nos salvar, porque permaneceu santo, puro e sem pecado.</p>
                 <p>Ele não foi um homem pecador tentando melhorar. Ele foi o segundo Adão, santo, obediente e vitorioso, vencendo onde o primeiro caiu (<a href="#" class="biblical-reference" data-reference="Romanos 5:12-19">Romanos 5:12-19</a>; <a href="#" class="biblical-reference" data-reference="1 Coríntios 15">1 Coríntios 15</a>:21-22, <a href="#" class="biblical-reference" data-reference="1 Coríntios 15">1 Coríntios 15</a>:45-49).</p>
+            </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1473,6 +1617,14 @@ html { scroll-behavior: smooth; }
                 <p>a sensibilidade espiritual.</p>
                 <p>Em termos pastorais, o objetivo não é criar uma subcultura artificial, mas formar discípulos que vivam de maneira coerente com o Reino de Deus.</p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="dizimos-ofertas" class="sub-tab-content">
@@ -1524,6 +1676,14 @@ html { scroll-behavior: smooth; }
                 <p>A ideia teológica é que os recursos devem servir à missão, não ao enriquecimento pessoal de líderes.</p>
             </div>
         </div>
+    <div class="faq-estudo-biblico acb-fullbleed">
+        <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+        <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+        <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+        <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+        <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+    </div>
+
 
         <div id="batismo-ceia" class="sub-tab-content">
             <h2 class="sub-section-title">12. BATISMO, CEIA E PRÁTICAS LITÚRGICAS</h2>
@@ -1620,6 +1780,14 @@ html { scroll-behavior: smooth; }
                 <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 11:23-26">1 Coríntios 11:23-26</a></p>
                 <p>referências veterotestamentárias ao fermento como símbolo negativo em certos contextos.</p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="casamento-familia" class="sub-tab-content">
@@ -1677,6 +1845,14 @@ html { scroll-behavior: smooth; }
                 <p>Salmo 139:13-16</p>
                 <p><a href="#" class="biblical-reference" data-reference="Jeremias 1:5">Jeremias 1:5</a></p>
                 <p><a href="#" class="biblical-reference" data-reference="Êxodo 20:13">Êxodo 20:13</a></p>
+            </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1740,6 +1916,14 @@ html { scroll-behavior: smooth; }
                 <p><a href="#" class="biblical-reference" data-reference="2 Pedro 3:5-6">2 Pedro 3:5-6</a></p>
                 <p>Essa leitura serve como parte importante da explicação adventista para grande parte do registro fóssil e de formações geológicas de larga escala. A igreja vê o dilúvio como evento histórico catastrófico de alcance mundial.</p>
             </div>
+
+            <div class="faq-estudo-biblico acb-fullbleed">
+                <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+                <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+                <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+                <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+            </div>
         </div>
 
         <div id="costumes-festas" class="sub-tab-content">
@@ -1763,6 +1947,14 @@ html { scroll-behavior: smooth; }
                 <p>A Páscoa cristã pode ser ocasião legítima para pregação, culto, estudo bíblico e gratidão pela redenção em Cristo.</p>
             </div>
         </div>
+    <div class="faq-estudo-biblico acb-fullbleed">
+        <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+        <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+        <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+        <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+        <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+    </div>
+
 
         <div id="lideranca-feminina" class="sub-tab-content">
             <h2 class="sub-section-title">16. LIDERANÇA FEMININA E ORDENAÇÃO DE MULHERES</h2>
@@ -1821,6 +2013,14 @@ html { scroll-behavior: smooth; }
                 <p>Como posição oficial mais segura: a IASD reconhece os dons das mulheres e seu amplo ministério, mas a questão da ordenação ao pastorado não foi uniformemente resolvida para toda a igreja mundial.</p>
             </div>
         </div>
+
+    <div class="faq-estudo-biblico acb-fullbleed">
+        <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
+        <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
+        <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
+        <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
+        <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+    </div>
 
     <div class="faq-contact">
         <h3>Ainda Tem Dúvidas?</h3>
