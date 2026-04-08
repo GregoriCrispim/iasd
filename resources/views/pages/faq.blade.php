@@ -767,7 +767,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1120,7 +1120,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1240,7 +1240,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1302,7 +1302,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1437,7 +1437,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1623,7 +1623,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1786,7 +1786,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1852,7 +1852,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
@@ -1922,7 +1922,7 @@ html { scroll-behavior: smooth; }
                 <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
                 <p>Oferecemos estudos <strong>presenciais</strong> (na sua residência ou na igreja), <strong>online</strong> (por videoconferência) e <strong>remotos</strong> (por telefone ou mensagem).</p>
                 <p>Solicite materiais de estudo gratuitos e comece sua jornada espiritual hoje mesmo!</p>
-                <a href="{{ route('estudo-biblio') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
+                <a href="{{ route('estudo-biblico') }}" class="btn-estudo-biblico">Acessar Estudo Bíblico</a>
             </div>
         </div>
 
