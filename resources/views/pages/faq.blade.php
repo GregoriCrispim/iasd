@@ -86,19 +86,7 @@
 <style>
 html { scroll-behavior: smooth; }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #fcfaf7;
-    color: #2d2a26;
-}
-
-/* Garantir layout full-width */
-main, footer {
-    width: 100% !important;
-    max-width: none !important;
-}
-
-.faq-banner {
+.faq-container {
     width: 100%;
     background: linear-gradient(135deg, #003366 0%, #004080 50%, #003366 100%);
     padding: 80px 20px;
