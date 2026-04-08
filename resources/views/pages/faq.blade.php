@@ -86,26 +86,36 @@
 <style>
 html { scroll-behavior: smooth; }
 
+.faq-banner {
+    width: 100%;
+    background: linear-gradient(135deg, #003366 0%, #004080 50%, #003366 100%);
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+}
+
+.faq-banner h1 {
+    font-family: 'Bebas neue', sans-serif;
+    font-size: 3.5em;
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.faq-banner p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3em;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
 .faq-container {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
     padding: 40px 20px;
 }
-
-.faq-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.faq-header h1 {
-    font-family: 'Bebas neue', sans-serif;
-    font-size: 3em;
-    color: #003366;
-    margin-bottom: 15px;
-}
-
-.faq-header p {
     font-family: 'Roboto', sans-serif;
     font-size: 1.1rem;
     color: #666;
@@ -456,11 +466,12 @@ html { scroll-behavior: smooth; }
 @endpush
 
 @section('content')
+<div class="faq-banner">
+    <h1>Perguntas Frequentes</h1>
+    <p>Encontre respostas para as dúvidas mais comuns sobre nossa igreja e doutrina</p>
+</div>
+
 <div class="faq-container">
-    <div class="faq-header">
-        <h1>Perguntas Frequentes</h1>
-        <p>Encontre respostas para as dúvidas mais comuns sobre nossa igreja e doutrina.</p>
-    </div>
 
     <div class="faq-tabs">
         <button class="faq-tab-button active" data-tab="igreja">IASD Central de Brasília</button>
