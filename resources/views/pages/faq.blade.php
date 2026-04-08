@@ -86,6 +86,17 @@
 <style>
 html { scroll-behavior: smooth; }
 
+/* Garantir que o main e footer ocupem largura total */
+main {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+footer {
+    width: 100% !important;
+    max-width: none !important;
+}
+
 .faq-banner {
     width: 100%;
     background: linear-gradient(135deg, #003366 0%, #004080 50%, #003366 100%);
@@ -250,6 +261,7 @@ html { scroll-behavior: smooth; }
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 8px;
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -394,34 +406,28 @@ html { scroll-behavior: smooth; }
 }
 
 /* Seção de Estudo Bíblico */
-.faq-estudo-biblico-section {
-    width: 100%;
-    background: linear-gradient(135deg, #003366 0%, #001531 100%);
-    padding: 60px 20px;
-    margin: 0;
-    border-top: 3px solid rgba(211, 84, 0, 0.4);
-}
-
 .faq-estudo-biblico {
-    max-width: 900px;
-    margin: 0 auto;
+    margin-top: 40px;
     text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #003366 0%, #001531 100%);
+    border-radius: 12px;
+    border-top: 3px solid rgba(211, 84, 0, 0.4);
     color: #fff;
 }
 
 .faq-estudo-biblico h3 {
     font-family: 'Bebas neue', sans-serif;
-    font-size: 2.2em;
+    font-size: 1.8em;
     color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .faq-estudo-biblico p {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: #f8f9fa;
     margin-bottom: 15px;
-    line-height: 1.7;
 }
 
 .faq-estudo-biblico strong {
@@ -430,24 +436,20 @@ html { scroll-behavior: smooth; }
 }
 
 .btn-estudo-biblico {
-    display: inline-block;
-    padding: 16px 40px;
     background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%);
     color: white;
     text-decoration: none;
-    border-radius: 50px;
+    padding: 12px 30px;
+    border-radius: 8px;
+    display: inline-block;
+    transition: transform 0.3s, box-shadow 0.3s;
     font-weight: 600;
-    font-size: 1.15rem;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(211, 84, 0, 0.3);
-    border: 2px solid #ba4a00;
 }
 
 .btn-estudo-biblico:hover {
     background: linear-gradient(135deg, #ba4a00 0%, #9e4100 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(211, 84, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(211, 84, 0, 0.4);
     text-decoration: none;
 }
 </style>
@@ -1892,9 +1894,7 @@ html { scroll-behavior: smooth; }
                 <p>Como posição oficial mais segura: a IASD reconhece os dons das mulheres e seu amplo ministério, mas a questão da ordenação ao pastorado não foi uniformemente resolvida para toda a igreja mundial.</p>
             </div>
         </div>
-</div>
 
-<div class="faq-estudo-biblico-section">
     <div class="faq-estudo-biblico">
         <h3>📖 Quer Aprofundar Seus Conhecimentos Bíblicos?</h3>
         <p>Descubra como a Bíblia pode transformar sua vida através de nossos estudos bíblicos gratuitos!</p>
