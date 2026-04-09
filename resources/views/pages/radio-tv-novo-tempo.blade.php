@@ -787,6 +787,9 @@
     <div class="page-hero nt-hero acb-fullbleed">
         <h1 class="page-title acb-title-serif">Rádio e TV Novo Tempo</h1>
         <h2 class="page-subtitle" style="font-style: italic;">Conectando Você à Esperança!</h2>
+        <p style="background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); color: #fff; padding: 12px 20px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 1.1rem; margin: 12px 0;">
+            <i class="fa-solid fa-tv"></i> Em Brasília, assista na TV aberta: <strong>Canal 48</strong>
+        </p>
         <p class="page-text">
             Bem-vindo(a) à janela digital da <strong>TV e Rádio Novo Tempo</strong>, um ministério da Igreja Adventista do Sétimo Dia dedicado a levar mensagens de fé, saúde, família e esperança diretamente para o seu coração! Aqui, você encontrará programação de qualidade para inspirar seu dia a dia, fortalecer sua espiritualidade e oferecer conteúdo positivo para toda a família.
         </p>
