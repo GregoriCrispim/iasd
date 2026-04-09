@@ -86,28 +86,37 @@
 <style>
 html { scroll-behavior: smooth; }
 
-.faq-container {
-    width: 100%;
-    background: linear-gradient(135deg, #003366 0%, #004080 50%, #003366 100%);
-    padding: 80px 20px;
+.intro-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 50px 40px;
+    border-radius: 15px;
+    margin-bottom: 50px;
     text-align: center;
-    color: white;
-    margin-bottom: 0;
 }
 
-.faq-banner h1 {
+.intro-section h1 {
     font-family: 'Bebas neue', sans-serif;
-    font-size: 3.5em;
-    color: white;
-    margin-bottom: 15px;
+    font-size: 3em;
+    color: #003366;
+    margin-bottom: 25px;
     font-weight: 500;
 }
 
-.faq-banner p {
+.intro-section .subtitle {
+    font-family: 'Bebas neue', sans-serif;
+    font-size: 1.5em;
+    color: #003366;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.intro-section p {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.3em;
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #333;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .faq-container {
@@ -448,12 +457,17 @@ html { scroll-behavior: smooth; }
 @endpush
 
 @section('content')
-<div class="faq-banner">
-    <h1>Perguntas Frequentes</h1>
-    <p>Encontre respostas para as dúvidas mais comuns sobre nossa igreja e doutrina</p>
-</div>
+<img src="{{ asset('img/cards/estudo_biblico/estudo_biblico_header.webp') }}" alt="Perguntas Frequentes - IASD Central de Brasília" style="width: 100%;" fetchpriority="high" decoding="async">
 
 <div class="evidencias-container">
+    <!-- Seção Introdutória -->
+    <div class="intro-section">
+        <h1>Perguntas Frequentes</h1>
+        <span class="subtitle">Encontre respostas para suas dúvidas</span>
+        <p>
+            Aqui você encontra as perguntas mais frequentes sobre nossa igreja, doutrinas e programações. Se não encontrar sua resposta, entre em contato conosco!
+        </p>
+    </div>
 
     <div class="faq-tabs">
         <button class="faq-tab-button active" data-tab="igreja">IASD Central de Brasília</button>
