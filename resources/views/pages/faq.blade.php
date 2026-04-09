@@ -117,6 +117,13 @@ html { scroll-behavior: smooth; }
     padding: 40px 20px;
 }
 
+.evidencias-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
 .faq-tabs {
     display: flex;
     gap: 15px;
