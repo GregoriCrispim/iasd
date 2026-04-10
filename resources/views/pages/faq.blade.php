@@ -2,9 +2,9 @@
 
 @section('title', 'IASD Central de Brasília - Perguntas Frequentes')
 
-@section('meta-description', 'Encontre respostas para as perguntas mais frequentes sobre a IASD Central de Brasília. Horários, programações, estudos bíblicos e mais.')
+@section('meta-description', 'Encontre respostas para as perguntas mais frequentes sobre a IASD Central de Brasília, doutrinas adventistas, crenças fundamentais, programações, estudos bíblicos e muito mais. Abordagem clara sobre sábado, Ellen White, estado dos mortos, salvação, escatologia, criação e outras questões.')
 @section('og-title', 'Perguntas Frequentes - IASD Central de Brasília')
-@section('og-description', 'Dúvidas sobre nossa igreja? Encontre respostas aqui!')
+@section('og-description', 'Dúvidas sobre doutrinas adventistas e nossa igreja? Encontre respostas claras e bem fundamentadas em mais de 70 perguntas frequentes sobre crenças, práticas e programações!')
 @section('page-name', 'FAQ')
 
 @push('schema-faq')
@@ -18,7 +18,7 @@
       "name": "Quais são os horários dos cultos?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Temos cultos aos sábados às 08h45 e 19h00. A Escola Sabatina acontece às 11h00."
+        "text": "Temos cultos aos sábados às 08h45 e 19h. A Escola Sabatina acontece às 11h."
       }
     },
     {
@@ -63,18 +63,90 @@
     },
     {
       "@type": "Question",
-      "name": "O que a IASD Central de Brasília oferece?",
+      "name": "Por que os adventistas guardam o sábado e não o domingo?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oferecemos estudos bíblicos, escola sabatina, corais e orquestras, ministérios para todas as idades, eventos especiais, ações comunitárias através da ASA, e muito mais."
+        "text": "Os adventistas guardam o sábado porque acreditam que o quarto mandamento (Êxodo 20:8-11) estabelece o sábado como dia de descanso sagrado, não revogado no Novo Testamento. Jesus e os apóstolos mantiveram a observância do sábado."
       }
     },
     {
       "@type": "Question",
-      "name": "Como participar da IASD Central de Brasília?",
+      "name": "Os adventistas creem em criação literal em seis dias?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Você pode participar dos nossos cultos aos sábados, inscrever-se em estudos bíblicos, juntar-se a um ministério, ou participar de nossos eventos e programações especiais."
+        "text": "Sim. A IASD crê em criação literal em seis dias recentes, conforme Gênesis 1:1-2:3 e Êxodo 20:8-11. A criação é fundamental para a teologia bíblica e está diretamente ligada ao sábado como memorial da criação."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual é a posição da IASD sobre Ellen G. White?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A IASD entende que Ellen G. White exerceu o dom bíblico de profecia, como mensageira do Senhor. Seus escritos são considerados inspirados mas subordinados à Bíblia, que permanece como norma suprema de fé e prática."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que os adventistas creem sobre o estado dos mortos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Os adventistas creem que os mortos estão em um estado de inconsciência, aguardando a ressurreição. Não acreditam em alma imortal nem que os mortos vão para o céu ou inferno imediatamente após a morte."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual é a posição da IASD sobre salvação e graça?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A IASD crê que a salvação vem somente por Cristo, pela graça, mediante a fé, não por obras. A lei não pode salvar, mas revela a vontade de Deus. A perfeição cristã não significa ausência de pecado, mas crescimento em santificação."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que é o Juízo Investigativo na doutrina adventista?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "O Juízo Investigativo é uma fase do juízo divino que começou em 1844, no santuário celestial, envolvendo o exame dos registros dos que professam fé em Cristo. É parte da compreensão adventista sobre o ministério de Jesus no santuário celestial."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual é a posição da IASD sobre a Trindade?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A IASD crê em um só Deus em três Pessoas coeternas: Pai, Filho e Espírito Santo. Esta posição está claramente formulada nas 28 Crenças Fundamentais e no livro 'Nisto Cremos'."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "O que a IASD ensina sobre saúde e alimentação?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A IASD promove um estilo de vida saudável baseado em princípios bíblicos, incluindo alimentação vegetariana ou ovo-lacto-vegetariana, abstinência de álcool, tabaco e drogas, e cuidado com o corpo como templo do Espírito Santo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Como a IASD entende o dízimo e as ofertas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A IASD entende que o dízimo é 'santo ao Senhor' e deve ser devolvido a Deus como reconhecimento de Sua soberania. As ofertas são dádivas voluntárias para sustentar a obra da igreja. O dízimo é usado principalmente para o sustento ministerial."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qual é a posição da IASD sobre batismo e ceia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A IASD pratica o batismo por imersão de pessoas que já expressaram fé em Cristo e arrependimento de pecados. A Ceia do Senhor (Santa Ceia) é celebrada periodicamente, incluindo o lava-pés como ordenança instituída por Jesus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Adventistas podem celebrar o Natal e a Páscoa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Adventistas podem celebrar o Natal e a Páscoa, desde que o façam de modo cristão, centrado em Cristo e sem superstição. A IASD não as eleva a sacramentos obrigatórios, mas podem ser ocasiões legítimas para pregação e reflexão sobre a encarnação, morte e ressurreição de Cristo."
       }
     }
   ]
@@ -117,6 +189,11 @@ html { scroll-behavior: smooth; }
     color: #333;
     max-width: 900px;
     margin: 0 auto;
+}
+
+/* Espaçamento visual para footer na FAQ */
+footer {
+    margin-top: 60px !important;
 }
 
 .faq-container {
@@ -277,7 +354,7 @@ html { scroll-behavior: smooth; }
     color: #666;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-align: center;
+    text-align: center !important;
     white-space: normal;
     line-height: 1.3;
     min-height: 65px;
@@ -380,9 +457,10 @@ html { scroll-behavior: smooth; }
         padding: 10px 8px;
         font-size: 0.7rem;
         white-space: normal;
-        text-align: left;
+        text-align: center !important;
         min-height: auto;
         line-height: 1.2;
+        justify-content: center !important;
     }
 
     .sub-section-title {
@@ -478,7 +556,7 @@ html { scroll-behavior: smooth; }
         <div class="faq-list">
             <div class="faq-item">
                 <h3>Quais são os horários dos cultos?</h3>
-                <p>Temos cultos aos sábados às 08h45 e 18h00. A Escola Sabatina acontece às 11h00. Os cultos também acontecem aos Domingos e Quartas às 19h00. Você é muito bem-vindo(a) em todos os nossos encontros!</p>
+                <p>Temos cultos aos sábados às 08h45 e 18h. A Escola Sabatina acontece às 11h. Os cultos também acontecem aos Domingos e Quartas às 19h. Você é muito bem-vindo(a) em todos os nossos encontros!</p>
             </div>
 
             <div class="faq-item">
@@ -532,10 +610,8 @@ html { scroll-behavior: smooth; }
             <button class="sub-tab-button" data-subtab="saude-alimentacao">10. SAÚDE, ALIMENTAÇÃO E ESTILO DE VIDA</button>
             <button class="sub-tab-button" data-subtab="dizimos-ofertas">11. DÍZIMOS, OFERTAS E FINANÇAS</button>
             <button class="sub-tab-button" data-subtab="batismo-ceia">12. BATISMO, CEIA E PRÁTICAS LITÚRGICAS</button>
-            <button class="sub-tab-button" data-subtab="casamento-familia">13. CASAMENTO, FAMÍLIA E QUESTÕES ÉTICAS</button>
-            <button class="sub-tab-button" data-subtab="criacao-evolucao">14. CRIAÇÃO, EVOLUÇÃO E ORIGENS</button>
-            <button class="sub-tab-button" data-subtab="costumes-festas">15. COSTUMES, FESTAS E PRÁTICAS CULTURAIS</button>
-            <button class="sub-tab-button" data-subtab="lideranca-feminina">16. LIDERANÇA FEMININA E ORDENAÇÃO DE MULHERES</button>
+            <button class="sub-tab-button" data-subtab="criacao-evolucao">13. CRIAÇÃO, EVOLUÇÃO E ORIGENS</button>
+            <button class="sub-tab-button" data-subtab="costumes-festas">14. COSTUMES, FESTAS E PRÁTICAS CULTURAIS</button>
         </div>
 
         <div id="sabado-lei" class="sub-tab-content active">
@@ -1701,69 +1777,11 @@ html { scroll-behavior: smooth; }
             </div>
         </div>
 
-        <div id="casamento-familia" class="sub-tab-content">
-            <h2 class="sub-section-title">13. CASAMENTO, FAMÍLIA E QUESTÕES ÉTICAS</h2>
-
-            <div class="doctrine-item">
-                <h4>13.1 Qual é a posição da IASD sobre divórcio e novo casamento? A Igreja aceita casamentos de pessoas divorciadas?</h4>
-                <p>A IASD entende que o casamento é uma instituição sagrada e, idealmente, permanente. O Nisto Cremos cita claramente o ensino de Jesus: "O que Deus ajuntou não o separe o homem" (<a href="#" class="biblical-reference" data-reference="Mateus 19:6">Mateus 19:6</a>; <a href="#" class="biblical-reference" data-reference="Marcos 10:9">Marcos 10:9</a>).</p>
-                <p>A igreja reconhece, porém, que o pecado feriu profundamente a realidade humana. Por isso, trata o divórcio como tragédia, não como ideal. Em casos bíblicos específicos, especialmente imoralidade sexual (<a href="#" class="biblical-reference" data-reference="Mateus 5:32">Mateus 5:32</a>; <a href="#" class="biblical-reference" data-reference="Mateus 19:9">19:9</a>) e, em discussões pastorais, abandono destrutivo ligado a <a href="#" class="biblical-reference" data-reference="1 Coríntios 7:10-15">1 Coríntios 7:10-15</a>, a igreja admite que houve ruptura real da aliança.</p>
-                <p>Quanto ao novo casamento, a IASD o trata com seriedade pastoral e análise bíblica. Em muitos casos, sim, a igreja aceita o casamento de pessoas divorciadas, desde que a situação seja tratada conforme os princípios bíblicos e as normas eclesiásticas aplicáveis.</p>
-                <p>Portanto:</p>
-                <p>divórcio não é o ideal de Deus;</p>
-                <p>a igreja não o banaliza;</p>
-                <p>mas reconhece situações de quebra grave da aliança;</p>
-                <p>e trata novo casamento dentro de critérios pastorais e bíblicos.</p>
-            </div>
-
-            <div class="doctrine-item">
-                <h4>13.2 Qual é a posição oficial da Igreja Adventista sobre homossexualidade e uniões homoafetivas?</h4>
-                <p>A posição oficial da IASD distingue entre:</p>
-                <p>inclinação/atração;</p>
-                <p>prática sexual;</p>
-                <p>doutrina do casamento.</p>
-                <p>A igreja ensina que toda pessoa tem dignidade, valor e deve ser tratada com respeito, compaixão e amor cristão. Ao mesmo tempo, sustenta que o padrão bíblico para a prática sexual e para o casamento é a união entre um homem e uma mulher, dentro da aliança matrimonial.</p>
-                <p>Textos frequentemente citados:</p>
-                <p><a href="#" class="biblical-reference" data-reference="Gênesis 1:27">Gênesis 1:27</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Gênesis 2:24">Gênesis 2:24</a></p>
-                <p>Mateus 19:4-6</p>
-                <p><a href="#" class="biblical-reference" data-reference="Romanos 1:24-27">Romanos 1:24-27</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 6:9-11">1 Coríntios 6:9-11</a></p>
-                <p>Assim, a IASD não reconhece uniões homoafetivas como casamento bíblico e não aprova prática sexual fora do modelo bíblico que ela entende ser heterossexual e conjugal.</p>
-                <p>Pastoralmente, isso deve ser dito com verdade e graça: a igreja não autoriza redefinir o casamento, mas é chamada a acolher pessoas, anunciar o evangelho e chamar todos ao discipulado.</p>
-            </div>
-
-            <div class="doctrine-item">
-                <h4>13.3 Adventistas podem se casar com pessoas de outras religiões ou denominações?</h4>
-                <p>A orientação oficial é que o crente não deve casar-se com incrédulos ou com quem não compartilha a mesma fé de forma compatível. O anexo traz referência explícita ao cuidado contra casar com descrentes.</p>
-                <p>Base bíblica:</p>
-                <p><a href="#" class="biblical-reference" data-reference="2 Coríntios 6:14">2 Coríntios 6:14</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Amós 3:3">Amós 3:3</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 7:39">1 Coríntios 7:39</a> — "contanto que seja no Senhor".</p>
-                <p>A preocupação é espiritual, prática e familiar. Diferenças profundas de fé costumam gerar conflito em culto doméstico, criação dos filhos, prioridades morais e missão da casa.</p>
-                <p>Então, embora a igreja lidere pastoralmente com casos reais já existentes, a orientação é clara: o ideal bíblico é casar-se "no Senhor".</p>
-            </div>
-
-            <div class="doctrine-item">
-                <h4>13.4 Qual é a posição oficial da IASD sobre o aborto?</h4>
-                <p>A IASD tem posição fortemente pró-vida, reconhecendo o valor sagrado da vida humana. Em regra, o aborto não é tratado como método aceitável de conveniência, controle social ou liberdade irrestrita sobre o corpo.</p>
-                <p>Ao mesmo tempo, a abordagem adventista costuma buscar responsabilidade pastoral em casos dramáticos e complexos. A tendência oficial é afirmar:</p>
-                <p>a vida humana é dom de Deus;</p>
-                <p>o nascituro merece respeito moral;</p>
-                <p>o aborto não deve ser trivializado;</p>
-                <p>situações extremas exigem seriedade, oração, princípio bíblico e consciência responsável.</p>
-                <p>Textos de referência moral:</p>
-                <p>Salmo 139:13-16</p>
-                <p><a href="#" class="biblical-reference" data-reference="Jeremias 1:5">Jeremias 1:5</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Êxodo 20:13">Êxodo 20:13</a></p>
-            </div>
-        </div>
-
         <div id="criacao-evolucao" class="sub-tab-content">
-            <h2 class="sub-section-title">14. CRIAÇÃO, EVOLUÇÃO E ORIGENS</h2>
+            <h2 class="sub-section-title">13. CRIAÇÃO, EVOLUÇÃO E ORIGENS</h2>
 
             <div class="doctrine-item">
-                <h4>14.1 Os adventistas creem em criação literal em seis dias?</h4>
+                <h4>13.1 Os adventistas creem em criação literal em seis dias?</h4>
                 <p>Sim. A IASD crê em criação literal em seis dias. Isso é parte central de sua doutrina.</p>
                 <p>Textos principais:</p>
                 <p><a href="#" class="biblical-reference" data-reference="Gênesis 1:1-2:3">Gênesis 1:1-2:3</a></p>
@@ -1772,7 +1790,7 @@ html { scroll-behavior: smooth; }
             </div>
 
             <div class="doctrine-item">
-                <h4>14.2 Por que a IASD rejeita a macroevolução e a evolução teísta?</h4>
+                <h4>13.2 Por que a IASD rejeita a macroevolução e a evolução teísta?</h4>
                 <p>Porque entende que essas teorias entram em conflito com o relato bíblico da criação, da queda e da morte.</p>
                 <p>Se a macroevolução for aceita como mecanismo principal da origem humana, surgem grandes tensões com:</p>
                 <p>a historicidade de Adão e Eva;</p>
@@ -1789,7 +1807,7 @@ html { scroll-behavior: smooth; }
             </div>
 
             <div class="doctrine-item">
-                <h4>14.3 A criação em seis dias é um pilar que afeta outras doutrinas, como sábado, queda e redenção?</h4>
+                <h4>13.3 A criação em seis dias é um pilar que afeta outras doutrinas, como sábado, queda e redenção?</h4>
                 <p>Sim, profundamente. O próprio Nisto Cremos afirma que muitos conceitos bíblicos fundamentais estão enraizados na criação divina.</p>
                 <p>A criação afeta:</p>
                 <p>sábado — memorial da criação;</p>
@@ -1801,7 +1819,7 @@ html { scroll-behavior: smooth; }
             </div>
 
             <div class="doctrine-item">
-                <h4>14.4 Qual é a posição adventista sobre a idade da Terra e do universo (milhares vs milhões/bilhões)?</h4>
+                <h4>13.4 Qual é a posição adventista sobre a idade da Terra e do universo (milhares vs milhões/bilhões)?</h4>
                 <p>A IASD oficialmente afirma a criação literal recente da vida na Terra em seis dias, mas historicamente nem sempre especifica com o mesmo grau dogmático cada detalhe cronológico do universo inteiro como tema confessional central.</p>
                 <p>Na prática, o adventismo tende a uma leitura de Terra recente, associada à cronologia bíblica. Quanto ao universo em sua totalidade, há adventistas que discutem o tema com cautela maior, mas a posição doutrinária da igreja enfatiza sobretudo:</p>
                 <p>criação divina literal;</p>
@@ -1811,7 +1829,7 @@ html { scroll-behavior: smooth; }
             </div>
 
             <div class="doctrine-item">
-                <h4>14.5 O dilúvio foi global e explica geologia e fósseis na leitura adventista?</h4>
+                <h4>13.5 O dilúvio foi global e explica geologia e fósseis na leitura adventista?</h4>
                 <p>Sim. Na leitura adventista tradicional, o dilúvio de Gênesis foi global, não apenas regional.</p>
                 <p>Textos principais:</p>
                 <p><a href="#" class="biblical-reference" data-reference="Gênesis 6:9">Gênesis 6:9</a></p>
@@ -1822,10 +1840,10 @@ html { scroll-behavior: smooth; }
         </div>
 
         <div id="costumes-festas" class="sub-tab-content">
-            <h2 class="sub-section-title">15. COSTUMES, FESTAS E PRÁTICAS CULTURAIS</h2>
+            <h2 class="sub-section-title">14. COSTUMES, FESTAS E PRÁTICAS CULTURAIS</h2>
 
             <div class="doctrine-item">
-                <h4>15.1 Adventistas celebram o Natal? É pecado ou considerado pagão?</h4>
+                <h4>14.1 Adventistas celebram o Natal? É pecado ou considerado pagão?</h4>
                 <p>Adventistas podem celebrar o Natal, desde que o façam de modo cristão, centrado em Cristo e sem superstição. A IASD não trata o Natal como sacramento obrigatório nem como festa proibida em si.</p>
                 <p>A preocupação adventista costuma ser dupla:</p>
                 <p>evitar consumismo, sentimentalismo vazio e elementos contrários ao evangelho;</p>
@@ -1837,67 +1855,9 @@ html { scroll-behavior: smooth; }
             </div>
 
             <div class="doctrine-item">
-                <h4>15.2 Adventistas celebram a Páscoa?</h4>
+                <h4>14.2 Adventistas celebram a Páscoa?</h4>
                 <p>Sim, podem celebrar, especialmente destacando a morte e ressurreição de Cristo. Mas, como no Natal, a IASD tende a evitar formalismo litúrgico obrigatório e elementos não bíblicos que obscureçam o evangelho.</p>
                 <p>A Páscoa cristã pode ser ocasião legítima para pregação, culto, estudo bíblico e gratidão pela redenção em Cristo.</p>
-            </div>
-        </div>
-
-        <div id="lideranca-feminina" class="sub-tab-content">
-            <h2 class="sub-section-title">16. LIDERANÇA FEMININA E ORDENAÇÃO DE MULHERES</h2>
-
-            <div class="doctrine-item">
-                <h4>16.1 Mulheres podem pregar, ensinar, dar estudos bíblicos e exercer liderança na IASD?</h4>
-                <p>Sim. A IASD reconhece amplamente o ministério feminino em várias áreas. O próprio Nisto Cremos afirma que o Espírito distribui dons à igreja para ministérios como ensino, proclamação, administração, reconciliação, compaixão e serviço. Isso não é limitado, nesse princípio, apenas aos homens.</p>
-                <p>Além disso, o livro reconhece o ministério profético de Ellen G. White, cofundadora da Igreja Adventista do Sétimo Dia. Isso, por si só, mostra que a IASD não crê que Deus esteja impedido de usar mulheres em ensino, exortação e liderança espiritual.</p>
-                <p>Textos relevantes:</p>
-                <p><a href="#" class="biblical-reference" data-reference="Joel 2:28-29">Joel 2:28-29</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Atos 2:17-18">Atos 2:17-18</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Romanos 16:1-27">Romanos 16:1-27</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Juízes 4:1-5">Juízes 4:1-5</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Atos 18:26">Atos 18:26</a></p>
-                <p>Na prática, mulheres podem:</p>
-                <p>pregar;</p>
-                <p>ensinar;</p>
-                <p>dar estudos bíblicos;</p>
-                <p>liderar ministérios;</p>
-                <p>servir em muitas funções eclesiásticas.</p>
-            </div>
-
-            <div class="doctrine-item">
-                <h4>16.2 Por que existe controvérsia sobre a ordenação de mulheres ao pastorado na IASD?</h4>
-                <p>Porque esse tema envolve não apenas dons espirituais, mas também interpretação bíblica, prática eclesiástica mundial, unidade denominacional e compreensão do ofício pastoral ordenado.</p>
-                <p>Os dois lados normalmente concordam que mulheres podem servir a Deus de forma poderosa. A controvérsia está em outra pergunta: isso inclui ordenação ao pastorado no mesmo sentido formal aplicado aos homens?</p>
-                <p>As áreas de debate incluem:</p>
-                <p>interpretação de 1 Timóteo 2;</p>
-                <p>interpretação de 1 Coríntios 11 e 14;</p>
-                <p>relação entre criação, queda e liderança;</p>
-                <p>distinção entre dom ministerial e ordenação eclesiástica;</p>
-                <p>unidade mundial da igreja.</p>
-                <p>Como você pediu a posição oficial, o ponto importante é: a IASD mundial não estabeleceu ordenação feminina ao pastorado como prática universal obrigatória. Por isso o tema permanece controverso.</p>
-            </div>
-
-            <div class="doctrine-item">
-                <h4>16.3 O que a Bíblia diz, segundo a leitura adventista, sobre mulheres como pastoras e anciãs?</h4>
-                <p>A resposta adventista oficial aqui exige cuidado, porque a igreja mundial abriga discussões interpretativas internas. Mas alguns pontos são claros:</p>
-                <p>a Bíblia mostra mulheres exercendo papéis espirituais importantes;</p>
-                <p>a Bíblia também contém textos usados por muitos para restringir certas funções de governo e ensino autoritativo eclesial.</p>
-                <p>Textos em favor de forte participação feminina:</p>
-                <p><a href="#" class="biblical-reference" data-reference="Joel 2:28-29">Joel 2:28-29</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Atos 2:17-18">Atos 2:17-18</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Romanos 16:1-27">Romanos 16:1-27</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Juízes 4:1-5">Juízes 4:1-5</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="Atos 18:26">Atos 18:26</a></p>
-                <p>Textos usados nas restrições:</p>
-                <p><a href="#" class="biblical-reference" data-reference="1 Timóteo 2:11-15">1 Timóteo 2:11-15</a></p>
-                <p><a href="#" class="biblical-reference" data-reference="1 Coríntios 14:34-35">1 Coríntios 14:34-35</a></p>
-                <p>1 Timóteo 3</p>
-                <p>Tito 1</p>
-                <p>Na prática adventista:</p>
-                <p>quanto a pregar, ensinar e liderar, a resposta é claramente sim;</p>
-                <p>quanto a ordenação pastoral, a questão permanece debatida no âmbito mundial;</p>
-                <p>quanto a anciãs, em muitas regiões e contextos a função existe, mas a aplicação pode variar conforme decisões e políticas eclesiásticas.</p>
-                <p>Como posição oficial mais segura: a IASD reconhece os dons das mulheres e seu amplo ministério, mas a questão da ordenação ao pastorado não foi uniformemente resolvida para toda a igreja mundial.</p>
             </div>
         </div>
 
