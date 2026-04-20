@@ -1,7 +1,2 @@
 User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /storage/
-Disallow: /vendor/
-
-Sitemap: https://adventistascentralbrasilia.org/sitemap.xml
+Disallow:

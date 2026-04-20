@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'IASD Central de Brasília - Doutores da Esperança')
+@section('title', 'IASD Central de Brasília - Doutores de Esperança')
 
 @push('styles')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
     .doutores-container {
         width: 100%;
@@ -210,55 +209,6 @@
         transform: scale(1.02);
     }
 
-    .atividade-galeria img.lightbox-trigger {
-        cursor: pointer;
-    }
-
-    /* Lightbox styles */
-    .lightbox {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-
-    .lightbox.active {
-        display: flex;
-    }
-
-    .lightbox-content {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain;
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    }
-
-    .lightbox-close {
-        position: absolute;
-        top: 20px;
-        right: 28px;
-        color: #fff;
-        font-size: 50px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: color 0.3s;
-        user-select: none;
-        line-height: 1;
-    }
-
-    .lightbox-close:hover {
-        color: #3b82f6;
-    }
-
     .video-section {
         background: #f8f9fa;
         padding: 40px;
@@ -410,6 +360,62 @@
         color: #f8f9fa;
     }
 
+    .lightbox {
+        --doutores-lightbox-right-gap: 0px;
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: var(--header-height);
+        width: calc(100vw - var(--doutores-lightbox-right-gap));
+        height: calc(100vh - var(--header-height));
+        height: calc(100dvh - var(--header-height));
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .lightbox.active {
+        display: flex;
+    }
+
+    .lightbox-content {
+        max-width: min(90%, 1200px);
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        margin: 0 auto;
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 18px;
+        right: 28px;
+        color: #fff;
+        font-size: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s;
+        user-select: none;
+        line-height: 1;
+        z-index: 1;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+    .lightbox-close:hover {
+        color: #3b82f6;
+    }
+
     @media (max-width: 768px) {
         .doutores-container {
             padding: 20px 15px;
@@ -521,13 +527,13 @@
 @endpush
 
 @section('content')
-<img src="{{ asset('img/doutores/doutores_header.webp') }}" alt="Doutores da Esperança" style="width: 100%;" fetchpriority="high" decoding="async">
+<img src="{{ asset('img/doutores/doutores_header.webp') }}" alt="Doutores de Esperança" style="width: 100%;" fetchpriority="high" decoding="async">
 
 <div class="doutores-container">
 
     <!-- Seção Introdutória -->
     <div class="doutores-intro acb-fullbleed">
-        <h1 class="acb-title-serif">Doutores da Esperança</h1>
+        <h1 class="acb-title-serif">Doutores de Esperança</h1>
         <p>
             O Ministério Doutores de Esperança consiste em um projeto de humanização hospitalar cristão apoiado pela Ação Solidária Adventista - ASA da Igreja Adventista Central de Brasília. Idealizado e criado em 2013 em Volta Redonda/RJ pelo querido Betão, Dr Gentileza, o projeto nasceu em Brasília em fevereiro de 2018 e conta com voluntários da comunidade em geral treinados para atuar na área de humanização hospitalar, através da palhaçaria, oração e música.
         </p>
@@ -539,7 +545,7 @@
     <!-- Seção Identidade Corporativa -->
     <div class="identidade-section acb-fullbleed">
         <h2 style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-            <img src="{{ asset('img/doutores/imagem_12.webp') }}" alt="Logomarca Doutores da Esperança" style="width: 60px; height: 60px; object-fit: contain; border-radius: 8px;" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/doutores/imagem_12.webp') }}">
+            <img src="{{ asset('img/doutores/imagem_12.webp') }}" alt="" style="width: 60px; height: 60px; object-fit: contain; border-radius: 8px;" loading="lazy" decoding="async">
             Identidade Corporativa
         </h2>
 
@@ -587,7 +593,7 @@
 
                 <div class="valor-card">
                     <h4>Trabalho em Equipe</h4>
-                    <p>Colaborar de forma harmoniosa e eficiente com outros voluntários e profissionais de saúde, visando o bem-estar comum.</p>
+                    <p>Colaborar de forma harmoniosa e eficiente com outros voluntários e profissionais de saúde, visando ao bem-estar comum.</p>
                 </div>
 
                 <div class="valor-card">
@@ -668,11 +674,6 @@
         </div>
     </div>
 
-    <div class="lightbox" id="lightbox" aria-hidden="true">
-        <span class="lightbox-close" aria-label="Fechar">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" src="" alt="" loading="lazy" decoding="async">
-    </div>
-
     {{-- Seção Vídeo (oculta temporariamente - documento do Drive inválido) --}}
     {{--
     <div class="video-section">
@@ -687,7 +688,7 @@
     <div class="calendario-section acb-fullbleed">
         <h3 class="acb-title-serif">Como Participar / Voluntariado</h3>
         <p>
-            Se você tem mais de 16 anos e deseja ser voluntário(a), a prática comum é <strong>participar do treinamento</strong> oferecido pelo grupo local e assinar termo de responsabilidade de uso de voz e imagem.
+            Se você tem mais de 16 anos e deseja ser voluntário(a), será muito bem-vindo(a)! Para participar, é necessário realizar o treinamento do grupo local e assinar o termo de responsabilidade para uso de voz e imagem.
         </p>
         <p style="margin-top: 20px;">
             Acompanhe as chamadas para formação nas redes sociais do grupo:
@@ -725,6 +726,11 @@
         </div>
     </div>
 
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <span class="lightbox-close" aria-label="Fechar">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="" loading="lazy" decoding="async">
+    </div>
+
 </div>
 @endsection
 
@@ -735,38 +741,70 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.querySelector('.lightbox-close');
     const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+    const pageAside = document.querySelector('aside');
+
+    function syncLightboxBounds() {
+        if (!lightbox) return;
+
+        let rightGap = 0;
+
+        if (pageAside) {
+            const asideRect = pageAside.getBoundingClientRect();
+
+            if (asideRect.width > 0 && asideRect.right > asideRect.left) {
+                rightGap = Math.max(0, asideRect.width);
+            }
+        }
+
+        lightbox.style.setProperty('--doutores-lightbox-right-gap', `${rightGap}px`);
+    }
+
+    function openLightbox() {
+        if (!lightbox) return;
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        syncLightboxBounds();
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+        if (!lightbox || !lightboxImg) return;
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+    }
 
     if (lightbox && lightboxImg && lightboxClose && lightboxTriggers.length > 0) {
+        syncLightboxBounds();
+        window.addEventListener('resize', syncLightboxBounds);
+
         lightboxTriggers.forEach(trigger => {
             trigger.addEventListener('click', function() {
+                syncLightboxBounds();
                 const fullSizeSrc = this.getAttribute('data-full') || this.getAttribute('src');
                 const altText = this.getAttribute('alt') || '';
                 lightboxImg.src = fullSizeSrc || '';
                 lightboxImg.alt = altText;
-                lightbox.classList.add('active');
-                lightbox.setAttribute('aria-hidden', 'false');
+                openLightbox();
             });
         });
 
         lightboxClose.addEventListener('click', function() {
-            lightbox.classList.remove('active');
-            lightbox.setAttribute('aria-hidden', 'true');
-            lightboxImg.src = '';
+            closeLightbox();
         });
 
         lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-                lightbox.setAttribute('aria-hidden', 'true');
-                lightboxImg.src = '';
+                closeLightbox();
             }
         });
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                lightbox.classList.remove('active');
-                lightbox.setAttribute('aria-hidden', 'true');
-                lightboxImg.src = '';
+                closeLightbox();
             }
         });
     }

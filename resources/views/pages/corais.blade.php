@@ -518,17 +518,21 @@ $orchestras = [
 
     /* Lightbox Styles */
     .lightbox {
+        --corais-lightbox-right-gap: 0px;
         display: none;
         position: fixed;
         z-index: 9999;
         left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.95);
+        top: var(--header-height);
+        width: calc(100vw - var(--corais-lightbox-right-gap));
+        height: calc(100vh - var(--header-height));
+        height: calc(100dvh - var(--header-height));
+        background-color: rgba(0, 0, 0, 0.9);
         justify-content: center;
         align-items: center;
         padding: 20px;
+        box-sizing: border-box;
+        overflow: hidden;
     }
 
     .lightbox.active {
@@ -536,23 +540,33 @@ $orchestras = [
     }
 
     .lightbox-content {
-        max-width: 90%;
+        max-width: min(90%, 1200px);
         max-height: 90%;
         object-fit: contain;
         border-radius: 10px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        margin: 0 auto;
     }
 
     .lightbox-close {
         position: absolute;
-        top: 30px;
-        right: 40px;
+        top: 18px;
+        right: 28px;
         color: #fff;
         font-size: 50px;
         font-weight: bold;
         cursor: pointer;
         transition: color 0.3s;
         user-select: none;
+        line-height: 1;
+        z-index: 1;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
     }
 
     .lightbox-close:hover {
@@ -664,49 +678,89 @@ $orchestras = [
 </div>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-    <span class="lightbox-close">&times;</span>
+<div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="lightbox-close" aria-label="Fechar">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="" alt="" loading="lazy" decoding="async">
 </div>
 @endsection
 
 @push('scripts')
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
     lucide.createIcons();
 
-    // Lightbox functionality
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.querySelector('.lightbox-close');
     const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+    const pageAside = document.querySelector('aside');
 
-    lightboxTriggers.forEach(trigger => {
-        trigger.addEventListener('click', function() {
-            const fullSizeSrc = this.getAttribute('data-full');
-            lightboxImg.src = fullSizeSrc;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    });
+    function syncLightboxBounds() {
+        if (!lightbox) return;
 
-    lightboxClose.addEventListener('click', function() {
+        let rightGap = 0;
+
+        if (pageAside) {
+            const asideRect = pageAside.getBoundingClientRect();
+
+            if (asideRect.width > 0 && asideRect.right > asideRect.left) {
+                rightGap = Math.max(0, asideRect.width);
+            }
+        }
+
+        lightbox.style.setProperty('--corais-lightbox-right-gap', `${rightGap}px`);
+    }
+
+    function openLightbox() {
+        if (!lightbox) return;
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        syncLightboxBounds();
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+        if (!lightbox || !lightboxImg) return;
         lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+    }
 
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
+    if (lightbox && lightboxImg && lightboxClose && lightboxTriggers.length > 0) {
+        syncLightboxBounds();
+        window.addEventListener('resize', syncLightboxBounds);
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
+        lightboxTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                syncLightboxBounds();
+                const fullSizeSrc = this.getAttribute('data-full') || this.getAttribute('src');
+                const altText = this.getAttribute('alt') || '';
+                lightboxImg.src = fullSizeSrc || '';
+                lightboxImg.alt = altText;
+                openLightbox();
+            });
+        });
+
+        lightboxClose.addEventListener('click', function() {
+            closeLightbox();
+        });
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+    }
+});
 </script>
 @endpush

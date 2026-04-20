@@ -4,7 +4,6 @@
 
 @push('styles')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
     .cemab-container {
         width: 100%;
@@ -465,7 +464,7 @@
 @endpush
 
 @section('content')
-<img class="page-header-img" src="{{ asset('img/cemab/cemab_header.webp') }}" alt="CEMAB (Centro Musical Adventista de Brasília)">
+<img class="page-header-img" src="{{ asset('img/cemab/cemab_header.webp') }}" alt="CEMAB (Centro Musical Adventista de Brasília)" fetchpriority="high" decoding="async">
 
 <div class="cemab-container">
 

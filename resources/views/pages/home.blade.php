@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('title', 'IASD Central de Brasília - Início')
-@section('meta-description', 'IASD Central de Brasília - Uma comunidade de fé, amor e esperança em Brasília. Participe de nossos cultos, estudos bíblicos, eventos e atividades para todas as idades.')
-@section('og-title', 'IASD Central de Brasília - Bem-vindo à Nossa Comunidade')
-@section('og-description', 'Junte-se a nós! Uma comunidade de fé, amor e esperança em Brasília. Cultos, estudos bíblicos, programações e muito mais.')
-@section('twitter-title', 'IASD Central de Brasília')
-@section('twitter-description', 'Uma comunidade de fé, amor e esperança em Brasília. Venha nos visitar!')
-@section('page-name', 'Início')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
@@ -36,8 +30,8 @@
     </div>
 
     <div class="buttons">
-        <button id="prev"><img src="{{ asset('img/btn-left.png') }}" alt="Anterior" width="40" height="40"></button>
-        <button id="next"><img src="{{ asset('img/btn-right.png') }}" alt="Próximo" width="40" height="40"></button>
+        <button id="prev"><img src="{{ asset('img/btn-left.webp') }}" alt="Anterior" width="40" height="40"></button>
+        <button id="next"><img src="{{ asset('img/btn-right.webp') }}" alt="Próximo" width="40" height="40"></button>
     </div>
 
     <ul class="dots">
@@ -52,47 +46,47 @@
 
 <span class="span_cards">
     <div class="container_cards">
-        <div class="card">
+        <a class="card" href="{{ route('estudo-biblico') }}">
             <img src="{{ asset('img/cards/estudo_biblico.webp') }}" alt="Estudo Bíblico" loading="lazy" decoding="async" width="400" height="300">
             <h2 class="acb-title-serif">Estudo Bíblico:<br>Uma Jornada para Conectar-se com Deus</h2>
             <p>Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais? O Estudo Bíblico é o caminho!</p>
-            <a href="{{ route('estudo-biblico') }}">Saiba mais</a>
-        </div>
+            <span class="card_cta">Saiba mais</span>
+        </a>
 
-        <div class="card">
+        <a class="card" href="{{ route('escola-sabatina') }}">
             <img src="{{ asset('img/cards/escola_sabatina.webp') }}" alt="Escola Sabatina" loading="lazy" decoding="async" width="400" height="300">
             <h2 class="acb-title-serif">Venha Crescer Conosco na Escola Sabatina!</h2>
             <p>A Escola Sabatina é um presente de Deus para você! Não é apenas um momento de estudo, mas um encontro semanal que alimenta a alma, fortalece a fé e nos une como família em Cristo.</p>
-            <a href="{{ route('escola-sabatina') }}">Saiba mais</a>
-        </div>
+            <span class="card_cta">Saiba mais</span>
+        </a>
 
-        <div class="card">
+        <a class="card" href="{{ route('oracao-visita') }}">
             <img src="{{ asset('img/cards/oracao.webp') }}" alt="Oração e Visita" loading="lazy" decoding="async" width="400" height="300">
             <h2 class="acb-title-serif">Precisa de Oração ou Visita? Vamos Interceder por Você!</h2>
             <p>Não carregue suas lutas sozinho(a). Deus ouve cada oração e, através da nossa comunidade, queremos ser um canal de esperança para sua vida.</p>
-            <a href="{{ route('oracao-visita') }}">Saiba mais</a>
-        </div>
+            <span class="card_cta">Saiba mais</span>
+        </a>
 
-        <div class="card">
+        <a class="card" href="{{ route('programacoes') }}">
             <img src="{{ asset('img/cards/eventos.webp') }}" alt="Programações e Eventos" loading="lazy" decoding="async" width="400" height="300">
             <h2 class="acb-title-serif">Programações </h2>
             <p>Nossa comunidade está em constante movimento! Todos os meses, os ministérios organizam programações especiais que abraçam todas as idades. Venha participar e fortalecer sua fé junto à família da igreja. Aqui, há espaço para todos!</p>
-            <a href="{{ route('programacoes') }}">Saiba mais</a>
-        </div>
+            <span class="card_cta">Saiba mais</span>
+        </a>
 
-        <div class="card">
+        <a class="card" href="{{ route('asa') }}">
             <img src="{{ asset('img/cards/asa.webp') }}" alt="Ação Solidária Adventista" loading="lazy" decoding="async" width="400" height="300">
             <h2 class="acb-title-serif">Ação Solidária Adventista (ASA) </h2>
             <p>A ASA é o braço social da Igreja Adventista, dedicado a servir e transformar vidas através de ações de amor e solidariedade. Seja parte desta corrente do bem!</p>
-            <a href="{{ route('asa') }}">Saiba mais</a>
-        </div>
+            <span class="card_cta">Saiba mais</span>
+        </a>
 
-        <div class="card">
+        <a class="card" href="{{ route('secretaria') }}">
             <img src="{{ asset('img/cards/secretaria.webp') }}" alt="Secretaria da Igreja" loading="lazy" decoding="async" width="400" height="300">
             <h2 class="acb-title-serif">Fale com a secretaria </h2>
             <p>Na Igreja Adventista do Sétimo Dia, cada membro é parte essencial da família de Deus. Para cuidar bem uns dos outros e garantir que nossa missão avance com eficiência, é fundamental que seus dados estejam sempre atualizados.</p>
-            <a href="{{ route('secretaria') }}">Saiba mais</a>
-        </div>
+            <span class="card_cta">Saiba mais</span>
+        </a>
     </div>
 </span>
 
@@ -103,23 +97,37 @@
     </div>
     <div id="div1" class="youtube">
         <h2 class="acb-title-serif">Acompanhe nossas transmissões</h2>
-        <div class="content_yt">
-            <div class="yt_ao_vivo">
-                <iframe width="560" height="315" src="about:blank" data-src="https://www.youtube.com/embed/629KDII-r94?si=I4oLWFGER1l1G_Wn&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+        <div class="yt_stage is-loading" data-yt-stage>
+            <div class="yt_loader" data-yt-loader role="status" aria-live="polite" aria-label="Carregando vídeos do YouTube">
+                <span class="yt_loader_spinner" aria-hidden="true"></span>
             </div>
+            <div class="content_yt" data-yt-content aria-hidden="true">
+                <div class="yt_ao_vivo">
+                    <button type="button" class="yt_lazy" data-yt-lazy aria-label="Reproduzir vídeo do YouTube">
+                        <img class="yt_lazy_thumb" src="{{ asset('img/canais/yt_em_breve.avif') }}" alt="" loading="lazy" decoding="async">
+                        <span class="yt_lazy_play" aria-hidden="true"></span>
+                    </button>
+                </div>
 
-            <div class="yt_em_breve">
-                <div class="thumb_em_breve">
-                    <img src="{{ asset('img/canais/yt_em_breve.avif') }}" alt="Em breve" loading="lazy" decoding="async">
-                    <a href="" style="font-size: 0.8em;">Título sermão</a>
-                </div>
-                <div class="thumb_em_breve">
-                    <img src="{{ asset('img/canais/yt_em_breve.avif') }}" alt="Em breve" loading="lazy" decoding="async">
-                    <a href="" style="font-size: 0.8em;">Título sermão</a>
-                </div>
-                <div class="thumb_em_breve">
-                    <img src="{{ asset('img/canais/yt_em_breve.avif') }}" alt="Em breve" loading="lazy" decoding="async">
-                    <a href="" style="font-size: 0.8em;">Título sermão</a>
+                <div class="yt_em_breve">
+                    <div class="thumb_em_breve">
+                        <a href="" class="thumb_em_breve_link" aria-label="Abrir vídeo no YouTube" target="_blank" rel="noopener noreferrer">
+                            <img src="{{ asset('img/canais/yt_em_breve.avif') }}" alt="Em breve" loading="lazy" decoding="async">
+                        </a>
+                        <a href="" class="thumb_em_breve_title" target="_blank" rel="noopener noreferrer">Título sermão</a>
+                    </div>
+                    <div class="thumb_em_breve">
+                        <a href="" class="thumb_em_breve_link" aria-label="Abrir vídeo no YouTube" target="_blank" rel="noopener noreferrer">
+                            <img src="{{ asset('img/canais/yt_em_breve.avif') }}" alt="Em breve" loading="lazy" decoding="async">
+                        </a>
+                        <a href="" class="thumb_em_breve_title" target="_blank" rel="noopener noreferrer">Título sermão</a>
+                    </div>
+                    <div class="thumb_em_breve">
+                        <a href="" class="thumb_em_breve_link" aria-label="Abrir vídeo no YouTube" target="_blank" rel="noopener noreferrer">
+                            <img src="{{ asset('img/canais/yt_em_breve.avif') }}" alt="Em breve" loading="lazy" decoding="async">
+                        </a>
+                        <a href="" class="thumb_em_breve_title" target="_blank" rel="noopener noreferrer">Título sermão</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,23 +142,7 @@
 
 @push('scripts')
 <script src="{{ asset('js/slider.js') }}" defer></script>
-<script src="{{ asset('js/canais.js') }}?v=2026-04-04-atualizado" defer></script>
+<script src="{{ asset('js/canais.js') }}" defer></script>
 <script src="{{ asset('js/videos_youtube.js') }}" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var ytIframe = document.querySelector('.yt_ao_vivo iframe[data-src]');
-    if (ytIframe) {
-        var obs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    ytIframe.src = ytIframe.dataset.src;
-                    obs.disconnect();
-                }
-            });
-        }, { rootMargin: '200px' });
-        obs.observe(ytIframe);
-    }
-});
-</script>
 @endpush
 

@@ -26,28 +26,11 @@ $scientists = [
 
 @push('styles')
 <style>
-    html {
-        scroll-behavior: smooth;
+    html { 
+        scroll-behavior: smooth; 
     }
 
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #fcfaf7;
-        color: #2d2a26;
-    }
-
-    h1, h2, h3 {
-        font-family: 'Crimson Pro', serif;
-    }
-
-    .evidencias-container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 40px 20px;
-    }
-
-    .intro-section {
+    .page-hero {
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         padding: 50px 40px;
         border-radius: 15px;
@@ -55,54 +38,12 @@ $scientists = [
         text-align: center;
     }
 
-    .intro-section h1 {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 3em;
-        color: #003366;
-        margin-bottom: 25px;
-        font-weight: 500;
-    }
-
-    .intro-section .subtitle {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 1.5em;
-        color: #003366;
-        margin-bottom: 20px;
-        display: block;
-    }
-
-    .intro-section p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #333;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .section-block {
-        margin-top: 60px;
-        margin-bottom: 50px;
-    }
-
-    .section-title {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 2.5em;
-        color: #003366;
-        text-align: center;
-        margin-bottom: 40px;
-        font-weight: 500;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     /* Seção de Cientistas */
     .cientistas-section {
         margin: 50px 0;
     }
 
-    .section-title {
+    .cientistas-section h2 {
         font-family: 'Bebas neue', sans-serif;
         font-size: 2.5em;
         color: #003366;
@@ -159,14 +100,14 @@ $scientists = [
         background: #eef2f6;
         padding: 25px;
         border-radius: 12px;
-        border-left: 4px solid #e67e22;
+        border-left: 4px solid #003366;
     }
 
     .newton-card h3 {
         font-family: 'Roboto', sans-serif;
         font-size: 1.3em;
         font-weight: 700;
-        color: #e67e22;
+        color: #003366;
         margin-bottom: 15px;
     }
 
@@ -180,12 +121,12 @@ $scientists = [
     }
 
     .quote-card {
-        border-left: 4px solid #e67e22;
-        background-color: #fef5e6;
+        border-left: 4px solid #003366;
+        background-color: #eef2f6;
         padding: 25px;
         margin: 30px 0;
         font-style: italic;
-        color: #e67e22;
+        color: #003366;
         border-radius: 8px;
     }
 
@@ -203,7 +144,7 @@ $scientists = [
         font-weight: 700;
         font-style: normal;
         font-size: 0.95rem;
-        color: #d35400;
+        color: #001531;
     }
 
     .cientistas-grid {
@@ -214,6 +155,46 @@ $scientists = [
         margin: 0 auto;
     }
 
+    .cientistas-highlight {
+        background: linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
+        border: 1px solid rgba(0, 51, 102, 0.08);
+        border-radius: 18px;
+        padding: 36px;
+        max-width: 1400px;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(0, 51, 102, 0.08);
+    }
+
+    .cientistas-highlight-intro {
+        max-width: 920px;
+        margin: 0 auto 28px;
+        text-align: center;
+    }
+
+    .cientistas-highlight-intro span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(0, 51, 102, 0.08);
+        color: #003366;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 16px;
+    }
+
+    .cientistas-highlight-intro p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.08rem;
+        color: #334155;
+        line-height: 1.8;
+        margin: 0;
+    }
+
     .cientista-card {
         background: #fff;
         padding: 30px;
@@ -221,31 +202,69 @@ $scientists = [
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         border: 2px solid #e0e0e0;
         transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
     }
 
     .cientista-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(230, 126, 34, 0.25);
-        border-color: #e67e22;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .cientista-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 5px;
+        background: linear-gradient(90deg, #003366 0%, #2f6fad 100%);
+    }
+
+    .cientista-card-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: #003366;
+        font-size: 1.45rem;
+    }
+
+    .cientista-card-icon.amber {
+        background: #fef3c7;
+    }
+
+    .cientista-card-icon.indigo {
+        background: #e0e7ff;
+    }
+
+    .cientista-card-icon.sky {
+        background: #e0f2fe;
+    }
+
+    .cientista-card-icon.emerald {
+        background: #d1fae5;
     }
 
     .cientista-card h3 {
         font-family: 'Roboto', sans-serif;
         font-size: 1.3em;
         font-weight: 700;
-        color: #e67e22;
+        color: #003366;
         margin-bottom: 8px;
     }
 
     .cientista-card .subtitle {
         font-family: 'Roboto', sans-serif;
         font-size: 0.9rem;
-        color: #f39c12;
+        color: #003366;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-bottom: 15px;
-        opacity: 0.9;
+        opacity: 0.8;
     }
 
     .cientista-card p {
@@ -333,8 +352,8 @@ $scientists = [
 
     .btn-scb {
         display: inline-block;
-        background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-        color: #fff;
+        background: #fff;
+        color: #003366;
         font-family: 'Roboto', sans-serif;
         font-weight: 700;
         padding: 15px 35px;
@@ -346,7 +365,7 @@ $scientists = [
 
     .btn-scb:hover {
         transform: translateY(-3px);
-        box-shadow: 0 5px 20px rgba(230, 126, 34, 0.4);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
     .scb-social {
@@ -387,7 +406,7 @@ $scientists = [
     }
 
     .social-link:hover {
-        background-color: #e67e22;
+        background-color: rgba(255, 255, 255, 0.25);
         transform: scale(1.1);
     }
 
@@ -495,7 +514,7 @@ $scientists = [
     }
 
     .conclusao-links a:hover {
-        color: #e67e22;
+        color: #001531;
     }
 
     .conclusao-links .separator {
@@ -518,24 +537,10 @@ $scientists = [
     }
 
     @media (max-width: 768px) {
-        .evidencias-container {
-            padding: 20px 15px;
-        }
-
-        .intro-section {
-            padding: 30px 20px;
-        }
-
-        .intro-section h1 {
-            font-size: 2.2em;
-        }
-
-        .section-title {
-            font-size: 2em;
-        }
-
+        .page-hero,
         .newton-section,
-        .scb-section {
+        .scb-section,
+        .cientistas-highlight {
             padding: 30px 20px;
         }
 
@@ -544,7 +549,11 @@ $scientists = [
             grid-template-columns: 1fr;
         }
 
-        .section-title,
+        .cientistas-highlight-intro {
+            margin-bottom: 24px;
+        }
+
+        .cientistas-section h2,
         .scb-section h2,
         .conclusao-section h2 {
             font-size: 2em;
@@ -587,20 +596,21 @@ $scientists = [
 @endpush
 
 @section('content')
-<img src="{{ asset('img/criacionismo/criacionismo_header.webp') }}" alt="Criacionismo e Ciência" style="width: 100%;" fetchpriority="high" decoding="async">
+<img class="page-header-img" src="{{ asset('img/criacionismo/criacionismo_header.webp') }}" alt="Criacionismo e Ciência" fetchpriority="high" decoding="async">
 
-<div class="evidencias-container">
-    <!-- Seção Introdutória -->
-    <div class="intro-section acb-fullbleed">
-        <h1>Criacionismo e Ciência</h1>
-        <span class="subtitle">A Harmonia entre Fé e Razão</span>
-        <p>
+<div class="page-container" style="padding-bottom: 0;">
+    <div class="page-hero acb-fullbleed">
+        <h1 class="page-title">Criacionismo e Ciência</h1>
+        <h2 class="page-subtitle" style="font-style: italic;">A Harmonia entre Fé e Razão</h2>
+        <p class="page-text">
             Aqui, exploramos como a ciência e a Bíblia se complementam, revelando a grandiosidade de um Criador amoroso. Inspirados pela Sociedade Criacionista Brasileira (SCB), destacamos a jornada de cientistas brilhantes que viram na natureza a assinatura divina.
         </p>
     </div>
+</div>
 
+<div class="page-container" style="padding-top: 0; padding-bottom: 40px;">
     <!-- Seção de Cientistas -->
-    <div class="section-block cientistas-section">
+    <div class="page-section cientistas-section">
         @foreach($scientists as $category)
         <div class="mb-5">
             <div class="cientista-category-title">
@@ -635,9 +645,29 @@ $scientists = [
                 </div>
             @else
                 <!-- Grid layout para outros cientistas -->
-                <div class="cientistas-grid">
+                <div class="cientistas-highlight">
+                    <div class="cientistas-highlight-intro">
+                        <span><i class="bi bi-stars"></i> Fé e conhecimento</span>
+                        <p>
+                            Grandes nomes da história da ciência também enxergavam propósito, ordem e inteligência na criação. Suas descobertas não afastaram a fé, mas reforçaram a convicção de que o universo carrega a assinatura do Criador.
+                        </p>
+                    </div>
+
+                    <div class="cientistas-grid">
                     @foreach($category['items'] as $item)
+                    @php
+                        $scientistAccentMap = [
+                            'Galileu Galilei' => ['icon' => 'binoculars', 'color' => 'amber'],
+                            'Johannes Kepler' => ['icon' => 'globe2', 'color' => 'indigo'],
+                            'Louis Pasteur' => ['icon' => 'virus', 'color' => 'sky'],
+                            'Michael Faraday' => ['icon' => 'lightning-charge', 'color' => 'emerald'],
+                        ];
+                        $scientistAccent = $scientistAccentMap[$item['name']] ?? ['icon' => 'stars', 'color' => 'indigo'];
+                    @endphp
                     <div class="cientista-card">
+                        <div class="cientista-card-icon {{ $scientistAccent['color'] }}">
+                            <i class="bi bi-{{ $scientistAccent['icon'] }}"></i>
+                        </div>
                         <h3>{{ $item['name'] }}</h3>
                         @if(isset($item['subtitle']))
                         <div class="subtitle">{{ $item['subtitle'] }}</div>
@@ -645,6 +675,7 @@ $scientists = [
                         <p>{{ $item['desc'] }}</p>
                     </div>
                     @endforeach
+                    </div>
                 </div>
             @endif
         </div>
@@ -652,14 +683,14 @@ $scientists = [
     </div>
 
     <!-- Seção SCB -->
-    <div class="section-block">
+    <div class="page-section">
         <div class="scb-section acb-fullbleed">
             <h2 class="acb-title-serif">Conheça a Sociedade Criacionista Brasileira (SCB)!</h2>
             <p>A SCB promove o criacionismo com rigor científico e teológico através de diversos recursos:</p>
 
             <ul class="scb-list">
                 <li>
-                    <strong>Publicações:</strong> Revistas como a Folha Criacionista e livros como "Evolução: Um Livro Texto Crítico".
+                    <strong>Publicações:</strong> Revistas como a Folha/Revista Criacionista e livros como "Em Busca das Origens: Evolução ou Criação?".
                 </li>
                 <li>
                     <strong>Eventos:</strong> Seminários como "A Filosofia das Origens" que conectam fé e ciência.
@@ -702,7 +733,7 @@ $scientists = [
     </div>
 
     <!-- Seção Conclusão -->
-    <div class="section-block conclusao-section">
+    <div class="page-section conclusao-section">
         <h2 class="acb-title-serif">Conclusão</h2>
         <p>
             A ciência não é inimiga da fé, mas uma aliada para revelar a majestade de Deus. A complexidade do universo e a precisão das leis naturais nos aproximam ainda mais do Criador.

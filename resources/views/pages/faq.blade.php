@@ -773,7 +773,7 @@ html { scroll-behavior: smooth; }
 
             <div class="doctrine-item">
                 <h4>2.8 Acreditar em Ellen G. White e em seus escritos é obrigatório para ser membro batizado da igreja adventista ou pertencer à "Igreja Remanescente" ou para ser salvo?</h4>
-                <p>A salvação, para os adventistas, vem somente por Cristo, pela graça, mediante a fé, e não pela aceitação formal de Ellen White <a href="#" class="biblical-reference" data-reference="João 3:16">João 3:16</a>; <a href="#" class="biblical-reference" data-reference="Efésios 2:8-9">Efésios 2:8-9</a>; <a href="#" class="biblical-reference" data-reference="Atos 4:12">Atos 4:12</a>. Ninguém é salvo por crer em um mensageiro humano. No entanto, a igreja entende que o dom de profecia é uma característica bíblica do povo remanescente (<a href="#" class="biblical-reference" data-reference="Apocalipse 12:17">Apocalipse 12:17</a>; 19:10) e, por isso, reconhecer esse dom faz parte da identidade doutrinária adventista.</p>
+                <p>A salvação, para os adventistas, vem somente por Cristo, pela graça, mediante a fé, e não pela aceitação formal de Ellen White <a href="#" class="biblical-reference" data-reference="João 3:16">João 3:16</a>; <a href="#" class="biblical-reference" data-reference="Efésios 2:8-9">Efésios 2:8-9</a>; <a href="#" class="biblical-reference" data-reference="Atos 4:12">Atos 4:12</a>. Ninguém é salvo por crer em um mensageiro humano. No entanto, a igreja entende que o dom de profecia é uma característica bíblica do povo remanescente (<a href="#" class="biblical-reference" data-reference="Apocalipse 12:17">Apocalipse 12:17</a>; <a href="#" class="biblical-reference" data-reference="Apocalipse 19:10">Apocalipse 19:10</a>) e, por isso, reconhecer esse dom faz parte da identidade doutrinária adventista.</p>
                 <p>Em termos eclesiásticos, a pessoa que se une à igreja é chamada a aceitar seus ensinos fundamentais, entre eles a manifestação do dom profético no ministério de Ellen White. Mas isso não significa colocá-la como condição meritória de salvação. A distinção é importante: uma coisa é o critério de salvação; outra é a coerência doutrinária e comunitária de quem decide fazer parte da IASD.</p>
             </div>
 
@@ -786,11 +786,11 @@ html { scroll-behavior: smooth; }
                 <p><strong>Cumprimento de predições quando aplicável:</strong> <a href="#" class="biblical-reference" data-reference="Jeremias 28:9">Jeremias 28:9</a></p>
                 <p><strong>Edificação da igreja:</strong> <a href="#" class="biblical-reference" data-reference="1 Coríntios 14:3">1 Coríntios 14:3</a></p>
                 <p>À luz desses critérios, a IASD entende que Ellen White:</p>
-                <p>exaltou constantemente a Bíblia e a centralidade de Cristo;</p>
-                <p>promoveu reforma espiritual, missionária, educacional e de saúde;</p>
-                <p>chamou a igreja à obediência, santidade e missão;</p>
-                <p>manifestou frutos duradouros em âmbito mundial;</p>
-                <p>não ensinou doutrinas contrárias às Escrituras.</p>
+                <p>- exaltou constantemente a Bíblia e a centralidade de Cristo;</p>
+                <p>- promoveu reforma espiritual, missionária, educacional e de saúde;</p>
+                <p>- chamou a igreja à obediência, santidade e missão;</p>
+                <p>- manifestou frutos duradouros em âmbito mundial;</p>
+                <p>- não ensinou doutrinas contrárias às Escrituras.</p>
                 <p>Por isso, a igreja conclui que seu ministério corresponde aos testes bíblicos de um dom profético genuíno.</p>
             </div>
 
@@ -804,9 +804,9 @@ html { scroll-behavior: smooth; }
                 <h4>2.11 O que significa "Espírito de Profecia" para os adventistas?</h4>
                 <p>Para os adventistas, "Espírito de Profecia" tem sentido bíblico derivado de <a href="#" class="biblical-reference" data-reference="Apocalipse 19:10">Apocalipse 19:10</a>, onde se diz que "o testemunho de Jesus é o espírito de profecia". A expressão pode se referir tanto ao dom profético dado pelo Espírito Santo à igreja quanto, no uso adventista mais específico, ao ministério de Ellen G. White como manifestação desse dom nos últimos dias.</p>
                 <p>Portanto, quando os adventistas falam em "Espírito de Profecia", podem estar se referindo:</p>
-                <p>ao princípio bíblico do dom profético na igreja;</p>
-                <p>à evidência desse dom no remanescente;</p>
-                <p>ou, de modo mais específico, ao conjunto dos escritos de Ellen White.</p>
+                <p>- ao princípio bíblico do dom profético na igreja;</p>
+                <p>- à evidência desse dom no remanescente;</p>
+                <p>- ou, de modo mais específico, ao conjunto dos escritos de Ellen White.</p>
                 <p>Em todos os casos, a ideia central é que Jesus continua testemunhando à sua igreja por meio do Espírito.</p>
             </div>
 
@@ -891,9 +891,9 @@ html { scroll-behavior: smooth; }
                 <h4>3.9 A doutrina do santuário celestial contradiz Hebreus 8–10 e a suficiência do sacrifício de Cristo?</h4>
                 <p>Para os adventistas, não. Ao contrário, a doutrina do santuário celestial busca preservar justamente o ensino de Hebreus: Cristo é o verdadeiro Sumo Sacerdote, seu sacrifício foi único e suficiente, e seu ministério atual é celestial e eficaz (<a href="#" class="biblical-reference" data-reference="Hebreus 7:25-27">Hebreus 7:25-27</a>; <a href="#" class="biblical-reference" data-reference="Hebreus 8:1-2">Hebreus 8:1-2</a>; <a href="#" class="biblical-reference" data-reference="Hebreus 9:24-28">Hebreus 9:24-28</a>; <a href="#" class="biblical-reference" data-reference="Hebreus 10:10-14">Hebreus 10:10-14</a>). O erro seria pensar que a doutrina adventista repete sacrifícios ou sugere insuficiência da cruz. Ela não faz isso.</p>
                 <p>A teologia adventista distingue entre:</p>
-                <p>sacrifício único, consumado na cruz;</p>
-                <p>intercessão contínua, realizada no céu;</p>
-                <p>fase final do juízo, ligada à purificação do santuário.</p>
+                <p>- sacrifício único, consumado na cruz;</p>
+                <p>- intercessão contínua, realizada no céu;</p>
+                <p>- fase final do juízo, ligada à purificação do santuário.</p>
                 <p>Assim, Hebreus 8–10 não destrói a doutrina do santuário; é precisamente o fundamento da realidade do ministério celestial de Cristo. O debate recai mais sobre a interpretação de sua estrutura interna do que sobre a sua existência.</p>
             </div>
 
@@ -1867,7 +1867,7 @@ html { scroll-behavior: smooth; }
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/biblical-isolado.js') }}"></script>
+<script src="{{ asset('js/biblical-isolado.js') }}?v=2"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.faq-tab-button');

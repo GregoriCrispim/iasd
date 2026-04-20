@@ -45,11 +45,9 @@ $addressEncoded = urlencode($addressString);
 @endphp
 
 @push('styles')
-<!-- Glide.js CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
-<!-- Font Awesome para ícones -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
 <style>
     html { scroll-behavior: smooth; }
@@ -847,8 +845,7 @@ $addressEncoded = urlencode($addressString);
 @endpush
 
 @push('scripts')
-<!-- Glide.js JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js" defer></script>
 <script>
     // Carrossel Casa Publicadora
     const apiUrlCasaPublicadora = (window.APP_URL || '') + '/api/videos-casapublicadora';

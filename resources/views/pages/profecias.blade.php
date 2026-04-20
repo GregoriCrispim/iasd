@@ -3,12 +3,6 @@
 @section('title', 'IASD Central de Brasília - Profecias Bíblicas')
 
 @push('styles')
-<!-- Lucide Icons via CDN -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-
 <style>
     /* Ajuste suave para rolagem */
     html { scroll-behavior: smooth; }
@@ -626,7 +620,7 @@
                     </p>
                     <div class="guide-actions">
                         <div class="action-row">
-                            <a href="https://drive.google.com/file/d/1Ls1quFiatBtilN2LdGVaXNRw6wXTeK6o/view?usp=drive_link" target="_blank" class="btn-primary">
+                            <a href="{{ asset('downloads/profecias-daniel.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn-primary">
                                 <i data-lucide="download"></i>
                                 Baixar em PDF
                             </a>
@@ -656,7 +650,7 @@
                     </p>
                     <div class="guide-actions">
                         <div class="action-row">
-                            <a href="https://drive.google.com/file/d/1zNmsjIGlmxq_u6jcHyoVMZDkzylDrkhw/view?usp=drive_link" target="_blank" class="btn-primary btn-purple">
+                            <a href="{{ asset('downloads/apocalipse.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn-primary btn-purple">
                                 <i data-lucide="download"></i>
                                 Baixar em PDF
                             </a>
@@ -703,8 +697,8 @@
 @endsection
 
 @push('scripts')
-<!-- Initialize Lucide Icons -->
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
 <script>
-    lucide.createIcons();
+    document.addEventListener('DOMContentLoaded', function() { lucide.createIcons(); });
 </script>
 @endpush

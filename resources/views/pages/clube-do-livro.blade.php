@@ -4,7 +4,6 @@
 
 @push('styles')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
     .clube-livro-container {
         width: 100%;
@@ -423,7 +422,7 @@
         <p>
             Para receber o link da próxima reunião no Google Meet e ser adicionado ao nosso grupo, por favor, entre em contato:
         </p>
-        <img src="{{ asset('img/clube_do_livro/clubelivro.jpg') }}" alt="Capa do livro Cartas de um Diabo a seu Aprendiz" loading="lazy" decoding="async" style="max-width: 400px; height: auto; margin: 30px auto; display: block; box-shadow: 0 6px 25px rgba(0,0,0,0.3); border-radius: 10px;">
+        <img src="{{ asset('img/clube_do_livro/clubelivro.webp') }}" alt="Capa do livro Cartas de um Diabo a seu Aprendiz" loading="lazy" decoding="async" style="max-width: 400px; height: auto; margin: 30px auto; display: block; box-shadow: 0 6px 25px rgba(0,0,0,0.3); border-radius: 10px;">
     </div>
 
 </div>

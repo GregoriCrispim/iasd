@@ -20,7 +20,9 @@
 
 .form-modal {
   width: min(760px, 96vw);
-  max-height: 90vh;
+  /* não pode ultrapassar a área útil abaixo do header (main) */
+  max-height: calc(100vh - var(--header-height) - 48px);
+  max-height: calc(100dvh - var(--header-height) - 48px);
   overflow: hidden;
   background: #fff;
   border-radius: 16px;
@@ -30,14 +32,18 @@
   padding: 22px 22px 18px;
   cursor: auto;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-modal-header {
   margin-bottom: 14px;
+  flex: 0 0 auto;
 }
 
 .form-modal-body {
-  max-height: calc(90vh - 110px);
+  flex: 1 1 auto;
+  min-height: 0; /* essencial para o overflow funcionar dentro de flex */
   overflow: auto;
   padding-right: 4px; /* evita "scrollbar jump" colando no conteúdo */
   box-sizing: border-box;
@@ -226,10 +232,11 @@ textarea.form-control {
   .form-modal {
     padding: 18px 16px 14px;
     border-radius: 14px;
+    max-height: calc(100vh - var(--header-height) - 28px);
+    max-height: calc(100dvh - var(--header-height) - 28px);
   }
 
   .form-modal-body {
-    max-height: calc(90vh - 96px);
     padding-right: 2px;
   }
 

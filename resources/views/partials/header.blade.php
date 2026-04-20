@@ -1,6 +1,6 @@
 <header>
     <a href="{{ route('home') }}" class="header-brand" aria-label="Ir para a página inicial">
-        <img src="{{ asset('img/logo_iasd.webp') }}" alt="Logo IASD Central de Brasília" width="60" height="60">
+        <img src="{{ asset('img/CENTRAL DE BRASÍLIA (200 x 67 px).svg') }}" alt="Logo IASD Central de Brasília">
     </a>
     <nav class="navegation">
         <ul>
@@ -13,7 +13,7 @@
                     <li><a href="{{ route('classe-saude') }}">Classe de Saúde</a></li>
                     <li><a href="{{ route('clube-do-livro') }}">Clube do Livro</a></li>
                     <!-- <li><a href="">Comunidades</a></li> -->
-                    <li><a href="{{ route('corais') }}">Corais e Orquestras</a></li>
+                    <li><a href="{{ route('corais') }}">Corais</a></li>
                     <!-- <li><a href="">Cursos</a></li> -->
                     <li><a href="{{ route('doutores-da-esperanca') }}">Doutores da esperança</a></li>
                     <!-- <li><a href="">MAP</a></li> -->

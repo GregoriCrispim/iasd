@@ -1,18 +1,9 @@
 @extends('layouts.app')
 
 @section('title', 'IASD Central de Brasília - Estudo Bíblico')
-@section('meta-description', 'Solicite seu estudo bíblico gratuito na IASD Central de Brasília. Estudos presenciais, online ou por telefone. Conecte-se com Deus através da Palavra.')
-@section('og-title', 'Estudo Bíblico - IASD Central de Brasília')
-@section('og-description', 'Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais? O Estudo Bíblico é o caminho!')
-@section('og-image', asset('img/cards/estudo_biblico/estudo_biblico_header.webp'))
-@section('twitter-title', 'Estudo Bíblico - IASD Central de Brasília')
-@section('twitter-description', 'Solicite seu estudo bíblico gratuito. Estudos presenciais, online ou por telefone.')
-@section('twitter-image', asset('img/cards/estudo_biblico/estudo_biblico_header.webp'))
-@section('page-name', 'Estudo Bíblico')
 
 @push('styles')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
     .estudo-biblico-container {
         width: 100%;
@@ -27,7 +18,6 @@
         border-radius: 15px;
         margin-bottom: 50px;
         text-align: center;
-        border-top: 3px solid rgba(211, 84, 0, 0.4);
     }
 
     .estudo-intro h1 {
@@ -406,17 +396,6 @@
         min-width: 0;
     }
 
-    .estudo-request__mode:hover {
-        transform: translateY(-3px);
-        border-color: rgba(211, 84, 0, 0.4);
-        box-shadow: 0 14px 40px rgba(211, 84, 0, 0.15);
-    }
-
-    .estudo-request__mode:hover .estudo-request__mode-icon {
-        background: linear-gradient(135deg, #ba4a00 0%, #9e4100 100%);
-        box-shadow: 0 6px 16px rgba(211, 84, 0, 0.4);
-    }
-
     .estudo-request__mode-icon {
         width: 48px;
         height: 48px;
@@ -437,10 +416,6 @@
         font-weight: 700;
         margin-bottom: 6px;
         transition: color 0.18s ease;
-    }
-
-    .estudo-request__mode:hover h3 {
-        color: #d35400;
     }
 
     .estudo-request__mode p {
@@ -471,10 +446,11 @@
     }
 
     .estudo-request .form-open-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 18px 42px rgba(211, 84, 0, 0.4);
-        filter: brightness(1.1);
-        border-bottom-color: rgba(186, 74, 0, 0.8);
+        transform: none;
+        box-shadow: 0 14px 30px rgba(211, 84, 0, 0.3);
+        filter: none;
+        border-bottom-color: rgba(186, 74, 0, 0.6);
+        background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%);
     }
 
     .estudo-request .form-open-btn:focus-visible {
@@ -726,7 +702,7 @@
             Acesse nossos conteúdos e solicite materiais gratuitos.
         </p>
 
-        <a href="https://cursobiblicool.wordpress.com/2019/01/08/sumario/" target="_blank" class="btn-material-destaque">
+        <a href="https://downloads.adventistas.org/pt/evangelismo/estudos-biblicos/cursos-biblicos/" target="_blank" class="btn-material-destaque">
             <i class="bi bi-journals"></i> Materiais para Estudo Bíblico
         </a>
 

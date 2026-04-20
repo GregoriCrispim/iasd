@@ -4,7 +4,6 @@
 
 @push('styles')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
     .secretaria-container {
         width: 100%;
@@ -17,7 +16,7 @@
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         padding: 50px 40px;
         border-radius: 15px;
-        margin-bottom: 50px;
+        margin-bottom: 0;
         text-align: center;
     }
 
@@ -43,7 +42,7 @@
         background: linear-gradient(135deg, #003366 0%, #001531 100%);
         padding: 60px 40px;
         border-radius: 15px;
-        margin: 50px 0;
+        margin: 0 0 50px;
         text-align: center;
         color: #fff;
     }

@@ -4,7 +4,6 @@
 
 @push('styles')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
     .asa-container {
         width: 100%;
@@ -30,7 +29,7 @@
     }
 
     .asa-intro {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background: linear-gradient(135deg, #003366 0%, #001531 100%);
         padding: 50px 40px;
         border-radius: 15px;
         margin-bottom: 0;
@@ -40,7 +39,7 @@
     .asa-intro h1 {
         font-family: 'Bebas neue', sans-serif;
         font-size: 3em;
-        color: #003366;
+        color: #fff;
         margin-bottom: 25px;
         font-weight: 500;
     }
@@ -49,7 +48,7 @@
         font-family: 'Roboto', sans-serif;
         font-size: 1.15rem;
         line-height: 1.8;
-        color: #333;
+        color: #f8f9fa;
         text-align: justify;
         max-width: 900px;
         margin: 0 auto;
@@ -116,41 +115,39 @@
 
     .estatisticas-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 20px;
         margin-bottom: 40px;
     }
 
     .estatistica-card {
-        background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
-        border: 3px solid #003366;
+        background: #fff;
+        border: 2px solid #e0e0e0;
         border-radius: 15px;
-        padding: 25px 20px;
+        padding: 30px 20px;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(0,51,102,0.12);
-        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .estatistica-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,51,102,0.2);
-        border-color: #1b4472;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
 
     .estatistica-numero {
         font-family: 'Bebas neue', sans-serif;
-        font-size: 3.2em;
+        font-size: 3.5em;
         color: #003366;
         font-weight: 500;
         margin-bottom: 10px;
         display: block;
-        text-shadow: 1px 1px 3px rgba(0,51,102,0.1);
     }
 
     .estatistica-label {
         font-family: 'Roboto', sans-serif;
-        font-size: 1.05rem;
-        color: #333;
+        font-size: 1.1rem;
+        color: #666;
         font-weight: 500;
     }
 
@@ -351,18 +348,21 @@
     }
 
     .lightbox {
+        --asa-lightbox-right-gap: 0px;
         display: none;
         position: fixed;
         z-index: 9999;
         left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
+        top: var(--header-height);
+        width: calc(100vw - var(--asa-lightbox-right-gap));
+        height: calc(100vh - var(--header-height));
+        height: calc(100dvh - var(--header-height));
         background-color: rgba(0, 0, 0, 0.9);
         justify-content: center;
         align-items: center;
         padding: 20px;
         box-sizing: border-box;
+        overflow: hidden;
     }
 
     .lightbox.active {
@@ -370,16 +370,17 @@
     }
 
     .lightbox-content {
-        max-width: 90%;
+        max-width: min(90%, 1200px);
         max-height: 90%;
         object-fit: contain;
         border-radius: 10px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        margin: 0 auto;
     }
 
     .lightbox-close {
         position: absolute;
-        top: 20px;
+        top: 18px;
         right: 28px;
         color: #fff;
         font-size: 50px;
@@ -388,6 +389,14 @@
         transition: color 0.3s;
         user-select: none;
         line-height: 1;
+        z-index: 1;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
     }
 
     .lightbox-close:hover {
@@ -457,27 +466,27 @@
         <div class="estatisticas-grid">
             <div class="estatistica-card">
                 <span class="estatistica-numero" data-value="250">0</span>
-                <div class="estatistica-label">🚨 Assistências familiares</div>
+                <div class="estatistica-label">Assistências familiares</div>
             </div>
 
             <div class="estatistica-card">
                 <span class="estatistica-numero" data-value="800">0</span>
-                <div class="estatistica-label">🚨 Cestas básicas entregues</div>
+                <div class="estatistica-label">Cestas básicas entregues</div>
             </div>
 
             <div class="estatistica-card">
                 <span class="estatistica-numero" data-value="3200">0</span>
-                <div class="estatistica-label">🚨Apoio a necessidades básicas<br><strong>(roupas, sapatos, remédios, enxovais para bebês, roupas de cama, toalhas, fraldas, produtos de higiene pessoal, produtos de limpeza)</strong></div>
+                <div class="estatistica-label">Apoio a necessidades básicas</div>
             </div>
 
             <div class="estatistica-card">
                 <span class="estatistica-numero" data-value="400">0</span>
-                <div class="estatistica-label">🚨 Doações<br><strong>(móveis, utensílios domésticos)</strong></div>
+                <div class="estatistica-label">Doações<br><strong>(móveis, utensílios domésticos)</strong></div>
             </div>
 
             <div class="estatistica-card">
                 <span class="estatistica-numero" data-value="50">0</span>
-                <div class="estatistica-label">🚨 Pessoas atendidas em<br><strong>cursos de capacitação</strong></div>
+                <div class="estatistica-label">Pessoas atendidas em<br><strong>cursos de capacitação</strong></div>
             </div>
         </div>
 
@@ -543,67 +552,67 @@
 
         <div class="galeria-grid">
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio1.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio1.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio1.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio1.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio2.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio2.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio2.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio2.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio3.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio3.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio3.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio3.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio4.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio4.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio4.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio4.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio5.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio5.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio5.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio5.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio6.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio6.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio6.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio6.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio7.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio7.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio7.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio7.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio8.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio8.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio8.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio8.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/apoio9.jpeg') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio9.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/apoio9.webp') }}" alt="ASA - Apoio" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/apoio9.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/bazar1.jpeg') }}" alt="ASA - Bazar" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/bazar1.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/bazar1.webp') }}" alt="ASA - Bazar" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/bazar1.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/costura1.jpeg') }}" alt="ASA - Costura" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/costura1.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/costura1.webp') }}" alt="ASA - Costura" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/costura1.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/costura2.jpeg') }}" alt="ASA - Costura" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/costura2.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/costura2.webp') }}" alt="ASA - Costura" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/costura2.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/costura3.jpeg') }}" alt="ASA - Costura" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/costura3.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/costura3.webp') }}" alt="ASA - Costura" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/costura3.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/culinaria1.jpeg') }}" alt="ASA - Culinária" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/culinaria1.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/culinaria1.webp') }}" alt="ASA - Culinária" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/culinaria1.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/culinaria2.jpeg') }}" alt="ASA - Culinária" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/culinaria2.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/culinaria2.webp') }}" alt="ASA - Culinária" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/culinaria2.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/culinaria3.jpeg') }}" alt="ASA - Culinária" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/culinaria3.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/culinaria3.webp') }}" alt="ASA - Culinária" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/culinaria3.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/pizzas1.jpeg') }}" alt="ASA - Pizzas" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/pizzas1.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/pizzas1.webp') }}" alt="ASA - Pizzas" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/pizzas1.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/tesouras2.jpeg') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras2.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/tesouras2.webp') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras2.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/tesouras3.jpeg') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras3.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/tesouras3.webp') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras3.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/tesouras4.jpeg') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras4.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/tesouras4.webp') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras4.webp') }}">
             </div>
             <div class="galeria-item">
-                <img src="{{ asset('img/cards/asa/tesouras5.jpeg') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras5.jpeg') }}">
+                <img src="{{ asset('img/cards/asa/tesouras5.webp') }}" alt="ASA - Tesouras" loading="lazy" decoding="async" class="lightbox-trigger" data-full="{{ asset('img/cards/asa/tesouras5.webp') }}">
             </div>
         </div>
     </div>
@@ -639,7 +648,7 @@
     <!-- Seção Agência Humanitária -->
     <div class="agencia-humanitaria acb-fullbleed">
         <h2 class="acb-title-serif">CONHEÇA A AGÊNCIA HUMANITÁRIA DA IGREJA ADVENTISTA DO SÉTIMO DIA</h2>
-        <img src="{{ asset('img/ADRA_Horizontal_Logo.webp') }}" alt="ADRA Logo" style="max-width: 300px; margin: 20px auto 30px; display: block;">
+        <img src="{{ asset('img/cards/asa/ADRA_Horizontal_Logo.webp') }}" alt="ADRA Logo" style="max-width: 300px; margin: 20px auto 30px; display: block;">
         <p>
             A Agência Humanitária da Igreja Adventista do Sétimo Dia trabalha em conjunto com a ASA para promover ações de solidariedade e assistência humanitária em todo o mundo, seguindo os princípios cristãos de amor ao próximo e serviço desinteressado.
         </p>
@@ -711,38 +720,70 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.querySelector('.lightbox-close');
     const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
+    const pageAside = document.querySelector('aside');
+
+    function syncLightboxBounds() {
+        if (!lightbox) return;
+
+        let rightGap = 0;
+
+        if (pageAside) {
+            const asideRect = pageAside.getBoundingClientRect();
+
+            if (asideRect.width > 0 && asideRect.right > asideRect.left) {
+                rightGap = Math.max(0, asideRect.width);
+            }
+        }
+
+        lightbox.style.setProperty('--asa-lightbox-right-gap', `${rightGap}px`);
+    }
+
+    function openLightbox() {
+        if (!lightbox) return;
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        syncLightboxBounds();
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+        if (!lightbox || !lightboxImg) return;
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+    }
 
     if (lightbox && lightboxImg && lightboxClose && lightboxTriggers.length > 0) {
+        syncLightboxBounds();
+        window.addEventListener('resize', syncLightboxBounds);
+
         lightboxTriggers.forEach(trigger => {
             trigger.addEventListener('click', function() {
+                syncLightboxBounds();
                 const fullSizeSrc = this.getAttribute('data-full') || this.getAttribute('src');
                 const altText = this.getAttribute('alt') || '';
                 lightboxImg.src = fullSizeSrc || '';
                 lightboxImg.alt = altText;
-                lightbox.classList.add('active');
-                lightbox.setAttribute('aria-hidden', 'false');
+                openLightbox();
             });
         });
 
         lightboxClose.addEventListener('click', function() {
-            lightbox.classList.remove('active');
-            lightbox.setAttribute('aria-hidden', 'true');
-            lightboxImg.src = '';
+            closeLightbox();
         });
 
         lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-                lightbox.setAttribute('aria-hidden', 'true');
-                lightboxImg.src = '';
+                closeLightbox();
             }
         });
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                lightbox.classList.remove('active');
-                lightbox.setAttribute('aria-hidden', 'true');
-                lightboxImg.src = '';
+                closeLightbox();
             }
         });
     }

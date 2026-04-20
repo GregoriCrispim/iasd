@@ -1,55 +1,49 @@
 @extends('layouts.app')
 
 @section('title', 'IASD Central de Brasília - Programações 2026')
-@section('meta-description', 'Confira todas as programações e eventos da IASD Central de Brasília para 2026. Cultos, congressos, convenções e muito mais.')
-@section('og-title', 'Programações 2026 - IASD Central de Brasília')
-@section('og-description', 'Reuniões espirituais, convenções, congressos e muito mais. Marque sua presença e cresça conosco na fé!')
-@section('og-image', asset('img/cards/programacoes/programacoes_header.webp'))
-@section('twitter-title', 'Programações 2026 - IASD Central de Brasília')
-@section('twitter-description', 'Confira todos os eventos e programações da IASD Central de Brasília para 2026.')
-@section('twitter-image', asset('img/cards/programacoes/programacoes_header.webp'))
-@section('page-name', 'Programações')
 
 @push('styles')
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
-
     /* Estilos isolados desta view (prefixo programacoes-) */
     .programacoes-container {
         width: 100%;
-        max-width: 1200px;
+        max-width: 1180px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: clamp(24px, 4vw, 56px) 16px;
         font-family: "Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
         color: #0f172a;
     }
 
-    .programacoes-intro {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        padding: 50px 40px;
-        border-radius: 15px;
-        margin-bottom: 50px;
-        text-align: center;
+    .programacoes-hero {
+        background: radial-gradient(1200px 500px at 20% -20%, rgba(2, 132, 199, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(30, 64, 175, 0.18), transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 18px;
+        padding: clamp(20px, 3vw, 40px);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        margin-bottom: 28px;
+        overflow: hidden;
     }
 
-    .programacoes-intro h1 {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 3em;
-        color: #003366;
-        margin-bottom: 25px;
-        font-weight: 500;
+    .programacoes-hero h1 {
+        font-family: "Bebas Neue", "Noto Sans JP", sans-serif;
+        letter-spacing: 0.5px;
+        font-size: clamp(2.2rem, 4vw, 3.2rem);
+        line-height: 1;
+        margin: 0 0 12px 0;
+        color: #0b2a4a;
     }
 
-    .programacoes-intro p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #333;
-        text-align: center;
-        max-width: 900px;
-        margin: 0 auto;
+    .programacoes-hero p {
+        font-family: "Roboto", "Noto Sans JP", sans-serif;
+        margin: 0;
+        max-width: 78ch;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: rgba(15, 23, 42, 0.85);
     }
-
 
     .programacoes-surface {
         background: #ffffff;
@@ -80,6 +74,13 @@
         flex-direction: column;
         gap: 4px;
         min-width: 0;
+    }
+
+    .programacoes-calendar-title-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
     }
 
     .programacoes-calendar-title h2 {
@@ -143,6 +144,16 @@
         background: #f8fafc;
     }
 
+    .programacoes-btn.secondary.is-active {
+        background: #0b2a4a;
+        color: #fff;
+        box-shadow: 0 10px 18px rgba(2, 6, 23, 0.15);
+    }
+
+    .programacoes-btn.secondary.is-active:hover {
+        background: #083055;
+    }
+
     .programacoes-select {
         border: 1px solid rgba(15, 23, 42, 0.16);
         border-radius: 12px;
@@ -160,6 +171,11 @@
         margin-top: 12px;
     }
 
+    /* Permite que itens do grid encolham no mobile (evita overflow “invisível”) */
+    .programacoes-calendar-grid > * {
+        min-width: 0;
+    }
+
     .programacoes-weekday {
         font-size: 0.85rem;
         font-weight: 800;
@@ -167,6 +183,8 @@
         letter-spacing: 0.4px;
         text-transform: uppercase;
         padding: 8px 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .programacoes-day {
@@ -179,6 +197,7 @@
         cursor: pointer;
         transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
         overflow: hidden;
+        min-width: 0;
     }
 
     .programacoes-day:hover {
@@ -207,6 +226,18 @@
     .programacoes-day.is-selected {
         border-color: rgba(30, 64, 175, 0.60);
         box-shadow: inset 0 0 0 2px rgba(30, 64, 175, 0.20);
+    }
+
+    .programacoes-day.is-disabled {
+        cursor: default;
+        pointer-events: none;
+        opacity: 0.82;
+    }
+
+    .programacoes-day.is-disabled:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: rgba(15, 23, 42, 0.10);
     }
 
     .programacoes-day-number {
@@ -258,7 +289,7 @@
     .programacoes-agenda {
         padding: 18px 20px 22px;
         background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        border-top: 0;
         scroll-margin-top: 96px;
     }
 
@@ -301,46 +332,6 @@
         margin: 0;
         line-height: 1.5;
     }
-    .programacoes-month-day-group {
-        margin-bottom: 20px;
-    }
-
-    .programacoes-month-day-header {
-        font-weight: 900;
-        font-size: 0.95rem;
-        color: #0b2a4a;
-        margin-bottom: 10px;
-        padding: 8px 12px;
-        background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
-        border-radius: 10px;
-        border: 1px solid rgba(2, 132, 199, 0.15);
-    }
-    .programacoes-back-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 16px;
-        background: #fff;
-        border: 1px solid rgba(2, 132, 199, 0.25);
-        border-radius: 10px;
-        color: #0369a1;
-        font-weight: 700;
-        font-size: 0.85rem;
-        cursor: pointer;
-        margin-bottom: 12px;
-        transition: all 150ms ease;
-    }
-
-    .programacoes-back-btn:hover {
-        background: rgba(2, 132, 199, 0.08);
-        border-color: rgba(2, 132, 199, 0.45);
-        transform: translateX(-2px);
-    }
-
-    .programacoes-back-btn svg {
-        width: 18px;
-        height: 18px;
-    }
 
     .programacoes-agenda-empty {
         border: 1px dashed rgba(15, 23, 42, 0.18);
@@ -367,36 +358,80 @@
             padding: 14px;
         }
 
+        .programacoes-calendar-toolbar {
+            flex-wrap: wrap;
+        }
+
+        .programacoes-calendar-actions {
+            width: 100%;
+            justify-content: center;
+        }
+
         .programacoes-calendar-grid {
-            gap: 8px;
+            gap: 6px;
         }
 
         .programacoes-day {
-            min-height: 92px;
-            padding: 8px;
-            border-radius: 12px;
+            min-height: 0;
+            padding: 0;
+            border-radius: 999px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .programacoes-weekday {
             padding: 6px 8px;
             font-size: 0.78rem;
+            text-align: center;
         }
 
         .programacoes-select {
             min-width: 160px;
+        }
+
+        /* Mobile: dias como círculos com número centralizado */
+        .programacoes-day-number {
+            width: 100%;
+            margin: 0;
+            justify-content: center;
+        }
+
+        .programacoes-day-number small {
+            display: none;
+        }
+
+        .programacoes-day-number span {
+            font-size: 0.95rem;
+            font-weight: 900;
+        }
+
+        .programacoes-chip {
+            display: none;
+        }
+
+        .programacoes-day.has-events {
+            background: var(--day-bg, rgba(2, 132, 199, 0.10));
+            border-color: var(--day-border, rgba(2, 132, 199, 0.35));
+            box-shadow: inset 0 0 0 1px rgba(2, 6, 23, 0.06);
+        }
+
+        .programacoes-day.has-events .programacoes-day-number span {
+            color: var(--day-fg, #0b2a4a);
         }
     }
 </style>
 @endpush
 
 @section('content')
-<img src="{{ asset('img/cards/programacoes/programacoes_header.webp') }}" alt="Programações 2026" style="width: 100%;">
+<img class="page-header-img" src="{{ asset('img/cards/programacoes/programacoes_header.webp') }}" alt="Programações 2026" fetchpriority="high" decoding="async">
 
 <div class="programacoes-container">
 
     <!-- Seção Introdutória -->
-    <div class="programacoes-intro">
-        <h1>Programações 2026</h1>
+    <div class="programacoes-hero">
+        <h1 class="acb-title-serif">Programações 2026</h1>
         <p>
             Confira todas as programações e eventos da IASD Central de Brasília para o ano de 2026.
             Reuniões espirituais, convenções, congressos e muito mais. Marque sua presença e cresça conosco na fé!
@@ -408,8 +443,13 @@
             <div class="programacoes-calendar-main">
                 <div class="programacoes-calendar-toolbar">
                     <div class="programacoes-calendar-title">
-                        <h2 id="programacoesCalendarTitle">Calendário</h2>
-                        <p>Toque/clique em um dia para ver os detalhes.</p>
+                        <div class="programacoes-calendar-title-row">
+                            <h2 class="acb-title-serif" id="programacoesCalendarTitle">Calendário</h2>
+                            <button type="button" class="programacoes-btn secondary is-active" id="programacoesMonthAgendaToggle" aria-pressed="true">
+                                Eventos do mês
+                            </button>
+                        </div>
+                        <p id="programacoesCalendarHint">Toque/clique em um dia para ver os detalhes.</p>
                     </div>
 
                     <div class="programacoes-calendar-actions">
@@ -454,7 +494,7 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/programacoes-events.js?v=' . time()) }}"></script>
+<script src="{{ asset('js/programacoes-events.js') }}" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const YEAR = 2026;
@@ -471,18 +511,33 @@ document.addEventListener('DOMContentLoaded', () => {
      * Eventos (2026)
      * start/end no formato YYYY-MM-DD (intervalo inclusivo)
      */
-    const EVENTS = PROGRAMACOES_EVENTS_2026;
+    const EVENTS = (typeof PROGRAMACOES_EVENTS_2026 !== 'undefined' && Array.isArray(PROGRAMACOES_EVENTS_2026))
+        ? PROGRAMACOES_EVENTS_2026
+        : [];
 
     const calendarRoot = document.getElementById('programacoesCalendar');
     const gridEl = document.getElementById('programacoesCalendarGrid');
     const titleEl = document.getElementById('programacoesCalendarTitle');
     const monthSelectEl = document.getElementById('programacoesMonthSelect');
+    const monthAgendaToggleEl = document.getElementById('programacoesMonthAgendaToggle');
+    const calendarHintEl = document.getElementById('programacoesCalendarHint');
     const agendaSectionEl = document.getElementById('programacoesAgendaSection');
     const agendaTitleEl = document.getElementById('programacoesAgendaTitle');
     const agendaSubtitleEl = document.getElementById('programacoesAgendaSubtitle');
     const agendaListEl = document.getElementById('programacoesAgendaList');
 
-    if (!calendarRoot || !gridEl || !titleEl || !monthSelectEl || !agendaSectionEl || !agendaTitleEl || !agendaSubtitleEl || !agendaListEl) return;
+    if (!calendarRoot || !gridEl || !titleEl || !monthSelectEl || !monthAgendaToggleEl || !calendarHintEl || !agendaSectionEl || !agendaTitleEl || !agendaSubtitleEl || !agendaListEl) return;
+
+    let pendingAgendaScroll = false;
+
+    const scrollToAgenda = () => {
+        if (!agendaSectionEl || agendaSectionEl.style.display === 'none') return;
+        const headerEl = document.querySelector('header');
+        const headerH = headerEl ? headerEl.offsetHeight : 0;
+        const extraGap = 14; // respiro extra abaixo do header fixo
+        const top = agendaSectionEl.getBoundingClientRect().top + window.scrollY - headerH - extraGap;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    };
 
     const toIso = (y, m1, d) => `${String(y).padStart(4,'0')}-${String(m1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const clampMonth = (m) => Math.max(0, Math.min(11, m));
@@ -490,6 +545,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthDaysCount = (y, m0) => new Date(y, m0 + 1, 0).getDate();
 
     const getEventsOnDay = (isoDate) => EVENTS.filter(e => e.start <= isoDate && isoDate <= e.end);
+
+    const getEventsInMonth = (m0) => {
+        const monthStart = toIso(YEAR, m0 + 1, 1);
+        const monthEnd = toIso(YEAR, m0 + 1, monthDaysCount(YEAR, m0));
+
+        return EVENTS
+            .filter(e => e.start <= monthEnd && e.end >= monthStart)
+            .slice()
+            .sort((a, b) => {
+                if (a.start !== b.start) return a.start.localeCompare(b.start);
+                if (a.end !== b.end) return a.end.localeCompare(b.end);
+                return a.title.localeCompare(b.title, 'pt-BR');
+            });
+    };
 
     const formatDateLong = (isoDate) => {
         const [y, m, d] = isoDate.split('-').map(Number);
@@ -552,6 +621,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentMonth = clampMonth(getInitialMonthFromUrl() ?? defaultMonth);
     let selectedDateIso = null;
+    let isMonthAgendaActive = true;
 
     const hideAgenda = () => {
         agendaSectionEl.style.display = 'none';
@@ -559,109 +629,16 @@ document.addEventListener('DOMContentLoaded', () => {
         agendaListEl.innerHTML = '';
     };
 
-    const renderMonthAgenda = () => {
-        selectedDateIso = null;
-        agendaListEl.innerHTML = '';
-
-        const daysInMonth = monthDaysCount(YEAR, currentMonth);
-        const monthStart = toIso(YEAR, currentMonth + 1, 1);
-        const monthEnd = toIso(YEAR, currentMonth + 1, daysInMonth);
-
-        // Filter events for the current month (including events that start before but occur during the month)
-        const monthEvents = EVENTS.filter(e => {
-            // Event starts during the month OR event is ongoing during the month
-            return (e.start >= monthStart && e.start <= monthEnd) || (e.end >= monthStart && e.end <= monthEnd) || (e.start <= monthStart && e.end >= monthEnd);
-        });
-
-        if (monthEvents.length === 0) {
-            agendaTitleEl.textContent = 'Agenda do Mês';
-            agendaSubtitleEl.textContent = MONTHS[currentMonth] + ' de ' + YEAR;
-            agendaSectionEl.style.display = 'block';
-            agendaListEl.innerHTML = '<div class="programacoes-agenda-empty">Nenhum evento neste mês.</div>';
-            return;
-        }
-
-        // Group events by date
-        const eventsByDate = {};
-        for (const e of monthEvents) {
-            // For multi-day events, add to each day they occur during the month
-            const eventStart = new Date(e.start + 'T12:00:00');
-            const eventEnd = new Date(e.end + 'T12:00:00');
-            const currentDate = new Date(Math.max(eventStart.getTime(), new Date(monthStart + 'T12:00:00').getTime()));
-            const endDate = new Date(Math.min(eventEnd.getTime(), new Date(monthEnd + 'T12:00:00').getTime()));
-
-            while (currentDate <= endDate) {
-                const isoDate = toIso(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
-                if (!eventsByDate[isoDate]) {
-                    eventsByDate[isoDate] = [];
-                }
-                eventsByDate[isoDate].push(e);
-                currentDate.setDate(currentDate.getDate() + 1);
-            }
-        }
-
-        // Sort dates
-        const sortedDates = Object.keys(eventsByDate).sort();
-
-        agendaTitleEl.textContent = 'Agenda do Mês';
-        agendaSubtitleEl.textContent = MONTHS[currentMonth] + ' de ' + YEAR;
-        agendaSectionEl.style.display = 'block';
-
-        for (const date of sortedDates) {
-            const dayEvents = eventsByDate[date];
-            const dayGroup = document.createElement('div');
-            dayGroup.className = 'programacoes-month-day-group';
-
-            const dayHeader = document.createElement('div');
-            dayHeader.className = 'programacoes-month-day-header';
-            dayHeader.textContent = formatDateLong(date);
-            dayGroup.appendChild(dayHeader);
-
-            for (const e of dayEvents) {
-                const colors = eventColor(e);
-                const item = document.createElement('div');
-                item.className = 'programacoes-agenda-item';
-                item.style.setProperty('--event-accent', colors.accent);
-                item.innerHTML = `
-                    <p class="title">${e.title}</p>
-                    ${e.metaHtml ? `<p class="meta">${e.metaHtml}</p>` : ''}
-                `;
-                dayGroup.appendChild(item);
-            }
-
-            agendaListEl.appendChild(dayGroup);
-        }
+    const updateCalendarModeUi = () => {
+        monthAgendaToggleEl.classList.toggle('is-active', isMonthAgendaActive);
+        monthAgendaToggleEl.setAttribute('aria-pressed', String(isMonthAgendaActive));
+        calendarHintEl.textContent = isMonthAgendaActive
+            ? 'Visualizando todos os eventos do mês. Para escolher um dia, desative essa visualização.'
+            : 'Toque/clique em um dia para ver os detalhes.';
     };
 
-    const renderAgenda = (isoDate, { scrollIntoView } = { scrollIntoView: false }) => {
-        selectedDateIso = isoDate;
+    const renderAgendaItems = (events) => {
         agendaListEl.innerHTML = '';
-
-        if (!isoDate) {
-            hideAgenda();
-            return;
-        }
-
-        const events = getEventsOnDay(isoDate);
-        if (events.length === 0) {
-            hideAgenda();
-            return;
-        }
-
-        agendaTitleEl.textContent = 'Agenda';
-        agendaSubtitleEl.textContent = formatDateLong(isoDate);
-        agendaSectionEl.style.display = 'block';
-
-        // Add back button
-        const backBtn = document.createElement('button');
-        backBtn.className = 'programacoes-back-btn';
-        backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg> Ver agenda do mês';
-        backBtn.addEventListener('click', () => {
-            selectedDateIso = null;
-            renderMonthAgenda();
-            renderCalendar();
-        });
-        agendaListEl.appendChild(backBtn);
 
         for (const e of events) {
             const colors = eventColor(e);
@@ -671,18 +648,61 @@ document.addEventListener('DOMContentLoaded', () => {
             const range = formatRangeShort(e.start, e.end);
             item.innerHTML = `
                 <p class="title">${e.title}</p>
-                ${e.metaHtml ? `<p class="meta">${e.metaHtml}<\/p>` : ''}
+                <p class="meta"><strong>Data:</strong> ${range}${e.metaHtml ? `<br>${e.metaHtml}` : ''}</p>
             `;
             agendaListEl.appendChild(item);
         }
+    };
 
-        if (scrollIntoView) {
-            // Garante que o título "Agenda" fique visível após o scroll (evita ficar sob header fixo).
-            agendaTitleEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const renderAgenda = (isoDate, { scrollIntoView } = { scrollIntoView: false }) => {
+        isMonthAgendaActive = false;
+        selectedDateIso = isoDate;
+        pendingAgendaScroll = Boolean(scrollIntoView);
+
+        if (!isoDate) {
+            hideAgenda();
+            updateCalendarModeUi();
+            return;
         }
+
+        const events = getEventsOnDay(isoDate);
+        if (events.length === 0) {
+            hideAgenda();
+            updateCalendarModeUi();
+            return;
+        }
+
+        agendaTitleEl.textContent = 'Agenda';
+        agendaSubtitleEl.textContent = formatDateLong(isoDate);
+        agendaSectionEl.style.display = 'block';
+        renderAgendaItems(events);
+        updateCalendarModeUi();
+    };
+
+    const renderMonthAgenda = ({ scrollIntoView } = {}) => {
+        isMonthAgendaActive = true;
+        selectedDateIso = null;
+        if (typeof scrollIntoView === 'boolean') pendingAgendaScroll = scrollIntoView;
+
+        const events = getEventsInMonth(currentMonth);
+        const totalLabel = `${events.length} ${events.length === 1 ? 'evento' : 'eventos'}`;
+
+        agendaTitleEl.textContent = 'Eventos do mês';
+        agendaSubtitleEl.textContent = `${MONTHS[currentMonth]} de ${YEAR} • ${totalLabel}`;
+        agendaSectionEl.style.display = 'block';
+
+        if (events.length === 0) {
+            agendaListEl.innerHTML = '<div class="programacoes-agenda-empty">Nenhum evento cadastrado para este mês.</div>';
+            updateCalendarModeUi();
+            return;
+        }
+
+        renderAgendaItems(events);
+        updateCalendarModeUi();
     };
 
     const renderCalendar = () => {
+        updateCalendarModeUi();
         titleEl.textContent = `${MONTHS[currentMonth]} de ${YEAR}`;
         monthSelectEl.value = String(currentMonth);
         setMonthInUrl(currentMonth);
@@ -742,12 +762,23 @@ document.addEventListener('DOMContentLoaded', () => {
             dayEl.className = 'programacoes-day';
             dayEl.setAttribute('role', 'gridcell');
             dayEl.setAttribute('data-date', iso);
+            dayEl.setAttribute('aria-disabled', isMonthAgendaActive ? 'true' : 'false');
 
             if (!inCurrentMonth) dayEl.classList.add('is-outside');
             if (isTodayIso && iso === isTodayIso) dayEl.classList.add('is-today');
             if (selectedDateIso && iso === selectedDateIso) dayEl.classList.add('is-selected');
+            if (inCurrentMonth && isMonthAgendaActive) dayEl.classList.add('is-disabled');
 
             const events = inCurrentMonth ? getEventsOnDay(iso) : [];
+
+            // Mobile: se houver programação, colore o "círculo" do dia com a cor do evento
+            if (inCurrentMonth && events.length > 0) {
+                const h = hashString(eventKey(events[0])) % 360;
+                dayEl.classList.add('has-events');
+                dayEl.style.setProperty('--day-bg', `hsl(${h} 85% 92%)`);
+                dayEl.style.setProperty('--day-border', `hsl(${h} 70% 45% / 0.45)`);
+                dayEl.style.setProperty('--day-fg', `hsl(${h} 35% 20%)`);
+            }
 
             const weekdaySmall = new Intl.DateTimeFormat('pt-BR', { weekday: 'short' })
                 .format(new Date(y, m0, d, 12, 0, 0))
@@ -794,7 +825,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dayEl.appendChild(more);
             }
 
-            if (inCurrentMonth) {
+            if (inCurrentMonth && !isMonthAgendaActive) {
                 dayEl.addEventListener('click', () => {
                     // Só exibe (e rola) quando existir programação no dia
                     const hasEvents = getEventsOnDay(iso).length > 0;
@@ -806,7 +837,16 @@ document.addEventListener('DOMContentLoaded', () => {
             gridEl.appendChild(dayEl);
         }
 
-        if (!selectedDateIso) renderMonthAgenda();
+        if (isMonthAgendaActive) {
+            renderMonthAgenda();
+        } else if (!selectedDateIso) {
+            renderAgenda(null);
+        }
+
+        if (pendingAgendaScroll) {
+            pendingAgendaScroll = false;
+            requestAnimationFrame(scrollToAgenda);
+        }
     };
 
     // Eventos do toolbar
@@ -827,51 +867,19 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendar();
     });
 
+    monthAgendaToggleEl.addEventListener('click', () => {
+        if (isMonthAgendaActive) {
+            isMonthAgendaActive = false;
+            hideAgenda();
+            renderCalendar();
+            return;
+        }
+
+        renderMonthAgenda({ scrollIntoView: true });
+        renderCalendar();
+    });
+
     renderCalendar();
 });
-</script>
-@endpush
-
-@push('schema-events')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Event",
-  "name": "Programações 2026 - IASD Central de Brasília",
-  "startDate": "2026-01-01",
-  "endDate": "2026-12-31",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "location": {
-    "@type": "Place",
-    "name": "IASD Central de Brasília",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "SGAS 611 módulo 75 - Asa Sul",
-      "addressLocality": "Brasília",
-      "addressRegion": "DF",
-      "postalCode": "70200-970",
-      "addressCountry": "BR"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "-15.8289723",
-      "longitude": "-47.9048304"
-    }
-  },
-  "image": [
-    "https://adventistascentralbrasilia.org/img/cards/programacoes/programacoes_header.webp"
-  ],
-  "description": "Confira todas as programações e eventos da IASD Central de Brasília para o ano de 2026. Reuniões espirituais, convenções, congressos e muito mais.",
-  "organizer": {
-    "@type": "Organization",
-    "name": "IASD Central de Brasília",
-    "url": "https://adventistascentralbrasilia.org"
-  },
-  "performer": {
-    "@type": "Organization",
-    "name": "IASD Central de Brasília"
-  }
-}
 </script>
 @endpush

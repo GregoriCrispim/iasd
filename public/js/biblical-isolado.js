@@ -16,6 +16,12 @@
 
         "Êxodo 20:8-11": "Lembre-se do dia de sábado, para santificá-lo. Trabalhe seis dias e neles realize toda a sua obra, mas o sétimo dia é o sábado dedicado ao Senhor, o seu Deus. Naquele dia você não deve fazer nenhum trabalho, nem você, nem seus filhos ou filhas, nem seus servos ou servas, nem seus animais, nem os estrangeiros que vivem nas suas cidades. Pois em seis dias o Senhor fez os céus e a terra, o mar e tudo o que neles existe, mas descansou no sétimo dia. Por isso o Senhor abençoou o dia de sábado e o santificou.",
 
+        "Êxodo 20:12": "Honra teu pai e tua mãe, para que se prolonguem os teus dias na terra que o Senhor, teu Deus, te dá.",
+
+        "Êxodo 20:13-15": "Não matarás. Não adulterarás. Não furtarás.",
+
+        "Êxodo 31:13": "Digas aos filhos de Israel: Certamente guardareis meus sábados; porquanto isso é um sinal entre mim e vós nas vossas gerações; para que saibais que eu sou o Senhor, que vos santifica.",
+
         "Êxodo 31:14-15": "Guardem o sábado, pois é santo para vocês. Aquele que o profanar terá que ser executado. Quem fizer algum trabalho nesse dia será eliminado do meio do seu povo. Durante seis dias trabalhar-se-á, mas o sétimo dia será sábado de descanso consagrado ao Senhor. Quem fizer algum trabalho no dia de sábado terá que ser executado.",
 
         "Êxodo 31:18": "Quando o Senhor terminou de falar com Moisés no monte Sinai, deu-lhe as duas tábuas da aliança, tábuas de pedra escritas pelo dedo de Deus.",
@@ -24,13 +30,19 @@
 
         "Êxodo 35:3": "Não acendam fogo em nenhuma das suas habitações no dia de sábado",
 
+        "Êxodo 21:12": "Quem ferir uma pessoa, que morra, ele também será morto.",
+
+        "Levítico 20:10": "Se um homem cometer adultério com a mulher do seu próximo, tanto o adúltero como a adúltera deverão ser mortos.",
+
         "Levítico 23:32": "Será para vocês dia de descanso completo e vocês se humilharão. Desde a véspera do nono dia do mês, desde o pôr do sol até o pôr do sol do dia seguinte, vocês deverão descansar.",
 
         "Deuteronômio 5:15": "Lembre-se de que você foi escravo no Egito e que o Senhor, o seu Deus, o tirou de lá com mão poderosa e com braço forte. Por isso o Senhor, o seu Deus, lhe ordenou que guardasse o dia de sábado.",
 
         "Deuteronômio 10:1-5": "Naquele tempo o Senhor me disse: 'Corte duas tábuas de pedra, como as primeiras, e suba ao monte para encontrar-se comigo. Também faça uma arca de madeira. E nas tábuas escreverei as palavras que estavam nas primeiras, que você quebrou, e você as colocará na arca'. Então fiz uma arca de madeira de acácia, cortei duas tábuas de pedra, como as primeiras, e subi ao monte com as duas tábuas nas mãos. O Senhor escreveu nas tábuas, como tinha escrito anteriormente, os Dez Mandamentos que ele proclamou a vocês no monte, do meio do fogo, no dia da assembleia. Então o Senhor as deu a mim, e eu desci do monte e as coloquei na arca que tinha feito, conforme o Senhor tinha ordenado, e onde elas permanecem até hoje.",
 
-        "Deuteronômio 10:5": "Assim, no sétimo dia Deus já havia concluído a obra que realizara, e nesse dia descansou. Deus abençoou o sétimo dia e o santificou, porque nele descansou de toda a obra que realizara na criação.",
+        "Deuteronômio 10:5": "Então desci do monte e coloquei as tábuas na arca que tinha feito, conforme o Senhor tinha ordenado, e onde elas permanecem até hoje.",
+
+        "Deuteronômio 13:6-10": "Se o seu próprio irmão, ou o seu filho, ou a sua filha, ou a sua mulher, ou o seu amigo mais chegado, te incitar em segredo, dizendo: 'Vamos e sirvamos a outros deuses', deuses que nem tu nem os teus pais conheceram, dentre os deuses dos povos que vos rodeiam, perto ou longe de ti, desde uma extremidade da terra até a outra extremidade, não consentirás com ele, nem o ouvirás, nem o teu olho lhe poupará, nem terás piedade dele, nem o esconderás, mas certamente o matarás; a tua mão será a primeira contra ele para o matar, e depois a mão de todo o povo. E o apedrejarás, até que morra, pois te procurou apartar do Senhor teu Deus, que te tirou da terra do Egito, da casa da servidão.",
 
         "Deuteronômio 31:24-26": "Depois que Moisés terminou de escrever num livro as palavras desta Lei, até o fim, deu esta ordem aos levitas que transportavam a arca da aliança do Senhor: 'Levem este livro da Lei e coloquem-no ao lado da arca da aliança do Senhor, do seu Deus. Ali ele servirá de testemunha contra vocês.'",
 
@@ -45,6 +57,8 @@
         "Ezequiel 45:17": "Caberá ao príncipe a responsabilidade de oferecer os holocaustos, as ofertas de cereal e as ofertas derramadas, nas festas, nas luas novas e nos sábados, em todas as festas fixas da casa de Israel. Ele será responsável pela oferta pelo pecado, pela oferta de cereal, pelo holocausto e pela oferta de paz, para fazer propiciação pela casa de Israel.",
 
         "Isaías 58:13-14": "Se vocês chamarem o sábado deleitoso e honroso ao santificado do Senhor, e se o honrarem, não seguindo os seus próprios caminhos, nem se divertindo nem falando palavras vãs, então vocês encontrarão alegria no Senhor, e eu os farei cavalgar sobre as alturas da terra e fazê-los comer da herança de Jacó, seu pai. A boca do Senhor falou.",
+
+        "Isaías 66:22-23": "Pois, como os novos céus e a nova terra, que hei de fazer, estarão diante de mim, diz o Senhor, assim há de estar a vossa posteridade e o vosso nome. E será que, de uma lua nova à outra, e de um sábado a outro, virá toda a carne a adorar perante mim, diz o Senhor.",
 
         "Mateus 12:1-12": "Naquela ocasião, Jesus passou pelas lavouras num sábado. Seus discípulos estavam famintos e começaram a colher espigas de cereal e a comê-las. Quando os fariseus viram isso, disseram a Jesus: 'Olha! Os teus discípulos estão fazendo o que é ilegal fazer em sábado'. Ele respondeu: 'Vocês não leram o que fez Davi quando ele e seus companheiros estavam famintos? Ele entrou na casa de Deus, e ele e os seus companheiros comeram os pães da consagração, que não lhes era permitido comer, mas apenas aos sacerdotes. Ou não leram na Lei que, no sábado, os sacerdotes no templo profanam o sábado e ainda assim ficam inocentes? Pois eu lhes digo que aqui está quem é maior que o templo. Se vocês tivessem compreendido o que significa: 'Desejo misericórdia, não sacrifícios', não teriam condenado inocentes. Pois o Filho do homem é Senhor do sábado'. Saindo dali, ele foi para a sinagoga deles, e estava ali um homem com a mão mirrada. Procurando um motivo para acusar Jesus, perguntaram-lhe: 'É permitido curar no sábado?' Ele lhes respondeu: 'Supondo que um de vocês tenha uma ovelha e, num sábado, esta caia num buraco, não irá agarrá-la e tirá-la de lá? Quanto mais vale um homem do que uma ovelha! Portanto, é permitido fazer o bem no sábado'.",
 
@@ -65,6 +79,8 @@
         "Lucas 14:3-5": "Então Jesus perguntou aos fariseus e aos peritos na Lei: 'É permitido ou não curar no sábado?' Mas eles ficaram em silêncio. Então Jesus tomou o homem, curou-o e mandou-o embora. Depois lhes perguntou: 'Se algum de vocês tiver um filho ou um boi que cair num poço num sábado, não o tirará imediatamente?'",
 
         "João 14:15": "Se vocês me amam, obedecerão aos meus mandamentos.",
+
+        "João 15:10": "Se vocês obedecerem aos meus mandamentos, permanecerão no meu amor, assim como eu obedeci aos mandamentos de meu Pai e permaneço no seu amor.",
 
         "Atos 5:29": "Pedro e os outros apóstolos responderam: 'É preciso obedecer a Deus e não aos homens!'",
 
@@ -131,6 +147,8 @@
         "Hebreus 10:1": "A Lei tem apenas uma sombra dos bens futuros, e não a sua realidade. Por isso, ela é incapaz de aperfeiçoar, mediante a repetição dos mesmos sacrifícios oferecidos ano após ano, aqueles que vêm para adorar a Deus.",
 
         "Tiago 2:10-12": "Pois quem obedece a toda a Lei, mas tropeça em apenas um ponto, torna-se culpado de quebrá-la inteiramente. Pois aquele que disse: 'Não cometa adultério', também disse: 'Não mate'. Se você não comete adultério, porém mata, tornou-se transgressor da Lei. Falem e ajam como quem vai ser julgado pela lei da liberdade.",
+
+        "Tiago 2:17": "Assim também a fé, se não tiver as obras, é morta em si mesma.",
 
         "Jeremias 31:33": "'Esta é a aliança que farei com a comunidade de Israel depois daqueles dias', declara o Senhor. 'Porei a minha lei no seu interior e a escreverei nos seus corações. Serei o Deus deles, e eles serão o meu povo.'",
 
@@ -268,7 +286,7 @@
 
         "Hebreus 1:1-8": "Havendo Deus falado muitas vezes e de muitas maneiras, aos pais pelos profetas, nestes últimos dias nos falou pelo Filho. Ele nos designou herdeiro de todas as coisas, e por meio dele também fez o universo. O Filho é o resplendor da glória de Deus e a representação exata do seu ser, sustentando todas as coisas por sua palavra poderosa. Depois de ter proporcionado purificação dos pecados, ele se assentou à direita da Majestade nas alturas, tornando-se tão superior aos anjos quanto o nome que herdou é superior ao deles.",
 
-        "1 Tessalonicenses 4:16": "Pois, segundo a palavra do Senhor, nós declaram que vocês que estão vivos e os que dormem, nós seremos arrebatados juntamente com eles nas nuvens, para encontrar o Senhor nos ares. E assim estaremos com o Senhor para sempre.",
+        "1 Tessalonicenses 4:16": "Porque o mesmo Senhor descerá do céu com alarido, e com voz de arcanjo, e com a trombeta de Deus; e os que morreram em Cristo ressuscitarão primeiro.",
 
         "Apocalipse 22:18-19": "Eu advirto a todos os que ouvem as palavras da profecia deste livro: Se alguém lhe acrescentar algo, Deus lhe acrescentará as pragas descritas neste livro. Se alguém tirar alguma palavra deste livro de profecia, Deus tirará dele a sua parte na árvore da vida e na cidade santa, que são descritas neste livro.",
 
@@ -522,6 +540,8 @@
 
         "1 Tessalonicenses 5:23": "E o mesmo Deus de paz vos santifique em tudo; e todo o vosso espírito, e alma, e corpo sejam plenamente conservados irrepreensíveis para a vinda de nosso Senhor Jesus Cristo.",
 
+        "1 João 3:4": "Todo aquele que pratica o pecado transgride a lei; de fato, o pecado é a transgressão da lei.",
+
         "1 João 3:6-9": "Qualquer que permanece nele não peca; qualquer que peca não o viu nem o conheceu. Filhinhos, ninguém vos engane; quem pratica justiça é justo, como ele é justo. Quem comete o pecado é do diabo; porque o diabo peca desde o princípio. Para isto o Filho de Deus se manifestou: para desfarz as obras do diabo. Qualquer que é nascido de Deus não comete pecado; porque a sua semente permanece nele; e não pode pecar, porque é nascido de Deus.",
 
         "Judas 24": "Ora, aquele que é poderoso para vos guardar de tropeçar e apresentar-vos irrepreensíveis, com alegria, perante a sua glória.",
@@ -534,7 +554,15 @@
 
         "Gálatas 3:19": "Logo, para que é a lei? Foi ordenada por causa das transgressões, até que viesse a descendência a quem a promessa tinha sido feita, e foi posta pelos anjos na mão de um medianário.",
 
+        "Romanos 5:18": "Portanto, assim como por uma só ofensa veio o juízo sobre todos os homens para condenação, assim também por um só ato de justiça veio a graça sobre todos os homens para justificação de vida.",
+
+        "Romanos 5:18-19": "Portanto, assim como por uma só ofensa veio o juízo sobre todos os homens para condenação, assim também por um só ato de justiça veio a graça sobre todos os homens para justificação de vida. Porque, como pela desobediência de um só homem, muitos foram feitos pecadores, assim pela obediência de um, muitos serão feitos justos.",
+
         "Romanos 5:20": "Sobreveio a lei para que a ofensa abundasse; mas, onde o pecado abundou, superabundou a graça.",
+
+        "Romanos 8:1": "Portanto, agora nenhuma condenação há para os que estão em Cristo Jesus.",
+
+        "Romanos 8:1-2": "Portanto, agora nenhuma condenação há para os que estão em Cristo Jesus. Porque a lei do Espírito de vida, em Cristo Jesus, me livrou da lei do pecado e da morte.",
 
         "Gálatas 3:24": "De maneira que a lei nos serviu de aio, para nos conduzir a Cristo, para que pela fé fôssemos justificados.",
 
@@ -891,24 +919,83 @@
         "Juízes 4:1-5": "E os filhos de Israel tornaram a fazer o que era mal aos olhos do Senhor, depois da morte de Eúde. E o Senhor os vendeu na mão de Jabim, rei de Canaã, que reinou em Hazor; e Sísera era o capitão do seu exército, o qual então habitava em Harosete dos Gentios. E os filhos de Israel clamaram ao Senhor, porquanto Jabim tinha novecentos carros de ferro, e por vinte anos oprimia violentamente os filhos de Israel. E Débora, mulher profetisa, mulher de Lapidote, julgava a Israel naquele tempo. Ela assentava-se sob a palmeira de Débora, entre Ramá e Betel, na montanha de Efraim; e os filhos de Israel subiam a ela a juízo.",
 
         "Romanos 16:1-27": "Recomendo-vos, pois, nossa irmã Febe, que é serva da igreja que está em Cencréia, para que a recebais no Senhor, como convém aos santos, e que a ajudeis em qualquer coisa que de vós necessitar; porque ela tem ajudado a muitos, e também a mim mesmo. Saudai a Priscila e a Áqüila, meus cooperadores em Cristo Jesus, os quais pela minha vida expuseram as suas cabeças; o que não só eu lhes agradeço, mas também todas as igrejas dos gentios. Saudai também a igreja que está em sua casa. Saudai a Epêneto, meu amado, que é as primícias da Acaia em Cristo. Saudai a Maria, que trabalhou muito por nós. Saudai a Andrônico e a Júnias, meus parentes e meus companheiros na prisão, os quais são ilustres entre os apóstolos e foram antes de mim em Cristo. Saudai a Amplias, meu amado no Senhor. Saudai a Urbano, nosso cooperador em Cristo, e a Estáquis, meu amado. Saudai a Apeles, aprovado em Cristo. Saudai aos da família de Aristóbulo. Saudai a Herodião, meu parente. Saudai aos da família de Narciso, os que estão no Senhor. Saudai a Trifena e a Trifosa, as quais trabalham no Senhor. Saudai à amada Pérside, a qual trabalhou muito no Senhor. Saudai a Rufo, eleito no Senhor, e a sua mãe e minha. Saudai a Asíncrito, a Flegonte, a Hermes, a Pátrobas, a Hermas, e aos irmãos que estão com eles. Saudai a Filólogo e a Júlia, a Nereu e a sua irmã, e a Olimpas, e a todos os santos que estão com eles. Saudai-vos uns aos outros com ósculo santo. As igrejas de Cristo vos saúdam. E rogo-vos, irmãos, que noteis os que promovem dissensões e escândalos contra a doutrina que aprendestes; desviai-vos deles. Porque os tais não servem a nosso Senhor Jesus Cristo, mas ao seu ventre; e com suaves palavras e lisonjas enganam os corações dos simples. E a vossa obediência é conhecida de todos. Comprazo-me, portanto, em vós; e quero que sejais sábios no bem, e simples no mal. E o Deus de paz esmagará em breve Satanás debaixo dos vossos pés. A graça de nosso Senhor Jesus Cristo seja convosco. Amém. Saúdam-vos Timóteo, meu cooperador, e Lúcio, e Jasom, e Sosípatro, meus parentes. Eu, Tércio, que esta carta escrevi, vos saúdo no Senhor. Saúda-vos Gaio, meu hospedeiro, e de toda a igreja. Saúda-vos Erasto, o tesoureiro da cidade, e a Quarto, irmão. A graça de nosso Senhor Jesus Cristo seja com todos vós. Amém. Ora, aquele que é poderoso para vos confirmar segundo o meu evangelho e a pregação de Jesus Cristo, conforme a revelação do mistério que desde tempos eternos esteve oculto, mas agora se manifestou e foi notificado pelas Escrituras dos profetas, segundo o mandamento do Deus eterno, a todas as nações para obediência da fé; ao único Deus, sábio, seja dada glória por Jesus Cristo para sempre. Amém.",
+
+        // Textos adicionais para pergunta 1.19
+        "Tito 3:5": "Não por causa de atos de justiça por nós praticados, mas devido à sua misericórdia, ele nos salvou pelo lavar regenerador e renovador do Espírito Santo.",
+
+        "Efésios 2:8-9": "Pois vocês são salvos pela graça, por meio da fé, e isto não vem de vocês, é dom de Deus; não por obras, para que ninguém se glorie.",
+
+        "Gênesis 2:2-3": "Assim foram acabados os céus e a terra, e todos os seus exércitos. No sétimo dia Deus já havia concluído a obra que realizara, e nesse dia descansou. Deus abençoou o sétimo dia e o santificou, porque nele descansou de toda a obra que realizara na criação.",
+
+        "Apocalipse 14:12": "Isto exige a perseverança dos santos, os quais obedecem aos mandamentos de Deus e permanecem fiéis a Jesus.",
+
+        "1 João 1:9": "Se confessarmos os nossos pecados, ele é fiel e justo para perdoar os nossos pecados e nos purificar de toda injustiça.",
+
+        "Marcos 2:28": "Por isso o Filho do homem é Senhor até do sábado.",
+
+        "Atos 17:2": "Conforme o seu costume, Paulo foi à sinagoga e por três sábados discutiu com eles com base nas Escrituras.",
+
+        "Êxodo 20:14": "Não adulterarás.",
+
+        "Lucas 4:16": "Indo para Nazaré, onde fora criado, entrou num dia de sábado, segundo o seu costume, na sinagoga e levantou-se para ler.",
+
+        "Hebreus 10:26-29": "Se continuarmos a pecar deliberadamente depois que recebemos o conhecimento da verdade, já não resta sacrifício pelos pecados, mas apenas uma expectativa terrível de juízo e de fogo intenso que vai consumir os adversários de Deus. Se alguém rejeitar a lei de Moisés, morre sem misericórdia pelo testemunho de duas ou três pessoas. Quão mais severo castigo vocês acham que merece aquele que pisou o Filho de Deus, que profanou o sangue da aliança pelo qual foi santificado, e que insultou o Espírito da graça?",
+
+        "Romanos 3:20": "Portanto, ninguém será declarado justo diante dele baseando-se na obediência à lei, pois é mediante a lei que nos tornamos plenamente conscientes do pecado.",
+
+        "Efésios 2:8": "Pois vocês são salvos pela graça, por meio da fé, e isto não vem de vocês, é dom de Deus.",
+
+        "João 5:39": "Vocês estudam cuidadosamente as Escrituras, porque pensam que nelas vocês têm a vida eterna. E são as Escrituras que testemunham de mim.",
+
+        "Êxodo 20:15": "Não furtarás.",
+
+        "Gálatas 5:13-14": "Irmãos, vocês foram chamados para a liberdade. Mas não usem a liberdade para dar ocasião à vontade da carne; pelo contrário, sirvam uns aos outros mediante o amor. Toda a Lei se resume num único mandamento: 'Ame o seu próximo como a si mesmo'.",
+
+        "Efésios 2:8-10": "Pois vocês são salvos pela graça, por meio da fé, e isto não vem de vocês, é dom de Deus; não por obras, para que ninguém se glorie. Pois somos criação de Deus, feitos em Cristo Jesus para praticar boas obras, as quais Deus preparou de antemão para que nós as praticássemos.",
     };
 
     // Função simples para abrir popup
     function abrirPopupBiblico(reference, text) {
-        // Criar overlay COMPLETAMENTE isolado
         const overlay = document.createElement('div');
         overlay.id = 'biblical-overlay-unico';
-        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:99999;padding:20px;box-sizing:border-box;';
+        overlay.style.position = 'fixed';
+        overlay.style.zIndex = '9999';
+        overlay.style.left = '0';
+        overlay.style.top = 'var(--header-height)';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.padding = '20px';
+        overlay.style.boxSizing = 'border-box';
+        overlay.style.overflow = 'hidden';
+
+        const pageAside = document.querySelector('aside');
+        const previousHtmlOverflow = document.documentElement.style.overflow;
+        const previousBodyOverflow = document.body.style.overflow;
+
+        function syncOverlayBounds() {
+            let rightGap = 0;
+
+            if (pageAside) {
+                const asideRect = pageAside.getBoundingClientRect();
+
+                if (asideRect.width > 0 && asideRect.right > asideRect.left) {
+                    rightGap = Math.max(0, asideRect.width);
+                }
+            }
+
+            overlay.style.width = `calc(100vw - ${rightGap}px)`;
+            overlay.style.height = 'calc(100vh - var(--header-height))';
+            overlay.style.height = 'calc(100dvh - var(--header-height))';
+        }
 
         const modal = document.createElement('div');
-        modal.style.cssText = 'background:white;border-radius:12px;padding:24px;max-width:600px;max-height:80vh;overflow-y:auto;position:relative;font-family:Arial,sans-serif;';
+        modal.style.cssText = 'background:white;border-radius:12px;padding:24px;max-width:min(90%, 600px);max-height:90%;overflow-y:auto;position:relative;font-family:Arial,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.5);';
 
         const fechar = document.createElement('button');
         fechar.innerHTML = '✕';
-        fechar.style.cssText = 'position:absolute;top:10px;right:10px;background:#f0f0f0;border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:18px;';
-        fechar.onclick = function() {
-            document.body.removeChild(overlay);
-        };
+        fechar.style.cssText = 'position:absolute;top:18px;right:18px;color:#003366;font-size:32px;font-weight:bold;cursor:pointer;user-select:none;line-height:1;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:none;border-radius:999px;background:rgba(0, 0, 0, 0.08);';
 
         const titulo = document.createElement('h3');
         titulo.textContent = reference;
@@ -923,24 +1010,36 @@
         modal.appendChild(texto);
         overlay.appendChild(modal);
 
-        // Fechar ao clicar fora
-        overlay.onclick = function(e) {
-            if (e.target === overlay) {
-                document.body.removeChild(overlay);
-            }
-        };
-
-        // Fechar com ESC
         const escHandler = function(e) {
             if (e.key === 'Escape') {
-                if (document.body.contains(overlay)) {
-                    document.body.removeChild(overlay);
-                }
-                document.removeEventListener('keydown', escHandler);
+                closeOverlay();
             }
         };
-        document.addEventListener('keydown', escHandler);
 
+        function closeOverlay() {
+            if (document.body.contains(overlay)) {
+                document.body.removeChild(overlay);
+            }
+
+            document.documentElement.style.overflow = previousHtmlOverflow;
+            document.body.style.overflow = previousBodyOverflow;
+            document.removeEventListener('keydown', escHandler);
+            window.removeEventListener('resize', syncOverlayBounds);
+        }
+
+        fechar.onclick = closeOverlay;
+
+        overlay.onclick = function(e) {
+            if (e.target === overlay) {
+                closeOverlay();
+            }
+        };
+
+        syncOverlayBounds();
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', escHandler);
+        window.addEventListener('resize', syncOverlayBounds);
         document.body.appendChild(overlay);
     }
 

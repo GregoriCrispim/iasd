@@ -2,10 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\SitemapController;
-
-// Sitemap
-Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Página inicial
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -31,10 +27,10 @@ Route::get('/evidencias-biblicas', [PageController::class, 'evidenciasBiblicas']
 Route::get('/filmes-series', [PageController::class, 'filmesSeries'])->name('filmes-series');
 Route::get('/profecias', [PageController::class, 'profecias'])->name('profecias');
 Route::get('/radio-tv-novo-tempo', [PageController::class, 'radioTvNovoTempo'])->name('radio-tv-novo-tempo');
-Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
 // Time de desenvolvimento
 Route::view('/time-de-desenvolvimento', 'pages.time-desenvolvimento')->name('time-desenvolvimento');
+Route::view('/faq', 'pages.faq')->name('faq');
 
 // Formulários
 Route::post('/contato/enviar', [PageController::class, 'enviarContato'])->name('contato.enviar');

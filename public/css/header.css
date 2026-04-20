@@ -22,7 +22,7 @@ header{
 }
 
 .header-brand img{
-    width: 50%;
+    width: 58%;
     margin: 10px 0 10px 20px;
     max-width: 100%;
     height: auto;
@@ -147,7 +147,7 @@ li:hover ul.dropdown{
 
     .header-brand img{
         width: auto;
-        height: 46px;
+        height: 50px;
         margin: 10px 0 10px 12px;
     }
 

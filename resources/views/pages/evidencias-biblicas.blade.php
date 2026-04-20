@@ -3,8 +3,7 @@
 @section('title', 'IASD Central de Brasília - Evidências Bíblicas')
 
 @push('styles')
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
 <style>
     html { scroll-behavior: smooth; }

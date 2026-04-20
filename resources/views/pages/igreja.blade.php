@@ -4,7 +4,6 @@
 
 @push('styles')
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
     
     .igreja-container {
         width: 100%;
@@ -1084,7 +1083,7 @@
                 Pelo exercício da fé e pelo esforço determinado de muitos, a magnífica realidade ali estava presente, numa demonstração de que aquela máxima citada pelo Apóstolo Paulo aos Filipenses capítulo 4, verso 13, inspirada pelo Espírito da Profecia, de que, "Tudo posso nAquele que me fortalece", estava sendo transformada em uma verdade deslumbrante, real, concreta esplendorosa, sublime, bem presente, cheia de luz, "e a Glória do Senhor Deus encheu o Templo" (II Crônicas 5:14).
             </p>
 
-            <img src="{{ asset('img/igreja/inauguracao.png') }}" alt="Inauguração da Igreja Central de Brasília" loading="lazy" decoding="async">
+            <img src="{{ asset('img/igreja/inauguracao.webp') }}" alt="Inauguração da Igreja Central de Brasília" loading="lazy" decoding="async">
 
             <p>
                 Naquele dia esta bela Igreja, esta Casa de Deus, nova, exuberante e confortável, estava pronta para ser dedicada ao Senhor Deus; e assim foi, para honra e glória do nosso Pai Eterno, a quem tudo devemos.
@@ -1094,13 +1093,13 @@
                 O terreno onde está construída a Igreja tem a área total de 25.000 m², medindo 100 metros de frente por 250 metros de fundos, foi uma doação do Governo do Brasil à União Sul Brasileira, com a intermediação incansável do saudoso irmão Dr. João Batista Clayton Rossi, Procurador da República.
             </p>
 
-            <img src="{{ asset('img/igreja/construcao.png') }}" alt="Construção do Templo" loading="lazy" decoding="async">
+            <img src="{{ asset('img/igreja/construcao.webp') }}" alt="Construção do Templo" loading="lazy" decoding="async">
 
             <p>
                 De acordo com as informações colhidas com o Pr. Wilson Sarli, então Presidente da Missão Brasil Central da IASD, um dos vespertinos da Capital Federal anunciou: "Igreja Adventista inaugura Templo e reúne fiéis do DF". E acrescenta: "Foi inaugurada, às 11 horas de ontem, na Avenida L2 Sul, o novo Templo da Igreja Adventista, com o descerramento da fita pelo presidente mundial daquela Igreja, Pastor Roberto H. Pierson, e o Senador Carvalho Pinto, especialmente convidado para a cerimônia".
             </p>
 
-            <img src="{{ asset('img/igreja/coral_taguatinga.png') }}" alt="Coral de Taguatinga na Inauguração" loading="lazy" decoding="async">
+            <img src="{{ asset('img/igreja/coral_taguatinga.webp') }}" alt="Coral de Taguatinga na Inauguração" loading="lazy" decoding="async">
 
             <p>
                 Conforme informações colhidas, cinco ônibus chegaram de várias partes do Estado de Goiás, trazendo irmãos para a cerimônia de inauguração, além de mais outros dez ônibus e inúmeros carros particulares com pessoas de outros Estados.

@@ -3,11 +3,9 @@
 @section('title', 'IASD Central de Brasília - Rádio e TV Novo Tempo')
 
 @push('styles')
-<!-- Glide.js CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
-<!-- Font Awesome para ícones -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
 <style>
     html { scroll-behavior: smooth; }
@@ -171,6 +169,29 @@
 
     .nt-hero-btn--radio {
         background: linear-gradient(135deg, #0ea5e9 0%, #0b2a4a 100%);
+    }
+
+    .nt-hero-note {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: #1e3a8a;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(30, 64, 175, 0.16);
+        box-shadow: 0 10px 24px rgba(59, 130, 246, 0.12);
+        flex: 1 1 260px;
+        max-width: 360px;
+        text-align: center;
+    }
+
+    .nt-hero-note strong {
+        color: #172554;
     }
 
     /* Última seção encostando no rodapé */
@@ -648,8 +669,7 @@
 @endpush
 
 @push('scripts')
-<!-- Glide.js JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js" defer></script>
 <script>
     // Carrossel Novo Tempo
     const apiUrlNovoTempo = (window.APP_URL || '') + '/api/videos-novotempo';
@@ -787,9 +807,6 @@
     <div class="page-hero nt-hero acb-fullbleed">
         <h1 class="page-title acb-title-serif">Rádio e TV Novo Tempo</h1>
         <h2 class="page-subtitle" style="font-style: italic;">Conectando Você à Esperança!</h2>
-        <p style="background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); color: #fff; padding: 12px 20px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 1.1rem; margin: 12px 0;">
-            <i class="fa-solid fa-tv"></i> Em Brasília, assista na TV aberta: <strong>Canal 48</strong>
-        </p>
         <p class="page-text">
             Bem-vindo(a) à janela digital da <strong>TV e Rádio Novo Tempo</strong>, um ministério da Igreja Adventista do Sétimo Dia dedicado a levar mensagens de fé, saúde, família e esperança diretamente para o seu coração! Aqui, você encontrará programação de qualidade para inspirar seu dia a dia, fortalecer sua espiritualidade e oferecer conteúdo positivo para toda a família.
         </p>
@@ -801,6 +818,10 @@
             <a class="nt-hero-btn nt-hero-btn--radio" href="https://www.novotempo.com/radio/#onde-ouvir" target="_blank" rel="noopener noreferrer">
                 <i class="fa-solid fa-radio"></i> Ouvir rádio ao vivo
             </a>
+            <div class="nt-hero-note">
+                <i class="fa-solid fa-tower-broadcast"></i>
+                <span>Em Brasília, assista na TV aberta: <strong>Canal 48</strong></span>
+            </div>
         </div>
     </div>
 </div>

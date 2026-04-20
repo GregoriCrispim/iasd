@@ -1,16 +1,19 @@
 <footer>
     <div class="img_rodape">
-        <img src="{{ asset('img/rodape/logo.webp') }}" alt="" loading="lazy" decoding="async">
+        <img src="{{ asset('img/rodape/APlaC_oPlano_LogotipoSimp_White (1).webp') }}" alt="" loading="lazy" decoding="async">
+        <div class="footer-copyright">
+            © {{ date('Y') }} Igreja Adventista do Sétimo Dia Central de Brasília
+        </div>
     </div>
     <div class="contato">
         <h2>contato</h2>
         <div class="info_contato">
             <span>
-                <img src="{{ asset('img/rodape/phone-solid-36.png') }}" alt="" loading="lazy" decoding="async">
+                <img src="{{ asset('img/rodape/phone-solid-36.webp') }}" alt="" loading="lazy" decoding="async">
                 <p style="margin: 0;">(61) 98157-4702</p>
             </span>
             <span style="margin-bottom: 10px;">
-                <img src="{{ asset('img/rodape/envelope-solid-36.png') }}" alt="" style="width: 10%;" loading="lazy" decoding="async">
+                <img src="{{ asset('img/rodape/envelope-solid-36.webp') }}" alt="" style="width: 10%;" loading="lazy" decoding="async">
                 <p style="margin: 0;">comunicacaocentralbsb@gmail.com</p>
             </span>
         </div>
@@ -22,18 +25,23 @@
         <h2>Redes Sociais</h2>
         <div class="icones_redes">
             <a href="https://www.facebook.com/share/18C9sd7nvQ/" target="_blank" rel="noopener noreferrer" aria-label="Facebook (abre em nova aba)">
-                <img src="{{ asset('img/rodape/facebook-circle-logo-36.png') }}" alt="Facebook" loading="lazy" decoding="async">
+                <img src="{{ asset('img/rodape/facebook-circle-logo-36.webp') }}" alt="Facebook" loading="lazy" decoding="async">
             </a>
             <a href="https://www.instagram.com/iasdbrasilia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (abre em nova aba)">
-                <img src="{{ asset('img/rodape/instagram-logo-36.png') }}" alt="Instagram" loading="lazy" decoding="async">
+                <img src="{{ asset('img/rodape/instagram-logo-36.webp') }}" alt="Instagram" loading="lazy" decoding="async">
             </a>
             <a href="https://www.youtube.com/@adventistascentralbrasilia" target="_blank" rel="noopener noreferrer" aria-label="YouTube (abre em nova aba)">
-                <img src="{{ asset('img/rodape/youtube-logo-36.png') }}" alt="YouTube" loading="lazy" decoding="async">
+                <img src="{{ asset('img/rodape/youtube-logo-36.webp') }}" alt="YouTube" loading="lazy" decoding="async">
             </a>
             <a href="https://www.tiktok.com/@igrejaadvcentraldebsb?_r=1&_t=ZS-94uacDC2BQ0" target="_blank" rel="noopener noreferrer" aria-label="TikTok (abre em nova aba)">
-                <img src="{{ asset('img/rodape/tiktok-logo-36.png') }}" alt="TikTok" loading="lazy" decoding="async">
+                <img src="{{ asset('img/rodape/tiktok-logo-36.webp') }}" alt="TikTok" loading="lazy" decoding="async">
             </a>
         </div>
+
+        <h2>Central de Ajuda</h2>
+        <a class="footer-devteam-btn footer-devteam-btn--faq" href="{{ route('faq') }}">
+            Conheça
+        </a>
 
         <h2>Time de Desenvolvimento</h2>
         <a class="footer-devteam-btn" href="{{ route('time-desenvolvimento') }}">
@@ -41,8 +49,5 @@
         </a>
     </div>
 
-    <div class="footer-copyright">
-        © {{ date('Y') }} Igreja Adventista do Sétimo Dia Central de Brasília
-    </div>
 </footer>
 
