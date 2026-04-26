@@ -11,6 +11,7 @@ Route::get('/igreja', [PageController::class, 'igreja'])->name('igreja');
 Route::get('/dizimos-ofertas', [PageController::class, 'dizimosOfertas'])->name('dizimos-ofertas');
 Route::get('/escola-sabatina', [PageController::class, 'escolaSabatina'])->name('escola-sabatina');
 Route::get('/estudo-biblico', [PageController::class, 'estudoBiblico'])->name('estudo-biblico');
+Route::get('/estudo-biblico/formulario', [PageController::class, 'estudoBiblicoFormulario'])->name('estudo-biblico.formulario');
 Route::get('/oracao-visita', [PageController::class, 'oracaoVisita'])->name('oracao-visita');
 Route::get('/classe-novo-tempo', [PageController::class, 'classeNovoTempo'])->name('classe-novo-tempo');
 Route::get('/classe-saude', [PageController::class, 'classeSaude'])->name('classe-saude');

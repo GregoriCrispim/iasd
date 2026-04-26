@@ -49,6 +49,14 @@ class PageController extends Controller
     }
 
     /**
+     * Exibe a página de formulário de estudo bíblico
+     */
+    public function estudoBiblicoFormulario()
+    {
+        return view('pages.estudo-biblico-formulario');
+    }
+
+    /**
      * Exibe a página de oração e visita
      */
     public function oracaoVisita()
@@ -244,13 +252,13 @@ class PageController extends Controller
                     'message' => $e->getMessage(),
                 ]);
 
-                return back()
+                return redirect()->route('estudo-biblico.formulario')
                     ->withErrors(['google_sheets' => 'Não foi possível registrar sua solicitação no momento. Tente novamente em alguns minutos.'])
                     ->withInput();
             }
         }
 
-        return back()->with('success', 'Solicitação de estudo bíblico enviada com sucesso! Entraremos em contato em breve.');
+        return redirect()->route('estudo-biblico.formulario')->with('success', 'Solicitação de estudo bíblico enviada com sucesso! Entraremos em contato em breve.');
     }
 
     /**

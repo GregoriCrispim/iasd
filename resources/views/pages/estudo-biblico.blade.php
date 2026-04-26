@@ -443,6 +443,10 @@
         box-shadow: 0 14px 30px rgba(211, 84, 0, 0.3);
         transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
         border-bottom: 3px solid rgba(186, 74, 0, 0.6);
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
     }
 
     .estudo-request .form-open-btn:hover {
@@ -763,40 +767,9 @@
 
             <!-- FORMULÁRIO -->
             <div class="container_form">
-                <div class="form-cta" @if($errors->any()) data-open-on-load="1" @endif>
-                    @if ($errors->any())
-                        <div class="form-server-errors" style="display:none;">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @php
-                        $formConfigEstudoBiblico = [
-                            'title' => 'Preencha o formulário',
-                            'subtitle' => 'Solicitação de Estudo Bíblico',
-                            'action' => route('estudo-biblico.enviar'),
-                            'method' => 'POST',
-                            'submitLabel' => 'Enviar Mensagem',
-                            'fields' => [
-                                ['type' => 'text', 'name' => 'nome', 'label' => 'Nome', 'placeholder' => 'Nome', 'required' => true, 'autocomplete' => 'name'],
-                                ['type' => 'email', 'name' => 'email', 'label' => 'E-mail', 'placeholder' => 'E-mail', 'required' => true, 'autocomplete' => 'email'],
-                                ['type' => 'tel', 'name' => 'telefone', 'label' => 'Telefone', 'placeholder' => '(00) 00000-0000', 'required' => true, 'autocomplete' => 'tel', 'inputmode' => 'tel', 'maxlength' => 15, 'mask' => 'br-phone'],
-                                ['type' => 'textarea', 'name' => 'mensagem', 'label' => 'Mensagem', 'placeholder' => 'Mensagem', 'required' => true, 'rows' => 10],
-                            ],
-                        ];
-                    @endphp
-
-                    <button
-                        type="button"
-                        class="btn-primary-solid form-open-btn"
-                        data-form-config='@json($formConfigEstudoBiblico)'>
-                        Preencher Formulário
-                    </button>
-                </div>
+                <a href="{{ route('estudo-biblico.formulario') }}" class="btn-primary-solid form-open-btn">
+                    Preencher Formulário
+                </a>
             </div>
         </div>
     </section>
