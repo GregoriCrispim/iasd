@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Profecias Bíblicas')
 
+@section('meta-description', 'Estude as profecias bíblicas na IASD Central de Brasília. Profecias de Daniel, Apocalipse e livros proféticos. Aprofunde seu conhecimento bíblico.')
+@section('og-title', 'Profecias Bíblicas - IASD Central de Brasília')
+@section('og-description', 'Descubra o fascinante mundo das profecias bíblicas e o que elas revelam sobre os últimos eventos.')
+@section('page-name', 'Profecias')
+
 @push('styles')
 <style>
     /* Ajuste suave para rolagem */

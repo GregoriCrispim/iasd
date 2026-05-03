@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - ASA (Ação Social Adventista)')
 
+@section('meta-description', 'Conheça o trabalho da ASA - Ação Solidária Adventista da IASD Central de Brasília. Serviço comunitário, distribuição de alimentos e assistência social.')
+@section('og-title', 'ASA - Ação Solidária Adventista')
+@section('og-description', 'Servindo a comunidade com amor e compaixão. Conheça nossas ações sociais!')
+@section('page-name', 'ASA')
+
 @push('styles')
 <style>
 

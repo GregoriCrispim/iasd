@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Fale com a Secretaria')
 
+@section('meta-description', 'Entre em contato com a secretaria da IASD Central de Brasília. Atualize seus dados, faça inscrições e tire suas dúvidas.')
+@section('og-title', 'Secretaria - IASD Central de Brasília')
+@section('og-description', 'Fale com nossa secretaria e mantenha seus dados atualizados!')
+@section('page-name', 'Secretaria')
+
 @push('styles')
 <style>
 

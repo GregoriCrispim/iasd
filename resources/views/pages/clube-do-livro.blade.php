@@ -2,6 +2,11 @@
 
 @section('title', 'Clube do Livro: Páginas que Conectam')
 
+@section('meta-description', 'Participe do Clube do Livro da IASD Central de Brasília. Leituras edificantes, discussões enriquecedoras e comunhão através da literatura.')
+@section('og-title', 'Clube do Livro - IASD Central de Brasília')
+@section('og-description', 'Boas leituras, boas conversas. Junte-se ao nosso clube do livro!')
+@section('page-name', 'Clube do Livro')
+
 @push('styles')
 <style>
 

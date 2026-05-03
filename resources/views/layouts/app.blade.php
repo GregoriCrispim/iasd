@@ -61,6 +61,124 @@
     <title>@yield('title', 'IASD Central de Brasília')</title>
 
     <!-- Schema.org JSON-LD -->
+    @push('schema-organization')
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "IASD Central de Brasília",
+      "url": "https://adventistascentralbrasilia.org",
+      "logo": "https://adventistascentralbrasilia.org/img/logo_iasd.webp",
+      "description": "Igreja Adventista do Sétimo Dia Central de Brasília - Uma comunidade de fé, amor e esperança",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Setor de Áreas Isoladas Norte",
+        "addressLocality": "Brasília",
+        "addressRegion": "DF",
+        "postalCode": "70710-100",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-61-98157-4702",
+        "contactType": "customer service",
+        "email": "comunicacaocentralbsb@gmail.com",
+        "areaServed": "BR",
+        "availableLanguage": ["Portuguese"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/share/18C9sd7nvQ/",
+        "https://www.instagram.com/comunidadecentralbsb/",
+        "https://www.youtube.com/@adventistascentralbrasilia",
+        "https://www.tiktok.com/@igrejaadvcentraldebsb"
+      ],
+      "foundingDate": "2016",
+      "numberOfEmployees": "500"
+    }
+    </script>
+    @endpush
+
+    @push('schema-localbusiness')
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "IASD Central de Brasília",
+      "image": "https://adventistascentralbrasilia.org/img/logo_iasd.webp",
+      "telephone": "+55-61-98157-4702",
+      "email": "comunicacaocentralbsb@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Setor de Áreas Isoladas Norte",
+        "addressLocality": "Brasília",
+        "addressRegion": "DF",
+        "postalCode": "70710-100",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-15.8289723",
+        "longitude": "-47.9048304"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday"],
+          "opens": "08:00",
+          "closes": "12:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday"],
+          "opens": "19:00",
+          "closes": "21:00"
+        }
+      ],
+      "priceRange": "FREE"
+    }
+    </script>
+    @endpush
+
+    @push('schema-breadcrumb')
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://adventistascentralbrasilia.org"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "@yield('page-name', 'Página')",
+          "item": "{{ request()->url() }}"
+        }
+      ]
+    }
+    </script>
+    @endpush
+
+    @push('schema-website')
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "IASD Central de Brasília",
+      "url": "https://adventistascentralbrasilia.org",
+      "description": "Uma comunidade de fé, amor e esperança em Brasília. Encontre estudos bíblicos, programações, eventos e mais.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://adventistascentralbrasilia.org/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    @endpush
+
     @yield('schema-organization')
     @yield('schema-webpage')
     @yield('schema-localbusiness')

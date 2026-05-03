@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Estudo Bíblico')
 
+@section('meta-description', 'Solicite seu estudo bíblico gratuito na IASD Central de Brasília. Estudos presenciais, online ou por telefone. Conecte-se com Deus através da Palavra.')
+@section('og-title', 'Estudo Bíblico - IASD Central de Brasília')
+@section('og-description', 'Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais? O Estudo Bíblico é o caminho!')
+@section('page-name', 'Estudo Bíblico')
+
 @push('styles')
 <style>
 
@@ -462,6 +467,11 @@
         outline-offset: 3px;
     }
 
+    .estudo-request a.btn-primary-solid:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(211, 84, 0, 0.3);
+    }
+
     .container_form {
         width: 100%;
         display: flex;
@@ -729,7 +739,7 @@
     </div>
 
     <!-- Seção Solicitação de Estudo Bíblico -->
-    <section class="estudo-request acb-fullbleed" aria-labelledby="estudo-request-title">
+    <section class="estudo-request acb-fullbleed" aria-labelledby="estudo-request-title" style="margin-bottom: 0;">
         <div class="estudo-request__inner">
             <h2 id="estudo-request-title" class="acb-title-serif estudo-request__title">
                 Solicite Seu Estudo Bíblico Gratuito
@@ -771,6 +781,20 @@
                     Preencher Formulário
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Seção Questões sobre Doutrina -->
+    <section class="estudo-request acb-fullbleed" style="background: linear-gradient(135deg, #003366 0%, #001531 100%); color: #fff; text-align: center; padding: 60px 40px; margin: 0 0 56px;">
+        <div style="max-width: 980px; margin: 0 auto;">
+            <i class='bx bx-book-open' style="font-size: 3rem; color: #fff; margin-bottom: 20px; display: block;"></i>
+            <h2 class="acb-title-serif" style="font-size: 2.5em; color: #fff; margin-bottom: 25px; font-weight: 700;">Tem perguntas sobre doutrina?</h2>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1.15rem; line-height: 1.8; color: #f8f9fa; margin-bottom: 30px; max-width: 860px; margin-left: auto; margin-right: auto;">
+                Explore nossa seção de Perguntas Frequentes para encontrar respostas detalhadas sobre as doutrinas bíblicas adventistas. Descubra mais sobre sábado, dom de profecia, juízo investigativo, estado dos mortos e muito mais!
+            </p>
+            <a href="{{ route('faq') }}#doutrina" class="btn-primary-solid" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%); color: #fff; border: none; border-radius: 12px; font-family: 'Roboto', sans-serif; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; border-bottom: 3px solid rgba(186, 74, 0, 0.6);">
+                <i class='bx bx-help-circle'></i> Ver Questões sobre Doutrina
+            </a>
         </div>
     </section>
 

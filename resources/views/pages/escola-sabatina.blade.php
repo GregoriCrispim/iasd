@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Escola Sabatina')
 
+@section('meta-description', 'Participe da Escola Sabatina da IASD Central de Brasília. Estudo bíblico em pequenos grupos para todas as idades. Sábado às 08h00.')
+@section('og-title', 'Escola Sabatina - IASD Central de Brasília')
+@section('og-description', 'Estude a Bíblia em grupos pequenos e interativos. Aprenda, cresça e faça novos amigos!')
+@section('page-name', 'Escola Sabatina')
+
 @push('styles')
 <style>
 

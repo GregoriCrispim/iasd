@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Filmes e Séries')
 
+@section('meta-description', 'Confira nossa seleção de filmes cristãos e séries edificantes recomendadas pela IASD Central de Brasília. Conteúdo para toda a família.')
+@section('og-title', 'Filmes e Séries - IASD Central de Brasília')
+@section('og-description', 'Entretenimento com valores cristãos. Filmes e séries para toda a família!')
+@section('page-name', 'Filmes e Séries')
+
 @push('styles')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" media="print" onload="this.media='all'">

@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Criacionismo e Ciência')
 
+@section('meta-description', 'Descubra a harmonia entre ciência e fé. Estudos sobre criacionismo e cientistas que acreditaram em Deus, na IASD Central de Brasília.')
+@section('og-title', 'Criacionismo e Ciência - IASD Central de Brasília')
+@section('og-description', 'Ciência e fé não se contradizem. Conheça cientistas que viram Deus em suas descobertas!')
+@section('page-name', 'Criacionismo')
+
 @php
 // Definição dos dados dos cientistas em Array PHP para fácil manutenção
 $scientists = [

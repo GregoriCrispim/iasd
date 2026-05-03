@@ -2,6 +2,11 @@
 
 @section('title', 'Time de Desenvolvimento')
 
+@section('meta-description', 'Conheça a equipe de desenvolvimento do site da IASD Central de Brasília. Profissionais dedicados a manter e evoluir nossa presença digital.')
+@section('og-title', 'Time de Desenvolvimento - IASD Central de Brasília')
+@section('og-description', 'Por trás do site, pessoas dedicadas a espalhar a mensagem digitalmente.')
+@section('page-name', 'Time de Desenvolvimento')
+
 @section('content')
     <img class="page-header-img"
          src="{{ asset('img/time_dev/time_dev_header.webp') }}"

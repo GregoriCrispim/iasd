@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Rádio e TV Novo Tempo')
 
+@section('meta-description', 'Assista Rádio e TV Novo Tempo. Programação cristã 24h com estudos bíblicos, entrevistas, música e muito mais na IASD Central de Brasília.')
+@section('og-title', 'Rádio e TV Novo Tempo - IASD Central de Brasília')
+@section('og-description', 'Programação cristã edificante 24 horas por dia. Assista agora!')
+@section('page-name', 'Rádio e TV Novo Tempo')
+
 @push('styles')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css" media="print" onload="this.media='all'">

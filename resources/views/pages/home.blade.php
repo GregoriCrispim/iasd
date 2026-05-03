@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Início')
 
+@section('meta-description', 'IASD Central de Brasília - Uma comunidade de fé, amor e esperança. Participe de nossos cultos aos sábados, estudos bíblicos, eventos e programações especiais.')
+@section('og-title', 'IASD Central de Brasília - Uma comunidade de fé e esperança')
+@section('og-description', 'Bem-vindo à IASD Central de Brasília! Junte-se a nós em uma jornada de fé, comunhão e transformação.')
+@section('page-name', 'Início')
+
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endpush

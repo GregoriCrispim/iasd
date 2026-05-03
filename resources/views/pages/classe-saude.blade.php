@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Classe de Saúde')
 
+@section('meta-description', 'Classe de Saúde da IASD Central de Brasília. Aprenda sobre viver saudável, temperança, nutrição e bem-estar cristão.')
+@section('og-title', 'Classe de Saúde - IASD Central de Brasília')
+@section('og-description', 'Saúde física e espiritual! Aprenda a viver melhor com nossos cursos.')
+@section('page-name', 'Classe de Saúde')
+
 @push('styles')
 <style>
 

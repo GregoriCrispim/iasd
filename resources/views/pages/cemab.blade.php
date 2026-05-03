@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - CEMAB (Centro Musical Adventista de Brasília)')
 
+@section('meta-description', 'Conheça o CEMAB - Centro Musical Adventista de Brasília da IASD Central. Aulas de música, corais, orquestras e louvor a Deus.')
+@section('og-title', 'CEMAB - Centro Musical Adventista')
+@section('og-description', 'Música para glorificar a Deus! Participe de nossos corais e orquestras.')
+@section('page-name', 'CEMAB')
+
 @push('styles')
 <style>
 

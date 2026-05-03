@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Doutores de Esperança')
 
+@section('meta-description', 'Conheça os Doutores da Esperança da IASD Central de Brasília. Profissionais de saúde dedicados a compartilhar princípios de vida saudável.')
+@section('og-title', 'Doutores da Esperança - IASD Central de Brasília')
+@section('og-description', 'Saúde e esperança! Médicos adventistas compartilhando princípios de vida.')
+@section('page-name', 'Doutores da Esperança')
+
 @push('styles')
 <style>
 

@@ -34,7 +34,7 @@
       "name": "Onde fica a igreja?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Estamos localizados em Brasília, DF. Consulte o mapa em nossa página de contato para obter a localização exata."
+        "text": "Estamos localizados na SGAS 611 módulo 75 - Asa Sul, Brasília - DF, 70200-970. Consulte o mapa em nossa página de contato para obter a localização exata."
       }
     },
     {
@@ -520,7 +520,7 @@ html { scroll-behavior: smooth; }
 
             <div class="faq-item">
                 <h3>3. Onde fica a igreja?</h3>
-                <p>Estamos localizados em Brasília, DF. Consulte o mapa no rodapé de nosso site para obter a localização exata. Se precisar de instruções detalhadas, entre em contato conosco.</p>
+                <p>Estamos localizados na SGAS 611 módulo 75 - Asa Sul, Brasília - DF, 70200-970. Consulte o mapa no rodapé de nosso site para obter a localização exata. Se precisar de instruções detalhadas, entre em contato conosco.</p>
             </div>
 
             <div class="faq-item">

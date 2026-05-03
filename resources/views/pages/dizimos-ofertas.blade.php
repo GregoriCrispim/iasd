@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Dízimos e Ofertas')
 
+@section('meta-description', 'Contribua com a obra de Deus através de dízimos e ofertas na IASD Central de Brasília. Saiba como fazer sua contribuição com segurança e facilidade.')
+@section('og-title', 'Dízimos e Ofertas - IASD Central de Brasília')
+@section('og-description', 'Sua contribuição faz a diferença! Saiba como apoiar o trabalho da igreja.')
+@section('page-name', 'Dízimos e Ofertas')
+
 @push('styles')
 <style>
 

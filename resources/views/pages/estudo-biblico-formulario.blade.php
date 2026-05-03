@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Solicitação de Estudo Bíblico')
 
+@section('meta-description', 'Solicite seu estudo bíblico gratuito agora. Preencha o formulário e nossa equipe entrará em contato. Estudos presenciais ou online.')
+@section('og-title', 'Solicitação de Estudo Bíblico - IASD Central de Brasília')
+@section('og-description', 'Dê o primeiro passo! Solicite seu estudo bíblico gratuito preenchendo o formulário.')
+@section('page-name', 'Solicitação de Estudo Bíblico')
+
 @push('styles')
 <style>
 
@@ -159,6 +164,11 @@
         color: #d35400;
     }
 
+    .form-section a.btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(211, 84, 0, 0.3);
+    }
+
     @media (max-width: 768px) {
         .estudo-form-container {
             padding: 20px 15px;
@@ -265,6 +275,18 @@
                 <i class='bx bx-arrow-back'></i> Voltar para página de Estudo Bíblico
             </a>
         </div>
+    </div>
+
+    <!-- Seção Questões sobre Doutrina -->
+    <div class="form-section" style="background: linear-gradient(135deg, #003366 0%, #001531 100%); color: #fff; text-align: center; padding: 50px 24px;">
+        <i class='bx bx-book-open' style="font-size: 3rem; color: #fff; margin-bottom: 20px; display: block;"></i>
+        <h2 class="acb-title-serif" style="font-size: 2.5em; color: #fff; margin-bottom: 25px; font-weight: 700;">Tem perguntas sobre doutrina?</h2>
+        <p style="font-family: 'Roboto', sans-serif; font-size: 1.15rem; line-height: 1.8; color: #f8f9fa; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Explore nossa seção de Perguntas Frequentes para encontrar respostas detalhadas sobre as doutrinas bíblicas adventistas. Descubra mais sobre sábado, dom de profecia, juízo investigativo, estado dos mortos e muito mais!
+        </p>
+        <a href="{{ route('faq') }}#doutrina" class="btn-submit" style="display: inline-block; width: auto; padding: 16px 40px; background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%); color: #fff; border: none; border-radius: 10px; font-family: 'Roboto', sans-serif; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none;">
+            <i class='bx bx-help-circle'></i> Ver Questões sobre Doutrina
+        </a>
     </div>
 </div>
 @endsection

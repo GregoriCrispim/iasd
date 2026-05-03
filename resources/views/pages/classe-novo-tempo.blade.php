@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Classe Novo Tempo')
 
+@section('meta-description', 'Participe da Classe Novo Tempo da IASD Central de Brasília. Estudos bíblicos especiais sobre profecias, livros bíblicos e temas atuais.')
+@section('og-title', 'Classe Novo Tempo - IASD Central de Brasília')
+@section('og-description', 'Aprofunde seu conhecimento bíblico com a Classe Novo Tempo!')
+@section('page-name', 'Classe Novo Tempo')
+
 @push('styles')
 <style>
 

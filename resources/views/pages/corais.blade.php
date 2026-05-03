@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Corais e Orquestras')
 
+@section('meta-description', 'Conheça os corais e orquestras da IASD Central de Brasília. Coral infantil, adulto, orquestra e muito mais. Venha fazer música conosco!')
+@section('og-title', 'Corais e Orquestras - IASD Central de Brasília')
+@section('og-description', 'Música para glorificar a Deus! Participe de nossos corais e orquestras.')
+@section('page-name', 'Corais e Orquestras')
+
 @php
 // Definição dos dados dos corais em Array PHP para fácil manutenção
 $choirs = [

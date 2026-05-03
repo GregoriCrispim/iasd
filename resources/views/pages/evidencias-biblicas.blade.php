@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Evidências Bíblicas')
 
+@section('meta-description', 'Explore as evidências históricas e arqueológicas que confirmam a Bíblia. Estudos profundos que fortalecem sua fé na IASD Central de Brasília.')
+@section('og-title', 'Evidências Bíblicas - IASD Central de Brasília')
+@section('og-description', 'A Bíblia é confiável! Conheça as evidências que comprovam sua veracidade histórica.')
+@section('page-name', 'Evidências Bíblicas')
+
 @push('styles')
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 

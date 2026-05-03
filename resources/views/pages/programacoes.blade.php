@@ -2,6 +2,51 @@
 
 @section('title', 'IASD Central de Brasília - Programações 2026')
 
+@section('meta-description', 'Confira todas as programações e eventos da IASD Central de Brasília para 2026. Cultos, congressos, convenções e muito mais.')
+@section('og-title', 'Programações 2026 - IASD Central de Brasília')
+@section('og-description', 'Reuniões espirituais, convenções, congressos e muito mais. Marque sua presença e cresça conosco na fé!')
+@section('og-image', asset('img/cards/programacoes/programacoes_header.webp'))
+@section('page-name', 'Programações')
+
+@push('schema-events')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Programações 2026 - IASD Central de Brasília",
+  "startDate": "2026-01-01",
+  "endDate": "2026-12-31",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": {
+    "@type": "Place",
+    "name": "IASD Central de Brasília",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Setor de Áreas Isoladas Norte",
+      "addressLocality": "Brasília",
+      "addressRegion": "DF",
+      "postalCode": "70710-100",
+      "addressCountry": "BR"
+    }
+  },
+  "image": [
+    "https://adventistascentralbrasilia.org/img/cards/programacoes/programacoes_header.webp"
+  ],
+  "description": "Confira todas as programações e eventos da IASD Central de Brasília para o ano de 2026. Reuniões espirituais, convenções, congressos e muito mais.",
+  "organizer": {
+    "@type": "Organization",
+    "name": "IASD Central de Brasília",
+    "url": "https://adventistascentralbrasilia.org"
+  },
+  "performer": {
+    "@type": "Organization",
+    "name": "IASD Central de Brasília"
+  }
+}
+</script>
+@endpush
+
 @push('styles')
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <style>

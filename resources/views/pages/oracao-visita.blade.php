@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - Oração e Visita')
 
+@section('meta-description', 'Precisando de oração ou uma visita? Deixe seu pedido de oração ou solicite uma visita pastoral da equipe da IASD Central de Brasília. Estamos aqui para você!')
+@section('og-title', 'Oração e Visita - IASD Central de Brasília')
+@section('og-description', 'Estamos aqui para orar por você e visitar você em momentos difíceis. Deixe seu pedido!')
+@section('page-name', 'Oração e Visita')
+
 @push('styles')
 <style>
 

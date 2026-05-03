@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - A Igreja')
 
+@section('meta-description', 'Conheça a IASD Central de Brasília, uma comunidade cristã dedicada a compartilhar o amor de Deus através da Palavra, do serviço comunitário e do culto.')
+@section('og-title', 'A Igreja - IASD Central de Brasília')
+@section('og-description', 'Faça parte de nossa família e cresça espiritualmente conosco!')
+@section('page-name', 'A Igreja')
+
 @push('styles')
 <style>
     

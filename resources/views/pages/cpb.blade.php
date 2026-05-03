@@ -2,6 +2,11 @@
 
 @section('title', 'IASD Central de Brasília - CPB Casa Publicadora Brasileira')
 
+@section('meta-description', 'Acesse livros, Bíblias e materiais da CPB - Casa Publicadora Brasileira. Literatura cristã de qualidade na IASD Central de Brasília.')
+@section('og-title', 'CPB - Casa Publicadora Brasileira')
+@section('og-description', 'Literatura que transforma vidas! Conheça os livros e materiais da CPB.')
+@section('page-name', 'CPB')
+
 @php
 // Definição dos dados dos produtos em Array PHP para fácil manutenção
 $products = [
