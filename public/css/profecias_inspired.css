@@ -1,0 +1,190 @@
+/* Shared styling inspired by resources/views/pages/profecias.blade.php
+   Important: uses only .acb-* classes to avoid impacting profecias page. */
+
+:root{
+  --acb-max-width: 1200px;
+  --acb-content-width: 1024px;
+  --acb-muted: #f9fafb;
+  --acb-ink: #111827;
+  --acb-ink-2: #4b5563;
+  --acb-primary: #2563eb;
+  --acb-primary-2: #1e3a8a;
+  --acb-card: #ffffff;
+  --acb-border: #e5e7eb;
+  --acb-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+}
+
+/* Full-bleed background for sections inside main.
+   Works by painting an inherited background on a pseudo element that spans viewport width,
+   then gets clipped by main's overflow-x rules (already in padrao.css). */
+.acb-fullbleed{
+  position: relative;
+  z-index: 0;
+}
+.acb-fullbleed::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: inherit;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* If the last block in <main> is full-bleed (i.e., right before footer),
+   remove any gap so footer touches it. Also supports a wrapper/container where
+   the last child is .acb-fullbleed. */
+main > :nth-last-child(2).acb-fullbleed{
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+main > :nth-last-child(2):has(> .acb-fullbleed:last-child){
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+main > :nth-last-child(2) > .acb-fullbleed:last-child{
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* If the first section in main content is full-bleed, remove top gap so it
+   touches the header image (or directly the header include). Handles:
+   - main > .acb-fullbleed (after header include)
+   - main > img + .acb-fullbleed
+   - main > img + container > .acb-fullbleed:first-child
+   - main > container > .acb-fullbleed:first-child */
+main > :nth-child(2).acb-fullbleed{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+main > :nth-child(2):has(> .acb-fullbleed:first-child){
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+main > :nth-child(2) > .acb-fullbleed:first-child{
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+main > img + .acb-fullbleed{
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+main > img + :has(> .acb-fullbleed:first-child){
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+main > img + :has(> .acb-fullbleed:first-child) > .acb-fullbleed:first-child{
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+/* Optional helpers when you DON'T already have a background set */
+.acb-bg-muted{ background: var(--acb-muted); }
+.acb-bg-card{ background: var(--acb-card); }
+.acb-bg-gradient-muted{ background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+.acb-bg-gradient-primary{ background: linear-gradient(135deg, var(--acb-primary-2) 0%, #1e40af 100%); }
+
+/* Serif display font for titles (inspired by profecias h2/quotes) */
+h1.acb-title-serif,
+h2.acb-title-serif,
+h3.acb-title-serif,
+h4.acb-title-serif{
+  font-family: "Playfair Display", serif;
+  letter-spacing: 0;
+}
+
+/* Quote / citation styling */
+.acb-quote{
+  margin: 22px 0;
+  padding: 16px 18px;
+  border-left: 4px solid var(--acb-primary);
+  background: rgba(37, 99, 235, 0.06);
+  border-radius: 12px;
+  color: var(--acb-ink);
+}
+
+.acb-quote > p{
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 1.15em;
+  line-height: 1.65;
+  color: var(--acb-ink);
+}
+
+/* Support common patterns already present in pages */
+.acb-quote .referencia,
+.acb-quote .acb-quote__ref{
+  display: block;
+  margin-top: 10px;
+  font-family: Inter, Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  color: rgba(17, 24, 39, 0.72);
+}
+
+.acb-quote--glass{
+  border: 1px solid rgba(96, 165, 250, 0.9);
+  border-left-width: 4px;
+  background: rgba(30, 64, 128, 0.40);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.acb-quote--glass > p{
+  color: #dbeafe;
+}
+.acb-quote--glass .referencia,
+.acb-quote--glass .acb-quote__ref{
+  color: rgba(191, 219, 254, 0.95);
+}
+
+/* A lightweight “section header” pattern (opt-in) */
+.acb-section-header{
+  text-align: center;
+  margin: 0 auto 28px;
+  max-width: 56rem;
+}
+.acb-section-header > .acb-section-title{
+  margin: 0 0 10px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: var(--acb-ink);
+  font-size: 2em;
+}
+.acb-section-header > .acb-section-subtitle{
+  margin: 0;
+  color: #6b7280;
+  font-size: 1.125em;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px){
+  .acb-quote{
+    padding: 14px 14px;
+    border-radius: 10px;
+  }
+  .acb-quote > p{
+    font-size: 1.05em;
+  }
+  .acb-section-header > .acb-section-title{
+    font-size: 1.75em;
+  }
+}
