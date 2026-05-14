@@ -1,0 +1,35 @@
+name: Deploy Automático para Hostgator
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Sincronizar arquivos via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          
+          # A configuração do diretório depende de como você criou o usuário no cPanel:
+          # Se o diretório da conta FTP foi deixado como /home2/maur5614/, use a linha abaixo:
+          #server-dir: /adventistascentralbrasilia.org/
+          
+          # Se na criação do FTP você apontou o diretório diretamente para /home2/maur5614/adventistascentralbrasilia.org,
+          # então comente a linha de cima e descomente a linha de baixo:
+          # server-dir: /
+          
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
