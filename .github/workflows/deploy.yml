@@ -10,24 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
-
-      - name: Sincronizar arquivos via FTP
+      - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          
-          # A configuração do diretório depende de como você criou o usuário no cPanel:
-          # Se o diretório da conta FTP foi deixado como /home2/maur5614/, use a linha abaixo:
-          #server-dir: /adventistascentralbrasilia.org/
-          
-          # Se na criação do FTP você apontou o diretório diretamente para /home2/maur5614/adventistascentralbrasilia.org,
-          # então comente a linha de cima e descomente a linha de baixo:
-          # server-dir: /
-          
+          server-dir: / # Ajuste conforme a raiz que configurou no passo anterior
+          port: 21 # Força a comunicação na porta padrão de FTP
+          timeout: 120000 # Aumenta o tempo limite de resposta (em milissegundos)
           exclude: |
             **/.git*
             **/.git*/**
