@@ -16,7 +16,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: / # Ajuste conforme a raiz que configurou no passo anterior
+          #server-dir: / # Ajuste conforme a raiz que configurou no passo anterior
+          protocol: ftps
           port: 21 # Força a comunicação na porta padrão de FTP
           timeout: 120000 # Aumenta o tempo limite de resposta (em milissegundos)
           exclude: |
