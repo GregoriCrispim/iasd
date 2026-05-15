@@ -44,6 +44,17 @@
     </ul>
 </div>
 
+<a class="boletim-home" href="{{ route('boletim-digital') }}" aria-label="Acessar boletim digital">
+    <div class="boletim-home__content">
+        <div class="boletim-home__text">
+            <span class="boletim-home__eyebrow">Central Informa</span>
+            <h2 class="acb-title-serif">Boletim Informativo</h2>
+            <p>Fique por dentro das atividades da semana da IASD Central de Brasília.</p>
+        </div>
+        <span class="boletim-home__button">Acessar boletim</span>
+    </div>
+</a>
+
 <span class="span_cards">
     <div class="container_cards">
         <a class="card" href="{{ route('estudo-biblico') }}">

@@ -19,6 +19,7 @@ Route::get('/corais', [PageController::class, 'corais'])->name('corais');
 Route::get('/cemab', [PageController::class, 'cemab'])->name('cemab');
 Route::get('/doutores-da-esperanca', [PageController::class, 'doutoresDaEsperanca'])->name('doutores-da-esperanca');
 Route::get('/programacoes', [PageController::class, 'programacoes'])->name('programacoes');
+Route::view('/boletim-digital', 'pages.boletim-digital')->name('boletim-digital');
 Route::get('/cpb', [PageController::class, 'cpb'])->name('cpb');
 Route::get('/asa', [PageController::class, 'asa'])->name('asa');
 Route::get('/secretaria', [PageController::class, 'secretaria'])->name('secretaria');

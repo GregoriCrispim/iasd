@@ -1,0 +1,194 @@
+.boletim-page{
+    width: 100%;
+    background: #f4f6f8;
+    padding: clamp(32px, 5vw, 64px) 0;
+}
+
+.boletim-page__header{
+    width: min(100%, 1180px);
+    margin: 0 auto clamp(28px, 5vw, 54px);
+    padding: 0 clamp(18px, 4vw, 36px);
+    text-align: center;
+}
+
+.boletim-page__eyebrow{
+    display: inline-block;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #47637f;
+}
+
+.boletim-page h1{
+    margin: 0 0 14px;
+    font-family: 'Bebas neue', 'Arial Narrow', sans-serif;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    line-height: 1;
+    font-weight: 500;
+    color: #003366;
+    text-transform: uppercase;
+}
+
+.boletim-page__header p{
+    max-width: 760px;
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.18rem);
+    line-height: 1.7;
+    color: #333;
+}
+
+.boletim-feed{
+    width: min(100%, 1180px);
+    margin: 0 auto;
+    padding: 0 clamp(12px, 3vw, 36px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 5vw, 56px);
+}
+
+.boletim-feed__item{
+    width: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .12);
+}
+
+.boletim-feed__media-wrap{
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #111;
+}
+
+.boletim-feed__image-button{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+}
+
+.boletim-feed__image-button:focus-visible{
+    outline: 3px solid #fff;
+    outline-offset: -6px;
+}
+
+.boletim-feed__media{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: #111;
+}
+
+video.boletim-feed__media{
+    object-fit: cover;
+}
+
+.boletim-feed__caption{
+    padding: clamp(18px, 3vw, 34px);
+}
+
+.boletim-feed__caption h2{
+    margin: 0 0 12px;
+    font-family: 'Bebas neue', 'Arial Narrow', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+    line-height: 1;
+    font-weight: 500;
+    color: #003366;
+    text-transform: uppercase;
+}
+
+.boletim-feed__caption p{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    line-height: 1.75;
+    color: #28323c;
+    text-align: justify;
+}
+
+.boletim-lightbox{
+    --boletim-lightbox-right-gap: 0px;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: var(--header-height);
+    width: calc(100vw - var(--boletim-lightbox-right-gap));
+    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .9);
+}
+
+.boletim-lightbox.active{
+    display: flex;
+}
+
+.boletim-lightbox__content{
+    max-width: min(90%, 1200px);
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.5);
+}
+
+.boletim-lightbox__close{
+    position: absolute;
+    top: 18px;
+    right: 28px;
+    z-index: 1;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .45);
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    transition: color .3s;
+}
+
+.boletim-lightbox__close:hover,
+.boletim-lightbox__close:focus-visible{
+    color: #3b82f6;
+}
+
+@media (max-width: 700px){
+    .boletim-page{
+        padding-top: 28px;
+    }
+
+    .boletim-feed{
+        padding: 0 16px;
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .boletim-feed__item{
+        border-radius: 18px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+    }
+
+    .boletim-feed__caption p{
+        text-align: left;
+    }
+}

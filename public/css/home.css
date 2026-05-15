@@ -3,7 +3,7 @@
     aspect-ratio: 1920/700;
     position: relative;
     overflow: hidden;
-    margin-bottom: 2em;
+    margin-bottom: 0;
 }
 
 .list{
@@ -68,6 +68,88 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.boletim-home{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    background: #151d27;
+    color: #fff;
+}
+
+.boletim-home__content{
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    padding: clamp(28px, 5vw, 58px) clamp(20px, 6vw, 72px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+.boletim-home__text{
+    max-width: 690px;
+}
+
+.boletim-home__eyebrow{
+    display: inline-block;
+    margin-bottom: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #b9c7d7;
+}
+
+.boletim-home h2{
+    margin: 0 0 14px;
+    font-family: 'Bebas neue', 'Arial Narrow', sans-serif;
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: .03em;
+    color: #f6f1e7;
+    text-transform: uppercase;
+}
+
+.boletim-home p{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+    line-height: 1.6;
+    color: #f2f5f8;
+}
+
+.boletim-home__button{
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 190px;
+    padding: 14px 30px;
+    border-radius: 999px;
+    background: #fff;
+    color: #151d27;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.boletim-home:hover .boletim-home__button,
+.boletim-home:focus-visible .boletim-home__button{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.24);
+    background: #f6f1e7;
+}
+
+.boletim-home:focus-visible{
+    outline: 3px solid #fff;
+    outline-offset: -6px;
 }
 
 .container_cards{
@@ -370,7 +452,7 @@
 
 @media (max-width: 700px){
     .slider{
-        margin-bottom: 1em;
+        margin-bottom: 0;
     }
 
     .dots{
@@ -381,6 +463,16 @@
     .container_cards{
         margin-top: 2vh;
         margin-bottom: 2vh;
+    }
+
+    .boletim-home__content{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 22px;
+    }
+
+    .boletim-home__button{
+        width: 100%;
     }
 
     .youtube h2{
