@@ -21,7 +21,7 @@
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         padding: 50px 40px;
         border-radius: 15px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         text-align: center;
     }
 
@@ -221,16 +221,36 @@
     <div class="oracao-intro acb-fullbleed">
         <h1>Precisa de Oração ou Visita?<br>Estamos Aqui para Interceder por Você!</h1>
         <p>
-            No Ministério de Oração, nossa missão é apoiar você em meio às dificuldades da vida. Oramos por seus pedidos, confiando no poder transformador da oração.
+            No Ministério de Oração, nossa missão é apoiar você em meio às dificuldades da vida. Oramos por seus pedidos, confiando no poder transformador da oração. Não carregue suas lutas sozinho(a). Deus ouve cada oração e, através da nossa comunidade, queremos ser um canal de esperança para sua vida.
         </p>
-        <p>
-            Não carregue suas lutas sozinho(a). Deus ouve cada oração e, através da nossa comunidade, queremos ser um canal de esperança para sua vida.
+    </div>
+
+    <!-- Informações sobre Oração -->
+    <div class="oracao-info acb-fullbleed" style="background: #ffffff; padding: 50px 40px; border-radius: 15px; margin-bottom: 50px; text-align: center; border: 2px solid #e9ecef; box-shadow: 0 4px 20px rgba(0, 51, 102, 0.08);">
+        <i class='bx bx-pray' style="font-size: 3rem; color: #003366; margin-bottom: 15px; margin-top: -20px; display: block;"></i>
+        <h3 class="acb-title-serif" style="font-size: 2.2em; color: #003366; margin-bottom: 30px; margin-top: 10px; font-weight: 700;">Deixe aqui os seus pedidos de oração</h3>
+        <p style="font-family: 'Roboto', sans-serif; font-size: 1.1rem; line-height: 1.8; color: #333; text-align: justify; max-width: 900px; margin: 0 auto 25px;">
+            Todos os dias teremos alguém intercedendo por eles e, nos dias de culto, seus pedidos estarão na caixa de oração para podermos com a congregação orar por eles. Se preferir participar do nosso Grupo de Oração Presencial é só comparecer a cada 15 dias na Sala de Oração.
         </p>
+        <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto; text-align: left;">
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1.05rem; line-height: 1.8; color: #333; margin-bottom: 20px; display: flex; align-items: flex-start;">
+                <span style="color: #003366; font-size: 1.5rem; margin-right: 15px; flex-shrink: 0;">📌</span>
+                <span>Cada pedido enviado aqui é tratado com carinho e fé. Ele é impresso e cuidadosamente depositado em nossa Caixa de Oração, onde recebe nossas intercessões semanais.</span>
+            </p>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1.05rem; line-height: 1.8; color: #333; margin-bottom: 25px; display: flex; align-items: flex-start;">
+                <span style="color: #003366; font-size: 1.5rem; margin-right: 15px; flex-shrink: 0;">🙏</span>
+                <span>Oramos com esperança para que Deus atenda ao seu clamor e traga paz ao seu coração.</span>
+            </p>
+            <blockquote style="background: linear-gradient(135deg, #003366 0%, #001531 100%); padding: 20px 30px; border-radius: 10px; color: #fff; font-family: 'Roboto', sans-serif; font-size: 1.1rem; line-height: 1.6; text-align: center; font-style: italic; margin: 0;">
+                "E tudo o que pedirem em oração, se crerem, vocês receberão"
+                <span style="display: block; margin-top: 10px; font-size: 0.9em; font-weight: 600; font-style: normal;">Mateus 21:22</span>
+            </blockquote>
+        </div>
     </div>
 
     <!-- Seção do Formulário -->
     <div class="form-section">
-        <h2 class="acb-title-serif">Preencha o formulário</h2>
+        <h2 class="acb-title-serif" style="margin-top: -50px;">Preencha o formulário</h2>
 
         <form action="{{ route('oracao-visita.enviar') }}" method="POST" class="oracao-form">
             @csrf

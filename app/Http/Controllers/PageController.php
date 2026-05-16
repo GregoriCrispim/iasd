@@ -689,5 +689,13 @@ class PageController extends Controller
             return response()->json(['error' => 'Erro ao carregar vídeos: ' . $e->getMessage()], 500);
         }
     }
+
+    /**
+     * Exibe a página do Ministério da Mulher
+     */
+    public function ministerioMulher()
+    {
+        return view('pages.ministerio-mulher');
+    }
 }
 
