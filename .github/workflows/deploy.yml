@@ -28,8 +28,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./
           protocol: ftps
-          port: 21 # Força a comunicação na porta padrão de FTP
-          timeout: 120000 # Aumenta o tempo limite de resposta (em milissegundos)
+          port: 21
+          timeout: 120000
           exclude: |
             **/.git*
             **/.git*/**

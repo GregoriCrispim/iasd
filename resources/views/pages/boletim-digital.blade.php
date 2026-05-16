@@ -10,6 +10,27 @@
     $boletins = [
         [
             'type' => 'image',
+            'src' => 'img/boletim/convite_jotinha_16_9.jpg.jpeg',
+            'alt' => 'Convite para programação infantil Jotinha',
+            'title' => 'JOTINHA',
+            'text' => 'Hoje, às 17h45, haverá a estreia do Jotinha na igreja: uma programação especial feita por crianças e para crianças, com muito louvor, dinâmicas e fortalecimento da fé. Traga sua família e convide um amigo!',
+        ],
+        [
+            'type' => 'image',
+            'src' => 'img/boletim/asa.jpeg',
+            'alt' => 'ASA Aberta com pizzas, sucos e lanches',
+            'title' => 'ASA Aberta',
+            'text' => 'Hoje, após o Jotinha, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
+        ],
+        [
+            'type' => 'image',
+            'src' => 'img/boletim/cha.jpeg',
+            'alt' => 'Chá Evangelístico para mulheres',
+            'title' => 'Chá Evangelístico',
+            'text' => 'Atenção Mulheres, vem aí o Sábado Missionário da Mulher Adventista e em celebração a este dia faremos um lindo chá da tarde, planejado especialmente para fortalecer laços e compartilhar esperança. Para tornar este encontro ainda mais significativo, cada mulher adventista deverá realizar a sua inscrição e também a de uma amiga convidada não adventista, sendo essencial a presença de ambas no dia do evento. O encontro acontecerá no sábado, dia 30 de maio de 2026, às 16h, no Salão Jovem da Igreja Central. As vagas são limitadas, por isso, garanta sua participação realizando a inscrição pelo QR Code, as inscrições se encerrarão nesta quarta-feira, dia 20/05. Não perca o prazo!',
+        ],
+        [
+            'type' => 'image',
             'src' => 'img/boletim/calendário doutores.jpeg',
             'alt' => 'Calendário dos Doutores de Esperança',
             'title' => 'Coração do Bem',
@@ -24,10 +45,10 @@
         ],
         [
             'type' => 'image',
-            'src' => 'img/boletim/convite_jotinha_16_9.jpg.jpeg',
-            'alt' => 'Convite para programação infantil',
-            'title' => null,
-            'text' => null,
+            'src' => 'img/boletim/voluntariado.jpeg',
+            'alt' => 'Voluntariado nos ministérios da igreja',
+            'title' => 'Voluntariado',
+            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o QR Code e escolha o departamento da igreja que mais combina com você.',
         ],
         [
             'type' => 'image',
@@ -50,13 +71,6 @@
             'title' => null,
             'text' => null,
         ],
-        [
-            'type' => 'image',
-            'src' => 'img/boletim/voluntariado.jpeg',
-            'alt' => 'Voluntariado nos ministérios da igreja',
-            'title' => 'Voluntariado',
-            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o QR Code e escolha o departamento da igreja que mais combina com você.',
-        ],
     ];
 @endphp
 
@@ -65,7 +79,7 @@
     <div class="boletim-page__header">
         <span class="boletim-page__eyebrow">Central Informa</span>
         <h1 class="acb-title-serif">Boletim Digital</h1>
-        <p>Acompanhe os anúncios e materiais desta semana da IASD Central de Brasília.</p>
+        <p>Acompanhe as programações e eventos da IASD Central de Brasília.</p>
     </div>
 
     <div class="boletim-feed" aria-label="Conteúdos do boletim digital">
