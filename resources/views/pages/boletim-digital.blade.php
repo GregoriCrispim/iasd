@@ -10,7 +10,6 @@
     $boletimBase = 'img/boletim/boletim_04_07_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
     $oracaoBase = $boletimBase . '/M. Oração';
-    $heroesBase = $boletimBase . '/HEROES';
 
     $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: BENIGNIDADE - GENTILEZA. O desafio da SEGUNDA semana de JULHO é: Ore para praticar a bondade de forma discreta, ajudando alguém sem buscar reconhecimento.';
     $textoReuniaoOracao = 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.';
@@ -83,13 +82,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Ceia.jpg',
-            'alt' => 'Ceia do Senhor',
-            'title' => 'Ceia',
-            'text' => 'Atenção! A nossa Santa Ceia precisou ser remarcada e não acontecerá mais neste sábado (04/07). Anote a nova data e programe-se: Sábado, 11 de julho, a partir das 08h30 aqui na Igreja Adventista Central de Brasília. Que possamos aproveitar esta semana para preparar nossos corações em oração e consagração para este momento tão especial de comunhão e gratidão. Compartilhe este aviso para que todos fiquem sabendo!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Oficina do Bem.png',
             'alt' => 'Oficina do Bem — Doutores de Esperança',
             'title' => 'Coração do Bem',
@@ -150,14 +142,6 @@
             'alt' => 'ASA Aberta — pizzas e lanches',
             'title' => 'ASA Aberta',
             'text' => 'A ASA estará aberta, 04/07/26, após o pôr do sol, para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
-        ],
-        // Sem descrição no script
-        [
-            'type' => 'image',
-            'src' => $heroesBase . '/WhatsApp Image 2026-05-27 at 08.08.06.jpeg',
-            'alt' => 'Série evangelística Heroes',
-            'title' => null,
-            'text' => null,
         ],
     ];
 
