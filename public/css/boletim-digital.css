@@ -165,6 +165,16 @@ video.boletim-feed__media{
     text-align: justify;
 }
 
+.boletim-feed__caption a{
+    color: #0b5cab;
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.boletim-feed__caption a:hover{
+    color: #083f78;
+}
+
 .boletim-feed__toggle{
     position: relative;
     z-index: 1;
