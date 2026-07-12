@@ -7,13 +7,23 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_27_06_2026';
+    $boletimBase = 'img/boletim/boletim_11_07_2026/Imagens atualização do Boletim SITE';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
-    $heroesBase = $boletimBase . '/HEROES';
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: BENIGNIDADE - GENTILEZA. O desafio da PRIMEIRA semana de JULHO é: Ore para que suas palavras sejam mais suaves, sábias e cheias de graça, mesmo em conversas difíceis.';
-    $textoReuniaoOracao = 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.';
-    $textoHeroes = 'Quem nunca desejou ser um herói e ter o poder de vencer suas próprias batalhas? Na série evangelística HEROES, você vai descobrir que os maiores heróis da Bíblia eram pessoas comuns, escolhidas para fazer coisas extraordinárias! Prepare-se para uma jornada emocionante de fé, coragem e transformação através das histórias de Abraão, Ester, Davi e Jesus. O herói que você procura pode ser exatamente quem Deus quer formar dentro de você. Não perca, a série HEROES, todos os domingos de junho, às 19h, aqui na igreja. Traga sua família e participe!';
+    $linkify = static function (?string $text): ?string {
+        if ($text === null || $text === '') {
+            return $text;
+        }
+
+        return preg_replace(
+            '~(https?://[^\s<]+)~',
+            '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>',
+            $text
+        );
+    };
+
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: BENIGNIDADE - GENTILEZA. O desafio da TERCEIRA semana de JULHO é: Ore por paciência nos tempos de espera e diante de problemas que você não pode controlar.';
+    $textoEmDefesaLiberdade = 'Perspectivas Jurídicas, Históricas e Teológicas sobre os Direitos Fundamentais. O alicerce de toda e qualquer sociedade democrática reside no respeito irrestrito e no exercício seguro dos direitos e das garantias fundamentais. Contudo, a contemporaneidade nos impõe uma reflexão crítica: observamos, globalmente, movimentos estruturados que tangenciam o enfraquecimento dessas prerrogativas jurídicas, com o nítido escopo de fragmentá-las e mitigá-las no horizonte social. Para debater a complexidade desse cenário, convidamos a comunidade acadêmica, juristas, pesquisadores e estudantes para um ciclo de palestras de alto nível técnico e intelectual. O evento contará com a exposição de Mestres e Doutores, além de renomados juristas e advogados, que cruzarão a análise dogmática do Direito Constitucional com as profundas advertências históricas e teológicas contidas no texto bíblico.<br><br>A Temática Central: Tomando como objeto de análise a exegese de Apocalipse 13:11 que descreve metodicamente a transição de um poder de aparência pacífica (cordeiro) para uma postura autocrática (dragão), o corpo de palestrantes debaterá as reais implicações jurídicas, geopolíticas e institucionais desse cenário em um futuro iminente.<br><br><strong>Programação e cronograma</strong><br>Dias 12, 19 e 26 de julho (domingos): Painéis temáticos às 19h<br>Local: Igreja Adventista Central de Brasília – SGAS 611, Módulo 75 – Brasília/DF<br><br><strong>Informações sobre ingressos</strong><br>Gratuito mediante retirada de ingresso no Sympla pelo link: https://www.sympla.com.br/evento/palestra-em-defesa-da-liberdade/3491192 (evento de caráter acadêmico-cultural).<br>Inscrições: Imprescindíveis para controle de capacidade do auditório. Vagas limitadas à lotação do espaço.<br><br>Nota aos acadêmicos: Uma oportunidade única para o desenvolvimento do pensamento crítico, debate hermenêutico e networking com especialistas e referências das áreas jurídica e teológica. Garanta a sua participação!';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -26,17 +36,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.53 (2).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.54 (2).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Entre Elas.jpg',
-            'alt' => 'Entre Elas — palestra com Dra. Elisabete Ostrowski',
-            'title' => 'Entre Elas',
-            'text' => 'Atenção, mulheres! Vocês estão convidadas para o nosso próximo encontro do Entre Elas. Nesta edição, receberemos a Dra. Elisabete (Ginecologista), que conduzirá uma conversa fundamental sobre saúde feminina, bem-estar e cuidado integral. O evento acontecerá no Espaço Jovem da Igreja Central de Brasília, no domingo, 5 de julho, às 17h. Venham desfrutar de uma tarde enriquecedora. A presença de cada uma de vocês é essencial para tornar este momento ainda mais especial!',
         ],
         [
             'type' => 'image',
@@ -57,7 +60,7 @@
             'src' => $boletimBase . '/Voluntariado.jpeg',
             'alt' => 'Voluntariado nos ministérios da igreja',
             'title' => 'Voluntariado',
-            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o link/QR Code e escolha o departamento da igreja que mais combina com você.',
+            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o link/QR Code e escolha o departamento da igreja que mais combina com você. https://forms.gle/yBKYhMg3V7Rcd8uY6',
         ],
         [
             'type' => 'image',
@@ -68,68 +71,103 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/M_Oracoa.jpeg',
-            'alt' => 'Reunião de oração',
-            'title' => 'Reunião de Oração',
-            'text' => $textoReuniaoOracao,
+            'src' => $boletimBase . '/WhatsApp Image 2026-07-02 at 19.58.37.jpeg',
+            'alt' => 'Encontro especial de mulheres — Vida que Eleva',
+            'title' => 'Encontro Especial de Mulheres',
+            'text' => 'Queridas mulheres, vocês são nossas convidadas especiais para uma tarde de renovação, comunhão e inspiração! No sábado, dia 08/08/26, às 16h, aqui na Igreja Central de Brasília, teremos um encontro especial de mulheres com o tema "Vida que Eleva". Teremos a alegria de receber Darleide Alves, apresentadora da TV Novo Tempo! Uma oportunidade imperdível para ouvirmos uma mensagem poderosa para os nossos corações. Tudo foi preparado com muito carinho para vocês. Não venham sozinhas: tragam uma amiga e venham compartilhar desse momento tão especial com a gente! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Ceia (1).jpg',
+            'src' => $boletimBase . '/Ceia.jpeg',
             'alt' => 'Ceia do Senhor',
             'title' => 'Ceia',
-            'text' => 'No dia 4 de julho, a partir das 8h30, celebraremos a Ceia do Senhor. Que possamos preparar nossos corações para este momento de comunhão.',
+            'text' => 'Atenção! A nossa Santa Ceia precisou ser remarcada e não acontecerá mais neste sábado (04/07). Anote a nova data e programe-se: Sábado, 1º de agosto, a partir das 08h30 aqui na Igreja Adventista Central de Brasília. Que possamos aproveitar esta semana para preparar nossos corações em oração e consagração para este momento tão especial de comunhão e gratidão. Compartilhe este aviso para que todos fiquem sabendo!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Oficina do Bem.png',
+            'src' => $boletimBase . '/Oficina do Bem.jpg',
             'alt' => 'Oficina do Bem — Doutores de Esperança',
             'title' => 'Coração do Bem',
-            'text' => 'Participe da Oficina do Bem, às 9h, na sala dos Doutores de Esperança. Onde voluntários se reúnem para confeccionar corações de feltro que serão distribuídos aos pacientes durante os Plantões dos Doutores de Esperança. Qualquer pessoa pode participar. Venha! Nossa oficina acontece a cada 15 dias, siga nosso calendário e venha ser um voluntário.',
+            'text' => 'No mês de julho estaremos de férias, nossa oficina retornará em agosto, nas datas programadas.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Entrega de livros.jpg',
             'alt' => 'Entrega de livros missionários',
             'title' => 'Entrega de Livros',
-            'text' => 'Nós temos uma missão grandiosa e cada um de nós faz a diferença! Chegou a hora de acelerar o passo e incentivar a todos na entrega de dois livros por semana. Não é apenas uma distribuição, é uma entrega intencional, com propósito, oração e foco em alcançar corações. Imagine o impacto de cada página compartilhada na vida de alguém neste momento! Vamos juntos, com dedicação e amor, fazer essa mensagem ir mais longe. Procure a equipe de publicações, retire os seus livros e faça parte desse movimento de esperança!',
+            'text' => 'Malas prontas? Não esqueça o essencial! As férias chegaram e o descanso é merecido, mas a nossa missão não tira folga. Onde quer que você vá neste período, a sua fé vai com você. Aproveite cada parada, cada reencontro e cada novo lugar para espalhar esperança. O livro "Contagem Regressiva" é o seu companheiro de viagem perfeito para alcançar corações por onde você passar. Antes de sair, passe no Centro White de publicações, pegue os seus exemplares e distribua esperança por onde os seus pés pisarem. Transforme seus dias de descanso em uma oportunidade eterna para a vida de alguém.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/WhatsApp Image 2026-06-26 at 20.38.56.jpeg',
-            'alt' => 'Classe de Saúde — A importância do descanso',
+            'src' => $boletimBase . '/Classe de Saúde - Divulgação.jpg',
+            'alt' => 'Classe de Saúde — férias em julho',
             'title' => 'Classe de Saúde',
-            'text' => '✨ A IMPORTÂNCIA DO DESCANSO ✨<br><br>A ciência nos revela que fomos estruturados sob um ritmo biológico preciso: a luz para o despertar e o labor, e a escuridão para o repouso. Contudo, a Bíblia nos conduz a uma dimensão ainda mais profunda dessa necessidade. O descanso, sob a ótica das Escrituras, transcende o biológico; ele é, em sua essência, uma necessidade espiritual. 📖🙏<br><br>Compreender esse equilíbrio é o primeiro passo para uma vida plena e em sintonia com o propósito divino. Queremos aprofundar esse tema com você!<br><br>📅 Data: Sábado, 27/06<br>🕚 Horário: 11h<br>📍 Local: Classe de Saúde - Igreja Adventista Central de Brasília - SGAS 611 AV. L2 Sul Brasília/DF<br><br>Será um momento muito especial de aprendizado e renovo. Esperamos por você! ✨🙌',
+            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília estará de férias. Retornaremos nossas atividades em agosto.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/SGI.jpg',
             'alt' => 'SGI — Sistema de Gerenciamento de Interessados',
             'title' => 'SGI',
-            'text' => 'Está no ar o SGI - Sistema de Gerenciamento de Interessados. Querido membro, se você está estudando a Bíblia com alguém, a Igreja Central conta agora com um sistema de cadastro de interessados, o SGI, onde você poderá se cadastrar como Instrutor bíblico e cadastrar seus alunos. Nele você contará com o apoio do Ministério Pessoal e com estudos bíblicos especialmente preparados. Aponte seu celular para o QR CODE que está na tela e faça hoje mesmo o seu cadastro. E se você é visitante: Que bom que você veio! É uma alegria tê-lo conosco. Se você está nos visitando pela primeira vez e gostaria que orássemos por você ou tem interesse em estudar a Bíblia, acesse o nosso site pelo QR CODE que está aparecendo na tela ou procure nossa equipe de recepção, preencha o cartão de visitas que teremos o maior prazer em atendê-lo.',
+            'text' => 'Está no ar o SGI - Sistema de Gerenciamento de Interessados. Querido membro, se você está estudando a Bíblia com alguém, a Igreja Central conta agora com um sistema de cadastro de interessados, o SGI, onde você poderá se cadastrar como Instrutor bíblico e cadastrar seus alunos. Nele você contará com o apoio do Ministério Pessoal e com estudos bíblicos especialmente preparados. Aponte seu celular para o QR CODE que está na tela e faça hoje mesmo o seu cadastro. E se você é visitante: Que bom que você veio! É uma alegria tê-lo conosco. Se você está nos visitando pela primeira vez e gostaria que orássemos por você ou tem interesse em estudar a Bíblia, acesse o nosso site https://aplac.sgi7.com.br/ ou procure nossa equipe de recepção, preencha o cartão de visitas que teremos o maior prazer em atendê-lo.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/tela 16_9  capa centro.png',
+            'src' => $boletimBase . '/classe pós batismo (1).jpg',
+            'alt' => 'Classe Pós-Batismo — Programa de Discipulado 2026',
+            'title' => 'Classe Pós-Batismo',
+            'text' => 'Queridos membros, no primeiro sábado de agosto, 01/08/2026, às 10h45, na Sala do Ministério de Oração, acontecerá o novo Programa de Discipulado da Classe Pós-Batismal de 2026. Este projeto é voltado para quem se batizou entre 2023 e 2026 ou para membros que ainda não participaram desse programa e desejam fortalecer a fé, conhecendo a fundo a história, a organização, a missão global e o estilo de vida da Igreja Adventista. Para garantir sua vaga, você deverá acessar o link https://wa.me/qr/WFZC7FAE4POAK1 para se inscrever ou falar diretamente com o líder do Ministério Pessoal, irmão Alexandre Tinoco. Participe!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Francês.jpeg',
+            'alt' => 'Classe de Escola Sabatina em Francês',
+            'title' => 'Classe de Francês',
+            'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta! No sábado, 04/07/26, às 10h, na Igreja Adventista Internacional "BIC", retomaremos esse espaço dedicado a adultos que desejam aprofundar seu conhecimento no idioma francês enquanto estudamos a Bíblia juntos. É uma oportunidade maravilhosa para aprender e compartilhar em comunidade. Entre no nosso grupo de WhatsApp para receber todos os detalhes e materiais. https://chat.whatsapp.com/KcWLeUItuvWEnZ27s6Xs67?mode=gi_t À bientôt!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/curso de noivos.jpg',
+            'alt' => 'Curso de Noivos',
+            'title' => 'Curso de Noivos',
+            'text' => 'Estão abertas as inscrições para o Curso de Noivos, que acontecerá no dia 8 de agosto, no auditório da APLaC, a partir das 8h45. Realize sua inscrição pelo link. https://eventos.adventistasbrasilia.org.br/event/cadastro_individual/381',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/BIC.jpeg',
+            'alt' => 'Vacation Bible School — Escola Cristã de Férias em inglês',
+            'title' => 'Vacation Bible School',
+            'text' => 'Vem aí a VBS (VACATION BIBLE SCHOOL), uma Escola Cristã de Férias especial para crianças de 6 a 10 anos, com atividades totalmente em inglês. O evento acontecerá de 21 a 23 de julho no Colégio Adventista da Asa Sul, em uma parceria com a BIC - Igreja Adventist International Church, sendo aberto a todas as famílias da comunidade, especialmente as não adventistas. Uma oportunidade incrível para fazer novos amigos e aprender mais sobre a Bíblia. Logo após o evento, o projeto terá continuidade com os estudos bíblicos em inglês do Explore the Bible. As vagas são limitadas, por isso garanta já a inscrição do seu filho ou convide uma família amiga. Para dúvidas e inscrições, entre em contato pelo WhatsApp (61) 98209-3883.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Encontro SDV (2).jpg',
+            'alt' => 'Palestra SDV 40+ — Relacionamento',
+            'title' => 'Palestra SDV',
+            'text' => 'Em um NOVO relacionamento amoroso, homens e mulheres buscam bases semelhantes, como respeito, confiança e amor. No entanto, a forma de expressar e priorizar essas necessidades costuma ser diferente devido a fatores biológicos, sociais e culturais. Para entender como conciliar esses interesses e descobrir novas perspectivas para fortalecer a convivência, convidamos os Solteiros, Divorciados e Viúvos acima de 40 anos para uma palestra imperdível do projeto SDV 40+, com o tema: Relacionamento: o que as mulheres querem e o que os homens querem? A palestra será ministrada por Flávia Perrotta, especialista em Neurociência, Comunicação e Desenvolvimento. O evento acontecerá no dia 18 de julho, às 17h, aqui na Igreja, na Sala Novo Tempo. Não perca essa oportunidade de aprendizado e crescimento pessoal. Participe!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Em-defesa-da-liberdade.jpg',
             'alt' => 'Série Em Defesa da Liberdade',
             'title' => 'Em Defesa da Liberdade',
-            'text' => 'Nos domingos de julho, aqui na Igreja Adventista Central de Brasília, sempre às 19h, teremos a série Em Defesa da Liberdade. Participe e traga a sua família!',
+            'text' => $textoEmDefesaLiberdade,
         ],
         [
             'type' => 'image',
-            'src' => $heroesBase . '/WhatsApp Image 2026-05-27 at 08.08.06.jpeg',
-            'alt' => 'Série evangelística Heroes',
-            'title' => 'Heroes',
-            'text' => $textoHeroes,
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/investidura (1).png',
-            'alt' => 'Investidura do Clube de Aventureiros Cruzeiro do Sul',
-            'title' => 'Investidura Aventureiros',
-            'text' => 'Neste sábado, 27/06/26, às 16h, teremos a honra de realizar a 1ª Cerimônia de Investidura do Clube de Aventureiros Cruzeiro do Sul, um momento especial para celebrar o crescimento de nossas crianças, que receberão as especialidades conquistadas neste semestre, além da entrega das faixas para a classe Abelhinhas; traga sua família e participe conosco desta grande conquista.',
+            'src' => $boletimBase . '/cientistas adventistas.jpg',
+            'alt' => 'VII Congresso Internacional de Cientistas Adventistas',
+            'title' => 'Congresso de Cientistas Adventistas',
+            'text' => 'Ciência, Fé e Redenção: interpretando o mundo à luz do grande conflito. A sétima edição do Congresso Internacional Multidisciplinar dos Cientistas Adventistas será realizada de 11 a 13 de setembro de 2026 em Cachoeira–BA, e promete ser tão grandiosa quanto suas edições anteriores. Sob o tema geral "Ciência, Fé e Redenção: interpretando o mundo à luz do grande conflito", o congresso convida especialistas de várias disciplinas para debater os mais recentes avanços e desafios. Com um leque diversificado de palestras, o evento será uma plataforma excepcional para troca de ideias pioneiras e fomento de parcerias produtivas. Representa uma chance única para aqueles que desejam ampliar seus horizontes intelectuais e espirituais, sejam profissionais, estudantes ou entusiastas. Faça sua inscrição pelo link: https://www.even3.com.br/vii-congresso-internacional-de-cientistas-adventistas-715277/',
         ],
     ];
+
+    foreach ($boletins as &$boletim) {
+        if (!empty($boletim['text'])) {
+            $boletim['text'] = $linkify($boletim['text']);
+        }
+    }
+    unset($boletim);
 
     $boletimColumns = [[], []];
     foreach ($boletins as $index => $boletim) {
