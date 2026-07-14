@@ -353,7 +353,11 @@ class PageController extends Controller
      */
     public function getVideosYoutube()
     {
-        $apiKey = 'AIzaSyB63pkSZDhSxyh7Fu7LbRSuRvS92NwT4dY';
+        $apiKey = config('services.youtube.api_key');
+        if (!$apiKey) {
+            return response()->json(['error' => 'YouTube API não configurada'], 500);
+        }
+
         $channelId = 'UCk4NT38Kna-Fj5jyFtPwjQQ';
 
         $uploadsPlaylistId = 'UU' . substr($channelId, 2);
@@ -475,7 +479,11 @@ class PageController extends Controller
      */
     public function getVideosNovoTempo()
     {
-        $apiKey = 'AIzaSyB63pkSZDhSxyh7Fu7LbRSuRvS92NwT4dY';
+        $apiKey = config('services.youtube.api_key');
+        if (!$apiKey) {
+            return response()->json(['error' => 'YouTube API não configurada'], 500);
+        }
+
         $channelHandle = 'novotempo'; // Handle do canal sem o @
         $maxResults = 10;
 
@@ -551,7 +559,11 @@ class PageController extends Controller
      */
     public function getVideosCasaPublicadora()
     {
-        $apiKey = 'AIzaSyB63pkSZDhSxyh7Fu7LbRSuRvS92NwT4dY';
+        $apiKey = config('services.youtube.api_key');
+        if (!$apiKey) {
+            return response()->json(['error' => 'YouTube API não configurada'], 500);
+        }
+
         $channelHandle = 'casapublicadora'; // Handle do canal sem o @
         $maxResults = 10;
 
@@ -627,7 +639,11 @@ class PageController extends Controller
      */
     public function getVideosProvaiEVede()
     {
-        $apiKey = 'AIzaSyB63pkSZDhSxyh7Fu7LbRSuRvS92NwT4dY';
+        $apiKey = config('services.youtube.api_key');
+        if (!$apiKey) {
+            return response()->json(['error' => 'YouTube API não configurada'], 500);
+        }
+
         $channelHandle = 'provaievedeoficial'; // Handle do canal sem o @
         $maxResults = 10;
 
