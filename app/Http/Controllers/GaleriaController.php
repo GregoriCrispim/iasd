@@ -11,9 +11,9 @@ class GaleriaController extends Controller
 {
     private const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
-    private const FOTOS_DIR = 'galeria/fotos';
+    private const FOTOS_DIR = 'img/galeria/fotos';
 
-    private const THUMBS_DIR = 'galeria/thumbs';
+    private const THUMBS_DIR = 'img/galeria/thumbs';
 
     private const THUMB_WIDTH = 480;
 

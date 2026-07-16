@@ -340,7 +340,7 @@
                 </div>
             </a>
         @empty
-            <div class="galeria-empty">Nenhuma programação encontrada. Adicione pastas em public/galeria/fotos.</div>
+            <div class="galeria-empty">Nenhuma programação encontrada. Adicione pastas em public/img/galeria/fotos.</div>
         @endforelse
     </div>
 
