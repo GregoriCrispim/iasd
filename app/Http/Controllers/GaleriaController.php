@@ -78,8 +78,12 @@ class GaleriaController extends Controller
      * Gera (e cacheia em disco) uma miniatura otimizada da foto, servindo o
      * original como fallback caso a geração não seja possível no servidor.
      */
-    public function thumb(string $evento, string $foto)
+    public function thumb(Request $request)
     {
+        $evento = (string) $request->query('evento', '');
+        $foto = (string) $request->query('foto', '');
+
+        abort_if($evento === '' || $foto === '', 404);
         abort_if(str_contains($evento, '..') || str_contains($foto, '..'), 404);
 
         $original = public_path(self::FOTOS_DIR."/{$evento}/{$foto}");

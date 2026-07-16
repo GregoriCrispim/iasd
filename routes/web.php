@@ -94,7 +94,9 @@ Route::view('/noticias/desbravadores-campori-2026', 'pages.noticia-desbravadores
 
 // Galeria de fotos (em testes - sem links no site ainda)
 Route::get('/galeria', [GaleriaController::class, 'index'])->name('galeria');
-Route::get('/galeria/thumb/{evento}/{foto}', [GaleriaController::class, 'thumb'])->name('galeria.thumb');
+// Miniatura via query string (evento/foto) para funcionar também com `php -S -t public`,
+// que serve URLs terminadas em extensão (.webp) como arquivo estático antes de rotear.
+Route::get('/galeria/thumb', [GaleriaController::class, 'thumb'])->name('galeria.thumb');
 Route::get('/galeria/{evento}/download', [GaleriaController::class, 'download'])->name('galeria.download');
 Route::get('/galeria/{evento}', [GaleriaController::class, 'show'])->name('galeria.show');
 
