@@ -3,6 +3,59 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\Admin\UploadsController;
+use App\Http\Controllers\Admin\CmsPreviewController;
+use App\Http\Controllers\Admin\CmsCompareController;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+
+// Login (gestão)
+Route::middleware('guest')->get('/login', function () {
+    return redirect('/admin/login');
+})->name('login');
+
+// Filament renders GET /admin/login. If JS/Livewire doesn't run, the form falls back to POST /admin/login.
+// This handler makes the login work in that fallback scenario.
+Route::middleware(['guest', 'throttle:10,1'])->post('/admin/login', function (Request $request) {
+    $email = $request->input('email') ?? $request->input('login');
+
+    $credentials = $request->validate([
+        'password' => ['required', 'string'],
+    ]);
+
+    if (!is_string($email) || $email === '') {
+        throw ValidationException::withMessages([
+            'email' => 'O e-mail é obrigatório.',
+        ]);
+    }
+
+    $remember = $request->boolean('remember');
+
+    if (!Auth::attempt(['email' => $email, 'password' => $credentials['password']], $remember)) {
+        throw ValidationException::withMessages([
+            'email' => __('auth.failed'),
+        ]);
+    }
+
+    $request->session()->regenerate();
+
+    return redirect()->intended('/admin');
+})
+    ->withoutMiddleware([VerifyCsrfToken::class])
+    ->name('admin.login.post');
+
+Route::middleware(['auth', 'throttle:20,1'])->prefix('admin/uploads')->group(function () {
+    Route::post('/image', [UploadsController::class, 'image'])->name('admin.uploads.image');
+    Route::post('/file', [UploadsController::class, 'file'])->name('admin.uploads.file');
+});
+
+Route::middleware(['auth'])->get('/admin/cms/preview/{cmsRevision}', [CmsPreviewController::class, 'show'])
+    ->name('admin.cms.preview');
+
+Route::middleware(['auth'])->get('/admin/cms/compare/{cmsRevision}', [CmsCompareController::class, 'show'])
+    ->name('admin.cms.compare');
 
 // Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');

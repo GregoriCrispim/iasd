@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Support\Cms;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::directive('cmsBlock', function (string $expression): string {
+            // Usage:
+            // @cmsBlock('intro')
+            // @cmsBlock('intro', '<p>fallback</p>')
+            return "<?php echo \\App\\Support\\Cms::block({$expression}); ?>";
+        });
     }
 }

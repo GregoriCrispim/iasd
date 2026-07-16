@@ -374,6 +374,17 @@
 </style>
 @endpush
 
+@php
+    $secretariaIntroFallback = <<<'HTML'
+<p>
+    A Secretaria da Igreja Adventista do Sétimo Dia de Brasília está aqui para servi-lo(a) com excelência, cortesia e eficiência. Nosso compromisso é oferecer apoio administrativo e espiritual a membros e visitantes, facilitando a vida da comunidade eclesiástica.
+</p>
+<p>
+    Como um ministério essencial, a secretaria funciona como o coração administrativo da igreja, conectando membros, departamentos e liderança. Cada atendimento é realizado com dedicação, refletindo os valores cristãos de acolhimento, respeito e profissionalismo.
+</p>
+HTML;
+@endphp
+
 @section('content')
 <img src="{{ asset('img/cards/secretaria/secretaria_header.webp') }}" alt="IASD Central de Brasília - Secretaria" style="width: 100%;" fetchpriority="high" decoding="async">
 
@@ -382,12 +393,7 @@
     <!-- Seção Introdutória -->
     <div class="secretaria-intro acb-fullbleed">
         <h1 class="acb-title-serif">FALE COM A SECRETARIA</h1>
-        <p>
-            A Secretaria da Igreja Adventista do Sétimo Dia de Brasília está aqui para servi-lo(a) com excelência, cortesia e eficiência. Nosso compromisso é oferecer apoio administrativo e espiritual a membros e visitantes, facilitando a vida da comunidade eclesiástica.
-        </p>
-        <p>
-            Como um ministério essencial, a secretaria funciona como o coração administrativo da igreja, conectando membros, departamentos e liderança. Cada atendimento é realizado com dedicação, refletindo os valores cristãos de acolhimento, respeito e profissionalismo.
-        </p>
+        @cmsBlock('intro', $secretariaIntroFallback)
     </div>
 
     <!-- Seção Missão -->
