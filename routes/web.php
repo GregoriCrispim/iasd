@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\CmsPreviewController;
 use App\Http\Controllers\Admin\CmsCompareController;
@@ -90,6 +91,12 @@ Route::get('/ministerio-mulher', [PageController::class, 'ministerioMulher'])->n
 Route::view('/desbravadores-cruzeiro-do-sul', 'pages.desbravadores-cruzeiro-do-sul')->name('desbravadores-cruzeiro-do-sul');
 Route::view('/historia-desbravadores', 'pages.historia-desbravadores')->name('historia-desbravadores');
 Route::view('/noticias/desbravadores-campori-2026', 'pages.noticia-desbravadores')->name('noticia-desbravadores');
+
+// Galeria de fotos (em testes - sem links no site ainda)
+Route::get('/galeria', [GaleriaController::class, 'index'])->name('galeria');
+Route::get('/galeria/thumb/{evento}/{foto}', [GaleriaController::class, 'thumb'])->name('galeria.thumb');
+Route::get('/galeria/{evento}/download', [GaleriaController::class, 'download'])->name('galeria.download');
+Route::get('/galeria/{evento}', [GaleriaController::class, 'show'])->name('galeria.show');
 
 // Time de desenvolvimento
 Route::view('/time-de-desenvolvimento', 'pages.time-desenvolvimento')->name('time-desenvolvimento');
