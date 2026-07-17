@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -18,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method bool hasAnyRole(string|array|\Spatie\Permission\Models\Role|\Illuminate\Support\Collection ...$roles)
  * @method \Illuminate\Support\Collection getRoleNames()
  */
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
@@ -57,11 +55,6 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return $this->hasAnyRoleName(['super_admin', 'manager', 'collaborator']);
     }
 
     public function isSuperAdmin(): bool

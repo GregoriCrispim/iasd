@@ -141,13 +141,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/BIC.jpeg',
-            'alt' => 'Vacation Bible School — Escola Cristã de Férias em inglês',
-            'title' => 'Vacation Bible School',
-            'text' => 'Vem aí a VBS (VACATION BIBLE SCHOOL), uma Escola Cristã de Férias especial para crianças de 6 a 10 anos, com atividades totalmente em inglês. O evento acontecerá de 21 a 23 de julho no Colégio Adventista da Asa Sul, em uma parceria com a BIC - Igreja Adventist International Church, sendo aberto a todas as famílias da comunidade, especialmente as não adventistas. Uma oportunidade incrível para fazer novos amigos e aprender mais sobre a Bíblia. Logo após o evento, o projeto terá continuidade com os estudos bíblicos em inglês do Explore the Bible. As vagas são limitadas, por isso garanta já a inscrição do seu filho ou convide uma família amiga. Para dúvidas e inscrições, entre em contato pelo WhatsApp (61) 98209-3883.',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Encontro SDV (2).jpg',
             'alt' => 'Palestra SDV 40+ — Relacionamento',
             'title' => 'Palestra SDV',

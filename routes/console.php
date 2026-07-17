@@ -21,7 +21,7 @@ Artisan::command('cms:sync-pages', function () {
     $routes = collect(Route::getRoutes()->getRoutes())
         ->filter(fn ($route) => in_array('GET', $route->methods(), true) || in_array('HEAD', $route->methods(), true))
         ->filter(fn ($route) => is_string($route->getName()) && $route->getName() !== '')
-        ->reject(fn ($route) => Str::startsWith($route->getName(), ['filament.', 'livewire.', 'storage.']))
+        ->reject(fn ($route) => Str::startsWith($route->getName(), ['livewire.', 'storage.', 'admin.']))
         ->reject(fn ($route) => Str::startsWith($route->uri(), ['api/', 'admin', 'up']))
         ->reject(fn ($route) => $route->uri() === 'sitemap.xml');
 

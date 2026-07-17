@@ -4,59 +4,98 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\GaleriaController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CmsPageController;
+use App\Http\Controllers\Admin\CmsBlockController;
+use App\Http\Controllers\Admin\CmsRevisionController;
+use App\Http\Controllers\Admin\ApprovalsController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\CmsPreviewController;
 use App\Http\Controllers\Admin\CmsCompareController;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
-// Login (gestão)
-Route::middleware('guest')->get('/login', function () {
-    return redirect('/admin/login');
-})->name('login');
+/*
+|--------------------------------------------------------------------------
+| Painel administrativo (Blade)
+|--------------------------------------------------------------------------
+*/
 
-// Filament renders GET /admin/login. If JS/Livewire doesn't run, the form falls back to POST /admin/login.
-// This handler makes the login work in that fallback scenario.
-Route::middleware(['guest', 'throttle:10,1'])->post('/admin/login', function (Request $request) {
-    $email = $request->input('email') ?? $request->input('login');
-
-    $credentials = $request->validate([
-        'password' => ['required', 'string'],
-    ]);
-
-    if (!is_string($email) || $email === '') {
-        throw ValidationException::withMessages([
-            'email' => 'O e-mail é obrigatório.',
-        ]);
-    }
-
-    $remember = $request->boolean('remember');
-
-    if (!Auth::attempt(['email' => $email, 'password' => $credentials['password']], $remember)) {
-        throw ValidationException::withMessages([
-            'email' => __('auth.failed'),
-        ]);
-    }
-
-    $request->session()->regenerate();
-
-    return redirect()->intended('/admin');
-})
-    ->withoutMiddleware([VerifyCsrfToken::class])
-    ->name('admin.login.post');
-
-Route::middleware(['auth', 'throttle:20,1'])->prefix('admin/uploads')->group(function () {
-    Route::post('/image', [UploadsController::class, 'image'])->name('admin.uploads.image');
-    Route::post('/file', [UploadsController::class, 'file'])->name('admin.uploads.file');
+// Autenticação
+Route::middleware('guest')->group(function () {
+    Route::get('/login', fn () => redirect()->route('admin.login'))->name('login');
+    Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('admin.login');
+    Route::post('/admin/login', [AuthController::class, 'login'])
+        ->middleware('throttle:10,1')
+        ->name('admin.login.post');
 });
 
-Route::middleware(['auth'])->get('/admin/cms/preview/{cmsRevision}', [CmsPreviewController::class, 'show'])
-    ->name('admin.cms.preview');
+Route::post('/admin/logout', [AuthController::class, 'logout'])
+    ->middleware('auth')
+    ->name('admin.logout');
 
-Route::middleware(['auth'])->get('/admin/cms/compare/{cmsRevision}', [CmsCompareController::class, 'show'])
-    ->name('admin.cms.compare');
+Route::middleware(['auth', 'role:super_admin,manager,collaborator'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        // Uploads (editor)
+        Route::middleware('throttle:20,1')->group(function () {
+            Route::post('/uploads/image', [UploadsController::class, 'image'])->name('uploads.image');
+            Route::post('/uploads/file', [UploadsController::class, 'file'])->name('uploads.file');
+        });
+
+        // Preview / comparação de revisões
+        Route::get('/cms/preview/{cmsRevision}', [CmsPreviewController::class, 'show'])->name('cms.preview');
+        Route::get('/cms/compare/{cmsRevision}', [CmsCompareController::class, 'show'])->name('cms.compare');
+
+        // Revisões (todos os papéis; escopo aplicado no controller)
+        Route::get('/cms/revisions', [CmsRevisionController::class, 'index'])->name('revisions.index');
+        Route::get('/cms/revisions/create', [CmsRevisionController::class, 'create'])->name('revisions.create');
+        Route::post('/cms/revisions', [CmsRevisionController::class, 'store'])->name('revisions.store');
+        Route::get('/cms/revisions/{revision}/edit', [CmsRevisionController::class, 'edit'])->name('revisions.edit');
+        Route::put('/cms/revisions/{revision}', [CmsRevisionController::class, 'update'])->name('revisions.update');
+        Route::post('/cms/revisions/{revision}/submit', [CmsRevisionController::class, 'submit'])->name('revisions.submit');
+        Route::post('/cms/revisions/{revision}/approve-manager', [CmsRevisionController::class, 'approveManager'])->name('revisions.approveManager');
+        Route::post('/cms/revisions/{revision}/approve-super', [CmsRevisionController::class, 'approveSuper'])->name('revisions.approveSuper');
+        Route::post('/cms/revisions/{revision}/reject', [CmsRevisionController::class, 'reject'])->name('revisions.reject');
+        Route::delete('/cms/revisions/{revision}', [CmsRevisionController::class, 'destroy'])->name('revisions.destroy');
+
+        // Aprovações e usuários (super-admin e gestor)
+        Route::middleware('role:super_admin,manager')->group(function () {
+            Route::get('/cms/approvals', [ApprovalsController::class, 'index'])->name('approvals.index');
+            Route::post('/cms/approvals/{revision}/approve', [ApprovalsController::class, 'approve'])->name('approvals.approve');
+            Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
+
+            Route::get('/users', [UserController::class, 'index'])->name('users.index');
+            Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+            Route::post('/users', [UserController::class, 'store'])->name('users.store');
+            Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+            Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+            Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+            Route::get('/users/{user}/pages', [UserController::class, 'pages'])->name('users.pages');
+            Route::post('/users/{user}/pages', [UserController::class, 'attachPage'])->name('users.pages.attach');
+            Route::put('/users/{user}/pages/{page}', [UserController::class, 'updatePage'])->name('users.pages.update');
+            Route::delete('/users/{user}/pages/{page}', [UserController::class, 'detachPage'])->name('users.pages.detach');
+        });
+
+        // Somente super-admin
+        Route::middleware('role:super_admin')->group(function () {
+            Route::get('/cms/pages', [CmsPageController::class, 'index'])->name('pages.index');
+            Route::post('/cms/pages/sync', [CmsPageController::class, 'sync'])->name('pages.sync');
+            Route::get('/cms/pages/{page}/edit', [CmsPageController::class, 'edit'])->name('pages.edit');
+            Route::put('/cms/pages/{page}', [CmsPageController::class, 'update'])->name('pages.update');
+
+            Route::get('/cms/blocks', [CmsBlockController::class, 'index'])->name('blocks.index');
+            Route::get('/cms/blocks/create', [CmsBlockController::class, 'create'])->name('blocks.create');
+            Route::post('/cms/blocks', [CmsBlockController::class, 'store'])->name('blocks.store');
+            Route::get('/cms/blocks/{block}/edit', [CmsBlockController::class, 'edit'])->name('blocks.edit');
+            Route::put('/cms/blocks/{block}', [CmsBlockController::class, 'update'])->name('blocks.update');
+            Route::delete('/cms/blocks/{block}', [CmsBlockController::class, 'destroy'])->name('blocks.destroy');
+        });
+    });
 
 // Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
