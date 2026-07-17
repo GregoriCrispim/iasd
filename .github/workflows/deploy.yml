@@ -9,15 +9,28 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, gd, zip
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
       - name: Verify deploy payload
         run: |
           test -f artisan
           test -d public
+          test -d vendor/laravel/framework
+          test ! -d vendor/filament
+          test ! -d vendor/spatie/laravel-permission
           echo "Deploy payload ready."
 
       - name: Sync files via FTP
@@ -35,3 +48,9 @@ jobs:
             **/.git*/**
             **/node_modules/**
             .github/**
+            .env
+            .env.*
+            tests/**
+            phpunit.xml
+            .composer-cache/**
+            .composer-home/**

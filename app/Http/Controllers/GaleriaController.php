@@ -89,21 +89,27 @@ class GaleriaController extends Controller
         $original = public_path(self::FOTOS_DIR."/{$evento}/{$foto}");
         abort_unless(is_file($original), 404);
 
-        $thumbDir = public_path(self::THUMBS_DIR."/{$evento}");
-        $thumbPath = $thumbDir.'/'.$foto;
+        // Em shared hosting o GD/WebP costuma estourar memória; se falhar,
+        // redireciona para o arquivo estático (já funciona em produção).
+        try {
+            $thumbDir = public_path(self::THUMBS_DIR."/{$evento}");
+            $thumbPath = $thumbDir.'/'.$foto;
 
-        if (!is_file($thumbPath)) {
-            if (!is_dir($thumbDir)) {
-                @mkdir($thumbDir, 0755, true);
+            if (! is_file($thumbPath)) {
+                if (! is_dir($thumbDir)) {
+                    @mkdir($thumbDir, 0755, true);
+                }
+                $this->generateThumbnail($original, $thumbPath, self::THUMB_WIDTH);
             }
-            $this->generateThumbnail($original, $thumbPath, self::THUMB_WIDTH);
+
+            $servePath = is_file($thumbPath) ? $thumbPath : $original;
+
+            return response()->file($servePath, [
+                'Cache-Control' => 'public, max-age=31536000, immutable',
+            ]);
+        } catch (\Throwable) {
+            return redirect()->to($this->photoAssetUrl($evento, $foto), 302);
         }
-
-        $servePath = is_file($thumbPath) ? $thumbPath : $original;
-
-        return response()->file($servePath, [
-            'Cache-Control' => 'public, max-age=31536000, immutable',
-        ]);
     }
 
     /**
@@ -181,7 +187,9 @@ class GaleriaController extends Controller
             'dateLong' => $dateLong,
             'monthKey' => $monthKey,
             'monthLabel' => $monthLabel,
-            'coverUrl' => $cover ? route('galeria.thumb', ['evento' => $folder, 'foto' => $cover]) : null,
+            // Usa asset estático (confiável na Hostgator). A rota /thumb pode falhar
+            // quando o GD/WebP estoura memória ao gerar miniaturas.
+            'coverUrl' => $cover ? $this->photoAssetUrl($folder, $cover) : null,
             'photoCount' => count($files),
         ];
     }
@@ -208,7 +216,7 @@ class GaleriaController extends Controller
                     'eventoId' => $evento['id'],
                     'eventoTitle' => $evento['title'],
                     'eventoDate' => $evento['dateShort'],
-                    'thumbUrl' => route('galeria.thumb', ['evento' => $evento['id'], 'foto' => $file]),
+                    'thumbUrl' => $this->photoAssetUrl($evento['id'], $file),
                 ];
             }
         }
@@ -224,9 +232,21 @@ class GaleriaController extends Controller
 
         return array_map(fn ($file) => [
             'name' => $file,
-            'url' => asset(self::FOTOS_DIR."/{$evento}/{$file}"),
-            'thumbUrl' => route('galeria.thumb', ['evento' => $evento, 'foto' => $file]),
+            'url' => $this->photoAssetUrl($evento, $file),
+            'thumbUrl' => $this->photoAssetUrl($evento, $file),
         ], $files);
+    }
+
+    /**
+     * Monta URL pública com cada segmento do path corretamente percent-encoded
+     * (pastas com espaços/acentos quebram se passadas cruas para asset()).
+     */
+    private function photoAssetUrl(string $evento, string $file): string
+    {
+        $relative = self::FOTOS_DIR.'/'.$evento.'/'.$file;
+        $encoded = implode('/', array_map('rawurlencode', explode('/', $relative)));
+
+        return asset($encoded);
     }
 
     private function imageFiles(string $dir): array
