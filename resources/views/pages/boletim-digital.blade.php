@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_18_07_2026';
+    $boletimBase = 'img/boletim/boletim_25_07_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
 
     $linkify = static function (?string $text): ?string {
@@ -22,8 +22,8 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: BENIGNIDADE - GENTILEZA. O desafio da QUARTA semana de JULHO é: Ore por gentileza até quando estiver cansada.';
-    $textoEmDefesaLiberdade = 'Perspectivas Jurídicas, Históricas e Teológicas sobre os Direitos Fundamentais. O alicerce de toda e qualquer sociedade democrática reside no respeito irrestrito e no exercício seguro dos direitos e das garantias fundamentais. Contudo, a contemporaneidade nos impõe uma reflexão crítica: observamos, globalmente, movimentos estruturados que tangenciam o enfraquecimento dessas prerrogativas jurídicas, com o nítido escopo de fragmentá-las e mitigá-las no horizonte social. Para debater a complexidade desse cenário, convidamos a comunidade acadêmica, juristas, pesquisadores e estudantes para um ciclo de palestras de alto nível técnico e intelectual. O evento contará com a exposição de Mestres e Doutores, além de renomados juristas e advogados, que cruzarão a análise dogmática do Direito Constitucional com as profundas advertências históricas e teológicas contidas no texto bíblico.<br><br>A Temática Central: Tomando como objeto de análise a exegese de Apocalipse 13:11 que descreve metodicamente a transição de um poder de aparência pacífica (cordeiro) para uma postura autocrática (dragão), o corpo de palestrantes debaterá as reais implicações jurídicas, geopolíticas e institucionais desse cenário em um futuro iminente.<br><br><strong>Programação e cronograma</strong><br>Dias 19 e 26 de julho (domingos): Painéis temáticos às 19h<br>Local: Igreja Adventista Central de Brasília – SGAS 611, Módulo 75 – Brasília/DF<br><br><strong>Informações sobre ingressos</strong><br>Gratuito mediante retirada de ingresso no Sympla pelo link: https://www.sympla.com.br/evento/palestra-em-defesa-da-liberdade/3491192 (evento de caráter acadêmico-cultural).<br>Inscrições: Imprescindíveis para controle de capacidade do auditório. Vagas limitadas à lotação do espaço.<br><br>Nota aos acadêmicos: Uma oportunidade única para o desenvolvimento do pensamento crítico, debate hermenêutico e networking com especialistas e referências das áreas jurídica e teológica. Garanta a sua participação!';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: BENIGNIDADE - GENTILEZA. O desafio da QUINTA semana de JULHO é: Ore para que a gentileza seja um reflexo diário do amor de Deus em suas atitudes, alcançando sua família, igreja e todos ao seu redor.';
+    $textoEmDefesaLiberdade = 'Perspectivas Jurídicas, Históricas e Teológicas sobre os Direitos Fundamentais. O alicerce de toda e qualquer sociedade democrática reside no respeito irrestrito e no exercício seguro dos direitos e das garantias fundamentais. Contudo, a contemporaneidade nos impõe uma reflexão crítica: observamos, globalmente, movimentos estruturados que tangenciam o enfraquecimento dessas prerrogativas jurídicas, com o nítido escopo de fragmentá-las e mitigá-las no horizonte social. Para debater a complexidade desse cenário, convidamos a comunidade acadêmica, juristas, pesquisadores e estudantes para um ciclo de palestras de alto nível técnico e intelectual. O evento contará com a exposição de Mestres e Doutores, além de renomados juristas e advogados, que cruzarão a análise dogmática do Direito Constitucional com as profundas advertências históricas e teológicas contidas no texto bíblico.<br><br>A Temática Central: Tomando como objeto de análise a exegese de Apocalipse 13:11 que descreve metodicamente a transição de um poder de aparência pacífica (cordeiro) para uma postura autocrática (dragão), o corpo de palestrantes debaterá as reais implicações jurídicas, geopolíticas e institucionais desse cenário em um futuro iminente.<br><br><strong>Programação e cronograma</strong><br>26 de julho (domingo): Painéis temáticos às 19h<br>Local: Igreja Adventista Central de Brasília – SGAS 611, Módulo 75 – Brasília/DF<br><br><strong>Informações sobre ingressos</strong><br>Gratuito mediante retirada de ingresso no Sympla pelo link: https://www.sympla.com.br/evento/palestra-em-defesa-da-liberdade/3491192 (evento de caráter acadêmico-cultural).<br>Inscrições: Imprescindíveis para controle de capacidade do auditório. Vagas limitadas à lotação do espaço.<br><br>Nota aos acadêmicos: Uma oportunidade única para o desenvolvimento do pensamento crítico, debate hermenêutico e networking com especialistas e referências das áreas jurídica e teológica. Garanta a sua participação!';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -36,7 +36,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.55.jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-07-15 at 13.12.57.jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -74,14 +74,28 @@
             'src' => $boletimBase . '/Oi Amiga.jpg',
             'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
             'title' => 'Oi Amiga',
-            'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. No dia 25 de julho, às 16h30, teremos uma reunião on-line muito especial. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve essa data na sua agenda. Escaneie o QR Code e inscreva-se! Contamos com a sua presença!',
+            'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. No dia 25 de julho, às 16h30, teremos uma reunião on-line muito especial. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve essa data na sua agenda. Acesse o link: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform e inscreva-se! Contamos com a sua presença!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/encontro_mulheres.jpeg',
+            'src' => $boletimBase . '/Quebrando o Silêncio.jpg',
+            'alt' => 'Quebrando o Silêncio — Idosos em Risco',
+            'title' => 'Quebrando o Silêncio',
+            'text' => 'Idosos em Risco - A violência que atinge quem mais precisa de cuidado. Desde 2002 a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência, através do projeto QUEBRANDO O SILÊNCIO, neste ano o tema será "Idosos em Risco". No dia 22 de agosto, no período da tarde, realizaremos uma ação especial de amor e cuidado com uma visita a uma casa de repouso; você pode fazer a diferença participando conosco como voluntário ou contribuindo com doações de fraldas geriátricas, lenços umedecidos e produtos de higiene pessoal tais como: sabonete, xampu, creme hidratante, creme dental, escova de dente entre outros. Inscreva-se para participar através do link: https://forms.gle/DUjiLok9vspJXrvF7',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Darleide, Encontro de Mulheres.jpg',
             'alt' => 'Encontro especial de mulheres — Vida que Eleva',
             'title' => 'Encontro Especial de Mulheres',
             'text' => 'Queridas mulheres, vocês são nossas convidadas especiais para uma tarde de renovação, comunhão e inspiração! No sábado, dia 08/08/26, às 16h, aqui na Igreja Central de Brasília, teremos um encontro especial de mulheres com o tema "Vida que Eleva". Teremos a alegria de receber Darleide Alves, apresentadora da TV Novo Tempo! Uma oportunidade imperdível para ouvirmos uma mensagem poderosa para os nossos corações. Tudo foi preparado com muito carinho para vocês. Não venham sozinhas: tragam uma amiga e venham compartilhar desse momento tão especial com a gente! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Quartas da Família.jpg',
+            'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
+            'title' => 'Quartas da Família',
+            'text' => 'Queridos irmãos, o Ministério da Família da Igreja Central de Brasília convida você e sua família para a série "Chaves da Felicidade Familiar", que acontecerá de 05 de agosto a 23 de setembro; serão 8 quartas-feiras especiais dedicadas à consagração, ao fortalecimento espiritual e ao aprendizado da Palavra de Deus. Venha interceder por sua família e traga convidados para buscarem juntos essa bênção, teremos presentes especiais para todos os visitantes não adventistas! Participem!',
         ],
         [
             'type' => 'image',
@@ -109,7 +123,7 @@
             'src' => $boletimBase . '/Classe de Saúde - Divulgação.jpg',
             'alt' => 'Classe de Saúde — férias em julho',
             'title' => 'Classe de Saúde',
-            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília estará de férias. Retornaremos nossas atividades em agosto.',
+            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília estará de férias. Retornaremos às nossas atividades em agosto.',
         ],
         [
             'type' => 'image',
@@ -120,7 +134,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/classe pós batismo (1).jpg',
+            'src' => $boletimBase . '/Classe pós-batismo.jpg',
             'alt' => 'Classe Pós-Batismo — Programa de Discipulado 2026',
             'title' => 'Classe Pós-Batismo',
             'text' => 'Queridos membros, no primeiro sábado de agosto, 01/08/2026, às 10h45, na Sala do Ministério de Oração, acontecerá o novo Programa de Discipulado da Classe Pós-Batismal de 2026. Este projeto é voltado para quem se batizou entre 2023 e 2026 ou para membros que ainda não participaram desse programa e desejam fortalecer a fé, conhecendo a fundo a história, a organização, a missão global e o estilo de vida da Igreja Adventista. Para garantir sua vaga, você deverá acessar o link https://wa.me/qr/WFZC7FAE4POAK1 para se inscrever ou falar diretamente com o líder do Ministério Pessoal, irmão Alexandre Tinoco. Participe!',
@@ -141,10 +155,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Encontro SDV (2).jpg',
-            'alt' => 'Palestra SDV 40+ — Relacionamento',
-            'title' => 'Palestra SDV',
-            'text' => 'Em um NOVO relacionamento amoroso, homens e mulheres buscam bases semelhantes, como respeito, confiança e amor. No entanto, a forma de expressar e priorizar essas necessidades costuma ser diferente devido a fatores biológicos, sociais e culturais. Para entender como conciliar esses interesses e descobrir novas perspectivas para fortalecer a convivência, convidamos os Solteiros, Divorciados e Viúvos acima de 40 anos para uma palestra imperdível do projeto SDV 40+, com o tema: Relacionamento: o que as mulheres querem e o que os homens querem? A palestra será ministrada por Flávia Perrotta, especialista em Neurociência, Comunicação e Desenvolvimento. O evento acontecerá no dia 18 de julho, às 17h, aqui na Igreja, na Sala Novo Tempo. Não perca essa oportunidade de aprendizado e crescimento pessoal. Participe!',
+            'src' => $boletimBase . '/Quartas de Poder 2026.jpg',
+            'alt' => 'Quartas de Poder — O Mover do Espírito',
+            'title' => 'Quartas de Poder',
+            'text' => 'Convidamos toda a comunidade para o culto especial do projeto Quartas de Poder, que será realizado nesta quarta-feira, dia 29 de julho, às 19h30, com o tema "O Mover do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. O sermão desta noite será ministrado pela oradora Zuleica Medeiros. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
         ],
         [
             'type' => 'image',
@@ -159,6 +173,20 @@
             'alt' => 'VII Congresso Internacional de Cientistas Adventistas',
             'title' => 'Congresso de Cientistas Adventistas',
             'text' => 'Ciência, Fé e Redenção: interpretando o mundo à luz do grande conflito. A sétima edição do Congresso Internacional Multidisciplinar dos Cientistas Adventistas será realizada de 11 a 13 de setembro de 2026 em Cachoeira–BA, e promete ser tão grandiosa quanto suas edições anteriores. Sob o tema geral "Ciência, Fé e Redenção: interpretando o mundo à luz do grande conflito", o congresso convida especialistas de várias disciplinas para debater os mais recentes avanços e desafios. Com um leque diversificado de palestras, o evento será uma plataforma excepcional para troca de ideias pioneiras e fomento de parcerias produtivas. Representa uma chance única para aqueles que desejam ampliar seus horizontes intelectuais e espirituais, sejam profissionais, estudantes ou entusiastas. Faça sua inscrição pelo link: https://www.even3.com.br/vii-congresso-internacional-de-cientistas-adventistas-715277/',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Rádio NT.jpeg',
+            'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
+            'title' => 'Rádio Novo Tempo',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial será no dia 24 de julho, às 18h. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/ZAP.jpg',
+            'alt' => 'Canal Central Informa no WhatsApp',
+            'title' => 'Canal WhatsApp',
+            'text' => 'Perdeu algum detalhe dos nossos anúncios? Não se preocupe. O Central Informa está disponível no nosso canal oficial no WhatsApp para manter você atualizado. Siga o canal: Adventistas Central Brasília! Acesse o link https://whatsapp.com/channel/0029VaY6Z5UJJhzdkYF51D1T e faça parte desta comunidade.',
         ],
     ];
 
