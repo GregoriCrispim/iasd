@@ -45,7 +45,7 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        if (!$user instanceof User || !$user->hasAnyRoleName(['super_admin', 'manager', 'collaborator'])) {
+        if (!$user instanceof User || !$user->hasAnyRoleName(['super_admin', 'manager', 'collaborator', 'fotografia'])) {
             Auth::logout();
 
             throw ValidationException::withMessages([

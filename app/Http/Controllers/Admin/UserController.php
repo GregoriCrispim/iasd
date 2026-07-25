@@ -252,7 +252,7 @@ class UserController extends Controller
         ];
 
         if (!$authUser->isManager()) {
-            $rules['role'] = ['required', Rule::in(['manager', 'collaborator'])];
+            $rules['role'] = ['required', Rule::in(['manager', 'collaborator', 'fotografia'])];
             $rules['manager_id'] = ['nullable', 'exists:users,id'];
             $rules['email_verified_at'] = ['nullable', 'date'];
         }
@@ -269,7 +269,11 @@ class UserController extends Controller
             return ['collaborator' => 'Colaborador'];
         }
 
-        return ['manager' => 'Gestor', 'collaborator' => 'Colaborador'];
+        return [
+            'manager' => 'Gestor',
+            'collaborator' => 'Colaborador',
+            'fotografia' => 'Fotografia',
+        ];
     }
 
     /**

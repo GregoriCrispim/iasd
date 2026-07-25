@@ -174,6 +174,10 @@ function initGaleriaEventoPage() {
         lightbox.style.setProperty('--galeria-lightbox-right-gap', `${rightGap}px`);
     };
 
+    // A lightbox usa a versão reduzida; o download precisa do arquivo guardado.
+    const fotoDownloadUrl = (foto) => foto.downloadUrl || foto.url;
+    const fotoDownloadName = (foto) => foto.downloadName || foto.name;
+
     const downloadFoto = (url, name) => {
         const link = document.createElement('a');
         link.href = url;
@@ -184,7 +188,7 @@ function initGaleriaEventoPage() {
     };
 
     const shareFoto = async (url, name) => {
-        const fullUrl = window.location.origin + url;
+        const fullUrl = /^https?:\/\//i.test(url) ? url : (window.location.origin + url);
         try {
             if (navigator.share) {
                 await navigator.share({ title: name, url: fullUrl });
@@ -242,7 +246,7 @@ function initGaleriaEventoPage() {
     nextBtn?.addEventListener('click', nextLightbox);
     downloadBtn?.addEventListener('click', () => {
         const foto = ordered[currentIndex];
-        if (foto) downloadFoto(foto.url, foto.name);
+        if (foto) downloadFoto(fotoDownloadUrl(foto), fotoDownloadName(foto));
     });
     shareBtn?.addEventListener('click', () => {
         const foto = ordered[currentIndex];
@@ -325,7 +329,7 @@ function initGaleriaEventoPage() {
         // fotos escolhidas individualmente, sem depender do servidor original.
         const selectedPhotos = ordered.filter(foto => selected.has(foto.name));
         selectedPhotos.forEach((foto, index) => {
-            window.setTimeout(() => downloadFoto(foto.url, foto.name), index * 250);
+            window.setTimeout(() => downloadFoto(fotoDownloadUrl(foto), fotoDownloadName(foto)), index * 250);
         });
     });
 
@@ -352,8 +356,15 @@ function initGaleriaEventoPage() {
 
         const img = card.querySelector('img');
         const loader = card.querySelector('.galeria-thumb-loader');
-        img.addEventListener('load', () => loader.remove(), { once: true });
-        img.addEventListener('error', () => loader.remove(), { once: true });
+        const hideLoader = () => loader?.remove();
+        img.addEventListener('load', hideLoader, { once: true });
+        img.addEventListener('error', () => {
+            if (foto.url && img.getAttribute('src') !== foto.url) {
+                img.src = foto.url;
+                return;
+            }
+            hideLoader();
+        });
         img.src = foto.thumbUrl || foto.url;
 
         card.addEventListener('click', () => {
@@ -374,7 +385,7 @@ function initGaleriaEventoPage() {
         });
         card.querySelector('[data-action="download"]')?.addEventListener('click', (e) => {
             e.stopPropagation();
-            downloadFoto(foto.url, foto.name);
+            downloadFoto(fotoDownloadUrl(foto), fotoDownloadName(foto));
         });
         card.querySelector('[data-action="share"]')?.addEventListener('click', (e) => {
             e.stopPropagation();

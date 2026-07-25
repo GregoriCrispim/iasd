@@ -2,7 +2,7 @@
 
 @php
     $activeNav = 'users';
-    $roleLabels = ['super_admin' => 'Super Admin', 'manager' => 'Gestor', 'collaborator' => 'Colaborador'];
+    $roleLabels = ['super_admin' => 'Super Admin', 'manager' => 'Gestor', 'collaborator' => 'Colaborador', 'fotografia' => 'Fotografia'];
     $roleBadges = ['super_admin' => 'badge-purple', 'manager' => 'badge-blue', 'collaborator' => 'badge-gray'];
 @endphp
 @section('title', 'Usuários')

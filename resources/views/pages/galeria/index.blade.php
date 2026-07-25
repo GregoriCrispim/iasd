@@ -322,8 +322,8 @@
                data-title="{{ mb_strtolower($evento['title']) }}"
                data-month="{{ $evento['monthKey'] }}"
                data-date="{{ $evento['rawDate'] }}">
-                @if($evento['coverUrl'])
-                    <img src="{{ $evento['coverUrl'] }}" alt="{{ $evento['title'] }}" loading="lazy">
+                @if($evento['coverThumbUrl'])
+                    <img src="{{ $evento['coverThumbUrl'] }}" alt="{{ $evento['title'] }}" loading="lazy" decoding="async">
                 @else
                     <div class="galeria-card-placeholder"><i class="bi bi-folder-fill"></i></div>
                 @endif
@@ -340,7 +340,7 @@
                 </div>
             </a>
         @empty
-            <div class="galeria-empty">Nenhuma programação encontrada. Adicione pastas em public/img/galeria/fotos.</div>
+            <div class="galeria-empty">Nenhuma programação publicada ainda. Publique um álbum no painel de gestão (Galeria → Visível no site).</div>
         @endforelse
     </div>
 

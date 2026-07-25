@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\CmsPreviewController;
 use App\Http\Controllers\Admin\CmsCompareController;
+use App\Http\Controllers\Admin\GalleryAlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,66 +35,86 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('admin.logout');
 
-Route::middleware(['auth', 'role:super_admin,manager,collaborator'])
+Route::middleware(['auth'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
-        // Uploads (editor)
-        Route::middleware('throttle:20,1')->group(function () {
-            Route::post('/uploads/image', [UploadsController::class, 'image'])->name('uploads.image');
-            Route::post('/uploads/file', [UploadsController::class, 'file'])->name('uploads.file');
+        Route::middleware('role:super_admin,manager,collaborator,fotografia')->group(function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         });
 
-        // Preview / comparação de revisões
-        Route::get('/cms/preview/{cmsRevision}', [CmsPreviewController::class, 'show'])->name('cms.preview');
-        Route::get('/cms/compare/{cmsRevision}', [CmsCompareController::class, 'show'])->name('cms.compare');
+        Route::middleware('role:super_admin,manager,collaborator')->group(function () {
+            // Uploads (editor)
+            Route::middleware('throttle:20,1')->group(function () {
+                Route::post('/uploads/image', [UploadsController::class, 'image'])->name('uploads.image');
+                Route::post('/uploads/file', [UploadsController::class, 'file'])->name('uploads.file');
+            });
 
-        // Revisões (todos os papéis; escopo aplicado no controller)
-        Route::get('/cms/revisions', [CmsRevisionController::class, 'index'])->name('revisions.index');
-        Route::get('/cms/revisions/create', [CmsRevisionController::class, 'create'])->name('revisions.create');
-        Route::post('/cms/revisions', [CmsRevisionController::class, 'store'])->name('revisions.store');
-        Route::get('/cms/revisions/{revision}/edit', [CmsRevisionController::class, 'edit'])->name('revisions.edit');
-        Route::put('/cms/revisions/{revision}', [CmsRevisionController::class, 'update'])->name('revisions.update');
-        Route::post('/cms/revisions/{revision}/submit', [CmsRevisionController::class, 'submit'])->name('revisions.submit');
-        Route::post('/cms/revisions/{revision}/approve-manager', [CmsRevisionController::class, 'approveManager'])->name('revisions.approveManager');
-        Route::post('/cms/revisions/{revision}/approve-super', [CmsRevisionController::class, 'approveSuper'])->name('revisions.approveSuper');
-        Route::post('/cms/revisions/{revision}/reject', [CmsRevisionController::class, 'reject'])->name('revisions.reject');
-        Route::delete('/cms/revisions/{revision}', [CmsRevisionController::class, 'destroy'])->name('revisions.destroy');
+            // Preview / comparação de revisões
+            Route::get('/cms/preview/{cmsRevision}', [CmsPreviewController::class, 'show'])->name('cms.preview');
+            Route::get('/cms/compare/{cmsRevision}', [CmsCompareController::class, 'show'])->name('cms.compare');
 
-        // Aprovações e usuários (super-admin e gestor)
-        Route::middleware('role:super_admin,manager')->group(function () {
-            Route::get('/cms/approvals', [ApprovalsController::class, 'index'])->name('approvals.index');
-            Route::post('/cms/approvals/{revision}/approve', [ApprovalsController::class, 'approve'])->name('approvals.approve');
-            Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
+            // Revisões (todos os papéis CMS; escopo aplicado no controller)
+            Route::get('/cms/revisions', [CmsRevisionController::class, 'index'])->name('revisions.index');
+            Route::get('/cms/revisions/create', [CmsRevisionController::class, 'create'])->name('revisions.create');
+            Route::post('/cms/revisions', [CmsRevisionController::class, 'store'])->name('revisions.store');
+            Route::get('/cms/revisions/{revision}/edit', [CmsRevisionController::class, 'edit'])->name('revisions.edit');
+            Route::put('/cms/revisions/{revision}', [CmsRevisionController::class, 'update'])->name('revisions.update');
+            Route::post('/cms/revisions/{revision}/submit', [CmsRevisionController::class, 'submit'])->name('revisions.submit');
+            Route::post('/cms/revisions/{revision}/approve-manager', [CmsRevisionController::class, 'approveManager'])->name('revisions.approveManager');
+            Route::post('/cms/revisions/{revision}/approve-super', [CmsRevisionController::class, 'approveSuper'])->name('revisions.approveSuper');
+            Route::post('/cms/revisions/{revision}/reject', [CmsRevisionController::class, 'reject'])->name('revisions.reject');
+            Route::delete('/cms/revisions/{revision}', [CmsRevisionController::class, 'destroy'])->name('revisions.destroy');
 
-            Route::get('/users', [UserController::class, 'index'])->name('users.index');
-            Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-            Route::post('/users', [UserController::class, 'store'])->name('users.store');
-            Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-            Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-            Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+            // Aprovações e usuários (super-admin e gestor)
+            Route::middleware('role:super_admin,manager')->group(function () {
+                Route::get('/cms/approvals', [ApprovalsController::class, 'index'])->name('approvals.index');
+                Route::post('/cms/approvals/{revision}/approve', [ApprovalsController::class, 'approve'])->name('approvals.approve');
+                Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
 
-            Route::get('/users/{user}/pages', [UserController::class, 'pages'])->name('users.pages');
-            Route::post('/users/{user}/pages', [UserController::class, 'attachPage'])->name('users.pages.attach');
-            Route::put('/users/{user}/pages/{page}', [UserController::class, 'updatePage'])->name('users.pages.update');
-            Route::delete('/users/{user}/pages/{page}', [UserController::class, 'detachPage'])->name('users.pages.detach');
+                Route::get('/users', [UserController::class, 'index'])->name('users.index');
+                Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+                Route::post('/users', [UserController::class, 'store'])->name('users.store');
+                Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+                Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+                Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+                Route::get('/users/{user}/pages', [UserController::class, 'pages'])->name('users.pages');
+                Route::post('/users/{user}/pages', [UserController::class, 'attachPage'])->name('users.pages.attach');
+                Route::put('/users/{user}/pages/{page}', [UserController::class, 'updatePage'])->name('users.pages.update');
+                Route::delete('/users/{user}/pages/{page}', [UserController::class, 'detachPage'])->name('users.pages.detach');
+            });
+
+            // Somente super-admin
+            Route::middleware('role:super_admin')->group(function () {
+                Route::get('/cms/pages', [CmsPageController::class, 'index'])->name('pages.index');
+                Route::post('/cms/pages/sync', [CmsPageController::class, 'sync'])->name('pages.sync');
+                Route::get('/cms/pages/{page}/edit', [CmsPageController::class, 'edit'])->name('pages.edit');
+                Route::put('/cms/pages/{page}', [CmsPageController::class, 'update'])->name('pages.update');
+
+                Route::get('/cms/blocks', [CmsBlockController::class, 'index'])->name('blocks.index');
+                Route::get('/cms/blocks/create', [CmsBlockController::class, 'create'])->name('blocks.create');
+                Route::post('/cms/blocks', [CmsBlockController::class, 'store'])->name('blocks.store');
+                Route::get('/cms/blocks/{block}/edit', [CmsBlockController::class, 'edit'])->name('blocks.edit');
+                Route::put('/cms/blocks/{block}', [CmsBlockController::class, 'update'])->name('blocks.update');
+                Route::delete('/cms/blocks/{block}', [CmsBlockController::class, 'destroy'])->name('blocks.destroy');
+            });
         });
 
-        // Somente super-admin
-        Route::middleware('role:super_admin')->group(function () {
-            Route::get('/cms/pages', [CmsPageController::class, 'index'])->name('pages.index');
-            Route::post('/cms/pages/sync', [CmsPageController::class, 'sync'])->name('pages.sync');
-            Route::get('/cms/pages/{page}/edit', [CmsPageController::class, 'edit'])->name('pages.edit');
-            Route::put('/cms/pages/{page}', [CmsPageController::class, 'update'])->name('pages.update');
-
-            Route::get('/cms/blocks', [CmsBlockController::class, 'index'])->name('blocks.index');
-            Route::get('/cms/blocks/create', [CmsBlockController::class, 'create'])->name('blocks.create');
-            Route::post('/cms/blocks', [CmsBlockController::class, 'store'])->name('blocks.store');
-            Route::get('/cms/blocks/{block}/edit', [CmsBlockController::class, 'edit'])->name('blocks.edit');
-            Route::put('/cms/blocks/{block}', [CmsBlockController::class, 'update'])->name('blocks.update');
-            Route::delete('/cms/blocks/{block}', [CmsBlockController::class, 'destroy'])->name('blocks.destroy');
+        // Galeria de fotos (super-admin, gestor e fotografia)
+        Route::middleware('role:super_admin,manager,fotografia')->group(function () {
+            Route::get('/galeria', [GalleryAlbumController::class, 'index'])->name('galeria.index');
+            Route::get('/galeria/create', [GalleryAlbumController::class, 'create'])->name('galeria.create');
+            Route::post('/galeria', [GalleryAlbumController::class, 'store'])->name('galeria.store');
+            Route::get('/galeria/{album}', [GalleryAlbumController::class, 'show'])->name('galeria.show');
+            Route::get('/galeria/{album}/edit', [GalleryAlbumController::class, 'edit'])->name('galeria.edit');
+            Route::put('/galeria/{album}', [GalleryAlbumController::class, 'update'])->name('galeria.update');
+            Route::delete('/galeria/{album}', [GalleryAlbumController::class, 'destroy'])->name('galeria.destroy');
+            Route::post('/galeria/{album}/photos', [GalleryAlbumController::class, 'upload'])
+                ->middleware('throttle:120,1')
+                ->name('galeria.upload');
+            Route::post('/galeria/{album}/photos/{photo}/cover', [GalleryAlbumController::class, 'setCover'])->name('galeria.photos.cover');
+            Route::delete('/galeria/{album}/photos/{photo}', [GalleryAlbumController::class, 'destroyPhoto'])->name('galeria.photos.destroy');
         });
     });
 

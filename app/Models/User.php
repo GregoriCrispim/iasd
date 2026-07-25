@@ -94,6 +94,16 @@ class User extends Authenticatable
         return $this->roles->contains('name', 'collaborator');
     }
 
+    public function isFotografia(): bool
+    {
+        return $this->roles->contains('name', 'fotografia');
+    }
+
+    public function canManageGaleria(): bool
+    {
+        return $this->hasAnyRoleName(['super_admin', 'manager', 'fotografia']);
+    }
+
     /**
      * @param  array<int, string>  $roles
      */

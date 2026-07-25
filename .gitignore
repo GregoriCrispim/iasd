@@ -4,6 +4,9 @@
 /public/hot
 /public/storage
 /public/img/galeria/thumbs
+# Fotos enviadas pelo painel: ficam apenas no servidor, nunca no repositório.
+/public/img/galeria/uploads/*
+!/public/img/galeria/uploads/.htaccess
 /storage/*.key
 /storage/pail
 /vendor
