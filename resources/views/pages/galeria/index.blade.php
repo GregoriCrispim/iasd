@@ -265,7 +265,11 @@
                 @foreach($carrossel as $index => $item)
                     <a href="{{ route('galeria.show', $item['eventoId']) }}"
                        class="galeria-carrossel-slide{{ $index === 0 ? ' is-active' : '' }}">
-                        <img src="{{ $item['thumbUrl'] }}" alt="{{ $item['eventoTitle'] }}" loading="{{ $index === 0 ? 'eager' : 'lazy' }}" decoding="async">
+                        <img
+                            @if($index === 0) src="{{ $item['imageUrl'] }}" fetchpriority="high" @else data-src="{{ $item['imageUrl'] }}" @endif
+                            alt="{{ $item['eventoTitle'] }}"
+                            loading="{{ $index === 0 ? 'eager' : 'lazy' }}"
+                            decoding="async">
                         <span class="galeria-carrossel-caption">
                             <span>{{ $item['eventoTitle'] }}</span>
                             @if($item['eventoDate'])
@@ -323,7 +327,7 @@
                data-month="{{ $evento['monthKey'] }}"
                data-date="{{ $evento['rawDate'] }}">
                 @if($evento['coverThumbUrl'])
-                    <img src="{{ $evento['coverThumbUrl'] }}" alt="{{ $evento['title'] }}" loading="lazy" decoding="async">
+                    <img data-galeria-lazy data-src="{{ $evento['coverThumbUrl'] }}" alt="{{ $evento['title'] }}" loading="lazy" decoding="async" fetchpriority="low">
                 @else
                     <div class="galeria-card-placeholder"><i class="bi bi-folder-fill"></i></div>
                 @endif
@@ -350,5 +354,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/galeria.js') }}" defer></script>
+<script src="{{ asset('js/galeria.js') }}?v={{ filemtime(public_path('js/galeria.js')) }}" defer></script>
 @endpush

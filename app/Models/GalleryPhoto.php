@@ -219,7 +219,13 @@ class GalleryPhoto extends Model
     /**
      * Shape esperado pelo JS da galeria pública.
      *
-     * @return array{name:string,url:string,thumbUrl:string,downloadUrl:string,downloadName:string}
+     * @return array{
+     *     name:string,
+     *     url:string,          versão de overlay (alta qualidade na tela)
+     *     thumbUrl:string,     miniatura da grade (baixa resolução)
+     *     downloadUrl:string,  arquivo guardado (maior qualidade no download)
+     *     downloadName:string
+     * }
      */
     public function toPublicArray(): array
     {

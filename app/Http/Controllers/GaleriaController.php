@@ -18,7 +18,7 @@ class GaleriaController extends Controller
 
     private const CARROSSEL_FOTOS = 10;
 
-    private const FOTOS_POR_LOTE = 40;
+    private const FOTOS_POR_LOTE = 24;
 
     /**
      * Lista as programações (eventos) disponíveis na galeria.
@@ -171,7 +171,7 @@ class GaleriaController extends Controller
 
     /**
      * @param  \Illuminate\Support\Collection<int, GalleryAlbum>  $albums
-     * @return list<array{eventoId:string,eventoTitle:string,eventoDate:?string,thumbUrl:string}>
+     * @return list<array{eventoId:string,eventoTitle:string,eventoDate:?string,imageUrl:string}>
      */
     private function buildCarrossel($albums): array
     {
@@ -193,7 +193,9 @@ class GaleriaController extends Controller
                     'eventoId' => $album->slug,
                     'eventoTitle' => $album->title,
                     'eventoDate' => $album->dateShort(),
-                    'thumbUrl' => $photo->thumbUrl(),
+                    // Versão de overlay (~1920px): o carrossel é grande e precisa
+                    // de mais qualidade do que a miniatura da grade.
+                    'imageUrl' => $photo->displayUrl(),
                 ];
             }
         }
@@ -232,23 +234,29 @@ class GaleriaController extends Controller
 
         $width = imagesx($image);
         $height = imagesy($image);
+        $side = max($width, $height);
 
-        if ($width <= $maxWidth) {
-            $ok = @imagewebp($image, $destination, 82);
+        if ($side <= $maxWidth) {
+            $ok = @imagewebp($image, $destination, 72);
             imagedestroy($image);
 
             return $ok;
         }
 
-        $newHeight = (int) round($height * ($maxWidth / $width));
-        $resized = imagescale($image, $maxWidth, $newHeight, IMG_LANCZOS);
+        $ratio = $maxWidth / $side;
+        $resized = imagescale(
+            $image,
+            max(1, (int) round($width * $ratio)),
+            max(1, (int) round($height * $ratio)),
+            GalleryImageProcessor::scaleMode()
+        );
         imagedestroy($image);
 
         if ($resized === false) {
             return false;
         }
 
-        $ok = @imagewebp($resized, $destination, 82);
+        $ok = @imagewebp($resized, $destination, 72);
         imagedestroy($resized);
 
         return $ok;

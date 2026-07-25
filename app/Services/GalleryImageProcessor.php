@@ -20,17 +20,19 @@ use Illuminate\Support\Facades\Storage;
  */
 class GalleryImageProcessor
 {
-    public const MASTER_MAX_SIDE = 2560;
+    // O arquivo guardado alimenta o download em .zip e é o material do
+    // departamento de fotografia: fica em resolução alta e qualidade alta.
+    public const MASTER_MAX_SIDE = 4096;
 
-    public const DISPLAY_MAX_WIDTH = 1400;
+    public const DISPLAY_MAX_WIDTH = 1920;
 
-    public const THUMB_MAX_WIDTH = 480;
+    public const THUMB_MAX_WIDTH = 420;
 
-    private const MASTER_QUALITY = 86;
+    private const MASTER_QUALITY = 92;
 
-    private const DISPLAY_QUALITY = 84;
+    private const DISPLAY_QUALITY = 86;
 
-    private const THUMB_QUALITY = 80;
+    private const THUMB_QUALITY = 72;
 
     private const LOADERS = [
         'jpg' => 'imagecreatefromjpeg',
@@ -45,6 +47,16 @@ class GalleryImageProcessor
         return function_exists('imagecreatetruecolor')
             && function_exists('imagewebp')
             && function_exists('imagescale');
+    }
+
+    /**
+     * IMG_LANCZOS só existe em algumas compilações do GD; sem esse cuidado o
+     * redimensionamento quebra com "Undefined constant" e nenhuma derivada é
+     * gerada, deixando o site servir as fotos em tamanho original.
+     */
+    public static function scaleMode(): int
+    {
+        return defined('IMG_LANCZOS') ? (int) constant('IMG_LANCZOS') : IMG_BICUBIC;
     }
 
     /**
@@ -115,14 +127,14 @@ class GalleryImageProcessor
             $basename = pathinfo($masterPath, PATHINFO_FILENAME);
 
             $thumbPath = 'thumbs/'.$album.'/'.$basename.'.webp';
-            if (! $this->writeWebp($image, $disk->path($thumbPath), self::THUMB_MAX_WIDTH, self::THUMB_QUALITY)) {
+            if (! $this->writeWebp($image, $disk->path($thumbPath), self::THUMB_MAX_WIDTH, self::THUMB_QUALITY, true)) {
                 $thumbPath = null;
             }
 
             $displayPath = null;
-            if (imagesx($image) > self::DISPLAY_MAX_WIDTH) {
+            if (imagesx($image) > self::DISPLAY_MAX_WIDTH || imagesy($image) > self::DISPLAY_MAX_WIDTH) {
                 $displayPath = 'display/'.$album.'/'.$basename.'.webp';
-                if (! $this->writeWebp($image, $disk->path($displayPath), self::DISPLAY_MAX_WIDTH, self::DISPLAY_QUALITY)) {
+                if (! $this->writeWebp($image, $disk->path($displayPath), self::DISPLAY_MAX_WIDTH, self::DISPLAY_QUALITY, false)) {
                     $displayPath = null;
                 }
             }
@@ -165,23 +177,34 @@ class GalleryImageProcessor
     }
 
     /**
-     * Grava uma cópia WebP, reduzindo para $maxWidth quando a imagem for maior.
+     * Grava uma cópia WebP reduzida.
+     *
+     * @param  bool  $byLongestSide  true = limita o maior lado (miniaturas);
+     *                               false = limita a largura (versão de overlay).
      */
-    private function writeWebp(GdImage $image, string $absoluteTarget, ?int $maxWidth, int $quality): bool
+    private function writeWebp(GdImage $image, string $absoluteTarget, ?int $maxSide, int $quality, bool $byLongestSide = false): bool
     {
         $this->ensureDirectory($absoluteTarget);
 
         $resized = null;
         $target = $image;
 
-        if ($maxWidth !== null && imagesx($image) > $maxWidth) {
-            $height = max(1, (int) round(imagesy($image) * ($maxWidth / imagesx($image))));
-            $resized = @imagescale($image, $maxWidth, $height, IMG_LANCZOS);
+        if ($maxSide !== null) {
+            $width = imagesx($image);
+            $height = imagesy($image);
+            $current = $byLongestSide ? max($width, $height) : $width;
 
-            if ($resized instanceof GdImage) {
-                imagealphablending($resized, false);
-                imagesavealpha($resized, true);
-                $target = $resized;
+            if ($current > $maxSide) {
+                $ratio = $maxSide / $current;
+                $newW = max(1, (int) round($width * $ratio));
+                $newH = max(1, (int) round($height * $ratio));
+                $resized = @imagescale($image, $newW, $newH, self::scaleMode());
+
+                if ($resized instanceof GdImage) {
+                    imagealphablending($resized, false);
+                    imagesavealpha($resized, true);
+                    $target = $resized;
+                }
             }
         }
 
@@ -208,7 +231,7 @@ class GalleryImageProcessor
             $image,
             max(1, (int) round($width * $ratio)),
             max(1, (int) round($height * $ratio)),
-            IMG_LANCZOS
+            self::scaleMode()
         );
 
         if (! $scaled instanceof GdImage) {

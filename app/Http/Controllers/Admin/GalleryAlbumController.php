@@ -66,7 +66,18 @@ class GalleryAlbumController extends Controller
     {
         $album->load(['photos', 'coverPhoto']);
 
-        return view('admin.galeria.show', ['album' => $album]);
+        $photos = $album->photos->map(fn (GalleryPhoto $photo) => [
+            'id' => $photo->id,
+            'url' => $photo->displayUrl(),
+            'thumb_url' => $photo->thumbUrl(),
+            'filename' => $photo->original_filename ?: $photo->basename(),
+            'is_cover' => $album->cover_photo_id === $photo->id,
+        ])->values()->all();
+
+        return view('admin.galeria.show', [
+            'album' => $album,
+            'photos' => $photos,
+        ]);
     }
 
     public function edit(GalleryAlbum $album): RedirectResponse

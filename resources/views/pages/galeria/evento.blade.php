@@ -19,18 +19,28 @@
         padding: clamp(24px, 4vw, 56px) 16px;
     }
 
+    .galeria-evento-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
     .galeria-evento-back {
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
+        gap: 0.4rem;
+        margin-left: auto;
         color: #003366;
         font-weight: 500;
         font-size: 0.9rem;
-        margin-bottom: 0.75rem;
         opacity: 0.85;
         text-decoration: none;
+        white-space: nowrap;
     }
     .galeria-evento-back:hover { opacity: 1; }
+    .galeria-evento-back i { font-size: 1rem; line-height: 1; }
 
     .galeria-evento-title {
         font-family: "Bebas Neue", "Noto Sans JP", sans-serif;
@@ -39,47 +49,106 @@
         letter-spacing: 1px;
         margin: 0;
         text-transform: capitalize;
+        flex: 1 1 auto;
+        min-width: 0;
     }
 
     .galeria-evento-meta {
         display: flex;
-        gap: 1.25rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
         margin-top: 0.5rem;
         flex-wrap: wrap;
         font-size: 0.9rem;
         color: #555555;
     }
-    .galeria-evento-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .galeria-evento-meta-info {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        min-width: 0;
+    }
+    .galeria-evento-meta-info span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .galeria-evento-meta .galeria-toolbar-btn {
+        margin-left: auto;
+        flex-shrink: 0;
+    }
 
     .galeria-photo-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+        gap: 16px;
         margin-top: 2rem;
+        align-items: stretch;
     }
 
     .galeria-photo-card {
         position: relative;
         border-radius: 12px;
         overflow: hidden;
-        aspect-ratio: 1;
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        min-width: 0;
         cursor: pointer;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         background: #eee;
     }
 
     .galeria-photo-card img {
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
+        display: block;
         transition: transform 0.4s ease;
     }
     .galeria-photo-card:hover img { transform: scale(1.05); }
 
     .galeria-photo-card.is-selected { outline: 3px solid #003366; outline-offset: -3px; }
-    .galeria-photo-card.is-selected .galeria-select-check { background: #003366; }
+    .galeria-photo-grid:not(.is-select-mode) .galeria-photo-card.is-selected { outline: none; }
 
-    /* Loader de miniatura */
+    /* Bolinha CSS pura (sem fonte de ícones): já vem no card, alternada por classe */
+    .galeria-select-check {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        z-index: 2;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.35);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    .galeria-photo-grid.is-select-mode .galeria-select-check {
+        visibility: visible;
+        pointer-events: auto;
+    }
+    .galeria-photo-card.is-selected .galeria-select-check {
+        background: #003366;
+        border-color: #fff;
+    }
+    .galeria-photo-card.is-selected .galeria-select-check::after {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 4px;
+        width: 7px;
+        height: 12px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
     .galeria-thumb-loader {
         position: absolute;
         inset: 0;
@@ -106,18 +175,50 @@
     }
     @keyframes galeria-spin { to { transform: rotate(360deg); } }
 
-    .galeria-grid-sentinel { height: 1px; }
-
-    /* Barra de ferramentas: seleção e ordenação */
-    .galeria-photo-toolbar {
+    .galeria-pagination {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: flex-end;
         flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.75rem;
+        gap: 0.4rem;
+        width: 100%;
+        margin-top: 1.5rem;
+    }
+    .galeria-pagination[hidden] { display: none; }
+    .galeria-page-btn {
+        min-width: 40px;
+        height: 40px;
+        padding: 0 0.7rem;
+        border: 1px solid rgba(0, 51, 102, 0.2);
+        border-radius: 8px;
+        background: #fff;
+        color: #003366;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .galeria-page-btn:hover:not(:disabled) { background: #003366; color: #fff; }
+    .galeria-page-btn.is-active { background: #003366; color: #fff; border-color: #003366; }
+    .galeria-page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .galeria-page-ellipsis {
+        color: #555555;
+        padding: 0 0.25rem;
+        font-family: "Roboto", sans-serif;
+    }
+    .galeria-page-info {
+        flex: 0 0 100%;
+        width: 100%;
+        text-align: right;
+        margin-top: 0.35rem;
+        font-size: 0.85rem;
+        color: #555555;
+        font-family: "Roboto", sans-serif;
     }
 
+    /* Barra de ferramentas: seleção e ordenação */
     .galeria-toolbar-btn {
         display: inline-flex;
         align-items: center;
@@ -134,6 +235,10 @@
     }
     .galeria-toolbar-btn:hover { background: #003366; color: #fff; }
     .galeria-toolbar-btn.is-active { background: #003366; color: #fff; }
+    .galeria-select-toggle > span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .galeria-select-toggle > .galeria-toggle-off { display: none; }
+    .galeria-select-toggle.is-active > .galeria-toggle-on { display: none; }
+    .galeria-select-toggle.is-active > .galeria-toggle-off { display: inline-flex; }
     .galeria-toolbar-btn.primary { background: #003366; color: #fff; }
     .galeria-toolbar-btn.primary:hover { background: #002244; }
 
@@ -148,23 +253,6 @@
         background: #fff;
         color: #1a1a1a;
         cursor: pointer;
-    }
-
-    /* Seleção de fotos para download em lote */
-    .galeria-select-check {
-        position: absolute;
-        top: 8px; left: 8px;
-        z-index: 2;
-        width: 28px; height: 28px;
-        border-radius: 50%;
-        border: none;
-        background: rgba(0, 0, 0, 0.35);
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 1.1rem;
     }
 
     .galeria-batch-bar {
@@ -190,46 +278,6 @@
     .galeria-batch-bar .galeria-toolbar-btn.primary { background: #fff; color: #003366; }
     .galeria-batch-bar .galeria-toolbar-btn:hover { background: rgba(255, 255, 255, 0.15); }
     .galeria-batch-bar .galeria-toolbar-btn.primary:hover { background: #e8eef5; }
-
-    .galeria-download-all {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        margin-top: 1rem;
-        color: #003366;
-        font-weight: 600;
-        font-size: 0.9rem;
-        text-decoration: none;
-    }
-    .galeria-download-all:hover { text-decoration: underline; }
-
-    .galeria-photo-overlay {
-        position: absolute;
-        bottom: 0; left: 0; right: 0;
-        padding: 1rem;
-        background: linear-gradient(transparent, rgba(0, 21, 49, 0.8));
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    .galeria-photo-card:hover .galeria-photo-overlay { opacity: 1; }
-
-    .galeria-photo-btn {
-        background: rgba(255, 255, 255, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        border-radius: 50%;
-        color: #fff;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 1.1rem;
-        backdrop-filter: blur(4px);
-    }
 
     .galeria-empty {
         text-align: center;
@@ -341,34 +389,37 @@
 @section('content')
 <div class="galeria-evento-container">
 
-    <a href="{{ route('galeria') }}" class="galeria-evento-back">&larr; Voltar para as galerias</a>
-
-    <h1 class="galeria-evento-title">{{ $evento['title'] }}</h1>
+    <div class="galeria-evento-header">
+        <h1 class="galeria-evento-title">{{ $evento['title'] }}</h1>
+        <a href="{{ route('galeria') }}" class="galeria-evento-back">
+            <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar para as galerias
+        </a>
+    </div>
 
     <div class="galeria-evento-meta">
-        @if($evento['dateLong'])
-            <span><i class="bi bi-calendar-event"></i> {{ $evento['dateLong'] }}</span>
-        @endif
+        <div class="galeria-evento-meta-info">
+            @if($evento['dateLong'])
+                <span><i class="bi bi-calendar-event"></i> {{ $evento['dateLong'] }}</span>
+            @endif
+            @if(count($fotos) > 0)
+                <span><i class="bi bi-images"></i> {{ count($fotos) }} foto{{ count($fotos) !== 1 ? 's' : '' }}</span>
+            @endif
+        </div>
         @if(count($fotos) > 0)
-            <span><i class="bi bi-images"></i> {{ count($fotos) }} foto{{ count($fotos) !== 1 ? 's' : '' }}</span>
+            <button type="button" class="galeria-toolbar-btn galeria-select-toggle" id="galeriaSelectToggle">
+                <span class="galeria-toggle-on"><i class="bi bi-check2-square"></i> Selecionar fotos</span>
+                <span class="galeria-toggle-off"><i class="bi bi-x-lg"></i> Cancelar seleção</span>
+            </button>
         @endif
     </div>
 
     @if(count($fotos) === 0)
         <div class="galeria-empty">Nenhuma foto encontrada nesta programação.</div>
     @else
-        <div class="galeria-photo-toolbar">
-            <button type="button" class="galeria-toolbar-btn" id="galeriaSelectToggle"><i class="bi bi-check2-square"></i> Selecionar fotos</button>
-        </div>
+        <div class="galeria-photo-grid" id="galeriaPhotoGrid" data-download-url="{{ route('galeria.download', $evento['id']) }}" data-page-size="{{ $fotosPorLote }}"></div>
+        <nav class="galeria-pagination" id="galeriaPagination" aria-label="Paginação das fotos" hidden></nav>
 
-        <div class="galeria-photo-grid" id="galeriaPhotoGrid" data-download-url="{{ route('galeria.download', $evento['id']) }}"></div>
-        <div id="galeriaGridSentinel" class="galeria-grid-sentinel" aria-hidden="true"></div>
-
-        <a href="{{ route('galeria.download', $evento['id']) }}" class="galeria-download-all">
-            <i class="bi bi-file-earmark-zip"></i> Baixar todas as fotos (.zip)
-        </a>
-
-        <script type="application/json" id="galeriaFotosData">{!! json_encode($fotos) !!}</script>
+        <script type="application/json" id="galeriaFotosData">{!! json_encode($fotos, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
     @endif
 
     <div class="galeria-lightbox" id="galeriaLightbox">
@@ -396,5 +447,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/galeria.js') }}" defer></script>
+<script src="{{ asset('js/galeria.js') }}?v={{ filemtime(public_path('js/galeria.js')) }}" defer></script>
 @endpush

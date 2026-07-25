@@ -109,31 +109,9 @@
         <div class="card-head"><h2>Fotos do álbum</h2> <span class="text-muted" id="galAlbumCount" style="margin-left:auto;font-size:0.85rem;">{{ $album->photos->count() }} foto{{ $album->photos->count() !== 1 ? 's' : '' }}</span></div>
         <div class="card-body">
             <div class="empty-state" id="galAlbumEmpty" @if ($album->photos->isNotEmpty()) hidden @endif><i class="bi bi-image"></i>Nenhuma foto ainda. Envie a primeira acima.</div>
-            <div class="gal-photo-grid" id="galAlbumGrid" @if ($album->photos->isEmpty()) hidden @endif>
-                @foreach ($album->photos as $photo)
-                    <div class="gal-photo-card" data-photo-id="{{ $photo->id }}">
-                        <div class="gal-photo-thumb">
-                            <img src="{{ $photo->thumbUrl() }}" alt="{{ $photo->original_filename }}" loading="lazy" decoding="async" data-full="{{ $photo->displayUrl() }}">
-                            @if ($album->cover_photo_id === $photo->id)
-                                <span class="gal-photo-cover-badge" data-cover-badge>Capa</span>
-                            @endif
-                        </div>
-                        <div class="gal-photo-body">
-                            <div class="text-muted gal-photo-name" title="{{ $photo->original_filename }}">{{ $photo->original_filename }}</div>
-                            <div class="gal-photo-actions" data-is-cover="{{ $album->cover_photo_id === $photo->id ? '1' : '0' }}">
-                                <form method="POST" action="{{ route('admin.galeria.photos.cover', [$album, $photo]) }}" class="gal-photo-cover-form" @if ($album->cover_photo_id === $photo->id) hidden @endif>
-                                    @csrf
-                                    <button type="submit" class="btn btn-secondary btn-sm" style="width:100%;justify-content:center;" title="Definir como capa"><i class="bi bi-star"></i></button>
-                                </form>
-                                <form method="POST" action="{{ route('admin.galeria.photos.destroy', [$album, $photo]) }}" onsubmit="return admConfirm('Remover esta foto? Esta ação não pode ser desfeita.', this, { title: 'Remover foto' });" style="flex:1;">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" style="width:100%;justify-content:center;" title="Remover"><i class="bi bi-trash"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+            <div class="gal-photo-grid" id="galAlbumGrid" @if ($album->photos->isEmpty()) hidden @endif></div>
+            <nav class="gal-pagination" id="galAlbumPagination" aria-label="Paginação das fotos" hidden></nav>
+            <script type="application/json" id="galAlbumPhotosData">{!! json_encode($photos, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
         </div>
     </div>
 
@@ -159,6 +137,8 @@
     var coverUrlTemplate = root.dataset.coverUrlTemplate;
     var destroyUrlTemplate = root.dataset.destroyUrlTemplate;
     var albumGrid = document.getElementById('galAlbumGrid');
+    var albumPagination = document.getElementById('galAlbumPagination');
+    var albumPhotosData = document.getElementById('galAlbumPhotosData');
     var albumEmpty = document.getElementById('galAlbumEmpty');
     var albumCount = document.getElementById('galAlbumCount');
     var dropzone = document.getElementById('galDropzone');
@@ -185,9 +165,43 @@
     var ACCEPT_MIME = { 'image/jpeg': 1, 'image/png': 1, 'image/gif': 1, 'image/webp': 1 };
     var ACCEPT_EXT = /\.(jpe?g|png|gif|webp)$/i;
     var MAX_BYTES = 15 * 1024 * 1024;
+    var PHOTO_PAGE_SIZE = 30;
     var queue = [];
     var uploading = false;
     var logOpen = false;
+    var albumPhotos = [];
+    var albumPhotoCount = 0;
+    var currentAlbumPage = 1;
+    var albumPageCache = {};
+    var loadedThumbs = {};
+
+    try {
+        albumPhotos = JSON.parse(albumPhotosData ? albumPhotosData.textContent : '[]');
+    } catch (error) {
+        albumPhotos = [];
+    }
+    albumPhotoCount = albumPhotos.length;
+
+    function markThumbLoaded(img, url) {
+        if (!img) return;
+        if (url) loadedThumbs[url] = 1;
+        img.loading = 'eager';
+        img.fetchPriority = 'auto';
+        img.dataset.loaded = '1';
+        img.removeAttribute('data-src');
+    }
+
+    function assignThumb(img, url) {
+        if (!img || !url) return;
+        if (img.dataset.loaded === '1' && (img.currentSrc === url || img.getAttribute('src') === url)) {
+            return;
+        }
+        img.src = url;
+        img.removeAttribute('data-src');
+        if (loadedThumbs[url] || (img.complete && img.naturalWidth > 0)) {
+            markThumbLoaded(img, url);
+        }
+    }
 
     function formatBytes(n) {
         if (n < 1024) return n + ' B';
@@ -258,10 +272,11 @@
         var coverUrl = coverUrlTemplate.replace('__PID__', encodeURIComponent(photo.id));
         var destroyUrl = destroyUrlTemplate.replace('__PID__', encodeURIComponent(photo.id));
         var name = escapeHtml(photo.filename || '');
+        var thumbUrl = photo.thumb_url || photo.url;
 
         card.innerHTML =
             '<div class="gal-photo-thumb">' +
-                '<img src="' + escapeHtml(photo.thumb_url || photo.url) + '" alt="' + name + '" loading="lazy" decoding="async" data-full="' + escapeHtml(photo.url) + '">' +
+                '<img alt="' + name + '" decoding="async" data-full="' + escapeHtml(photo.url) + '">' +
                 (photo.is_cover ? '<span class="gal-photo-cover-badge" data-cover-badge>Capa</span>' : '') +
             '</div>' +
             '<div class="gal-photo-body">' +
@@ -278,18 +293,130 @@
                     '</form>' +
                 '</div>' +
             '</div>';
+
+        var img = card.querySelector('img');
+        if (loadedThumbs[thumbUrl]) {
+            img.src = thumbUrl;
+            markThumbLoaded(img, thumbUrl);
+        } else {
+            img.addEventListener('load', function () { markThumbLoaded(img, thumbUrl); }, { once: true });
+            img.addEventListener('error', function () { markThumbLoaded(img, thumbUrl); }, { once: true });
+            assignThumb(img, thumbUrl);
+        }
         return card;
+    }
+
+    function albumTotalPages() {
+        return Math.max(1, Math.ceil(albumPhotos.length / PHOTO_PAGE_SIZE) || 1);
+    }
+
+    function albumPageWindow(page, pages) {
+        if (pages <= 7) {
+            var all = [];
+            for (var i = 1; i <= pages; i++) all.push(i);
+            return all;
+        }
+        var items = [1];
+        var start = Math.max(2, page - 1);
+        var end = Math.min(pages - 1, page + 1);
+        if (start > 2) items.push('…');
+        for (var n = start; n <= end; n++) items.push(n);
+        if (end < pages - 1) items.push('…');
+        items.push(pages);
+        return items;
+    }
+
+    function renderAlbumPagination() {
+        if (!albumPagination) return;
+        var pages = albumTotalPages();
+        if (albumPhotos.length === 0 || pages <= 1) {
+            albumPagination.hidden = true;
+            albumPagination.innerHTML = '';
+            return;
+        }
+
+        albumPagination.hidden = false;
+        var start = (currentAlbumPage - 1) * PHOTO_PAGE_SIZE + 1;
+        var end = Math.min(currentAlbumPage * PHOTO_PAGE_SIZE, albumPhotos.length);
+        var html = '<button type="button" class="gal-page-btn" data-page="prev"' + (currentAlbumPage === 1 ? ' disabled' : '') + ' aria-label="Página anterior"><i class="bi bi-chevron-left"></i></button>';
+
+        albumPageWindow(currentAlbumPage, pages).forEach(function (item) {
+            if (item === '…') {
+                html += '<span class="gal-page-ellipsis" aria-hidden="true">…</span>';
+                return;
+            }
+            html += '<button type="button" class="gal-page-btn' + (item === currentAlbumPage ? ' is-active' : '') + '" data-page="' + item + '"' +
+                (item === currentAlbumPage ? ' aria-current="page"' : '') +
+                ' aria-label="Página ' + item + '">' + item + '</button>';
+        });
+
+        html += '<button type="button" class="gal-page-btn" data-page="next"' + (currentAlbumPage === pages ? ' disabled' : '') + ' aria-label="Próxima página"><i class="bi bi-chevron-right"></i></button>';
+        html += '<div class="gal-page-info">' + start + '–' + end + ' de ' + albumPhotos.length + ' fotos</div>';
+        albumPagination.innerHTML = html;
+    }
+
+    function buildAlbumPageCards(page) {
+        var start = (page - 1) * PHOTO_PAGE_SIZE;
+        return albumPhotos.slice(start, start + PHOTO_PAGE_SIZE).map(buildPhotoCard);
+    }
+
+    function showAlbumPage(page, opts) {
+        opts = opts || {};
+        if (!albumGrid) return;
+        if (albumPhotos.length === 0) {
+            albumGrid.hidden = true;
+            if (albumEmpty) albumEmpty.hidden = false;
+            if (albumPagination) {
+                albumPagination.hidden = true;
+                albumPagination.innerHTML = '';
+            }
+            return;
+        }
+
+        if (albumEmpty) albumEmpty.hidden = true;
+        albumGrid.hidden = false;
+        currentAlbumPage = Math.min(Math.max(1, page), albumTotalPages());
+
+        var cards = albumPageCache[currentAlbumPage];
+        if (!cards) {
+            cards = buildAlbumPageCards(currentAlbumPage);
+            albumPageCache[currentAlbumPage] = cards;
+        }
+
+        albumGrid.replaceChildren.apply(albumGrid, cards);
+        renderAlbumPagination();
+
+        if (opts.scroll) {
+            albumGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    function invalidateAlbumPagesFrom(page) {
+        Object.keys(albumPageCache).forEach(function (key) {
+            if (Number(key) >= page) delete albumPageCache[key];
+        });
     }
 
     function appendUploadedPhoto(photo) {
         if (!albumGrid) return;
-        if (albumEmpty) albumEmpty.hidden = true;
-        albumGrid.hidden = false;
-        albumGrid.appendChild(buildPhotoCard(photo));
+        albumPhotos.push(photo);
+        albumPhotoCount++;
+        invalidateAlbumPagesFrom(albumTotalPages());
         if (albumCount) {
-            var total = albumGrid.querySelectorAll('.gal-photo-card').length;
-            albumCount.textContent = total + ' foto' + (total !== 1 ? 's' : '');
+            albumCount.textContent = albumPhotoCount + ' foto' + (albumPhotoCount !== 1 ? 's' : '');
         }
+        showAlbumPage(albumTotalPages(), { scroll: false });
+    }
+
+    if (albumPagination) {
+        albumPagination.addEventListener('click', function (e) {
+            var btn = e.target.closest('[data-page]');
+            if (!btn || btn.disabled) return;
+            var value = btn.getAttribute('data-page');
+            if (value === 'prev') showAlbumPage(currentAlbumPage - 1, { scroll: true });
+            else if (value === 'next') showAlbumPage(currentAlbumPage + 1, { scroll: true });
+            else showAlbumPage(Number(value), { scroll: true });
+        });
     }
 
     function renderQueue() {
@@ -679,8 +806,8 @@
             var thumb = e.target.closest('.gal-photo-thumb');
             if (!thumb) return;
             var img = thumb.querySelector('img');
-            if (!img || !img.src) return;
-            openLightbox(img.dataset.full || img.currentSrc || img.src, img.alt || '');
+            if (!img || !img.dataset.full) return;
+            openLightbox(img.dataset.full, img.alt || '');
         });
 
         lightboxClose.addEventListener('click', closeLightbox);
@@ -692,6 +819,7 @@
         });
     })();
 
+    showAlbumPage(1, { scroll: false });
     renderQueue();
 })();
 </script>

@@ -1,11 +1,60 @@
 document.addEventListener('DOMContentLoaded', () => {
     initGaleriaCarrossel();
+    initGaleriaLazyImages();
     initGaleriaFiltro();
     initGaleriaEventoPage();
 });
 
+function escapeGaleriaHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function initGaleriaLazyImages() {
+    const images = Array.from(document.querySelectorAll('img[data-galeria-lazy][data-src]'));
+    if (images.length === 0) return;
+
+    const load = (img) => {
+        if (!img.dataset.src || img.dataset.loaded === '1') return;
+        const url = img.dataset.src;
+        img.src = url;
+        img.removeAttribute('data-src');
+        const mark = () => {
+            img.loading = 'eager';
+            img.fetchPriority = 'auto';
+            img.dataset.loaded = '1';
+        };
+        if (img.complete && img.naturalWidth > 0) {
+            mark();
+            return;
+        }
+        img.addEventListener('load', mark, { once: true });
+        img.addEventListener('error', mark, { once: true });
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        images.forEach(load);
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            load(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '500px 0px' });
+
+    images.forEach((img) => observer.observe(img));
+}
+
 /**
  * Página de listagem: carrossel de fotos recentes.
+ * Carrega uma imagem por vez; enquanto a atual está na tela, pré-carrega a próxima.
  */
 function initGaleriaCarrossel() {
     const root = document.getElementById('galeriaCarrossel');
@@ -21,8 +70,54 @@ function initGaleriaCarrossel() {
     let current = 0;
     let timer = null;
 
+    const slideImage = (index) => slides[index]?.querySelector('img');
+
+    const loadSlideImage = (index) => new Promise((resolve) => {
+        const image = slideImage(index);
+        if (!image) {
+            resolve();
+            return;
+        }
+        if (image.dataset.loaded === '1') {
+            resolve();
+            return;
+        }
+
+        const url = image.dataset.src || image.getAttribute('src');
+        if (!url) {
+            resolve();
+            return;
+        }
+
+        const mark = () => {
+            image.loading = 'eager';
+            image.fetchPriority = 'auto';
+            image.dataset.loaded = '1';
+            resolve();
+        };
+
+        if (!image.getAttribute('src') || image.dataset.src) {
+            image.src = url;
+            image.removeAttribute('data-src');
+        }
+
+        if (image.complete && image.naturalWidth > 0) {
+            mark();
+            return;
+        }
+
+        image.addEventListener('load', mark, { once: true });
+        image.addEventListener('error', mark, { once: true });
+    });
+
+    const preloadNext = () => {
+        if (slides.length < 2) return;
+        void loadSlideImage((current + 1) % slides.length);
+    };
+
     const show = (index) => {
         current = (index + slides.length) % slides.length;
+        void loadSlideImage(current).then(preloadNext);
         slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
         dots.forEach((dot, i) => dot.classList.toggle('is-active', i === current));
     };
@@ -119,8 +214,8 @@ function initGaleriaFiltro() {
 }
 
 /**
- * Página do evento: grade de fotos com carregamento progressivo, miniaturas
- * otimizadas, ordenação, seleção em lote (download .zip) e lightbox.
+ * Página do evento: grade de fotos com paginação, cache de páginas já visitadas,
+ * miniaturas otimizadas, seleção em lote (download .zip) e lightbox.
  */
 function initGaleriaEventoPage() {
     const grid = document.getElementById('galeriaPhotoGrid');
@@ -134,9 +229,8 @@ function initGaleriaEventoPage() {
         fotos = [];
     }
 
-    const BATCH_SIZE = 24;
-    const sentinel = document.getElementById('galeriaGridSentinel');
-    const sortSelect = document.getElementById('galeriaPhotoSort');
+    const PAGE_SIZE = Math.max(1, parseInt(grid.dataset.pageSize || '24', 10) || 24);
+    const paginationEl = document.getElementById('galeriaPagination');
     const selectToggleBtn = document.getElementById('galeriaSelectToggle');
     const batchBar = document.getElementById('galeriaBatchBar');
     const batchCountEl = document.getElementById('galeriaBatchCount');
@@ -145,9 +239,35 @@ function initGaleriaEventoPage() {
     const batchCancelBtn = document.getElementById('galeriaBatchCancel');
 
     let ordered = fotos.slice();
-    let rendered = 0;
+    let currentPage = 1;
     let selectMode = false;
     const selected = new Set();
+    /** @type {Map<number, HTMLElement[]>} */
+    const pageCache = new Map();
+    const loadedThumbs = new Set();
+
+    const markThumbLoaded = (img, url) => {
+        if (!img) return;
+        if (url) loadedThumbs.add(url);
+        img.loading = 'eager';
+        img.fetchPriority = 'auto';
+        img.dataset.loaded = '1';
+        img.removeAttribute('data-src');
+    };
+
+    const assignThumb = (img, url) => {
+        if (!img || !url) return;
+        if (img.dataset.loaded === '1' && (img.currentSrc === url || img.getAttribute('src') === url)) {
+            return;
+        }
+        if (loadedThumbs.has(url) || img.complete && img.naturalWidth > 0 && img.getAttribute('src') === url) {
+            img.src = url;
+            markThumbLoaded(img, url);
+            return;
+        }
+        img.src = url;
+        img.removeAttribute('data-src');
+    };
 
     /* ---------- Lightbox ---------- */
     const lightbox = document.getElementById('galeriaLightbox');
@@ -174,7 +294,8 @@ function initGaleriaEventoPage() {
         lightbox.style.setProperty('--galeria-lightbox-right-gap', `${rightGap}px`);
     };
 
-    // A lightbox usa a versão reduzida; o download precisa do arquivo guardado.
+    // Grade = miniatura. Overlay = versão de exibição. Download = arquivo guardado (maior qualidade).
+    const fotoPreviewUrl = (foto) => foto.url || foto.downloadUrl;
     const fotoDownloadUrl = (foto) => foto.downloadUrl || foto.url;
     const fotoDownloadName = (foto) => foto.downloadName || foto.name;
 
@@ -205,7 +326,7 @@ function initGaleriaEventoPage() {
         const foto = ordered[currentIndex];
         if (!foto || !imgEl) return;
         loaderEl?.classList.add('is-visible');
-        imgEl.src = foto.url;
+        imgEl.src = fotoPreviewUrl(foto);
         imgEl.alt = foto.name;
         if (nameEl) nameEl.textContent = '';
         if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${ordered.length}`;
@@ -250,7 +371,7 @@ function initGaleriaEventoPage() {
     });
     shareBtn?.addEventListener('click', () => {
         const foto = ordered[currentIndex];
-        if (foto) shareFoto(foto.url, foto.name);
+        if (foto) shareFoto(fotoPreviewUrl(foto), foto.name);
     });
     lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
     window.addEventListener('resize', syncLightboxBounds);
@@ -261,7 +382,7 @@ function initGaleriaEventoPage() {
         if (e.key === 'Escape') closeLightbox();
     });
 
-    /* ---------- Seleção em lote ---------- */
+    /* ---------- Seleção em lote (bolinhas só na página atual) ---------- */
     const updateBatchBar = () => {
         if (!batchBar) return;
         batchBar.classList.toggle('is-visible', selectMode && selected.size > 0);
@@ -270,51 +391,42 @@ function initGaleriaEventoPage() {
         }
     };
 
+    const syncCardSelection = (card) => {
+        card.classList.toggle('is-selected', selected.has(card.dataset.name));
+    };
+
+    /**
+     * A bolinha nasce junto com o card da página atual e a visibilidade é só
+     * CSS: ativar a seleção custa uma troca de classe, sem mexer no DOM.
+     */
     const setSelectMode = (on) => {
-        selectMode = on;
+        selectMode = !!on;
         grid.classList.toggle('is-select-mode', selectMode);
 
-        if (selectToggleBtn) {
-            selectToggleBtn.classList.toggle('is-active', selectMode);
-            selectToggleBtn.innerHTML = selectMode
-                ? '<i class="bi bi-x-lg"></i> Cancelar seleção'
-                : '<i class="bi bi-check2-square"></i> Selecionar fotos';
-        }
+        // Os dois rótulos já estão no HTML; alternar é só classe (sem reparse).
+        selectToggleBtn?.classList.toggle('is-active', selectMode);
 
-        grid.querySelectorAll('.galeria-select-check').forEach(btn => { btn.hidden = !selectMode; });
-
-        if (!selectMode) {
+        if (!selectMode && selected.size > 0) {
             selected.clear();
-            grid.querySelectorAll('.galeria-photo-card.is-selected').forEach(card => {
-                card.classList.remove('is-selected');
-                const icon = card.querySelector('.galeria-select-check i');
-                if (icon) icon.className = 'bi bi-circle';
-            });
+            for (const card of grid.children) card.classList.remove('is-selected');
         }
 
         updateBatchBar();
     };
 
     const toggleSelected = (card, name) => {
-        const icon = card.querySelector('.galeria-select-check i');
-        if (selected.has(name)) {
-            selected.delete(name);
-            card.classList.remove('is-selected');
-            if (icon) icon.className = 'bi bi-circle';
-        } else {
-            selected.add(name);
-            card.classList.add('is-selected');
-            if (icon) icon.className = 'bi bi-check-circle-fill';
-        }
+        if (selected.has(name)) selected.delete(name);
+        else selected.add(name);
+        syncCardSelection(card);
         updateBatchBar();
     };
 
     selectToggleBtn?.addEventListener('click', () => setSelectMode(!selectMode));
     batchCancelBtn?.addEventListener('click', () => setSelectMode(false));
     batchSelectAllBtn?.addEventListener('click', () => {
-        grid.querySelectorAll('.galeria-photo-card').forEach(card => {
+        for (const card of grid.children) {
             if (!selected.has(card.dataset.name)) toggleSelected(card, card.dataset.name);
-        });
+        }
     });
     batchDownloadBtn?.addEventListener('click', () => {
         if (selected.size === 0) return;
@@ -325,15 +437,15 @@ function initGaleriaEventoPage() {
             return;
         }
 
-        // Na versão estática não há endpoint PHP para criar um ZIP. Baixa as
-        // fotos escolhidas individualmente, sem depender do servidor original.
         const selectedPhotos = ordered.filter(foto => selected.has(foto.name));
         selectedPhotos.forEach((foto, index) => {
             window.setTimeout(() => downloadFoto(fotoDownloadUrl(foto), fotoDownloadName(foto)), index * 250);
         });
     });
 
-    /* ---------- Grade com carregamento progressivo ---------- */
+    /* ---------- Grade com paginação e cache ---------- */
+    const totalPages = () => Math.max(1, Math.ceil(ordered.length / PAGE_SIZE));
+
     const createCard = (foto, index) => {
         const card = document.createElement('div');
         card.className = 'galeria-photo-card';
@@ -341,31 +453,39 @@ function initGaleriaEventoPage() {
         card.dataset.url = foto.url;
         card.dataset.name = foto.name;
 
+        // Sempre a miniatura na grade — nunca a versão de overlay/download.
+        const thumbUrl = foto.thumbUrl;
+        if (!thumbUrl) {
+            card.innerHTML = `<div class="galeria-thumb-loader"><span class="galeria-spinner"></span></div>`;
+            return card;
+        }
+
         card.innerHTML = `
             <div class="galeria-thumb-loader"><span class="galeria-spinner"></span></div>
-            <img alt="${foto.name}" loading="lazy" decoding="async">
-            <button type="button" class="galeria-select-check" data-action="select" aria-label="Selecionar foto" ${selectMode ? '' : 'hidden'}>
-                <i class="bi bi-circle"></i>
-            </button>
-            <div class="galeria-photo-overlay">
-                <button type="button" class="galeria-photo-btn" data-action="open" title="Ampliar"><i class="bi bi-arrows-fullscreen"></i></button>
-                <button type="button" class="galeria-photo-btn" data-action="download" title="Baixar"><i class="bi bi-download"></i></button>
-                <button type="button" class="galeria-photo-btn" data-action="share" title="Compartilhar"><i class="bi bi-share-fill"></i></button>
-            </div>
+            <img alt="${escapeGaleriaHtml(foto.name)}" decoding="async" loading="lazy">
+            <button type="button" class="galeria-select-check" data-action="select" aria-label="Selecionar foto"></button>
         `;
 
         const img = card.querySelector('img');
         const loader = card.querySelector('.galeria-thumb-loader');
-        const hideLoader = () => loader?.remove();
-        img.addEventListener('load', hideLoader, { once: true });
-        img.addEventListener('error', () => {
-            if (foto.url && img.getAttribute('src') !== foto.url) {
-                img.src = foto.url;
-                return;
-            }
+        const hideLoader = () => {
+            loader?.remove();
+            markThumbLoaded(img, thumbUrl);
+        };
+
+        if (loadedThumbs.has(thumbUrl)) {
+            img.src = thumbUrl;
             hideLoader();
+        } else {
+            img.addEventListener('load', hideLoader, { once: true });
+            img.addEventListener('error', hideLoader, { once: true });
+            assignThumb(img, thumbUrl);
+        }
+
+        card.querySelector('[data-action="select"]')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleSelected(card, foto.name);
         });
-        img.src = foto.thumbUrl || foto.url;
 
         card.addEventListener('click', () => {
             if (selectMode) {
@@ -375,57 +495,89 @@ function initGaleriaEventoPage() {
             }
         });
 
-        card.querySelector('[data-action="select"]')?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleSelected(card, foto.name);
-        });
-        card.querySelector('[data-action="open"]')?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openLightbox(Number(card.dataset.index));
-        });
-        card.querySelector('[data-action="download"]')?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            downloadFoto(fotoDownloadUrl(foto), fotoDownloadName(foto));
-        });
-        card.querySelector('[data-action="share"]')?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            shareFoto(foto.url, foto.name);
-        });
-
         return card;
     };
 
-    let observer = null;
-    if (sentinel && 'IntersectionObserver' in window) {
-        observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) renderBatch();
-        }, { rootMargin: '800px 0px' });
-    }
+    const buildPageCards = (page) => {
+        const start = (page - 1) * PAGE_SIZE;
+        return ordered.slice(start, start + PAGE_SIZE).map((foto, i) => createCard(foto, start + i));
+    };
 
-    function renderBatch() {
-        const next = ordered.slice(rendered, rendered + BATCH_SIZE);
-        next.forEach((foto, i) => grid.appendChild(createCard(foto, rendered + i)));
-        rendered += next.length;
-        if (rendered >= ordered.length) observer?.disconnect();
-    }
+    const pageWindow = (page, pages) => {
+        if (pages <= 7) {
+            return Array.from({ length: pages }, (_, i) => i + 1);
+        }
+        const items = [1];
+        const start = Math.max(2, page - 1);
+        const end = Math.min(pages - 1, page + 1);
+        if (start > 2) items.push('…');
+        for (let i = start; i <= end; i++) items.push(i);
+        if (end < pages - 1) items.push('…');
+        items.push(pages);
+        return items;
+    };
 
-    function resetGrid() {
-        grid.innerHTML = '';
-        rendered = 0;
-        selected.clear();
-        updateBatchBar();
-        renderBatch();
-        if (sentinel && observer && rendered < ordered.length) observer.observe(sentinel);
-    }
+    const renderPagination = () => {
+        if (!paginationEl) return;
+        const pages = totalPages();
+        if (pages <= 1) {
+            paginationEl.hidden = true;
+            paginationEl.innerHTML = '';
+            return;
+        }
 
-    sortSelect?.addEventListener('change', () => {
-        const mode = sortSelect.value;
-        ordered = fotos.slice();
-        if (mode === 'nome-az') ordered.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
-        if (mode === 'nome-za') ordered.sort((a, b) => b.name.localeCompare(a.name, 'pt-BR'));
-        resetGrid();
+        paginationEl.hidden = false;
+        const start = (currentPage - 1) * PAGE_SIZE + 1;
+        const end = Math.min(currentPage * PAGE_SIZE, ordered.length);
+        const buttons = [
+            `<button type="button" class="galeria-page-btn" data-page="prev" ${currentPage === 1 ? 'disabled' : ''} aria-label="Página anterior"><i class="bi bi-chevron-left"></i></button>`,
+        ];
+
+        pageWindow(currentPage, pages).forEach((item) => {
+            if (item === '…') {
+                buttons.push('<span class="galeria-page-ellipsis" aria-hidden="true">…</span>');
+                return;
+            }
+            buttons.push(
+                `<button type="button" class="galeria-page-btn${item === currentPage ? ' is-active' : ''}" data-page="${item}" aria-label="Página ${item}"${item === currentPage ? ' aria-current="page"' : ''}>${item}</button>`
+            );
+        });
+
+        buttons.push(
+            `<button type="button" class="galeria-page-btn" data-page="next" ${currentPage === pages ? 'disabled' : ''} aria-label="Próxima página"><i class="bi bi-chevron-right"></i></button>`,
+            `<div class="galeria-page-info">${start}–${end} de ${ordered.length} fotos</div>`
+        );
+
+        paginationEl.innerHTML = buttons.join('');
+    };
+
+    const showPage = (page, { scroll = true } = {}) => {
+        const pages = totalPages();
+        currentPage = Math.min(Math.max(1, page), pages);
+
+        let cards = pageCache.get(currentPage);
+        if (!cards) {
+            cards = buildPageCards(currentPage);
+            pageCache.set(currentPage, cards);
+        }
+
+        grid.replaceChildren(...cards);
+        for (const card of cards) syncCardSelection(card);
+        renderPagination();
+
+        if (scroll) {
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
+    paginationEl?.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-page]');
+        if (!btn || btn.disabled) return;
+        const value = btn.getAttribute('data-page');
+        if (value === 'prev') showPage(currentPage - 1);
+        else if (value === 'next') showPage(currentPage + 1);
+        else showPage(Number(value));
     });
 
-    renderBatch();
-    if (sentinel && observer && rendered < ordered.length) observer.observe(sentinel);
+    showPage(1, { scroll: false });
 }
