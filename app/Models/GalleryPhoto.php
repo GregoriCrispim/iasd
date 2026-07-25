@@ -53,10 +53,15 @@ class GalleryPhoto extends Model
 
     /**
      * Arquivo guardado (o maior que existe), usado nos downloads.
+     * Se o upload ainda não estiver no servidor, cai na pasta legada.
      */
     public function publicUrl(): string
     {
-        return self::BASE_URL.'/'.$this->relativePath();
+        if ($this->uploadFileExists()) {
+            return self::BASE_URL.'/'.$this->relativePath();
+        }
+
+        return $this->legacyPublicUrl() ?? (self::BASE_URL.'/'.$this->relativePath());
     }
 
     /**
@@ -66,23 +71,90 @@ class GalleryPhoto extends Model
     {
         $variant = $this->variantPath('display');
 
-        return $variant ? self::BASE_URL.'/'.$variant : $this->publicUrl();
+        if ($variant && Storage::disk(self::DISK)->exists($variant)) {
+            return self::BASE_URL.'/'.$variant;
+        }
+
+        return $this->publicUrl();
     }
 
     /**
-     * Miniatura para as grades. Sem a derivada em disco, usa a rota que gera
-     * sob demanda, que por sua vez cai no original se o servidor não tiver GD.
+     * Miniatura para as grades. Prefere derivada em disco; sem ela, gera sob
+     * demanda via rota — ou usa a pasta legada se o upload ainda não existir
+     * no servidor (caso típico logo após o deploy na HostGator).
      */
     public function thumbUrl(): string
     {
         $variant = $this->variantPath('thumb');
 
-        return $variant ? self::BASE_URL.'/'.$variant : '/galeria/thumb?photo='.$this->id;
+        if ($variant && Storage::disk(self::DISK)->exists($variant)) {
+            return self::BASE_URL.'/'.$variant;
+        }
+
+        if ($this->uploadFileExists()) {
+            return '/galeria/thumb?photo='.$this->id;
+        }
+
+        return $this->legacyPublicUrl() ?? '/galeria/thumb?photo='.$this->id;
     }
 
+    /**
+     * Caminho absoluto do arquivo a servir: upload novo, senão pasta legada.
+     */
     public function absolutePath(): string
     {
-        return Storage::disk(self::DISK)->path($this->path);
+        $upload = Storage::disk(self::DISK)->path($this->path);
+
+        if (is_file($upload)) {
+            return $upload;
+        }
+
+        return $this->legacyAbsolutePath() ?? $upload;
+    }
+
+    public function uploadFileExists(): bool
+    {
+        return is_file(Storage::disk(self::DISK)->path($this->path));
+    }
+
+    /**
+     * URL pública da pasta antiga (public/img/galeria/fotos/{slug}/{arquivo}).
+     */
+    public function legacyPublicUrl(): ?string
+    {
+        $relative = $this->legacyRelativePath();
+
+        return $relative ? '/img/galeria/fotos/'.$relative : null;
+    }
+
+    public function legacyAbsolutePath(): ?string
+    {
+        $relative = $this->legacyRelativePath();
+
+        if ($relative === null) {
+            return null;
+        }
+
+        $absolute = public_path('img/galeria/fotos/'.$relative);
+
+        return is_file($absolute) ? $absolute : null;
+    }
+
+    private function legacyRelativePath(): ?string
+    {
+        $filename = $this->original_filename;
+        if (! is_string($filename) || $filename === '') {
+            return null;
+        }
+
+        $album = $this->relationLoaded('album') ? $this->album : $this->album()->first();
+        $slug = $album?->slug;
+
+        if (! is_string($slug) || $slug === '') {
+            return null;
+        }
+
+        return $slug.'/'.$filename;
     }
 
     public function basename(): string

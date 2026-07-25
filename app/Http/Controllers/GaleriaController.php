@@ -91,30 +91,36 @@ class GaleriaController extends Controller
         abort_unless(is_file($original), 404);
 
         try {
-            $thumbRelative = $photo->variantPath('thumb')
-                ?? 'thumbs/'.$photo->gallery_album_id.'/'.pathinfo($photo->basename(), PATHINFO_FILENAME).'.webp';
-            $thumbAbsolute = Storage::disk(GalleryPhoto::DISK)->path($thumbRelative);
+            // Só grava miniatura no disco novo se o upload existir; senão serve
+            // o arquivo legado direto (evita criar pastas vazias na HostGator).
+            if ($photo->uploadFileExists()) {
+                $thumbRelative = $photo->variantPath('thumb')
+                    ?? 'thumbs/'.$photo->gallery_album_id.'/'.pathinfo($photo->basename(), PATHINFO_FILENAME).'.webp';
+                $thumbAbsolute = Storage::disk(GalleryPhoto::DISK)->path($thumbRelative);
 
-            if (! is_file($thumbAbsolute)) {
-                $thumbDir = dirname($thumbAbsolute);
-                if (! is_dir($thumbDir)) {
-                    @mkdir($thumbDir, 0755, true);
+                if (! is_file($thumbAbsolute)) {
+                    $thumbDir = dirname($thumbAbsolute);
+                    if (! is_dir($thumbDir)) {
+                        @mkdir($thumbDir, 0755, true);
+                    }
+                    $this->generateThumbnail($original, $thumbAbsolute, self::THUMB_WIDTH);
                 }
-                $this->generateThumbnail($original, $thumbAbsolute, self::THUMB_WIDTH);
-            }
 
-            if (is_file($thumbAbsolute)) {
-                return response()->file($thumbAbsolute, [
-                    'Content-Type' => 'image/webp',
-                    'Cache-Control' => 'public, max-age=31536000, immutable',
-                ]);
+                if (is_file($thumbAbsolute)) {
+                    return response()->file($thumbAbsolute, [
+                        'Content-Type' => 'image/webp',
+                        'Cache-Control' => 'public, max-age=31536000, immutable',
+                    ]);
+                }
             }
 
             return response()->file($original, [
                 'Cache-Control' => 'public, max-age=31536000, immutable',
             ]);
         } catch (\Throwable) {
-            return redirect()->to($photo->publicUrl(), 302);
+            $fallback = $photo->legacyPublicUrl() ?? $photo->publicUrl();
+
+            return redirect()->to($fallback, 302);
         }
     }
 
