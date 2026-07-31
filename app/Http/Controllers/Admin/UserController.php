@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -21,7 +22,7 @@ class UserController extends Controller
         $users = $this->scopedQuery($authUser)
             ->with(['roles', 'manager'])
             ->when($request->filled('q'), function (Builder $query) use ($request) {
-                $term = '%' . $request->string('q') . '%';
+                $term = '%'.$request->string('q').'%';
                 $query->where(fn (Builder $q) => $q->where('name', 'like', $term)->orWhere('email', 'like', $term));
             })
             ->orderBy('name')
@@ -37,7 +38,7 @@ class UserController extends Controller
         $authUser = $request->user();
 
         return view('admin.users.form', [
-            'user' => new User(),
+            'user' => new User,
             'roleOptions' => $this->roleOptions($authUser),
             'managerOptions' => $this->managerOptions(),
             'currentRole' => $authUser->isManager() ? 'collaborator' : null,
@@ -94,7 +95,7 @@ class UserController extends Controller
             'email' => $data['email'],
         ];
 
-        if (!empty($data['password'])) {
+        if (! empty($data['password'])) {
             $payload['password'] = $data['password'];
         }
 
@@ -118,7 +119,7 @@ class UserController extends Controller
         /** @var User $authUser */
         $authUser = $request->user();
 
-        if (!$authUser->isSuperAdmin()) {
+        if (! $authUser->isSuperAdmin()) {
             abort(403);
         }
 
@@ -163,7 +164,7 @@ class UserController extends Controller
             'can_approve' => ['nullable', 'boolean'],
         ]);
 
-        if (!$this->availablePages($authUser)->contains('id', (int) $data['cms_page_id'])) {
+        if (! $this->availablePages($authUser)->contains('id', (int) $data['cms_page_id'])) {
             abort(403);
         }
 
@@ -247,11 +248,24 @@ class UserController extends Controller
     {
         $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user?->id)],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                function (string $attribute, mixed $value, \Closure $fail) use ($user): void {
+                    $query = User::query()->admins()->where('email', $value);
+                    if ($user) {
+                        $query->where('id', '!=', $user->id);
+                    }
+                    if ($query->exists()) {
+                        $fail('Este e-mail já está em uso por outra conta do painel.');
+                    }
+                },
+            ],
             'password' => [$user ? 'nullable' : 'required', 'string', 'min:6'],
         ];
 
-        if (!$authUser->isManager()) {
+        if (! $authUser->isManager()) {
             $rules['role'] = ['required', Rule::in(['manager', 'collaborator', 'fotografia'])];
             $rules['manager_id'] = ['nullable', 'exists:users,id'];
             $rules['email_verified_at'] = ['nullable', 'date'];
@@ -277,7 +291,7 @@ class UserController extends Controller
     }
 
     /**
-     * @return \Illuminate\Support\Collection<int, User>
+     * @return Collection<int, User>
      */
     protected function managerOptions()
     {
@@ -288,7 +302,7 @@ class UserController extends Controller
     }
 
     /**
-     * @return \Illuminate\Support\Collection<int, CmsPage>
+     * @return Collection<int, CmsPage>
      */
     protected function availablePages(User $authUser)
     {

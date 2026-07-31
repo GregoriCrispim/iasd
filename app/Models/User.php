@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +14,7 @@ use Illuminate\Support\Collection;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -25,6 +26,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'birth_date',
+        'congregation',
+        'is_church_member',
+        'is_active',
         'created_by',
         'manager_id',
     ];
@@ -49,6 +55,9 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
+            'is_church_member' => 'boolean',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -97,6 +106,55 @@ class User extends Authenticatable
     public function isFotografia(): bool
     {
         return $this->roles->contains('name', 'fotografia');
+    }
+
+    public function isMember(): bool
+    {
+        return $this->roles->contains('name', 'member');
+    }
+
+    /**
+     * Contas de membro do site (busca facial). Independentes das contas do painel.
+     */
+    public function scopeMembers($query)
+    {
+        return $query->whereHas('roles', fn ($q) => $q->where('name', 'member'));
+    }
+
+    /**
+     * Contas com acesso ao painel administrativo.
+     */
+    public function scopeAdmins($query)
+    {
+        return $query->whereHas(
+            'roles',
+            fn ($q) => $q->whereIn('name', ['super_admin', 'manager', 'collaborator', 'fotografia'])
+        );
+    }
+
+    /**
+     * Papéis do painel administrativo. Contas de membro são registros separados.
+     */
+    public function canAccessAdminPanel(): bool
+    {
+        return $this->hasAnyRoleName(['super_admin', 'manager', 'collaborator', 'fotografia']);
+    }
+
+    /**
+     * A busca facial só é liberada para membros ativos.
+     */
+    public function isActiveMember(): bool
+    {
+        return $this->isMember() && (bool) ($this->is_active ?? true);
+    }
+
+    public function isMinor(): bool
+    {
+        if (! $this->birth_date) {
+            return false;
+        }
+
+        return $this->birth_date->age < 18;
     }
 
     public function canManageGaleria(): bool
@@ -160,14 +218,14 @@ class User extends Authenticatable
     protected function pagePivot(string $routeName): ?array
     {
         static $cache = [];
-        $key = $this->id . ':' . $routeName;
+        $key = $this->id.':'.$routeName;
 
         if (array_key_exists($key, $cache)) {
             return $cache[$key];
         }
 
         $page = CmsPage::query()->where('route_name', $routeName)->first();
-        if (!$page) {
+        if (! $page) {
             return $cache[$key] = null;
         }
 
@@ -176,7 +234,7 @@ class User extends Authenticatable
             ->first()
             ?->pivot;
 
-        if (!$pivot) {
+        if (! $pivot) {
             return $cache[$key] = null;
         }
 

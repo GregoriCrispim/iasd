@@ -3,7 +3,7 @@
 @php
     $activeNav = 'users';
     $editing = $user->exists;
-    $isManagerAuth = auth()->user()->isManager();
+    $isManagerAuth = auth('admin')->user()->isManager();
 @endphp
 @section('title', $editing ? 'Editar usuário' : 'Novo usuário')
 @section('heading', $editing ? 'Editar usuário' : 'Novo usuário')

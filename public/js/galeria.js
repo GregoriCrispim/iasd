@@ -579,5 +579,31 @@ function initGaleriaEventoPage() {
         else showPage(Number(value));
     });
 
+    /* ---------- Filtro por busca facial ---------- */
+    // O módulo face-search.js chama estes ganchos para reduzir a grade às fotos
+    // encontradas (por id estável) ou restaurar a lista completa.
+    const allFotos = fotos.slice();
+
+    const rebuildAfterFilter = () => {
+        pageCache.clear();
+        selected.clear();
+        if (selectMode) setSelectMode(false);
+        showPage(1, { scroll: false });
+        updateBatchBar();
+    };
+
+    window.galeriaApplyFaceFilter = (ids) => {
+        const set = new Set((ids || []).map(Number));
+        ordered = allFotos.filter((foto) => set.has(Number(foto.id)));
+        rebuildAfterFilter();
+        return ordered.length;
+    };
+
+    window.galeriaClearFaceFilter = () => {
+        ordered = allFotos.slice();
+        rebuildAfterFilter();
+        return ordered.length;
+    };
+
     showPage(1, { scroll: false });
 }

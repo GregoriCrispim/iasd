@@ -71,9 +71,111 @@
         min-width: 0;
     }
     .galeria-evento-meta-info span { display: inline-flex; align-items: center; gap: 0.4rem; }
-    .galeria-evento-meta .galeria-toolbar-btn {
+    .galeria-meta-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
         margin-left: auto;
-        flex-shrink: 0;
+        flex-wrap: wrap;
+    }
+
+    .galeria-face-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        background: #eef4fb;
+        border: 1px solid rgba(0, 51, 102, 0.15);
+        color: #003366;
+        font-size: 0.92rem;
+    }
+    .galeria-face-banner[hidden] { display: none; }
+
+    /* Modal de busca facial */
+    .galeria-face-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 16px;
+        backdrop-filter: blur(3px);
+    }
+    .galeria-face-modal.is-open { display: flex; }
+    .galeria-face-dialog {
+        background: #fff;
+        border-radius: 16px;
+        max-width: 520px;
+        width: 100%;
+        max-height: 92vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        padding: clamp(20px, 3vw, 32px);
+    }
+    .galeria-face-dialog h2 {
+        font-family: "Bebas Neue", "Noto Sans JP", sans-serif;
+        color: #003366;
+        margin: 0 0 0.25rem;
+        font-size: 1.8rem;
+        letter-spacing: 0.5px;
+    }
+    .galeria-face-dialog p.face-sub { color: #555; font-size: 0.9rem; margin: 0 0 1rem; }
+    .galeria-face-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .galeria-face-tab {
+        flex: 1;
+        padding: 0.55rem;
+        border: 1px solid rgba(0, 51, 102, 0.25);
+        border-radius: 8px;
+        background: #fff;
+        color: #003366;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    .galeria-face-tab.is-active { background: #003366; color: #fff; }
+    .galeria-face-stage {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        max-height: 320px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #0b1b2e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    .galeria-face-stage video, .galeria-face-stage img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .galeria-face-stage .face-placeholder { color: rgba(255,255,255,0.6); font-size: 0.9rem; text-align: center; padding: 1rem; }
+    .galeria-face-hidden { display: none !important; }
+    .galeria-face-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .galeria-face-consents { margin-bottom: 1rem; }
+    .galeria-face-consents label { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.82rem; color: #444; margin-bottom: 0.6rem; line-height: 1.4; }
+    .galeria-face-consents input { margin-top: 0.2rem; }
+    #galeriaFaceGuardian { display: none; }
+    #galeriaFaceGuardian.is-visible { display: block; }
+    .galeria-face-status { font-size: 0.85rem; color: #555; min-height: 1.2rem; margin-bottom: 0.75rem; }
+    .galeria-face-status.is-error { color: #a12622; }
+    .galeria-face-foot { display: flex; gap: 0.5rem; justify-content: flex-end; }
+    .galeria-face-close {
+        position: absolute;
+        top: 14px; right: 14px;
+        background: rgba(0,0,0,0.06);
+        border: none;
+        border-radius: 50%;
+        width: 34px; height: 34px;
+        cursor: pointer;
+        color: #333;
     }
 
     .galeria-photo-grid {
@@ -242,6 +344,53 @@
     .galeria-toolbar-btn.primary { background: #003366; color: #fff; }
     .galeria-toolbar-btn.primary:hover { background: #002244; }
 
+    /* CTA de visitante: destaque para incentivar o login antes da busca facial */
+    .galeria-face-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.6rem 1.15rem;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #0a5aa8 0%, #003366 58%, #00223f 100%);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: "Roboto", sans-serif;
+        line-height: 1;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 6px 18px rgba(0, 51, 102, 0.28);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+    .galeria-face-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(0, 51, 102, 0.38);
+        filter: brightness(1.06);
+    }
+    .galeria-face-cta:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 51, 102, 0.3); }
+    .galeria-face-cta:focus-visible { outline: 3px solid rgba(10, 90, 168, 0.45); outline-offset: 3px; }
+    .galeria-face-cta .galeria-face-cta-icon { font-size: 1.1rem; }
+    .galeria-face-cta .galeria-face-cta-arrow { font-size: 1.15rem; transition: transform 0.18s ease; }
+    .galeria-face-cta:hover .galeria-face-cta-arrow { transform: translateX(3px); }
+    .galeria-face-cta.is-secondary {
+        background: #fff;
+        color: #003366;
+        border: 1px solid rgba(0, 51, 102, 0.28);
+        box-shadow: none;
+    }
+    .galeria-face-cta.is-secondary:hover {
+        background: #f4f8fc;
+        filter: none;
+        box-shadow: 0 6px 16px rgba(0, 51, 102, 0.12);
+    }
+    .galeria-face-auth {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        flex-wrap: wrap;
+    }
+
     .galeria-sort-wrap { display: flex; align-items: center; gap: 0.5rem; }
     .galeria-sort-label { font-size: 0.85rem; color: #555555; font-family: "Roboto", sans-serif; }
     .galeria-sort-wrap select {
@@ -396,6 +545,12 @@
         </a>
     </div>
 
+    @php
+        $faceUser = auth('web')->user();
+        $faceEnabled = (bool) config('face.enabled', true);
+        $faceCanSearch = $faceUser && $faceUser->isActiveMember();
+    @endphp
+
     <div class="galeria-evento-meta">
         <div class="galeria-evento-meta-info">
             @if($evento['dateLong'])
@@ -406,12 +561,40 @@
             @endif
         </div>
         @if(count($fotos) > 0)
-            <button type="button" class="galeria-toolbar-btn galeria-select-toggle" id="galeriaSelectToggle">
-                <span class="galeria-toggle-on"><i class="bi bi-check2-square"></i> Selecionar fotos</span>
-                <span class="galeria-toggle-off"><i class="bi bi-x-lg"></i> Cancelar seleção</span>
-            </button>
+            <div class="galeria-meta-actions">
+                @if($faceEnabled)
+                    @if($faceCanSearch)
+                        <button type="button" class="galeria-toolbar-btn primary" id="galeriaFaceSearchBtn">
+                            <i class="bi bi-person-bounding-box"></i> Encontrar minhas fotos
+                        </button>
+                    @else
+                        <div class="galeria-face-auth">
+                            <a href="{{ route('member.login', ['redirect' => url()->current()]) }}" class="galeria-face-cta is-secondary" title="Entre com sua conta de membro">
+                                <i class="bi bi-box-arrow-in-right galeria-face-cta-icon" aria-hidden="true"></i>
+                                <span>Entrar</span>
+                            </a>
+                            <a href="{{ route('member.register', ['redirect' => url()->current()]) }}" class="galeria-face-cta" title="Crie uma conta de membro para localizar as fotos em que você aparece">
+                                <i class="bi bi-stars galeria-face-cta-icon" aria-hidden="true"></i>
+                                <span>Criar conta</span>
+                                <i class="bi bi-arrow-right-short galeria-face-cta-arrow" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    @endif
+                @endif
+                <button type="button" class="galeria-toolbar-btn galeria-select-toggle" id="galeriaSelectToggle">
+                    <span class="galeria-toggle-on"><i class="bi bi-check2-square"></i> Selecionar fotos</span>
+                    <span class="galeria-toggle-off"><i class="bi bi-x-lg"></i> Cancelar seleção</span>
+                </button>
+            </div>
         @endif
     </div>
+
+    @if(count($fotos) > 0 && $faceEnabled && $faceCanSearch)
+        <div class="galeria-face-banner" id="galeriaFaceBanner" hidden>
+            <span id="galeriaFaceBannerText"></span>
+            <button type="button" class="galeria-toolbar-btn" id="galeriaFaceClear"><i class="bi bi-x-circle"></i> Limpar busca</button>
+        </div>
+    @endif
 
     @if(count($fotos) === 0)
         <div class="galeria-empty">Nenhuma foto encontrada nesta programação.</div>
@@ -443,9 +626,72 @@
         <button type="button" class="galeria-toolbar-btn" id="galeriaBatchCancel">Cancelar</button>
     </div>
 
+    @if(count($fotos) > 0 && $faceEnabled && $faceCanSearch)
+        <div class="galeria-face-modal" id="galeriaFaceModal" role="dialog" aria-modal="true" aria-labelledby="galeriaFaceTitle">
+            <div class="galeria-face-dialog">
+                <button type="button" class="galeria-face-close" id="galeriaFaceModalClose" aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
+                <h2 id="galeriaFaceTitle">Encontrar minhas fotos</h2>
+                <p class="face-sub">Tire uma selfie ou envie uma foto sua. O reconhecimento acontece no seu dispositivo — só um código numérico temporário é enviado para comparar com as fotos deste álbum.</p>
+
+                <div class="galeria-face-tabs">
+                    <button type="button" class="galeria-face-tab is-active" data-mode="camera"><i class="bi bi-camera"></i> Câmera</button>
+                    <button type="button" class="galeria-face-tab" data-mode="upload"><i class="bi bi-upload"></i> Enviar foto</button>
+                </div>
+
+                <div class="galeria-face-stage" id="galeriaFaceStage">
+                    <div class="face-placeholder" id="galeriaFacePlaceholder">Toque em “Ativar câmera” para começar.</div>
+                    <video id="galeriaFaceVideo" class="galeria-face-hidden" playsinline muted></video>
+                    <img id="galeriaFacePreview" class="galeria-face-hidden" alt="Pré-visualização">
+                </div>
+
+                <input type="file" id="galeriaFaceFile" accept="image/*" hidden>
+
+                <div class="galeria-face-buttons">
+                    <button type="button" class="galeria-toolbar-btn" id="galeriaFaceCameraStart"><i class="bi bi-camera-video"></i> Ativar câmera</button>
+                    <button type="button" class="galeria-toolbar-btn" id="galeriaFaceCapture" hidden><i class="bi bi-camera"></i> Capturar</button>
+                    <button type="button" class="galeria-toolbar-btn galeria-face-hidden" id="galeriaFacePick"><i class="bi bi-image"></i> Escolher foto</button>
+                    <button type="button" class="galeria-toolbar-btn" id="galeriaFaceRetake" hidden><i class="bi bi-arrow-counterclockwise"></i> Refazer</button>
+                </div>
+
+                <div class="galeria-face-consents">
+                    <label><input type="checkbox" id="galeriaConsentSelf"> Confirmo que sou a pessoa retratada e não estou enviando imagem de terceiro.</label>
+                    <label><input type="checkbox" id="galeriaConsentBiometric"> Autorizo o uso temporário do meu descriptor biométrico exclusivamente para localizar minhas fotos neste álbum.</label>
+                    <label><input type="checkbox" id="galeriaConsentLimitations"> Entendo que o recurso pode apresentar falsos positivos/negativos, não comprova identidade e não possui verificação de vivacidade (liveness).</label>
+                    <div id="galeriaFaceGuardian" class="{{ $faceUser && $faceUser->isMinor() ? 'is-visible' : '' }}">
+                        <label><input type="checkbox" id="galeriaConsentGuardian"> Declaro que quem realiza esta busca é o responsável legal pelo menor e autoriza o tratamento dos dados.</label>
+                    </div>
+                </div>
+
+                <div class="galeria-face-status" id="galeriaFaceStatus"></div>
+
+                <div class="galeria-face-foot">
+                    <button type="button" class="galeria-toolbar-btn" id="galeriaFaceCancel">Cancelar</button>
+                    <button type="button" class="galeria-toolbar-btn primary" id="galeriaFaceSubmit" disabled><i class="bi bi-search"></i> Buscar minhas fotos</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="application/json" id="faceConfig">{!! json_encode([
+            'scriptUrl' => config('face.script_url'),
+            'modelsUrl' => config('face.models_url'),
+            'searchUrl' => route('galeria.busca-facial', $evento['id']),
+            'csrf' => csrf_token(),
+            'isMinor' => (bool) ($faceUser && $faceUser->isMinor()),
+            'selfie' => [
+                'minScore' => (float) config('face.detection.selfie.min_score', 0.7),
+                'minSizeRatio' => (float) config('face.detection.selfie.min_size_ratio', 0.12),
+                'maxSide' => (int) config('face.detection.selfie.analysis_max_side', 640),
+            ],
+        ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
+    @endif
+
 </div>
 @endsection
 
 @push('scripts')
 <script src="{{ asset('js/galeria.js') }}?v={{ filemtime(public_path('js/galeria.js')) }}" defer></script>
+@if(count($fotos) > 0 && $faceEnabled && $faceCanSearch)
+<script src="{{ asset('js/face-engine.js') }}?v={{ filemtime(public_path('js/face-engine.js')) }}" defer></script>
+<script src="{{ asset('js/face-search.js') }}?v={{ filemtime(public_path('js/face-search.js')) }}" defer></script>
+@endif
 @endpush

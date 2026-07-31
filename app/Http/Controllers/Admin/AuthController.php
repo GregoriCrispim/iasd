@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -14,7 +15,7 @@ class AuthController extends Controller
 {
     public function showLogin(): View|RedirectResponse
     {
-        if (Auth::check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard');
         }
 
@@ -29,30 +30,32 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (!is_string($email) || $email === '') {
+        if (! is_string($email) || $email === '') {
             throw ValidationException::withMessages([
                 'email' => 'O e-mail é obrigatório.',
             ]);
         }
 
-        $remember = $request->boolean('remember');
+        $user = User::query()
+            ->admins()
+            ->where('email', $email)
+            ->first();
 
-        if (!Auth::attempt(['email' => $email, 'password' => $credentials['password']], $remember)) {
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
         }
 
-        $user = Auth::user();
-
-        if (!$user instanceof User || !$user->hasAnyRoleName(['super_admin', 'manager', 'collaborator', 'fotografia'])) {
-            Auth::logout();
-
+        if (! $user->canAccessAdminPanel()) {
             throw ValidationException::withMessages([
                 'email' => 'Sua conta não tem acesso ao painel.',
             ]);
         }
 
+        Auth::guard('admin')->login($user, $request->boolean('remember'));
+
+        // Regenera o ID da sessão sem invalidá-la, para preservar a sessão do site (web).
         $request->session()->regenerate();
 
         return redirect()->intended(route('admin.dashboard'));
@@ -60,8 +63,9 @@ class AuthController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        Auth::logout();
-        $request->session()->invalidate();
+        Auth::guard('admin')->logout();
+
+        // Não invalida a sessão inteira: a autenticação de membro (web) deve permanecer.
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.login');

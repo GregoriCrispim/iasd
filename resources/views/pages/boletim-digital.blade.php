@@ -7,8 +7,9 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_25_07_2026';
+    $boletimBase = 'img/boletim/boletim_01_08_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
+    $oracaoBase = $boletimBase . '/M. Oração';
 
     $linkify = static function (?string $text): ?string {
         if ($text === null || $text === '') {
@@ -22,8 +23,8 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: BENIGNIDADE - GENTILEZA. O desafio da QUINTA semana de JULHO é: Ore para que a gentileza seja um reflexo diário do amor de Deus em suas atitudes, alcançando sua família, igreja e todos ao seu redor.';
-    $textoEmDefesaLiberdade = 'Perspectivas Jurídicas, Históricas e Teológicas sobre os Direitos Fundamentais. O alicerce de toda e qualquer sociedade democrática reside no respeito irrestrito e no exercício seguro dos direitos e das garantias fundamentais. Contudo, a contemporaneidade nos impõe uma reflexão crítica: observamos, globalmente, movimentos estruturados que tangenciam o enfraquecimento dessas prerrogativas jurídicas, com o nítido escopo de fragmentá-las e mitigá-las no horizonte social. Para debater a complexidade desse cenário, convidamos a comunidade acadêmica, juristas, pesquisadores e estudantes para um ciclo de palestras de alto nível técnico e intelectual. O evento contará com a exposição de Mestres e Doutores, além de renomados juristas e advogados, que cruzarão a análise dogmática do Direito Constitucional com as profundas advertências históricas e teológicas contidas no texto bíblico.<br><br>A Temática Central: Tomando como objeto de análise a exegese de Apocalipse 13:11 que descreve metodicamente a transição de um poder de aparência pacífica (cordeiro) para uma postura autocrática (dragão), o corpo de palestrantes debaterá as reais implicações jurídicas, geopolíticas e institucionais desse cenário em um futuro iminente.<br><br><strong>Programação e cronograma</strong><br>26 de julho (domingo): Painéis temáticos às 19h<br>Local: Igreja Adventista Central de Brasília – SGAS 611, Módulo 75 – Brasília/DF<br><br><strong>Informações sobre ingressos</strong><br>Gratuito mediante retirada de ingresso no Sympla pelo link: https://www.sympla.com.br/evento/palestra-em-defesa-da-liberdade/3491192 (evento de caráter acadêmico-cultural).<br>Inscrições: Imprescindíveis para controle de capacidade do auditório. Vagas limitadas à lotação do espaço.<br><br>Nota aos acadêmicos: Uma oportunidade única para o desenvolvimento do pensamento crítico, debate hermenêutico e networking com especialistas e referências das áreas jurídica e teológica. Garanta a sua participação!';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da PRIMEIRA semana de AGOSTO é BONDADE: Ore para praticar o bem dentro de casa, através de atitudes simples, serviço e palavras que edificam.';
+    $textoReuniaoOracao = 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -36,14 +37,14 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-07-15 at 13.12.57.jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.53.jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Agasalho.jpg',
+            'src' => $boletimBase . '/WhatsApp Image 2026-07-28 at 11.02.57.jpeg',
             'alt' => 'Campanha do agasalho',
             'title' => 'Campanha do Agasalho',
             'text' => 'A ASA está arrecadando agasalhos, cobertores e roupas de frio em geral. Colabore doando itens limpos e em bom estado de conservação; o que não lhe serve mais será de grande valia para famílias que enfrentam o rigor deste inverno. Deixe sua doação na caixa da ASA, localizada na recepção da igreja.',
@@ -74,14 +75,14 @@
             'src' => $boletimBase . '/Oi Amiga.jpg',
             'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
             'title' => 'Oi Amiga',
-            'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. No dia 25 de julho, às 16h30, teremos uma reunião on-line muito especial. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve essa data na sua agenda. Acesse o link: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform e inscreva-se! Contamos com a sua presença!',
+            'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. As reuniões serão on-line. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve a sua agenda. Acesse o link e inscreva-se: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Quebrando o Silêncio.jpg',
             'alt' => 'Quebrando o Silêncio — Idosos em Risco',
             'title' => 'Quebrando o Silêncio',
-            'text' => 'Idosos em Risco - A violência que atinge quem mais precisa de cuidado. Desde 2002 a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência, através do projeto QUEBRANDO O SILÊNCIO, neste ano o tema será "Idosos em Risco". No dia 22 de agosto, no período da tarde, realizaremos uma ação especial de amor e cuidado com uma visita a uma casa de repouso; você pode fazer a diferença participando conosco como voluntário ou contribuindo com doações de fraldas geriátricas, lenços umedecidos e produtos de higiene pessoal tais como: sabonete, xampu, creme hidratante, creme dental, escova de dente entre outros. Inscreva-se para participar através do link: https://forms.gle/DUjiLok9vspJXrvF7',
+            'text' => 'Idosos em Risco — A violência que atinge quem mais precisa de cuidado. Desde 2002, a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência por meio do projeto Quebrando o Silêncio. Neste ano, o tema será "Idosos em Risco". No dia 22 de agosto, às 15h, realizaremos uma ação especial de amor e cuidado com uma visita à pousada da Casa do Ceará. Você pode fazer a diferença participando conosco como voluntário ou contribuindo com doações de fraldas geriátricas (o item de maior necessidade), lenços umedecidos e produtos de higiene pessoal, tais como sabonete, xampu, creme hidratante, creme dental e escova de dente. Inscreva-se para participar através do link: https://forms.gle/DUjiLok9vspJXrvF7',
         ],
         [
             'type' => 'image',
@@ -92,6 +93,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $oracaoBase . '/01_08_2026.jpeg',
+            'alt' => 'Reunião de oração',
+            'title' => 'Reunião de Oração',
+            'text' => $textoReuniaoOracao,
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Quartas da Família.jpg',
             'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
             'title' => 'Quartas da Família',
@@ -99,31 +107,24 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Ceia.jpg',
-            'alt' => 'Ceia do Senhor',
-            'title' => 'Ceia',
-            'text' => 'Atenção! A nossa Santa Ceia precisou ser remarcada. Anote a nova data e programe-se: Sábado, 25 de julho, a partir das 08h30, com a cerimônia do lava-pés, aqui na Igreja Adventista Central de Brasília. Que possamos aproveitar esta semana para preparar nossos corações em oração e consagração para este momento tão especial de comunhão e gratidão. Compartilhe este aviso para que todos fiquem sabendo!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Oficina do Bem.jpg',
             'alt' => 'Oficina do Bem — Doutores de Esperança',
             'title' => 'Coração do Bem',
-            'text' => 'No mês de julho estaremos de férias, nossa oficina retornará em agosto, nas datas programadas.',
+            'text' => 'Participe da Oficina do Bem, às 9h, na sala dos Doutores de Esperança. Onde voluntários se reúnem para confeccionar corações de feltro que serão distribuídos aos pacientes durante os Plantões dos Doutores de Esperança. Qualquer pessoa pode participar. Venha! Nossa oficina acontece a cada 15 dias, siga nosso calendário e venha ser um voluntário.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Entrega de livros.jpg',
             'alt' => 'Entrega de livros missionários',
             'title' => 'Entrega de Livros',
-            'text' => 'Malas prontas? Não esqueça o essencial! As férias chegaram e o descanso é merecido, mas a nossa missão não tira folga. Onde quer que você vá neste período, a sua fé vai com você. Aproveite cada parada, cada reencontro e cada novo lugar para espalhar esperança. O livro "Contagem Regressiva" é o seu companheiro de viagem perfeito para alcançar corações por onde você passar. Antes de sair, passe no Centro White de publicações, pegue os seus exemplares e distribua esperança por onde os seus pés pisarem. Transforme seus dias de descanso em uma oportunidade eterna para a vida de alguém.',
+            'text' => 'O descanso acabou, mas a nossa missão só está começando! Agosto chegou e, com ele, renovamos nossas energias para o maior compromisso do nosso ano. As férias ficaram para trás, e agora o convite é direto para você: liderar e continuar o trabalho transformador de levar esperança às pessoas através do Impacto Esperança. Cada livro entregue é uma semente de transformação, uma resposta a uma oração e uma mensagem que atravessa vidas. A contagem regressiva já começou! Não deixe para depois. Ajuste sua agenda e junte-se a nós nessa corrente de fé e ação. A mensagem não pode parar, e a sua voz e suas mãos fazem toda a diferença nessa missão! Quem está pronto para fazer a diferença neste mês? Passe no Centro White e retire os livros que pretende entregar durante a semana.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Classe de Saúde - Divulgação.jpg',
-            'alt' => 'Classe de Saúde — férias em julho',
+            'alt' => 'Classe de Saúde — retorno em agosto',
             'title' => 'Classe de Saúde',
-            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília estará de férias. Retornaremos às nossas atividades em agosto.',
+            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília esteve de férias. Retornaremos às nossas atividades no dia 08 de agosto.',
         ],
         [
             'type' => 'image',
@@ -151,21 +152,21 @@
             'src' => $boletimBase . '/curso de noivos.jpg',
             'alt' => 'Curso de Noivos',
             'title' => 'Curso de Noivos',
-            'text' => 'Estão abertas as inscrições para o Curso de Noivos, que acontecerá no dia 8 de agosto, no auditório da APLaC, a partir das 8h45. Realize sua inscrição pelo link. https://eventos.adventistasbrasilia.org.br/event/cadastro_individual/381',
+            'text' => 'Estão abertas as inscrições para o Curso de Noivos, que acontecerá no dia 8 de agosto, no auditório da APLaC, a partir das 8h45. Atenção! Restam poucas vagas! Realize sua inscrição pelo link. https://eventos.adventistasbrasilia.org.br/event/cadastro_individual/381',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Quartas de Poder 2026.jpg',
             'alt' => 'Quartas de Poder — O Mover do Espírito',
             'title' => 'Quartas de Poder',
-            'text' => 'Convidamos toda a comunidade para o culto especial do projeto Quartas de Poder, que será realizado nesta quarta-feira, dia 29 de julho, às 19h30, com o tema "O Mover do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. O sermão desta noite será ministrado pela oradora Zuleica Medeiros. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
+            'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30, com o tema "O Mover do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Em-defesa-da-liberdade.jpg',
-            'alt' => 'Série Em Defesa da Liberdade',
-            'title' => 'Em Defesa da Liberdade',
-            'text' => $textoEmDefesaLiberdade,
+            'src' => $boletimBase . '/Série Coisas Estranhas.png',
+            'alt' => 'Série Coisas Estranhas — Domingos Especiais',
+            'title' => 'Coisas Estranhas',
+            'text' => 'Fenômenos estranhos no espaço têm despertado a atenção de autoridades globais e alimentado intensas investigações oficiais, dividindo opiniões entre tecnologia humana desconhecida, inteligência extraterrestre ou fenômenos de origem ainda mais profunda. Antes de aceitar qualquer teoria, a nova série dos Domingos Especiais investiga o tema sob a perspectiva das Escrituras Sagradas para revelar o verdadeiro significado dos sinais nos céus e o impacto direto desses acontecimentos no seu cotidiano. Acompanhe a série especial intitulada COISAS ESTRANHAS, transmitida às 19h, todos os domingos durante os meses de agosto e setembro. Participe!',
         ],
         [
             'type' => 'image',
@@ -180,6 +181,13 @@
             'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
             'title' => 'Rádio Novo Tempo',
             'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial será no dia 24 de julho, às 18h. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/CEMAB.jpg',
+            'alt' => 'CEMAB — matrículas abertas',
+            'title' => 'CEMAB',
+            'text' => 'O Centro Musical Adventista de Brasília está com matrículas abertas. O futuro musical do seu filho começa aqui! Queridos pais e responsáveis, as matrículas para o 2º módulo de 2026 do CEMAB já estão abertas! Sabemos como a música é fundamental para o desenvolvimento do foco, da criatividade e da disciplina das crianças e jovens. Por isso, preparamos um semestre com muita prática e aprendizado! Vagas limitadas: Garanta o melhor horário para a rotina do seu filho. Clique no link e garanta agora mesmo sua vaga: https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAbJLm9tUNzdTWjRUSzZPNzFUUVlOODRYOFdGRVRRNC4u',
         ],
         [
             'type' => 'image',

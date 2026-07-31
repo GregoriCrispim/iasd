@@ -1,20 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ApprovalsController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CmsBlockController;
+use App\Http\Controllers\Admin\CmsCompareController;
+use App\Http\Controllers\Admin\CmsPageController;
+use App\Http\Controllers\Admin\CmsPreviewController;
+use App\Http\Controllers\Admin\CmsRevisionController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GalleryAlbumController;
+use App\Http\Controllers\Admin\GalleryFaceController;
+use App\Http\Controllers\Admin\MemberInviteController;
+use App\Http\Controllers\Admin\UploadsController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\MemberAuthController;
+use App\Http\Controllers\FaceSearchController;
+use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
-use App\Http\Controllers\GaleriaController;
-use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\CmsPageController;
-use App\Http\Controllers\Admin\CmsBlockController;
-use App\Http\Controllers\Admin\CmsRevisionController;
-use App\Http\Controllers\Admin\ApprovalsController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\UploadsController;
-use App\Http\Controllers\Admin\CmsPreviewController;
-use App\Http\Controllers\Admin\CmsCompareController;
-use App\Http\Controllers\Admin\GalleryAlbumController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +26,8 @@ use App\Http\Controllers\Admin\GalleryAlbumController;
 |--------------------------------------------------------------------------
 */
 
-// Autenticação
-Route::middleware('guest')->group(function () {
+// Autenticação do painel (guard: admin)
+Route::middleware('guest:admin')->group(function () {
     Route::get('/login', fn () => redirect()->route('admin.login'))->name('login');
     Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('admin.login');
     Route::post('/admin/login', [AuthController::class, 'login'])
@@ -32,10 +36,26 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/admin/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')
+    ->middleware('auth:admin')
     ->name('admin.logout');
 
-Route::middleware(['auth'])
+// Autenticação de membros no site (guard: web) — sessão independente do painel.
+// Sem guest:web: sessão residual de não-membro (ex.: login antigo do painel no mesmo cookie)
+// não pode bloquear /entrar e /cadastrar.
+Route::get('/entrar', [MemberAuthController::class, 'showLogin'])->name('member.login');
+Route::post('/entrar', [MemberAuthController::class, 'login'])
+    ->middleware('throttle:10,1')
+    ->name('member.login.post');
+Route::get('/cadastrar', [MemberAuthController::class, 'showRegister'])->name('member.register');
+Route::post('/cadastrar', [MemberAuthController::class, 'register'])
+    ->middleware('throttle:10,1')
+    ->name('member.register.post');
+
+Route::post('/sair', [MemberAuthController::class, 'logout'])
+    ->middleware('auth:web')
+    ->name('member.logout');
+
+Route::middleware(['auth:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -92,6 +112,12 @@ Route::middleware(['auth'])
                 Route::get('/cms/pages/{page}/edit', [CmsPageController::class, 'edit'])->name('pages.edit');
                 Route::put('/cms/pages/{page}', [CmsPageController::class, 'update'])->name('pages.update');
 
+                // Convites de membros (somente super-admin)
+                Route::get('/convites', [MemberInviteController::class, 'index'])->name('invites.index');
+                Route::post('/convites', [MemberInviteController::class, 'store'])->name('invites.store');
+                Route::post('/convites/{invite}/toggle', [MemberInviteController::class, 'toggle'])->name('invites.toggle');
+                Route::delete('/convites/{invite}', [MemberInviteController::class, 'destroy'])->name('invites.destroy');
+
                 Route::get('/cms/blocks', [CmsBlockController::class, 'index'])->name('blocks.index');
                 Route::get('/cms/blocks/create', [CmsBlockController::class, 'create'])->name('blocks.create');
                 Route::post('/cms/blocks', [CmsBlockController::class, 'store'])->name('blocks.store');
@@ -115,6 +141,13 @@ Route::middleware(['auth'])
                 ->name('galeria.upload');
             Route::post('/galeria/{album}/photos/{photo}/cover', [GalleryAlbumController::class, 'setCover'])->name('galeria.photos.cover');
             Route::delete('/galeria/{album}/photos/{photo}', [GalleryAlbumController::class, 'destroyPhoto'])->name('galeria.photos.destroy');
+
+            // Reconhecimento facial: indexação/reprocessamento no navegador
+            Route::get('/galeria/{album}/faces', [GalleryFaceController::class, 'index'])->name('galeria.faces');
+            Route::get('/galeria/{album}/faces/queue', [GalleryFaceController::class, 'queue'])->name('galeria.faces.queue');
+            Route::post('/galeria/{album}/faces/{photo}', [GalleryFaceController::class, 'store'])
+                ->middleware('throttle:300,1')
+                ->name('galeria.faces.store');
         });
     });
 
@@ -158,11 +191,16 @@ Route::get('/galeria', [GaleriaController::class, 'index'])->name('galeria');
 // que serve URLs terminadas em extensão (.webp) como arquivo estático antes de rotear.
 Route::get('/galeria/thumb', [GaleriaController::class, 'thumb'])->name('galeria.thumb');
 Route::get('/galeria/{evento}/download', [GaleriaController::class, 'download'])->name('galeria.download');
+// Busca facial autenticada e fortemente limitada por usuário/IP
+Route::post('/galeria/{evento}/busca-facial', [FaceSearchController::class, 'search'])
+    ->middleware(['auth:web', 'throttle:20,1'])
+    ->name('galeria.busca-facial');
 Route::get('/galeria/{evento}', [GaleriaController::class, 'show'])->name('galeria.show');
 
 // Time de desenvolvimento
 Route::view('/time-de-desenvolvimento', 'pages.time-desenvolvimento')->name('time-desenvolvimento');
 Route::view('/faq', 'pages.faq')->name('faq');
+Route::view('/politica-de-privacidade', 'pages.politica-privacidade')->name('privacidade');
 
 // Formulários
 Route::post('/contato/enviar', [PageController::class, 'enviarContato'])->name('contato.enviar');

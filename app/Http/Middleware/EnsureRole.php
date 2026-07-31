@@ -15,9 +15,10 @@ class EnsureRole
      */
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        $user = $request->user();
+        // Preferência: usuário do guard ativo da rota (admin no painel).
+        $user = $request->user('admin') ?? $request->user();
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             abort(403);
         }
 
@@ -25,7 +26,7 @@ class EnsureRole
             return $next($request);
         }
 
-        if (!$user->hasAnyRoleName($roles)) {
+        if (! $user->hasAnyRoleName($roles)) {
             abort(403);
         }
 

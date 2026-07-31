@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 class GalleryPhoto extends Model
@@ -49,6 +50,11 @@ class GalleryPhoto extends Model
     public function uploader(): BelongsTo
     {
         return $this->belongsTo(User::class, 'uploaded_by');
+    }
+
+    public function faceDescriptors(): HasMany
+    {
+        return $this->hasMany(GalleryFaceDescriptor::class, 'gallery_photo_id');
     }
 
     /**
@@ -220,6 +226,7 @@ class GalleryPhoto extends Model
      * Shape esperado pelo JS da galeria pública.
      *
      * @return array{
+     *     id:int,              id estável, usado pelo filtro de busca facial
      *     name:string,
      *     url:string,          versão de overlay (alta qualidade na tela)
      *     thumbUrl:string,     miniatura da grade (baixa resolução)
@@ -230,6 +237,7 @@ class GalleryPhoto extends Model
     public function toPublicArray(): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->original_filename ?: $this->basename(),
             'url' => $this->displayUrl(),
             'thumbUrl' => $this->thumbUrl(),

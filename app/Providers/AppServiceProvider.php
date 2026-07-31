@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Support\Cms;
 use App\Support\CmsWorkflow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
@@ -33,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('admin.layout', function ($view): void {
-            $user = Auth::user();
+            $user = Auth::guard('admin')->user();
             $count = $user instanceof User ? CmsWorkflow::pendingApprovalsCount($user) : 0;
             $view->with('pendingApprovalsCount', $count);
         });

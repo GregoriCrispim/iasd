@@ -21,6 +21,7 @@
         data-album-published="{{ $album->is_published ? '1' : '0' }}"
         onclick="admOpenAlbumEditModal(this)"
     ><i class="bi bi-pencil"></i> Editar</button>
+    <a href="{{ route('admin.galeria.faces', $album) }}" class="btn btn-secondary"><i class="bi bi-person-bounding-box"></i> Reconhecimento facial</a>
     @if ($album->is_published)
         <a href="{{ route('galeria.show', $album->slug) }}" class="btn btn-secondary" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Ver no site</a>
     @endif
@@ -399,6 +400,9 @@
 
     function appendUploadedPhoto(photo) {
         if (!albumGrid) return;
+        if (typeof window.faceIndexEnqueue === 'function') {
+            try { window.faceIndexEnqueue(photo); } catch (e) {}
+        }
         albumPhotos.push(photo);
         albumPhotoCount++;
         invalidateAlbumPagesFrom(albumTotalPages());
@@ -823,4 +827,87 @@
     renderQueue();
 })();
 </script>
+
+@if (config('face.enabled'))
+<script type="application/json" id="faceConfig">{!! json_encode([
+    'scriptUrl' => config('face.script_url'),
+    'modelsUrl' => config('face.models_url'),
+    'modelVersion' => config('face.version'),
+    'csrf' => csrf_token(),
+    'storeTemplate' => route('admin.galeria.faces.store', [$album, '__PID__']),
+    'photo' => [
+        'minScore' => (float) config('face.detection.photo.min_score', 0.5),
+        'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.02),
+        'maxFaces' => (int) config('face.detection.photo.max_faces', 60),
+        'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1024),
+    ],
+], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
+<script src="{{ asset('js/face-engine.js') }}?v={{ filemtime(public_path('js/face-engine.js')) }}"></script>
+<script>
+(function () {
+    // Indexa faces das fotos recém-enviadas, direto no navegador, logo após o
+    // upload. Falhas aqui nunca bloqueiam o envio: a foto fica 'pending' e pode
+    // ser reprocessada na tela de Reconhecimento facial.
+    var CONFIG = {};
+    try { CONFIG = JSON.parse(document.getElementById('faceConfig').textContent || '{}'); } catch (e) {}
+    window.FACE_CONFIG = CONFIG;
+    var cfg = CONFIG.photo || {};
+    var csrf = CONFIG.csrf;
+    var storeTemplate = CONFIG.storeTemplate;
+
+    var pending = [];
+    var working = false;
+
+    function postResult(photoId, payload) {
+        var url = storeTemplate.replace('__PID__', encodeURIComponent(photoId));
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrf,
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify(payload)
+        });
+    }
+
+    function drain() {
+        if (working) return;
+        var photo = pending.shift();
+        if (!photo) return;
+        working = true;
+
+        var url = photo.url || photo.thumb_url;
+        window.FaceEngine.loadImage(url).then(function (img) {
+            return window.FaceEngine.detectAll(img, {
+                maxSide: cfg.maxSide || 1024,
+                minScore: cfg.minScore || 0.5,
+                minSizeRatio: cfg.minSizeRatio || 0.02,
+                maxFaces: cfg.maxFaces || 60
+            });
+        }).then(function (faces) {
+            return postResult(photo.id, {
+                status: faces.length ? 'ready' : 'no_face',
+                faces: faces,
+                reason: faces.length ? null : 'Nenhum rosto detectado.'
+            });
+        }).catch(function (err) {
+            return postResult(photo.id, { status: 'failed', reason: String(err && err.message ? err.message : err).slice(0, 200) }).catch(function () {});
+        }).then(function () {
+            working = false;
+            if (pending.length) setTimeout(drain, 0);
+        });
+    }
+
+    window.faceIndexEnqueue = function (photo) {
+        if (!photo || !photo.id) return;
+        pending.push(photo);
+        if (window.FaceEngine) {
+            window.FaceEngine.preload().then(drain).catch(function () {});
+        }
+    };
+})();
+</script>
+@endif
 @endpush

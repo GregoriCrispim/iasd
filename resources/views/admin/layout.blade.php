@@ -1,6 +1,6 @@
 @php
     /** @var \App\Models\User|null $authUser */
-    $authUser = auth()->user();
+    $authUser = auth('admin')->user();
     $isSuper = $authUser && $authUser->isSuperAdmin();
     $isManager = $authUser && $authUser->isManager();
     $canGaleria = $authUser && $authUser->canManageGaleria();
@@ -70,6 +70,12 @@
                 <div class="adm-nav-group">Gestão</div>
                 <a href="{{ route('admin.users.index') }}" class="{{ $active === 'users' ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Usuários
+                </a>
+            @endif
+
+            @if ($isSuper)
+                <a href="{{ route('admin.invites.index') }}" class="{{ $active === 'invites' ? 'active' : '' }}">
+                    <i class="bi bi-ticket-perforated"></i> Convites de membros
                 </a>
             @endif
         </nav>

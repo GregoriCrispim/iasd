@@ -5,7 +5,7 @@
 @section('heading', 'Início')
 
 @section('content')
-    <p class="text-muted mt-0">Bem-vindo(a), <strong>{{ auth()->user()->name }}</strong>.</p>
+    <p class="text-muted mt-0">Bem-vindo(a), <strong>{{ auth('admin')->user()->name }}</strong>.</p>
 
     <div class="stat-grid">
         @if ($isSuper ?? false)

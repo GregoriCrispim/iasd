@@ -12,29 +12,29 @@ class CmsPreviewController extends Controller
 {
     public function show(CmsRevision $cmsRevision): Response
     {
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             abort(403);
         }
 
         $page = $cmsRevision->block?->page;
         $routeName = $page?->route_name;
 
-        if (!is_string($routeName) || $routeName === '' || !$page?->cms_enabled) {
+        if (! is_string($routeName) || $routeName === '' || ! $page?->cms_enabled) {
             abort(404);
         }
 
-        if (!$user->isSuperAdmin()) {
+        if (! $user->isSuperAdmin()) {
             // Gestores podem visualizar revisões dos seus colaboradores e as próprias.
             if ($user->isManager()) {
                 $author = $cmsRevision->author;
-                if (!$author || ($author->manager_id !== $user->id && $author->id !== $user->id)) {
+                if (! $author || ($author->manager_id !== $user->id && $author->id !== $user->id)) {
                     abort(403);
                 }
             }
 
-            if (!$user->canEditPage($routeName) && !$user->canApprovePage($routeName)) {
+            if (! $user->canEditPage($routeName) && ! $user->canApprovePage($routeName)) {
                 abort(403);
             }
         }

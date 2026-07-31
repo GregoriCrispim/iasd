@@ -6,6 +6,7 @@ use App\Models\GalleryAlbum;
 use App\Models\GalleryPhoto;
 use App\Services\GalleryImageProcessor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use ZipArchive;
@@ -37,7 +38,7 @@ class GaleriaController extends Controller
 
         $months = [];
         foreach ($eventos as $evento) {
-            if (!$evento['rawDate'] || isset($months[$evento['monthKey']])) {
+            if (! $evento['rawDate'] || isset($months[$evento['monthKey']])) {
                 continue;
             }
             $months[$evento['monthKey']] = $evento['monthLabel'];
@@ -61,15 +62,18 @@ class GaleriaController extends Controller
             ->with(['coverPhoto', 'photos'])
             ->firstOrFail();
 
-        return view('pages.galeria.evento', [
-            'evento' => $album->toPublicSummary(),
-            'fotos' => $album->photos
-                ->filter(fn (GalleryPhoto $photo) => is_file($photo->absolutePath()))
-                ->map(fn (GalleryPhoto $photo) => $photo->toPublicArray())
-                ->values()
-                ->all(),
-            'fotosPorLote' => self::FOTOS_POR_LOTE,
-        ]);
+        return response()
+            ->view('pages.galeria.evento', [
+                'evento' => $album->toPublicSummary(),
+                'fotos' => $album->photos
+                    ->filter(fn (GalleryPhoto $photo) => is_file($photo->absolutePath()))
+                    ->map(fn (GalleryPhoto $photo) => $photo->toPublicArray())
+                    ->values()
+                    ->all(),
+                'fotosPorLote' => self::FOTOS_POR_LOTE,
+            ])
+            // A busca facial usa a câmera (getUserMedia) na própria origem.
+            ->header('Permissions-Policy', 'camera=(self)');
     }
 
     /**
@@ -152,7 +156,7 @@ class GaleriaController extends Controller
 
         $zipPath = tempnam(sys_get_temp_dir(), 'galeria_zip_');
 
-        $zip = new ZipArchive();
+        $zip = new ZipArchive;
         $zip->open($zipPath, ZipArchive::OVERWRITE);
 
         foreach ($photos as $photo) {
@@ -170,7 +174,7 @@ class GaleriaController extends Controller
     }
 
     /**
-     * @param  \Illuminate\Support\Collection<int, GalleryAlbum>  $albums
+     * @param  Collection<int, GalleryAlbum>  $albums
      * @return list<array{eventoId:string,eventoTitle:string,eventoDate:?string,imageUrl:string}>
      */
     private function buildCarrossel($albums): array
@@ -223,7 +227,7 @@ class GaleriaController extends Controller
         ];
 
         $loader = $loaders[$ext] ?? null;
-        if (!$loader || !function_exists($loader) || !function_exists('imagewebp')) {
+        if (! $loader || ! function_exists($loader) || ! function_exists('imagewebp')) {
             return false;
         }
 

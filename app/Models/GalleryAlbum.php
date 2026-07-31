@@ -39,6 +39,11 @@ class GalleryAlbum extends Model
         return $this->belongsTo(GalleryPhoto::class, 'cover_photo_id');
     }
 
+    public function faceDescriptors(): HasMany
+    {
+        return $this->hasMany(GalleryFaceDescriptor::class, 'gallery_album_id');
+    }
+
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -87,7 +92,7 @@ class GalleryAlbum extends Model
 
     public function dateLong(): ?string
     {
-        if (!$this->event_date) {
+        if (! $this->event_date) {
             return null;
         }
 
@@ -103,7 +108,7 @@ class GalleryAlbum extends Model
 
     public function monthLabel(): string
     {
-        if (!$this->event_date) {
+        if (! $this->event_date) {
             return '';
         }
 
