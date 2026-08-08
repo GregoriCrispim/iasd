@@ -49,16 +49,246 @@
     </ul>
 </div>
 
-<a class="boletim-home" href="{{ route('boletim-digital') }}" aria-label="Acessar boletim digital">
-    <div class="boletim-home__content">
-        <div class="boletim-home__text">
-            <span class="boletim-home__eyebrow">Central Informa</span>
+<section class="boletim-preview-section">
+    <div class="boletim-preview-container">
+        <div class="boletim-preview-header">
+            <span class="boletim-preview-eyebrow">Central Informa</span>
             <h2 class="acb-title-serif">Boletim Informativo</h2>
             <p>Fique por dentro das atividades da semana da IASD Central de Brasília.</p>
         </div>
-        <span class="boletim-home__button">Acessar boletim</span>
+
+        @php
+            $boletimBase = 'img/boletim/boletim_08_08_2026';
+            $oracao365Base = $boletimBase . '/365 Dias de Oração';
+
+            $linkify = static function (?string $text): ?string {
+                if ($text === null || $text === '') {
+                    return $text;
+                }
+                return preg_replace(
+                    '~(https?://[^\s<]+)~',
+                    '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>',
+                    $text
+                );
+            };
+
+            $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da SEGUNDA semana de AGOSTO é BONDADE: Ore para que Deus lhe mostre oportunidades reais de ajudar alguém durante a semana.';
+
+            $boletins = [
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Culto Permanente.jpg',
+                    'alt' => 'Culto Permanente',
+                    'title' => 'Culto Permanente',
+                    'text' => 'Participe do Culto Permanente coordenado pela Igreja Adventista Central de Brasília. Um momento especial de paz, oração e fortalecimento espiritual para todos. Todo 3º sábado de cada mês, às no Hospital Brasília Lago Sul, Espaço Energia.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.51 (2).jpeg',
+                    'alt' => '365 Dias de Oração — Jornada de Oração',
+                    'title' => '365 Dias de Oração',
+                    'text' => $texto365Dias,
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Agasalho.jpg',
+                    'alt' => 'Campanha do agasalho',
+                    'title' => 'Campanha do Agasalho',
+                    'text' => 'A ASA está arrecadando agasalhos, cobertores e roupas de frio em geral. Colabore doando itens limpos e em bom estado de conservação; o que não lhe serve mais será de grande valia para famílias que enfrentam o rigor deste inverno.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Bordado.jpg',
+                    'alt' => 'Curso de bordado ASA',
+                    'title' => 'Curso de Bordado',
+                    'text' => 'Oportunidade Imperdível: Curso de Bordado ASA! Venha aprender técnicas exclusivas para confeccionar lindas peças. Aprender a bordar é uma excelente oportunidade para empreender e conquistar uma renda extra. Todos os domingos às 9h.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Voluntariado.jpeg',
+                    'alt' => 'Voluntariado nos ministérios da igreja',
+                    'title' => 'Voluntariado',
+                    'text' => 'Seja voluntário em um de nossos ministérios! Acesse o link/QR Code e escolha o departamento da igreja que mais combina com você.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/PG FEm.jpeg',
+                    'alt' => 'Pequeno Grupo Feminino',
+                    'title' => 'PG Feminino',
+                    'text' => 'Atenção mulheres! Temos um encontro especial a cada 15 dias no nosso PG Feminino, um espaço de acolhimento, amizade e fé.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Oi Amiga!.jpg',
+                    'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
+                    'title' => 'Oi Amiga',
+                    'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Quebrando o Silêncio.jpg',
+                    'alt' => 'Quebrando o Silêncio — Idosos em Risco',
+                    'title' => 'Quebrando o Silêncio',
+                    'text' => 'Idosos em Risco — A violência que atinge quem mais precisa de cuidado. Desde 2002, a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência por meio do projeto Quebrando o Silêncio.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Encontro de Mulheres com Darleide.jpg',
+                    'alt' => 'Encontro especial de mulheres — Vida que Eleva',
+                    'title' => 'Encontro Especial de Mulheres',
+                    'text' => 'Queridas amigas, devido à necessidade de recuperação da nossa querida Darleide Alves, o encontro "Vida que Eleva" foi transferido para o dia 22 de agosto, no mesmo horário.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Quartas da Família.jpg',
+                    'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
+                    'title' => 'Quartas da Família',
+                    'text' => 'Queridos irmãos, o Ministério da Família da Igreja Central de Brasília convida você e sua família para a série "Chaves da Felicidade Familiar", que acontecerá de 05 de agosto a 23 de setembro.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Oficina do Bem.jpg',
+                    'alt' => 'Oficina do Bem — Doutores de Esperança',
+                    'title' => 'Coração do Bem',
+                    'text' => 'Participe da Oficina do Bem, às 9h, na sala dos Doutores de Esperança. Onde voluntários se reúnem para confeccionar corações de feltro.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Entrega de livros.jpg',
+                    'alt' => 'Entrega de livros missionários',
+                    'title' => 'Entrega de Livros',
+                    'text' => 'O descanso acabou, mas a nossa missão só está começando! Agosto chegou e, com ele, renovamos nossas energias para o maior compromisso do nosso ano.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Classe de Saúde - Divulgação.jpg',
+                    'alt' => 'Classe de Saúde — retorno em 15 de agosto',
+                    'title' => 'Classe de Saúde',
+                    'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília esteve de férias. Retornaremos às nossas atividades no dia 15 de agosto.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/SGI.jpg',
+                    'alt' => 'SGI — Sistema de Gerenciamento de Interessados',
+                    'title' => 'SGI',
+                    'text' => 'Está no ar o SGI - Sistema de Gerenciamento de Interessados. Querido membro, se você está estudando a Bíblia com alguém, a Igreja Central conta agora com um sistema de cadastro de interessados.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Classe pós-batismo.jpg',
+                    'alt' => 'Classe Pós-Batismo — Programa de Discipulado 2026',
+                    'title' => 'Classe Pós-Batismo',
+                    'text' => 'Queridos membros, aos sábados, às 10h45, na Sala do Ministério de Oração, acontece o Programa de Discipulado da Classe Pós-Batismal de 2026.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Francês.jpeg',
+                    'alt' => 'Classe de Escola Sabatina em Francês',
+                    'title' => 'Classe de Francês',
+                    'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta!',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Quartas de Poder 2026.jpg',
+                    'alt' => 'Quartas de Poder — O Mover do Espírito',
+                    'title' => 'Quartas de Poder',
+                    'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Série Coisas Estranhas.png',
+                    'alt' => 'Série Coisas Estranhas — Domingos Especiais',
+                    'title' => 'Coisas Estranhas',
+                    'text' => 'A morte é um grande mistério. Afinal, o que realmente acontece quando fechamos os olhos pela última vez? Venha participar da nova série dos domingos especiais.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/cientistas adventistas.jpg',
+                    'alt' => 'VII Congresso Internacional de Cientistas Adventistas',
+                    'title' => 'Congresso de Cientistas Adventistas',
+                    'text' => 'Ciência, Fé e Redenção: interpretando o mundo à luz do grande conflito. A sétima edição do Congresso Internacional será realizada de 11 a 13 de setembro de 2026 em Cachoeira–BA.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Rádio NT.jpeg',
+                    'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
+                    'title' => 'Rádio Novo Tempo',
+                    'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal. O lançamento oficial será no dia 24 de julho, às 18h.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Sementes Musicais.jpg',
+                    'alt' => 'Sementes Musicais — flautas doces no CEMAB',
+                    'title' => 'Sementes Musicais',
+                    'text' => 'O projeto de musicalização através das flautas doces denominado Sementes Musicais retomará suas atividades no próximo sábado, dia 15 de agosto.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/CEMAB.jpg',
+                    'alt' => 'CEMAB — matrículas abertas',
+                    'title' => 'CEMAB',
+                    'text' => 'O Centro Musical Adventista de Brasília está com matrículas abertas. Queridos pais e responsáveis, as matrículas para o 2º módulo de 2026 do CEMAB já estão abertas!',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Orquestra CEMAB.jpg',
+                    'alt' => 'Orquestra CEMAB — ensaios semanais',
+                    'title' => 'Orquestra CEMAB',
+                    'text' => 'A Orquestra CEMAB retomará suas atividades no próximo sábado, dia 15 de agosto, promovendo ensaios semanais.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/Desbravadores.jpg',
+                    'alt' => 'Apoie um Desbravador — Campori DSA 2027',
+                    'title' => 'Rumo ao Campori da DSA 2027',
+                    'text' => 'O Clube de Desbravadores Cruzeiro do Sul já está se preparando para participar do Campori da Divisão Sul-Americana, o maior encontro de Desbravadores.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/ave_branca_run.jpeg',
+                    'alt' => 'Corrida Ave Branca — 60 anos',
+                    'title' => 'Corrida Ave Branca',
+                    'text' => 'O Ministério Jovem da Igreja Adventista Central de Brasília está apoiando a corrida comemorativa de 60 anos do Clube de Desbravadores Ave Branca.',
+                ],
+                [
+                    'type' => 'image',
+                    'src' => $boletimBase . '/ZAP.jpg',
+                    'alt' => 'Canal Central Informa no WhatsApp',
+                    'title' => 'Canal WhatsApp',
+                    'text' => 'Perdeu algum detalhe dos nossos anúncios? Não se preocupe. O Central Informa está disponível no nosso canal oficial no WhatsApp.',
+                ],
+            ];
+
+            foreach ($boletins as &$boletim) {
+                if (!empty($boletim['text'])) {
+                    $boletim['text'] = $linkify($boletim['text']);
+                }
+            }
+            unset($boletim);
+        @endphp
+
+        <div class="boletim-preview-grid" id="boletim-preview-grid">
+            @foreach ($boletins as $index => $boletim)
+                <article class="boletim-preview-item {{ $index >= 4 ? 'boletim-preview-item--hidden' : '' }}" style="--item-index: {{ $index }}">
+                    <div class="boletim-preview-item__image">
+                        <img src="{{ asset($boletim['src']) }}" alt="{{ $boletim['alt'] }}" loading="{{ $index < 4 ? 'eager' : 'lazy' }}" decoding="async" width="400" height="225">
+                    </div>
+                    <div class="boletim-preview-item__content">
+                        <h3 class="boletim-preview-item__title">{{ $boletim['title'] }}</h3>
+                        <p class="boletim-preview-item__text">{!! $boletim['text'] !!}</p>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+
+        <div class="boletim-preview-actions">
+            <button type="button" class="boletim-preview-toggle" id="boletim-preview-toggle" aria-expanded="false">
+                <span class="boletim-preview-toggle__label">Ver mais tópicos</span>
+                <span class="boletim-preview-toggle__icon" aria-hidden="true"></span>
+            </button>
+        </div>
     </div>
-</a>
+</section>
 
 <section class="noticias-section">
     <div class="noticias-container">
@@ -217,6 +447,7 @@
 @endsection
 
 @push('scripts')
+<script src="{{ asset('js/home.js') }}" defer></script>
 <script src="{{ asset('js/slider.js') }}" defer></script>
 <script src="{{ asset('js/canais.js') }}" defer></script>
 <script src="{{ asset('js/videos_youtube.js') }}" defer></script>
