@@ -9,15 +9,40 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, gd, zip
+          coverage: none
+
+      # Valida o composer.lock e regenera o discovery sem Spatie/Filament.
+      # O vendor da Hostgator já tem o Laravel; não enviamos vendor via FTP
+      # (upload enorme e lento). O packages.php limpo sobrescreve o cache antigo.
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+      - name: Refresh package discovery cache
+        run: |
+          php artisan package:discover --ansi
+          test -f bootstrap/cache/packages.php
+          if grep -qiE 'spatie|filament' bootstrap/cache/packages.php; then
+            echo "FAIL: packages.php ainda referencia Spatie/Filament"
+            exit 1
+          fi
+          echo "Package discovery OK (sem Spatie/Filament)."
 
       - name: Verify deploy payload
         run: |
           test -f artisan
           test -d public
+          test ! -d vendor/filament
+          test ! -d vendor/spatie/laravel-permission
           echo "Deploy payload ready."
 
       - name: Sync files via FTP
@@ -34,4 +59,15 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
+            **/vendor/**
             .github/**
+            .env
+            .env.*
+            tests/**
+            phpunit.xml
+            .composer-cache/**
+            .composer-home/**
+            storage/logs/**
+            storage/framework/cache/**
+            storage/framework/sessions/**
+            storage/framework/views/**

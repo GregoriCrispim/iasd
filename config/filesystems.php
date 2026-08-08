@@ -47,6 +47,17 @@ return [
             'report' => false,
         ],
 
+        // Fica dentro de public/ de propósito: a hospedagem compartilhada não
+        // permite rodar `storage:link`, então servir por symlink não é viável.
+        'galeria' => [
+            'driver' => 'local',
+            'root' => public_path('img/galeria/uploads'),
+            'url' => '/img/galeria/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

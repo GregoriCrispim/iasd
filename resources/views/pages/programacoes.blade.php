@@ -469,6 +469,15 @@
 </style>
 @endpush
 
+@php
+    $programacoesHeroFallback = <<<'HTML'
+<p>
+    Confira todas as programações e eventos da IASD Central de Brasília para o ano de 2026.
+    Reuniões espirituais, convenções, congressos e muito mais. Marque sua presença e cresça conosco na fé!
+</p>
+HTML;
+@endphp
+
 @section('content')
 <img class="page-header-img" src="{{ asset('img/cards/programacoes/programacoes_header.webp') }}" alt="Programações 2026" fetchpriority="high" decoding="async">
 
@@ -477,10 +486,7 @@
     <!-- Seção Introdutória -->
     <div class="programacoes-hero">
         <h1 class="acb-title-serif">Programações 2026</h1>
-        <p>
-            Confira todas as programações e eventos da IASD Central de Brasília para o ano de 2026.
-            Reuniões espirituais, convenções, congressos e muito mais. Marque sua presença e cresça conosco na fé!
-        </p>
+        @cmsBlock('hero_text', $programacoesHeroFallback)
     </div>
 
     <div class="programacoes-surface">

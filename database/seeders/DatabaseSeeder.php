@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        Role::query()->firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'manager', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'collaborator', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'fotografia', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'member', 'guard_name' => 'web']);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $user = User::query()->updateOrCreate(
+            ['email' => 'gregoridesbravador@gmail.com'],
+            [
+                'name' => 'Super Admin',
+                'password' => 'Admin123',
+                'email_verified_at' => Carbon::now(),
+            ],
+        );
+
+        $user->syncRoles(['super_admin']);
+
+        $fotoUser = User::query()->updateOrCreate(
+            ['email' => 'fotografia@adventistascentralbrasilia.org'],
+            [
+                'name' => 'Ministério de Fotografia',
+                'password' => 'Foto@2026',
+                'email_verified_at' => Carbon::now(),
+            ],
+        );
+
+        $fotoUser->syncRoles(['fotografia']);
     }
 }

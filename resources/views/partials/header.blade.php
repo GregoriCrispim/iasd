@@ -28,6 +28,7 @@
                     <li><a href="{{ route('criacionismo') }}">Criacionismo</a></li>
                     <li><a href="{{ route('evidencias-biblicas') }}">Evidências bíblicas</a></li>
                     <li><a href="{{ route('filmes-series') }}">Filmes e séries</a></li>
+                    <li><a href="{{ route('galeria') }}">Galeria de Fotos</a></li>
                     <li><a href="{{ route('profecias') }}">Profecias</a></li>
                     <li><a href="{{ route('radio-tv-novo-tempo') }}">Rádio e TV Novo Tempo</a></li>
                 </ul>

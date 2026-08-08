@@ -41,4 +41,8 @@ return [
         'sheet_name' => env('GOOGLE_SHEETS_SHEET_NAME', 'Respostas'),
     ],
 
+    'youtube' => [
+        'api_key' => env('YOUTUBE_API_KEY'),
+    ],
+
 ];
