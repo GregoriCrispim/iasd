@@ -7,9 +7,8 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_01_08_2026';
+    $boletimBase = 'img/boletim/boletim_08_08_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
-    $oracaoBase = $boletimBase . '/M. Oração';
 
     $linkify = static function (?string $text): ?string {
         if ($text === null || $text === '') {
@@ -23,8 +22,7 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da PRIMEIRA semana de AGOSTO é BONDADE: Ore para praticar o bem dentro de casa, através de atitudes simples, serviço e palavras que edificam.';
-    $textoReuniaoOracao = 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da SEGUNDA semana de AGOSTO é BONDADE: Ore para que Deus lhe mostre oportunidades reais de ajudar alguém durante a semana.';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -37,14 +35,14 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.53.jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.51 (2).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/WhatsApp Image 2026-07-28 at 11.02.57.jpeg',
+            'src' => $boletimBase . '/Agasalho.jpg',
             'alt' => 'Campanha do agasalho',
             'title' => 'Campanha do Agasalho',
             'text' => 'A ASA está arrecadando agasalhos, cobertores e roupas de frio em geral. Colabore doando itens limpos e em bom estado de conservação; o que não lhe serve mais será de grande valia para famílias que enfrentam o rigor deste inverno. Deixe sua doação na caixa da ASA, localizada na recepção da igreja.',
@@ -72,7 +70,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Oi Amiga.jpg',
+            'src' => $boletimBase . '/Oi Amiga!.jpg',
             'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
             'title' => 'Oi Amiga',
             'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. As reuniões serão on-line. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve a sua agenda. Acesse o link e inscreva-se: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform',
@@ -82,21 +80,14 @@
             'src' => $boletimBase . '/Quebrando o Silêncio.jpg',
             'alt' => 'Quebrando o Silêncio — Idosos em Risco',
             'title' => 'Quebrando o Silêncio',
-            'text' => 'Idosos em Risco — A violência que atinge quem mais precisa de cuidado. Desde 2002, a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência por meio do projeto Quebrando o Silêncio. Neste ano, o tema será "Idosos em Risco". No dia 22 de agosto, às 15h, realizaremos uma ação especial de amor e cuidado com uma visita à pousada da Casa do Ceará. Você pode fazer a diferença participando conosco como voluntário ou contribuindo com doações de fraldas geriátricas (o item de maior necessidade), lenços umedecidos e produtos de higiene pessoal, tais como sabonete, xampu, creme hidratante, creme dental e escova de dente. Inscreva-se para participar através do link: https://forms.gle/DUjiLok9vspJXrvF7',
+            'text' => 'Idosos em Risco — A violência que atinge quem mais precisa de cuidado. Desde 2002, a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência por meio do projeto Quebrando o Silêncio. Neste ano, o tema será "Idosos em Risco". No dia 15 de agosto, às 15h, realizaremos uma ação especial de amor e cuidado com uma visita à pousada da Casa do Ceará. Você pode fazer a diferença participando conosco como voluntário ou contribuindo com doações de fraldas geriátricas (o item de maior necessidade), lenços umedecidos e produtos de higiene pessoal, tais como sabonete, xampu, creme hidratante, creme dental e escova de dente. Inscreva-se para participar através do link: https://forms.gle/DUjiLok9vspJXrvF7',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Darleide, Encontro de Mulheres.jpg',
+            'src' => $boletimBase . '/Encontro de Mulheres com Darleide.jpg',
             'alt' => 'Encontro especial de mulheres — Vida que Eleva',
             'title' => 'Encontro Especial de Mulheres',
-            'text' => 'Queridas mulheres, vocês são nossas convidadas especiais para uma tarde de renovação, comunhão e inspiração! No sábado, dia 08/08/26, às 16h, aqui na Igreja Central de Brasília, teremos um encontro especial de mulheres com o tema "Vida que Eleva". Teremos a alegria de receber Darleide Alves, apresentadora da TV Novo Tempo! Uma oportunidade imperdível para ouvirmos uma mensagem poderosa para os nossos corações. Tudo foi preparado com muito carinho para vocês. Não venham sozinhas: tragam uma amiga e venham compartilhar desse momento tão especial com a gente! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
-        ],
-        [
-            'type' => 'image',
-            'src' => $oracaoBase . '/01_08_2026.jpeg',
-            'alt' => 'Reunião de oração',
-            'title' => 'Reunião de Oração',
-            'text' => $textoReuniaoOracao,
+            'text' => 'Queridas amigas, devido à necessidade de recuperação da nossa querida Darleide Alves, o encontro "Vida que Eleva" foi transferido para o dia 22 de agosto, no mesmo horário. Estamos em oração para que Deus conceda a ela uma recuperação completa e agradecemos a compreensão e o carinho de todas. Cremos que o Senhor está conduzindo cada detalhe e temos a certeza de que será um dia muito especial. Contamos com a presença de todas! Não venham sozinhas: tragam uma amiga e venham compartilhar desse momento tão especial com a gente! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
         ],
         [
             'type' => 'image',
@@ -122,9 +113,9 @@
         [
             'type' => 'image',
             'src' => $boletimBase . '/Classe de Saúde - Divulgação.jpg',
-            'alt' => 'Classe de Saúde — retorno em agosto',
+            'alt' => 'Classe de Saúde — retorno em 15 de agosto',
             'title' => 'Classe de Saúde',
-            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília esteve de férias. Retornaremos às nossas atividades no dia 08 de agosto.',
+            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília esteve de férias. Retornaremos às nossas atividades no dia 15 de agosto.',
         ],
         [
             'type' => 'image',
@@ -138,7 +129,7 @@
             'src' => $boletimBase . '/Classe pós-batismo.jpg',
             'alt' => 'Classe Pós-Batismo — Programa de Discipulado 2026',
             'title' => 'Classe Pós-Batismo',
-            'text' => 'Queridos membros, no primeiro sábado de agosto, 01/08/2026, às 10h45, na Sala do Ministério de Oração, acontecerá o novo Programa de Discipulado da Classe Pós-Batismal de 2026. Este projeto é voltado para quem se batizou entre 2023 e 2026 ou para membros que ainda não participaram desse programa e desejam fortalecer a fé, conhecendo a fundo a história, a organização, a missão global e o estilo de vida da Igreja Adventista. Para garantir sua vaga, você deverá acessar o link https://wa.me/qr/WFZC7FAE4POAK1 para se inscrever ou falar diretamente com o líder do Ministério Pessoal, irmão Alexandre Tinoco. Participe!',
+            'text' => 'Queridos membros, aos sábados, às 10h45, na Sala do Ministério de Oração, acontece o Programa de Discipulado da Classe Pós-Batismal de 2026. Este projeto é voltado para quem se batizou entre 2023 e 2026 ou para membros que ainda não participaram desse programa e desejam fortalecer a fé, conhecendo a fundo a história, a organização, a missão global e o estilo de vida da Igreja Adventista. Para garantir sua vaga, você deverá acessar o link https://wa.me/qr/WFZC7FAE4POAK1 para se inscrever ou falar diretamente com o líder do Ministério Pessoal, irmão Alexandre Tinoco. Participe!',
         ],
         [
             'type' => 'image',
@@ -146,13 +137,6 @@
             'alt' => 'Classe de Escola Sabatina em Francês',
             'title' => 'Classe de Francês',
             'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta! No sábado, 04/07/26, às 10h, na Igreja Adventista Internacional "BIC", retomaremos esse espaço dedicado a adultos que desejam aprofundar seu conhecimento no idioma francês enquanto estudamos a Bíblia juntos. É uma oportunidade maravilhosa para aprender e compartilhar em comunidade. Entre no nosso grupo de WhatsApp para receber todos os detalhes e materiais. https://chat.whatsapp.com/KcWLeUItuvWEnZ27s6Xs67?mode=gi_t À bientôt!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/curso de noivos.jpg',
-            'alt' => 'Curso de Noivos',
-            'title' => 'Curso de Noivos',
-            'text' => 'Estão abertas as inscrições para o Curso de Noivos, que acontecerá no dia 8 de agosto, no auditório da APLaC, a partir das 8h45. Atenção! Restam poucas vagas! Realize sua inscrição pelo link. https://eventos.adventistasbrasilia.org.br/event/cadastro_individual/381',
         ],
         [
             'type' => 'image',
@@ -166,7 +150,7 @@
             'src' => $boletimBase . '/Série Coisas Estranhas.png',
             'alt' => 'Série Coisas Estranhas — Domingos Especiais',
             'title' => 'Coisas Estranhas',
-            'text' => 'Fenômenos estranhos no espaço têm despertado a atenção de autoridades globais e alimentado intensas investigações oficiais, dividindo opiniões entre tecnologia humana desconhecida, inteligência extraterrestre ou fenômenos de origem ainda mais profunda. Antes de aceitar qualquer teoria, a nova série dos Domingos Especiais investiga o tema sob a perspectiva das Escrituras Sagradas para revelar o verdadeiro significado dos sinais nos céus e o impacto direto desses acontecimentos no seu cotidiano. Acompanhe a série especial intitulada COISAS ESTRANHAS, transmitida às 19h, todos os domingos durante os meses de agosto e setembro. Participe!',
+            'text' => 'A morte é um grande mistério. Milhões de pessoas acreditam que a vida continua de alguma forma, enquanto outras buscam respostas em relatos, experiências de quase morte e diferentes tradições espirituais. Afinal, o que realmente acontece quando fechamos os olhos pela última vez? Antes de aceitar qualquer resposta, descubra o que a Bíblia revela sobre esse tema e por que essa verdade pode mudar a maneira como você vive hoje e encara a eternidade. Venha participar da nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, aos domingos sempre às 19h.',
         ],
         [
             'type' => 'image',
@@ -184,10 +168,38 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Sementes Musicais.jpg',
+            'alt' => 'Sementes Musicais — flautas doces no CEMAB',
+            'title' => 'Sementes Musicais',
+            'text' => 'O projeto de musicalização através das flautas doces denominado Sementes Musicais retomará suas atividades no próximo sábado, dia 15 de agosto, oferecendo aulas totalmente gratuitas e abertas ao público no CEMAB. Voltada para quem deseja aprender a tocar o instrumento ou aperfeiçoar sua técnica, a iniciativa ocorrerá semanalmente, todos os sábados, às 15h30, sendo necessário apenas levar a própria flauta para participar. Os encontros acontecem na sala da Saúde, as inscrições são feitas presencialmente. Venha tocar conosco!',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/CEMAB.jpg',
             'alt' => 'CEMAB — matrículas abertas',
             'title' => 'CEMAB',
             'text' => 'O Centro Musical Adventista de Brasília está com matrículas abertas. O futuro musical do seu filho começa aqui! Queridos pais e responsáveis, as matrículas para o 2º módulo de 2026 do CEMAB já estão abertas! Sabemos como a música é fundamental para o desenvolvimento do foco, da criatividade e da disciplina das crianças e jovens. Por isso, preparamos um semestre com muita prática e aprendizado! Vagas limitadas: Garanta o melhor horário para a rotina do seu filho. Clique no link e garanta agora mesmo sua vaga: https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAbJLm9tUNzdTWjRUSzZPNzFUUVlOODRYOFdGRVRRNC4u',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Orquestra CEMAB.jpg',
+            'alt' => 'Orquestra CEMAB — ensaios semanais',
+            'title' => 'Orquestra CEMAB',
+            'text' => 'A Orquestra CEMAB retomará suas atividades no próximo sábado, dia 15 de agosto, promovendo ensaios semanais totalmente gratuitos na Sala da Orquestra do CEMAB. Voltada para instrumentistas de todos os níveis que desejam integrar o grupo musical, a iniciativa ocorrerá todos os sábados, às 15h30, com inscrições realizadas presencialmente no próprio local, sendo necessário apenas levar o instrumento para participar.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Desbravadores.jpg',
+            'alt' => 'Apoie um Desbravador — Campori DSA 2027',
+            'title' => 'Rumo ao Campori da DSA 2027',
+            'text' => 'O Clube de Desbravadores Cruzeiro do Sul já está se preparando para participar do Campori da Divisão Sul-Americana, o maior encontro de Desbravadores, que será realizado de 5 a 10 de janeiro de 2027, em Barretos/SP. Mais do que uma viagem, o Campori representa uma oportunidade de crescimento espiritual, desenvolvimento de valores cristãos, fortalecimento da fé e formação do caráter de nossas crianças e adolescentes. Por isso, convidamos toda a igreja a fazer parte desse projeto! Adote um Desbravador e apoie a campanha "Rumo ao Campori da DSA 2027". Sua contribuição ajudará nossos desbravadores a viver essa experiência transformadora. Se você deseja colaborar ou saber mais sobre como participar, entre em contato com a Direção do Clube de Desbravadores Cruzeiro do Sul. Celular: (61) 99117-4444 – Rozi Manzi.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/ave_branca_run.jpeg',
+            'alt' => 'Corrida Ave Branca — 60 anos',
+            'title' => 'Corrida Ave Branca',
+            'text' => 'O Ministério Jovem da Igreja Adventista Central de Brasília está apoiando a corrida comemorativa de 60 anos do Clube de Desbravadores Ave Branca. O evento celebra a trajetória histórica do grupo na comunidade, os interessados em participar da corrida podem garantir sua inscrição por meio do link: https://avebrancat7.com.br/',
         ],
         [
             'type' => 'image',
