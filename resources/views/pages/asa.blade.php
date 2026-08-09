@@ -59,6 +59,54 @@
         margin: 0 auto;
     }
 
+    .asa-cta-section {
+        background: linear-gradient(135deg, #00632E 0%, #004D24 100%);
+        padding: 45px 40px;
+        border-radius: 15px;
+        margin: 50px 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 8px 25px rgba(0, 99, 46, 0.25);
+    }
+
+    .asa-cta-section h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: 2.2em;
+        margin-bottom: 15px;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .asa-cta-section p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto 25px;
+        opacity: 0.95;
+        color: #f8f9fa;
+    }
+
+    .asa-cta-button {
+        display: inline-block;
+        background: #ffffff;
+        color: #00632E;
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .asa-cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: #f8f9fa;
+    }
+
     .agencia-humanitaria {
         background: linear-gradient(135deg, #00632E 0%, #004D24 100%);
         padding: 60px 40px;
@@ -421,6 +469,24 @@
             font-size: 2.2em;
         }
 
+        .asa-cta-section {
+            padding: 35px 25px;
+            margin: 35px 0;
+        }
+
+        .asa-cta-section h2 {
+            font-size: 1.8em;
+        }
+
+        .asa-cta-section p {
+            font-size: 0.95rem;
+        }
+
+        .asa-cta-button {
+            padding: 14px 30px;
+            font-size: 0.95rem;
+        }
+
         .agencia-humanitaria {
             padding: 40px 20px;
         }
@@ -462,6 +528,17 @@
         <p>
             Cada ação realizada é um gesto de carinho e cuidado, revelando a preocupação genuína com o próximo. Seja através de seminários educativos, programas de desenvolvimento comunitário, visitas, aconselhamento, ou outras iniciativas, o Ministério da Ação Social Adventista se dedica a transformar vidas e a trazer esperança.
         </p>
+    </div>
+
+    <!-- Seção de Inscrição em Cursos -->
+    <div class="asa-cta-section acb-fullbleed">
+        <h2>Descubra o prazer de aprender com os cursos da ASA! ✨</h2>
+        <p>Você já pensou em transformar seu tempo livre em momentos criativos e produtivos? A ASA tem o curso ideal para você! São cursos incríveis que vão despertar seus talentos e renovar sua rotina e até abrir portas para uma possível renda extra!</p>
+        <p style="margin-top: 15px;">Aproveite essa oportunidade para aprender, crescer e se reinventar. Seu talento pode ir muito além do que você imagina!</p>
+        <p style="font-weight: 600; margin-top: 20px; margin-bottom: 25px;"><em>Atenção! Os cursos são presenciais e realizados em Brasília</em></p>
+        <a href="https://forms.gle/nmZztx1nZiij6i2E7" target="_blank" rel="noopener noreferrer" class="asa-cta-button">
+            Inscreva-se em um Curso
+        </a>
     </div>
 
     <!-- Seção de Estatísticas -->
