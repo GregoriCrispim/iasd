@@ -311,6 +311,10 @@ $orchestras = [
         margin-bottom: 15px;
     }
 
+    .group-images-gallery--three {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .image-wrapper {
         position: relative;
         display: flex;
@@ -552,6 +556,10 @@ $orchestras = [
             grid-template-columns: 1fr;
         }
 
+        .group-images-gallery--three {
+            grid-template-columns: 1fr;
+        }
+
         .group-images-gallery .group-image {
             height: 250px;
         }
@@ -677,7 +685,7 @@ $orchestras = [
                 <h3 class="group-name">{{ $choir['name'] }}</h3>
             </div>
             @if(isset($choir['images']) && count($choir['images']) > 0)
-            <div class="group-images-gallery">
+            <div class="group-images-gallery{{ count($choir['images']) === 3 ? ' group-images-gallery--three' : '' }}">
                 @foreach($choir['images'] as $index => $image)
                 <div class="image-wrapper">
                     <img src="{{ asset('img/corais/' . $image) }}" alt="{{ $choir['name'] }}" loading="lazy" decoding="async" class="group-image lightbox-trigger" data-full="{{ asset('img/corais/' . $image) }}">
@@ -715,7 +723,7 @@ $orchestras = [
                 <h3 class="group-name">{{ $orchestra['name'] }}</h3>
             </div>
             @if(isset($orchestra['images']) && count($orchestra['images']) > 0)
-            <div class="group-images-gallery">
+            <div class="group-images-gallery{{ count($orchestra['images']) === 3 ? ' group-images-gallery--three' : '' }}">
                 @foreach($orchestra['images'] as $image)
                 <div class="image-wrapper">
                     <img src="{{ asset('img/corais/' . $image) }}" alt="{{ $orchestra['name'] }}" loading="lazy" decoding="async" class="group-image lightbox-trigger" data-full="{{ asset('img/corais/' . $image) }}">
