@@ -1207,43 +1207,6 @@
         </div>
     </div>
 
-    <!-- Seção Liderança -->
-    <div class="contato-section">
-        <h2 style="font-family: 'Bebas neue', sans-serif; font-size: 2.5em; color: #003366; text-align: center; margin-bottom: 40px; font-weight: 500;">Liderança</h2>
-
-        <div style="display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; margin-top: 30px;">
-            <!-- Pastor Lucas Alves -->
-            <div style="text-align: center; max-width: 310px;">
-                <img src="{{ asset('img/igreja/pr-lucas.webp') }}"
-                     alt="Pastor Lucas Alves"
-                     loading="lazy" decoding="async"
-                     style="width: 310px; height: 310px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 15px;">
-                <h3 style="font-family: 'Bebas neue', sans-serif; font-size: 1.5em; color: #003366; margin-bottom: 5px;">Pastor Lucas Alves</h3>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #666; font-weight: 600;">Pastor Sênior</p>
-            </div>
-
-            <!-- Pastor Hugo Rodrigues -->
-            <div style="text-align: center; max-width: 310px;">
-                <img src="{{ asset('img/igreja/pr-hugo.webp') }}"
-                     alt="Pastor Hugo Rodrigues"
-                     loading="lazy" decoding="async"
-                     style="width: 310px; height: 310px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 15px;">
-                <h3 style="font-family: 'Bebas neue', sans-serif; font-size: 1.5em; color: #003366; margin-bottom: 5px;">Pastor Hugo Rodrigues</h3>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #666; font-weight: 600;">Área Jovem</p>
-            </div>
-
-            <!-- Pastor Adriano Rezende -->
-            <div style="text-align: center; max-width: 310px;">
-                <img src="{{ asset('img/igreja/pr-adriano.webp') }}"
-                     alt="Pastor Adriano Rezende"
-                     loading="lazy" decoding="async"
-                     style="width: 310px; height: 310px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 15px;">
-                <h3 style="font-family: 'Bebas neue', sans-serif; font-size: 1.5em; color: #003366; margin-bottom: 5px;">Pastor Adriano Rezende</h3>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #666; font-weight: 600;">Área Missionária</p>
-            </div>
-        </div>
-    </div>
-
 </div>
 @endsection
 
