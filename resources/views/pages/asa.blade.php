@@ -36,7 +36,7 @@
     .asa-intro {
         background: linear-gradient(135deg, #003366 0%, #001531 100%);
         padding: 50px 40px;
-        border-radius: 15px;
+        border-radius: 15px 15px 0 0;
         margin-bottom: 0;
         text-align: center;
     }
@@ -62,8 +62,8 @@
     .asa-cta-section {
         background: linear-gradient(135deg, #00632E 0%, #004D24 100%);
         padding: 45px 40px;
-        border-radius: 15px;
-        margin: 50px 0;
+        border-radius: 0 0 15px 15px;
+        margin: 0 0 50px;
         text-align: center;
         color: white;
         box-shadow: 0 8px 25px rgba(0, 99, 46, 0.25);
@@ -471,7 +471,7 @@
 
         .asa-cta-section {
             padding: 35px 25px;
-            margin: 35px 0;
+            margin: 0 0 35px;
         }
 
         .asa-cta-section h2 {

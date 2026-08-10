@@ -146,8 +146,8 @@ $orchestras = [
     .corais-intro {
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         padding: 50px 40px;
-        border-radius: 15px;
-        margin-bottom: 50px;
+        border-radius: 15px 15px 0 0;
+        margin-bottom: 0;
         text-align: center;
     }
 
@@ -172,8 +172,8 @@ $orchestras = [
     .corais-cta-section {
         background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
         padding: 45px 40px;
-        border-radius: 15px;
-        margin-bottom: 50px;
+        border-radius: 0 0 15px 15px;
+        margin: 0 0 50px;
         text-align: center;
         color: white;
         box-shadow: 0 8px 25px rgba(30, 58, 138, 0.25);
