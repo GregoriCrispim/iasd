@@ -595,7 +595,7 @@
             <div class="contato-item">
                 <i class="bi bi-telephone icon"></i>
                 <h4>Telefone</h4>
-                <p><a href="tel:+5561996529846">(61) 99652-9846</a></p>
+                <p><a href="tel:+5561996125450">(61) 99612-5450</a></p>
             </div>
 
             <div class="contato-item">

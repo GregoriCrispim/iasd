@@ -21,10 +21,14 @@
             <img src="{{ asset('img/carrousel/2.webp') }}" alt="Slide 2" decoding="async" width="1280" height="720">
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/3.webp') }}" alt="Slide 3" decoding="async" width="1280" height="720">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOx1UFYwKkJhHYkPQzXiUHCMZBxTKQjanOfLQtXZc27uZi2Q/viewform" target="_blank" rel="noopener noreferrer">
+                <img src="{{ asset('img/carrousel/3.webp') }}" alt="Slide 3 - Corais" decoding="async" width="1280" height="720">
+            </a>
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/4.webp') }}" alt="Slide 4" decoding="async" width="1280" height="720">
+            <a href="https://forms.gle/nmZztx1nZiij6i2E7" target="_blank" rel="noopener noreferrer">
+                <img src="{{ asset('img/carrousel/4.webp') }}" alt="Slide 4 - ASA" decoding="async" width="1280" height="720">
+            </a>
         </div>
         <div class="item">
             <img src="{{ asset('img/carrousel/5.webp') }}" alt="Slide 5" decoding="async" width="1280" height="720">
@@ -210,6 +214,43 @@
                 <h3>Quarta-feira</h3>
                 <p>19h30 - Culto de oração</p>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seção Liderança -->
+<div class="lideranca-section">
+    <h2 class="acb-title-serif" style="text-align: center; font-size: 2.5em; color: #003366; margin-bottom: 40px; font-weight: 500;">Liderança</h2>
+
+    <div style="display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; margin-top: 30px;">
+        <!-- Pastor Lucas Alves -->
+        <div style="text-align: center; max-width: 310px;">
+            <img src="{{ asset('img/igreja/pr-lucas.webp') }}"
+                 alt="Pastor Lucas Alves"
+                 loading="lazy" decoding="async"
+                 style="width: 310px; height: 310px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 15px;">
+            <h3 style="font-family: 'Bebas neue', sans-serif; font-size: 1.5em; color: #003366; margin-bottom: 5px;">Pastor Lucas Alves</h3>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #666; font-weight: 600;">Pastor Sênior</p>
+        </div>
+
+        <!-- Pastor Hugo Rodrigues -->
+        <div style="text-align: center; max-width: 310px;">
+            <img src="{{ asset('img/igreja/pr-hugo.webp') }}"
+                 alt="Pastor Hugo Rodrigues"
+                 loading="lazy" decoding="async"
+                 style="width: 310px; height: 310px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 15px;">
+            <h3 style="font-family: 'Bebas neue', sans-serif; font-size: 1.5em; color: #003366; margin-bottom: 5px;">Pastor Hugo Rodrigues</h3>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #666; font-weight: 600;">Área Jovem</p>
+        </div>
+
+        <!-- Pastor Adriano Rezende -->
+        <div style="text-align: center; max-width: 310px;">
+            <img src="{{ asset('img/igreja/pr-adriano.webp') }}"
+                 alt="Pastor Adriano Rezende"
+                 loading="lazy" decoding="async"
+                 style="width: 310px; height: 310px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 15px;">
+            <h3 style="font-family: 'Bebas neue', sans-serif; font-size: 1.5em; color: #003366; margin-bottom: 5px;">Pastor Adriano Rezende</h3>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1em; color: #666; font-weight: 600;">Área Missionária</p>
         </div>
     </div>
 </div>

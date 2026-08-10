@@ -58,7 +58,7 @@ Iniciamos nossas atividades no dia 24 de fevereiro de 2024 e, apesar de ainda nÃ
         "icon" => "music",
         "images" => ["jovem1.webp", "jovem2.webp", "jovem3.webp", "jovem4.webp"],
         "leaders" => [
-            ["role" => "Diretora", "name" => "Juliana Cesario"],
+            ["role" => "Diretoras", "name" => "Ana Karina Braga e Cristiane Lamarques"],
             ["role" => "Secretaria", "name" => "Maisa Miranda"],
             ["role" => "Regente/Pianista", "name" => "Marcos de Paula"]
         ],
