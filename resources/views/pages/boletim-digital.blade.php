@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_08_08_2026';
+    $boletimBase = 'img/boletim/boletim_15_08_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
 
     $linkify = static function (?string $text): ?string {
@@ -22,30 +22,16 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da SEGUNDA semana de AGOSTO é BONDADE: Ore para que Deus lhe mostre oportunidades reais de ajudar alguém durante a semana.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da TERCEIRA semana de AGOSTO é BONDADE: Ore por um coração generoso, disposto a compartilhar tempo, atenção e recursos.';
 
     $boletins = [
         // Com descrição (script DOCX)
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Culto Permanente.jpg',
-            'alt' => 'Culto Permanente',
-            'title' => 'Culto Permanente',
-            'text' => 'Participe do Culto Permanente coordenado pela Igreja Adventista Central de Brasília. Um momento especial de paz, oração e fortalecimento espiritual para todos. Todo 3º sábado de cada mês, às no Hospital Brasília Lago Sul, Espaço Energia. O convite é aberto a pacientes, familiares, profissionais, colaboradores e toda a comunidade. Participe e venha viver este tempo de esperança!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.51 (2).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.52 (1).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Agasalho.jpg',
-            'alt' => 'Campanha do agasalho',
-            'title' => 'Campanha do Agasalho',
-            'text' => 'A ASA está arrecadando agasalhos, cobertores e roupas de frio em geral. Colabore doando itens limpos e em bom estado de conservação; o que não lhe serve mais será de grande valia para famílias que enfrentam o rigor deste inverno. Deixe sua doação na caixa da ASA, localizada na recepção da igreja.',
         ],
         [
             'type' => 'image',
@@ -54,6 +40,7 @@
             'title' => 'Curso de Bordado',
             'text' => 'Oportunidade Imperdível: Curso de Bordado ASA! Venha aprender técnicas exclusivas para confeccionar lindas peças. Aprender a bordar é uma excelente oportunidade para empreender e conquistar uma renda extra. Todos os domingos às 9h. Invista no seu talento e transforme o seu domingo em um momento de aprendizado e crescimento. Esperamos por você!',
         ],
+
         [
             'type' => 'image',
             'src' => $boletimBase . '/Voluntariado.jpeg',
@@ -91,13 +78,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Quartas da Família.jpg',
-            'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
-            'title' => 'Quartas da Família',
-            'text' => 'Queridos irmãos, o Ministério da Família da Igreja Central de Brasília convida você e sua família para a série "Chaves da Felicidade Familiar", que acontecerá de 05 de agosto a 23 de setembro; serão 8 quartas-feiras especiais dedicadas à consagração, ao fortalecimento espiritual e ao aprendizado da Palavra de Deus. Venha interceder por sua família e traga convidados para buscarem juntos essa bênção, teremos presentes especiais para todos os visitantes não adventistas! Participem!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Oficina do Bem.jpg',
             'alt' => 'Oficina do Bem — Doutores de Esperança',
             'title' => 'Coração do Bem',
@@ -112,10 +92,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Classe de Saúde - Divulgação.jpg',
-            'alt' => 'Classe de Saúde — retorno em 15 de agosto',
+            'src' => $boletimBase . '/Saúde.jpeg',
+            'alt' => 'Classe de Saúde — Entre a sede e a fonte',
             'title' => 'Classe de Saúde',
-            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília esteve de férias. Retornaremos às nossas atividades no dia 15 de agosto.',
+            'text' => 'JORNADA 8 REMÉDIOS NATURAIS – O SEU PASSO A PASSO PARA UMA VIDA PLENA. 6º Encontro, sábado, 15/08/26, a partir das 11h, na Classe de Saúde. Título deste sábado: ENTRE A SEDE E A FONTE. Há sedes que o corpo reconhece e outras que se manifestam de maneiras mais silenciosas. Nem sempre percebemos imediatamente o que estamos buscando, nem qual fonte poderá verdadeiramente nos restaurar. Esta reflexão será um convite para olhar com mais atenção para os sinais do corpo, as necessidades que surgem no cotidiano e aquilo que, silenciosamente, buscamos para encontrar equilíbrio e bem-estar. Porque aprender a reconhecer a própria sede também é aprender a escolher melhor a fonte. Com a Psiconaturoterapeuta Ivone Gomes Barreto.',
         ],
         [
             'type' => 'image',
@@ -123,6 +103,20 @@
             'alt' => 'SGI — Sistema de Gerenciamento de Interessados',
             'title' => 'SGI',
             'text' => 'Está no ar o SGI - Sistema de Gerenciamento de Interessados. Querido membro, se você está estudando a Bíblia com alguém, a Igreja Central conta agora com um sistema de cadastro de interessados, o SGI, onde você poderá se cadastrar como Instrutor bíblico e cadastrar seus alunos. Nele você contará com o apoio do Ministério Pessoal e com estudos bíblicos especialmente preparados. Aponte seu celular para o QR CODE que está na tela e faça hoje mesmo o seu cadastro. E se você é visitante: Que bom que você veio! É uma alegria tê-lo conosco. Se você está nos visitando pela primeira vez e gostaria que orássemos por você ou tem interesse em estudar a Bíblia, acesse o nosso site https://aplac.sgi7.com.br/ ou procure nossa equipe de recepção, preencha o cartão de visitas que teremos o maior prazer em atendê-lo.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Maná.jpeg',
+            'alt' => 'Projeto Maná — assinatura da Lição da Escola Sabatina',
+            'title' => 'Projeto Maná',
+            'text' => 'A vida é feita de escolhas. E uma delas é decidir o que vai ocupar um espaço na nossa rotina. Assinar a Lição da Escola Sabatina é mais do que receber um material em casa. É escolher alimentar a fé, aprofundar o conhecimento da Palavra e reservar, todos os dias, um momento para estar com Deus. No Projeto Maná, queremos incentivar uma igreja que não apenas ouve sobre a Bíblia, mas que a estuda, vive e compartilha. Faça parte desse movimento. Assine a Lição da Escola Sabatina e transforme seu estudo em um compromisso diário com Deus. Acesse: https://projetomana.cpb.com.br/ ou pelo WhatsApp: (61) 98235-0008 ou ligue: (61) 3321-2021 ou 0800 979 0666.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/On Voice.jpeg',
+            'alt' => 'One Voice 27 — uma só voz para anunciar Jesus',
+            'title' => 'One Voice',
+            'text' => 'Uma só voz para anunciar Jesus e Sua breve volta! Dia 5 de setembro. Participe deste movimento!',
         ],
         [
             'type' => 'image',
@@ -150,7 +144,7 @@
             'src' => $boletimBase . '/Série Coisas Estranhas.png',
             'alt' => 'Série Coisas Estranhas — Domingos Especiais',
             'title' => 'Coisas Estranhas',
-            'text' => 'A morte é um grande mistério. Milhões de pessoas acreditam que a vida continua de alguma forma, enquanto outras buscam respostas em relatos, experiências de quase morte e diferentes tradições espirituais. Afinal, o que realmente acontece quando fechamos os olhos pela última vez? Antes de aceitar qualquer resposta, descubra o que a Bíblia revela sobre esse tema e por que essa verdade pode mudar a maneira como você vive hoje e encara a eternidade. Venha participar da nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, aos domingos sempre às 19h.',
+            'text' => 'Relatos de casas assombradas, experiências mediúnicas e fenômenos considerados paranormais acompanham a história humana, desafiando nossa compreensão sobre a realidade. Entre explicações psicológicas, manifestações espirituais e interpretações culturais, surge uma questão fundamental: como avaliar aquilo que parece ultrapassar os limites do natural? À luz das Escrituras, este tema convida a uma reflexão profunda sobre o mundo invisível, o discernimento espiritual e a diferença entre mistério, engano e verdade. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
         ],
         [
             'type' => 'image',
@@ -171,7 +165,7 @@
             'src' => $boletimBase . '/Sementes Musicais.jpg',
             'alt' => 'Sementes Musicais — flautas doces no CEMAB',
             'title' => 'Sementes Musicais',
-            'text' => 'O projeto de musicalização através das flautas doces denominado Sementes Musicais retomará suas atividades no próximo sábado, dia 15 de agosto, oferecendo aulas totalmente gratuitas e abertas ao público no CEMAB. Voltada para quem deseja aprender a tocar o instrumento ou aperfeiçoar sua técnica, a iniciativa ocorrerá semanalmente, todos os sábados, às 15h30, sendo necessário apenas levar a própria flauta para participar. Os encontros acontecem na sala da Saúde, as inscrições são feitas presencialmente. Venha tocar conosco!',
+            'text' => 'O projeto de musicalização através das flautas doces denominado Sementes Musicais está de volta, oferecendo aulas totalmente gratuitas e abertas ao público. Voltada para quem deseja aprender a tocar um instrumento ou aperfeiçoar sua técnica, a iniciativa ocorre semanalmente, todos os sábados, às 15h30, sendo necessário apenas levar a própria flauta para participar. Os encontros acontecem na sala da Saúde, as inscrições são feitas presencialmente. Venha tocar conosco!',
         ],
         [
             'type' => 'image',
@@ -185,7 +179,7 @@
             'src' => $boletimBase . '/Orquestra CEMAB.jpg',
             'alt' => 'Orquestra CEMAB — ensaios semanais',
             'title' => 'Orquestra CEMAB',
-            'text' => 'A Orquestra CEMAB retomará suas atividades no próximo sábado, dia 15 de agosto, promovendo ensaios semanais totalmente gratuitos na Sala da Orquestra do CEMAB. Voltada para instrumentistas de todos os níveis que desejam integrar o grupo musical, a iniciativa ocorrerá todos os sábados, às 15h30, com inscrições realizadas presencialmente no próprio local, sendo necessário apenas levar o instrumento para participar.',
+            'text' => 'A Orquestra CEMAB retoma suas atividades. Os ensaios acontecem semanalmente e são totalmente gratuitos, nossos encontros acontecem na Sala da Orquestra do CEMAB. Voltada para instrumentistas de todos os níveis que desejam integrar o grupo musical, a iniciativa ocorre todos os sábados, às 15h30, com inscrições realizadas presencialmente no próprio local, sendo necessário apenas levar o instrumento para participar.',
         ],
         [
             'type' => 'image',
@@ -196,10 +190,38 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/ave_branca_run.jpeg',
+            'src' => $boletimBase . '/Corrida.jpg',
             'alt' => 'Corrida Ave Branca — 60 anos',
             'title' => 'Corrida Ave Branca',
             'text' => 'O Ministério Jovem da Igreja Adventista Central de Brasília está apoiando a corrida comemorativa de 60 anos do Clube de Desbravadores Ave Branca. O evento celebra a trajetória histórica do grupo na comunidade, os interessados em participar da corrida podem garantir sua inscrição por meio do link: https://avebrancat7.com.br/',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Criacionismo.jpg',
+            'alt' => 'Sábado da Criação — Ciência, Fé e Verdade',
+            'title' => 'Sábado da Criação',
+            'text' => 'Ciência, Fé e Verdade - Será que ciência e religião precisam estar em lados opostos? No Sábado da Criação, duas palestras vão provocar reflexões profundas sobre aquilo que ouvimos, aquilo em que acreditamos e a maneira como compreendemos alguns aspetos da criação. Às 10h ocorrerá a palestra com o tema: “Quem tem ouvidos, ouça!” e às 16h a palestra intitulada “Ciência versus religião: Um falso dilema.” Com Tiago Alves Jorge Souza, Mestre e Doutor em Genética pela USP. Uma programação para quem gosta de pensar, questionar e ir além das respostas prontas. Com o encontro da ciência e da fé, talvez você descubra que algumas questões são mais complexas e mais fascinantes do que parecem. Acontecerá na Igreja Adventista do Lago Sul, no sábado, dia 29 de agosto de 2026. Participe!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/AVT.jpeg',
+            'alt' => 'Clube de Aventureiros — especialidades',
+            'title' => 'Aventureiros',
+            'text' => 'O Clube de Aventureiros está de volta! No domingo, dia 16/08, às 9h30, teremos uma manhã muito especial, com todas as classes aprendendo novas especialidades e, acima de tudo, descobrindo ainda mais sobre o amor de Jesus! Aventureiro, não falte! Será um momento de muita alegria, aprendizado e comunhão!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/JA.jpeg',
+            'alt' => 'Culto Jovem — Comunidade Jovem',
+            'title' => 'Culto Jovem',
+            'text' => 'Sábado, 15/8/26, às 17h, teremos um momento especial para estar na presença de Deus, fortalecer a nossa fé e estarmos juntos na Comunidade Jovem. Você é nosso convidado especial! Venha!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/ASA.jpeg',
+            'alt' => 'ASA Aberta — pizzas e lanches',
+            'title' => 'ASA Aberta',
+            'text' => 'Sábado, 15/08/26, após o pôr do sol, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
         ],
         [
             'type' => 'image',
