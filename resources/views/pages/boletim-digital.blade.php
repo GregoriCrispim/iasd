@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_15_08_2026';
+    $boletimBase = 'img/boletim/boletim_22_08_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
 
     $linkify = static function (?string $text): ?string {
@@ -22,13 +22,13 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da TERCEIRA semana de AGOSTO é BONDADE: Ore por um coração generoso, disposto a compartilhar tempo, atenção e recursos.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da QUARTA semana de AGOSTO é BONDADE: Ore para demonstrar bondade até mesmo com quem já lhe feriu ou decepcionou.';
 
     $boletins = [
         // Com descrição (script DOCX)
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.52 (1).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.52 (3).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -40,7 +40,6 @@
             'title' => 'Curso de Bordado',
             'text' => 'Oportunidade Imperdível: Curso de Bordado ASA! Venha aprender técnicas exclusivas para confeccionar lindas peças. Aprender a bordar é uma excelente oportunidade para empreender e conquistar uma renda extra. Todos os domingos às 9h. Invista no seu talento e transforme o seu domingo em um momento de aprendizado e crescimento. Esperamos por você!',
         ],
-
         [
             'type' => 'image',
             'src' => $boletimBase . '/Voluntariado.jpeg',
@@ -64,17 +63,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Quebrando o Silêncio.jpg',
-            'alt' => 'Quebrando o Silêncio — Idosos em Risco',
-            'title' => 'Quebrando o Silêncio',
-            'text' => 'Idosos em Risco — A violência que atinge quem mais precisa de cuidado. Desde 2002, a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência por meio do projeto Quebrando o Silêncio. Neste ano, o tema será "Idosos em Risco". No dia 15 de agosto, às 15h, realizaremos uma ação especial de amor e cuidado com uma visita à pousada da Casa do Ceará. Você pode fazer a diferença participando conosco como voluntário ou contribuindo com doações de fraldas geriátricas (o item de maior necessidade), lenços umedecidos e produtos de higiene pessoal, tais como sabonete, xampu, creme hidratante, creme dental e escova de dente. Inscreva-se para participar através do link: https://forms.gle/DUjiLok9vspJXrvF7',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Encontro de Mulheres com Darleide.jpg',
             'alt' => 'Encontro especial de mulheres — Vida que Eleva',
             'title' => 'Encontro Especial de Mulheres',
-            'text' => 'Queridas amigas, devido à necessidade de recuperação da nossa querida Darleide Alves, o encontro "Vida que Eleva" foi transferido para o dia 22 de agosto, no mesmo horário. Estamos em oração para que Deus conceda a ela uma recuperação completa e agradecemos a compreensão e o carinho de todas. Cremos que o Senhor está conduzindo cada detalhe e temos a certeza de que será um dia muito especial. Contamos com a presença de todas! Não venham sozinhas: tragam uma amiga e venham compartilhar desse momento tão especial com a gente! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
+            'text' => 'Queridas amigas, hoje teremos o encontro de mulheres "Vida que Eleva", às 16h. Aguardamos vocês para uma tarde memorável preparada com muito carinho, teremos a presença especial da apresentadora da TV Novo Tempo, Darleide Alves. Não percam! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Quartas da Família (1).jpg',
+            'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
+            'title' => 'Quartas da Família',
+            'text' => 'Queridos irmãos, o Ministério da Família da Igreja Central de Brasília convida você e sua família para a série "Chaves da Felicidade Familiar", que acontecerá de 05 de agosto a 23 de setembro; serão 8 quartas-feiras especiais dedicadas à consagração, ao fortalecimento espiritual e ao aprendizado da Palavra de Deus. Venha interceder por sua família e traga convidados para buscarem juntos essa bênção, teremos presentes especiais para todos os visitantes não adventistas! Participem!',
         ],
         [
             'type' => 'image',
@@ -89,13 +88,6 @@
             'alt' => 'Entrega de livros missionários',
             'title' => 'Entrega de Livros',
             'text' => 'O descanso acabou, mas a nossa missão só está começando! Agosto chegou e, com ele, renovamos nossas energias para o maior compromisso do nosso ano. As férias ficaram para trás, e agora o convite é direto para você: liderar e continuar o trabalho transformador de levar esperança às pessoas através do Impacto Esperança. Cada livro entregue é uma semente de transformação, uma resposta a uma oração e uma mensagem que atravessa vidas. A contagem regressiva já começou! Não deixe para depois. Ajuste sua agenda e junte-se a nós nessa corrente de fé e ação. A mensagem não pode parar, e a sua voz e suas mãos fazem toda a diferença nessa missão! Quem está pronto para fazer a diferença neste mês? Passe no Centro White e retire os livros que pretende entregar durante a semana.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Saúde.jpeg',
-            'alt' => 'Classe de Saúde — Entre a sede e a fonte',
-            'title' => 'Classe de Saúde',
-            'text' => 'JORNADA 8 REMÉDIOS NATURAIS – O SEU PASSO A PASSO PARA UMA VIDA PLENA. 6º Encontro, sábado, 15/08/26, a partir das 11h, na Classe de Saúde. Título deste sábado: ENTRE A SEDE E A FONTE. Há sedes que o corpo reconhece e outras que se manifestam de maneiras mais silenciosas. Nem sempre percebemos imediatamente o que estamos buscando, nem qual fonte poderá verdadeiramente nos restaurar. Esta reflexão será um convite para olhar com mais atenção para os sinais do corpo, as necessidades que surgem no cotidiano e aquilo que, silenciosamente, buscamos para encontrar equilíbrio e bem-estar. Porque aprender a reconhecer a própria sede também é aprender a escolher melhor a fonte. Com a Psiconaturoterapeuta Ivone Gomes Barreto.',
         ],
         [
             'type' => 'image',
@@ -158,7 +150,7 @@
             'src' => $boletimBase . '/Rádio NT.jpeg',
             'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
             'title' => 'Rádio Novo Tempo',
-            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial será no dia 24 de julho, às 18h. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
         ],
         [
             'type' => 'image',
@@ -190,13 +182,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Corrida.jpg',
-            'alt' => 'Corrida Ave Branca — 60 anos',
-            'title' => 'Corrida Ave Branca',
-            'text' => 'O Ministério Jovem da Igreja Adventista Central de Brasília está apoiando a corrida comemorativa de 60 anos do Clube de Desbravadores Ave Branca. O evento celebra a trajetória histórica do grupo na comunidade, os interessados em participar da corrida podem garantir sua inscrição por meio do link: https://avebrancat7.com.br/',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Criacionismo.jpg',
             'alt' => 'Sábado da Criação — Ciência, Fé e Verdade',
             'title' => 'Sábado da Criação',
@@ -204,24 +189,31 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/AVT.jpeg',
-            'alt' => 'Clube de Aventureiros — especialidades',
-            'title' => 'Aventureiros',
-            'text' => 'O Clube de Aventureiros está de volta! No domingo, dia 16/08, às 9h30, teremos uma manhã muito especial, com todas as classes aprendendo novas especialidades e, acima de tudo, descobrindo ainda mais sobre o amor de Jesus! Aventureiro, não falte! Será um momento de muita alegria, aprendizado e comunhão!',
+            'src' => $boletimBase . '/Clube do Livro.jpg',
+            'alt' => 'Clube do Livro Cristão',
+            'title' => 'Clube do Livro',
+            'text' => 'Descubra novas perspectivas e aprofunde sua fé em nossa comunidade literária. O Clube do Livro Cristão é um espaço dedicado à leitura reflexiva, à comunhão e ao debate de obras que edificam a mente e o espírito. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 19h30, em formato online, permitindo a participação de qualquer lugar, complementados por uma reunião presencial mensal para estreitar os laços de fraternidade. Venha caminhar conosco nessa jornada de aprendizado e crescimento espiritual; faça parte do nosso grupo e acompanhe as próximas leituras através do link: https://chat.whatsapp.com/JISpyFzQWaz5FflxofhNfs',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/JA.jpeg',
-            'alt' => 'Culto Jovem — Comunidade Jovem',
-            'title' => 'Culto Jovem',
-            'text' => 'Sábado, 15/8/26, às 17h, teremos um momento especial para estar na presença de Deus, fortalecer a nossa fé e estarmos juntos na Comunidade Jovem. Você é nosso convidado especial! Venha!',
+            'src' => $boletimBase . '/PG Jovem.jpg',
+            'alt' => 'Pequeno Grupo Jovem',
+            'title' => 'Pequeno Grupo Jovem',
+            'text' => 'Um espaço de comunhão, amizade e fé feito sob medida para você. O Pequeno Grupo Jovem é o lugar ideal para jovens de 15 a 25 anos compartilharem experiências, fortalecerem os laços e aprofundarem o conhecimento espiritual de forma leve e relevante. Nossos encontros acontecem quinzenalmente às quintas-feiras, às 19h30, em formato online, contando também com um encontro presencial especial por mês para estarmos juntos. Venha fazer parte desta jornada e caminhar conosco; saiba mais e integre-se ao grupo através do link: https://chat.whatsapp.com/JWDD88eG3rOBXUG7iqvfv1?s=sw&p=a&ilr=0',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/ASA.jpeg',
+            'src' => $boletimBase . '/PG Liberdade Religiosa .jpeg',
+            'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
+            'title' => 'Liberdade Religiosa e Tempo do Fim',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. O próximo encontro será no dia 27 de agosto, via Microsoft Teams. Contaremos com a ilustre presença do Pr. Hélio Carnassale — conferencista e uma das principais referências da Igreja Adventista do Sétimo Dia na área de Liberdade Religiosa —, que ministrará sobre o instigante tema: "Haverá liberdade religiosa após o decreto dominical?" Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/ASA Aberta.jpg',
             'alt' => 'ASA Aberta — pizzas e lanches',
             'title' => 'ASA Aberta',
-            'text' => 'Sábado, 15/08/26, após o pôr do sol, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
+            'text' => 'Sábado, 22/08/26, após o pôr do sol, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
         ],
         [
             'type' => 'image',
