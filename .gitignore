@@ -4,6 +4,12 @@
 /public/hot
 /public/storage
 /public/img/galeria/thumbs
+# Modelos face-api (~12 MB): não versionar; gerar com scripts/sync-face-api-assets.sh
+# e enviar ao servidor via deploy/face-api-assets.zip (scripts/pack-face-api-assets.sh).
+/public/js/vendor/face-api-*.js
+/public/models/face-api/
+/deploy/face-api-assets.zip
+/deploy/.face-api-staging/
 # Fotos enviadas pelo painel: ficam apenas no servidor, nunca no repositório.
 /public/img/galeria/uploads/*
 !/public/img/galeria/uploads/.htaccess

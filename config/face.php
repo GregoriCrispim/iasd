@@ -24,8 +24,9 @@ return [
     |--------------------------------------------------------------------------
     | Modelos face-api (carregados no navegador)
     |--------------------------------------------------------------------------
-    | Os assets versionados ficam no próprio site para não depender de CDN em
-    | produção e para que o deploy FTP leve exatamente os modelos testados.
+    | Pesos e o script vendor NÃO vão no Git (são grandes). Gere localmente com
+    | scripts/sync-face-api-assets.sh e no servidor descompacte
+    | deploy/face-api-assets.zip na pasta pública (ver deploy/LEIA-ME-face-api.txt).
     */
     'models_url' => env('FACE_MODELS_URL', '/models/face-api/1.7.15'),
     'script_url' => env('FACE_SCRIPT_URL', '/js/vendor/face-api-1.7.15.js'),
@@ -68,4 +69,13 @@ return [
     | Versão do termo aceito na busca; incrementar quando o texto mudar.
     */
     'consent_version' => env('FACE_CONSENT_VERSION', '2026-07-25'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Indexação no servidor (Node)
+    |--------------------------------------------------------------------------
+    | Após o upload, um Job dispara `scripts/face-index-photo.mjs` (face-api +
+    | canvas + tfjs-wasm). Defina FACE_NODE_BINARY se o `node` não estiver no PATH.
+    */
+    'node_binary' => env('FACE_NODE_BINARY', ''),
 ];

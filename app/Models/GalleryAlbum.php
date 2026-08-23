@@ -144,6 +144,62 @@ class GalleryAlbum extends Model
     }
 
     /**
+     * Progresso da indexação facial do álbum (para a galeria pública).
+     *
+     * @return array{
+     *   total:int,
+     *   scanned:int,
+     *   pending:int,
+     *   ready:int,
+     *   no_face:int,
+     *   failed:int,
+     *   percent:int,
+     *   complete:bool
+     * }
+     */
+    public function faceIndexProgress(): array
+    {
+        $rows = $this->photos()
+            ->selectRaw('faces_status, COUNT(*) as aggregate')
+            ->groupBy('faces_status')
+            ->pluck('aggregate', 'faces_status');
+
+        $ready = (int) ($rows['ready'] ?? 0);
+        $noFace = (int) ($rows['no_face'] ?? 0);
+        $failed = (int) ($rows['failed'] ?? 0);
+        $pending = (int) ($rows['pending'] ?? 0);
+        // Status nulo legado conta como pendente.
+        foreach ($rows as $status => $count) {
+            if ($status === null || $status === '') {
+                $pending += (int) $count;
+            }
+        }
+
+        $total = $ready + $noFace + $failed + $pending;
+        $scanned = $ready + $noFace + $failed;
+        $percent = $total > 0 ? (int) floor(($scanned / $total) * 100) : 0;
+
+        return [
+            'total' => $total,
+            'scanned' => $scanned,
+            'pending' => $pending,
+            'ready' => $ready,
+            'no_face' => $noFace,
+            'failed' => $failed,
+            'percent' => min(100, max(0, $percent)),
+            'complete' => $total > 0 && $pending === 0,
+        ];
+    }
+
+    /**
+     * Álbum pronto para busca facial pública (todas as fotos foram analisadas).
+     */
+    public function isFaceSearchReady(): bool
+    {
+        return (bool) ($this->faceIndexProgress()['complete'] ?? false);
+    }
+
+    /**
      * Shape expected by the public gallery Blade/JS (legacy array contract).
      *
      * @return array{id:string,title:string,rawDate:string,dateShort:?string,dateLong:?string,monthKey:string,monthLabel:string,coverUrl:?string,coverThumbUrl:?string,photoCount:int}

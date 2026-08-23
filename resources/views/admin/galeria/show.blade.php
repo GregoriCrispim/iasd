@@ -686,6 +686,22 @@
         renderQueue();
         submitLabel.textContent = 'Enviar';
 
+        if (ok > 0 && typeof window.faceIndexEnqueue === 'function') {
+            // Reforço: além das fotos deste lote, processa qualquer pendente do álbum.
+            try {
+                var queueUrl = @json(route('admin.galeria.faces.queue', $album));
+                fetch(queueUrl + '?scope=pending', {
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+                    credentials: 'same-origin'
+                }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+                    if (!data || !Array.isArray(data.photos)) return;
+                    data.photos.forEach(function (photo) {
+                        if (photo && photo.id) window.faceIndexEnqueue(photo);
+                    });
+                }).catch(function () {});
+            } catch (e) {}
+        }
+
         if (ok > 0 && typeof window.admToast === 'function') {
             window.admToast(
                 countPhrase(ok, 'foto enviada', 'fotos enviadas') + (fail ? ', ' + fail + ' com erro' : '') + '.',

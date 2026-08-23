@@ -291,7 +291,9 @@
                     });
                 })
                 .catch(function (err) {
-                    log('Falha ao iniciar: ' + (err && err.message ? err.message : err), 'error');
+                    var msg = err && err.message ? err.message : String(err);
+                    log('Falha ao iniciar: ' + msg, 'error');
+                    setProgress(0, 1, 'Falha ao carregar modelos', '');
                     running = false;
                     paused = false;
                     startBtn.disabled = false;

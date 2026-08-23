@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ProcessGalleryPhotoFaces;
 use App\Models\GalleryAlbum;
 use App\Models\GalleryPhoto;
 use App\Models\User;
@@ -250,6 +251,10 @@ class GalleryAlbumController extends Controller
                 'filename' => $photo->original_filename,
                 'is_cover' => $album->cover_photo_id === $photo->id,
             ];
+
+            if (config('face.enabled', true)) {
+                ProcessGalleryPhotoFaces::dispatch($photo->id)->afterResponse();
+            }
 
             $uploaded++;
         }

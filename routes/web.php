@@ -186,6 +186,9 @@ Route::get('/galeria', [GaleriaController::class, 'index'])->name('galeria');
 // que serve URLs terminadas em extensão (.webp) como arquivo estático antes de rotear.
 Route::get('/galeria/thumb', [GaleriaController::class, 'thumb'])->name('galeria.thumb');
 Route::get('/galeria/{evento}/download', [GaleriaController::class, 'download'])->name('galeria.download');
+Route::get('/galeria/{evento}/faces/progresso', [GaleriaController::class, 'faceProgress'])
+    ->middleware('throttle:60,1')
+    ->name('galeria.faces.progress');
 // Busca facial autenticada e fortemente limitada por usuário/IP
 Route::post('/galeria/{evento}/busca-facial', [FaceSearchController::class, 'search'])
     ->middleware(['auth:web', 'throttle:20,1'])

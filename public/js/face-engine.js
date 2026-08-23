@@ -42,7 +42,10 @@
                 if (window.faceapi) resolve(window.faceapi);
                 else reject(new Error('face-api carregou mas não expôs a API.'));
             };
-            s.onerror = function () { reject(new Error('Falha ao carregar o face-api.')); };
+            s.onerror = function () {
+                scriptPromise = null;
+                reject(new Error('Falha ao carregar o face-api (' + scriptUrl + '). Verifique se o arquivo existe no servidor.'));
+            };
             document.head.appendChild(s);
         });
         return scriptPromise;
@@ -58,6 +61,15 @@
                 faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
                 faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl)
             ]).then(function () { return faceapi; });
+        }).catch(function (err) {
+            // Permite nova tentativa após falha (ex.: assets ainda não descompactados).
+            modelsPromise = null;
+            scriptPromise = null;
+            var msg = err && err.message ? err.message : String(err);
+            if (/loadFromUri|404|Failed to fetch|NetworkError|fetch/i.test(msg)) {
+                throw new Error('Falha ao carregar os modelos faciais. Confirme se /models/face-api/1.7.15/ está na pasta pública (veja deploy/LEIA-ME-face-api.txt).');
+            }
+            throw err;
         });
         return modelsPromise;
     }

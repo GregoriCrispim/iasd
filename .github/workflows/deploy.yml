@@ -67,6 +67,10 @@ jobs:
             phpunit.xml
             .composer-cache/**
             .composer-home/**
+            deploy/face-api-assets.zip
+            deploy/.face-api-staging/**
+            public/models/face-api/**
+            public/js/vendor/face-api-*.js
             storage/logs/**
             storage/framework/cache/**
             storage/framework/sessions/**

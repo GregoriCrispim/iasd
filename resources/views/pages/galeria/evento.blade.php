@@ -79,6 +79,65 @@
         flex-wrap: wrap;
     }
 
+    .galeria-face-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        min-height: 2.4rem;
+    }
+    .galeria-face-btn.is-processing {
+        background: #ffffff !important;
+        color: #1f7a4d !important;
+        border: 1px solid rgba(31, 122, 77, 0.28);
+        cursor: default;
+        pointer-events: none;
+    }
+    .galeria-face-btn.is-processing:hover {
+        background: #ffffff !important;
+        color: #1f7a4d !important;
+    }
+    .galeria-face-btn-loader {
+        position: relative;
+        width: 1.7rem;
+        height: 1.7rem;
+        flex-shrink: 0;
+    }
+    .galeria-face-btn-loader svg {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+        display: block;
+    }
+    .galeria-face-btn-loader .face-ring-bg {
+        fill: none;
+        stroke: rgba(31, 122, 77, 0.18);
+        stroke-width: 3.5;
+    }
+    .galeria-face-btn-loader .face-ring-fg {
+        fill: none;
+        stroke: #22a06b;
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.35s ease;
+    }
+    .galeria-face-btn-pct {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.58rem;
+        font-weight: 700;
+        color: #1f7a4d;
+        line-height: 1;
+        pointer-events: none;
+    }
+    .galeria-face-btn-label {
+        font-weight: 600;
+    }
+
     .galeria-face-banner {
         display: flex;
         align-items: center;
@@ -893,6 +952,20 @@
         $faceUser = auth('web')->user();
         $faceEnabled = (bool) config('face.enabled', true);
         $faceCanSearch = $faceUser && $faceUser->canUseFaceSearch();
+        $faceProgress = $faceProgress ?? [
+            'total' => 0,
+            'scanned' => 0,
+            'pending' => 0,
+            'ready' => 0,
+            'no_face' => 0,
+            'failed' => 0,
+            'percent' => 0,
+            'complete' => false,
+        ];
+        $faceAlbumReady = (bool) ($faceProgress['complete'] ?? false);
+        $facePercent = (int) ($faceProgress['percent'] ?? 0);
+        $faceRingC = 2 * M_PI * 15.5;
+        $faceRingOffset = $faceRingC * (1 - max(0, min(100, $facePercent)) / 100);
     @endphp
 
     <div class="galeria-evento-meta">
@@ -907,13 +980,61 @@
         @if(count($fotos) > 0)
             <div class="galeria-meta-actions">
                 @if($faceEnabled)
-                    @if($faceCanSearch)
-                        <button type="button" class="galeria-toolbar-btn primary" id="galeriaFaceSearchBtn" title="Localizar as fotos em que você aparece">
-                            <i class="bi bi-person-bounding-box"></i> Reconhecimento Facial
+                    @if(! $faceAlbumReady)
+                        <button
+                            type="button"
+                            class="galeria-toolbar-btn primary galeria-face-btn is-processing"
+                            id="galeriaFaceSearchBtn"
+                            disabled
+                            aria-disabled="true"
+                            title="Indexação facial em andamento"
+                            data-face-progress-url="{{ route('galeria.faces.progress', $evento['id']) }}"
+                            data-face-login-url="{{ route('member.login', ['redirect' => request()->fullUrlWithQuery(['face' => 1])]) }}"
+                            data-face-can-search="{{ $faceCanSearch ? '1' : '0' }}"
+                            data-face-percent="{{ $facePercent }}"
+                        >
+                            <span class="galeria-face-btn-loader" aria-hidden="true">
+                                <svg viewBox="0 0 36 36" focusable="false">
+                                    <circle class="face-ring-bg" cx="18" cy="18" r="15.5"></circle>
+                                    <circle
+                                        class="face-ring-fg"
+                                        id="galeriaFaceBtnRing"
+                                        cx="18" cy="18" r="15.5"
+                                        stroke-dasharray="{{ number_format($faceRingC, 3, '.', '') }}"
+                                        stroke-dashoffset="{{ number_format($faceRingOffset, 3, '.', '') }}"
+                                    ></circle>
+                                </svg>
+                                <span class="galeria-face-btn-pct" id="galeriaFaceBtnPct">{{ $facePercent }}%</span>
+                            </span>
+                            <span class="galeria-face-btn-label" id="galeriaFaceBtnLabel">Processando…</span>
+                        </button>
+                    @elseif($faceCanSearch)
+                        <button
+                            type="button"
+                            class="galeria-toolbar-btn primary galeria-face-btn"
+                            id="galeriaFaceSearchBtn"
+                            title="Localizar as fotos em que você aparece"
+                            data-face-progress-url="{{ route('galeria.faces.progress', $evento['id']) }}"
+                            data-face-login-url="{{ route('member.login', ['redirect' => request()->fullUrlWithQuery(['face' => 1])]) }}"
+                            data-face-can-search="1"
+                            data-face-percent="100"
+                        >
+                            <i class="bi bi-person-bounding-box"></i>
+                            <span class="galeria-face-btn-label">Reconhecimento Facial</span>
                         </button>
                     @else
-                        <a href="{{ route('member.login', ['redirect' => request()->fullUrlWithQuery(['face' => 1])]) }}" class="galeria-toolbar-btn primary" title="Entre com sua conta de membro para usar o reconhecimento facial">
-                            <i class="bi bi-person-bounding-box"></i> Reconhecimento Facial
+                        <a
+                            href="{{ route('member.login', ['redirect' => request()->fullUrlWithQuery(['face' => 1])]) }}"
+                            class="galeria-toolbar-btn primary galeria-face-btn"
+                            id="galeriaFaceSearchBtn"
+                            title="Entre com sua conta de membro para usar o reconhecimento facial"
+                            data-face-progress-url="{{ route('galeria.faces.progress', $evento['id']) }}"
+                            data-face-login-url="{{ route('member.login', ['redirect' => request()->fullUrlWithQuery(['face' => 1])]) }}"
+                            data-face-can-search="0"
+                            data-face-percent="100"
+                        >
+                            <i class="bi bi-person-bounding-box"></i>
+                            <span class="galeria-face-btn-label">Reconhecimento Facial</span>
                         </a>
                     @endif
                 @endif
@@ -925,7 +1046,7 @@
         @endif
     </div>
 
-    @if(count($fotos) > 0 && $faceEnabled && $faceCanSearch)
+    @if(count($fotos) > 0 && $faceEnabled && $faceCanSearch && $faceAlbumReady)
         <div class="galeria-face-banner" id="galeriaFaceBanner" hidden>
             <span id="galeriaFaceBannerText"></span>
             <div class="galeria-face-banner-actions">
@@ -980,7 +1101,7 @@
         <button type="button" class="galeria-toolbar-btn" id="galeriaBatchCancel">Cancelar</button>
     </div>
 
-    @if(count($fotos) > 0 && $faceEnabled && $faceCanSearch)
+    @if(count($fotos) > 0 && $faceEnabled && $faceCanSearch && $faceAlbumReady)
         <div class="galeria-face-modal" id="galeriaFaceModal" role="dialog" aria-modal="true" aria-labelledby="galeriaFaceTitle">
             <div class="galeria-face-dialog">
                 <button type="button" class="galeria-face-close" id="galeriaFaceModalClose" aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
@@ -1068,7 +1189,10 @@
 
 @push('scripts')
 <script src="{{ asset('js/galeria.js') }}?v={{ filemtime(public_path('js/galeria.js')) }}" defer></script>
-@if(count($fotos) > 0 && $faceEnabled && $faceCanSearch)
+@if(count($fotos) > 0 && $faceEnabled)
+<script src="{{ asset('js/face-progress.js') }}?v={{ filemtime(public_path('js/face-progress.js')) }}" defer></script>
+@endif
+@if(count($fotos) > 0 && $faceEnabled && $faceCanSearch && $faceAlbumReady)
 <script src="{{ asset('js/face-engine.js') }}?v={{ filemtime(public_path('js/face-engine.js')) }}" defer></script>
 <script src="{{ asset('js/face-search.js') }}?v={{ filemtime(public_path('js/face-search.js')) }}" defer></script>
 @endif
