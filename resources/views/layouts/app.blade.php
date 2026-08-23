@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
     <!-- Quiz Bíblico -->
-    <link rel="stylesheet" href="{{ asset('quiz/quiz.css') }}">
+    <link rel="stylesheet" href="{{ asset('quiz/quiz.css') }}?v={{ filemtime(public_path('quiz/quiz.css')) }}">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" media="print" onload="this.media='all'">
@@ -233,7 +233,7 @@
     <script src="{{ asset('js/form_overlay.js') }}" defer></script>
 
     <!-- Quiz Bíblico -->
-    <script src="{{ asset('quiz/quiz.js') }}" defer></script>
+    <script src="{{ asset('quiz/quiz.js') }}?v={{ filemtime(public_path('quiz/quiz.js')) }}" defer></script>
 
     @stack('scripts')
 </body>

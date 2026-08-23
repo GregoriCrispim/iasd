@@ -8,7 +8,7 @@
 @section('page-name', 'Início')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+<link rel="stylesheet" href="{{ asset('css/home.css') }}?v={{ filemtime(public_path('css/home.css')) }}">
 @endpush
 
 @section('content')
@@ -268,7 +268,7 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/slider.js') }}" defer></script>
+<script src="{{ asset('js/slider.js') }}?v={{ filemtime(public_path('js/slider.js')) }}" defer></script>
 <script src="{{ asset('js/canais.js') }}" defer></script>
 <script src="{{ asset('js/videos_youtube.js') }}" defer></script>
 @endpush
