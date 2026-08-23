@@ -14,7 +14,7 @@
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 20px 40px;
+        padding: 0 20px;
     }
 
     /* Cola a 1ª seção na imagem do header e a 1ª na 2ª seção */
@@ -666,7 +666,7 @@
 
 
     .crencas-section {
-        margin: 60px 0;
+        margin: 60px 0 0;
     }
 
     .crencas-section h2 {
@@ -751,7 +751,7 @@
     .crencas-cta {
         background: linear-gradient(135deg, #003366 0%, #1b4472 100%);
         padding: 50px 40px;
-        border-radius: 15px;
+        border-radius: 15px 15px 0 0;
         text-align: center;
         color: #fff;
     }
@@ -781,7 +781,7 @@
 
     @media (max-width: 768px) {
         .igreja-container {
-            padding: 20px 15px;
+            padding: 20px 15px 0;
         }
 
         .igreja-intro {
@@ -1200,7 +1200,7 @@
             <p style="font-family: 'Roboto', sans-serif; font-size: 1rem; color: #f8f9fa; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
                 Acesse gratuitamente a publicação "Nisto Cremos" para conhecer em detalhes todas as crenças que a Igreja Adventista sustenta a respeito dos ensinos bíblicos.
             </p>
-            <a href="https://www.institutodemissao.org.br/wp-content/uploads/2021/07/Nisto-Cremos.pdf" target="_blank" class="btn-crencas-destaque">
+            <a href="{{ asset('pdf/Nisto_Cremos.pdf') }}" target="_blank" class="btn-crencas-destaque">
                 <i class="bi bi-book-half" style="font-size: 1.5em;"></i>
                 Ler "Nisto Cremos"
             </a>
