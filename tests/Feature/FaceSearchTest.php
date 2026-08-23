@@ -171,6 +171,26 @@ class FaceSearchTest extends TestCase
         $this->assertCount(1, array_keys($ids, $near->id, true));
     }
 
+    public function test_extra_descriptor_can_recover_near_miss(): void
+    {
+        [$album, $near, $far] = $this->seedAlbum();
+
+        // Consulta principal longe do índice; extra próximo do vetor base (foto near).
+        $primary = array_map(fn ($x) => $x + 0.9, $this->baseVector());
+        $extra = $this->baseVector();
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $primary,
+                'extra_descriptors' => [$extra],
+            ]));
+
+        $response->assertOk();
+        $ids = $response->json('photo_ids');
+        $this->assertContains($near->id, $ids);
+        $this->assertNotContains($far->id, $ids);
+    }
+
     public function test_response_never_leaks_biometrics(): void
     {
         [$album] = $this->seedAlbum();

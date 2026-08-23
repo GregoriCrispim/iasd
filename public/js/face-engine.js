@@ -93,6 +93,21 @@
         return canvas;
     }
 
+    /** Espelha horizontalmente (câmera frontal / selfie invertida). */
+    function mirrorCanvas(source) {
+        var w = source.naturalWidth || source.videoWidth || source.width;
+        var h = source.naturalHeight || source.videoHeight || source.height;
+        if (!w || !h) return source;
+        var canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        var ctx = canvas.getContext('2d');
+        ctx.translate(w, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(source, 0, 0, w, h);
+        return canvas;
+    }
+
     function loadImage(url) {
         return new Promise(function (resolve, reject) {
             var img = new Image();
@@ -132,8 +147,8 @@
         detectAll: function (source, opts) {
             opts = opts || {};
             return loadModels().then(function (faceapi) {
-                var canvas = toAnalysisCanvas(source, opts.maxSide || 1024);
-                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.5 });
+                var canvas = toAnalysisCanvas(source, opts.maxSide || 1536);
+                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.35 });
                 return faceapi.detectAllFaces(canvas, options)
                     .withFaceLandmarks()
                     .withFaceDescriptors()
@@ -142,6 +157,8 @@
                         faces = faces.filter(function (f) {
                             return f.sizeRatio >= (opts.minSizeRatio || 0) && f.descriptor.length === 128;
                         });
+                        // Mantém os rostos com maior confiança (SSD não garante ordem).
+                        faces.sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
                         if (opts.maxFaces && faces.length > opts.maxFaces) {
                             faces = faces.slice(0, opts.maxFaces);
                         }
@@ -158,8 +175,8 @@
         detectSingle: function (source, opts) {
             opts = opts || {};
             return loadModels().then(function (faceapi) {
-                var canvas = toAnalysisCanvas(source, opts.maxSide || 640);
-                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.7 });
+                var canvas = toAnalysisCanvas(source, opts.maxSide || 720);
+                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.65 });
                 return faceapi.detectAllFaces(canvas, options)
                     .withFaceLandmarks()
                     .withFaceDescriptors()
@@ -168,7 +185,7 @@
                             throw new Error('Nenhum rosto foi detectado. Use uma foto nítida e de frente.');
                         }
                         var faces = results.map(function (r) { return normalizeResult(r, canvas); });
-                        var big = faces.filter(function (f) { return f.sizeRatio >= (opts.minSizeRatio || 0.12); });
+                        var big = faces.filter(function (f) { return f.sizeRatio >= (opts.minSizeRatio || 0.10); });
                         if (!big.length) {
                             throw new Error('O rosto está pequeno demais. Aproxime-se da câmera.');
                         }
@@ -177,6 +194,38 @@
                         }
                         return big[0];
                     });
+            });
+        },
+
+        /**
+         * Detecta o rosto na imagem e também na versão espelhada (útil com
+         * câmera frontal). Resolve com { descriptor, extraDescriptors, ... }.
+         */
+        detectSingleWithMirror: function (source, opts) {
+            var self = this;
+            return self.detectSingle(source, opts).then(function (primary) {
+                var mirrored = mirrorCanvas(source);
+                return self.detectSingle(mirrored, opts).then(function (alt) {
+                    var extras = [];
+                    if (alt && alt.descriptor && alt.descriptor.length === 128) {
+                        extras.push(alt.descriptor);
+                    }
+                    return {
+                        descriptor: primary.descriptor,
+                        extraDescriptors: extras,
+                        score: primary.score,
+                        box: primary.box,
+                        sizeRatio: primary.sizeRatio
+                    };
+                }).catch(function () {
+                    return {
+                        descriptor: primary.descriptor,
+                        extraDescriptors: [],
+                        score: primary.score,
+                        box: primary.box,
+                        sizeRatio: primary.sizeRatio
+                    };
+                });
             });
         },
 

@@ -35,9 +35,11 @@ return [
     | Correspondência (match) 1:N
     |--------------------------------------------------------------------------
     | Distância euclidiana entre descritores de 128 dimensões. Quanto menor,
-    | mais parecido. 0,50 é um limiar conservador para reduzir falsos positivos.
+    | mais parecido. O padrão do FaceMatcher do face-api é ~0,60; usamos 0,58
+    | para reduzir falsos negativos (rosto presente mas não filtrado) sem abrir
+    | demais para falsos positivos.
     */
-    'match_threshold' => (float) env('FACE_MATCH_THRESHOLD', 0.50),
+    'match_threshold' => (float) env('FACE_MATCH_THRESHOLD', 0.58),
     'max_results' => (int) env('FACE_MAX_RESULTS', 200),
 
     /*
@@ -49,15 +51,15 @@ return [
     */
     'detection' => [
         'photo' => [
-            'min_score' => (float) env('FACE_PHOTO_MIN_SCORE', 0.50),
-            'max_faces' => (int) env('FACE_PHOTO_MAX_FACES', 60),
-            'min_size_ratio' => (float) env('FACE_PHOTO_MIN_SIZE_RATIO', 0.02),
-            'analysis_max_side' => (int) env('FACE_PHOTO_ANALYSIS_SIDE', 1024),
+            'min_score' => (float) env('FACE_PHOTO_MIN_SCORE', 0.35),
+            'max_faces' => (int) env('FACE_PHOTO_MAX_FACES', 80),
+            'min_size_ratio' => (float) env('FACE_PHOTO_MIN_SIZE_RATIO', 0.01),
+            'analysis_max_side' => (int) env('FACE_PHOTO_ANALYSIS_SIDE', 1536),
         ],
         'selfie' => [
-            'min_score' => (float) env('FACE_SELFIE_MIN_SCORE', 0.70),
-            'min_size_ratio' => (float) env('FACE_SELFIE_MIN_SIZE_RATIO', 0.12),
-            'analysis_max_side' => (int) env('FACE_SELFIE_ANALYSIS_SIDE', 640),
+            'min_score' => (float) env('FACE_SELFIE_MIN_SCORE', 0.65),
+            'min_size_ratio' => (float) env('FACE_SELFIE_MIN_SIZE_RATIO', 0.10),
+            'analysis_max_side' => (int) env('FACE_SELFIE_ANALYSIS_SIDE', 720),
         ],
     ],
 

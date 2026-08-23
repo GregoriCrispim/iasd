@@ -1177,9 +1177,9 @@
             'isMinor' => (bool) ($faceUser && $faceUser->isMinor()),
             'photoCount' => count($fotos),
             'selfie' => [
-                'minScore' => (float) config('face.detection.selfie.min_score', 0.7),
-                'minSizeRatio' => (float) config('face.detection.selfie.min_size_ratio', 0.12),
-                'maxSide' => (int) config('face.detection.selfie.analysis_max_side', 640),
+                'minScore' => (float) config('face.detection.selfie.min_score', 0.65),
+                'minSizeRatio' => (float) config('face.detection.selfie.min_size_ratio', 0.10),
+                'maxSide' => (int) config('face.detection.selfie.analysis_max_side', 720),
             ],
         ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
     @endif

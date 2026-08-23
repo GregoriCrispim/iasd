@@ -857,10 +857,10 @@
     'csrf' => csrf_token(),
     'storeTemplate' => route('admin.galeria.faces.store', [$album, '__PID__']),
     'photo' => [
-        'minScore' => (float) config('face.detection.photo.min_score', 0.5),
-        'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.02),
-        'maxFaces' => (int) config('face.detection.photo.max_faces', 60),
-        'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1024),
+        'minScore' => (float) config('face.detection.photo.min_score', 0.35),
+        'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.01),
+        'maxFaces' => (int) config('face.detection.photo.max_faces', 80),
+        'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1536),
     ],
 ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
 <script src="{{ asset('js/face-engine.js') }}?v={{ filemtime(public_path('js/face-engine.js')) }}"></script>
@@ -899,13 +899,13 @@
         if (!photo) return;
         working = true;
 
-        var url = photo.url || photo.thumb_url;
+        var url = photo.index_url || photo.url || photo.thumb_url;
         window.FaceEngine.loadImage(url).then(function (img) {
             return window.FaceEngine.detectAll(img, {
-                maxSide: cfg.maxSide || 1024,
-                minScore: cfg.minScore || 0.5,
-                minSizeRatio: cfg.minSizeRatio || 0.02,
-                maxFaces: cfg.maxFaces || 60
+                maxSide: cfg.maxSide || 1536,
+                minScore: cfg.minScore || 0.35,
+                minSizeRatio: cfg.minSizeRatio || 0.01,
+                maxFaces: cfg.maxFaces || 80
             });
         }).then(function (faces) {
             return postResult(photo.id, {

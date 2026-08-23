@@ -576,7 +576,7 @@
             showSearchOverlay();
             updateSearchProgress('Analisando', 'Detectando o rosto no seu dispositivo…', 0);
 
-            window.FaceEngine.detectSingle(source, {
+            window.FaceEngine.detectSingleWithMirror(source, {
                 maxSide: cfg.selfie.maxSide,
                 minScore: cfg.selfie.minScore,
                 minSizeRatio: cfg.selfie.minSizeRatio
@@ -588,6 +588,17 @@
                         : 'Comparando com as fotos do álbum…',
                     0
                 );
+                var payload = {
+                    descriptor: face.descriptor,
+                    source: searchMode,
+                    consent_self: consentPayload.consent_self,
+                    consent_biometric: consentPayload.consent_biometric,
+                    consent_limitations: consentPayload.consent_limitations,
+                    guardian_declaration: consentPayload.guardian_declaration
+                };
+                if (face.extraDescriptors && face.extraDescriptors.length) {
+                    payload.extra_descriptors = face.extraDescriptors;
+                }
                 return fetch(cfg.searchUrl, {
                     method: 'POST',
                     headers: {
@@ -596,14 +607,7 @@
                         'X-CSRF-TOKEN': cfg.csrf,
                         'X-Requested-With': 'XMLHttpRequest'
                     },
-                    body: JSON.stringify({
-                        descriptor: face.descriptor,
-                        source: searchMode,
-                        consent_self: consentPayload.consent_self,
-                        consent_biometric: consentPayload.consent_biometric,
-                        consent_limitations: consentPayload.consent_limitations,
-                        guardian_declaration: consentPayload.guardian_declaration
-                    })
+                    body: JSON.stringify(payload)
                 });
             }).then(function (r) {
                 return r.json().then(function (data) { return { ok: r.ok, status: r.status, data: data }; });

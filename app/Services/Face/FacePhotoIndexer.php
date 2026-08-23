@@ -46,10 +46,10 @@ class FacePhotoIndexer
             $script,
             '--image='.$absolute,
             '--models='.$modelsDir,
-            '--minScore='.(string) ($cfg['min_score'] ?? 0.5),
-            '--minSizeRatio='.(string) ($cfg['min_size_ratio'] ?? 0.02),
-            '--maxFaces='.(string) ($cfg['max_faces'] ?? 60),
-            '--maxSide='.(string) ($cfg['analysis_max_side'] ?? 1024),
+            '--minScore='.(string) ($cfg['min_score'] ?? 0.35),
+            '--minSizeRatio='.(string) ($cfg['min_size_ratio'] ?? 0.01),
+            '--maxFaces='.(string) ($cfg['max_faces'] ?? 80),
+            '--maxSide='.(string) ($cfg['analysis_max_side'] ?? 1536),
         ], base_path(), null, null, 180);
 
         $process->run();

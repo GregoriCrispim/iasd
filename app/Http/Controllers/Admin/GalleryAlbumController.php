@@ -247,6 +247,7 @@ class GalleryAlbumController extends Controller
             $createdPhotos[] = [
                 'id' => $photo->id,
                 'url' => $photo->displayUrl(),
+                'index_url' => $photo->publicUrl(),
                 'thumb_url' => $photo->thumbUrl(),
                 'filename' => $photo->original_filename,
                 'is_cover' => $album->cover_photo_id === $photo->id,

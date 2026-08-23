@@ -45,10 +45,10 @@ function fail(message, code = 1) {
 
 const imagePath = arg('image');
 const modelsDir = arg('models');
-const minScore = Number(arg('minScore', '0.5'));
-const minSizeRatio = Number(arg('minSizeRatio', '0.02'));
-const maxFaces = Number(arg('maxFaces', '60'));
-const maxSide = Number(arg('maxSide', '1024'));
+const minScore = Number(arg('minScore', '0.35'));
+const minSizeRatio = Number(arg('minSizeRatio', '0.01'));
+const maxFaces = Number(arg('maxFaces', '80'));
+const maxSide = Number(arg('maxSide', '1536'));
 
 if (!imagePath || !fs.existsSync(imagePath)) {
     fail('Imagem não encontrada.');
@@ -108,6 +108,8 @@ try {
 
     let faces = results.map((r) => normalizeResult(r, analysis));
     faces = faces.filter((f) => f.sizeRatio >= minSizeRatio && f.descriptor.length === 128);
+    // Mantém os rostos com maior confiança (SSD não garante ordem).
+    faces.sort((a, b) => (b.score || 0) - (a.score || 0));
     if (faces.length > maxFaces) {
         faces = faces.slice(0, maxFaces);
     }

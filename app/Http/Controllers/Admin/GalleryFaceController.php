@@ -50,7 +50,8 @@ class GalleryFaceController extends Controller
 
         $photos = $query->get()->map(fn (GalleryPhoto $photo) => [
             'id' => $photo->id,
-            'url' => $photo->displayUrl(),
+            // Full-res: a variante display perde rostos pequenos/distantes.
+            'url' => $photo->publicUrl(),
             'status' => $photo->faces_status,
         ])->values()->all();
 

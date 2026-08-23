@@ -58,10 +58,10 @@
         'queueUrl' => route('admin.galeria.faces.queue', $album),
         'storeTemplate' => route('admin.galeria.faces.store', [$album, '__PID__']),
         'photo' => [
-            'minScore' => (float) config('face.detection.photo.min_score', 0.5),
-            'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.02),
-            'maxFaces' => (int) config('face.detection.photo.max_faces', 60),
-            'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1024),
+            'minScore' => (float) config('face.detection.photo.min_score', 0.35),
+            'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.01),
+            'maxFaces' => (int) config('face.detection.photo.max_faces', 80),
+            'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1536),
         ],
     ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
     <script src="{{ asset('js/face-engine.js') }}?v={{ filemtime(public_path('js/face-engine.js')) }}"></script>

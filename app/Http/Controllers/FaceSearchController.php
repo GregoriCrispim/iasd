@@ -36,6 +36,9 @@ class FaceSearchController extends Controller
         $data = $request->validate([
             'descriptor' => ['required', 'array', 'size:128'],
             'descriptor.*' => ['required', 'numeric'],
+            'extra_descriptors' => ['sometimes', 'array', 'max:2'],
+            'extra_descriptors.*' => ['array', 'size:128'],
+            'extra_descriptors.*.*' => ['numeric'],
             'source' => ['required', 'in:camera,upload'],
             'consent_self' => ['accepted'],
             'consent_biometric' => ['accepted'],
@@ -54,7 +57,10 @@ class FaceSearchController extends Controller
         }
 
         try {
-            $query = $this->descriptors->validate($data['descriptor']);
+            $queries = [$this->descriptors->validate($data['descriptor'])];
+            foreach ($data['extra_descriptors'] ?? [] as $extra) {
+                $queries[] = $this->descriptors->validate($extra);
+            }
         } catch (\Throwable) {
             throw ValidationException::withMessages([
                 'descriptor' => 'O descriptor facial enviado é inválido.',
@@ -71,7 +77,7 @@ class FaceSearchController extends Controller
             'consented_at' => now(),
         ]);
 
-        $result = $this->matcher->search($album, $query);
+        $result = $this->matcher->search($album, count($queries) === 1 ? $queries[0] : $queries);
 
         // Nunca devolvemos vetores nem selfies: apenas IDs estáveis das fotos.
         return response()->json([

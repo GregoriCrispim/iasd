@@ -6,22 +6,27 @@ use App\Models\GalleryAlbum;
 use App\Models\GalleryFaceDescriptor;
 
 /**
- * Busca 1:N: compara um descriptor de consulta com os descritores gravados
- * apenas do álbum atual, retornando os IDs das fotos correspondentes.
+ * Busca 1:N: compara um (ou mais) descriptors de consulta com os descritores
+ * gravados apenas do álbum atual, retornando os IDs das fotos correspondentes.
  */
 class FaceMatchService
 {
     public function __construct(private readonly FaceDescriptorService $descriptors) {}
 
     /**
-     * @param  list<float>  $query
+     * @param  list<float>|list<list<float>>  $query  Um descriptor ou vários (OR: menor distância vence).
      * @return array{photo_ids:list<int>, matches:list<array{photo_id:int,distance:float}>}
      */
     public function search(GalleryAlbum $album, array $query, ?float $threshold = null, ?int $maxResults = null): array
     {
-        $threshold ??= (float) config('face.match_threshold', 0.50);
+        $threshold ??= (float) config('face.match_threshold', 0.58);
         $maxResults ??= (int) config('face.max_results', 200);
         $modelVersion = (string) config('face.version', 'v1');
+        $queries = $this->normalizeQueries($query);
+
+        if ($queries === []) {
+            return ['photo_ids' => [], 'matches' => []];
+        }
 
         $best = [];
 
@@ -29,14 +34,14 @@ class FaceMatchService
             ->where('gallery_album_id', $album->id)
             ->where('model_version', $modelVersion)
             ->orderBy('id')
-            ->chunk(500, function ($rows) use ($query, $threshold, &$best) {
+            ->chunk(500, function ($rows) use ($queries, $threshold, &$best) {
                 foreach ($rows as $row) {
                     $vector = $this->descriptors->decrypt($row->descriptor);
                     if ($vector === null) {
                         continue;
                     }
 
-                    $distance = $this->euclidean($query, $vector, $threshold);
+                    $distance = $this->bestDistance($queries, $vector, $threshold);
                     if ($distance === null || $distance > $threshold) {
                         continue;
                     }
@@ -61,6 +66,59 @@ class FaceMatchService
             'photo_ids' => array_map(static fn ($m) => $m['photo_id'], $matches),
             'matches' => $matches,
         ];
+    }
+
+    /**
+     * @param  list<float>|list<list<float>>  $query
+     * @return list<list<float>>
+     */
+    private function normalizeQueries(array $query): array
+    {
+        if ($query === []) {
+            return [];
+        }
+
+        // Lista de descriptors: primeiro elemento é um array (vetor).
+        if (is_array($query[0] ?? null)) {
+            $out = [];
+            foreach ($query as $candidate) {
+                if (is_array($candidate) && count($candidate) === 128) {
+                    $out[] = array_map(static fn ($v) => (float) $v, $candidate);
+                }
+            }
+
+            return $out;
+        }
+
+        if (count($query) !== 128) {
+            return [];
+        }
+
+        return [array_map(static fn ($v) => (float) $v, $query)];
+    }
+
+    /**
+     * @param  list<list<float>>  $queries
+     * @param  list<float>  $vector
+     */
+    private function bestDistance(array $queries, array $vector, float $threshold): ?float
+    {
+        $best = null;
+
+        foreach ($queries as $q) {
+            $distance = $this->euclidean($q, $vector, $threshold);
+            if ($distance === null) {
+                continue;
+            }
+            if ($best === null || $distance < $best) {
+                $best = $distance;
+            }
+            if ($best <= 0.0) {
+                break;
+            }
+        }
+
+        return $best;
     }
 
     /**
