@@ -4,11 +4,6 @@
 /public/hot
 /public/storage
 /public/img/galeria/thumbs
-# Modelos face-api em public/: gerados no CI a partir de deploy/face-api-assets.zip
-# (o ZIP é versionado; os .bin descompactados em public/ não).
-/public/js/vendor/face-api-*.js
-/public/models/face-api/
-/deploy/.face-api-staging/
 # Fotos enviadas pelo painel: ficam apenas no servidor, nunca no repositório.
 /public/img/galeria/uploads/*
 !/public/img/galeria/uploads/.htaccess
