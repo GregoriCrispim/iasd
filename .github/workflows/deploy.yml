@@ -69,6 +69,7 @@ jobs:
             phpunit.xml
             .composer-cache/**
             .composer-home/**
+            deploy/**
             storage/logs/**
             storage/framework/cache/**
             storage/framework/sessions/**
