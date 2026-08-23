@@ -29,21 +29,18 @@ class UserController extends Controller
             ->paginate(30)
             ->withQueryString();
 
-        return view('admin.users.index', ['users' => $users, 'authUser' => $authUser]);
+        return view('admin.users.index', [
+            'users' => $users,
+            'authUser' => $authUser,
+            'roleOptions' => $this->roleOptions($authUser),
+            'defaultRole' => $this->defaultRole($authUser),
+            'canAssignAdvanced' => $this->canAssignAdvancedFields($authUser),
+        ]);
     }
 
-    public function create(Request $request): View
+    public function create(): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
-
-        return view('admin.users.form', [
-            'user' => new User,
-            'roleOptions' => $this->roleOptions($authUser),
-            'managerOptions' => $this->managerOptions(),
-            'currentRole' => $this->defaultRole($authUser),
-            'canManagePagePerms' => $this->canManagePagePerms($authUser),
-        ]);
+        return redirect()->route('admin.users.index', ['novo' => 1]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -52,15 +49,14 @@ class UserController extends Controller
         $authUser = $request->user();
 
         $data = $this->validateData($request, null, $authUser);
-        [$role, $managerId, $emailVerifiedAt] = $this->resolveAssignment($authUser, $data);
+        [$role, $managerId] = $this->resolveAssignment($authUser, $data);
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'email_verified_at' => $emailVerifiedAt,
             'created_by' => $authUser->id,
-            'manager_id' => $managerId,
+            'manager_id' => $managerId === false ? null : $managerId,
         ]);
 
         $user->syncRoles([$role]);
@@ -87,7 +83,6 @@ class UserController extends Controller
         return view('admin.users.form', [
             'user' => $user,
             'roleOptions' => $this->roleOptions($authUser),
-            'managerOptions' => $this->managerOptions(),
             'currentRole' => $user->roles->pluck('name')->first(),
             'attached' => $attached,
             'available' => $available,
@@ -102,20 +97,19 @@ class UserController extends Controller
         $this->authorizeManage($authUser, $user);
 
         $data = $this->validateData($request, $user, $authUser);
-        [$role, $managerId, $emailVerifiedAt] = $this->resolveAssignment($authUser, $data);
+        [$role, $managerId] = $this->resolveAssignment($authUser, $data);
 
         $payload = [
             'name' => $data['name'],
             'email' => $data['email'],
-            'manager_id' => $managerId,
         ];
+
+        if ($managerId !== false) {
+            $payload['manager_id'] = $managerId;
+        }
 
         if (! empty($data['password'])) {
             $payload['password'] = $data['password'];
-        }
-
-        if ($this->canAssignAdvancedFields($authUser)) {
-            $payload['email_verified_at'] = $emailVerifiedAt;
         }
 
         $user->update($payload);
@@ -272,12 +266,12 @@ class UserController extends Controller
                 'email',
                 'max:255',
                 function (string $attribute, mixed $value, \Closure $fail) use ($user): void {
-                    $query = User::query()->admins()->where('email', $value);
+                    $query = User::query()->where('email', $value);
                     if ($user) {
                         $query->where('id', '!=', $user->id);
                     }
                     if ($query->exists()) {
-                        $fail('Este e-mail já está em uso por outra conta do painel.');
+                        $fail('Este e-mail já está em uso.');
                     }
                 },
             ],
@@ -286,32 +280,29 @@ class UserController extends Controller
 
         if ($this->canAssignAdvancedFields($authUser)) {
             $rules['role'] = ['required', Rule::in(array_keys($this->roleOptions($authUser)))];
-            $rules['manager_id'] = ['nullable', 'exists:users,id'];
-            $rules['email_verified_at'] = ['nullable', 'date'];
         }
 
         return $request->validate($rules);
     }
 
     /**
+     * Hierarquia automática: gestor/líder vinculam subordinados a si.
+     * Super admin não define responsável pelo formulário (false = não alterar no update).
+     *
      * @param  array<string, mixed>  $data
-     * @return array{0: string, 1: int|null, 2: mixed}
+     * @return array{0: string, 1: int|null|false}
      */
     protected function resolveAssignment(User $authUser, array $data): array
     {
         if ($authUser->isManager()) {
-            return ['collaborator', $authUser->id, null];
+            return ['collaborator', $authUser->id];
         }
 
         if ($authUser->isFotografiaLider()) {
-            return ['fotografia_colaborador', $authUser->id, null];
+            return ['fotografia_colaborador', $authUser->id];
         }
 
-        return [
-            $data['role'],
-            isset($data['manager_id']) ? (int) $data['manager_id'] : null,
-            $data['email_verified_at'] ?? null,
-        ];
+        return [$data['role'], false];
     }
 
     protected function canAssignAdvancedFields(User $authUser): bool
@@ -356,17 +347,6 @@ class UserController extends Controller
             'fotografia_lider' => 'Líder de Fotografia',
             'fotografia_colaborador' => 'Colaborador de Fotografia',
         ];
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    protected function managerOptions()
-    {
-        return User::query()
-            ->whereHas('roles', fn (Builder $q) => $q->whereIn('name', ['manager', 'fotografia_lider']))
-            ->orderBy('name')
-            ->get(['id', 'name']);
     }
 
     /**

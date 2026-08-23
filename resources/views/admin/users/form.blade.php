@@ -2,13 +2,13 @@
 
 @php
     $activeNav = 'users';
-    $editing = $user->exists;
+    $editing = true;
     $auth = auth('admin')->user();
     $canAssignAdvanced = $auth->isSuperAdmin();
     $canManagePagePerms = $canManagePagePerms ?? ($auth->isSuperAdmin() || $auth->isManager());
 @endphp
-@section('title', $editing ? 'Editar usuário' : 'Novo usuário')
-@section('heading', $editing ? 'Editar usuário' : 'Novo usuário')
+@section('title', 'Editar usuário')
+@section('heading', 'Editar usuário')
 
 @section('actions')
     <a href="{{ route('admin.users.index') }}" class="btn btn-secondary" title="Voltar"><i class="bi bi-arrow-left"></i> Voltar</a>
@@ -55,25 +55,6 @@
                         </div>
                     @endif
                 </div>
-
-                @if ($canAssignAdvanced)
-                    <div class="form-row">
-                        <div class="field">
-                            <label>Responsável</label>
-                            <select name="manager_id" class="select">
-                                <option value="">—</option>
-                                @foreach ($managerOptions as $m)
-                                    <option value="{{ $m->id }}" {{ (string) old('manager_id', $user->manager_id) === (string) $m->id ? 'selected' : '' }}>{{ $m->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label>E-mail verificado em</label>
-                            <input type="datetime-local" name="email_verified_at" class="input"
-                                   value="{{ old('email_verified_at', $user->email_verified_at?->format('Y-m-d\TH:i')) }}">
-                        </div>
-                    </div>
-                @endif
 
                 <div class="form-actions">
                     <button type="submit" class="btn" title="Salvar"><i class="bi bi-check-lg"></i> Salvar</button>

@@ -25,7 +25,7 @@
 
     <h2>1. Dados que coletamos</h2>
     <ul>
-        <li><strong>Cadastro de membros:</strong> nome, e-mail, telefone, data de nascimento, congregação/vínculo e a informação de ser ou não membro batizado. Não coletamos CPF.</li>
+        <li><strong>Cadastro de membros:</strong> nome, e-mail, telefone, data de nascimento e vínculo com a igreja (membro batizado, membro não batizado, visitante, etc.). Não coletamos CPF.</li>
         <li><strong>Fotos de eventos:</strong> imagens publicadas na galeria e os descritores faciais (vetores numéricos) das pessoas presentes nelas.</li>
         <li><strong>Busca facial:</strong> quando um membro usa a busca por selfie, extraímos um descriptor temporário no próprio navegador.</li>
     </ul>

@@ -33,14 +33,20 @@ class DatabaseSeeder extends Seeder
         $user->syncRoles(['super_admin']);
 
         $fotoUser = User::query()->updateOrCreate(
-            ['email' => 'fotografia@adventistascentralbrasilia.org'],
+            ['email' => 'giorgiannecrispim@gmail.com'],
             [
-                'name' => 'Ministério de Fotografia',
+                'name' => 'Giorgianne Crispim',
                 'password' => 'Foto@2026',
                 'email_verified_at' => Carbon::now(),
             ],
         );
 
         $fotoUser->syncRoles(['fotografia_lider']);
+
+        // Remove conta legada do seed anterior, se ainda existir.
+        User::query()
+            ->where('email', 'fotografia@adventistascentralbrasilia.org')
+            ->where('id', '!=', $fotoUser->id)
+            ->delete();
     }
 }

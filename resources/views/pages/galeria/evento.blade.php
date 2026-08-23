@@ -94,88 +94,477 @@
         font-size: 0.92rem;
     }
     .galeria-face-banner[hidden] { display: none; }
+    .galeria-face-banner-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
 
-    /* Modal de busca facial */
-    .galeria-face-modal {
+    /* Overlay de progresso da busca facial (após fechar o modal) */
+    .galeria-face-search-overlay {
+        --galeria-face-pad: 16px;
         position: fixed;
-        inset: 0;
-        z-index: 10000;
+        top: var(--header-height);
+        left: 0;
+        right: 14.28%;
+        bottom: 0;
+        z-index: 10001;
         display: none;
         align-items: center;
         justify-content: center;
+        padding: var(--galeria-face-pad);
+        background: rgba(8, 18, 32, 0.72);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        box-sizing: border-box;
+    }
+    .galeria-face-search-overlay.is-open { display: flex; }
+    .galeria-face-search-card {
+        width: min(100%, 380px);
+        text-align: center;
+        padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.25rem, 3vw, 2rem);
+        border-radius: 18px;
+        background: linear-gradient(180deg, #ffffff 0%, #f4f8fc 100%);
+        border: 1px solid rgba(0, 51, 102, 0.12);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+        color: #003366;
+    }
+    .galeria-face-search-spinner {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 1.1rem;
+        border-radius: 50%;
+        border: 3px solid rgba(0, 51, 102, 0.14);
+        border-top-color: #0a5aa8;
+        animation: galeria-spin 0.85s linear infinite;
+    }
+    .galeria-face-search-card.is-done .galeria-face-search-spinner {
+        display: none;
+    }
+    .galeria-face-search-check {
+        display: none;
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 1.1rem;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        background: #e8f5ee;
+        color: #1f7a4d;
+        font-size: 1.5rem;
+    }
+    .galeria-face-search-card.is-done .galeria-face-search-check {
+        display: inline-flex;
+    }
+    .galeria-face-search-card.is-error .galeria-face-search-spinner { display: none; }
+    .galeria-face-search-card.is-error .galeria-face-search-check {
+        display: inline-flex;
+        background: #fdecea;
+        color: #a12622;
+    }
+    .galeria-face-search-title {
+        margin: 0 0 0.35rem;
+        font-family: "Bebas Neue", "Noto Sans JP", sans-serif;
+        font-size: clamp(1.45rem, 4vw, 1.75rem);
+        letter-spacing: 0.4px;
+        color: #003366;
+    }
+    .galeria-face-search-status {
+        margin: 0 0 1rem;
+        font-size: 0.92rem;
+        color: #556;
+        line-height: 1.4;
+        min-height: 1.35em;
+    }
+    .galeria-face-search-count {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.15rem;
+        margin: 0 auto;
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        background: rgba(0, 51, 102, 0.06);
+        min-width: 9rem;
+    }
+    .galeria-face-search-count-num {
+        font-family: "Bebas Neue", "Noto Sans JP", sans-serif;
+        font-size: clamp(2.4rem, 8vw, 3.2rem);
+        line-height: 1;
+        letter-spacing: 1px;
+        color: #003366;
+        font-variant-numeric: tabular-nums;
+    }
+    .galeria-face-search-count-label {
+        font-size: 0.82rem;
+        color: #5a6b7d;
+        font-weight: 500;
+    }
+    .galeria-face-search-retry {
+        display: none;
+        margin-top: 1.1rem;
+    }
+    .galeria-face-search-card.is-error .galeria-face-search-retry {
+        display: inline-flex;
+    }
+
+    @media (max-width: 1100px) {
+        .galeria-face-search-overlay { right: 0; }
+    }
+
+    /* Modal de busca facial — respeita o header fixo e a coluna lateral (aside),
+       no mesmo padrão do lightbox / form-overlay do site */
+    .galeria-face-modal {
+        --galeria-face-pad: 16px;
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 14.28%;
+        bottom: 0;
+        z-index: 10000;
+        display: none;
+        justify-content: center;
+        align-items: flex-start;
         background: rgba(0, 0, 0, 0.6);
-        padding: 16px;
+        padding: var(--galeria-face-pad);
+        padding-bottom: max(var(--galeria-face-pad), env(safe-area-inset-bottom, 0px));
         backdrop-filter: blur(3px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        box-sizing: border-box;
     }
     .galeria-face-modal.is-open { display: flex; }
     .galeria-face-dialog {
+        position: relative;
         background: #fff;
         border-radius: 16px;
-        max-width: 520px;
+        max-width: 720px;
         width: 100%;
-        max-height: 92vh;
-        overflow-y: auto;
+        margin: auto;
+        max-height: calc(100vh - var(--header-height) - 32px);
+        max-height: calc(100dvh - var(--header-height) - 32px);
+        display: flex;
+        flex-direction: column;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-        padding: clamp(20px, 3vw, 32px);
+        overflow: hidden;
+    }
+    .galeria-face-dialog-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: clamp(16px, 3vw, 28px);
+        padding-bottom: 12px;
     }
     .galeria-face-dialog h2 {
         font-family: "Bebas Neue", "Noto Sans JP", sans-serif;
         color: #003366;
         margin: 0 0 0.25rem;
-        font-size: 1.8rem;
+        font-size: clamp(1.35rem, 4.5vw, 1.8rem);
         letter-spacing: 0.5px;
+        padding-right: 2rem;
     }
     .galeria-face-dialog p.face-sub { color: #555; font-size: 0.9rem; margin: 0 0 1rem; }
-    .galeria-face-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .galeria-face-tabs { display: flex; gap: 0.4rem; margin-bottom: 1rem; padding: 0.28rem; background: #f3f6f9; border-radius: 12px; }
     .galeria-face-tab {
         flex: 1;
-        padding: 0.55rem;
-        border: 1px solid rgba(0, 51, 102, 0.25);
-        border-radius: 8px;
+        padding: 0.55rem 0.6rem;
+        border: none;
+        border-radius: 9px;
+        background: transparent;
+        color: #4a5d70;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .galeria-face-tab:hover { color: #003366; }
+    .galeria-face-tab.is-active {
         background: #fff;
         color: #003366;
-        cursor: pointer;
-        font-size: 0.9rem;
+        box-shadow: 0 1px 3px rgba(0, 51, 102, 0.1), 0 0 0 1px rgba(0, 51, 102, 0.06);
     }
-    .galeria-face-tab.is-active { background: #003366; color: #fff; }
     .galeria-face-stage {
+        --face-stage-fg: #003366;
+        --face-stage-muted: #5f7388;
+        --face-stage-accent: #0a5aa8;
         position: relative;
-        width: 100%;
+        width: min(100%, 360px);
         aspect-ratio: 1 / 1;
-        max-height: 320px;
-        border-radius: 12px;
+        max-height: min(360px, 36vh, 36dvh);
+        margin: 0 auto 1rem;
+        border-radius: 20px;
         overflow: hidden;
-        background: #0b1b2e;
+        background: linear-gradient(165deg, #f7fafc 0%, #eef4fa 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1rem;
+        border: 1.5px dashed rgba(0, 51, 102, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        transition:
+            border-color 0.22s ease,
+            border-style 0.22s ease,
+            box-shadow 0.22s ease,
+            background 0.22s ease,
+            transform 0.22s ease;
+    }
+    .galeria-face-stage.is-idle {
+        cursor: pointer;
+    }
+    .galeria-face-stage.is-idle:hover {
+        border-style: solid;
+        border-color: rgba(10, 90, 168, 0.42);
+        background: linear-gradient(165deg, #f3f8fd 0%, #e7f1fa 100%);
+        box-shadow:
+            0 10px 28px rgba(0, 51, 102, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        transform: translateY(-1px);
+    }
+    .galeria-face-stage.is-idle:focus-visible {
+        outline: 3px solid rgba(10, 90, 168, 0.35);
+        outline-offset: 3px;
+    }
+    .galeria-face-stage.is-dragover {
+        border-style: solid;
+        border-color: var(--face-stage-accent);
+        background: linear-gradient(165deg, #eaf4fc 0%, #dcecf8 100%);
+        box-shadow:
+            0 0 0 4px rgba(10, 90, 168, 0.12),
+            0 12px 30px rgba(0, 51, 102, 0.1);
+        transform: scale(1.01);
+    }
+    .galeria-face-stage.is-live,
+    .galeria-face-stage.is-preview {
+        border-style: solid;
+        border-color: rgba(0, 51, 102, 0.08);
+        background: #0d1a2b;
+        box-shadow: none;
+        cursor: default;
+        transform: none;
     }
     .galeria-face-stage video, .galeria-face-stage img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-    .galeria-face-stage .face-placeholder { color: rgba(255,255,255,0.6); font-size: 0.9rem; text-align: center; padding: 1rem; }
+    /* Preview ao vivo espelhado (selfie); a captura no canvas usa o frame bruto */
+    .galeria-face-stage video {
+        transform: scaleX(-1);
+    }
+    .galeria-face-stage .face-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        color: var(--face-stage-fg);
+        text-align: center;
+        padding: 1.5rem 1.6rem;
+        pointer-events: none;
+        user-select: none;
+        max-width: 17rem;
+    }
+    .galeria-face-stage .face-drop-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.55rem;
+        background: #fff;
+        border: 1px solid rgba(0, 51, 102, 0.08);
+        box-shadow:
+            0 8px 20px rgba(0, 51, 102, 0.08),
+            0 1px 0 rgba(255, 255, 255, 0.9);
+        color: var(--face-stage-accent);
+        font-size: 1.55rem;
+        transition: transform 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, background 0.22s ease;
+    }
+    .galeria-face-stage.is-idle:hover .face-drop-icon {
+        transform: translateY(-2px) scale(1.04);
+        color: #084f94;
+        box-shadow:
+            0 12px 26px rgba(0, 51, 102, 0.12),
+            0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+    .galeria-face-stage.is-dragover .face-drop-icon {
+        transform: scale(1.08);
+        background: var(--face-stage-accent);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 10px 24px rgba(10, 90, 168, 0.28);
+    }
+    .galeria-face-stage .face-drop-title {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--face-stage-fg);
+        line-height: 1.35;
+        letter-spacing: 0;
+    }
+    .galeria-face-stage .face-drop-hint {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.86rem;
+        font-weight: 400;
+        color: var(--face-stage-muted);
+        line-height: 1.45;
+        max-width: 14.5rem;
+    }
+    .galeria-face-stage.is-dragover .face-drop-title {
+        color: var(--face-stage-accent);
+    }
+    .galeria-face-stage.is-dragover .face-drop-hint {
+        color: #3d5f7a;
+    }
     .galeria-face-hidden { display: none !important; }
-    .galeria-face-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-    .galeria-face-consents { margin-bottom: 1rem; }
-    .galeria-face-consents label { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.82rem; color: #444; margin-bottom: 0.6rem; line-height: 1.4; }
-    .galeria-face-consents input { margin-top: 0.2rem; }
+    .galeria-face-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1rem;
+        min-height: 0;
+    }
+    .galeria-face-buttons:empty,
+    .galeria-face-buttons.is-empty { display: none; }
+    .galeria-face-consents { margin-bottom: 0.5rem; }
+    .galeria-face-consents-legend {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: nowrap;
+        gap: 0.35rem;
+        margin: 0 0 0.65rem;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: #003366;
+        white-space: nowrap;
+    }
+    .galeria-face-consents-legend .face-req {
+        font-weight: 500;
+        color: #8a2f2b;
+        font-size: 0.78rem;
+        white-space: nowrap;
+    }
+    .galeria-face-consents label {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.65rem;
+        font-size: 0.82rem;
+        color: #444;
+        margin-bottom: 0.7rem;
+        line-height: 1.4;
+        cursor: pointer;
+    }
+    .galeria-face-consents input[type="checkbox"] {
+        width: 1.15rem;
+        height: 1.15rem;
+        min-width: 1.15rem;
+        min-height: 1.15rem;
+        margin-top: 0.12rem;
+        flex-shrink: 0;
+        cursor: pointer;
+        accent-color: #003366;
+    }
+    .galeria-face-consents .face-req {
+        color: #c0392b;
+        font-weight: 700;
+        margin-left: 0.15rem;
+    }
+    .galeria-face-foot .galeria-toolbar-btn.primary:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        filter: grayscale(0.15);
+    }
     #galeriaFaceGuardian { display: none; }
     #galeriaFaceGuardian.is-visible { display: block; }
-    .galeria-face-status { font-size: 0.85rem; color: #555; min-height: 1.2rem; margin-bottom: 0.75rem; }
+    .galeria-face-status { font-size: 0.85rem; color: #555; min-height: 1.2rem; margin-bottom: 0.5rem; }
     .galeria-face-status.is-error { color: #a12622; }
-    .galeria-face-foot { display: flex; gap: 0.5rem; justify-content: flex-end; }
+    .galeria-face-foot {
+        flex: 0 0 auto;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        padding: 12px clamp(16px, 3vw, 28px);
+        border-top: 1px solid rgba(0, 51, 102, 0.1);
+        background: #fff;
+    }
     .galeria-face-close {
         position: absolute;
-        top: 14px; right: 14px;
+        top: 12px;
+        right: 12px;
+        z-index: 2;
         background: rgba(0,0,0,0.06);
         border: none;
         border-radius: 50%;
         width: 34px; height: 34px;
         cursor: pointer;
         color: #333;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 1100px) {
+        .galeria-face-modal { right: 0; }
+        .galeria-face-search-overlay { right: 0; }
+    }
+
+    @media (max-width: 768px) {
+        .galeria-face-modal { --galeria-face-pad: 12px; }
+        .galeria-face-dialog {
+            max-width: 100%;
+            border-radius: 14px;
+            max-height: calc(100vh - var(--header-height) - 24px);
+            max-height: calc(100dvh - var(--header-height) - 24px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .galeria-face-dialog-body { padding: 14px 14px 8px; }
+        .galeria-face-dialog p.face-sub { font-size: 0.84rem; margin-bottom: 0.75rem; }
+        .galeria-face-tabs { margin-bottom: 0.75rem; }
+        .galeria-face-tab { font-size: 0.84rem; padding: 0.5rem 0.4rem; }
+        .galeria-face-stage {
+            max-height: min(220px, 28vh, 28dvh);
+            margin-bottom: 0.75rem;
+        }
+        .galeria-face-buttons { margin-bottom: 0.75rem; }
+        .galeria-face-buttons .galeria-toolbar-btn {
+            flex: 1 1 calc(50% - 0.25rem);
+            justify-content: center;
+            font-size: 0.82rem;
+            padding: 0.45rem 0.6rem;
+        }
+        .galeria-face-consents label { font-size: 0.78rem; margin-bottom: 0.5rem; }
+        .galeria-face-foot {
+            padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+        }
+        .galeria-face-foot .galeria-toolbar-btn {
+            flex: 1 1 auto;
+            justify-content: center;
+        }
+    }
+
+    @media (max-height: 700px) {
+        .galeria-face-stage {
+            max-height: min(200px, 26vh, 26dvh);
+        }
+        .galeria-face-dialog h2 { font-size: 1.35rem; }
+        .galeria-face-dialog p.face-sub { margin-bottom: 0.6rem; }
     }
 
     .galeria-photo-grid {
@@ -344,52 +733,7 @@
     .galeria-toolbar-btn.primary { background: #003366; color: #fff; }
     .galeria-toolbar-btn.primary:hover { background: #002244; }
 
-    /* CTA de visitante: destaque para incentivar o login antes da busca facial */
-    .galeria-face-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        padding: 0.6rem 1.15rem;
-        border: none;
-        border-radius: 999px;
-        background: linear-gradient(135deg, #0a5aa8 0%, #003366 58%, #00223f 100%);
-        color: #fff;
-        font-size: 0.9rem;
-        font-weight: 600;
-        font-family: "Roboto", sans-serif;
-        line-height: 1;
-        text-decoration: none;
-        cursor: pointer;
-        box-shadow: 0 6px 18px rgba(0, 51, 102, 0.28);
-        transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-    }
-    .galeria-face-cta:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 28px rgba(0, 51, 102, 0.38);
-        filter: brightness(1.06);
-    }
-    .galeria-face-cta:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 51, 102, 0.3); }
-    .galeria-face-cta:focus-visible { outline: 3px solid rgba(10, 90, 168, 0.45); outline-offset: 3px; }
-    .galeria-face-cta .galeria-face-cta-icon { font-size: 1.1rem; }
-    .galeria-face-cta .galeria-face-cta-arrow { font-size: 1.15rem; transition: transform 0.18s ease; }
-    .galeria-face-cta:hover .galeria-face-cta-arrow { transform: translateX(3px); }
-    .galeria-face-cta.is-secondary {
-        background: #fff;
-        color: #003366;
-        border: 1px solid rgba(0, 51, 102, 0.28);
-        box-shadow: none;
-    }
-    .galeria-face-cta.is-secondary:hover {
-        background: #f4f8fc;
-        filter: none;
-        box-shadow: 0 6px 16px rgba(0, 51, 102, 0.12);
-    }
-    .galeria-face-auth {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        flex-wrap: wrap;
-    }
+    a.galeria-toolbar-btn { text-decoration: none; }
 
     .galeria-sort-wrap { display: flex; align-items: center; gap: 0.5rem; }
     .galeria-sort-label { font-size: 0.85rem; color: #555555; font-family: "Roboto", sans-serif; }
@@ -548,7 +892,7 @@
     @php
         $faceUser = auth('web')->user();
         $faceEnabled = (bool) config('face.enabled', true);
-        $faceCanSearch = $faceUser && $faceUser->isActiveMember();
+        $faceCanSearch = $faceUser && $faceUser->canUseFaceSearch();
     @endphp
 
     <div class="galeria-evento-meta">
@@ -564,21 +908,13 @@
             <div class="galeria-meta-actions">
                 @if($faceEnabled)
                     @if($faceCanSearch)
-                        <button type="button" class="galeria-toolbar-btn primary" id="galeriaFaceSearchBtn">
-                            <i class="bi bi-person-bounding-box"></i> Encontrar minhas fotos
+                        <button type="button" class="galeria-toolbar-btn primary" id="galeriaFaceSearchBtn" title="Localizar as fotos em que você aparece">
+                            <i class="bi bi-person-bounding-box"></i> Reconhecimento Facial
                         </button>
                     @else
-                        <div class="galeria-face-auth">
-                            <a href="{{ route('member.login', ['redirect' => url()->current()]) }}" class="galeria-face-cta is-secondary" title="Entre com sua conta de membro">
-                                <i class="bi bi-box-arrow-in-right galeria-face-cta-icon" aria-hidden="true"></i>
-                                <span>Entrar</span>
-                            </a>
-                            <a href="{{ route('member.register', ['redirect' => url()->current()]) }}" class="galeria-face-cta" title="Crie uma conta de membro para localizar as fotos em que você aparece">
-                                <i class="bi bi-stars galeria-face-cta-icon" aria-hidden="true"></i>
-                                <span>Criar conta</span>
-                                <i class="bi bi-arrow-right-short galeria-face-cta-arrow" aria-hidden="true"></i>
-                            </a>
-                        </div>
+                        <a href="{{ route('member.login', ['redirect' => request()->fullUrlWithQuery(['face' => 1])]) }}" class="galeria-toolbar-btn primary" title="Entre com sua conta de membro para usar o reconhecimento facial">
+                            <i class="bi bi-person-bounding-box"></i> Reconhecimento Facial
+                        </a>
                     @endif
                 @endif
                 <button type="button" class="galeria-toolbar-btn galeria-select-toggle" id="galeriaSelectToggle">
@@ -592,7 +928,25 @@
     @if(count($fotos) > 0 && $faceEnabled && $faceCanSearch)
         <div class="galeria-face-banner" id="galeriaFaceBanner" hidden>
             <span id="galeriaFaceBannerText"></span>
-            <button type="button" class="galeria-toolbar-btn" id="galeriaFaceClear"><i class="bi bi-x-circle"></i> Limpar busca</button>
+            <div class="galeria-face-banner-actions">
+                <button type="button" class="galeria-toolbar-btn" id="galeriaFaceClear"><i class="bi bi-images"></i> Ver todas</button>
+            </div>
+        </div>
+
+        <div class="galeria-face-search-overlay" id="galeriaFaceSearchOverlay" aria-live="polite" aria-busy="false" hidden>
+            <div class="galeria-face-search-card" id="galeriaFaceSearchCard">
+                <div class="galeria-face-search-spinner" aria-hidden="true"></div>
+                <div class="galeria-face-search-check" id="galeriaFaceSearchCheck" aria-hidden="true"><i class="bi bi-check-lg"></i></div>
+                <h3 class="galeria-face-search-title" id="galeriaFaceSearchTitle">Buscando fotos</h3>
+                <p class="galeria-face-search-status" id="galeriaFaceSearchStatus">Preparando…</p>
+                <div class="galeria-face-search-count">
+                    <span class="galeria-face-search-count-num" id="galeriaFaceSearchCount">0</span>
+                    <span class="galeria-face-search-count-label" id="galeriaFaceSearchCountLabel">fotos encontradas</span>
+                </div>
+                <button type="button" class="galeria-toolbar-btn galeria-face-search-retry" id="galeriaFaceSearchRetry">
+                    <i class="bi bi-arrow-counterclockwise"></i> Tentar novamente
+                </button>
+            </div>
         </div>
     @endif
 
@@ -630,39 +984,62 @@
         <div class="galeria-face-modal" id="galeriaFaceModal" role="dialog" aria-modal="true" aria-labelledby="galeriaFaceTitle">
             <div class="galeria-face-dialog">
                 <button type="button" class="galeria-face-close" id="galeriaFaceModalClose" aria-label="Fechar"><i class="bi bi-x-lg"></i></button>
-                <h2 id="galeriaFaceTitle">Encontrar minhas fotos</h2>
-                <p class="face-sub">Tire uma selfie ou envie uma foto sua. O reconhecimento acontece no seu dispositivo — só um código numérico temporário é enviado para comparar com as fotos deste álbum.</p>
+                <div class="galeria-face-dialog-body">
+                    <h2 id="galeriaFaceTitle">Reconhecimento Facial</h2>
+                    <p class="face-sub">Tire uma selfie ou envie uma foto sua. O reconhecimento acontece no seu dispositivo.</p>
 
-                <div class="galeria-face-tabs">
-                    <button type="button" class="galeria-face-tab is-active" data-mode="camera"><i class="bi bi-camera"></i> Câmera</button>
-                    <button type="button" class="galeria-face-tab" data-mode="upload"><i class="bi bi-upload"></i> Enviar foto</button>
-                </div>
-
-                <div class="galeria-face-stage" id="galeriaFaceStage">
-                    <div class="face-placeholder" id="galeriaFacePlaceholder">Toque em “Ativar câmera” para começar.</div>
-                    <video id="galeriaFaceVideo" class="galeria-face-hidden" playsinline muted></video>
-                    <img id="galeriaFacePreview" class="galeria-face-hidden" alt="Pré-visualização">
-                </div>
-
-                <input type="file" id="galeriaFaceFile" accept="image/*" hidden>
-
-                <div class="galeria-face-buttons">
-                    <button type="button" class="galeria-toolbar-btn" id="galeriaFaceCameraStart"><i class="bi bi-camera-video"></i> Ativar câmera</button>
-                    <button type="button" class="galeria-toolbar-btn" id="galeriaFaceCapture" hidden><i class="bi bi-camera"></i> Capturar</button>
-                    <button type="button" class="galeria-toolbar-btn galeria-face-hidden" id="galeriaFacePick"><i class="bi bi-image"></i> Escolher foto</button>
-                    <button type="button" class="galeria-toolbar-btn" id="galeriaFaceRetake" hidden><i class="bi bi-arrow-counterclockwise"></i> Refazer</button>
-                </div>
-
-                <div class="galeria-face-consents">
-                    <label><input type="checkbox" id="galeriaConsentSelf"> Confirmo que sou a pessoa retratada e não estou enviando imagem de terceiro.</label>
-                    <label><input type="checkbox" id="galeriaConsentBiometric"> Autorizo o uso temporário do meu descriptor biométrico exclusivamente para localizar minhas fotos neste álbum.</label>
-                    <label><input type="checkbox" id="galeriaConsentLimitations"> Entendo que o recurso pode apresentar falsos positivos/negativos, não comprova identidade e não possui verificação de vivacidade (liveness).</label>
-                    <div id="galeriaFaceGuardian" class="{{ $faceUser && $faceUser->isMinor() ? 'is-visible' : '' }}">
-                        <label><input type="checkbox" id="galeriaConsentGuardian"> Declaro que quem realiza esta busca é o responsável legal pelo menor e autoriza o tratamento dos dados.</label>
+                    <div class="galeria-face-tabs">
+                        <button type="button" class="galeria-face-tab is-active" data-mode="camera"><i class="bi bi-camera"></i> Câmera</button>
+                        <button type="button" class="galeria-face-tab" data-mode="upload"><i class="bi bi-upload"></i> Enviar foto</button>
                     </div>
-                </div>
 
-                <div class="galeria-face-status" id="galeriaFaceStatus"></div>
+                    <div
+                        class="galeria-face-stage is-idle"
+                        id="galeriaFaceStage"
+                        role="button"
+                        tabindex="0"
+                        aria-label="Clique para ativar a câmera ou arraste uma imagem para carregar a foto"
+                    >
+                        <div class="face-placeholder" id="galeriaFacePlaceholder">
+                            <span class="face-drop-icon" aria-hidden="true"><i class="bi bi-camera"></i></span>
+                            <p class="face-drop-title" id="galeriaFaceDropTitle">Ativar câmera</p>
+                            <p class="face-drop-hint" id="galeriaFaceDropHint">Clique aqui ou arraste uma foto para começar</p>
+                        </div>
+                        <video id="galeriaFaceVideo" class="galeria-face-hidden" playsinline muted></video>
+                        <img id="galeriaFacePreview" class="galeria-face-hidden" alt="Pré-visualização">
+                    </div>
+
+                    <input type="file" id="galeriaFaceFile" accept="image/*" hidden>
+
+                    <div class="galeria-face-buttons is-empty" id="galeriaFaceButtons">
+                        <button type="button" class="galeria-toolbar-btn galeria-face-hidden" id="galeriaFaceCapture" hidden><i class="bi bi-camera"></i> Capturar</button>
+                        <button type="button" class="galeria-toolbar-btn galeria-face-hidden" id="galeriaFaceRetake" hidden><i class="bi bi-arrow-counterclockwise"></i> Refazer</button>
+                    </div>
+
+                    <div class="galeria-face-consents">
+                        <p class="galeria-face-consents-legend">Autorizações<span class="face-req">* obrigatórias</span></p>
+                        <label>
+                            <input type="checkbox" id="galeriaConsentSelf" required>
+                            <span>Confirmo que sou a pessoa retratada e não estou enviando imagem de terceiro.<span class="face-req" aria-hidden="true">*</span></span>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="galeriaConsentBiometric" required>
+                            <span>Autorizo o uso temporário do meu descriptor biométrico exclusivamente para localizar minhas fotos neste álbum.<span class="face-req" aria-hidden="true">*</span></span>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="galeriaConsentLimitations" required>
+                            <span>Entendo que o recurso pode apresentar falsos positivos/negativos, não comprova identidade e não possui verificação de vivacidade (liveness).<span class="face-req" aria-hidden="true">*</span></span>
+                        </label>
+                        <div id="galeriaFaceGuardian" class="{{ $faceUser && $faceUser->isMinor() ? 'is-visible' : '' }}">
+                            <label>
+                                <input type="checkbox" id="galeriaConsentGuardian" {{ $faceUser && $faceUser->isMinor() ? 'required' : '' }}>
+                                <span>Declaro que quem realiza esta busca é o responsável legal pelo menor e autoriza o tratamento dos dados.<span class="face-req" aria-hidden="true">*</span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="galeria-face-status" id="galeriaFaceStatus"></div>
+                </div>
 
                 <div class="galeria-face-foot">
                     <button type="button" class="galeria-toolbar-btn" id="galeriaFaceCancel">Cancelar</button>
@@ -677,6 +1054,7 @@
             'searchUrl' => route('galeria.busca-facial', $evento['id']),
             'csrf' => csrf_token(),
             'isMinor' => (bool) ($faceUser && $faceUser->isMinor()),
+            'photoCount' => count($fotos),
             'selfie' => [
                 'minScore' => (float) config('face.detection.selfie.min_score', 0.7),
                 'minSizeRatio' => (float) config('face.detection.selfie.min_size_ratio', 0.12),

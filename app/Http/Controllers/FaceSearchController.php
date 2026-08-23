@@ -26,9 +26,7 @@ class FaceSearchController extends Controller
         $user = $request->user('web');
         abort_unless($user instanceof User, 401);
 
-        // O convite é apenas uma credencial de cadastro. A busca só é liberada
-        // depois que ele é consumido por uma conta de membro ativa.
-        abort_unless($user->isActiveMember(), 403, 'A busca facial é exclusiva para membros ativos.');
+        abort_unless($user->canUseFaceSearch(), 403, 'A busca facial exige login ativo no site.');
 
         $album = GalleryAlbum::query()
             ->published()

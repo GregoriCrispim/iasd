@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\MemberInvite;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -48,19 +47,18 @@ class AuthGuardsCoexistenceTest extends TestCase
         return $user;
     }
 
-    private function createInvite(): array
+    private function registerPayload(string $email): array
     {
-        $generated = MemberInvite::generateCode();
-        $invite = MemberInvite::create([
-            'code' => $generated['code'],
-            'code_hash' => $generated['hash'],
-            'code_prefix' => $generated['prefix'],
-            'max_uses' => 1,
-            'uses_count' => 0,
-            'is_active' => true,
-        ]);
-
-        return [$invite, $generated['code']];
+        return [
+            'name' => 'Pessoa Membro',
+            'email' => $email,
+            'password' => 'membroSenha9',
+            'password_confirmation' => 'membroSenha9',
+            'phone' => '(61) 99999-0000',
+            'birth_date' => '1990-05-10',
+            'congregation' => 'visitante',
+            'accept_terms' => '1',
+        ];
     }
 
     public function test_admin_and_member_sessions_can_coexist(): void
@@ -138,17 +136,16 @@ class AuthGuardsCoexistenceTest extends TestCase
         $this->get(route('member.login'))->assertOk();
     }
 
-    public function test_stale_web_admin_session_does_not_redirect_register_to_galeria(): void
+    public function test_admin_on_web_is_redirected_away_from_register(): void
     {
         $admin = $this->admin();
 
         $this->actingAs($admin, 'web');
 
         $this->get(route('member.register'))
-            ->assertOk()
-            ->assertSee('Criar conta', false);
+            ->assertRedirect(route('galeria'));
 
-        $this->assertGuest('web');
+        $this->assertAuthenticatedAs($admin, 'web');
     }
 
     public function test_member_cannot_use_admin_login(): void
@@ -166,79 +163,48 @@ class AuthGuardsCoexistenceTest extends TestCase
         $this->assertGuest('web');
     }
 
-    public function test_admin_account_cannot_login_as_member_without_member_account(): void
+    public function test_admin_can_login_on_site_with_same_credentials(): void
     {
         $admin = $this->admin();
 
-        $this->from(route('member.login'))
-            ->post(route('member.login.post'), [
-                'email' => $admin->email,
-                'password' => 'senha12345',
-            ])
-            ->assertSessionHasErrors([
-                'email' => __('auth.failed'),
-            ]);
+        $this->post(route('member.login.post'), [
+            'email' => $admin->email,
+            'password' => 'senha12345',
+        ])->assertRedirect(route('galeria'));
 
-        $this->assertGuest('web');
+        $this->assertAuthenticatedAs($admin, 'web');
         $this->assertGuest('admin');
     }
 
-    public function test_admin_can_create_separate_member_account_with_same_email(): void
+    public function test_admin_and_site_login_redirect_by_form(): void
     {
         $admin = $this->admin();
-        [, $code] = $this->createInvite();
-
-        $this->post(route('member.register.post'), [
-            'invite_code' => $code,
-            'name' => 'Admin como Membro',
-            'email' => $admin->email,
-            'password' => 'membroSenha9',
-            'password_confirmation' => 'membroSenha9',
-            'phone' => '(61) 99999-0000',
-            'birth_date' => '1990-05-10',
-            'accept_terms' => '1',
-        ])->assertRedirect(route('galeria'));
-
-        $member = User::query()->members()->where('email', $admin->email)->first();
-        $this->assertNotNull($member);
-        $this->assertNotEquals($admin->id, $member->id);
-        $this->assertTrue($member->isMember());
-        $this->assertFalse($member->canAccessAdminPanel());
-        $this->assertTrue($admin->fresh()->isSuperAdmin());
-        $this->assertFalse($admin->fresh()->isMember());
-        $this->assertAuthenticatedAs($member, 'web');
-    }
-
-    public function test_same_email_admin_and_member_can_login_independently(): void
-    {
-        $admin = $this->admin();
-        [, $code] = $this->createInvite();
-
-        $this->post(route('member.register.post'), [
-            'invite_code' => $code,
-            'name' => 'Pessoa Membro',
-            'email' => $admin->email,
-            'password' => 'membroSenha9',
-            'password_confirmation' => 'membroSenha9',
-            'phone' => '(61) 99999-0000',
-            'birth_date' => '1990-05-10',
-            'accept_terms' => '1',
-        ]);
-        $this->post(route('member.logout'));
-
-        $member = User::query()->members()->where('email', $admin->email)->first();
 
         $this->post(route('admin.login.post'), [
             'email' => $admin->email,
             'password' => 'senha12345',
         ])->assertRedirect(route('admin.dashboard'));
 
+        $this->assertAuthenticatedAs($admin, 'admin');
+
         $this->post(route('member.login.post'), [
             'email' => $admin->email,
-            'password' => 'membroSenha9',
+            'password' => 'senha12345',
         ])->assertRedirect(route('galeria'));
 
         $this->assertAuthenticatedAs($admin, 'admin');
-        $this->assertAuthenticatedAs($member, 'web');
+        $this->assertAuthenticatedAs($admin, 'web');
+    }
+
+    public function test_cannot_register_member_with_existing_panel_email(): void
+    {
+        $admin = $this->admin();
+
+        $this->from(route('member.register'))
+            ->post(route('member.register.post'), $this->registerPayload($admin->email))
+            ->assertSessionHasErrors('email');
+
+        $this->assertSame(1, User::query()->where('email', $admin->email)->count());
+        $this->assertGuest('web');
     }
 }

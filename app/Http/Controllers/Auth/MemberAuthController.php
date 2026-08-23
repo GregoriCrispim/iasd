@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\MemberInvite;
-use App\Models\MemberInviteUse;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
@@ -20,22 +17,22 @@ class MemberAuthController extends Controller
 {
     public function showLogin(): View|RedirectResponse
     {
-        if ($this->activeMember()) {
+        if ($this->activeSiteUser()) {
             return redirect()->intended(route('galeria'));
         }
 
-        $this->forgetNonMemberWebSession();
+        $this->forgetInvalidWebSession();
 
         return view('auth.login');
     }
 
     public function login(Request $request): RedirectResponse
     {
-        if ($this->activeMember()) {
+        if ($this->activeSiteUser()) {
             return redirect()->intended(route('galeria'));
         }
 
-        $this->forgetNonMemberWebSession();
+        $this->forgetInvalidWebSession();
 
         $data = $request->validate([
             'email' => ['required', 'email'],
@@ -43,7 +40,6 @@ class MemberAuthController extends Controller
         ]);
 
         $user = User::query()
-            ->members()
             ->where('email', $data['email'])
             ->first();
 
@@ -53,9 +49,9 @@ class MemberAuthController extends Controller
             ]);
         }
 
-        if (! $user->isActiveMember()) {
+        if (! $user->canUseSiteAuth()) {
             throw ValidationException::withMessages([
-                'email' => 'Sua conta de membro está inativa. Fale com a equipe de comunicação.',
+                'email' => 'Sua conta está inativa. Fale com a equipe de comunicação.',
             ]);
         }
 
@@ -65,49 +61,46 @@ class MemberAuthController extends Controller
         return redirect()->to($this->safeRedirectTarget($request, route('galeria')));
     }
 
-    public function showRegister(Request $request): View|RedirectResponse
+    public function showRegister(): View|RedirectResponse
     {
-        if ($this->activeMember()) {
+        if ($this->activeSiteUser()) {
             return redirect()->intended(route('galeria'));
         }
 
-        $this->forgetNonMemberWebSession();
+        $this->forgetInvalidWebSession();
 
-        return view('auth.register', [
-            'prefillCode' => (string) $request->query('convite', ''),
-        ]);
+        return view('auth.register');
     }
 
     public function register(Request $request): RedirectResponse
     {
-        if ($this->activeMember()) {
+        if ($this->activeSiteUser()) {
             return redirect()->intended(route('galeria'));
         }
 
-        $this->forgetNonMemberWebSession();
+        $this->forgetInvalidWebSession();
 
         $data = $request->validate([
-            'invite_code' => ['required', 'string', 'max:40'],
             'name' => ['required', 'string', 'max:120'],
             'email' => [
                 'required',
                 'email',
                 'max:190',
                 function (string $attribute, mixed $value, \Closure $fail): void {
-                    // Unicidade apenas entre contas de membro; o mesmo e-mail pode existir no painel.
-                    if (User::query()->members()->where('email', $value)->exists()) {
-                        $fail('Este e-mail já possui conta de membro. Faça login.');
+                    if (User::query()->where('email', $value)->exists()) {
+                        $fail('Este e-mail já possui conta. Faça login.');
                     }
                 },
             ],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
             'phone' => ['required', 'string', 'max:30'],
             'birth_date' => ['required', 'date', 'before:today'],
-            'congregation' => ['nullable', 'string', 'max:120'],
-            'is_church_member' => ['nullable', 'boolean'],
+            'congregation' => ['required', 'string', 'in:'.implode(',', array_keys(User::MEMBERSHIP_LINKS))],
             'guardian_consent' => ['nullable', 'boolean'],
             'accept_terms' => ['accepted'],
         ], [
+            'congregation.required' => 'Selecione seu vínculo com a igreja.',
+            'congregation.in' => 'Selecione uma opção válida de vínculo.',
             'accept_terms.accepted' => 'É necessário aceitar os termos para se cadastrar.',
         ]);
 
@@ -120,49 +113,18 @@ class MemberAuthController extends Controller
             ]);
         }
 
-        try {
-            $user = DB::transaction(function () use ($data, $request, $birthDate) {
-                $invite = MemberInvite::query()
-                    ->where('code_hash', MemberInvite::hashCode($data['invite_code']))
-                    ->lockForUpdate()
-                    ->first();
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'phone' => $data['phone'],
+            'birth_date' => $birthDate->format('Y-m-d'),
+            'congregation' => $data['congregation'],
+            'is_church_member' => User::isBaptizedMembershipLink($data['congregation']),
+            'is_active' => true,
+        ]);
 
-                if (! $invite || ! $invite->isUsable()) {
-                    throw ValidationException::withMessages([
-                        'invite_code' => 'Código de convite inválido, expirado ou esgotado.',
-                    ]);
-                }
-
-                // Conta de membro é sempre um registro novo, independente do painel.
-                $user = User::create([
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'password' => $data['password'],
-                    'phone' => $data['phone'],
-                    'birth_date' => $birthDate->format('Y-m-d'),
-                    'congregation' => $data['congregation'] ?? null,
-                    'is_church_member' => $request->boolean('is_church_member'),
-                    'is_active' => true,
-                ]);
-
-                $user->syncRoles(['member']);
-
-                $invite->increment('uses_count');
-                if ($invite->uses_count >= $invite->max_uses) {
-                    $invite->forceFill(['is_active' => false])->save();
-                }
-
-                MemberInviteUse::create([
-                    'member_invite_id' => $invite->id,
-                    'user_id' => $user->id,
-                    'used_at' => now(),
-                ]);
-
-                return $user;
-            });
-        } catch (ValidationException $e) {
-            throw $e;
-        }
+        $user->syncRoles(['member']);
 
         Auth::guard('web')->login($user);
         $request->session()->regenerate();
@@ -182,19 +144,19 @@ class MemberAuthController extends Controller
         return redirect()->route('galeria')->with('success', 'Você saiu da sua conta.');
     }
 
-    protected function activeMember(): ?User
+    protected function activeSiteUser(): ?User
     {
         $user = Auth::guard('web')->user();
 
-        return $user instanceof User && $user->isActiveMember() ? $user : null;
+        return $user instanceof User && $user->canUseSiteAuth() ? $user : null;
     }
 
     /**
-     * Remove autenticação residual no guard web quando não é membro ativo.
+     * Remove autenticação residual no guard web quando a conta não pode usar o site.
      */
-    protected function forgetNonMemberWebSession(): void
+    protected function forgetInvalidWebSession(): void
     {
-        if (Auth::guard('web')->check() && ! $this->activeMember()) {
+        if (Auth::guard('web')->check() && ! $this->activeSiteUser()) {
             Auth::guard('web')->logout();
         }
     }

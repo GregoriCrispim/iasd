@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\CmsRevisionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryAlbumController;
 use App\Http\Controllers\Admin\GalleryFaceController;
-use App\Http\Controllers\Admin\MemberInviteController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\MemberAuthController;
@@ -39,9 +38,8 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])
     ->middleware('auth:admin')
     ->name('admin.logout');
 
-// Autenticação de membros no site (guard: web) — sessão independente do painel.
-// Sem guest:web: sessão residual de não-membro (ex.: login antigo do painel no mesmo cookie)
-// não pode bloquear /entrar e /cadastrar.
+// Autenticação do site (guard: web) — sessão independente do painel.
+// Membros e usuários do painel usam /entrar; o redirect segue o formulário usado.
 Route::get('/entrar', [MemberAuthController::class, 'showLogin'])->name('member.login');
 Route::post('/entrar', [MemberAuthController::class, 'login'])
     ->middleware('throttle:10,1')
@@ -99,12 +97,6 @@ Route::middleware(['auth:admin'])
                 Route::post('/cms/pages/sync', [CmsPageController::class, 'sync'])->name('pages.sync');
                 Route::get('/cms/pages/{page}/edit', [CmsPageController::class, 'edit'])->name('pages.edit');
                 Route::put('/cms/pages/{page}', [CmsPageController::class, 'update'])->name('pages.update');
-
-                // Convites de membros (somente super-admin)
-                Route::get('/convites', [MemberInviteController::class, 'index'])->name('invites.index');
-                Route::post('/convites', [MemberInviteController::class, 'store'])->name('invites.store');
-                Route::post('/convites/{invite}/toggle', [MemberInviteController::class, 'toggle'])->name('invites.toggle');
-                Route::delete('/convites/{invite}', [MemberInviteController::class, 'destroy'])->name('invites.destroy');
 
                 Route::get('/cms/blocks', [CmsBlockController::class, 'index'])->name('blocks.index');
                 Route::get('/cms/blocks/create', [CmsBlockController::class, 'create'])->name('blocks.create');

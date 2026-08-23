@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\GalleryAlbum;
 use App\Models\GalleryFaceDescriptor;
 use App\Models\GalleryPhoto;
-use App\Models\MemberInvite;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\Face\FaceDescriptorService;
@@ -122,28 +121,7 @@ class FaceSearchTest extends TestCase
             ->assertUnauthorized();
     }
 
-    public function test_unused_invite_never_authorizes_face_search_even_after_deletion(): void
-    {
-        [$album] = $this->seedAlbum();
-        $generated = MemberInvite::generateCode();
-        $invite = MemberInvite::create([
-            'code_hash' => $generated['hash'],
-            'code_prefix' => $generated['prefix'],
-            'max_uses' => 1,
-            'uses_count' => 0,
-            'is_active' => true,
-        ]);
-
-        $this->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
-            ->assertUnauthorized();
-
-        $invite->delete();
-
-        $this->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
-            ->assertUnauthorized();
-    }
-
-    public function test_administrator_without_member_role_cannot_search(): void
+    public function test_administrator_on_admin_guard_cannot_search_without_site_login(): void
     {
         [$album] = $this->seedAlbum();
         $admin = User::create([
@@ -157,10 +135,24 @@ class FaceSearchTest extends TestCase
         $this->actingAs($admin, 'admin')
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
             ->assertUnauthorized();
+    }
 
-        $this->actingAs($admin, 'web')
-            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
-            ->assertForbidden();
+    public function test_administrator_on_web_guard_can_search(): void
+    {
+        [$album, $near] = $this->seedAlbum();
+        $admin = User::create([
+            'name' => 'Administrador',
+            'email' => 'admin-face@ex.com',
+            'password' => 'senha12345',
+            'is_active' => true,
+        ]);
+        $admin->syncRoles(['super_admin']);
+
+        $response = $this->actingAs($admin, 'web')
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload());
+
+        $response->assertOk();
+        $this->assertContains($near->id, $response->json('photo_ids') ?? []);
     }
 
     public function test_search_returns_matching_photo_ids_only(): void

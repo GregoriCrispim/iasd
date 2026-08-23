@@ -74,12 +74,6 @@
                     <i class="bi bi-people"></i> Usuários
                 </a>
             @endif
-
-            @if ($isSuper)
-                <a href="{{ route('admin.invites.index') }}" class="{{ $active === 'invites' ? 'active' : '' }}">
-                    <i class="bi bi-ticket-perforated"></i> Convites de membros
-                </a>
-            @endif
         </nav>
 
         <div class="adm-sidebar-foot">
