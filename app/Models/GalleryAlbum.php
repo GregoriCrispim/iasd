@@ -160,6 +160,7 @@ class GalleryAlbum extends Model
     public function faceIndexProgress(): array
     {
         $rows = $this->photos()
+            ->reorder()
             ->selectRaw('faces_status, COUNT(*) as aggregate')
             ->groupBy('faces_status')
             ->pluck('aggregate', 'faces_status');
