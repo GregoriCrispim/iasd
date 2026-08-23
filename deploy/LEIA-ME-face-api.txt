@@ -1,0 +1,17 @@
+Reconhecimento facial — pacote para o servidor
+================================================
+
+Arquivo: deploy/face-api-assets.zip (~8 MB)
+
+No deploy automático (GitHub Actions), o ZIP é extraído em public/
+antes do FTP — os modelos sobem já no lugar certo.
+
+Se precisar instalar à mão na Hostgator:
+1. Extraia face-api-assets.zip na pasta pública (public / public_html).
+2. Confirme HTTP 200 em:
+   /js/vendor/face-api-1.7.15.js
+   /models/face-api/1.7.15/ssd_mobilenetv1_model-weights_manifest.json
+   /models/face-api/1.7.15/ssd_mobilenetv1_model.bin
+
+Gerar de novo (local):
+  npm install && ./scripts/sync-face-api-assets.sh && ./scripts/pack-face-api-assets.sh

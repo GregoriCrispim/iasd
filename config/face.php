@@ -24,9 +24,8 @@ return [
     |--------------------------------------------------------------------------
     | Modelos face-api (carregados no navegador)
     |--------------------------------------------------------------------------
-    | Pesos e o script vendor NÃO vão no Git (são grandes). Gere localmente com
-    | scripts/sync-face-api-assets.sh e no servidor descompacte
-    | deploy/face-api-assets.zip na pasta pública (ver deploy/LEIA-ME-face-api.txt).
+    | O pacote versionado é deploy/face-api-assets.zip. No CI ele é extraído em
+    | public/ antes do FTP. Ver deploy/LEIA-ME-face-api.txt.
     */
     'models_url' => env('FACE_MODELS_URL', '/models/face-api/1.7.15'),
     'script_url' => env('FACE_SCRIPT_URL', '/js/vendor/face-api-1.7.15.js'),

@@ -37,6 +37,15 @@ jobs:
           fi
           echo "Package discovery OK (sem Spatie/Filament)."
 
+      - name: Unpack face-api assets into public/
+        run: |
+          test -f deploy/face-api-assets.zip
+          unzip -o deploy/face-api-assets.zip -d public/
+          rm -f public/LEIA-ME.txt
+          test -f public/js/vendor/face-api-1.7.15.js
+          test -f public/models/face-api/1.7.15/ssd_mobilenetv1_model.bin
+          echo "Face-api assets ready in public/."
+
       - name: Verify deploy payload
         run: |
           test -f artisan
@@ -67,10 +76,7 @@ jobs:
             phpunit.xml
             .composer-cache/**
             .composer-home/**
-            deploy/face-api-assets.zip
             deploy/.face-api-staging/**
-            public/models/face-api/**
-            public/js/vendor/face-api-*.js
             storage/logs/**
             storage/framework/cache/**
             storage/framework/sessions/**
