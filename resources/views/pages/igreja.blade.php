@@ -1200,7 +1200,7 @@
             <p style="font-family: 'Roboto', sans-serif; font-size: 1rem; color: #f8f9fa; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
                 Acesse gratuitamente a publicação "Nisto Cremos" para conhecer em detalhes todas as crenças que a Igreja Adventista sustenta a respeito dos ensinos bíblicos.
             </p>
-            <a href="https://www.institutodemissao.org.br/wp-content/uploads/2021/07/Nisto-Cremos.pdf" target="_blank" class="btn-crencas-destaque">
+            <a href="{{ asset('pdf/Nisto_Cremos.pdf') }}" target="_blank" class="btn-crencas-destaque">
                 <i class="bi bi-book-half" style="font-size: 1.5em;"></i>
                 Ler "Nisto Cremos"
             </a>
