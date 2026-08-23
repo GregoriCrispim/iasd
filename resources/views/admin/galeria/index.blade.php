@@ -2,12 +2,14 @@
 
 @php
     $activeNav = 'galeria';
-    $openCreateAlbum = request()->boolean('novo') || ($errors->any() && old('_form') === 'create');
+    $authUser = auth('admin')->user();
+    $canManageAlbums = $authUser && $authUser->canManageGalleryAlbums();
+    $openCreateAlbum = $canManageAlbums && (request()->boolean('novo') || ($errors->any() && old('_form') === 'create'));
     if ($openCreateAlbum && $errors->any()) {
         view()->share('hideGlobalErrors', true);
     }
     $albumEditReturn = 'index';
-    $albumEditOpenId = request('editar');
+    $albumEditOpenId = $canManageAlbums ? request('editar') : null;
 
     // Só reaproveita os valores antigos se a falha de validação veio deste formulário.
     $createOld = fn (string $field, $default = null) => old('_form') === 'create' ? old($field, $default) : $default;
@@ -17,9 +19,11 @@
 @section('heading', 'Galeria de fotos')
 
 @section('actions')
-    <button type="button" class="btn" onclick="admOpenAlbumCreateModal()">
-        <i class="bi bi-plus-lg"></i> Novo álbum
-    </button>
+    @if ($canManageAlbums)
+        <button type="button" class="btn" title="Novo álbum" onclick="admOpenAlbumCreateModal()">
+            <i class="bi bi-plus-lg"></i> Novo álbum
+        </button>
+    @endif
 @endsection
 
 @section('content')
@@ -70,26 +74,28 @@
                                 @endif
                             </td>
                             <td class="text-muted nowrap text-center">{{ $album->updated_at?->format('d/m/Y H:i') }}</td>
-                            <td>
+                            <td class="col-actions">
                                 <div class="row-actions">
-                                    <a href="{{ route('admin.galeria.show', $album) }}" class="btn btn-secondary btn-sm" title="Fotos"><i class="bi bi-images"></i></a>
-                                    <button
-                                        type="button"
-                                        class="btn btn-secondary btn-sm"
-                                        title="Editar"
-                                        data-album-edit
-                                        data-album-id="{{ $album->id }}"
-                                        data-action="{{ route('admin.galeria.update', $album) }}"
-                                        data-album-title="{{ $album->title }}"
-                                        data-album-date="{{ $album->event_date?->format('Y-m-d') }}"
-                                        data-album-description="{{ $album->description }}"
-                                        data-album-published="{{ $album->is_published ? '1' : '0' }}"
-                                        onclick="admOpenAlbumEditModal(this)"
-                                    ><i class="bi bi-pencil"></i></button>
-                                    <form method="POST" action="{{ route('admin.galeria.destroy', $album) }}" onsubmit="return admConfirm('Remover este álbum e todas as fotos? Esta ação não pode ser desfeita.', this, { title: 'Remover álbum' });">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Remover"><i class="bi bi-trash"></i></button>
-                                    </form>
+                                    <a href="{{ route('admin.galeria.show', $album) }}" class="btn btn-secondary btn-sm" title="Abrir fotos"><i class="bi bi-images"></i></a>
+                                    @if ($canManageAlbums)
+                                        <button
+                                            type="button"
+                                            class="btn btn-secondary btn-sm"
+                                            title="Editar álbum"
+                                            data-album-edit
+                                            data-album-id="{{ $album->id }}"
+                                            data-action="{{ route('admin.galeria.update', $album) }}"
+                                            data-album-title="{{ $album->title }}"
+                                            data-album-date="{{ $album->event_date?->format('Y-m-d') }}"
+                                            data-album-description="{{ $album->description }}"
+                                            data-album-published="{{ $album->is_published ? '1' : '0' }}"
+                                            onclick="admOpenAlbumEditModal(this)"
+                                        ><i class="bi bi-pencil"></i></button>
+                                        <form method="POST" action="{{ route('admin.galeria.destroy', $album) }}" onsubmit="return admConfirm('Remover este álbum e todas as fotos? Esta ação não pode ser desfeita.', this, { title: 'Remover álbum' });">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Remover álbum"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

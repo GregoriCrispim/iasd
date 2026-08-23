@@ -2,14 +2,26 @@
 
 @php
     $activeNav = 'users';
-    $roleLabels = ['super_admin' => 'Super Admin', 'manager' => 'Gestor', 'collaborator' => 'Colaborador', 'fotografia' => 'Fotografia'];
-    $roleBadges = ['super_admin' => 'badge-purple', 'manager' => 'badge-blue', 'collaborator' => 'badge-gray'];
+    $roleLabels = [
+        'super_admin' => 'Super Admin',
+        'manager' => 'Gestor',
+        'collaborator' => 'Colaborador',
+        'fotografia_lider' => 'Líder de Fotografia',
+        'fotografia_colaborador' => 'Colaborador de Fotografia',
+    ];
+    $roleBadges = [
+        'super_admin' => 'badge-purple',
+        'manager' => 'badge-blue',
+        'collaborator' => 'badge-gray',
+        'fotografia_lider' => 'badge-amber',
+        'fotografia_colaborador' => 'badge-gray',
+    ];
 @endphp
 @section('title', 'Usuários')
 @section('heading', 'Usuários')
 
 @section('actions')
-    <a href="{{ route('admin.users.create') }}" class="btn"><i class="bi bi-plus-lg"></i> Novo usuário</a>
+    <a href="{{ route('admin.users.create') }}" class="btn" title="Novo usuário"><i class="bi bi-plus-lg"></i> Novo usuário</a>
 @endsection
 
 @section('content')
@@ -30,7 +42,7 @@
                         <th>E-mail</th>
                         <th>Perfil</th>
                         <th>Gestor</th>
-                        <th class="text-right">Ações</th>
+                        <th class="col-actions">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,14 +59,13 @@
                                 @endif
                             </td>
                             <td class="text-muted">{{ $u->manager?->name ?? '—' }}</td>
-                            <td>
+                            <td class="col-actions">
                                 <div class="row-actions">
-                                    <a href="{{ route('admin.users.pages', $u) }}" class="btn btn-ghost btn-sm" title="Permissões de páginas"><i class="bi bi-file-earmark-lock"></i></a>
-                                    <a href="{{ route('admin.users.edit', $u) }}" class="btn btn-secondary btn-sm"><i class="bi bi-pencil"></i></a>
+                                    <a href="{{ route('admin.users.edit', $u) }}" class="btn btn-secondary btn-sm" title="Editar"><i class="bi bi-pencil"></i></a>
                                     @if ($authUser->isSuperAdmin() && $u->id !== $authUser->id)
                                         <form method="POST" action="{{ route('admin.users.destroy', $u) }}" onsubmit="return confirm('Remover este usuário?');">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Remover"><i class="bi bi-trash"></i></button>
                                         </form>
                                     @endif
                                 </div>

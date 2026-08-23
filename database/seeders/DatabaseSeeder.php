@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         Role::query()->firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'manager', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'collaborator', 'guard_name' => 'web']);
-        Role::query()->firstOrCreate(['name' => 'fotografia', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'fotografia_lider', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'fotografia_colaborador', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'member', 'guard_name' => 'web']);
 
         $user = User::query()->updateOrCreate(
@@ -40,6 +41,6 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $fotoUser->syncRoles(['fotografia']);
+        $fotoUser->syncRoles(['fotografia_lider']);
     }
 }

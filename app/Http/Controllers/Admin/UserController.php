@@ -41,7 +41,8 @@ class UserController extends Controller
             'user' => new User,
             'roleOptions' => $this->roleOptions($authUser),
             'managerOptions' => $this->managerOptions(),
-            'currentRole' => $authUser->isManager() ? 'collaborator' : null,
+            'currentRole' => $this->defaultRole($authUser),
+            'canManagePagePerms' => $this->canManagePagePerms($authUser),
         ]);
     }
 
@@ -51,16 +52,15 @@ class UserController extends Controller
         $authUser = $request->user();
 
         $data = $this->validateData($request, null, $authUser);
-
-        $role = $authUser->isManager() ? 'collaborator' : $data['role'];
+        [$role, $managerId, $emailVerifiedAt] = $this->resolveAssignment($authUser, $data);
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'email_verified_at' => $authUser->isManager() ? null : ($data['email_verified_at'] ?? null),
+            'email_verified_at' => $emailVerifiedAt,
             'created_by' => $authUser->id,
-            'manager_id' => $authUser->isManager() ? $authUser->id : ($data['manager_id'] ?? null),
+            'manager_id' => $managerId,
         ]);
 
         $user->syncRoles([$role]);
@@ -74,11 +74,24 @@ class UserController extends Controller
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
+        $canManagePagePerms = $this->canManagePagePerms($authUser);
+        $attached = collect();
+        $available = collect();
+
+        if ($canManagePagePerms) {
+            $attached = $user->pages()->orderBy('label')->get();
+            $available = $this->availablePages($authUser)
+                ->whereNotIn('id', $attached->pluck('id'));
+        }
+
         return view('admin.users.form', [
             'user' => $user,
             'roleOptions' => $this->roleOptions($authUser),
             'managerOptions' => $this->managerOptions(),
             'currentRole' => $user->roles->pluck('name')->first(),
+            'attached' => $attached,
+            'available' => $available,
+            'canManagePagePerms' => $canManagePagePerms,
         ]);
     }
 
@@ -89,26 +102,23 @@ class UserController extends Controller
         $this->authorizeManage($authUser, $user);
 
         $data = $this->validateData($request, $user, $authUser);
+        [$role, $managerId, $emailVerifiedAt] = $this->resolveAssignment($authUser, $data);
 
         $payload = [
             'name' => $data['name'],
             'email' => $data['email'],
+            'manager_id' => $managerId,
         ];
 
         if (! empty($data['password'])) {
             $payload['password'] = $data['password'];
         }
 
-        if ($authUser->isManager()) {
-            $payload['manager_id'] = $authUser->id;
-        } else {
-            $payload['manager_id'] = $data['manager_id'] ?? null;
-            $payload['email_verified_at'] = $data['email_verified_at'] ?? null;
+        if ($this->canAssignAdvancedFields($authUser)) {
+            $payload['email_verified_at'] = $emailVerifiedAt;
         }
 
         $user->update($payload);
-
-        $role = $authUser->isManager() ? 'collaborator' : $data['role'];
         $user->syncRoles([$role]);
 
         return redirect()->route('admin.users.index')->with('success', 'Usuário atualizado.');
@@ -134,21 +144,17 @@ class UserController extends Controller
 
     /* ---------------- Page permissions ---------------- */
 
-    public function pages(Request $request, User $user): View
+    public function pages(Request $request, User $user): RedirectResponse
     {
         /** @var User $authUser */
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
-        $attached = $user->pages()->orderBy('label')->get();
-        $available = $this->availablePages($authUser)
-            ->whereNotIn('id', $attached->pluck('id'));
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
 
-        return view('admin.users.pages', [
-            'user' => $user,
-            'attached' => $attached,
-            'available' => $available,
-        ]);
+        return redirect()->route('admin.users.edit', $user)->withFragment('permissoes-paginas');
     }
 
     public function attachPage(Request $request, User $user): RedirectResponse
@@ -156,6 +162,10 @@ class UserController extends Controller
         /** @var User $authUser */
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
+
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
 
         $data = $request->validate([
             'cms_page_id' => ['required', 'exists:cms_pages,id'],
@@ -185,6 +195,10 @@ class UserController extends Controller
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
+
         $request->validate([
             'can_access' => ['nullable', 'boolean'],
             'can_edit' => ['nullable', 'boolean'],
@@ -206,6 +220,10 @@ class UserController extends Controller
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
+
         $user->pages()->detach($page->id);
 
         return back()->with('success', 'Página removida do usuário.');
@@ -221,7 +239,7 @@ class UserController extends Controller
             return $query;
         }
 
-        if ($authUser->isManager()) {
+        if ($authUser->isManager() || $authUser->isFotografiaLider()) {
             return $query->where(fn (Builder $b) => $b->where('manager_id', $authUser->id)->orWhere('id', $authUser->id));
         }
 
@@ -234,7 +252,8 @@ class UserController extends Controller
             return;
         }
 
-        if ($authUser->isManager() && ($target->manager_id === $authUser->id || $target->id === $authUser->id)) {
+        if (($authUser->isManager() || $authUser->isFotografiaLider())
+            && ($target->manager_id === $authUser->id || $target->id === $authUser->id)) {
             return;
         }
 
@@ -265,13 +284,57 @@ class UserController extends Controller
             'password' => [$user ? 'nullable' : 'required', 'string', 'min:6'],
         ];
 
-        if (! $authUser->isManager()) {
-            $rules['role'] = ['required', Rule::in(['manager', 'collaborator', 'fotografia'])];
+        if ($this->canAssignAdvancedFields($authUser)) {
+            $rules['role'] = ['required', Rule::in(array_keys($this->roleOptions($authUser)))];
             $rules['manager_id'] = ['nullable', 'exists:users,id'];
             $rules['email_verified_at'] = ['nullable', 'date'];
         }
 
         return $request->validate($rules);
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array{0: string, 1: int|null, 2: mixed}
+     */
+    protected function resolveAssignment(User $authUser, array $data): array
+    {
+        if ($authUser->isManager()) {
+            return ['collaborator', $authUser->id, null];
+        }
+
+        if ($authUser->isFotografiaLider()) {
+            return ['fotografia_colaborador', $authUser->id, null];
+        }
+
+        return [
+            $data['role'],
+            isset($data['manager_id']) ? (int) $data['manager_id'] : null,
+            $data['email_verified_at'] ?? null,
+        ];
+    }
+
+    protected function canAssignAdvancedFields(User $authUser): bool
+    {
+        return $authUser->isSuperAdmin();
+    }
+
+    protected function canManagePagePerms(User $authUser): bool
+    {
+        return $authUser->isSuperAdmin() || $authUser->isManager();
+    }
+
+    protected function defaultRole(User $authUser): ?string
+    {
+        if ($authUser->isManager()) {
+            return 'collaborator';
+        }
+
+        if ($authUser->isFotografiaLider()) {
+            return 'fotografia_colaborador';
+        }
+
+        return null;
     }
 
     /**
@@ -283,10 +346,15 @@ class UserController extends Controller
             return ['collaborator' => 'Colaborador'];
         }
 
+        if ($authUser->isFotografiaLider()) {
+            return ['fotografia_colaborador' => 'Colaborador de Fotografia'];
+        }
+
         return [
             'manager' => 'Gestor',
             'collaborator' => 'Colaborador',
-            'fotografia' => 'Fotografia',
+            'fotografia_lider' => 'Líder de Fotografia',
+            'fotografia_colaborador' => 'Colaborador de Fotografia',
         ];
     }
 
@@ -296,7 +364,7 @@ class UserController extends Controller
     protected function managerOptions()
     {
         return User::query()
-            ->whereHas('roles', fn (Builder $q) => $q->where('name', 'manager'))
+            ->whereHas('roles', fn (Builder $q) => $q->whereIn('name', ['manager', 'fotografia_lider']))
             ->orderBy('name')
             ->get(['id', 'name']);
     }

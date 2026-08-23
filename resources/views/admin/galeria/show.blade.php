@@ -3,27 +3,32 @@
 @php
     $activeNav = 'galeria';
     $albumEditReturn = 'show';
+    $authUser = auth('admin')->user();
+    $canManageAlbums = $authUser && $authUser->canManageGalleryAlbums();
 @endphp
 @section('title', $album->title)
 @section('heading', $album->title)
 
 @section('actions')
-    <a href="{{ route('admin.galeria.index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Álbuns</a>
-    <button
-        type="button"
-        class="btn btn-secondary"
-        data-album-edit
-        data-album-id="{{ $album->id }}"
-        data-action="{{ route('admin.galeria.update', $album) }}"
-        data-album-title="{{ $album->title }}"
-        data-album-date="{{ $album->event_date?->format('Y-m-d') }}"
-        data-album-description="{{ $album->description }}"
-        data-album-published="{{ $album->is_published ? '1' : '0' }}"
-        onclick="admOpenAlbumEditModal(this)"
-    ><i class="bi bi-pencil"></i> Editar</button>
-    <a href="{{ route('admin.galeria.faces', $album) }}" class="btn btn-secondary"><i class="bi bi-person-bounding-box"></i> Reconhecimento facial</a>
+    <a href="{{ route('admin.galeria.index') }}" class="btn btn-secondary" title="Voltar aos álbuns"><i class="bi bi-arrow-left"></i> Álbuns</a>
+    @if ($canManageAlbums)
+        <button
+            type="button"
+            class="btn btn-secondary"
+            title="Editar álbum"
+            data-album-edit
+            data-album-id="{{ $album->id }}"
+            data-action="{{ route('admin.galeria.update', $album) }}"
+            data-album-title="{{ $album->title }}"
+            data-album-date="{{ $album->event_date?->format('Y-m-d') }}"
+            data-album-description="{{ $album->description }}"
+            data-album-published="{{ $album->is_published ? '1' : '0' }}"
+            onclick="admOpenAlbumEditModal(this)"
+        ><i class="bi bi-pencil"></i> Editar</button>
+    @endif
+    <a href="{{ route('admin.galeria.faces', $album) }}" class="btn btn-secondary" title="Reconhecimento facial"><i class="bi bi-person-bounding-box"></i> Reconhecimento facial</a>
     @if ($album->is_published)
-        <a href="{{ route('galeria.show', $album->slug) }}" class="btn btn-secondary" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Ver no site</a>
+        <a href="{{ route('galeria.show', $album->slug) }}" class="btn btn-secondary" title="Ver no site" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Ver no site</a>
     @endif
 @endsection
 
@@ -56,10 +61,10 @@
                     <p class="gal-dropzone-hint">JPEG, PNG, GIF ou WebP · até 15 MB cada · pastas são filtradas automaticamente</p>
                     <p class="gal-dropzone-hint">As fotos são reduzidas e convertidas para WebP no envio, com miniatura própria para o site</p>
                     <div class="gal-dropzone-actions">
-                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFiles">
+                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFiles" title="Selecionar arquivos">
                             <i class="bi bi-file-earmark-image"></i> Selecionar arquivos
                         </button>
-                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFolder">
+                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFolder" title="Selecionar pasta">
                             <i class="bi bi-folder2-open"></i> Selecionar pasta
                         </button>
                     </div>
@@ -81,7 +86,7 @@
                 <div class="gal-queue" id="galQueue" hidden>
                     <div class="gal-queue-head">
                         <strong id="galQueueCount">0 imagens na fila</strong>
-                        <button type="button" class="btn btn-ghost btn-sm gal-queue-clear" id="galClearQueue" disabled>
+                        <button type="button" class="btn btn-ghost btn-sm gal-queue-clear" id="galClearQueue" disabled title="Limpar fila">
                             <i class="bi bi-x-circle"></i> Limpar
                         </button>
                     </div>

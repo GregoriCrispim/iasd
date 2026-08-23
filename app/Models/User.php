@@ -103,9 +103,22 @@ class User extends Authenticatable
         return $this->roles->contains('name', 'collaborator');
     }
 
+    public function isFotografiaLider(): bool
+    {
+        return $this->roles->contains('name', 'fotografia_lider');
+    }
+
+    public function isFotografiaColaborador(): bool
+    {
+        return $this->roles->contains('name', 'fotografia_colaborador');
+    }
+
+    /**
+     * Qualquer perfil do ministério de fotografia (líder ou colaborador).
+     */
     public function isFotografia(): bool
     {
-        return $this->roles->contains('name', 'fotografia');
+        return $this->hasAnyRoleName(['fotografia_lider', 'fotografia_colaborador']);
     }
 
     public function isMember(): bool
@@ -128,7 +141,13 @@ class User extends Authenticatable
     {
         return $query->whereHas(
             'roles',
-            fn ($q) => $q->whereIn('name', ['super_admin', 'manager', 'collaborator', 'fotografia'])
+            fn ($q) => $q->whereIn('name', [
+                'super_admin',
+                'manager',
+                'collaborator',
+                'fotografia_lider',
+                'fotografia_colaborador',
+            ])
         );
     }
 
@@ -137,7 +156,13 @@ class User extends Authenticatable
      */
     public function canAccessAdminPanel(): bool
     {
-        return $this->hasAnyRoleName(['super_admin', 'manager', 'collaborator', 'fotografia']);
+        return $this->hasAnyRoleName([
+            'super_admin',
+            'manager',
+            'collaborator',
+            'fotografia_lider',
+            'fotografia_colaborador',
+        ]);
     }
 
     /**
@@ -159,7 +184,20 @@ class User extends Authenticatable
 
     public function canManageGaleria(): bool
     {
-        return $this->hasAnyRoleName(['super_admin', 'manager', 'fotografia']);
+        return $this->hasAnyRoleName([
+            'super_admin',
+            'manager',
+            'fotografia_lider',
+            'fotografia_colaborador',
+        ]);
+    }
+
+    /**
+     * Criar, editar e remover álbuns (não inclui upload/capa/remoção de fotos).
+     */
+    public function canManageGalleryAlbums(): bool
+    {
+        return $this->hasAnyRoleName(['super_admin', 'manager', 'fotografia_lider']);
     }
 
     /**

@@ -187,9 +187,18 @@ table.adm-table thead th {
 table.adm-table tbody tr { border-bottom: 1px solid var(--adm-border); }
 table.adm-table tbody tr:last-child { border-bottom: 0; }
 table.adm-table tbody tr:hover { background: #f8fafc; }
-table.adm-table td .row-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+table.adm-table td .row-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
 table.adm-table th.text-center, table.adm-table td.text-center { text-align: center; }
 table.adm-table th.text-right, table.adm-table td.text-right { text-align: right; }
+table.adm-table th.col-actions,
+table.adm-table td.col-actions {
+    text-align: center;
+    vertical-align: middle;
+}
+table.adm-table td.col-actions .row-actions {
+    justify-content: center;
+    align-items: center;
+}
 .text-muted { color: var(--adm-muted); }
 .text-right { text-align: right; }
 .text-center { text-align: center; }
@@ -565,6 +574,7 @@ dialog.adm-dialog.adm-dialog--album::backdrop {
 .muted-sm { font-size: 12.5px; color: var(--adm-muted); }
 .mt-0 { margin-top: 0; }
 .mb-0 { margin-bottom: 0; }
+.hidden-form { display: none; }
 .flex-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
 .adm-overlay { display: none; }

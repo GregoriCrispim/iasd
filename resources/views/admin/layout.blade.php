@@ -3,7 +3,9 @@
     $authUser = auth('admin')->user();
     $isSuper = $authUser && $authUser->isSuperAdmin();
     $isManager = $authUser && $authUser->isManager();
+    $isFotoLider = $authUser && $authUser->isFotografiaLider();
     $canGaleria = $authUser && $authUser->canManageGaleria();
+    $canManageUsers = $isSuper || $isManager || $isFotoLider;
     $isCmsUser = $authUser && $authUser->hasAnyRoleName(['super_admin', 'manager', 'collaborator']);
     $active = $activeNav ?? '';
 @endphp
@@ -17,7 +19,7 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v={{ filemtime(public_path('css/admin.css')) }}">
     @stack('styles')
 </head>
 <body class="adm">
@@ -66,7 +68,7 @@
                 </a>
             @endif
 
-            @if ($isSuper || $isManager)
+            @if ($canManageUsers)
                 <div class="adm-nav-group">Gestão</div>
                 <a href="{{ route('admin.users.index') }}" class="{{ $active === 'users' ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Usuários
@@ -87,7 +89,8 @@
                     <small>
                         @if ($isSuper) Super Admin
                         @elseif ($isManager) Gestor
-                        @elseif ($authUser->isFotografia()) Fotografia
+                        @elseif ($authUser->isFotografiaLider()) Líder de Fotografia
+                        @elseif ($authUser->isFotografiaColaborador()) Colaborador de Fotografia
                         @else Colaborador @endif
                     </small>
                 </div>

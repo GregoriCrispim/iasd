@@ -16,7 +16,7 @@ class MemberInviteTest extends TestCase
     {
         parent::setUp();
 
-        foreach (['super_admin', 'manager', 'collaborator', 'fotografia', 'member'] as $role) {
+        foreach (['super_admin', 'manager', 'collaborator', 'fotografia_lider', 'fotografia_colaborador', 'member'] as $role) {
             Role::query()->create(['name' => $role, 'guard_name' => 'web']);
         }
     }
