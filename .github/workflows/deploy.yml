@@ -62,7 +62,7 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/vendor/**
+            vendor/**
             .github/**
             .env
             .env.*
