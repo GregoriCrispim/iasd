@@ -23,39 +23,47 @@ class FaceMatchServiceTest extends TestCase
         return $v;
     }
 
-    private function shift(array $v, float $delta): array
+    private function orthogonal(): array
     {
-        $v[0] += $delta;
+        $v = [];
+        for ($i = 0; $i < $this->dims(); $i++) {
+            $v[] = (($i % 2) ? 1 : -1) * 0.01 * (($i + 37) % 100);
+        }
 
         return $v;
     }
 
-    public function test_identical_vectors_have_similarity_one(): void
+    public function test_identical_vectors_have_similarity_and_cosine_one(): void
     {
         $svc = new FaceMatchService(new FaceDescriptorService);
         $a = $this->base();
 
         $this->assertSame(1.0, $svc->similarity($a, $a));
+        $this->assertSame(1.0, $svc->cosine($a, $a));
     }
 
-    public function test_far_vectors_fall_below_match_threshold(): void
+    public function test_orthogonal_vectors_are_below_match_thresholds(): void
     {
         $svc = new FaceMatchService(new FaceDescriptorService);
         $a = $this->base();
-        $b = array_map(static fn ($x) => $x + 1.0, $a);
+        $b = $this->orthogonal();
 
-        $this->assertLessThan(0.50, $svc->similarity($a, $b));
+        $this->assertLessThan(0.42, $svc->cosine($a, $b));
+        $this->assertLessThan(0.35, $svc->similarity($a, $b));
     }
 
-    public function test_calibrated_deltas_sit_in_expected_bands(): void
+    public function test_near_blend_lands_in_loose_cosine_band(): void
     {
         $svc = new FaceMatchService(new FaceDescriptorService);
         $a = $this->base();
+        $orth = $this->orthogonal();
+        $mixed = [];
+        for ($i = 0; $i < $this->dims(); $i++) {
+            $mixed[] = 0.35 * $a[$i] + 0.65 * $orth[$i];
+        }
 
-        // delta≈9.4 → ~0.55 (limite estrito); delta≈9.8 → ~0.52 (faixa folgada).
-        $this->assertGreaterThanOrEqual(0.55, $svc->similarity($a, $this->shift($a, 9.4)));
-        $simLoose = $svc->similarity($a, $this->shift($a, 9.8));
-        $this->assertGreaterThanOrEqual(0.50, $simLoose);
-        $this->assertLessThan(0.55, $simLoose);
+        $cos = $svc->cosine($a, $mixed);
+        $this->assertGreaterThanOrEqual(0.42, $cos);
+        $this->assertLessThan(0.55, $cos);
     }
 }

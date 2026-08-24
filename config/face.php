@@ -40,21 +40,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Correspondência (match) 1:N — similaridade Human (0..1)
+    | Correspondência (match) 1:N
     |--------------------------------------------------------------------------
-    | Usa a fórmula de human.match.similarity (order=2). Quanto maior, mais
-    | parecido. A doc do Human cita ≥ 0,50 em condições ideais (rosto grande,
-    | de frente). Em fotos de evento (ângulo, distância, luz) o mesmo rosto
-    | costuma cair abaixo disso — por isso o mínimo operacional é mais baixo.
+    | match_revision: sobe quando a lógica muda (permite confirmar deploy).
     |
-    | Faixa estrita (≥ strict): aceita sempre.
-    | Faixa folgada (match ≤ s < strict): exige qualidade mínima do rosto
-    | indexado (score/tamanho), sem exigir consenso de probes.
+    | Cosseno: métrica principal para embeddings Human 1024-D em fotos de
+    | evento (pose/luz). A similaridade oficial Human (order=2) também conta.
+    | Basta um dos dois critérios passar.
+    |
+    | Faixa estrita: aceita sempre.
+    | Faixa folgada: exige qualidade mínima do rosto indexado.
     */
+    'match_revision' => 2,
+    'match_cosine_strict' => (float) env('FACE_MATCH_COSINE_STRICT', 0.55),
+    'match_cosine' => (float) env('FACE_MATCH_COSINE', 0.42),
     'match_similarity_strict' => (float) env('FACE_MATCH_SIMILARITY_STRICT', 0.48),
-    'match_similarity' => (float) env('FACE_MATCH_SIMILARITY', 0.40),
-    'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.30),
-    'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.02),
+    'match_similarity' => (float) env('FACE_MATCH_SIMILARITY', 0.35),
+    'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.25),
+    'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.015),
     'match_similarity_multiplier' => (float) env('FACE_MATCH_SIMILARITY_MULTIPLIER', 25),
     'match_similarity_min' => (float) env('FACE_MATCH_SIMILARITY_MIN', 0.2),
     'match_similarity_max' => (float) env('FACE_MATCH_SIMILARITY_MAX', 0.8),

@@ -56,12 +56,39 @@ class FaceSearchTest extends TestCase
         return $v;
     }
 
-    /** Desloca só a 1ª dimensão — calibra similaridade Human (order=2). */
-    private function shift(array $v, float $delta): array
+    /** Vetor distinto do base e do ortogonal de blend — cosseno baixo com ambos. */
+    private function farVector(): array
     {
-        $v[0] += $delta;
+        $v = [];
+        for ($i = 0; $i < $this->dims(); $i++) {
+            $v[] = 0.02 * cos($i * 0.13 + 1.7);
+        }
 
         return $v;
+    }
+
+    /** Quase ortogonal ao base — usado só para misturas de cosseno. */
+    private function orthogonalVector(): array
+    {
+        $v = [];
+        for ($i = 0; $i < $this->dims(); $i++) {
+            $v[] = (($i % 2) ? 1 : -1) * 0.01 * (($i + 37) % 100);
+        }
+
+        return $v;
+    }
+
+    /** Mistura base/ortogonal para cosseno alvo (~0,35 → ~0,47; ~0,55 → ~0,77). */
+    private function blend(float $alpha): array
+    {
+        $base = $this->baseVector();
+        $orth = $this->orthogonalVector();
+        $out = [];
+        for ($i = 0; $i < $this->dims(); $i++) {
+            $out[] = $alpha * $base[$i] + (1 - $alpha) * $orth[$i];
+        }
+
+        return $out;
     }
 
     private function seedAlbum(bool $published = true): array
@@ -90,11 +117,9 @@ class FaceSearchTest extends TestCase
         ]);
 
         $base = $this->baseVector();
-        $farVector = array_map(fn ($x) => $x + 1.0, $base); // similaridade ~0
-
+        $farVector = $this->farVector();
         $version = (string) config('face.version', 'v3');
 
-        // Duas faces na mesma foto "near" para validar deduplicação por foto.
         foreach ([0, 1] as $idx) {
             GalleryFaceDescriptor::create([
                 'gallery_album_id' => $album->id,
@@ -166,6 +191,7 @@ class FaceSearchTest extends TestCase
 
         $response->assertOk();
         $this->assertContains($near->id, $response->json('photo_ids') ?? []);
+        $this->assertSame(2, $response->json('match_rev'));
     }
 
     public function test_search_returns_matching_photo_ids_only(): void
@@ -180,67 +206,36 @@ class FaceSearchTest extends TestCase
 
         $this->assertContains($near->id, $ids);
         $this->assertNotContains($far->id, $ids);
-        // Deduplicação: apesar de duas faces na foto near, o id aparece uma vez.
         $this->assertCount(1, array_keys($ids, $near->id, true));
     }
 
-    public function test_extra_descriptor_can_recover_near_miss(): void
+    public function test_loose_cosine_recovers_near_miss(): void
     {
         [$album, $near, $far] = $this->seedAlbum();
-
-        // Probe principal na faixa folgada (~0,52); deve casar com qualidade ok.
-        $primary = $this->shift($this->baseVector(), 9.8);
 
         GalleryFaceDescriptor::query()
             ->where('gallery_photo_id', $near->id)
             ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
 
         config([
-            'face.match_similarity_strict' => 0.55,
-            'face.match_similarity' => 0.50,
-            'face.match_loose_min_score' => 0.30,
-            'face.match_loose_min_size_ratio' => 0.02,
+            'face.match_cosine_strict' => 0.55,
+            'face.match_cosine' => 0.42,
+            'face.match_similarity_strict' => 0.99,
+            'face.match_similarity' => 0.99,
+            'face.match_loose_min_score' => 0.25,
+            'face.match_loose_min_size_ratio' => 0.015,
         ]);
 
+        // Cosseno ~0,47 — faixa folgada.
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
-                'descriptor' => $primary,
+                'descriptor' => $this->blend(0.35),
             ]));
 
         $response->assertOk();
         $ids = $response->json('photo_ids');
         $this->assertContains($near->id, $ids);
         $this->assertNotContains($far->id, $ids);
-    }
-
-    public function test_single_probe_in_loose_band_matches_with_quality(): void
-    {
-        [$album, $near, $far] = $this->seedAlbum();
-
-        GalleryFaceDescriptor::query()
-            ->where('gallery_photo_id', $near->id)
-            ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
-
-        config([
-            'face.match_similarity_strict' => 0.55,
-            'face.match_similarity' => 0.50,
-            'face.match_loose_min_score' => 0.30,
-            'face.match_loose_min_size_ratio' => 0.02,
-        ]);
-
-        // Principal abaixo do mínimo; só o extra na faixa folgada — agora aceita.
-        $primary = $this->shift($this->baseVector(), 12.0); // ~0.33
-        $extra = $this->shift($this->baseVector(), 9.8); // ~0.52
-
-        $response = $this->actingAs($this->member())
-            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
-                'descriptor' => $primary,
-                'extra_descriptors' => [$extra],
-            ]));
-
-        $response->assertOk();
-        $this->assertContains($near->id, $response->json('photo_ids') ?? []);
-        $this->assertNotContains($far->id, $response->json('photo_ids') ?? []);
     }
 
     public function test_response_never_leaks_biometrics(): void
@@ -304,15 +299,15 @@ class FaceSearchTest extends TestCase
             ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
 
         $extras = [
-            $this->shift($this->baseVector(), 9.7),
-            $this->shift($this->baseVector(), 9.75),
-            $this->shift($this->baseVector(), 9.85),
-            $this->shift($this->baseVector(), 9.9),
+            $this->blend(0.9),
+            $this->blend(0.85),
+            $this->blend(0.8),
+            $this->blend(0.75),
         ];
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
-                'descriptor' => $this->shift($this->baseVector(), 9.8),
+                'descriptor' => $this->blend(0.35),
                 'extra_descriptors' => $extras,
             ]));
 
@@ -323,10 +318,12 @@ class FaceSearchTest extends TestCase
     public function test_loose_band_requires_quality_gate(): void
     {
         config([
-            'face.match_similarity_strict' => 0.55,
-            'face.match_similarity' => 0.50,
-            'face.match_loose_min_score' => 0.30,
-            'face.match_loose_min_size_ratio' => 0.02,
+            'face.match_cosine_strict' => 0.55,
+            'face.match_cosine' => 0.42,
+            'face.match_similarity_strict' => 0.99,
+            'face.match_similarity' => 0.99,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
         ]);
 
         $album = GalleryAlbum::create([
@@ -352,10 +349,7 @@ class FaceSearchTest extends TestCase
             'faces_status' => 'ready',
         ]);
 
-        $base = $this->baseVector();
-        // Similaridade ~0,52 — faixa folgada (entre 0,50 e 0,55).
-        $shifted = $this->shift($base, 9.8);
-
+        $indexed = $this->blend(0.35); // query base → cos ~0,47
         $version = (string) config('face.version', 'v3');
 
         GalleryFaceDescriptor::create([
@@ -368,7 +362,7 @@ class FaceSearchTest extends TestCase
             'box_h' => 0.2,
             'score' => 0.9,
             'model_version' => $version,
-            'descriptor' => $this->descriptors->encrypt($shifted),
+            'descriptor' => $this->descriptors->encrypt($indexed),
         ]);
         GalleryFaceDescriptor::create([
             'gallery_album_id' => $album->id,
@@ -380,12 +374,12 @@ class FaceSearchTest extends TestCase
             'box_h' => 0.005,
             'score' => 0.2,
             'model_version' => $version,
-            'descriptor' => $this->descriptors->encrypt($shifted),
+            'descriptor' => $this->descriptors->encrypt($indexed),
         ]);
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
-                'descriptor' => $base,
+                'descriptor' => $this->baseVector(),
             ]));
 
         $response->assertOk();
@@ -397,8 +391,10 @@ class FaceSearchTest extends TestCase
     public function test_strict_band_accepts_even_with_low_score(): void
     {
         config([
-            'face.match_similarity_strict' => 0.55,
-            'face.match_similarity' => 0.50,
+            'face.match_cosine_strict' => 0.55,
+            'face.match_cosine' => 0.42,
+            'face.match_similarity_strict' => 0.99,
+            'face.match_similarity' => 0.99,
             'face.match_loose_min_score' => 0.55,
             'face.match_loose_min_size_ratio' => 0.04,
         ]);
@@ -417,10 +413,7 @@ class FaceSearchTest extends TestCase
             'faces_status' => 'ready',
         ]);
 
-        $base = $this->baseVector();
-        // Similaridade ~0,58 — faixa estrita (≥ 0,55).
-        $shifted = $this->shift($base, 9.0);
-
+        // Cosseno ~0,77 — faixa estrita.
         GalleryFaceDescriptor::create([
             'gallery_album_id' => $album->id,
             'gallery_photo_id' => $photo->id,
@@ -431,12 +424,12 @@ class FaceSearchTest extends TestCase
             'box_h' => 0.005,
             'score' => 0.1,
             'model_version' => (string) config('face.version', 'v3'),
-            'descriptor' => $this->descriptors->encrypt($shifted),
+            'descriptor' => $this->descriptors->encrypt($this->blend(0.55)),
         ]);
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
-                'descriptor' => $base,
+                'descriptor' => $this->baseVector(),
             ]));
 
         $response->assertOk();

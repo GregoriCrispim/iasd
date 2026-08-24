@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GalleryAlbum;
+use App\Models\GalleryFaceDescriptor;
 use App\Models\GalleryPhoto;
 use App\Services\Face\FaceDescriptorService;
 use Illuminate\Http\JsonResponse;
@@ -19,15 +20,34 @@ class GalleryFaceController extends Controller
      */
     public function index(GalleryAlbum $album): View
     {
+        $modelVersion = (string) config('face.version', 'v3');
+
         $album->loadCount([
             'photos',
             'photos as ready_count' => fn ($q) => $q->where('faces_status', 'ready'),
             'photos as pending_count' => fn ($q) => $q->whereIn('faces_status', ['pending', 'failed']),
         ]);
 
+        $v3Descriptors = GalleryFaceDescriptor::query()
+            ->where('gallery_album_id', $album->id)
+            ->where('model_version', $modelVersion)
+            ->count();
+
+        $readyMissingV3 = GalleryPhoto::query()
+            ->where('gallery_album_id', $album->id)
+            ->where('faces_status', 'ready')
+            ->whereDoesntHave('faceDescriptors', function ($q) use ($modelVersion) {
+                $q->where('model_version', $modelVersion);
+            })
+            ->count();
+
         return view('admin.galeria.faces', [
             'album' => $album,
-            'modelVersion' => (string) config('face.version', 'v3'),
+            'modelVersion' => $modelVersion,
+            'v3Descriptors' => $v3Descriptors,
+            'readyMissingV3' => $readyMissingV3,
+            'matchRevision' => (int) config('face.match_revision', 2),
+            'matchCosine' => (float) config('face.match_cosine', 0.42),
         ]);
     }
 
