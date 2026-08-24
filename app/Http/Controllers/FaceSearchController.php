@@ -34,10 +34,10 @@ class FaceSearchController extends Controller
             ->firstOrFail();
 
         $data = $request->validate([
-            'descriptor' => ['required', 'array', 'size:128'],
+            'descriptor' => ['required', 'array', 'size:'.(int) config('face.descriptor_dimensions', 1024)],
             'descriptor.*' => ['required', 'numeric'],
             'extra_descriptors' => ['sometimes', 'array', 'max:4'],
-            'extra_descriptors.*' => ['array', 'size:128'],
+            'extra_descriptors.*' => ['array', 'size:'.(int) config('face.descriptor_dimensions', 1024)],
             'extra_descriptors.*.*' => ['numeric'],
             'source' => ['required', 'in:camera,upload'],
             'consent_self' => ['accepted'],

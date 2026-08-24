@@ -20,6 +20,7 @@
         "@tensorflow/tfjs-backend-cpu": "^4.22.0",
         "@tensorflow/tfjs-backend-wasm": "^4.22.0",
         "@vladmandic/face-api": "1.7.15",
+        "@vladmandic/human": "^3.3.6",
         "canvas": "^3.2.3"
     }
 }

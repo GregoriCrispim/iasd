@@ -13,8 +13,9 @@
         <div class="card-head"><h2>{{ $album->title }}</h2></div>
         <div class="card-body">
             <p class="text-muted mt-0">
-                O processamento acontece no seu navegador: cada foto é analisada aqui e apenas os descritores
+                O processamento acontece no seu navegador (Human): cada foto é analisada aqui e apenas os descritores
                 (vetores numéricos) são enviados ao servidor. As imagens não saem do seu computador durante a indexação.
+                Após atualizar o modelo (v3), use <strong>Reprocessar tudo</strong> — descritores antigos não entram na busca.
             </p>
 
             <div class="face-stats" style="display:flex;gap:24px;flex-wrap:wrap;margin:12px 0;">

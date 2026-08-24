@@ -27,6 +27,11 @@ class FaceSearchTest extends TestCase
         }
     }
 
+    private function dims(): int
+    {
+        return $this->descriptors->dimensions();
+    }
+
     private function member(?string $birth = '1990-01-01'): User
     {
         $user = User::create([
@@ -44,9 +49,17 @@ class FaceSearchTest extends TestCase
     private function baseVector(): array
     {
         $v = [];
-        for ($i = 0; $i < 128; $i++) {
-            $v[] = 0.01 * $i;
+        for ($i = 0; $i < $this->dims(); $i++) {
+            $v[] = 0.01 * ($i % 100);
         }
+
+        return $v;
+    }
+
+    /** Desloca só a 1ª dimensão — calibra similaridade Human (order=2). */
+    private function shift(array $v, float $delta): array
+    {
+        $v[0] += $delta;
 
         return $v;
     }
@@ -77,9 +90,9 @@ class FaceSearchTest extends TestCase
         ]);
 
         $base = $this->baseVector();
-        $farVector = array_map(fn ($x) => $x + 1.0, $base); // distância grande
+        $farVector = array_map(fn ($x) => $x + 1.0, $base); // similaridade ~0
 
-        $version = (string) config('face.version', 'v1');
+        $version = (string) config('face.version', 'v3');
 
         // Duas faces na mesma foto "near" para validar deduplicação por foto.
         foreach ([0, 1] as $idx) {
@@ -175,19 +188,17 @@ class FaceSearchTest extends TestCase
     {
         [$album, $near, $far] = $this->seedAlbum();
 
-        // Principal e extra próximos do índice: consenso de 2 probes na faixa folgada.
-        // (Uma única probe "mágica" longe da principal não deve resgatar sozinha — anti-FP.)
-        $primary = array_map(fn ($x) => $x + 0.45, $this->baseVector());
-        $extra = $this->baseVector();
+        // Duas probes na faixa folgada (~0,52): exige consenso ≥2.
+        $primary = $this->shift($this->baseVector(), 9.8);
+        $extra = $this->shift($this->baseVector(), 9.7);
 
-        // Garante score/tamanho no descriptor near para a faixa folgada.
         GalleryFaceDescriptor::query()
             ->where('gallery_photo_id', $near->id)
             ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
 
         config([
-            'face.match_threshold_strict' => 0.42,
-            'face.match_threshold' => 0.50,
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
             'face.match_loose_min_score' => 0.55,
             'face.match_loose_min_size_ratio' => 0.04,
         ]);
@@ -213,15 +224,15 @@ class FaceSearchTest extends TestCase
             ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
 
         config([
-            'face.match_threshold_strict' => 0.42,
-            'face.match_threshold' => 0.50,
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
             'face.match_loose_min_score' => 0.55,
             'face.match_loose_min_size_ratio' => 0.04,
         ]);
 
-        // Principal bem longe; só o extra acerta — deve rejeitar (sem consenso).
-        $primary = array_map(fn ($x) => $x + 0.9, $this->baseVector());
-        $extra = array_map(fn ($x) => $x + 0.45, $this->baseVector()); // ~0.45, faixa folgada
+        // Principal abaixo do mínimo; só o extra na faixa folgada — rejeita (sem consenso).
+        $primary = $this->shift($this->baseVector(), 12.0); // ~0.33
+        $extra = $this->shift($this->baseVector(), 9.8); // ~0.52
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
@@ -295,15 +306,15 @@ class FaceSearchTest extends TestCase
             ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
 
         $extras = [
-            $this->baseVector(),
-            array_map(fn ($x) => $x + 0.01, $this->baseVector()),
-            array_map(fn ($x) => $x + 0.02, $this->baseVector()),
-            array_map(fn ($x) => $x + 0.03, $this->baseVector()),
+            $this->shift($this->baseVector(), 9.7),
+            $this->shift($this->baseVector(), 9.75),
+            $this->shift($this->baseVector(), 9.85),
+            $this->shift($this->baseVector(), 9.9),
         ];
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
-                'descriptor' => array_map(fn ($x) => $x + 0.45, $this->baseVector()),
+                'descriptor' => $this->shift($this->baseVector(), 9.8),
                 'extra_descriptors' => $extras,
             ]));
 
@@ -314,8 +325,8 @@ class FaceSearchTest extends TestCase
     public function test_loose_band_requires_quality_gate(): void
     {
         config([
-            'face.match_threshold_strict' => 0.42,
-            'face.match_threshold' => 0.50,
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
             'face.match_loose_min_score' => 0.55,
             'face.match_loose_min_size_ratio' => 0.04,
         ]);
@@ -344,11 +355,10 @@ class FaceSearchTest extends TestCase
         ]);
 
         $base = $this->baseVector();
-        // Distância 0,46 — faixa folgada (entre 0,42 e 0,50).
-        $shifted = $base;
-        $shifted[0] += 0.46;
+        // Similaridade ~0,52 — faixa folgada (entre 0,50 e 0,55).
+        $shifted = $this->shift($base, 9.8);
 
-        $version = (string) config('face.version', 'v2');
+        $version = (string) config('face.version', 'v3');
 
         GalleryFaceDescriptor::create([
             'gallery_album_id' => $album->id,
@@ -389,8 +399,8 @@ class FaceSearchTest extends TestCase
     public function test_strict_band_accepts_even_with_low_score(): void
     {
         config([
-            'face.match_threshold_strict' => 0.42,
-            'face.match_threshold' => 0.50,
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
             'face.match_loose_min_score' => 0.55,
             'face.match_loose_min_size_ratio' => 0.04,
         ]);
@@ -410,9 +420,8 @@ class FaceSearchTest extends TestCase
         ]);
 
         $base = $this->baseVector();
-        // Distância 0,35 — faixa estrita.
-        $shifted = $base;
-        $shifted[0] += 0.35;
+        // Similaridade ~0,58 — faixa estrita (≥ 0,55).
+        $shifted = $this->shift($base, 9.0);
 
         GalleryFaceDescriptor::create([
             'gallery_album_id' => $album->id,
@@ -423,7 +432,7 @@ class FaceSearchTest extends TestCase
             'box_w' => 0.005,
             'box_h' => 0.005,
             'score' => 0.1,
-            'model_version' => (string) config('face.version', 'v2'),
+            'model_version' => (string) config('face.version', 'v3'),
             'descriptor' => $this->descriptors->encrypt($shifted),
         ]);
 

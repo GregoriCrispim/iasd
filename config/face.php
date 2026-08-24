@@ -18,37 +18,44 @@ return [
     | no banco, mas a busca compara apenas descritores da versão atual, e a
     | reindexação administrativa deve reprocessar as fotos.
     |
-    | v2: indexa também a variante espelhada de cada rosto.
+    | v3: @vladmandic/human (embedding 1024-D + similaridade).
     */
-    'version' => env('FACE_MODEL_VERSION', 'v2'),
+    'version' => env('FACE_MODEL_VERSION', 'v3'),
 
     /*
     |--------------------------------------------------------------------------
-    | Modelos face-api (carregados no navegador)
+    | Dimensão do descriptor
     |--------------------------------------------------------------------------
-    | Assets versionados em public/js/vendor e public/models/face-api.
-    | Para regenerar a partir do npm: ./scripts/sync-face-api-assets.sh
     */
-    'models_url' => env('FACE_MODELS_URL', '/models/face-api/1.7.15'),
-    'script_url' => env('FACE_SCRIPT_URL', '/js/vendor/face-api-1.7.15.js'),
+    'descriptor_dimensions' => (int) env('FACE_DESCRIPTOR_DIMENSIONS', 1024),
 
     /*
     |--------------------------------------------------------------------------
-    | Correspondência (match) 1:N
+    | Assets Human (carregados no navegador)
     |--------------------------------------------------------------------------
-    | Distância euclidiana entre descritores de 128 dimensões. Quanto menor,
-    | mais parecido.
-    |
-    | Faixa estrita (≤ strict): aceita sempre.
-    | Faixa folgada (strict < d ≤ match_threshold): exige qualidade do rosto
-    | indexado E consenso (≥2 probes batendo), para não misturar pessoas.
-    |
-    | Valores conservadores de propósito: 0,60 misturava rostos diferentes.
+    | Bundle IIFE + modelos locais. Regenerar: ./scripts/sync-human-assets.sh
     */
-    'match_threshold_strict' => (float) env('FACE_MATCH_THRESHOLD_STRICT', 0.42),
-    'match_threshold' => (float) env('FACE_MATCH_THRESHOLD', 0.50),
+    'models_url' => env('FACE_MODELS_URL', '/models/human/3.3.6'),
+    'script_url' => env('FACE_SCRIPT_URL', '/js/vendor/human-3.3.6.js'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Correspondência (match) 1:N — similaridade Human (0..1)
+    |--------------------------------------------------------------------------
+    | Usa a fórmula de human.match.similarity (order=2). Quanto maior, mais
+    | parecido. Documentação Human: similaridade ≥ 0,50 pode ser considerada match.
+    |
+    | Faixa estrita (≥ strict): aceita sempre.
+    | Faixa folgada (match ≤ s < strict): exige qualidade do rosto indexado
+    | e consenso (≥2 probes) quando houver várias probes.
+    */
+    'match_similarity_strict' => (float) env('FACE_MATCH_SIMILARITY_STRICT', 0.55),
+    'match_similarity' => (float) env('FACE_MATCH_SIMILARITY', 0.50),
     'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.55),
     'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.04),
+    'match_similarity_multiplier' => (float) env('FACE_MATCH_SIMILARITY_MULTIPLIER', 25),
+    'match_similarity_min' => (float) env('FACE_MATCH_SIMILARITY_MIN', 0.2),
+    'match_similarity_max' => (float) env('FACE_MATCH_SIMILARITY_MAX', 0.8),
     'max_results' => (int) env('FACE_MAX_RESULTS', 200),
 
     /*
@@ -66,7 +73,7 @@ return [
             'analysis_max_side' => (int) env('FACE_PHOTO_ANALYSIS_SIDE', 1536),
         ],
         'selfie' => [
-            'min_score' => (float) env('FACE_SELFIE_MIN_SCORE', 0.65),
+            'min_score' => (float) env('FACE_SELFIE_MIN_SCORE', 0.50),
             'min_size_ratio' => (float) env('FACE_SELFIE_MIN_SIZE_RATIO', 0.10),
             'analysis_max_side' => (int) env('FACE_SELFIE_ANALYSIS_SIDE', 720),
         ],
@@ -82,10 +89,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Indexação no servidor (Node)
+    | Indexação no servidor (legado face-api / Node)
     |--------------------------------------------------------------------------
-    | Após o upload, um Job dispara `scripts/face-index-photo.mjs` (face-api +
-    | canvas + tfjs-wasm). Defina FACE_NODE_BINARY se o `node` não estiver no PATH.
+    | Desativado no fluxo de upload: na HostGator a indexação é só no browser
+    | do admin (Human). O script Node face-api permanece no repositório como
+    | legado e não é disparado.
     */
     'node_binary' => env('FACE_NODE_BINARY', ''),
 ];

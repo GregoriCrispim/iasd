@@ -2,7 +2,7 @@
  * Busca facial do membro na página do álbum.
  *
  * A selfie (câmera ou upload) é processada localmente pelo FaceEngine; ao
- * servidor enviamos apenas o descriptor de 128 posições. A grade é então
+ * servidor enviamos apenas o descriptor de 1024 posições (Human). A grade é então
  * filtrada pelos IDs retornados via window.galeriaApplyFaceFilter.
  */
 (function () {

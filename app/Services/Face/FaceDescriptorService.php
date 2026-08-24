@@ -9,18 +9,23 @@ use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
 /**
- * Valida, compacta, criptografa e persiste descritores faciais de 128 posições.
+ * Valida, compacta, criptografa e persiste descritores faciais (Human 1024-D).
  *
  * O vetor nunca é gravado em claro: é serializado como binário Float32 e depois
  * criptografado com a APP_KEY (AES via Crypt). Na leitura, o processo é revertido.
  */
 class FaceDescriptorService
 {
-    public const DIMENSIONS = 128;
+    public const DIMENSIONS = 1024;
+
+    public function dimensions(): int
+    {
+        $configured = (int) config('face.descriptor_dimensions', self::DIMENSIONS);
+
+        return $configured > 0 ? $configured : self::DIMENSIONS;
+    }
 
     /**
-     * Valida que o valor recebido é um descriptor de 128 números finitos.
-     *
      * @param  mixed  $descriptor
      * @return list<float>
      *
@@ -32,8 +37,10 @@ class FaceDescriptorService
             throw new RuntimeException('Descriptor inválido.');
         }
 
-        if (count($descriptor) !== self::DIMENSIONS) {
-            throw new RuntimeException('Descriptor deve ter exatamente '.self::DIMENSIONS.' dimensões.');
+        $dimensions = $this->dimensions();
+
+        if (count($descriptor) !== $dimensions) {
+            throw new RuntimeException('Descriptor deve ter exatamente '.$dimensions.' dimensões.');
         }
 
         $clean = [];
@@ -52,20 +59,20 @@ class FaceDescriptorService
     }
 
     /**
-     * Serializa (Float32 little-endian) e criptografa o vetor.
-     *
      * @param  list<float>  $descriptor
      */
     public function encrypt(array $descriptor): string
     {
-        $packed = pack('g*', ...$descriptor);
+        // Pack em loop: splat de 1024 args é frágil em alguns ambientes PHP.
+        $packed = '';
+        foreach ($descriptor as $value) {
+            $packed .= pack('g', (float) $value);
+        }
 
         return Crypt::encryptString(base64_encode($packed));
     }
 
     /**
-     * Descriptografa e desserializa de volta para uma lista de floats.
-     *
      * @return list<float>|null
      */
     public function decrypt(string $stored): ?array
@@ -76,14 +83,16 @@ class FaceDescriptorService
             return null;
         }
 
-        if ($packed === false || strlen($packed) !== self::DIMENSIONS * 4) {
+        $dimensions = $this->dimensions();
+
+        if ($packed === false || strlen($packed) !== $dimensions * 4) {
             return null;
         }
 
         /** @var array<int, float>|false $values */
         $values = unpack('g*', $packed);
 
-        if ($values === false || count($values) !== self::DIMENSIONS) {
+        if ($values === false || count($values) !== $dimensions) {
             return null;
         }
 
@@ -91,8 +100,6 @@ class FaceDescriptorService
     }
 
     /**
-     * Substitui todos os descritores de uma foto pelos novos (transação).
-     *
      * @param  array<int, array{descriptor:array<int,float|int>,score?:float|null,box?:array<string,float|int>|null}>  $faces
      */
     public function replaceForPhoto(GalleryPhoto $photo, array $faces, string $modelVersion): int

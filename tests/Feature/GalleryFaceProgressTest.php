@@ -122,7 +122,7 @@ class GalleryFaceProgressTest extends TestCase
             ->assertSee('id="galeriaFaceModal"', false);
     }
 
-    public function test_upload_dispatches_face_processing_job(): void
+    public function test_upload_does_not_dispatch_legacy_node_face_job(): void
     {
         Bus::fake();
 
@@ -149,6 +149,6 @@ class GalleryFaceProgressTest extends TestCase
             ])
             ->assertOk();
 
-        Bus::assertDispatched(ProcessGalleryPhotoFaces::class);
+        Bus::assertNotDispatched(ProcessGalleryPhotoFaces::class);
     }
 }

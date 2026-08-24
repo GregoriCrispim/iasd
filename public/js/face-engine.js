@@ -1,22 +1,20 @@
 /**
- * Motor de reconhecimento facial no navegador (sem servidor Node).
+ * Motor de reconhecimento facial no navegador (@vladmandic/human).
  *
- * Carrega o @vladmandic/face-api e os modelos sob demanda a partir das URLs
- * definidas em window.FACE_CONFIG (injetadas pelo Blade a partir de config/face.php).
- * Expõe window.FaceEngine com detecção que devolve descritores de 128 posições.
+ * Carrega Human + modelos locais sob demanda a partir de window.FACE_CONFIG
+ * (Blade / config/face.php). Expõe window.FaceEngine com a mesma API usada
+ * por face-search.js e pelas telas admin de indexação.
  *
- * A imagem NUNCA é enviada ao servidor por este módulo: apenas o vetor numérico.
+ * A imagem NUNCA é enviada ao servidor por este módulo: apenas o vetor 1024-D.
  */
 (function () {
     'use strict';
 
     var scriptPromise = null;
-    var modelsPromise = null;
+    var humanPromise = null;
+    var humanInstance = null;
+    var DESCRIPTOR_DIM = 1024;
 
-    /**
-     * Resolve a configuração de forma preguiçosa: usa window.FACE_CONFIG se
-     * existir, senão faz o parse de um <script type="application/json" id="faceConfig">.
-     */
     function getConfig() {
         if (window.FACE_CONFIG) return window.FACE_CONFIG;
         var el = document.getElementById('faceConfig');
@@ -32,52 +30,102 @@
     function loadScript() {
         if (scriptPromise) return scriptPromise;
         scriptPromise = new Promise(function (resolve, reject) {
-            if (window.faceapi) { resolve(window.faceapi); return; }
+            if (typeof window.Human === 'function') {
+                resolve(window.Human);
+                return;
+            }
             var scriptUrl = getConfig().scriptUrl;
-            if (!scriptUrl) { reject(new Error('URL do face-api não configurada.')); return; }
+            if (!scriptUrl) {
+                reject(new Error('URL do Human não configurada.'));
+                return;
+            }
             var s = document.createElement('script');
             s.src = scriptUrl;
             s.async = true;
             s.onload = function () {
-                if (window.faceapi) resolve(window.faceapi);
-                else reject(new Error('face-api carregou mas não expôs a API.'));
+                if (typeof window.Human === 'function') resolve(window.Human);
+                else reject(new Error('Human carregou mas não expôs o construtor.'));
             };
             s.onerror = function () {
                 scriptPromise = null;
-                reject(new Error('Falha ao carregar o face-api (' + scriptUrl + '). Verifique se o arquivo existe no servidor.'));
+                reject(new Error('Falha ao carregar o Human (' + scriptUrl + ').'));
             };
             document.head.appendChild(s);
         });
         return scriptPromise;
     }
 
-    function loadModels() {
-        if (modelsPromise) return modelsPromise;
-        modelsPromise = loadScript().then(function (faceapi) {
-            var modelsUrl = getConfig().modelsUrl;
-            if (!modelsUrl) throw new Error('URL dos modelos não configurada.');
-            return Promise.all([
-                faceapi.nets.ssdMobilenetv1.loadFromUri(modelsUrl),
-                faceapi.nets.faceLandmark68Net.loadFromUri(modelsUrl),
-                faceapi.nets.faceRecognitionNet.loadFromUri(modelsUrl)
-            ]).then(function () { return faceapi; });
-        }).catch(function (err) {
-            // Permite nova tentativa após falha (ex.: assets ainda não descompactados).
-            modelsPromise = null;
-            scriptPromise = null;
-            var msg = err && err.message ? err.message : String(err);
-            if (/loadFromUri|404|Failed to fetch|NetworkError|fetch/i.test(msg)) {
-                throw new Error('Falha ao carregar os modelos faciais. Confirme se /models/face-api/1.7.15/ está na pasta pública (veja deploy/LEIA-ME-face-api.txt).');
-            }
-            throw err;
-        });
-        return modelsPromise;
+    function buildHumanConfig(maxDetected, minConfidence) {
+        var modelsUrl = getConfig().modelsUrl || '/models/human/3.3.6';
+        // Human espera barra final no modelBasePath.
+        if (modelsUrl.slice(-1) !== '/') modelsUrl += '/';
+
+        return {
+            modelBasePath: modelsUrl,
+            backend: 'webgl',
+            wasmPath: modelsUrl,
+            debug: false,
+            async: true,
+            warmup: 'none',
+            face: {
+                enabled: true,
+                detector: {
+                    modelPath: 'blazeface.json',
+                    rotation: true,
+                    maxDetected: maxDetected,
+                    minConfidence: minConfidence,
+                    return: true
+                },
+                mesh: {
+                    enabled: true,
+                    modelPath: 'facemesh.json'
+                },
+                description: {
+                    enabled: true,
+                    modelPath: 'faceres.json'
+                },
+                iris: { enabled: false },
+                emotion: { enabled: false },
+                antispoof: { enabled: false },
+                liveness: { enabled: false },
+                attention: { enabled: false },
+                gear: { enabled: false }
+            },
+            body: { enabled: false },
+            hand: { enabled: false },
+            gesture: { enabled: false },
+            object: { enabled: false },
+            segmentation: { enabled: false },
+            filter: { enabled: false }
+        };
     }
 
-    /**
-     * Reduz uma imagem para no máximo maxSide px no maior lado, para acelerar
-     * a análise. Devolve um canvas pronto para o face-api.
-     */
+    function getHuman(maxDetected, minConfidence) {
+        return loadScript().then(function (HumanCtor) {
+            if (humanInstance) {
+                // Atualiza limites por chamada (foto de álbum vs selfie).
+                humanInstance.config.face.detector.maxDetected = maxDetected;
+                humanInstance.config.face.detector.minConfidence = minConfidence;
+                return humanInstance;
+            }
+            humanInstance = new HumanCtor(buildHumanConfig(maxDetected, minConfidence));
+            humanPromise = humanInstance.load().then(function () {
+                return humanInstance.warmup();
+            }).then(function () {
+                return humanInstance;
+            }).catch(function (err) {
+                humanInstance = null;
+                humanPromise = null;
+                var msg = err && err.message ? err.message : String(err);
+                if (/404|Failed to fetch|NetworkError|fetch|load/i.test(msg)) {
+                    throw new Error('Falha ao carregar os modelos Human. Confirme se /models/human/3.3.6/ está público (./scripts/sync-human-assets.sh).');
+                }
+                throw err;
+            });
+            return humanPromise;
+        });
+    }
+
     function toAnalysisCanvas(source, maxSide) {
         var w = source.naturalWidth || source.videoWidth || source.width;
         var h = source.naturalHeight || source.videoHeight || source.height;
@@ -93,7 +141,6 @@
         return canvas;
     }
 
-    /** Espelha horizontalmente (câmera frontal / selfie invertida). */
     function mirrorCanvas(source) {
         var w = source.naturalWidth || source.videoWidth || source.width;
         var h = source.naturalHeight || source.videoHeight || source.height;
@@ -108,23 +155,32 @@
         return canvas;
     }
 
+    function loadImage(url) {
+        return new Promise(function (resolve, reject) {
+            var img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.decoding = 'async';
+            img.onload = function () { resolve(img); };
+            img.onerror = function () { reject(new Error('Falha ao carregar a imagem para análise.')); };
+            img.src = url;
+        });
+    }
 
-    function adjustBrightness(source, factor) {
-        var base = toAnalysisCanvas(source, 2048);
-        var canvas = document.createElement('canvas');
-        canvas.width = base.width;
-        canvas.height = base.height;
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(base, 0, 0);
-        var img = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        var data = img.data;
-        for (var i = 0; i < data.length; i += 4) {
-            data[i] = Math.max(0, Math.min(255, data[i] * factor));
-            data[i + 1] = Math.max(0, Math.min(255, data[i + 1] * factor));
-            data[i + 2] = Math.max(0, Math.min(255, data[i + 2] * factor));
-        }
-        ctx.putImageData(img, 0, 0);
-        return canvas;
+    /** boxRaw do Human: [x, y, width, height] normalizado 0..1 */
+    function normalizeFace(face) {
+        var raw = face.boxRaw || face.box || [0, 0, 0, 0];
+        var x = Number(raw[0]) || 0;
+        var y = Number(raw[1]) || 0;
+        var w = Number(raw[2]) || 0;
+        var h = Number(raw[3]) || 0;
+        var emb = face.embedding;
+        if (!emb || !emb.length) return null;
+        return {
+            descriptor: Array.prototype.slice.call(emb),
+            score: typeof face.score === 'number' ? face.score : (face.boxScore || 0),
+            box: { x: x, y: y, width: w, height: h },
+            sizeRatio: Math.max(w, h)
+        };
     }
 
     function iou(a, b) {
@@ -155,7 +211,7 @@
                 var score = iou(expected, alt.box);
                 if (score > bestIou) { bestIou = score; best = alt; }
             }
-            if (best && bestIou >= 0.25 && best.descriptor.length === 128) {
+            if (best && bestIou >= 0.25 && best.descriptor.length === DESCRIPTOR_DIM) {
                 out.push({
                     descriptor: best.descriptor,
                     score: face.score,
@@ -177,144 +233,101 @@
         return Math.sqrt(sum);
     }
 
-    /** Mantém descritores distintos (dist ≥ 0,12), no máximo max. */
     function dedupeDescriptors(primary, extras, max) {
         var out = [];
         var refs = [primary];
         for (var i = 0; i < extras.length && out.length < max; i++) {
             var cand = extras[i];
-            if (!cand || cand.length !== 128) continue;
+            if (!cand || cand.length !== DESCRIPTOR_DIM) continue;
             var ok = true;
             for (var j = 0; j < refs.length; j++) {
-                if (descriptorDistance(cand, refs[j]) < 0.12) { ok = false; break; }
+                if (descriptorDistance(cand, refs[j]) < 0.35) { ok = false; break; }
             }
             if (ok) { out.push(cand); refs.push(cand); }
         }
         return out;
     }
 
-    function loadImage(url) {
-        return new Promise(function (resolve, reject) {
-            var img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.decoding = 'async';
-            img.onload = function () { resolve(img); };
-            img.onerror = function () { reject(new Error('Falha ao carregar a imagem para análise.')); };
-            img.src = url;
+    function detectOnCanvas(human, canvas) {
+        return human.detect(canvas).then(function (result) {
+            var faces = [];
+            var list = (result && result.face) ? result.face : [];
+            for (var i = 0; i < list.length; i++) {
+                var n = normalizeFace(list[i]);
+                if (n && n.descriptor.length === DESCRIPTOR_DIM) faces.push(n);
+            }
+            return faces;
         });
     }
 
-    function normalizeResult(res, canvas) {
-        var box = res.detection.box;
-        var cw = canvas.width || 1;
-        var ch = canvas.height || 1;
-        return {
-            descriptor: Array.prototype.slice.call(res.descriptor),
-            score: res.detection.score,
-            box: {
-                // Guardamos a caixa em proporção (0..1) para ficar independente do tamanho.
-                x: box.x / cw,
-                y: box.y / ch,
-                width: box.width / cw,
-                height: box.height / ch
-            },
-            sizeRatio: Math.max(box.width / cw, box.height / ch)
-        };
-    }
-
     var FaceEngine = {
-        preload: function () { return loadModels(); },
+        preload: function () {
+            return getHuman(20, 0.3);
+        },
 
-        /**
-         * Detecta TODOS os rostos (fotos de evento).
-         * opts: { maxSide, minScore, minSizeRatio, maxFaces }
-         */
         detectAll: function (source, opts) {
             opts = opts || {};
-            return loadModels().then(function (faceapi) {
-                var canvas = toAnalysisCanvas(source, opts.maxSide || 1536);
-                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.30 });
-                return faceapi.detectAllFaces(canvas, options)
-                    .withFaceLandmarks()
-                    .withFaceDescriptors()
-                    .then(function (results) {
-                        var faces = results.map(function (r) { return normalizeResult(r, canvas); });
-                        faces = faces.filter(function (f) {
-                            return f.sizeRatio >= (opts.minSizeRatio || 0) && f.descriptor.length === 128;
-                        });
-                        // Mantém os rostos com maior confiança (SSD não garante ordem).
-                        faces.sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
-                        if (opts.maxFaces && faces.length > opts.maxFaces) {
-                            faces = faces.slice(0, opts.maxFaces);
-                        }
-                        if (!faces.length) return faces;
+            var maxSide = opts.maxSide || 1536;
+            var minScore = opts.minScore || 0.30;
+            var maxFaces = opts.maxFaces || 80;
+            var minSize = opts.minSizeRatio || 0;
 
-                        var mirrored = mirrorCanvas(canvas);
-                        return faceapi.detectAllFaces(mirrored, options)
-                            .withFaceLandmarks()
-                            .withFaceDescriptors()
-                            .then(function (mirroredResults) {
-                                var mirroredFaces = mirroredResults.map(function (r) {
-                                    return normalizeResult(r, mirrored);
-                                }).filter(function (f) {
-                                    return f.sizeRatio >= (opts.minSizeRatio || 0) && f.descriptor.length === 128;
-                                });
-                                return withMirrorVariants(faces, mirroredFaces);
-                            })
-                            .catch(function () { return faces; });
+            return getHuman(maxFaces, minScore).then(function (human) {
+                var canvas = toAnalysisCanvas(source, maxSide);
+                return detectOnCanvas(human, canvas).then(function (faces) {
+                    faces = faces.filter(function (f) {
+                        return f.sizeRatio >= minSize && f.descriptor.length === DESCRIPTOR_DIM;
                     });
+                    faces.sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
+                    if (faces.length > maxFaces) faces = faces.slice(0, maxFaces);
+                    if (!faces.length) return faces;
+
+                    var mirrored = mirrorCanvas(canvas);
+                    return detectOnCanvas(human, mirrored).then(function (mirroredFaces) {
+                        mirroredFaces = mirroredFaces.filter(function (f) {
+                            return f.sizeRatio >= minSize && f.descriptor.length === DESCRIPTOR_DIM;
+                        });
+                        return withMirrorVariants(faces, mirroredFaces);
+                    }).catch(function () { return faces; });
+                });
             });
         },
 
-        /**
-         * Detecta UM único rosto (selfie). Exige nitidez e proporção mínima.
-         * Resolve com o rosto ou lança erro descritivo.
-         * opts: { maxSide, minScore, minSizeRatio }
-         */
         detectSingle: function (source, opts) {
             opts = opts || {};
-            return loadModels().then(function (faceapi) {
-                var canvas = toAnalysisCanvas(source, opts.maxSide || 720);
-                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.65 });
-                return faceapi.detectAllFaces(canvas, options)
-                    .withFaceLandmarks()
-                    .withFaceDescriptors()
-                    .then(function (results) {
-                        if (!results.length) {
-                            throw new Error('Nenhum rosto foi detectado. Use uma foto nítida e de frente.');
-                        }
-                        var faces = results.map(function (r) { return normalizeResult(r, canvas); });
-                        var big = faces.filter(function (f) { return f.sizeRatio >= (opts.minSizeRatio || 0.10); });
-                        if (!big.length) {
-                            throw new Error('O rosto está pequeno demais. Aproxime-se da câmera.');
-                        }
-                        if (big.length > 1) {
-                            throw new Error('Mais de um rosto foi detectado. Envie uma foto somente sua.');
-                        }
-                        return big[0];
-                    });
+            var maxSide = opts.maxSide || 720;
+            var minScore = opts.minScore || 0.50;
+            var minSize = opts.minSizeRatio || 0.10;
+
+            return getHuman(5, minScore).then(function (human) {
+                var canvas = toAnalysisCanvas(source, maxSide);
+                return detectOnCanvas(human, canvas).then(function (faces) {
+                    if (!faces.length) {
+                        throw new Error('Nenhum rosto foi detectado. Use uma foto nítida e de frente.');
+                    }
+                    var big = faces.filter(function (f) { return f.sizeRatio >= minSize; });
+                    if (!big.length) {
+                        throw new Error('O rosto está pequeno demais. Aproxime-se da câmera.');
+                    }
+                    big.sort(function (a, b) { return (b.sizeRatio || 0) - (a.sizeRatio || 0); });
+                    if (big.length > 1 && big[1].sizeRatio > minSize * 1.2) {
+                        throw new Error('Mais de um rosto foi detectado. Envie uma foto somente sua.');
+                    }
+                    return big[0];
+                });
             });
         },
 
-        /**
-         * Detecta o rosto na imagem e também na versão espelhada (útil com
-         * câmera frontal). Resolve com { descriptor, extraDescriptors, ... }.
-         */
         detectSingleWithMirror: function (source, opts) {
             return this.detectSingleWithProbes(source, opts);
         },
 
-        /**
-         * Probes de consulta: original + espelho (sem brilho — gerava FP).
-         * Resolve com { descriptor, extraDescriptors (até 4), ... }.
-         */
         detectSingleWithProbes: function (source, opts) {
             var self = this;
             return self.detectSingle(source, opts).then(function (primary) {
                 var extras = [];
-                // Só espelho: variantes de brilho geravam falsos positivos entre pessoas parecidas.
                 return self.detectSingle(mirrorCanvas(source), opts).then(function (alt) {
-                    if (alt && alt.descriptor && alt.descriptor.length === 128) {
+                    if (alt && alt.descriptor && alt.descriptor.length === DESCRIPTOR_DIM) {
                         extras.push(alt.descriptor);
                     }
                 }).catch(function () { /* ignora */ }).then(function () {
@@ -329,9 +342,6 @@
             });
         },
 
-        /**
-         * Une descritores de várias fontes (ex.: 2 frames da câmera).
-         */
         detectFromSources: function (sources, opts) {
             var self = this;
             if (!sources || !sources.length) {

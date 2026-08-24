@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Descritores faciais (embeddings) extraídos das fotos do álbum.
-     * O vetor de 128 dimensões é sempre gravado criptografado; nunca em claro.
+     * O vetor (dimensão definida em config/face.php) é sempre gravado criptografado; nunca em claro.
      */
     public function up(): void
     {

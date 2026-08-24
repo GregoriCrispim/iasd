@@ -41,8 +41,9 @@ jobs:
         run: |
           test -f artisan
           test -d public
-          test -f public/js/vendor/face-api-1.7.15.js
-          test -f public/models/face-api/1.7.15/ssd_mobilenetv1_model.bin
+          test -f public/js/vendor/human-3.3.6.js
+          test -f public/models/human/3.3.6/faceres.bin
+          test -f public/models/human/3.3.6/models.json
           test ! -d vendor/filament
           test ! -d vendor/spatie/laravel-permission
           echo "Deploy payload ready."

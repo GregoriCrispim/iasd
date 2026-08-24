@@ -10,20 +10,21 @@ class FaceDescriptorServiceTest extends TestCase
 {
     private function vector(float $seed = 0.0): array
     {
+        $dims = (int) config('face.descriptor_dimensions', FaceDescriptorService::DIMENSIONS);
         $v = [];
-        for ($i = 0; $i < 128; $i++) {
+        for ($i = 0; $i < $dims; $i++) {
             $v[] = sin($i * 0.1 + $seed);
         }
 
         return $v;
     }
 
-    public function test_validate_accepts_128_finite_numbers(): void
+    public function test_validate_accepts_configured_finite_numbers(): void
     {
         $service = new FaceDescriptorService;
         $clean = $service->validate($this->vector());
 
-        $this->assertCount(128, $clean);
+        $this->assertCount($service->dimensions(), $clean);
         $this->assertContainsOnly('float', $clean);
     }
 
@@ -45,15 +46,16 @@ class FaceDescriptorServiceTest extends TestCase
     {
         $service = new FaceDescriptorService;
         $vector = $service->validate($this->vector(1.23));
+        $dims = $service->dimensions();
 
         $encrypted = $service->encrypt($vector);
         $this->assertNotEquals(implode(',', $vector), $encrypted);
 
         $decrypted = $service->decrypt($encrypted);
         $this->assertNotNull($decrypted);
-        $this->assertCount(128, $decrypted);
+        $this->assertCount($dims, $decrypted);
 
-        for ($i = 0; $i < 128; $i++) {
+        for ($i = 0; $i < $dims; $i++) {
             // Float32 tem precisão limitada; a tolerância cobre o arredondamento.
             $this->assertEqualsWithDelta($vector[$i], $decrypted[$i], 1e-5);
         }

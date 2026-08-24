@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Um descriptor facial de 128 dimensões extraído de uma foto do álbum.
+ * Um descriptor facial (Human 1024-D) extraído de uma foto do álbum.
  * O vetor é armazenado sempre criptografado na coluna `descriptor`.
  */
 class GalleryFaceDescriptor extends Model

@@ -6,33 +6,29 @@ use App\Models\GalleryAlbum;
 use App\Models\GalleryFaceDescriptor;
 
 /**
- * Busca 1:N: compara um (ou mais) descriptors de consulta com os descritores
- * gravados apenas do álbum atual, retornando os IDs das fotos correspondentes.
+ * Busca 1:N com similaridade do @vladmandic/human (0..1, maior = mais parecido).
  *
- * Limiar em duas faixas + consenso entre probes:
- * - estrita: aceita sempre
- * - folgada: exige qualidade do rosto indexado e, se houver várias probes,
- *   pelo menos 2 batendo (evita FP de uma única variante espúria)
+ * Porta human.match.similarity (order=2) para PHP.
  */
 class FaceMatchService
 {
     public function __construct(private readonly FaceDescriptorService $descriptors) {}
 
     /**
-     * @param  list<float>|list<list<float>>  $query  Um descriptor ou vários.
-     * @return array{photo_ids:list<int>, matches:list<array{photo_id:int,distance:float}>}
+     * @param  list<float>|list<list<float>>  $query
+     * @return array{photo_ids:list<int>, matches:list<array{photo_id:int,similarity:float}>}
      */
-    public function search(GalleryAlbum $album, array $query, ?float $threshold = null, ?int $maxResults = null): array
+    public function search(GalleryAlbum $album, array $query, ?float $minSimilarity = null, ?int $maxResults = null): array
     {
-        $loose = $threshold ?? (float) config('face.match_threshold', 0.50);
-        $strict = (float) config('face.match_threshold_strict', 0.42);
-        if ($strict > $loose) {
-            $strict = $loose;
+        $minSimilarity ??= (float) config('face.match_similarity', 0.50);
+        $strict = (float) config('face.match_similarity_strict', 0.55);
+        if ($strict < $minSimilarity) {
+            $strict = $minSimilarity;
         }
         $minLooseScore = (float) config('face.match_loose_min_score', 0.55);
         $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.04);
         $maxResults ??= (int) config('face.max_results', 200);
-        $modelVersion = (string) config('face.version', 'v2');
+        $modelVersion = (string) config('face.version', 'v3');
         $queries = $this->normalizeQueries($query);
 
         if ($queries === []) {
@@ -45,40 +41,39 @@ class FaceMatchService
             ->where('gallery_album_id', $album->id)
             ->where('model_version', $modelVersion)
             ->orderBy('id')
-            ->chunk(500, function ($rows) use ($queries, $loose, $strict, $minLooseScore, $minLooseSize, &$best) {
+            ->chunk(500, function ($rows) use ($queries, $minSimilarity, $strict, $minLooseScore, $minLooseSize, &$best) {
                 foreach ($rows as $row) {
                     $vector = $this->descriptors->decrypt($row->descriptor);
                     if ($vector === null) {
                         continue;
                     }
 
-                    $distance = $this->matchDistance(
+                    $similarity = $this->matchSimilarity(
                         $queries,
                         $vector,
-                        $loose,
+                        $minSimilarity,
                         $strict,
                         $row,
                         $minLooseScore,
                         $minLooseSize,
                     );
-                    if ($distance === null) {
+                    if ($similarity === null) {
                         continue;
                     }
 
                     $photoId = (int) $row->gallery_photo_id;
-                    // Deduplicação por foto: fica a menor distância encontrada.
-                    if (! isset($best[$photoId]) || $distance < $best[$photoId]) {
-                        $best[$photoId] = $distance;
+                    if (! isset($best[$photoId]) || $similarity > $best[$photoId]) {
+                        $best[$photoId] = $similarity;
                     }
                 }
             });
 
-        asort($best);
+        arsort($best);
         $best = array_slice($best, 0, $maxResults, true);
 
         $matches = [];
-        foreach ($best as $photoId => $distance) {
-            $matches[] = ['photo_id' => $photoId, 'distance' => round($distance, 4)];
+        foreach ($best as $photoId => $similarity) {
+            $matches[] = ['photo_id' => $photoId, 'similarity' => round($similarity, 4)];
         }
 
         return [
@@ -97,10 +92,12 @@ class FaceMatchService
             return [];
         }
 
+        $dimensions = $this->descriptors->dimensions();
+
         if (is_array($query[0] ?? null)) {
             $out = [];
             foreach ($query as $candidate) {
-                if (is_array($candidate) && count($candidate) === 128) {
+                if (is_array($candidate) && count($candidate) === $dimensions) {
                     $out[] = array_map(static fn ($v) => (float) $v, $candidate);
                 }
             }
@@ -108,7 +105,7 @@ class FaceMatchService
             return $out;
         }
 
-        if (count($query) !== 128) {
+        if (count($query) !== $dimensions) {
             return [];
         }
 
@@ -119,10 +116,10 @@ class FaceMatchService
      * @param  list<list<float>>  $queries
      * @param  list<float>  $vector
      */
-    private function matchDistance(
+    private function matchSimilarity(
         array $queries,
         array $vector,
-        float $loose,
+        float $minSimilarity,
         float $strict,
         GalleryFaceDescriptor $row,
         float $minLooseScore,
@@ -131,32 +128,28 @@ class FaceMatchService
         $hits = [];
 
         foreach ($queries as $q) {
-            $distance = $this->euclidean($q, $vector, $loose);
-            if ($distance === null || $distance > $loose) {
+            $similarity = $this->similarity($q, $vector);
+            if ($similarity < $minSimilarity) {
                 continue;
             }
-            $hits[] = $distance;
+            $hits[] = $similarity;
         }
 
         if ($hits === []) {
             return null;
         }
 
-        sort($hits);
+        rsort($hits);
         $best = $hits[0];
 
-        // Faixa estrita: aceita mesmo com uma única probe.
-        if ($best <= $strict) {
+        if ($best >= $strict) {
             return $best;
         }
 
-        // Faixa folgada: qualidade do rosto indexado.
         if (! $this->qualityOk($row, $minLooseScore, $minLooseSize)) {
             return null;
         }
 
-        // Uma probe só: ok (selfie sem extras).
-        // Várias probes: exige consenso (≥2 hits) — uma variante isolada costuma ser FP.
         if (count($queries) === 1 || count($hits) >= 2) {
             return $best;
         }
@@ -173,30 +166,39 @@ class FaceMatchService
     }
 
     /**
-     * Distância euclidiana com interrupção antecipada: se a soma parcial dos
-     * quadrados já ultrapassa o limiar², nem termina o cálculo.
+     * Porta de human.match.similarity (order=2).
      *
      * @param  list<float>  $a
      * @param  list<float>  $b
      */
-    public function euclidean(array $a, array $b, ?float $threshold = null): ?float
+    public function similarity(array $a, array $b): float
     {
         $n = count($a);
         if ($n === 0 || count($b) !== $n) {
-            return null;
+            return 0.0;
         }
 
-        $limit = $threshold !== null ? $threshold * $threshold : null;
-        $sum = 0.0;
+        $multiplier = (float) config('face.match_similarity_multiplier', 25);
+        $min = (float) config('face.match_similarity_min', 0.2);
+        $max = (float) config('face.match_similarity_max', 0.8);
+        if ($max <= $min) {
+            $max = $min + 0.0001;
+        }
 
+        $sum = 0.0;
         for ($i = 0; $i < $n; $i++) {
             $diff = $a[$i] - $b[$i];
             $sum += $diff * $diff;
-            if ($limit !== null && $sum > $limit) {
-                return sqrt($sum);
-            }
         }
 
-        return sqrt($sum);
+        $dist = round(100 * $multiplier * $sum) / 100;
+        if ($dist === 0.0) {
+            return 1.0;
+        }
+
+        $root = sqrt($dist);
+        $norm = (1 - ($root / 100) - $min) / ($max - $min);
+
+        return round(100 * max(min($norm, 1.0), 0.0)) / 100;
     }
 }

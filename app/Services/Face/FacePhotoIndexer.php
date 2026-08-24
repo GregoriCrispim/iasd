@@ -6,7 +6,8 @@ use App\Models\GalleryPhoto;
 use Symfony\Component\Process\Process;
 
 /**
- * Indexa rostos de uma foto no servidor via Node (@vladmandic/face-api + canvas).
+ * Indexa rostos de uma foto no servidor via Node (legado face-api + canvas).
+ * Na HostGator o fluxo suportado é só browser com @vladmandic/human (v3).
  */
 class FacePhotoIndexer
 {
@@ -67,7 +68,7 @@ class FacePhotoIndexer
 
         $status = (string) ($payload['status'] ?? 'failed');
         $faces = is_array($payload['faces'] ?? null) ? $payload['faces'] : [];
-        $modelVersion = (string) config('face.version', 'v2');
+        $modelVersion = (string) config('face.version', 'v3');
         $stored = 0;
 
         try {
