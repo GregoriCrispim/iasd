@@ -40,14 +40,15 @@ return [
     | mais parecido.
     |
     | Faixa estrita (≤ strict): aceita sempre.
-    | Faixa folgada (strict < d ≤ match_threshold): só aceita se o rosto
-    | indexado tiver score e tamanho mínimos — abre recall sem soltar
-    | embeddings ruins (falsos positivos).
+    | Faixa folgada (strict < d ≤ match_threshold): exige qualidade do rosto
+    | indexado E consenso (≥2 probes batendo), para não misturar pessoas.
+    |
+    | Valores conservadores de propósito: 0,60 misturava rostos diferentes.
     */
-    'match_threshold_strict' => (float) env('FACE_MATCH_THRESHOLD_STRICT', 0.52),
-    'match_threshold' => (float) env('FACE_MATCH_THRESHOLD', 0.60),
-    'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.45),
-    'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.015),
+    'match_threshold_strict' => (float) env('FACE_MATCH_THRESHOLD_STRICT', 0.42),
+    'match_threshold' => (float) env('FACE_MATCH_THRESHOLD', 0.50),
+    'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.55),
+    'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.04),
     'max_results' => (int) env('FACE_MAX_RESULTS', 200),
 
     /*

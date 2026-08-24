@@ -305,28 +305,19 @@
         },
 
         /**
-         * Probes de consulta: original + espelho + brilho ±.
+         * Probes de consulta: original + espelho (sem brilho — gerava FP).
          * Resolve com { descriptor, extraDescriptors (até 4), ... }.
          */
         detectSingleWithProbes: function (source, opts) {
             var self = this;
             return self.detectSingle(source, opts).then(function (primary) {
                 var extras = [];
-                var probes = [
-                    function () { return self.detectSingle(mirrorCanvas(source), opts); },
-                    function () { return self.detectSingle(adjustBrightness(source, 1.12), opts); },
-                    function () { return self.detectSingle(adjustBrightness(source, 0.88), opts); }
-                ];
-
-                return probes.reduce(function (chain, run) {
-                    return chain.then(function () {
-                        return run().then(function (alt) {
-                            if (alt && alt.descriptor && alt.descriptor.length === 128) {
-                                extras.push(alt.descriptor);
-                            }
-                        }).catch(function () { /* ignora probe falho */ });
-                    });
-                }, Promise.resolve()).then(function () {
+                // Só espelho: variantes de brilho geravam falsos positivos entre pessoas parecidas.
+                return self.detectSingle(mirrorCanvas(source), opts).then(function (alt) {
+                    if (alt && alt.descriptor && alt.descriptor.length === 128) {
+                        extras.push(alt.descriptor);
+                    }
+                }).catch(function () { /* ignora */ }).then(function () {
                     return {
                         descriptor: primary.descriptor,
                         extraDescriptors: dedupeDescriptors(primary.descriptor, extras, 4),

@@ -175,9 +175,22 @@ class FaceSearchTest extends TestCase
     {
         [$album, $near, $far] = $this->seedAlbum();
 
-        // Consulta principal longe do índice; extra próximo do vetor base (foto near).
-        $primary = array_map(fn ($x) => $x + 0.9, $this->baseVector());
+        // Principal e extra próximos do índice: consenso de 2 probes na faixa folgada.
+        // (Uma única probe "mágica" longe da principal não deve resgatar sozinha — anti-FP.)
+        $primary = array_map(fn ($x) => $x + 0.45, $this->baseVector());
         $extra = $this->baseVector();
+
+        // Garante score/tamanho no descriptor near para a faixa folgada.
+        GalleryFaceDescriptor::query()
+            ->where('gallery_photo_id', $near->id)
+            ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
+
+        config([
+            'face.match_threshold_strict' => 0.42,
+            'face.match_threshold' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
+        ]);
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
@@ -189,6 +202,36 @@ class FaceSearchTest extends TestCase
         $ids = $response->json('photo_ids');
         $this->assertContains($near->id, $ids);
         $this->assertNotContains($far->id, $ids);
+    }
+
+    public function test_single_extra_probe_alone_does_not_match_in_loose_band(): void
+    {
+        [$album, $near, $far] = $this->seedAlbum();
+
+        GalleryFaceDescriptor::query()
+            ->where('gallery_photo_id', $near->id)
+            ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
+
+        config([
+            'face.match_threshold_strict' => 0.42,
+            'face.match_threshold' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
+        ]);
+
+        // Principal bem longe; só o extra acerta — deve rejeitar (sem consenso).
+        $primary = array_map(fn ($x) => $x + 0.9, $this->baseVector());
+        $extra = array_map(fn ($x) => $x + 0.45, $this->baseVector()); // ~0.45, faixa folgada
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $primary,
+                'extra_descriptors' => [$extra],
+            ]));
+
+        $response->assertOk();
+        $this->assertNotContains($near->id, $response->json('photo_ids') ?? []);
+        $this->assertNotContains($far->id, $response->json('photo_ids') ?? []);
     }
 
     public function test_response_never_leaks_biometrics(): void
@@ -247,6 +290,10 @@ class FaceSearchTest extends TestCase
     {
         [$album, $near] = $this->seedAlbum();
 
+        GalleryFaceDescriptor::query()
+            ->where('gallery_photo_id', $near->id)
+            ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
+
         $extras = [
             $this->baseVector(),
             array_map(fn ($x) => $x + 0.01, $this->baseVector()),
@@ -256,7 +303,7 @@ class FaceSearchTest extends TestCase
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
-                'descriptor' => array_map(fn ($x) => $x + 0.9, $this->baseVector()),
+                'descriptor' => array_map(fn ($x) => $x + 0.45, $this->baseVector()),
                 'extra_descriptors' => $extras,
             ]));
 
@@ -267,10 +314,10 @@ class FaceSearchTest extends TestCase
     public function test_loose_band_requires_quality_gate(): void
     {
         config([
-            'face.match_threshold_strict' => 0.52,
-            'face.match_threshold' => 0.60,
-            'face.match_loose_min_score' => 0.45,
-            'face.match_loose_min_size_ratio' => 0.015,
+            'face.match_threshold_strict' => 0.42,
+            'face.match_threshold' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
         ]);
 
         $album = GalleryAlbum::create([
@@ -297,9 +344,9 @@ class FaceSearchTest extends TestCase
         ]);
 
         $base = $this->baseVector();
-        // Distância 0,55 — faixa folgada (entre 0,52 e 0,60).
+        // Distância 0,46 — faixa folgada (entre 0,42 e 0,50).
         $shifted = $base;
-        $shifted[0] += 0.55;
+        $shifted[0] += 0.46;
 
         $version = (string) config('face.version', 'v2');
 
@@ -342,10 +389,10 @@ class FaceSearchTest extends TestCase
     public function test_strict_band_accepts_even_with_low_score(): void
     {
         config([
-            'face.match_threshold_strict' => 0.52,
-            'face.match_threshold' => 0.60,
-            'face.match_loose_min_score' => 0.45,
-            'face.match_loose_min_size_ratio' => 0.015,
+            'face.match_threshold_strict' => 0.42,
+            'face.match_threshold' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
         ]);
 
         $album = GalleryAlbum::create([
@@ -363,9 +410,9 @@ class FaceSearchTest extends TestCase
         ]);
 
         $base = $this->baseVector();
-        // Distância 0,40 — faixa estrita.
+        // Distância 0,35 — faixa estrita.
         $shifted = $base;
-        $shifted[0] += 0.40;
+        $shifted[0] += 0.35;
 
         GalleryFaceDescriptor::create([
             'gallery_album_id' => $album->id,

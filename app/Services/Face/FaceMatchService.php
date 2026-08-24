@@ -9,26 +9,28 @@ use App\Models\GalleryFaceDescriptor;
  * Busca 1:N: compara um (ou mais) descriptors de consulta com os descritores
  * gravados apenas do álbum atual, retornando os IDs das fotos correspondentes.
  *
- * Usa limiar em duas faixas: estrita (sempre aceita) e folgada (exige qualidade
- * mínima do rosto indexado — score e tamanho da caixa).
+ * Limiar em duas faixas + consenso entre probes:
+ * - estrita: aceita sempre
+ * - folgada: exige qualidade do rosto indexado e, se houver várias probes,
+ *   pelo menos 2 batendo (evita FP de uma única variante espúria)
  */
 class FaceMatchService
 {
     public function __construct(private readonly FaceDescriptorService $descriptors) {}
 
     /**
-     * @param  list<float>|list<list<float>>  $query  Um descriptor ou vários (OR: menor distância vence).
+     * @param  list<float>|list<list<float>>  $query  Um descriptor ou vários.
      * @return array{photo_ids:list<int>, matches:list<array{photo_id:int,distance:float}>}
      */
     public function search(GalleryAlbum $album, array $query, ?float $threshold = null, ?int $maxResults = null): array
     {
-        $loose = $threshold ?? (float) config('face.match_threshold', 0.60);
-        $strict = (float) config('face.match_threshold_strict', 0.52);
+        $loose = $threshold ?? (float) config('face.match_threshold', 0.50);
+        $strict = (float) config('face.match_threshold_strict', 0.42);
         if ($strict > $loose) {
             $strict = $loose;
         }
-        $minLooseScore = (float) config('face.match_loose_min_score', 0.45);
-        $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.015);
+        $minLooseScore = (float) config('face.match_loose_min_score', 0.55);
+        $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.04);
         $maxResults ??= (int) config('face.max_results', 200);
         $modelVersion = (string) config('face.version', 'v2');
         $queries = $this->normalizeQueries($query);
@@ -50,12 +52,16 @@ class FaceMatchService
                         continue;
                     }
 
-                    $distance = $this->bestDistance($queries, $vector, $loose);
-                    if ($distance === null || $distance > $loose) {
-                        continue;
-                    }
-
-                    if (! $this->passesThreshold($distance, $strict, $loose, $row, $minLooseScore, $minLooseSize)) {
+                    $distance = $this->matchDistance(
+                        $queries,
+                        $vector,
+                        $loose,
+                        $strict,
+                        $row,
+                        $minLooseScore,
+                        $minLooseSize,
+                    );
+                    if ($distance === null) {
                         continue;
                     }
 
@@ -91,7 +97,6 @@ class FaceMatchService
             return [];
         }
 
-        // Lista de descriptors: primeiro elemento é um array (vetor).
         if (is_array($query[0] ?? null)) {
             $out = [];
             foreach ($query as $candidate) {
@@ -114,42 +119,53 @@ class FaceMatchService
      * @param  list<list<float>>  $queries
      * @param  list<float>  $vector
      */
-    private function bestDistance(array $queries, array $vector, float $threshold): ?float
-    {
-        $best = null;
-
-        foreach ($queries as $q) {
-            $distance = $this->euclidean($q, $vector, $threshold);
-            if ($distance === null) {
-                continue;
-            }
-            if ($best === null || $distance < $best) {
-                $best = $distance;
-            }
-            if ($best <= 0.0) {
-                break;
-            }
-        }
-
-        return $best;
-    }
-
-    private function passesThreshold(
-        float $distance,
-        float $strict,
+    private function matchDistance(
+        array $queries,
+        array $vector,
         float $loose,
+        float $strict,
         GalleryFaceDescriptor $row,
         float $minLooseScore,
         float $minLooseSize,
-    ): bool {
-        if ($distance <= $strict) {
-            return true;
+    ): ?float {
+        $hits = [];
+
+        foreach ($queries as $q) {
+            $distance = $this->euclidean($q, $vector, $loose);
+            if ($distance === null || $distance > $loose) {
+                continue;
+            }
+            $hits[] = $distance;
         }
 
-        if ($distance > $loose) {
-            return false;
+        if ($hits === []) {
+            return null;
         }
 
+        sort($hits);
+        $best = $hits[0];
+
+        // Faixa estrita: aceita mesmo com uma única probe.
+        if ($best <= $strict) {
+            return $best;
+        }
+
+        // Faixa folgada: qualidade do rosto indexado.
+        if (! $this->qualityOk($row, $minLooseScore, $minLooseSize)) {
+            return null;
+        }
+
+        // Uma probe só: ok (selfie sem extras).
+        // Várias probes: exige consenso (≥2 hits) — uma variante isolada costuma ser FP.
+        if (count($queries) === 1 || count($hits) >= 2) {
+            return $best;
+        }
+
+        return null;
+    }
+
+    private function qualityOk(GalleryFaceDescriptor $row, float $minLooseScore, float $minLooseSize): bool
+    {
         $score = $row->score !== null ? (float) $row->score : 0.0;
         $size = max((float) ($row->box_w ?? 0), (float) ($row->box_h ?? 0));
 
