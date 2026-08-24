@@ -251,6 +251,8 @@
             if (!cand || cand.length !== DESCRIPTOR_DIM) continue;
             var ok = true;
             for (var j = 0; j < refs.length; j++) {
+                // Face-api usava 0,35 em 128-D. Em 1024-D do Human isso só
+                // remove quase-duplicatas; variantes úteis (espelho/ângulo) passam.
                 if (descriptorDistance(cand, refs[j]) < 0.35) { ok = false; break; }
             }
             if (ok) { out.push(cand); refs.push(cand); }

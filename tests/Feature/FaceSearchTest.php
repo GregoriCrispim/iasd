@@ -188,9 +188,8 @@ class FaceSearchTest extends TestCase
     {
         [$album, $near, $far] = $this->seedAlbum();
 
-        // Duas probes na faixa folgada (~0,52): exige consenso ≥2.
+        // Probe principal na faixa folgada (~0,52); deve casar com qualidade ok.
         $primary = $this->shift($this->baseVector(), 9.8);
-        $extra = $this->shift($this->baseVector(), 9.7);
 
         GalleryFaceDescriptor::query()
             ->where('gallery_photo_id', $near->id)
@@ -199,14 +198,13 @@ class FaceSearchTest extends TestCase
         config([
             'face.match_similarity_strict' => 0.55,
             'face.match_similarity' => 0.50,
-            'face.match_loose_min_score' => 0.55,
-            'face.match_loose_min_size_ratio' => 0.04,
+            'face.match_loose_min_score' => 0.30,
+            'face.match_loose_min_size_ratio' => 0.02,
         ]);
 
         $response = $this->actingAs($this->member())
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
                 'descriptor' => $primary,
-                'extra_descriptors' => [$extra],
             ]));
 
         $response->assertOk();
@@ -215,7 +213,7 @@ class FaceSearchTest extends TestCase
         $this->assertNotContains($far->id, $ids);
     }
 
-    public function test_single_extra_probe_alone_does_not_match_in_loose_band(): void
+    public function test_single_probe_in_loose_band_matches_with_quality(): void
     {
         [$album, $near, $far] = $this->seedAlbum();
 
@@ -226,11 +224,11 @@ class FaceSearchTest extends TestCase
         config([
             'face.match_similarity_strict' => 0.55,
             'face.match_similarity' => 0.50,
-            'face.match_loose_min_score' => 0.55,
-            'face.match_loose_min_size_ratio' => 0.04,
+            'face.match_loose_min_score' => 0.30,
+            'face.match_loose_min_size_ratio' => 0.02,
         ]);
 
-        // Principal abaixo do mínimo; só o extra na faixa folgada — rejeita (sem consenso).
+        // Principal abaixo do mínimo; só o extra na faixa folgada — agora aceita.
         $primary = $this->shift($this->baseVector(), 12.0); // ~0.33
         $extra = $this->shift($this->baseVector(), 9.8); // ~0.52
 
@@ -241,7 +239,7 @@ class FaceSearchTest extends TestCase
             ]));
 
         $response->assertOk();
-        $this->assertNotContains($near->id, $response->json('photo_ids') ?? []);
+        $this->assertContains($near->id, $response->json('photo_ids') ?? []);
         $this->assertNotContains($far->id, $response->json('photo_ids') ?? []);
     }
 
@@ -327,8 +325,8 @@ class FaceSearchTest extends TestCase
         config([
             'face.match_similarity_strict' => 0.55,
             'face.match_similarity' => 0.50,
-            'face.match_loose_min_score' => 0.55,
-            'face.match_loose_min_size_ratio' => 0.04,
+            'face.match_loose_min_score' => 0.30,
+            'face.match_loose_min_size_ratio' => 0.02,
         ]);
 
         $album = GalleryAlbum::create([

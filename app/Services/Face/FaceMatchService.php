@@ -20,13 +20,13 @@ class FaceMatchService
      */
     public function search(GalleryAlbum $album, array $query, ?float $minSimilarity = null, ?int $maxResults = null): array
     {
-        $minSimilarity ??= (float) config('face.match_similarity', 0.50);
-        $strict = (float) config('face.match_similarity_strict', 0.55);
+        $minSimilarity ??= (float) config('face.match_similarity', 0.40);
+        $strict = (float) config('face.match_similarity_strict', 0.48);
         if ($strict < $minSimilarity) {
             $strict = $minSimilarity;
         }
-        $minLooseScore = (float) config('face.match_loose_min_score', 0.55);
-        $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.04);
+        $minLooseScore = (float) config('face.match_loose_min_score', 0.30);
+        $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.02);
         $maxResults ??= (int) config('face.max_results', 200);
         $modelVersion = (string) config('face.version', 'v3');
         $queries = $this->normalizeQueries($query);
@@ -146,21 +146,28 @@ class FaceMatchService
             return $best;
         }
 
+        // Faixa folgada: só filtra por qualidade do rosto indexado.
+        // Não exige consenso de probes — selfie vs foto de grupo costuma
+        // acertar em apenas uma variante (original/espelho).
         if (! $this->qualityOk($row, $minLooseScore, $minLooseSize)) {
             return null;
         }
 
-        if (count($queries) === 1 || count($hits) >= 2) {
-            return $best;
-        }
-
-        return null;
+        return $best;
     }
 
     private function qualityOk(GalleryFaceDescriptor $row, float $minLooseScore, float $minLooseSize): bool
     {
-        $score = $row->score !== null ? (float) $row->score : 0.0;
+        // Sem metadados de qualidade: não bloqueia (evita perder match pós-migração).
+        if ($row->score === null && $row->box_w === null && $row->box_h === null) {
+            return true;
+        }
+
+        $score = $row->score !== null ? (float) $row->score : 1.0;
         $size = max((float) ($row->box_w ?? 0), (float) ($row->box_h ?? 0));
+        if ($size <= 0) {
+            $size = 1.0;
+        }
 
         return $score >= $minLooseScore && $size >= $minLooseSize;
     }
