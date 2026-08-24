@@ -857,7 +857,7 @@
     'csrf' => csrf_token(),
     'storeTemplate' => route('admin.galeria.faces.store', [$album, '__PID__']),
     'photo' => [
-        'minScore' => (float) config('face.detection.photo.min_score', 0.35),
+        'minScore' => (float) config('face.detection.photo.min_score', 0.30),
         'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.01),
         'maxFaces' => (int) config('face.detection.photo.max_faces', 80),
         'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1536),
@@ -903,7 +903,7 @@
         window.FaceEngine.loadImage(url).then(function (img) {
             return window.FaceEngine.detectAll(img, {
                 maxSide: cfg.maxSide || 1536,
-                minScore: cfg.minScore || 0.35,
+                minScore: cfg.minScore || 0.30,
                 minSizeRatio: cfg.minSizeRatio || 0.01,
                 maxFaces: cfg.maxFaces || 80
             });

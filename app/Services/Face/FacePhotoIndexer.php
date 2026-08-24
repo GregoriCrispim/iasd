@@ -46,7 +46,7 @@ class FacePhotoIndexer
             $script,
             '--image='.$absolute,
             '--models='.$modelsDir,
-            '--minScore='.(string) ($cfg['min_score'] ?? 0.35),
+            '--minScore='.(string) ($cfg['min_score'] ?? 0.30),
             '--minSizeRatio='.(string) ($cfg['min_size_ratio'] ?? 0.01),
             '--maxFaces='.(string) ($cfg['max_faces'] ?? 80),
             '--maxSide='.(string) ($cfg['analysis_max_side'] ?? 1536),
@@ -67,7 +67,7 @@ class FacePhotoIndexer
 
         $status = (string) ($payload['status'] ?? 'failed');
         $faces = is_array($payload['faces'] ?? null) ? $payload['faces'] : [];
-        $modelVersion = (string) config('face.version', 'v1');
+        $modelVersion = (string) config('face.version', 'v2');
         $stored = 0;
 
         try {

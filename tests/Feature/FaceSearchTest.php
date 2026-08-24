@@ -242,4 +242,150 @@ class FaceSearchTest extends TestCase
             ->assertStatus(422)
             ->assertJsonValidationErrors('descriptor');
     }
+
+    public function test_extra_descriptors_accepts_up_to_four(): void
+    {
+        [$album, $near] = $this->seedAlbum();
+
+        $extras = [
+            $this->baseVector(),
+            array_map(fn ($x) => $x + 0.01, $this->baseVector()),
+            array_map(fn ($x) => $x + 0.02, $this->baseVector()),
+            array_map(fn ($x) => $x + 0.03, $this->baseVector()),
+        ];
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => array_map(fn ($x) => $x + 0.9, $this->baseVector()),
+                'extra_descriptors' => $extras,
+            ]));
+
+        $response->assertOk();
+        $this->assertContains($near->id, $response->json('photo_ids') ?? []);
+    }
+
+    public function test_loose_band_requires_quality_gate(): void
+    {
+        config([
+            'face.match_threshold_strict' => 0.52,
+            'face.match_threshold' => 0.60,
+            'face.match_loose_min_score' => 0.45,
+            'face.match_loose_min_size_ratio' => 0.015,
+        ]);
+
+        $album = GalleryAlbum::create([
+            'title' => 'Culto qualidade',
+            'slug' => 'culto-q-'.uniqid(),
+            'is_published' => true,
+        ]);
+
+        $good = GalleryPhoto::create([
+            'gallery_album_id' => $album->id,
+            'path' => $album->id.'/good.webp',
+            'original_filename' => 'good.jpg',
+            'mime_type' => 'image/webp',
+            'size_bytes' => 1000,
+            'faces_status' => 'ready',
+        ]);
+        $bad = GalleryPhoto::create([
+            'gallery_album_id' => $album->id,
+            'path' => $album->id.'/bad.webp',
+            'original_filename' => 'bad.jpg',
+            'mime_type' => 'image/webp',
+            'size_bytes' => 1000,
+            'faces_status' => 'ready',
+        ]);
+
+        $base = $this->baseVector();
+        // Distância 0,55 — faixa folgada (entre 0,52 e 0,60).
+        $shifted = $base;
+        $shifted[0] += 0.55;
+
+        $version = (string) config('face.version', 'v2');
+
+        GalleryFaceDescriptor::create([
+            'gallery_album_id' => $album->id,
+            'gallery_photo_id' => $good->id,
+            'face_index' => 0,
+            'box_x' => 0.1,
+            'box_y' => 0.1,
+            'box_w' => 0.2,
+            'box_h' => 0.2,
+            'score' => 0.9,
+            'model_version' => $version,
+            'descriptor' => $this->descriptors->encrypt($shifted),
+        ]);
+        GalleryFaceDescriptor::create([
+            'gallery_album_id' => $album->id,
+            'gallery_photo_id' => $bad->id,
+            'face_index' => 0,
+            'box_x' => 0.1,
+            'box_y' => 0.1,
+            'box_w' => 0.005,
+            'box_h' => 0.005,
+            'score' => 0.2,
+            'model_version' => $version,
+            'descriptor' => $this->descriptors->encrypt($shifted),
+        ]);
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $base,
+            ]));
+
+        $response->assertOk();
+        $ids = $response->json('photo_ids');
+        $this->assertContains($good->id, $ids);
+        $this->assertNotContains($bad->id, $ids);
+    }
+
+    public function test_strict_band_accepts_even_with_low_score(): void
+    {
+        config([
+            'face.match_threshold_strict' => 0.52,
+            'face.match_threshold' => 0.60,
+            'face.match_loose_min_score' => 0.45,
+            'face.match_loose_min_size_ratio' => 0.015,
+        ]);
+
+        $album = GalleryAlbum::create([
+            'title' => 'Culto estrito',
+            'slug' => 'culto-e-'.uniqid(),
+            'is_published' => true,
+        ]);
+        $photo = GalleryPhoto::create([
+            'gallery_album_id' => $album->id,
+            'path' => $album->id.'/strict.webp',
+            'original_filename' => 'strict.jpg',
+            'mime_type' => 'image/webp',
+            'size_bytes' => 1000,
+            'faces_status' => 'ready',
+        ]);
+
+        $base = $this->baseVector();
+        // Distância 0,40 — faixa estrita.
+        $shifted = $base;
+        $shifted[0] += 0.40;
+
+        GalleryFaceDescriptor::create([
+            'gallery_album_id' => $album->id,
+            'gallery_photo_id' => $photo->id,
+            'face_index' => 0,
+            'box_x' => 0.1,
+            'box_y' => 0.1,
+            'box_w' => 0.005,
+            'box_h' => 0.005,
+            'score' => 0.1,
+            'model_version' => (string) config('face.version', 'v2'),
+            'descriptor' => $this->descriptors->encrypt($shifted),
+        ]);
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $base,
+            ]));
+
+        $response->assertOk();
+        $this->assertContains($photo->id, $response->json('photo_ids') ?? []);
+    }
 }

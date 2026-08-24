@@ -36,7 +36,7 @@ class FaceSearchController extends Controller
         $data = $request->validate([
             'descriptor' => ['required', 'array', 'size:128'],
             'descriptor.*' => ['required', 'numeric'],
-            'extra_descriptors' => ['sometimes', 'array', 'max:2'],
+            'extra_descriptors' => ['sometimes', 'array', 'max:4'],
             'extra_descriptors.*' => ['array', 'size:128'],
             'extra_descriptors.*.*' => ['numeric'],
             'source' => ['required', 'in:camera,upload'],

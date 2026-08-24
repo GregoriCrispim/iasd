@@ -108,6 +108,91 @@
         return canvas;
     }
 
+
+    function adjustBrightness(source, factor) {
+        var base = toAnalysisCanvas(source, 2048);
+        var canvas = document.createElement('canvas');
+        canvas.width = base.width;
+        canvas.height = base.height;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(base, 0, 0);
+        var img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var data = img.data;
+        for (var i = 0; i < data.length; i += 4) {
+            data[i] = Math.max(0, Math.min(255, data[i] * factor));
+            data[i + 1] = Math.max(0, Math.min(255, data[i + 1] * factor));
+            data[i + 2] = Math.max(0, Math.min(255, data[i + 2] * factor));
+        }
+        ctx.putImageData(img, 0, 0);
+        return canvas;
+    }
+
+    function iou(a, b) {
+        var ax2 = a.x + a.width, ay2 = a.y + a.height;
+        var bx2 = b.x + b.width, by2 = b.y + b.height;
+        var ix1 = Math.max(a.x, b.x), iy1 = Math.max(a.y, b.y);
+        var ix2 = Math.min(ax2, bx2), iy2 = Math.min(ay2, by2);
+        var iw = Math.max(0, ix2 - ix1), ih = Math.max(0, iy2 - iy1);
+        var inter = iw * ih;
+        if (inter <= 0) return 0;
+        var union = a.width * a.height + b.width * b.height - inter;
+        return union > 0 ? inter / union : 0;
+    }
+
+    function mirrorBox(box) {
+        return { x: 1 - (box.x + box.width), y: box.y, width: box.width, height: box.height };
+    }
+
+    function withMirrorVariants(faces, mirroredFaces) {
+        var out = [];
+        for (var i = 0; i < faces.length; i++) {
+            var face = faces[i];
+            out.push(face);
+            var expected = mirrorBox(face.box);
+            var best = null, bestIou = 0;
+            for (var j = 0; j < mirroredFaces.length; j++) {
+                var alt = mirroredFaces[j];
+                var score = iou(expected, alt.box);
+                if (score > bestIou) { bestIou = score; best = alt; }
+            }
+            if (best && bestIou >= 0.25 && best.descriptor.length === 128) {
+                out.push({
+                    descriptor: best.descriptor,
+                    score: face.score,
+                    box: face.box,
+                    sizeRatio: face.sizeRatio
+                });
+            }
+        }
+        return out;
+    }
+
+    function descriptorDistance(a, b) {
+        if (!a || !b || a.length !== b.length) return 999;
+        var sum = 0;
+        for (var i = 0; i < a.length; i++) {
+            var d = a[i] - b[i];
+            sum += d * d;
+        }
+        return Math.sqrt(sum);
+    }
+
+    /** Mantém descritores distintos (dist ≥ 0,12), no máximo max. */
+    function dedupeDescriptors(primary, extras, max) {
+        var out = [];
+        var refs = [primary];
+        for (var i = 0; i < extras.length && out.length < max; i++) {
+            var cand = extras[i];
+            if (!cand || cand.length !== 128) continue;
+            var ok = true;
+            for (var j = 0; j < refs.length; j++) {
+                if (descriptorDistance(cand, refs[j]) < 0.12) { ok = false; break; }
+            }
+            if (ok) { out.push(cand); refs.push(cand); }
+        }
+        return out;
+    }
+
     function loadImage(url) {
         return new Promise(function (resolve, reject) {
             var img = new Image();
@@ -148,7 +233,7 @@
             opts = opts || {};
             return loadModels().then(function (faceapi) {
                 var canvas = toAnalysisCanvas(source, opts.maxSide || 1536);
-                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.35 });
+                var options = new faceapi.SsdMobilenetv1Options({ minConfidence: opts.minScore || 0.30 });
                 return faceapi.detectAllFaces(canvas, options)
                     .withFaceLandmarks()
                     .withFaceDescriptors()
@@ -162,7 +247,21 @@
                         if (opts.maxFaces && faces.length > opts.maxFaces) {
                             faces = faces.slice(0, opts.maxFaces);
                         }
-                        return faces;
+                        if (!faces.length) return faces;
+
+                        var mirrored = mirrorCanvas(canvas);
+                        return faceapi.detectAllFaces(mirrored, options)
+                            .withFaceLandmarks()
+                            .withFaceDescriptors()
+                            .then(function (mirroredResults) {
+                                var mirroredFaces = mirroredResults.map(function (r) {
+                                    return normalizeResult(r, mirrored);
+                                }).filter(function (f) {
+                                    return f.sizeRatio >= (opts.minSizeRatio || 0) && f.descriptor.length === 128;
+                                });
+                                return withMirrorVariants(faces, mirroredFaces);
+                            })
+                            .catch(function () { return faces; });
                     });
             });
         },
@@ -202,25 +301,67 @@
          * câmera frontal). Resolve com { descriptor, extraDescriptors, ... }.
          */
         detectSingleWithMirror: function (source, opts) {
+            return this.detectSingleWithProbes(source, opts);
+        },
+
+        /**
+         * Probes de consulta: original + espelho + brilho ±.
+         * Resolve com { descriptor, extraDescriptors (até 4), ... }.
+         */
+        detectSingleWithProbes: function (source, opts) {
             var self = this;
             return self.detectSingle(source, opts).then(function (primary) {
-                var mirrored = mirrorCanvas(source);
-                return self.detectSingle(mirrored, opts).then(function (alt) {
-                    var extras = [];
-                    if (alt && alt.descriptor && alt.descriptor.length === 128) {
-                        extras.push(alt.descriptor);
-                    }
+                var extras = [];
+                var probes = [
+                    function () { return self.detectSingle(mirrorCanvas(source), opts); },
+                    function () { return self.detectSingle(adjustBrightness(source, 1.12), opts); },
+                    function () { return self.detectSingle(adjustBrightness(source, 0.88), opts); }
+                ];
+
+                return probes.reduce(function (chain, run) {
+                    return chain.then(function () {
+                        return run().then(function (alt) {
+                            if (alt && alt.descriptor && alt.descriptor.length === 128) {
+                                extras.push(alt.descriptor);
+                            }
+                        }).catch(function () { /* ignora probe falho */ });
+                    });
+                }, Promise.resolve()).then(function () {
                     return {
                         descriptor: primary.descriptor,
-                        extraDescriptors: extras,
+                        extraDescriptors: dedupeDescriptors(primary.descriptor, extras, 4),
                         score: primary.score,
                         box: primary.box,
                         sizeRatio: primary.sizeRatio
                     };
-                }).catch(function () {
+                });
+            });
+        },
+
+        /**
+         * Une descritores de várias fontes (ex.: 2 frames da câmera).
+         */
+        detectFromSources: function (sources, opts) {
+            var self = this;
+            if (!sources || !sources.length) {
+                return Promise.reject(new Error('Nenhuma imagem para analisar.'));
+            }
+            return self.detectSingleWithProbes(sources[0], opts).then(function (primary) {
+                var extras = primary.extraDescriptors.slice();
+                var rest = sources.slice(1);
+                return rest.reduce(function (chain, src) {
+                    return chain.then(function () {
+                        return self.detectSingle(src, opts).then(function (face) {
+                            if (face && face.descriptor) extras.push(face.descriptor);
+                            return self.detectSingle(mirrorCanvas(src), opts).then(function (alt) {
+                                if (alt && alt.descriptor) extras.push(alt.descriptor);
+                            }).catch(function () {});
+                        }).catch(function () {});
+                    });
+                }, Promise.resolve()).then(function () {
                     return {
                         descriptor: primary.descriptor,
-                        extraDescriptors: [],
+                        extraDescriptors: dedupeDescriptors(primary.descriptor, extras, 4),
                         score: primary.score,
                         box: primary.box,
                         sizeRatio: primary.sizeRatio

@@ -45,7 +45,7 @@ function fail(message, code = 1) {
 
 const imagePath = arg('image');
 const modelsDir = arg('models');
-const minScore = Number(arg('minScore', '0.35'));
+const minScore = Number(arg('minScore', '0.30'));
 const minSizeRatio = Number(arg('minSizeRatio', '0.01'));
 const maxFaces = Number(arg('maxFaces', '80'));
 const maxSide = Number(arg('maxSide', '1536'));
@@ -69,6 +69,15 @@ function toAnalysisCanvas(img) {
     return out;
 }
 
+function mirrorCanvas(src) {
+    const out = canvas.createCanvas(src.width, src.height);
+    const ctx = out.getContext('2d');
+    ctx.translate(src.width, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(src, 0, 0);
+    return out;
+}
+
 function normalizeResult(res, cnv) {
     const box = res.detection.box;
     const cw = cnv.width || 1;
@@ -84,6 +93,59 @@ function normalizeResult(res, cnv) {
         },
         sizeRatio: Math.max(box.width / cw, box.height / ch),
     };
+}
+
+function iou(a, b) {
+    const ax2 = a.x + a.width;
+    const ay2 = a.y + a.height;
+    const bx2 = b.x + b.width;
+    const by2 = b.y + b.height;
+    const ix1 = Math.max(a.x, b.x);
+    const iy1 = Math.max(a.y, b.y);
+    const ix2 = Math.min(ax2, bx2);
+    const iy2 = Math.min(ay2, by2);
+    const iw = Math.max(0, ix2 - ix1);
+    const ih = Math.max(0, iy2 - iy1);
+    const inter = iw * ih;
+    if (inter <= 0) return 0;
+    const union = a.width * a.height + b.width * b.height - inter;
+    return union > 0 ? inter / union : 0;
+}
+
+function mirrorBox(box) {
+    return {
+        x: 1 - (box.x + box.width),
+        y: box.y,
+        width: box.width,
+        height: box.height,
+    };
+}
+
+/** Acrescenta descriptor espelhado de cada rosto (IoU ≥ 0,25). */
+function withMirrorVariants(faces, mirroredFaces) {
+    const out = [];
+    for (const face of faces) {
+        out.push(face);
+        const expected = mirrorBox(face.box);
+        let best = null;
+        let bestIou = 0;
+        for (const alt of mirroredFaces) {
+            const score = iou(expected, alt.box);
+            if (score > bestIou) {
+                bestIou = score;
+                best = alt;
+            }
+        }
+        if (best && bestIou >= 0.25 && best.descriptor.length === 128) {
+            out.push({
+                descriptor: best.descriptor,
+                score: face.score,
+                box: face.box,
+                sizeRatio: face.sizeRatio,
+            });
+        }
+    }
+    return out;
 }
 
 try {
@@ -115,6 +177,15 @@ try {
     }
 
     if (faces.length) {
+        const mirrored = mirrorCanvas(analysis);
+        const mirroredResults = await faceapi
+            .detectAllFaces(mirrored, options)
+            .withFaceLandmarks()
+            .withFaceDescriptors();
+        const mirroredFaces = mirroredResults
+            .map((r) => normalizeResult(r, mirrored))
+            .filter((f) => f.sizeRatio >= minSizeRatio && f.descriptor.length === 128);
+        faces = withMirrorVariants(faces, mirroredFaces);
         emit({ ok: true, status: 'ready', faces, reason: null });
     } else {
         emit({ ok: true, status: 'no_face', faces: [], reason: 'Nenhum rosto detectado.' });

@@ -27,7 +27,7 @@ class GalleryFaceController extends Controller
 
         return view('admin.galeria.faces', [
             'album' => $album,
-            'modelVersion' => (string) config('face.version', 'v1'),
+            'modelVersion' => (string) config('face.version', 'v2'),
         ]);
     }
 
@@ -56,7 +56,7 @@ class GalleryFaceController extends Controller
         ])->values()->all();
 
         return response()->json([
-            'model_version' => (string) config('face.version', 'v1'),
+            'model_version' => (string) config('face.version', 'v2'),
             'scope' => $scope,
             'photos' => $photos,
         ]);
@@ -79,7 +79,7 @@ class GalleryFaceController extends Controller
             'faces.*.box' => ['nullable', 'array'],
         ]);
 
-        $modelVersion = (string) config('face.version', 'v1');
+        $modelVersion = (string) config('face.version', 'v2');
         $status = $data['status'];
         $stored = 0;
 

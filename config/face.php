@@ -17,8 +17,10 @@ return [
     | Alterar esta versão invalida os descritores já gravados: eles continuam
     | no banco, mas a busca compara apenas descritores da versão atual, e a
     | reindexação administrativa deve reprocessar as fotos.
+    |
+    | v2: indexa também a variante espelhada de cada rosto.
     */
-    'version' => env('FACE_MODEL_VERSION', 'v1'),
+    'version' => env('FACE_MODEL_VERSION', 'v2'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,11 +37,17 @@ return [
     | Correspondência (match) 1:N
     |--------------------------------------------------------------------------
     | Distância euclidiana entre descritores de 128 dimensões. Quanto menor,
-    | mais parecido. O padrão do FaceMatcher do face-api é ~0,60; usamos 0,58
-    | para reduzir falsos negativos (rosto presente mas não filtrado) sem abrir
-    | demais para falsos positivos.
+    | mais parecido.
+    |
+    | Faixa estrita (≤ strict): aceita sempre.
+    | Faixa folgada (strict < d ≤ match_threshold): só aceita se o rosto
+    | indexado tiver score e tamanho mínimos — abre recall sem soltar
+    | embeddings ruins (falsos positivos).
     */
-    'match_threshold' => (float) env('FACE_MATCH_THRESHOLD', 0.58),
+    'match_threshold_strict' => (float) env('FACE_MATCH_THRESHOLD_STRICT', 0.52),
+    'match_threshold' => (float) env('FACE_MATCH_THRESHOLD', 0.60),
+    'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.45),
+    'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.015),
     'max_results' => (int) env('FACE_MAX_RESULTS', 200),
 
     /*
@@ -51,7 +59,7 @@ return [
     */
     'detection' => [
         'photo' => [
-            'min_score' => (float) env('FACE_PHOTO_MIN_SCORE', 0.35),
+            'min_score' => (float) env('FACE_PHOTO_MIN_SCORE', 0.30),
             'max_faces' => (int) env('FACE_PHOTO_MAX_FACES', 80),
             'min_size_ratio' => (float) env('FACE_PHOTO_MIN_SIZE_RATIO', 0.01),
             'analysis_max_side' => (int) env('FACE_PHOTO_ANALYSIS_SIDE', 1536),

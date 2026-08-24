@@ -61,6 +61,7 @@
         var mode = 'camera';
         var stream = null;
         var capturedSource = null;
+        var capturedSourceAlt = null;
         var busy = false;
         var cameraStarting = false;
         var dragDepth = 0;
@@ -180,6 +181,8 @@
             stopCamera();
             cameraStarting = false;
             capturedSource = null;
+            capturedSourceAlt = null;
+            capturedSourceAlt = null;
             dragDepth = 0;
             hide(video);
             hide(preview);
@@ -296,6 +299,7 @@
                     preview.src = img.src;
                     preview.style.transform = '';
                     capturedSource = img;
+                    capturedSourceAlt = null;
                     hide(placeholder);
                     show(preview);
                     showRetakeOnly();
@@ -396,19 +400,39 @@
         captureBtn.addEventListener('click', function () {
             var w = video.videoWidth, h = video.videoHeight;
             if (!w || !h) return;
-            var canvas = document.createElement('canvas');
-            canvas.width = w; canvas.height = h;
-            canvas.getContext('2d').drawImage(video, 0, 0, w, h);
-            preview.src = canvas.toDataURL('image/jpeg', 0.92);
-            preview.style.transform = 'scaleX(-1)';
-            capturedSource = canvas;
-            stopCamera();
-            hide(video);
-            show(preview);
-            showRetakeOnly();
-            setStageState('is-preview');
-            updateSubmit();
-            setStatus('Selfie capturada. Marque as autorizações e busque.');
+            captureBtn.disabled = true;
+            setStatus('Capturando… mantenha o rosto na frente da câmera.');
+
+            function snap() {
+                var canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext('2d').drawImage(video, 0, 0, w, h);
+                return canvas;
+            }
+
+            var first = snap();
+            window.setTimeout(function () {
+                var second = null;
+                try {
+                    if (video.videoWidth && video.videoHeight) {
+                        second = snap();
+                    }
+                } catch (e) { /* ignora */ }
+
+                capturedSource = first;
+                capturedSourceAlt = second;
+                preview.src = first.toDataURL('image/jpeg', 0.92);
+                preview.style.transform = 'scaleX(-1)';
+                stopCamera();
+                hide(video);
+                show(preview);
+                showRetakeOnly();
+                setStageState('is-preview');
+                captureBtn.disabled = false;
+                updateSubmit();
+                setStatus('Selfie capturada. Marque as autorizações e busque.');
+            }, 400);
         });
 
         fileInput.addEventListener('change', function () {
@@ -424,6 +448,7 @@
         retakeBtn.addEventListener('click', function () {
             setStatus('');
             capturedSource = null;
+            capturedSourceAlt = null;
             hide(preview);
             preview.removeAttribute('src');
             preview.style.transform = '';
@@ -576,11 +601,14 @@
             showSearchOverlay();
             updateSearchProgress('Analisando', 'Detectando o rosto no seu dispositivo…', 0);
 
-            window.FaceEngine.detectSingleWithMirror(source, {
-                maxSide: cfg.selfie.maxSide,
-                minScore: cfg.selfie.minScore,
-                minSizeRatio: cfg.selfie.minSizeRatio
-            }).then(function (face) {
+            window.FaceEngine.detectFromSources(
+                capturedSourceAlt ? [source, capturedSourceAlt] : [source],
+                {
+                    maxSide: cfg.selfie.maxSide,
+                    minScore: cfg.selfie.minScore,
+                    minSizeRatio: cfg.selfie.minSizeRatio
+                }
+            ).then(function (face) {
                 updateSearchProgress(
                     'Comparando',
                     albumPhotoCount > 0

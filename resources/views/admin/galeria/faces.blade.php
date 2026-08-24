@@ -58,7 +58,7 @@
         'queueUrl' => route('admin.galeria.faces.queue', $album),
         'storeTemplate' => route('admin.galeria.faces.store', [$album, '__PID__']),
         'photo' => [
-            'minScore' => (float) config('face.detection.photo.min_score', 0.35),
+            'minScore' => (float) config('face.detection.photo.min_score', 0.30),
             'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.01),
             'maxFaces' => (int) config('face.detection.photo.max_faces', 80),
             'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1536),

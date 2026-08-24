@@ -8,6 +8,9 @@ use App\Models\GalleryFaceDescriptor;
 /**
  * Busca 1:N: compara um (ou mais) descriptors de consulta com os descritores
  * gravados apenas do álbum atual, retornando os IDs das fotos correspondentes.
+ *
+ * Usa limiar em duas faixas: estrita (sempre aceita) e folgada (exige qualidade
+ * mínima do rosto indexado — score e tamanho da caixa).
  */
 class FaceMatchService
 {
@@ -19,9 +22,15 @@ class FaceMatchService
      */
     public function search(GalleryAlbum $album, array $query, ?float $threshold = null, ?int $maxResults = null): array
     {
-        $threshold ??= (float) config('face.match_threshold', 0.58);
+        $loose = $threshold ?? (float) config('face.match_threshold', 0.60);
+        $strict = (float) config('face.match_threshold_strict', 0.52);
+        if ($strict > $loose) {
+            $strict = $loose;
+        }
+        $minLooseScore = (float) config('face.match_loose_min_score', 0.45);
+        $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.015);
         $maxResults ??= (int) config('face.max_results', 200);
-        $modelVersion = (string) config('face.version', 'v1');
+        $modelVersion = (string) config('face.version', 'v2');
         $queries = $this->normalizeQueries($query);
 
         if ($queries === []) {
@@ -34,15 +43,19 @@ class FaceMatchService
             ->where('gallery_album_id', $album->id)
             ->where('model_version', $modelVersion)
             ->orderBy('id')
-            ->chunk(500, function ($rows) use ($queries, $threshold, &$best) {
+            ->chunk(500, function ($rows) use ($queries, $loose, $strict, $minLooseScore, $minLooseSize, &$best) {
                 foreach ($rows as $row) {
                     $vector = $this->descriptors->decrypt($row->descriptor);
                     if ($vector === null) {
                         continue;
                     }
 
-                    $distance = $this->bestDistance($queries, $vector, $threshold);
-                    if ($distance === null || $distance > $threshold) {
+                    $distance = $this->bestDistance($queries, $vector, $loose);
+                    if ($distance === null || $distance > $loose) {
+                        continue;
+                    }
+
+                    if (! $this->passesThreshold($distance, $strict, $loose, $row, $minLooseScore, $minLooseSize)) {
                         continue;
                     }
 
@@ -119,6 +132,28 @@ class FaceMatchService
         }
 
         return $best;
+    }
+
+    private function passesThreshold(
+        float $distance,
+        float $strict,
+        float $loose,
+        GalleryFaceDescriptor $row,
+        float $minLooseScore,
+        float $minLooseSize,
+    ): bool {
+        if ($distance <= $strict) {
+            return true;
+        }
+
+        if ($distance > $loose) {
+            return false;
+        }
+
+        $score = $row->score !== null ? (float) $row->score : 0.0;
+        $size = max((float) ($row->box_w ?? 0), (float) ($row->box_h ?? 0));
+
+        return $score >= $minLooseScore && $size >= $minLooseSize;
     }
 
     /**
