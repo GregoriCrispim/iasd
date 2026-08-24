@@ -83,7 +83,6 @@ class FaceSearchController extends Controller
         return response()->json([
             'photo_ids' => $result['photo_ids'],
             'count' => count($result['photo_ids']),
-            'match_rev' => $result['match_rev'] ?? $this->matcher->revision(),
         ]);
     }
 }

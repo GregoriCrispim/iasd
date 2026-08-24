@@ -6,11 +6,9 @@ use App\Models\GalleryAlbum;
 use App\Models\GalleryFaceDescriptor;
 
 /**
- * Busca 1:N de rostos indexados.
+ * Busca 1:N com similaridade do @vladmandic/human (0..1, maior = mais parecido).
  *
- * Usa cosseno (estável em embeddings Human 1024-D sob pose/luz) e, em
- * paralelo, a similaridade oficial human.match (order=2). Basta um dos dois
- * critérios passar.
+ * Porta human.match.similarity (order=2) para PHP.
  */
 class FaceMatchService
 {
@@ -18,30 +16,23 @@ class FaceMatchService
 
     /**
      * @param  list<float>|list<list<float>>  $query
-     * @return array{photo_ids:list<int>, matches:list<array{photo_id:int,similarity:float}>, match_rev:int}
+     * @return array{photo_ids:list<int>, matches:list<array{photo_id:int,similarity:float}>}
      */
     public function search(GalleryAlbum $album, array $query, ?float $minSimilarity = null, ?int $maxResults = null): array
     {
-        $minCosine = (float) config('face.match_cosine', 0.42);
-        $strictCosine = (float) config('face.match_cosine_strict', 0.55);
-        if ($strictCosine < $minCosine) {
-            $strictCosine = $minCosine;
+        $minSimilarity ??= (float) config('face.match_similarity', 0.50);
+        $strict = (float) config('face.match_similarity_strict', 0.55);
+        if ($strict < $minSimilarity) {
+            $strict = $minSimilarity;
         }
-
-        $minHuman = $minSimilarity ?? (float) config('face.match_similarity', 0.35);
-        $strictHuman = (float) config('face.match_similarity_strict', 0.48);
-        if ($strictHuman < $minHuman) {
-            $strictHuman = $minHuman;
-        }
-
-        $minLooseScore = (float) config('face.match_loose_min_score', 0.25);
-        $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.015);
+        $minLooseScore = (float) config('face.match_loose_min_score', 0.55);
+        $minLooseSize = (float) config('face.match_loose_min_size_ratio', 0.04);
         $maxResults ??= (int) config('face.max_results', 200);
         $modelVersion = (string) config('face.version', 'v3');
         $queries = $this->normalizeQueries($query);
 
         if ($queries === []) {
-            return ['photo_ids' => [], 'matches' => [], 'match_rev' => $this->revision()];
+            return ['photo_ids' => [], 'matches' => []];
         }
 
         $best = [];
@@ -50,29 +41,18 @@ class FaceMatchService
             ->where('gallery_album_id', $album->id)
             ->where('model_version', $modelVersion)
             ->orderBy('id')
-            ->chunk(500, function ($rows) use (
-                $queries,
-                $minCosine,
-                $strictCosine,
-                $minHuman,
-                $strictHuman,
-                $minLooseScore,
-                $minLooseSize,
-                &$best
-            ) {
+            ->chunk(500, function ($rows) use ($queries, $minSimilarity, $strict, $minLooseScore, $minLooseSize, &$best) {
                 foreach ($rows as $row) {
                     $vector = $this->descriptors->decrypt($row->descriptor);
                     if ($vector === null) {
                         continue;
                     }
 
-                    $similarity = $this->matchScore(
+                    $similarity = $this->matchSimilarity(
                         $queries,
                         $vector,
-                        $minCosine,
-                        $strictCosine,
-                        $minHuman,
-                        $strictHuman,
+                        $minSimilarity,
+                        $strict,
                         $row,
                         $minLooseScore,
                         $minLooseSize,
@@ -99,13 +79,7 @@ class FaceMatchService
         return [
             'photo_ids' => array_map(static fn ($m) => $m['photo_id'], $matches),
             'matches' => $matches,
-            'match_rev' => $this->revision(),
         ];
-    }
-
-    public function revision(): int
-    {
-        return (int) config('face.match_revision', 2);
     }
 
     /**
@@ -142,87 +116,53 @@ class FaceMatchService
      * @param  list<list<float>>  $queries
      * @param  list<float>  $vector
      */
-    private function matchScore(
+    private function matchSimilarity(
         array $queries,
         array $vector,
-        float $minCosine,
-        float $strictCosine,
-        float $minHuman,
-        float $strictHuman,
+        float $minSimilarity,
+        float $strict,
         GalleryFaceDescriptor $row,
         float $minLooseScore,
         float $minLooseSize,
     ): ?float {
-        $best = null;
+        $hits = [];
 
         foreach ($queries as $q) {
-            $cosine = $this->cosine($q, $vector);
-            $human = $this->similarity($q, $vector);
-            $score = max($cosine, $human);
-
-            $strictHit = $cosine >= $strictCosine || $human >= $strictHuman;
-            $looseHit = $cosine >= $minCosine || $human >= $minHuman;
-
-            if (! $strictHit && ! $looseHit) {
+            $similarity = $this->similarity($q, $vector);
+            if ($similarity < $minSimilarity) {
                 continue;
             }
-
-            if (! $strictHit && ! $this->qualityOk($row, $minLooseScore, $minLooseSize)) {
-                continue;
-            }
-
-            if ($best === null || $score > $best) {
-                $best = $score;
-            }
+            $hits[] = $similarity;
         }
 
-        return $best;
+        if ($hits === []) {
+            return null;
+        }
+
+        rsort($hits);
+        $best = $hits[0];
+
+        if ($best >= $strict) {
+            return $best;
+        }
+
+        if (! $this->qualityOk($row, $minLooseScore, $minLooseSize)) {
+            return null;
+        }
+
+        if (count($queries) === 1 || count($hits) >= 2) {
+            return $best;
+        }
+
+        return null;
     }
 
     private function qualityOk(GalleryFaceDescriptor $row, float $minLooseScore, float $minLooseSize): bool
     {
-        if ($row->score === null && $row->box_w === null && $row->box_h === null) {
-            return true;
-        }
-
-        $score = $row->score !== null ? (float) $row->score : 1.0;
+        $score = $row->score !== null ? (float) $row->score : 0.0;
         $size = max((float) ($row->box_w ?? 0), (float) ($row->box_h ?? 0));
-        if ($size <= 0) {
-            $size = 1.0;
-        }
 
         return $score >= $minLooseScore && $size >= $minLooseSize;
-    }
-
-    /**
-     * Cosseno em [0, 1] (valores negativos viram 0 — embeddings faciais).
-     *
-     * @param  list<float>  $a
-     * @param  list<float>  $b
-     */
-    public function cosine(array $a, array $b): float
-    {
-        $n = count($a);
-        if ($n === 0 || count($b) !== $n) {
-            return 0.0;
-        }
-
-        $dot = 0.0;
-        $na = 0.0;
-        $nb = 0.0;
-        for ($i = 0; $i < $n; $i++) {
-            $dot += $a[$i] * $b[$i];
-            $na += $a[$i] * $a[$i];
-            $nb += $b[$i] * $b[$i];
-        }
-
-        if ($na < 1e-12 || $nb < 1e-12) {
-            return 0.0;
-        }
-
-        $cos = $dot / (sqrt($na) * sqrt($nb));
-
-        return round(100 * max(min($cos, 1.0), 0.0)) / 100;
     }
 
     /**

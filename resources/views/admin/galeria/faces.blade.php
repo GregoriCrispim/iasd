@@ -22,18 +22,7 @@
                 <div><strong id="faceStatTotal">{{ $album->photos_count ?? $album->photos()->count() }}</strong> <span class="text-muted">fotos</span></div>
                 <div><strong id="faceStatReady">{{ $album->ready_count ?? 0 }}</strong> <span class="text-muted">indexadas</span></div>
                 <div><strong id="faceStatPending">{{ $album->pending_count ?? 0 }}</strong> <span class="text-muted">pendentes/falhas</span></div>
-                <div><strong>{{ $v3Descriptors ?? 0 }}</strong> <span class="text-muted">descritores {{ $modelVersion }}</span></div>
             </div>
-
-            @if(($readyMissingV3 ?? 0) > 0)
-                <p class="text-muted" style="color:#b45309;margin:0 0 12px;">
-                    {{ $readyMissingV3 }} foto(s) marcadas como indexadas ainda sem descritor {{ $modelVersion }}.
-                    Use <strong>Reprocessar tudo</strong> — a busca só compara {{ $modelVersion }}.
-                </p>
-            @endif
-            <p class="text-muted" style="font-size:0.85rem;margin:0 0 12px;">
-                Match ativo: rev {{ $matchRevision ?? '?' }} · cosseno ≥ {{ number_format($matchCosine ?? 0.42, 2, ',', '') }}
-            </p>
 
             <div class="gal-progress" id="faceProgress" hidden>
                 <div class="gal-progress-meta">

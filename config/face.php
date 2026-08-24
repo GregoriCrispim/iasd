@@ -40,24 +40,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Correspondência (match) 1:N
+    | Correspondência (match) 1:N — similaridade Human (0..1)
     |--------------------------------------------------------------------------
-    | match_revision: sobe quando a lógica muda (permite confirmar deploy).
+    | Usa a fórmula de human.match.similarity (order=2). Quanto maior, mais
+    | parecido. Documentação Human: similaridade ≥ 0,50 pode ser considerada match.
     |
-    | Cosseno: métrica principal para embeddings Human 1024-D em fotos de
-    | evento (pose/luz). A similaridade oficial Human (order=2) também conta.
-    | Basta um dos dois critérios passar.
-    |
-    | Faixa estrita: aceita sempre.
-    | Faixa folgada: exige qualidade mínima do rosto indexado.
+    | Faixa estrita (≥ strict): aceita sempre.
+    | Faixa folgada (match ≤ s < strict): exige qualidade do rosto indexado
+    | e consenso (≥2 probes) quando houver várias probes.
     */
-    'match_revision' => 2,
-    'match_cosine_strict' => (float) env('FACE_MATCH_COSINE_STRICT', 0.55),
-    'match_cosine' => (float) env('FACE_MATCH_COSINE', 0.42),
-    'match_similarity_strict' => (float) env('FACE_MATCH_SIMILARITY_STRICT', 0.48),
-    'match_similarity' => (float) env('FACE_MATCH_SIMILARITY', 0.35),
-    'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.25),
-    'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.015),
+    'match_similarity_strict' => (float) env('FACE_MATCH_SIMILARITY_STRICT', 0.55),
+    'match_similarity' => (float) env('FACE_MATCH_SIMILARITY', 0.50),
+    'match_loose_min_score' => (float) env('FACE_MATCH_LOOSE_MIN_SCORE', 0.55),
+    'match_loose_min_size_ratio' => (float) env('FACE_MATCH_LOOSE_MIN_SIZE', 0.04),
     'match_similarity_multiplier' => (float) env('FACE_MATCH_SIMILARITY_MULTIPLIER', 25),
     'match_similarity_min' => (float) env('FACE_MATCH_SIMILARITY_MIN', 0.2),
     'match_similarity_max' => (float) env('FACE_MATCH_SIMILARITY_MAX', 0.8),
