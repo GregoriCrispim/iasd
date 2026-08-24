@@ -27,11 +27,21 @@
         return {};
     }
 
+    /** O IIFE de human-*.js exporta um namespace { Human, default, ... }, não a classe. */
+    function resolveHumanCtor() {
+        var ns = window.Human;
+        if (typeof ns === 'function') return ns;
+        if (ns && typeof ns.Human === 'function') return ns.Human;
+        if (ns && typeof ns.default === 'function') return ns.default;
+        return null;
+    }
+
     function loadScript() {
         if (scriptPromise) return scriptPromise;
         scriptPromise = new Promise(function (resolve, reject) {
-            if (typeof window.Human === 'function') {
-                resolve(window.Human);
+            var existing = resolveHumanCtor();
+            if (existing) {
+                resolve(existing);
                 return;
             }
             var scriptUrl = getConfig().scriptUrl;
@@ -43,7 +53,8 @@
             s.src = scriptUrl;
             s.async = true;
             s.onload = function () {
-                if (typeof window.Human === 'function') resolve(window.Human);
+                var ctor = resolveHumanCtor();
+                if (ctor) resolve(ctor);
                 else reject(new Error('Human carregou mas não expôs o construtor.'));
             };
             s.onerror = function () {
@@ -63,7 +74,6 @@
         return {
             modelBasePath: modelsUrl,
             backend: 'webgl',
-            wasmPath: modelsUrl,
             debug: false,
             async: true,
             warmup: 'none',

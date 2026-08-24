@@ -294,7 +294,7 @@
                 .catch(function (err) {
                     var msg = err && err.message ? err.message : String(err);
                     log('Falha ao iniciar: ' + msg, 'error');
-                    setProgress(0, 1, 'Falha ao carregar modelos', '');
+                    setProgress(0, 1, 'Falha: ' + msg.slice(0, 80), '');
                     running = false;
                     paused = false;
                     startBtn.disabled = false;
