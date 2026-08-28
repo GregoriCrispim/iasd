@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_22_08_2026';
+    $boletimBase = 'img/boletim/boletim_29_08_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
 
     $linkify = static function (?string $text): ?string {
@@ -22,13 +22,20 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da QUARTA semana de AGOSTO é BONDADE: Ore para demonstrar bondade até mesmo com quem já lhe feriu ou decepcionou.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da PRIMEIRA semana de SETEMBRO: Ore por constância e fidelidade na vida devocional, mantendo tempo diário de oração e leitura da Bíblia.';
 
     $boletins = [
         // Com descrição (script DOCX)
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.52 (3).jpeg',
+            'src' => $boletimBase . '/ON VOICE.jpeg',
+            'alt' => 'One Voice 27 — mobilização missionária global',
+            'title' => 'One Voice',
+            'text' => 'O OneVoice27 é o projeto global de mobilização missionária da Igreja Adventista do Sétimo Dia, que conduzirá toda a igreja mundial a um mesmo esforço evangelístico. O lançamento oficial acontece em 5 de setembro deste ano. Lançada no segundo semestre de 2025 e planejada para ser uma grande celebração em setembro de 2027, marcando os 2.000 anos do batismo de Jesus Cristo. A Divisão Sul-Americana lidera a mobilização de todas as suas Uniões, Associações, Missões e igrejas locais para que participem em uma estratégia digital unificada. Participe conosco deste projeto.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.23 (1).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -63,13 +70,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Encontro de Mulheres com Darleide.jpg',
-            'alt' => 'Encontro especial de mulheres — Vida que Eleva',
-            'title' => 'Encontro Especial de Mulheres',
-            'text' => 'Queridas amigas, hoje teremos o encontro de mulheres "Vida que Eleva", às 16h. Aguardamos vocês para uma tarde memorável preparada com muito carinho, teremos a presença especial da apresentadora da TV Novo Tempo, Darleide Alves. Não percam! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Quartas da Família (1).jpg',
             'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
             'title' => 'Quartas da Família',
@@ -91,6 +91,20 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Aventureiros Pais.jpeg',
+            'alt' => 'Clube de Aventureiros — manhã especial com os pais',
+            'title' => 'Aventureiros',
+            'text' => 'O CLUBE DE AVENTUREIROS CRUZEIRO DO SUL convida para uma manhã muito especial! No domingo, dia 30/08/26, a partir das 9h, todas as classes estarão reunidas para aprender novas especialidades e, acima de tudo, descobrir ainda mais sobre o amor de Jesus. Às 10h: teremos uma palestra em homenagem aos pais, no Salão Jovem. Às 11h: será a hora do nosso Circuito de Brincadeiras com os pais! Preparem-se para uma manhã muito divertida, com alegria e muita diversão! Este será o último encontro do Clube antes do acampamento! Por isso, queremos muito contar com a presença de cada Aventureiro. Será um momento de muita alegria, aprendizado, amizade e comunhão e, claro, de estarmos cada vez mais perto de Jesus!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/DOUTORES.jpeg',
+            'alt' => 'Doutores de Esperança — plantão Hospital Santa Lúcia Sul',
+            'title' => 'Doutores de Esperança',
+            'text' => 'Junte-se aos Doutores de Esperança! Você já sentiu o desejo de levar um abraço, um sorriso e uma palavra de conforto para quem mais precisa? Nossos plantões estão de volta, e queremos convidar você para fazer parte dessa missão transformadora! Quando: 30 de agosto, às 13h30. Onde: Hospital Santa Lúcia Sul. Quer participar, mas ainda não faz parte do grupo? Esta é a sua oportunidade! Você pode começar acompanhando a nossa equipe como observador, conhecendo de perto a dinâmica do projeto antes de dar o próximo passo. Venha vivenciar essa experiência cheia de amor, empatia e alegria com a gente. Como posso me inscrever? Entre em contato agora mesmo com a Lu Mesquita pelo link https://wa.me/message/7M6UOXXMBRWRI1 e garanta as informações para participar. Venha fazer a diferença na vida de alguém e descubra a alegria de servir!',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/SGI.jpg',
             'alt' => 'SGI — Sistema de Gerenciamento de Interessados',
             'title' => 'SGI',
@@ -102,13 +116,6 @@
             'alt' => 'Projeto Maná — assinatura da Lição da Escola Sabatina',
             'title' => 'Projeto Maná',
             'text' => 'A vida é feita de escolhas. E uma delas é decidir o que vai ocupar um espaço na nossa rotina. Assinar a Lição da Escola Sabatina é mais do que receber um material em casa. É escolher alimentar a fé, aprofundar o conhecimento da Palavra e reservar, todos os dias, um momento para estar com Deus. No Projeto Maná, queremos incentivar uma igreja que não apenas ouve sobre a Bíblia, mas que a estuda, vive e compartilha. Faça parte desse movimento. Assine a Lição da Escola Sabatina e transforme seu estudo em um compromisso diário com Deus. Acesse: https://projetomana.cpb.com.br/ ou pelo WhatsApp: (61) 98235-0008 ou ligue: (61) 3321-2021 ou 0800 979 0666.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/On Voice.jpeg',
-            'alt' => 'One Voice 27 — uma só voz para anunciar Jesus',
-            'title' => 'One Voice',
-            'text' => 'Uma só voz para anunciar Jesus e Sua breve volta! Dia 5 de setembro. Participe deste movimento!',
         ],
         [
             'type' => 'image',
@@ -136,7 +143,7 @@
             'src' => $boletimBase . '/Série Coisas Estranhas.png',
             'alt' => 'Série Coisas Estranhas — Domingos Especiais',
             'title' => 'Coisas Estranhas',
-            'text' => 'Relatos de casas assombradas, experiências mediúnicas e fenômenos considerados paranormais acompanham a história humana, desafiando nossa compreensão sobre a realidade. Entre explicações psicológicas, manifestações espirituais e interpretações culturais, surge uma questão fundamental: como avaliar aquilo que parece ultrapassar os limites do natural? À luz das Escrituras, este tema convida a uma reflexão profunda sobre o mundo invisível, o discernimento espiritual e a diferença entre mistério, engano e verdade. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
+            'text' => 'Ao longo da história, milagres, curas e manifestações extraordinárias desafiaram explicações convencionais e continuam despertando fé, esperança e questionamentos. Mas uma pergunta permanece: todo fenômeno que parece sobrenatural revela necessariamente a ação de Deus? Nesse estudo, vamos além das aparências para investigar o significado dos sinais à luz das Escrituras. Descubra como a Bíblia apresenta o verdadeiro poder divino, por que alguns sinais podem impressionar sem revelar a verdade e qual é o papel do discernimento em um mundo cada vez mais fascinado pelo sobrenatural. À luz das Escrituras, este tema convida a uma reflexão profunda sobre o mundo invisível, o discernimento espiritual e a diferença entre mistério, engano e verdade. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
         ],
         [
             'type' => 'image',
@@ -210,10 +217,45 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/ASA Aberta.jpg',
-            'alt' => 'ASA Aberta — pizzas e lanches',
-            'title' => 'ASA Aberta',
-            'text' => 'Sábado, 22/08/26, após o pôr do sol, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
+            'src' => $boletimBase . '/Código 318.png',
+            'alt' => 'Código 318 — círculo de homens',
+            'title' => 'Código 318',
+            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. Primeira reunião: 12 de setembro, 16h30, Salão Jovem. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Firmados na Palavra.jpeg',
+            'alt' => 'Curso Bíblico Firmados na Palavra',
+            'title' => 'Firmados na Palavra',
+            'text' => 'Queridos irmãos, temos um convite especial para toda a família! A partir do dia 30 de agosto, aos domingos, às 18h, teremos o Curso Bíblico "Firmados na Palavra". Será um momento precioso para conhecer, compreender e viver as verdades da Bíblia, fortalecer a fé e crescermos juntos na caminhada com Deus. Local: Igreja Adventista Central de Brasília. Todos os domingos, às 18h. Traga sua família e seus amigos para estudar a Palavra conosco! "Ensina-me, SENHOR, o caminho dos teus mandamentos..." — Salmo 119:33. Esperamos vocês!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/SEMINÁRIO.jpeg',
+            'alt' => 'Seminário Eventos Finais do Juízo',
+            'title' => 'Seminário Eventos Finais do Juízo',
+            'text' => 'No próximo sábado, dia 5 de setembro, às 10h45, na sala da Classe Novo Tempo, teremos o início do nosso primeiro seminário sobre os eventos finais do juízo. Neste encontro, vamos explorar profundamente os capítulos 12 e 13 do livro de Apocalipse, sob a condução especial do professor Manuel Morais. Venha descobrir e aprender mais sobre os fascinantes símbolos apocalípticos: O Dragão, A Mulher e As Bestas. Sua presença é muito importante! Venha e traga seus amigos para esse momento de aprendizado e comunhão. Esperamos você!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/UNIVERSITÁRIOS.jpg',
+            'alt' => 'Encontro de Universitários — UCOB',
+            'title' => 'Encontro de Universitários',
+            'text' => 'É hoje o nosso Encontro da Igreja Universitária Adventista! Um momento especial pra gente se encontrar, fortalecer nossa comunidade, compartilhar experiências e crescer juntos! Sábado, dia 29 de agosto, às 17h. Local: UCOB. E depois do encontro ainda teremos lanche e jogos pra fechar a noite daquele jeito! Confirma sua presença aqui: https://eventos.adventistasbrasilia.org.br/event/evento/394. Chama a galera e vem com a gente!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Comunidade.jpeg',
+            'alt' => 'Comunidade Jovem — Espaço Jovem',
+            'title' => 'Comunidade Jovem',
+            'text' => 'Neste sábado, teremos um encontro muito especial da nossa comunidade jovem! Será um momento incrível para aprendermos mais sobre Deus e fortalecermos a nossa fé juntos. Sábado, 29 de agosto de 2026, às 17h30. Local: Espaço Jovem, na Igreja Adventista Central de Brasília. Esperamos por você e seus amigos para estarmos juntos! Vem com a gente!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/convite_jotinha_18h_16_9.png',
+            'alt' => 'Jotinha — bandinha infantil',
+            'title' => 'Jotinha',
+            'text' => 'Convite Especial para as Famílias! Neste sábado, 29 de agosto de 2026, às 18h, teremos mais um Jotinha! Nossa bandinha continua crescendo, e é uma alegria ver crianças e jovens cantando, tocando instrumentos e desenvolvendo os talentos que Deus lhes deu. No Jotinha, seu filho tem a oportunidade de desenvolver seus talentos, fazer novas amizades, fortalecer os valores cristãos, crescer no amor a Deus e participar ativamente da igreja. Traga seus filhos e convide também amigos, vizinhos, sobrinhos e netos! Sábado, 29 de agosto de 2026, às 18h. Esperamos sua família para um fim de tarde especial de louvor, aprendizado, amizade e muita alegria!',
         ],
         [
             'type' => 'image',
