@@ -44,7 +44,7 @@
             <img src="{{ asset('img/carrousel/5.webp') }}" alt="Slide 5" decoding="async" width="1280" height="720">
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/6.webp') }}" alt="Slide 6" decoding="async" width="1280" height="720">
+            <img src="{{ asset('img/carrousel/series-coisas-estranhas.webp') }}" alt="Slide 6 - Nova série dos domingos especiais: Coisas Estranhas, agosto e setembro, 19h" decoding="async" width="1920" height="700">
         </div>
     </div>
 
