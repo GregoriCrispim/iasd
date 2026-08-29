@@ -18,6 +18,18 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Opções de vínculo eclesiástico no cadastro público.
+     *
+     * @var array<string, string>
+     */
+    public const MEMBERSHIP_LINKS = [
+        'membro_batizado' => 'Membro batizado',
+        'membro_nao_batizado' => 'Membro não batizado',
+        'visitante' => 'Visitante',
+        'outra_igreja' => 'Membro de outra igreja',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
@@ -103,9 +115,22 @@ class User extends Authenticatable
         return $this->roles->contains('name', 'collaborator');
     }
 
+    public function isFotografiaLider(): bool
+    {
+        return $this->roles->contains('name', 'fotografia_lider');
+    }
+
+    public function isFotografiaColaborador(): bool
+    {
+        return $this->roles->contains('name', 'fotografia_colaborador');
+    }
+
+    /**
+     * Qualquer perfil do ministério de fotografia (líder ou colaborador).
+     */
     public function isFotografia(): bool
     {
-        return $this->roles->contains('name', 'fotografia');
+        return $this->hasAnyRoleName(['fotografia_lider', 'fotografia_colaborador']);
     }
 
     public function isMember(): bool
@@ -114,7 +139,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Contas de membro do site (busca facial). Independentes das contas do painel.
+     * Contas com papel de membro do site (cadastro público).
      */
     public function scopeMembers($query)
     {
@@ -128,24 +153,56 @@ class User extends Authenticatable
     {
         return $query->whereHas(
             'roles',
-            fn ($q) => $q->whereIn('name', ['super_admin', 'manager', 'collaborator', 'fotografia'])
+            fn ($q) => $q->whereIn('name', [
+                'super_admin',
+                'manager',
+                'collaborator',
+                'fotografia_lider',
+                'fotografia_colaborador',
+            ])
         );
     }
 
     /**
-     * Papéis do painel administrativo. Contas de membro são registros separados.
+     * Papéis do painel administrativo.
      */
     public function canAccessAdminPanel(): bool
     {
-        return $this->hasAnyRoleName(['super_admin', 'manager', 'collaborator', 'fotografia']);
+        return $this->hasAnyRoleName([
+            'super_admin',
+            'manager',
+            'collaborator',
+            'fotografia_lider',
+            'fotografia_colaborador',
+        ]);
     }
 
     /**
-     * A busca facial só é liberada para membros ativos.
+     * Membro ativo do site (papel member + conta ativa).
      */
     public function isActiveMember(): bool
     {
         return $this->isMember() && (bool) ($this->is_active ?? true);
+    }
+
+    /**
+     * Pode autenticar no site (/entrar): membro ativo ou usuário ativo do painel.
+     */
+    public function canUseSiteAuth(): bool
+    {
+        if (! (bool) ($this->is_active ?? true)) {
+            return false;
+        }
+
+        return $this->isMember() || $this->canAccessAdminPanel();
+    }
+
+    /**
+     * Pode usar a busca facial na galeria (mesma regra do login do site).
+     */
+    public function canUseFaceSearch(): bool
+    {
+        return $this->canUseSiteAuth();
     }
 
     public function isMinor(): bool
@@ -157,9 +214,36 @@ class User extends Authenticatable
         return $this->birth_date->age < 18;
     }
 
+    public function membershipLinkLabel(): string
+    {
+        if (! is_string($this->congregation) || $this->congregation === '') {
+            return '—';
+        }
+
+        return self::MEMBERSHIP_LINKS[$this->congregation] ?? $this->congregation;
+    }
+
+    public static function isBaptizedMembershipLink(string $link): bool
+    {
+        return $link === 'membro_batizado';
+    }
+
     public function canManageGaleria(): bool
     {
-        return $this->hasAnyRoleName(['super_admin', 'manager', 'fotografia']);
+        return $this->hasAnyRoleName([
+            'super_admin',
+            'manager',
+            'fotografia_lider',
+            'fotografia_colaborador',
+        ]);
+    }
+
+    /**
+     * Criar, editar e remover álbuns (não inclui upload/capa/remoção de fotos).
+     */
+    public function canManageGalleryAlbums(): bool
+    {
+        return $this->hasAnyRoleName(['super_admin', 'manager', 'fotografia_lider']);
     }
 
     /**

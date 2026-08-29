@@ -92,6 +92,9 @@
 
         <form method="POST" action="{{ route('member.login.post') }}">
             @csrf
+            @if (request('redirect'))
+                <input type="hidden" name="redirect" value="{{ request('redirect') }}">
+            @endif
             <div class="auth-field">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username">
@@ -107,7 +110,7 @@
         </form>
 
         <div class="auth-foot">
-            Tem um código de convite? <a href="{{ route('member.register') }}">Criar conta</a>
+            Ainda não tem conta? <a href="{{ route('member.register', request()->only('redirect')) }}">Criar conta</a>
         </div>
     </div>
 </div>

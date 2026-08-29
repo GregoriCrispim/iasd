@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GalleryAlbum;
 use App\Models\GalleryPhoto;
 use App\Services\GalleryImageProcessor;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -71,9 +72,25 @@ class GaleriaController extends Controller
                     ->values()
                     ->all(),
                 'fotosPorLote' => self::FOTOS_POR_LOTE,
+                'faceProgress' => $album->faceIndexProgress(),
             ])
             // A busca facial usa a câmera (getUserMedia) na própria origem.
             ->header('Permissions-Policy', 'camera=(self)');
+    }
+
+    /**
+     * Progresso da indexação facial do álbum (polling da galeria pública).
+     */
+    public function faceProgress(string $evento): JsonResponse
+    {
+        abort_unless((bool) config('face.enabled', true), 404);
+
+        $album = GalleryAlbum::query()
+            ->published()
+            ->where('slug', $evento)
+            ->firstOrFail();
+
+        return response()->json($album->faceIndexProgress());
     }
 
     /**

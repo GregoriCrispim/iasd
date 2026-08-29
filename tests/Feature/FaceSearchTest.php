@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\GalleryAlbum;
 use App\Models\GalleryFaceDescriptor;
 use App\Models\GalleryPhoto;
-use App\Models\MemberInvite;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\Face\FaceDescriptorService;
@@ -28,6 +27,11 @@ class FaceSearchTest extends TestCase
         }
     }
 
+    private function dims(): int
+    {
+        return $this->descriptors->dimensions();
+    }
+
     private function member(?string $birth = '1990-01-01'): User
     {
         $user = User::create([
@@ -45,9 +49,17 @@ class FaceSearchTest extends TestCase
     private function baseVector(): array
     {
         $v = [];
-        for ($i = 0; $i < 128; $i++) {
-            $v[] = 0.01 * $i;
+        for ($i = 0; $i < $this->dims(); $i++) {
+            $v[] = 0.01 * ($i % 100);
         }
+
+        return $v;
+    }
+
+    /** Desloca só a 1ª dimensão — calibra similaridade Human (order=2). */
+    private function shift(array $v, float $delta): array
+    {
+        $v[0] += $delta;
 
         return $v;
     }
@@ -78,9 +90,9 @@ class FaceSearchTest extends TestCase
         ]);
 
         $base = $this->baseVector();
-        $farVector = array_map(fn ($x) => $x + 1.0, $base); // distância grande
+        $farVector = array_map(fn ($x) => $x + 1.0, $base); // similaridade ~0
 
-        $version = (string) config('face.version', 'v1');
+        $version = (string) config('face.version', 'v3');
 
         // Duas faces na mesma foto "near" para validar deduplicação por foto.
         foreach ([0, 1] as $idx) {
@@ -122,28 +134,7 @@ class FaceSearchTest extends TestCase
             ->assertUnauthorized();
     }
 
-    public function test_unused_invite_never_authorizes_face_search_even_after_deletion(): void
-    {
-        [$album] = $this->seedAlbum();
-        $generated = MemberInvite::generateCode();
-        $invite = MemberInvite::create([
-            'code_hash' => $generated['hash'],
-            'code_prefix' => $generated['prefix'],
-            'max_uses' => 1,
-            'uses_count' => 0,
-            'is_active' => true,
-        ]);
-
-        $this->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
-            ->assertUnauthorized();
-
-        $invite->delete();
-
-        $this->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
-            ->assertUnauthorized();
-    }
-
-    public function test_administrator_without_member_role_cannot_search(): void
+    public function test_administrator_on_admin_guard_cannot_search_without_site_login(): void
     {
         [$album] = $this->seedAlbum();
         $admin = User::create([
@@ -157,10 +148,24 @@ class FaceSearchTest extends TestCase
         $this->actingAs($admin, 'admin')
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
             ->assertUnauthorized();
+    }
 
-        $this->actingAs($admin, 'web')
-            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload())
-            ->assertForbidden();
+    public function test_administrator_on_web_guard_can_search(): void
+    {
+        [$album, $near] = $this->seedAlbum();
+        $admin = User::create([
+            'name' => 'Administrador',
+            'email' => 'admin-face@ex.com',
+            'password' => 'senha12345',
+            'is_active' => true,
+        ]);
+        $admin->syncRoles(['super_admin']);
+
+        $response = $this->actingAs($admin, 'web')
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload());
+
+        $response->assertOk();
+        $this->assertContains($near->id, $response->json('photo_ids') ?? []);
     }
 
     public function test_search_returns_matching_photo_ids_only(): void
@@ -177,6 +182,67 @@ class FaceSearchTest extends TestCase
         $this->assertNotContains($far->id, $ids);
         // Deduplicação: apesar de duas faces na foto near, o id aparece uma vez.
         $this->assertCount(1, array_keys($ids, $near->id, true));
+    }
+
+    public function test_extra_descriptor_can_recover_near_miss(): void
+    {
+        [$album, $near, $far] = $this->seedAlbum();
+
+        // Duas probes na faixa folgada (~0,52): exige consenso ≥2.
+        $primary = $this->shift($this->baseVector(), 9.8);
+        $extra = $this->shift($this->baseVector(), 9.7);
+
+        GalleryFaceDescriptor::query()
+            ->where('gallery_photo_id', $near->id)
+            ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
+
+        config([
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
+        ]);
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $primary,
+                'extra_descriptors' => [$extra],
+            ]));
+
+        $response->assertOk();
+        $ids = $response->json('photo_ids');
+        $this->assertContains($near->id, $ids);
+        $this->assertNotContains($far->id, $ids);
+    }
+
+    public function test_single_extra_probe_alone_does_not_match_in_loose_band(): void
+    {
+        [$album, $near, $far] = $this->seedAlbum();
+
+        GalleryFaceDescriptor::query()
+            ->where('gallery_photo_id', $near->id)
+            ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
+
+        config([
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
+        ]);
+
+        // Principal abaixo do mínimo; só o extra na faixa folgada — rejeita (sem consenso).
+        $primary = $this->shift($this->baseVector(), 12.0); // ~0.33
+        $extra = $this->shift($this->baseVector(), 9.8); // ~0.52
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $primary,
+                'extra_descriptors' => [$extra],
+            ]));
+
+        $response->assertOk();
+        $this->assertNotContains($near->id, $response->json('photo_ids') ?? []);
+        $this->assertNotContains($far->id, $response->json('photo_ids') ?? []);
     }
 
     public function test_response_never_leaks_biometrics(): void
@@ -229,5 +295,153 @@ class FaceSearchTest extends TestCase
             ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload(['descriptor' => array_fill(0, 10, 0.1)]))
             ->assertStatus(422)
             ->assertJsonValidationErrors('descriptor');
+    }
+
+    public function test_extra_descriptors_accepts_up_to_four(): void
+    {
+        [$album, $near] = $this->seedAlbum();
+
+        GalleryFaceDescriptor::query()
+            ->where('gallery_photo_id', $near->id)
+            ->update(['score' => 0.9, 'box_w' => 0.2, 'box_h' => 0.2]);
+
+        $extras = [
+            $this->shift($this->baseVector(), 9.7),
+            $this->shift($this->baseVector(), 9.75),
+            $this->shift($this->baseVector(), 9.85),
+            $this->shift($this->baseVector(), 9.9),
+        ];
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $this->shift($this->baseVector(), 9.8),
+                'extra_descriptors' => $extras,
+            ]));
+
+        $response->assertOk();
+        $this->assertContains($near->id, $response->json('photo_ids') ?? []);
+    }
+
+    public function test_loose_band_requires_quality_gate(): void
+    {
+        config([
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
+        ]);
+
+        $album = GalleryAlbum::create([
+            'title' => 'Culto qualidade',
+            'slug' => 'culto-q-'.uniqid(),
+            'is_published' => true,
+        ]);
+
+        $good = GalleryPhoto::create([
+            'gallery_album_id' => $album->id,
+            'path' => $album->id.'/good.webp',
+            'original_filename' => 'good.jpg',
+            'mime_type' => 'image/webp',
+            'size_bytes' => 1000,
+            'faces_status' => 'ready',
+        ]);
+        $bad = GalleryPhoto::create([
+            'gallery_album_id' => $album->id,
+            'path' => $album->id.'/bad.webp',
+            'original_filename' => 'bad.jpg',
+            'mime_type' => 'image/webp',
+            'size_bytes' => 1000,
+            'faces_status' => 'ready',
+        ]);
+
+        $base = $this->baseVector();
+        // Similaridade ~0,52 — faixa folgada (entre 0,50 e 0,55).
+        $shifted = $this->shift($base, 9.8);
+
+        $version = (string) config('face.version', 'v3');
+
+        GalleryFaceDescriptor::create([
+            'gallery_album_id' => $album->id,
+            'gallery_photo_id' => $good->id,
+            'face_index' => 0,
+            'box_x' => 0.1,
+            'box_y' => 0.1,
+            'box_w' => 0.2,
+            'box_h' => 0.2,
+            'score' => 0.9,
+            'model_version' => $version,
+            'descriptor' => $this->descriptors->encrypt($shifted),
+        ]);
+        GalleryFaceDescriptor::create([
+            'gallery_album_id' => $album->id,
+            'gallery_photo_id' => $bad->id,
+            'face_index' => 0,
+            'box_x' => 0.1,
+            'box_y' => 0.1,
+            'box_w' => 0.005,
+            'box_h' => 0.005,
+            'score' => 0.2,
+            'model_version' => $version,
+            'descriptor' => $this->descriptors->encrypt($shifted),
+        ]);
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $base,
+            ]));
+
+        $response->assertOk();
+        $ids = $response->json('photo_ids');
+        $this->assertContains($good->id, $ids);
+        $this->assertNotContains($bad->id, $ids);
+    }
+
+    public function test_strict_band_accepts_even_with_low_score(): void
+    {
+        config([
+            'face.match_similarity_strict' => 0.55,
+            'face.match_similarity' => 0.50,
+            'face.match_loose_min_score' => 0.55,
+            'face.match_loose_min_size_ratio' => 0.04,
+        ]);
+
+        $album = GalleryAlbum::create([
+            'title' => 'Culto estrito',
+            'slug' => 'culto-e-'.uniqid(),
+            'is_published' => true,
+        ]);
+        $photo = GalleryPhoto::create([
+            'gallery_album_id' => $album->id,
+            'path' => $album->id.'/strict.webp',
+            'original_filename' => 'strict.jpg',
+            'mime_type' => 'image/webp',
+            'size_bytes' => 1000,
+            'faces_status' => 'ready',
+        ]);
+
+        $base = $this->baseVector();
+        // Similaridade ~0,58 — faixa estrita (≥ 0,55).
+        $shifted = $this->shift($base, 9.0);
+
+        GalleryFaceDescriptor::create([
+            'gallery_album_id' => $album->id,
+            'gallery_photo_id' => $photo->id,
+            'face_index' => 0,
+            'box_x' => 0.1,
+            'box_y' => 0.1,
+            'box_w' => 0.005,
+            'box_h' => 0.005,
+            'score' => 0.1,
+            'model_version' => (string) config('face.version', 'v3'),
+            'descriptor' => $this->descriptors->encrypt($shifted),
+        ]);
+
+        $response = $this->actingAs($this->member())
+            ->postJson(route('galeria.busca-facial', $album->slug), $this->consentPayload([
+                'descriptor' => $base,
+            ]));
+
+        $response->assertOk();
+        $this->assertContains($photo->id, $response->json('photo_ids') ?? []);
     }
 }

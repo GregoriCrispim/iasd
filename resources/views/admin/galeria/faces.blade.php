@@ -13,8 +13,9 @@
         <div class="card-head"><h2>{{ $album->title }}</h2></div>
         <div class="card-body">
             <p class="text-muted mt-0">
-                O processamento acontece no seu navegador: cada foto é analisada aqui e apenas os descritores
+                O processamento acontece no seu navegador (Human): cada foto é analisada aqui e apenas os descritores
                 (vetores numéricos) são enviados ao servidor. As imagens não saem do seu computador durante a indexação.
+                Após atualizar o modelo (v3), use <strong>Reprocessar tudo</strong> — descritores antigos não entram na busca.
             </p>
 
             <div class="face-stats" style="display:flex;gap:24px;flex-wrap:wrap;margin:12px 0;">
@@ -36,16 +37,17 @@
 
             <div class="gal-upload-actions" style="display:flex;gap:8px;flex-wrap:wrap;">
                 <button type="button" class="btn" id="faceStart"><i class="bi bi-play-fill"></i> Processar pendentes</button>
-                <button type="button" class="btn btn-secondary" id="facePause" hidden><i class="bi bi-pause-fill"></i> Pausar</button>
                 <button type="button" class="btn btn-secondary" id="faceReprocess"><i class="bi bi-arrow-repeat"></i> Reprocessar tudo</button>
             </div>
-        </div>
-    </div>
 
-    <div class="card">
-        <div class="card-head"><h2>Log</h2></div>
-        <div class="card-body">
-            <pre class="gal-log" id="faceLog" style="max-height:320px;overflow:auto;"></pre>
+            <div class="gal-log-panel" id="faceLogPanel" hidden style="margin-top:14px;">
+                <button type="button" class="gal-log-toggle" id="faceLogToggle" aria-expanded="false">
+                    <i class="bi bi-terminal"></i>
+                    <span>Log de processamento</span>
+                    <i class="bi bi-chevron-down gal-log-chevron"></i>
+                </button>
+                <pre class="gal-log" id="faceLog" hidden></pre>
+            </div>
         </div>
     </div>
 
@@ -57,10 +59,10 @@
         'queueUrl' => route('admin.galeria.faces.queue', $album),
         'storeTemplate' => route('admin.galeria.faces.store', [$album, '__PID__']),
         'photo' => [
-            'minScore' => (float) config('face.detection.photo.min_score', 0.5),
-            'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.02),
-            'maxFaces' => (int) config('face.detection.photo.max_faces', 60),
-            'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1024),
+            'minScore' => (float) config('face.detection.photo.min_score', 0.30),
+            'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.01),
+            'maxFaces' => (int) config('face.detection.photo.max_faces', 80),
+            'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1536),
         ],
     ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
     <script src="{{ asset('js/face-engine.js') }}?v={{ filemtime(public_path('js/face-engine.js')) }}"></script>
@@ -75,7 +77,6 @@
         var storeTemplate = CONFIG.storeTemplate;
 
         var startBtn = document.getElementById('faceStart');
-        var pauseBtn = document.getElementById('facePause');
         var reprocessBtn = document.getElementById('faceReprocess');
         var progress = document.getElementById('faceProgress');
         var progressLabel = document.getElementById('faceProgressLabel');
@@ -83,6 +84,8 @@
         var progressFill = document.getElementById('faceProgressFill');
         var progressBar = document.getElementById('faceProgressBar');
         var progressSub = document.getElementById('faceProgressSub');
+        var logPanel = document.getElementById('faceLogPanel');
+        var logToggle = document.getElementById('faceLogToggle');
         var logEl = document.getElementById('faceLog');
         var statReady = document.getElementById('faceStatReady');
         var statPending = document.getElementById('faceStatPending');
@@ -91,14 +94,55 @@
         var idx = 0;
         var running = false;
         var paused = false;
+        var logOpen = false;
+        var hasLogEntries = false;
         var readyCount = parseInt(statReady.textContent, 10) || 0;
         var pendingCount = parseInt(statPending.textContent, 10) || 0;
 
+        function setStartAppearance() {
+            startBtn.classList.remove('btn-warning');
+            startBtn.innerHTML = '<i class="bi bi-play-fill"></i> Processar pendentes';
+        }
+
+        function setPauseAppearance() {
+            startBtn.classList.add('btn-warning');
+            startBtn.innerHTML = '<i class="bi bi-pause-fill"></i> Pausar';
+        }
+
+        function openLogPanel() {
+            if (!logOpen) {
+                logOpen = true;
+                logEl.hidden = false;
+                logToggle.setAttribute('aria-expanded', 'true');
+                logToggle.classList.add('is-open');
+            }
+        }
+
+        function syncLogVisibility() {
+            var show = hasLogEntries && running && !paused;
+            logPanel.hidden = !show;
+            if (show) openLogPanel();
+        }
+
+        function resetLog() {
+            hasLogEntries = false;
+            logEl.textContent = '';
+            logOpen = false;
+            logEl.hidden = true;
+            logToggle.setAttribute('aria-expanded', 'false');
+            logToggle.classList.remove('is-open');
+            logPanel.hidden = true;
+        }
+
         function log(msg, level) {
+            var wasEmpty = !hasLogEntries;
+            hasLogEntries = true;
             var stamp = new Date().toLocaleTimeString('pt-BR');
             var prefix = level === 'error' ? '[erro] ' : (level === 'warn' ? '[aviso] ' : '');
             logEl.textContent += stamp + '  ' + prefix + msg + '\n';
             logEl.scrollTop = logEl.scrollHeight;
+            if (wasEmpty) syncLogVisibility();
+            else if (hasLogEntries && running && !paused) logPanel.hidden = false;
         }
 
         function setProgress(done, total, label, sub) {
@@ -178,21 +222,48 @@
         }
 
         function finish() {
-            running = false;
-            paused = false;
-            pauseBtn.hidden = true;
-            startBtn.hidden = false;
-            reprocessBtn.disabled = false;
             setProgress(queue.length, queue.length, 'Concluído', queue.length + ' foto(s) processada(s)');
             log('Processamento concluído.');
+            running = false;
+            paused = false;
+            setStartAppearance();
+            reprocessBtn.disabled = false;
+            syncLogVisibility();
             if (typeof window.admToast === 'function') window.admToast('Indexação facial concluída.', 'success');
         }
 
-        function begin(scope) {
-            if (running) return;
+        function pauseProcessing() {
+            if (!running || paused) return;
+            paused = true;
+            setStartAppearance();
+            reprocessBtn.disabled = false;
+            log('Pausado.');
+            syncLogVisibility();
+        }
+
+        function resumeProcessing() {
+            if (!paused || idx >= queue.length) return;
+            paused = false;
+            running = true;
+            setPauseAppearance();
             reprocessBtn.disabled = true;
-            startBtn.hidden = true;
+            log('Retomado.');
+            syncLogVisibility();
+            processNext();
+        }
+
+        function begin(scope) {
+            if (running && !paused) return;
+            paused = false;
+            running = false;
+            resetLog();
+            reprocessBtn.disabled = true;
+            setStartAppearance();
+            startBtn.disabled = true;
             log('Carregando modelos faciais…');
+            // Mostra o painel já no carregamento (há registro + sessão iniciada).
+            running = true;
+            syncLogVisibility();
             setProgress(0, 1, 'Carregando modelos…', '');
 
             fetch(queueUrl + '?scope=' + scope, { headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' } })
@@ -200,45 +271,64 @@
                 .then(function (data) {
                     queue = data.photos || [];
                     idx = 0;
+                    startBtn.disabled = false;
                     if (!queue.length) {
                         log('Nenhuma foto para processar.');
                         setProgress(1, 1, 'Nada a fazer', '');
                         running = false;
-                        startBtn.hidden = false;
+                        setStartAppearance();
                         reprocessBtn.disabled = false;
+                        syncLogVisibility();
                         return;
                     }
                     return window.FaceEngine.preload().then(function () {
                         running = true;
                         paused = false;
-                        pauseBtn.hidden = false;
-                        pauseBtn.innerHTML = '<i class="bi bi-pause-fill"></i> Pausar';
+                        setPauseAppearance();
+                        reprocessBtn.disabled = true;
                         log('Modelos carregados. Processando ' + queue.length + ' foto(s) (' + scope + ').');
+                        syncLogVisibility();
                         processNext();
                     });
                 })
                 .catch(function (err) {
-                    log('Falha ao iniciar: ' + (err && err.message ? err.message : err), 'error');
+                    var msg = err && err.message ? err.message : String(err);
+                    log('Falha ao iniciar: ' + msg, 'error');
+                    setProgress(0, 1, 'Falha: ' + msg.slice(0, 80), '');
                     running = false;
-                    startBtn.hidden = false;
+                    paused = false;
+                    startBtn.disabled = false;
+                    setStartAppearance();
                     reprocessBtn.disabled = false;
+                    syncLogVisibility();
                 });
         }
 
-        startBtn.addEventListener('click', function () { begin('pending'); });
+        startBtn.addEventListener('click', function () {
+            if (running && !paused) {
+                pauseProcessing();
+                return;
+            }
+            if (paused && idx < queue.length) {
+                resumeProcessing();
+                return;
+            }
+            begin('pending');
+        });
         reprocessBtn.addEventListener('click', function () {
+            if (running && !paused) return;
             if (typeof window.admConfirm === 'function') {
                 window.admConfirm('Reprocessar TODAS as fotos deste álbum? Os descritores atuais serão substituídos.', function () { begin('all'); }, { title: 'Reprocessar tudo', confirmLabel: 'Reprocessar', confirmIcon: 'arrow-repeat' });
             } else {
                 begin('all');
             }
         });
-        pauseBtn.addEventListener('click', function () {
-            if (!running) return;
-            paused = !paused;
-            pauseBtn.innerHTML = paused ? '<i class="bi bi-play-fill"></i> Retomar' : '<i class="bi bi-pause-fill"></i> Pausar';
-            if (!paused) { log('Retomado.'); processNext(); }
-            else { log('Pausado.'); }
+        logToggle.addEventListener('click', function () {
+            if (logPanel.hidden) return;
+            logOpen = !logOpen;
+            logEl.hidden = !logOpen;
+            logToggle.setAttribute('aria-expanded', logOpen ? 'true' : 'false');
+            logToggle.classList.toggle('is-open', logOpen);
         });
     })();
     </script>

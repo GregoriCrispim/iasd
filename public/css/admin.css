@@ -140,6 +140,8 @@ a:hover { text-decoration: underline; }
 .btn-danger:hover { background: #b91c1c; color: #fff; }
 .btn-success { background: var(--adm-success); }
 .btn-success:hover { background: #15803d; color: #fff; }
+.btn-warning { background: var(--adm-warning); color: #fff; }
+.btn-warning:hover { background: #b45309; color: #fff; }
 .btn-ghost { background: transparent; color: var(--adm-muted); border-color: transparent; }
 .btn-ghost:hover { background: #f1f5f9; color: var(--adm-text); }
 .btn[disabled], .btn:disabled { opacity: .5; cursor: not-allowed; }
@@ -187,9 +189,18 @@ table.adm-table thead th {
 table.adm-table tbody tr { border-bottom: 1px solid var(--adm-border); }
 table.adm-table tbody tr:last-child { border-bottom: 0; }
 table.adm-table tbody tr:hover { background: #f8fafc; }
-table.adm-table td .row-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+table.adm-table td .row-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
 table.adm-table th.text-center, table.adm-table td.text-center { text-align: center; }
 table.adm-table th.text-right, table.adm-table td.text-right { text-align: right; }
+table.adm-table th.col-actions,
+table.adm-table td.col-actions {
+    text-align: center;
+    vertical-align: middle;
+}
+table.adm-table td.col-actions .row-actions {
+    justify-content: center;
+    align-items: center;
+}
 .text-muted { color: var(--adm-muted); }
 .text-right { text-align: right; }
 .text-center { text-align: center; }
@@ -541,6 +552,92 @@ dialog.adm-dialog.adm-dialog--album::backdrop {
     .adm-album-modal-body .form-row { grid-template-columns: 1fr; }
 }
 
+/* ---------- User create modal ---------- */
+dialog.adm-dialog.adm-dialog--user {
+    width: min(560px, 94vw);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(15, 23, 42, .28);
+    animation: admDialogIn .22s ease-out;
+}
+dialog.adm-dialog.adm-dialog--user::backdrop {
+    background: rgba(15, 23, 42, .58);
+    backdrop-filter: blur(6px);
+}
+.adm-user-modal-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-right: 40px;
+}
+.adm-user-modal-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #eff6ff, #dbeafe);
+    color: var(--adm-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex: 0 0 auto;
+}
+.adm-user-modal-body {
+    gap: 20px;
+}
+.adm-user-modal-section {
+    display: grid;
+    gap: 12px;
+    padding: 14px 14px 16px;
+    border: 1px solid var(--adm-border);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f8fafc, #fff);
+}
+.adm-user-modal-section h4 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--adm-muted);
+}
+.adm-user-modal-section .form-row {
+    margin: 0;
+}
+.adm-password-wrap {
+    position: relative;
+}
+.adm-password-wrap .input {
+    padding-right: 44px;
+}
+.adm-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--adm-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background .15s, color .15s;
+}
+.adm-password-toggle:hover {
+    background: #f1f5f9;
+    color: var(--adm-text);
+}
+.select.has-error { border-color: var(--adm-danger); }
+
+@media (max-width: 560px) {
+    .adm-user-modal-title { padding-right: 36px; }
+}
+
 /* ---------- Login ---------- */
 .adm-login-wrap {
     min-height: 100vh;
@@ -565,6 +662,7 @@ dialog.adm-dialog.adm-dialog--album::backdrop {
 .muted-sm { font-size: 12.5px; color: var(--adm-muted); }
 .mt-0 { margin-top: 0; }
 .mb-0 { margin-bottom: 0; }
+.hidden-form { display: none; }
 .flex-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
 .adm-overlay { display: none; }

@@ -29,20 +29,18 @@ class UserController extends Controller
             ->paginate(30)
             ->withQueryString();
 
-        return view('admin.users.index', ['users' => $users, 'authUser' => $authUser]);
+        return view('admin.users.index', [
+            'users' => $users,
+            'authUser' => $authUser,
+            'roleOptions' => $this->roleOptions($authUser),
+            'defaultRole' => $this->defaultRole($authUser),
+            'canAssignAdvanced' => $this->canAssignAdvancedFields($authUser),
+        ]);
     }
 
-    public function create(Request $request): View
+    public function create(): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
-
-        return view('admin.users.form', [
-            'user' => new User,
-            'roleOptions' => $this->roleOptions($authUser),
-            'managerOptions' => $this->managerOptions(),
-            'currentRole' => $authUser->isManager() ? 'collaborator' : null,
-        ]);
+        return redirect()->route('admin.users.index', ['novo' => 1]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -51,16 +49,14 @@ class UserController extends Controller
         $authUser = $request->user();
 
         $data = $this->validateData($request, null, $authUser);
-
-        $role = $authUser->isManager() ? 'collaborator' : $data['role'];
+        [$role, $managerId] = $this->resolveAssignment($authUser, $data);
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'email_verified_at' => $authUser->isManager() ? null : ($data['email_verified_at'] ?? null),
             'created_by' => $authUser->id,
-            'manager_id' => $authUser->isManager() ? $authUser->id : ($data['manager_id'] ?? null),
+            'manager_id' => $managerId === false ? null : $managerId,
         ]);
 
         $user->syncRoles([$role]);
@@ -74,11 +70,23 @@ class UserController extends Controller
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
+        $canManagePagePerms = $this->canManagePagePerms($authUser);
+        $attached = collect();
+        $available = collect();
+
+        if ($canManagePagePerms) {
+            $attached = $user->pages()->orderBy('label')->get();
+            $available = $this->availablePages($authUser)
+                ->whereNotIn('id', $attached->pluck('id'));
+        }
+
         return view('admin.users.form', [
             'user' => $user,
             'roleOptions' => $this->roleOptions($authUser),
-            'managerOptions' => $this->managerOptions(),
             'currentRole' => $user->roles->pluck('name')->first(),
+            'attached' => $attached,
+            'available' => $available,
+            'canManagePagePerms' => $canManagePagePerms,
         ]);
     }
 
@@ -89,26 +97,22 @@ class UserController extends Controller
         $this->authorizeManage($authUser, $user);
 
         $data = $this->validateData($request, $user, $authUser);
+        [$role, $managerId] = $this->resolveAssignment($authUser, $data);
 
         $payload = [
             'name' => $data['name'],
             'email' => $data['email'],
         ];
 
+        if ($managerId !== false) {
+            $payload['manager_id'] = $managerId;
+        }
+
         if (! empty($data['password'])) {
             $payload['password'] = $data['password'];
         }
 
-        if ($authUser->isManager()) {
-            $payload['manager_id'] = $authUser->id;
-        } else {
-            $payload['manager_id'] = $data['manager_id'] ?? null;
-            $payload['email_verified_at'] = $data['email_verified_at'] ?? null;
-        }
-
         $user->update($payload);
-
-        $role = $authUser->isManager() ? 'collaborator' : $data['role'];
         $user->syncRoles([$role]);
 
         return redirect()->route('admin.users.index')->with('success', 'Usuário atualizado.');
@@ -134,21 +138,17 @@ class UserController extends Controller
 
     /* ---------------- Page permissions ---------------- */
 
-    public function pages(Request $request, User $user): View
+    public function pages(Request $request, User $user): RedirectResponse
     {
         /** @var User $authUser */
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
-        $attached = $user->pages()->orderBy('label')->get();
-        $available = $this->availablePages($authUser)
-            ->whereNotIn('id', $attached->pluck('id'));
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
 
-        return view('admin.users.pages', [
-            'user' => $user,
-            'attached' => $attached,
-            'available' => $available,
-        ]);
+        return redirect()->route('admin.users.edit', $user)->withFragment('permissoes-paginas');
     }
 
     public function attachPage(Request $request, User $user): RedirectResponse
@@ -156,6 +156,10 @@ class UserController extends Controller
         /** @var User $authUser */
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
+
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
 
         $data = $request->validate([
             'cms_page_id' => ['required', 'exists:cms_pages,id'],
@@ -185,6 +189,10 @@ class UserController extends Controller
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
+
         $request->validate([
             'can_access' => ['nullable', 'boolean'],
             'can_edit' => ['nullable', 'boolean'],
@@ -206,6 +214,10 @@ class UserController extends Controller
         $authUser = $request->user();
         $this->authorizeManage($authUser, $user);
 
+        if (! $this->canManagePagePerms($authUser)) {
+            abort(403);
+        }
+
         $user->pages()->detach($page->id);
 
         return back()->with('success', 'Página removida do usuário.');
@@ -221,7 +233,7 @@ class UserController extends Controller
             return $query;
         }
 
-        if ($authUser->isManager()) {
+        if ($authUser->isManager() || $authUser->isFotografiaLider()) {
             return $query->where(fn (Builder $b) => $b->where('manager_id', $authUser->id)->orWhere('id', $authUser->id));
         }
 
@@ -234,7 +246,8 @@ class UserController extends Controller
             return;
         }
 
-        if ($authUser->isManager() && ($target->manager_id === $authUser->id || $target->id === $authUser->id)) {
+        if (($authUser->isManager() || $authUser->isFotografiaLider())
+            && ($target->manager_id === $authUser->id || $target->id === $authUser->id)) {
             return;
         }
 
@@ -253,25 +266,66 @@ class UserController extends Controller
                 'email',
                 'max:255',
                 function (string $attribute, mixed $value, \Closure $fail) use ($user): void {
-                    $query = User::query()->admins()->where('email', $value);
+                    $query = User::query()->where('email', $value);
                     if ($user) {
                         $query->where('id', '!=', $user->id);
                     }
                     if ($query->exists()) {
-                        $fail('Este e-mail já está em uso por outra conta do painel.');
+                        $fail('Este e-mail já está em uso.');
                     }
                 },
             ],
             'password' => [$user ? 'nullable' : 'required', 'string', 'min:6'],
         ];
 
-        if (! $authUser->isManager()) {
-            $rules['role'] = ['required', Rule::in(['manager', 'collaborator', 'fotografia'])];
-            $rules['manager_id'] = ['nullable', 'exists:users,id'];
-            $rules['email_verified_at'] = ['nullable', 'date'];
+        if ($this->canAssignAdvancedFields($authUser)) {
+            $rules['role'] = ['required', Rule::in(array_keys($this->roleOptions($authUser)))];
         }
 
         return $request->validate($rules);
+    }
+
+    /**
+     * Hierarquia automática: gestor/líder vinculam subordinados a si.
+     * Super admin não define responsável pelo formulário (false = não alterar no update).
+     *
+     * @param  array<string, mixed>  $data
+     * @return array{0: string, 1: int|null|false}
+     */
+    protected function resolveAssignment(User $authUser, array $data): array
+    {
+        if ($authUser->isManager()) {
+            return ['collaborator', $authUser->id];
+        }
+
+        if ($authUser->isFotografiaLider()) {
+            return ['fotografia_colaborador', $authUser->id];
+        }
+
+        return [$data['role'], false];
+    }
+
+    protected function canAssignAdvancedFields(User $authUser): bool
+    {
+        return $authUser->isSuperAdmin();
+    }
+
+    protected function canManagePagePerms(User $authUser): bool
+    {
+        return $authUser->isSuperAdmin() || $authUser->isManager();
+    }
+
+    protected function defaultRole(User $authUser): ?string
+    {
+        if ($authUser->isManager()) {
+            return 'collaborator';
+        }
+
+        if ($authUser->isFotografiaLider()) {
+            return 'fotografia_colaborador';
+        }
+
+        return null;
     }
 
     /**
@@ -283,22 +337,16 @@ class UserController extends Controller
             return ['collaborator' => 'Colaborador'];
         }
 
+        if ($authUser->isFotografiaLider()) {
+            return ['fotografia_colaborador' => 'Colaborador de Fotografia'];
+        }
+
         return [
             'manager' => 'Gestor',
             'collaborator' => 'Colaborador',
-            'fotografia' => 'Fotografia',
+            'fotografia_lider' => 'Líder de Fotografia',
+            'fotografia_colaborador' => 'Colaborador de Fotografia',
         ];
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    protected function managerOptions()
-    {
-        return User::query()
-            ->whereHas('roles', fn (Builder $q) => $q->where('name', 'manager'))
-            ->orderBy('name')
-            ->get(['id', 'name']);
     }
 
     /**

@@ -3,27 +3,32 @@
 @php
     $activeNav = 'galeria';
     $albumEditReturn = 'show';
+    $authUser = auth('admin')->user();
+    $canManageAlbums = $authUser && $authUser->canManageGalleryAlbums();
 @endphp
 @section('title', $album->title)
 @section('heading', $album->title)
 
 @section('actions')
-    <a href="{{ route('admin.galeria.index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Álbuns</a>
-    <button
-        type="button"
-        class="btn btn-secondary"
-        data-album-edit
-        data-album-id="{{ $album->id }}"
-        data-action="{{ route('admin.galeria.update', $album) }}"
-        data-album-title="{{ $album->title }}"
-        data-album-date="{{ $album->event_date?->format('Y-m-d') }}"
-        data-album-description="{{ $album->description }}"
-        data-album-published="{{ $album->is_published ? '1' : '0' }}"
-        onclick="admOpenAlbumEditModal(this)"
-    ><i class="bi bi-pencil"></i> Editar</button>
-    <a href="{{ route('admin.galeria.faces', $album) }}" class="btn btn-secondary"><i class="bi bi-person-bounding-box"></i> Reconhecimento facial</a>
+    <a href="{{ route('admin.galeria.index') }}" class="btn btn-secondary" title="Voltar aos álbuns"><i class="bi bi-arrow-left"></i> Álbuns</a>
+    @if ($canManageAlbums)
+        <button
+            type="button"
+            class="btn btn-secondary"
+            title="Editar álbum"
+            data-album-edit
+            data-album-id="{{ $album->id }}"
+            data-action="{{ route('admin.galeria.update', $album) }}"
+            data-album-title="{{ $album->title }}"
+            data-album-date="{{ $album->event_date?->format('Y-m-d') }}"
+            data-album-description="{{ $album->description }}"
+            data-album-published="{{ $album->is_published ? '1' : '0' }}"
+            onclick="admOpenAlbumEditModal(this)"
+        ><i class="bi bi-pencil"></i> Editar</button>
+    @endif
+    <a href="{{ route('admin.galeria.faces', $album) }}" class="btn btn-secondary" title="Reconhecimento facial"><i class="bi bi-person-bounding-box"></i> Reconhecimento facial</a>
     @if ($album->is_published)
-        <a href="{{ route('galeria.show', $album->slug) }}" class="btn btn-secondary" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Ver no site</a>
+        <a href="{{ route('galeria.show', $album->slug) }}" class="btn btn-secondary" title="Ver no site" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Ver no site</a>
     @endif
 @endsection
 
@@ -56,10 +61,10 @@
                     <p class="gal-dropzone-hint">JPEG, PNG, GIF ou WebP · até 15 MB cada · pastas são filtradas automaticamente</p>
                     <p class="gal-dropzone-hint">As fotos são reduzidas e convertidas para WebP no envio, com miniatura própria para o site</p>
                     <div class="gal-dropzone-actions">
-                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFiles">
+                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFiles" title="Selecionar arquivos">
                             <i class="bi bi-file-earmark-image"></i> Selecionar arquivos
                         </button>
-                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFolder">
+                        <button type="button" class="btn btn-secondary btn-sm" id="galPickFolder" title="Selecionar pasta">
                             <i class="bi bi-folder2-open"></i> Selecionar pasta
                         </button>
                     </div>
@@ -81,7 +86,7 @@
                 <div class="gal-queue" id="galQueue" hidden>
                     <div class="gal-queue-head">
                         <strong id="galQueueCount">0 imagens na fila</strong>
-                        <button type="button" class="btn btn-ghost btn-sm gal-queue-clear" id="galClearQueue" disabled>
+                        <button type="button" class="btn btn-ghost btn-sm gal-queue-clear" id="galClearQueue" disabled title="Limpar fila">
                             <i class="bi bi-x-circle"></i> Limpar
                         </button>
                     </div>
@@ -681,6 +686,22 @@
         renderQueue();
         submitLabel.textContent = 'Enviar';
 
+        if (ok > 0 && typeof window.faceIndexEnqueue === 'function') {
+            // Reforço: além das fotos deste lote, processa qualquer pendente do álbum.
+            try {
+                var queueUrl = @json(route('admin.galeria.faces.queue', $album));
+                fetch(queueUrl + '?scope=pending', {
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+                    credentials: 'same-origin'
+                }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+                    if (!data || !Array.isArray(data.photos)) return;
+                    data.photos.forEach(function (photo) {
+                        if (photo && photo.id) window.faceIndexEnqueue(photo);
+                    });
+                }).catch(function () {});
+            } catch (e) {}
+        }
+
         if (ok > 0 && typeof window.admToast === 'function') {
             window.admToast(
                 countPhrase(ok, 'foto enviada', 'fotos enviadas') + (fail ? ', ' + fail + ' com erro' : '') + '.',
@@ -836,10 +857,10 @@
     'csrf' => csrf_token(),
     'storeTemplate' => route('admin.galeria.faces.store', [$album, '__PID__']),
     'photo' => [
-        'minScore' => (float) config('face.detection.photo.min_score', 0.5),
-        'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.02),
-        'maxFaces' => (int) config('face.detection.photo.max_faces', 60),
-        'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1024),
+        'minScore' => (float) config('face.detection.photo.min_score', 0.30),
+        'minSizeRatio' => (float) config('face.detection.photo.min_size_ratio', 0.01),
+        'maxFaces' => (int) config('face.detection.photo.max_faces', 80),
+        'maxSide' => (int) config('face.detection.photo.analysis_max_side', 1536),
     ],
 ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
 <script src="{{ asset('js/face-engine.js') }}?v={{ filemtime(public_path('js/face-engine.js')) }}"></script>
@@ -878,13 +899,13 @@
         if (!photo) return;
         working = true;
 
-        var url = photo.url || photo.thumb_url;
+        var url = photo.index_url || photo.url || photo.thumb_url;
         window.FaceEngine.loadImage(url).then(function (img) {
             return window.FaceEngine.detectAll(img, {
-                maxSide: cfg.maxSide || 1024,
-                minScore: cfg.minScore || 0.5,
-                minSizeRatio: cfg.minSizeRatio || 0.02,
-                maxFaces: cfg.maxFaces || 60
+                maxSide: cfg.maxSide || 1536,
+                minScore: cfg.minScore || 0.30,
+                minSizeRatio: cfg.minSizeRatio || 0.01,
+                maxFaces: cfg.maxFaces || 80
             });
         }).then(function (faces) {
             return postResult(photo.id, {

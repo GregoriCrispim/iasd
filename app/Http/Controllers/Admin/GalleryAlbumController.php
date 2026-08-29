@@ -35,13 +35,17 @@ class GalleryAlbumController extends Controller
         return view('admin.galeria.index', ['albums' => $albums]);
     }
 
-    public function create(): RedirectResponse
+    public function create(Request $request): RedirectResponse
     {
+        $this->authorizeAlbumManage($request);
+
         return redirect()->route('admin.galeria.index', ['novo' => 1]);
     }
 
     public function store(Request $request): RedirectResponse
     {
+        $this->authorizeAlbumManage($request);
+
         /** @var User $user */
         $user = $request->user();
         $data = $this->validateAlbum($request);
@@ -80,13 +84,17 @@ class GalleryAlbumController extends Controller
         ]);
     }
 
-    public function edit(GalleryAlbum $album): RedirectResponse
+    public function edit(Request $request, GalleryAlbum $album): RedirectResponse
     {
+        $this->authorizeAlbumManage($request);
+
         return redirect()->route('admin.galeria.index', ['editar' => $album->id]);
     }
 
     public function update(Request $request, GalleryAlbum $album): RedirectResponse
     {
+        $this->authorizeAlbumManage($request);
+
         $data = $this->validateAlbum($request, $album);
 
         $eventDate = isset($data['event_date']) ? Carbon::parse($data['event_date']) : null;
@@ -113,8 +121,10 @@ class GalleryAlbumController extends Controller
         return $redirect->with('success', 'Álbum atualizado.');
     }
 
-    public function destroy(GalleryAlbum $album): RedirectResponse
+    public function destroy(Request $request, GalleryAlbum $album): RedirectResponse
     {
+        $this->authorizeAlbumManage($request);
+
         $albumId = $album->id;
 
         foreach ($album->photos as $photo) {
@@ -236,10 +246,14 @@ class GalleryAlbumController extends Controller
             $createdPhotos[] = [
                 'id' => $photo->id,
                 'url' => $photo->displayUrl(),
+                'index_url' => $photo->publicUrl(),
                 'thumb_url' => $photo->thumbUrl(),
                 'filename' => $photo->original_filename,
                 'is_cover' => $album->cover_photo_id === $photo->id,
             ];
+
+            // Indexação facial: só no browser do admin (Human). O job Node
+            // (ProcessGalleryPhotoFaces) é legado e não é disparado no upload.
 
             $uploaded++;
         }
@@ -345,5 +359,15 @@ class GalleryAlbumController extends Controller
     protected function deletePhotoFiles(GalleryPhoto $photo): void
     {
         Storage::disk(GalleryPhoto::DISK)->delete($photo->allFilePaths());
+    }
+
+    protected function authorizeAlbumManage(Request $request): void
+    {
+        /** @var User|null $user */
+        $user = $request->user();
+
+        if (! $user || ! $user->canManageGalleryAlbums()) {
+            abort(403);
+        }
     }
 }

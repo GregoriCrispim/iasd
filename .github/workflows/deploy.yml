@@ -41,6 +41,9 @@ jobs:
         run: |
           test -f artisan
           test -d public
+          test -f public/js/vendor/human-3.3.6.js
+          test -f public/models/human/3.3.6/faceres.bin
+          test -f public/models/human/3.3.6/models.json
           test ! -d vendor/filament
           test ! -d vendor/spatie/laravel-permission
           echo "Deploy payload ready."
@@ -59,7 +62,7 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            **/vendor/**
+            vendor/**
             .github/**
             .env
             .env.*
@@ -67,6 +70,7 @@ jobs:
             phpunit.xml
             .composer-cache/**
             .composer-home/**
+            deploy/**
             storage/logs/**
             storage/framework/cache/**
             storage/framework/sessions/**

@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\CmsRevisionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryAlbumController;
 use App\Http\Controllers\Admin\GalleryFaceController;
-use App\Http\Controllers\Admin\MemberInviteController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\MemberAuthController;
@@ -39,9 +38,8 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])
     ->middleware('auth:admin')
     ->name('admin.logout');
 
-// Autenticação de membros no site (guard: web) — sessão independente do painel.
-// Sem guest:web: sessão residual de não-membro (ex.: login antigo do painel no mesmo cookie)
-// não pode bloquear /entrar e /cadastrar.
+// Autenticação do site (guard: web) — sessão independente do painel.
+// Membros e usuários do painel usam /entrar; o redirect segue o formulário usado.
 Route::get('/entrar', [MemberAuthController::class, 'showLogin'])->name('member.login');
 Route::post('/entrar', [MemberAuthController::class, 'login'])
     ->middleware('throttle:10,1')
@@ -59,7 +57,7 @@ Route::middleware(['auth:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::middleware('role:super_admin,manager,collaborator,fotografia')->group(function () {
+        Route::middleware('role:super_admin,manager,collaborator,fotografia_lider,fotografia_colaborador')->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         });
 
@@ -86,23 +84,11 @@ Route::middleware(['auth:admin'])
             Route::post('/cms/revisions/{revision}/reject', [CmsRevisionController::class, 'reject'])->name('revisions.reject');
             Route::delete('/cms/revisions/{revision}', [CmsRevisionController::class, 'destroy'])->name('revisions.destroy');
 
-            // Aprovações e usuários (super-admin e gestor)
+            // Aprovações (super-admin e gestor)
             Route::middleware('role:super_admin,manager')->group(function () {
                 Route::get('/cms/approvals', [ApprovalsController::class, 'index'])->name('approvals.index');
                 Route::post('/cms/approvals/{revision}/approve', [ApprovalsController::class, 'approve'])->name('approvals.approve');
                 Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
-
-                Route::get('/users', [UserController::class, 'index'])->name('users.index');
-                Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-                Route::post('/users', [UserController::class, 'store'])->name('users.store');
-                Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-                Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-                Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-
-                Route::get('/users/{user}/pages', [UserController::class, 'pages'])->name('users.pages');
-                Route::post('/users/{user}/pages', [UserController::class, 'attachPage'])->name('users.pages.attach');
-                Route::put('/users/{user}/pages/{page}', [UserController::class, 'updatePage'])->name('users.pages.update');
-                Route::delete('/users/{user}/pages/{page}', [UserController::class, 'detachPage'])->name('users.pages.detach');
             });
 
             // Somente super-admin
@@ -111,12 +97,6 @@ Route::middleware(['auth:admin'])
                 Route::post('/cms/pages/sync', [CmsPageController::class, 'sync'])->name('pages.sync');
                 Route::get('/cms/pages/{page}/edit', [CmsPageController::class, 'edit'])->name('pages.edit');
                 Route::put('/cms/pages/{page}', [CmsPageController::class, 'update'])->name('pages.update');
-
-                // Convites de membros (somente super-admin)
-                Route::get('/convites', [MemberInviteController::class, 'index'])->name('invites.index');
-                Route::post('/convites', [MemberInviteController::class, 'store'])->name('invites.store');
-                Route::post('/convites/{invite}/toggle', [MemberInviteController::class, 'toggle'])->name('invites.toggle');
-                Route::delete('/convites/{invite}', [MemberInviteController::class, 'destroy'])->name('invites.destroy');
 
                 Route::get('/cms/blocks', [CmsBlockController::class, 'index'])->name('blocks.index');
                 Route::get('/cms/blocks/create', [CmsBlockController::class, 'create'])->name('blocks.create');
@@ -127,8 +107,23 @@ Route::middleware(['auth:admin'])
             });
         });
 
-        // Galeria de fotos (super-admin, gestor e fotografia)
-        Route::middleware('role:super_admin,manager,fotografia')->group(function () {
+        // Usuários: super-admin, gestor CMS e líder de fotografia
+        Route::middleware('role:super_admin,manager,fotografia_lider')->group(function () {
+            Route::get('/users', [UserController::class, 'index'])->name('users.index');
+            Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+            Route::post('/users', [UserController::class, 'store'])->name('users.store');
+            Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+            Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+            Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+            Route::get('/users/{user}/pages', [UserController::class, 'pages'])->name('users.pages');
+            Route::post('/users/{user}/pages', [UserController::class, 'attachPage'])->name('users.pages.attach');
+            Route::put('/users/{user}/pages/{page}', [UserController::class, 'updatePage'])->name('users.pages.update');
+            Route::delete('/users/{user}/pages/{page}', [UserController::class, 'detachPage'])->name('users.pages.detach');
+        });
+
+        // Galeria de fotos
+        Route::middleware('role:super_admin,manager,fotografia_lider,fotografia_colaborador')->group(function () {
             Route::get('/galeria', [GalleryAlbumController::class, 'index'])->name('galeria.index');
             Route::get('/galeria/create', [GalleryAlbumController::class, 'create'])->name('galeria.create');
             Route::post('/galeria', [GalleryAlbumController::class, 'store'])->name('galeria.store');
@@ -191,6 +186,9 @@ Route::get('/galeria', [GaleriaController::class, 'index'])->name('galeria');
 // que serve URLs terminadas em extensão (.webp) como arquivo estático antes de rotear.
 Route::get('/galeria/thumb', [GaleriaController::class, 'thumb'])->name('galeria.thumb');
 Route::get('/galeria/{evento}/download', [GaleriaController::class, 'download'])->name('galeria.download');
+Route::get('/galeria/{evento}/faces/progresso', [GaleriaController::class, 'faceProgress'])
+    ->middleware('throttle:60,1')
+    ->name('galeria.faces.progress');
 // Busca facial autenticada e fortemente limitada por usuário/IP
 Route::post('/galeria/{evento}/busca-facial', [FaceSearchController::class, 'search'])
     ->middleware(['auth:web', 'throttle:20,1'])

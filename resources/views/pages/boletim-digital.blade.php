@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_08_08_2026';
+    $boletimBase = 'img/boletim/boletim_29_08_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
 
     $linkify = static function (?string $text): ?string {
@@ -22,30 +22,23 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: O desafio da SEGUNDA semana de AGOSTO é BONDADE: Ore para que Deus lhe mostre oportunidades reais de ajudar alguém durante a semana.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da PRIMEIRA semana de SETEMBRO: Ore por constância e fidelidade na vida devocional, mantendo tempo diário de oração e leitura da Bíblia.';
 
     $boletins = [
         // Com descrição (script DOCX)
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Culto Permanente.jpg',
-            'alt' => 'Culto Permanente',
-            'title' => 'Culto Permanente',
-            'text' => 'Participe do Culto Permanente coordenado pela Igreja Adventista Central de Brasília. Um momento especial de paz, oração e fortalecimento espiritual para todos. Todo 3º sábado de cada mês, às no Hospital Brasília Lago Sul, Espaço Energia. O convite é aberto a pacientes, familiares, profissionais, colaboradores e toda a comunidade. Participe e venha viver este tempo de esperança!',
+            'src' => $boletimBase . '/ON VOICE.jpeg',
+            'alt' => 'One Voice 27 — mobilização missionária global',
+            'title' => 'One Voice',
+            'text' => 'O OneVoice27 é o projeto global de mobilização missionária da Igreja Adventista do Sétimo Dia, que conduzirá toda a igreja mundial a um mesmo esforço evangelístico. O lançamento oficial acontece em 5 de setembro deste ano. Lançada no segundo semestre de 2025 e planejada para ser uma grande celebração em setembro de 2027, marcando os 2.000 anos do batismo de Jesus Cristo. A Divisão Sul-Americana lidera a mobilização de todas as suas Uniões, Associações, Missões e igrejas locais para que participem em uma estratégia digital unificada. Participe conosco deste projeto.',
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-05-30 at 22.57.51 (2).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.23 (1).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Agasalho.jpg',
-            'alt' => 'Campanha do agasalho',
-            'title' => 'Campanha do Agasalho',
-            'text' => 'A ASA está arrecadando agasalhos, cobertores e roupas de frio em geral. Colabore doando itens limpos e em bom estado de conservação; o que não lhe serve mais será de grande valia para famílias que enfrentam o rigor deste inverno. Deixe sua doação na caixa da ASA, localizada na recepção da igreja.',
         ],
         [
             'type' => 'image',
@@ -77,21 +70,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Quebrando o Silêncio.jpg',
-            'alt' => 'Quebrando o Silêncio — Idosos em Risco',
-            'title' => 'Quebrando o Silêncio',
-            'text' => 'Idosos em Risco — A violência que atinge quem mais precisa de cuidado. Desde 2002, a Igreja Adventista do Sétimo Dia atua na prevenção contra o abuso e a violência por meio do projeto Quebrando o Silêncio. Neste ano, o tema será "Idosos em Risco". No dia 15 de agosto, às 15h, realizaremos uma ação especial de amor e cuidado com uma visita à pousada da Casa do Ceará. Você pode fazer a diferença participando conosco como voluntário ou contribuindo com doações de fraldas geriátricas (o item de maior necessidade), lenços umedecidos e produtos de higiene pessoal, tais como sabonete, xampu, creme hidratante, creme dental e escova de dente. Inscreva-se para participar através do link: https://forms.gle/DUjiLok9vspJXrvF7',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Encontro de Mulheres com Darleide.jpg',
-            'alt' => 'Encontro especial de mulheres — Vida que Eleva',
-            'title' => 'Encontro Especial de Mulheres',
-            'text' => 'Queridas amigas, devido à necessidade de recuperação da nossa querida Darleide Alves, o encontro "Vida que Eleva" foi transferido para o dia 22 de agosto, no mesmo horário. Estamos em oração para que Deus conceda a ela uma recuperação completa e agradecemos a compreensão e o carinho de todas. Cremos que o Senhor está conduzindo cada detalhe e temos a certeza de que será um dia muito especial. Contamos com a presença de todas! Não venham sozinhas: tragam uma amiga e venham compartilhar desse momento tão especial com a gente! Inscrições: https://docs.google.com/forms/d/e/1FAIpQLSeF8-UFe5ARIx4UbbhkRNj3X7ccJfP0luyVo2uuTeOUQ-vOaQ/viewform?usp=publish-editor',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Quartas da Família.jpg',
+            'src' => $boletimBase . '/Quartas da Família (1).jpg',
             'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
             'title' => 'Quartas da Família',
             'text' => 'Queridos irmãos, o Ministério da Família da Igreja Central de Brasília convida você e sua família para a série "Chaves da Felicidade Familiar", que acontecerá de 05 de agosto a 23 de setembro; serão 8 quartas-feiras especiais dedicadas à consagração, ao fortalecimento espiritual e ao aprendizado da Palavra de Deus. Venha interceder por sua família e traga convidados para buscarem juntos essa bênção, teremos presentes especiais para todos os visitantes não adventistas! Participem!',
@@ -112,10 +91,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Classe de Saúde - Divulgação.jpg',
-            'alt' => 'Classe de Saúde — retorno em 15 de agosto',
-            'title' => 'Classe de Saúde',
-            'text' => 'No mês de julho, a Classe Vida e Saúde da Igreja Adventista Central de Brasília esteve de férias. Retornaremos às nossas atividades no dia 15 de agosto.',
+            'src' => $boletimBase . '/Aventureiros Pais.jpeg',
+            'alt' => 'Clube de Aventureiros — manhã especial com os pais',
+            'title' => 'Aventureiros',
+            'text' => 'O CLUBE DE AVENTUREIROS CRUZEIRO DO SUL convida para uma manhã muito especial! No domingo, dia 30/08/26, a partir das 9h, todas as classes estarão reunidas para aprender novas especialidades e, acima de tudo, descobrir ainda mais sobre o amor de Jesus. Às 10h: teremos uma palestra em homenagem aos pais, no Salão Jovem. Às 11h: será a hora do nosso Circuito de Brincadeiras com os pais! Preparem-se para uma manhã muito divertida, com alegria e muita diversão! Este será o último encontro do Clube antes do acampamento! Por isso, queremos muito contar com a presença de cada Aventureiro. Será um momento de muita alegria, aprendizado, amizade e comunhão e, claro, de estarmos cada vez mais perto de Jesus!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/DOUTORES.jpeg',
+            'alt' => 'Doutores de Esperança — plantão Hospital Santa Lúcia Sul',
+            'title' => 'Doutores de Esperança',
+            'text' => 'Junte-se aos Doutores de Esperança! Você já sentiu o desejo de levar um abraço, um sorriso e uma palavra de conforto para quem mais precisa? Nossos plantões estão de volta, e queremos convidar você para fazer parte dessa missão transformadora! Quando: 30 de agosto, às 13h30. Onde: Hospital Santa Lúcia Sul. Quer participar, mas ainda não faz parte do grupo? Esta é a sua oportunidade! Você pode começar acompanhando a nossa equipe como observador, conhecendo de perto a dinâmica do projeto antes de dar o próximo passo. Venha vivenciar essa experiência cheia de amor, empatia e alegria com a gente. Como posso me inscrever? Entre em contato agora mesmo com a Lu Mesquita pelo link https://wa.me/message/7M6UOXXMBRWRI1 e garanta as informações para participar. Venha fazer a diferença na vida de alguém e descubra a alegria de servir!',
         ],
         [
             'type' => 'image',
@@ -123,6 +109,13 @@
             'alt' => 'SGI — Sistema de Gerenciamento de Interessados',
             'title' => 'SGI',
             'text' => 'Está no ar o SGI - Sistema de Gerenciamento de Interessados. Querido membro, se você está estudando a Bíblia com alguém, a Igreja Central conta agora com um sistema de cadastro de interessados, o SGI, onde você poderá se cadastrar como Instrutor bíblico e cadastrar seus alunos. Nele você contará com o apoio do Ministério Pessoal e com estudos bíblicos especialmente preparados. Aponte seu celular para o QR CODE que está na tela e faça hoje mesmo o seu cadastro. E se você é visitante: Que bom que você veio! É uma alegria tê-lo conosco. Se você está nos visitando pela primeira vez e gostaria que orássemos por você ou tem interesse em estudar a Bíblia, acesse o nosso site https://aplac.sgi7.com.br/ ou procure nossa equipe de recepção, preencha o cartão de visitas que teremos o maior prazer em atendê-lo.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Maná.jpeg',
+            'alt' => 'Projeto Maná — assinatura da Lição da Escola Sabatina',
+            'title' => 'Projeto Maná',
+            'text' => 'A vida é feita de escolhas. E uma delas é decidir o que vai ocupar um espaço na nossa rotina. Assinar a Lição da Escola Sabatina é mais do que receber um material em casa. É escolher alimentar a fé, aprofundar o conhecimento da Palavra e reservar, todos os dias, um momento para estar com Deus. No Projeto Maná, queremos incentivar uma igreja que não apenas ouve sobre a Bíblia, mas que a estuda, vive e compartilha. Faça parte desse movimento. Assine a Lição da Escola Sabatina e transforme seu estudo em um compromisso diário com Deus. Acesse: https://projetomana.cpb.com.br/ ou pelo WhatsApp: (61) 98235-0008 ou ligue: (61) 3321-2021 ou 0800 979 0666.',
         ],
         [
             'type' => 'image',
@@ -150,7 +143,7 @@
             'src' => $boletimBase . '/Série Coisas Estranhas.png',
             'alt' => 'Série Coisas Estranhas — Domingos Especiais',
             'title' => 'Coisas Estranhas',
-            'text' => 'A morte é um grande mistério. Milhões de pessoas acreditam que a vida continua de alguma forma, enquanto outras buscam respostas em relatos, experiências de quase morte e diferentes tradições espirituais. Afinal, o que realmente acontece quando fechamos os olhos pela última vez? Antes de aceitar qualquer resposta, descubra o que a Bíblia revela sobre esse tema e por que essa verdade pode mudar a maneira como você vive hoje e encara a eternidade. Venha participar da nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, aos domingos sempre às 19h.',
+            'text' => 'Ao longo da história, milagres, curas e manifestações extraordinárias desafiaram explicações convencionais e continuam despertando fé, esperança e questionamentos. Mas uma pergunta permanece: todo fenômeno que parece sobrenatural revela necessariamente a ação de Deus? Nesse estudo, vamos além das aparências para investigar o significado dos sinais à luz das Escrituras. Descubra como a Bíblia apresenta o verdadeiro poder divino, por que alguns sinais podem impressionar sem revelar a verdade e qual é o papel do discernimento em um mundo cada vez mais fascinado pelo sobrenatural. À luz das Escrituras, este tema convida a uma reflexão profunda sobre o mundo invisível, o discernimento espiritual e a diferença entre mistério, engano e verdade. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
         ],
         [
             'type' => 'image',
@@ -164,14 +157,14 @@
             'src' => $boletimBase . '/Rádio NT.jpeg',
             'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
             'title' => 'Rádio Novo Tempo',
-            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial será no dia 24 de julho, às 18h. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Sementes Musicais.jpg',
             'alt' => 'Sementes Musicais — flautas doces no CEMAB',
             'title' => 'Sementes Musicais',
-            'text' => 'O projeto de musicalização através das flautas doces denominado Sementes Musicais retomará suas atividades no próximo sábado, dia 15 de agosto, oferecendo aulas totalmente gratuitas e abertas ao público no CEMAB. Voltada para quem deseja aprender a tocar o instrumento ou aperfeiçoar sua técnica, a iniciativa ocorrerá semanalmente, todos os sábados, às 15h30, sendo necessário apenas levar a própria flauta para participar. Os encontros acontecem na sala da Saúde, as inscrições são feitas presencialmente. Venha tocar conosco!',
+            'text' => 'O projeto de musicalização através das flautas doces denominado Sementes Musicais está de volta, oferecendo aulas totalmente gratuitas e abertas ao público. Voltada para quem deseja aprender a tocar um instrumento ou aperfeiçoar sua técnica, a iniciativa ocorre semanalmente, todos os sábados, às 15h30, sendo necessário apenas levar a própria flauta para participar. Os encontros acontecem na sala da Saúde, as inscrições são feitas presencialmente. Venha tocar conosco!',
         ],
         [
             'type' => 'image',
@@ -185,7 +178,7 @@
             'src' => $boletimBase . '/Orquestra CEMAB.jpg',
             'alt' => 'Orquestra CEMAB — ensaios semanais',
             'title' => 'Orquestra CEMAB',
-            'text' => 'A Orquestra CEMAB retomará suas atividades no próximo sábado, dia 15 de agosto, promovendo ensaios semanais totalmente gratuitos na Sala da Orquestra do CEMAB. Voltada para instrumentistas de todos os níveis que desejam integrar o grupo musical, a iniciativa ocorrerá todos os sábados, às 15h30, com inscrições realizadas presencialmente no próprio local, sendo necessário apenas levar o instrumento para participar.',
+            'text' => 'A Orquestra CEMAB retoma suas atividades. Os ensaios acontecem semanalmente e são totalmente gratuitos, nossos encontros acontecem na Sala da Orquestra do CEMAB. Voltada para instrumentistas de todos os níveis que desejam integrar o grupo musical, a iniciativa ocorre todos os sábados, às 15h30, com inscrições realizadas presencialmente no próprio local, sendo necessário apenas levar o instrumento para participar.',
         ],
         [
             'type' => 'image',
@@ -196,10 +189,73 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/ave_branca_run.jpeg',
-            'alt' => 'Corrida Ave Branca — 60 anos',
-            'title' => 'Corrida Ave Branca',
-            'text' => 'O Ministério Jovem da Igreja Adventista Central de Brasília está apoiando a corrida comemorativa de 60 anos do Clube de Desbravadores Ave Branca. O evento celebra a trajetória histórica do grupo na comunidade, os interessados em participar da corrida podem garantir sua inscrição por meio do link: https://avebrancat7.com.br/',
+            'src' => $boletimBase . '/Criacionismo.jpg',
+            'alt' => 'Sábado da Criação — Ciência, Fé e Verdade',
+            'title' => 'Sábado da Criação',
+            'text' => 'Ciência, Fé e Verdade - Será que ciência e religião precisam estar em lados opostos? No Sábado da Criação, duas palestras vão provocar reflexões profundas sobre aquilo que ouvimos, aquilo em que acreditamos e a maneira como compreendemos alguns aspetos da criação. Às 10h ocorrerá a palestra com o tema: “Quem tem ouvidos, ouça!” e às 16h a palestra intitulada “Ciência versus religião: Um falso dilema.” Com Tiago Alves Jorge Souza, Mestre e Doutor em Genética pela USP. Uma programação para quem gosta de pensar, questionar e ir além das respostas prontas. Com o encontro da ciência e da fé, talvez você descubra que algumas questões são mais complexas e mais fascinantes do que parecem. Acontecerá na Igreja Adventista do Lago Sul, no sábado, dia 29 de agosto de 2026. Participe!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Clube do Livro.jpg',
+            'alt' => 'Clube do Livro Cristão',
+            'title' => 'Clube do Livro',
+            'text' => 'Descubra novas perspectivas e aprofunde sua fé em nossa comunidade literária. O Clube do Livro Cristão é um espaço dedicado à leitura reflexiva, à comunhão e ao debate de obras que edificam a mente e o espírito. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 19h30, em formato online, permitindo a participação de qualquer lugar, complementados por uma reunião presencial mensal para estreitar os laços de fraternidade. Venha caminhar conosco nessa jornada de aprendizado e crescimento espiritual; faça parte do nosso grupo e acompanhe as próximas leituras através do link: https://chat.whatsapp.com/JISpyFzQWaz5FflxofhNfs',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/PG Jovem.jpg',
+            'alt' => 'Pequeno Grupo Jovem',
+            'title' => 'Pequeno Grupo Jovem',
+            'text' => 'Um espaço de comunhão, amizade e fé feito sob medida para você. O Pequeno Grupo Jovem é o lugar ideal para jovens de 15 a 25 anos compartilharem experiências, fortalecerem os laços e aprofundarem o conhecimento espiritual de forma leve e relevante. Nossos encontros acontecem quinzenalmente às quintas-feiras, às 19h30, em formato online, contando também com um encontro presencial especial por mês para estarmos juntos. Venha fazer parte desta jornada e caminhar conosco; saiba mais e integre-se ao grupo através do link: https://chat.whatsapp.com/JWDD88eG3rOBXUG7iqvfv1?s=sw&p=a&ilr=0',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/PG Liberdade Religiosa .jpeg',
+            'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
+            'title' => 'Liberdade Religiosa e Tempo do Fim',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. O próximo encontro será no dia 27 de agosto, via Microsoft Teams. Contaremos com a ilustre presença do Pr. Hélio Carnassale — conferencista e uma das principais referências da Igreja Adventista do Sétimo Dia na área de Liberdade Religiosa —, que ministrará sobre o instigante tema: "Haverá liberdade religiosa após o decreto dominical?" Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Código 318.png',
+            'alt' => 'Código 318 — círculo de homens',
+            'title' => 'Código 318',
+            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. Primeira reunião: 12 de setembro, 16h30, Salão Jovem. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Firmados na Palavra.jpeg',
+            'alt' => 'Curso Bíblico Firmados na Palavra',
+            'title' => 'Firmados na Palavra',
+            'text' => 'Queridos irmãos, temos um convite especial para toda a família! A partir do dia 30 de agosto, aos domingos, às 18h, teremos o Curso Bíblico "Firmados na Palavra". Será um momento precioso para conhecer, compreender e viver as verdades da Bíblia, fortalecer a fé e crescermos juntos na caminhada com Deus. Local: Igreja Adventista Central de Brasília. Todos os domingos, às 18h. Traga sua família e seus amigos para estudar a Palavra conosco! "Ensina-me, SENHOR, o caminho dos teus mandamentos..." — Salmo 119:33. Esperamos vocês!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/SEMINÁRIO.jpeg',
+            'alt' => 'Seminário Eventos Finais do Juízo',
+            'title' => 'Seminário Eventos Finais do Juízo',
+            'text' => 'No próximo sábado, dia 5 de setembro, às 10h45, na sala da Classe Novo Tempo, teremos o início do nosso primeiro seminário sobre os eventos finais do juízo. Neste encontro, vamos explorar profundamente os capítulos 12 e 13 do livro de Apocalipse, sob a condução especial do professor Manuel Morais. Venha descobrir e aprender mais sobre os fascinantes símbolos apocalípticos: O Dragão, A Mulher e As Bestas. Sua presença é muito importante! Venha e traga seus amigos para esse momento de aprendizado e comunhão. Esperamos você!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/UNIVERSITÁRIOS.jpg',
+            'alt' => 'Encontro de Universitários — UCOB',
+            'title' => 'Encontro de Universitários',
+            'text' => 'É hoje o nosso Encontro da Igreja Universitária Adventista! Um momento especial pra gente se encontrar, fortalecer nossa comunidade, compartilhar experiências e crescer juntos! Sábado, dia 29 de agosto, às 17h. Local: UCOB. E depois do encontro ainda teremos lanche e jogos pra fechar a noite daquele jeito! Confirma sua presença aqui: https://eventos.adventistasbrasilia.org.br/event/evento/394. Chama a galera e vem com a gente!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Comunidade.jpeg',
+            'alt' => 'Comunidade Jovem — Espaço Jovem',
+            'title' => 'Comunidade Jovem',
+            'text' => 'Neste sábado, teremos um encontro muito especial da nossa comunidade jovem! Será um momento incrível para aprendermos mais sobre Deus e fortalecermos a nossa fé juntos. Sábado, 29 de agosto de 2026, às 17h30. Local: Espaço Jovem, na Igreja Adventista Central de Brasília. Esperamos por você e seus amigos para estarmos juntos! Vem com a gente!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/convite_jotinha_18h_16_9.png',
+            'alt' => 'Jotinha — bandinha infantil',
+            'title' => 'Jotinha',
+            'text' => 'Convite Especial para as Famílias! Neste sábado, 29 de agosto de 2026, às 18h, teremos mais um Jotinha! Nossa bandinha continua crescendo, e é uma alegria ver crianças e jovens cantando, tocando instrumentos e desenvolvendo os talentos que Deus lhes deu. No Jotinha, seu filho tem a oportunidade de desenvolver seus talentos, fazer novas amizades, fortalecer os valores cristãos, crescer no amor a Deus e participar ativamente da igreja. Traga seus filhos e convide também amigos, vizinhos, sobrinhos e netos! Sábado, 29 de agosto de 2026, às 18h. Esperamos sua família para um fim de tarde especial de louvor, aprendizado, amizade e muita alegria!',
         ],
         [
             'type' => 'image',

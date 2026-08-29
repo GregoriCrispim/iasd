@@ -27,7 +27,7 @@ class GalleryFaceController extends Controller
 
         return view('admin.galeria.faces', [
             'album' => $album,
-            'modelVersion' => (string) config('face.version', 'v1'),
+            'modelVersion' => (string) config('face.version', 'v3'),
         ]);
     }
 
@@ -50,12 +50,13 @@ class GalleryFaceController extends Controller
 
         $photos = $query->get()->map(fn (GalleryPhoto $photo) => [
             'id' => $photo->id,
-            'url' => $photo->displayUrl(),
+            // Full-res: a variante display perde rostos pequenos/distantes.
+            'url' => $photo->publicUrl(),
             'status' => $photo->faces_status,
         ])->values()->all();
 
         return response()->json([
-            'model_version' => (string) config('face.version', 'v1'),
+            'model_version' => (string) config('face.version', 'v3'),
             'scope' => $scope,
             'photos' => $photos,
         ]);
@@ -72,13 +73,13 @@ class GalleryFaceController extends Controller
             'status' => ['required', 'in:ready,no_face,failed'],
             'reason' => ['nullable', 'string', 'max:200'],
             'faces' => ['array'],
-            'faces.*.descriptor' => ['required', 'array', 'size:128'],
+            'faces.*.descriptor' => ['required', 'array', 'size:'.(int) config('face.descriptor_dimensions', 1024)],
             'faces.*.descriptor.*' => ['numeric'],
             'faces.*.score' => ['nullable', 'numeric'],
             'faces.*.box' => ['nullable', 'array'],
         ]);
 
-        $modelVersion = (string) config('face.version', 'v1');
+        $modelVersion = (string) config('face.version', 'v3');
         $status = $data['status'];
         $stored = 0;
 

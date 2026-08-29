@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Criar conta — IASD Central de Brasília')
-@section('meta-description', 'Cadastro de membros da IASD Central de Brasília por convite.')
+@section('meta-description', 'Cadastro de membros da IASD Central de Brasília para acesso à galeria de fotos.')
 @section('page-name', 'Criar conta')
 
 @push('styles')
@@ -82,6 +82,102 @@
     .auth-field input.is-valid {
         border-color: #2e7d4f;
     }
+
+    .auth-select {
+        position: relative;
+    }
+    .auth-select__trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.75rem 0.95rem;
+        border: 1px solid rgba(0, 51, 102, 0.25);
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-family: "Roboto", sans-serif;
+        background: #fff;
+        color: #222;
+        cursor: pointer;
+        text-align: left;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        box-sizing: border-box;
+    }
+    .auth-select__trigger:focus,
+    .auth-select__trigger:focus-visible,
+    .auth-select.is-open .auth-select__trigger {
+        outline: none;
+        border-color: #003366;
+        box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.18);
+    }
+    .auth-select__trigger.is-invalid {
+        border-color: #c0392b;
+        box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+    }
+    .auth-select__trigger.is-valid {
+        border-color: #2e7d4f;
+    }
+    .auth-select__value {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .auth-select__value.is-placeholder { color: #9aa3ad; }
+    .auth-select__chevron {
+        flex-shrink: 0;
+        color: #5a6b7d;
+        font-size: 0.95rem;
+        transition: transform 0.15s ease;
+    }
+    .auth-select.is-open .auth-select__chevron {
+        transform: rotate(180deg);
+    }
+    .auth-select__list {
+        position: absolute;
+        z-index: 20;
+        left: 0;
+        right: 0;
+        top: calc(100% + 6px);
+        margin: 0;
+        padding: 0.35rem;
+        list-style: none;
+        background: #fff;
+        border: 1px solid rgba(0, 51, 102, 0.18);
+        border-radius: 12px;
+        box-shadow: 0 12px 32px rgba(0, 30, 60, 0.14);
+        max-height: 240px;
+        overflow-y: auto;
+        display: none;
+    }
+    .auth-select.is-open .auth-select__list { display: block; }
+    .auth-select__option {
+        display: block;
+        width: 100%;
+        padding: 0.7rem 0.85rem;
+        border: none;
+        border-radius: 8px;
+        background: transparent;
+        color: #222;
+        font-size: 0.95rem;
+        font-family: "Roboto", sans-serif;
+        text-align: left;
+        cursor: pointer;
+    }
+    .auth-select__option:hover,
+    .auth-select__option:focus-visible {
+        background: rgba(0, 51, 102, 0.08);
+        color: #003366;
+        outline: none;
+    }
+    .auth-select__option[aria-selected="true"] {
+        background: rgba(0, 51, 102, 0.12);
+        color: #003366;
+        font-weight: 600;
+    }
+
     .auth-field .auth-error {
         color: #a12622;
         font-size: 0.78rem;
@@ -241,7 +337,7 @@
 <div class="auth-wrap">
     <div class="auth-card">
         <h1>Criar conta</h1>
-        <p class="auth-sub">O cadastro é feito por convite. Informe o código recebido da equipe de comunicação.</p>
+        <p class="auth-sub">Crie sua conta para acessar a galeria de fotos da igreja.</p>
 
         @if (session('error'))
             <div class="auth-alert" role="alert">{{ session('error') }}</div>
@@ -259,25 +355,10 @@
 
         <form id="registerForm" method="POST" action="{{ route('member.register.post') }}" novalidate>
             @csrf
+            @if (request('redirect'))
+                <input type="hidden" name="redirect" value="{{ request('redirect') }}">
+            @endif
             <div class="auth-grid">
-                <div class="auth-field full" data-field="invite_code">
-                    <label for="invite_code">Código de convite<span class="req" aria-hidden="true">*</span></label>
-                    <input
-                        type="text"
-                        id="invite_code"
-                        name="invite_code"
-                        value="{{ old('invite_code', $prefillCode) }}"
-                        required
-                        autocomplete="off"
-                        spellcheck="false"
-                        maxlength="14"
-                        inputmode="text"
-                        placeholder="XXXX-XXXX-XXXX"
-                        aria-describedby="invite_code_error"
-                    >
-                    <p class="auth-error" id="invite_code_error" role="alert"></p>
-                </div>
-
                 <div class="auth-field full" data-field="name">
                     <label for="name">Nome completo<span class="req" aria-hidden="true">*</span></label>
                     <input
@@ -384,24 +465,56 @@
                 </div>
 
                 <div class="auth-field" data-field="congregation">
-                    <label for="congregation">Congregação / vínculo</label>
-                    <input
-                        type="text"
-                        id="congregation"
-                        name="congregation"
-                        value="{{ old('congregation') }}"
-                        maxlength="120"
-                        placeholder="Opcional"
-                    >
+                    <label id="congregation_label">Congregação / vínculo<span class="req" aria-hidden="true">*</span></label>
+                    @php
+                        $membershipLinks = \App\Models\User::MEMBERSHIP_LINKS;
+                        $selectedLink = old('congregation');
+                        $selectedLabel = is_string($selectedLink) ? ($membershipLinks[$selectedLink] ?? null) : null;
+                    @endphp
+                    <div class="auth-select" data-auth-select>
+                        <input
+                            type="hidden"
+                            id="congregation"
+                            name="congregation"
+                            value="{{ $selectedLink }}"
+                            required
+                            aria-required="true"
+                        >
+                        <button
+                            type="button"
+                            class="auth-select__trigger"
+                            id="congregation_trigger"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                            aria-controls="congregation_list"
+                            aria-labelledby="congregation_label congregation_value"
+                            aria-describedby="congregation_error"
+                        >
+                            <span
+                                id="congregation_value"
+                                class="auth-select__value{{ $selectedLabel ? '' : ' is-placeholder' }}"
+                            >{{ $selectedLabel ?: 'Selecione seu vínculo' }}</span>
+                            <i class="bi bi-chevron-down auth-select__chevron" aria-hidden="true"></i>
+                        </button>
+                        <ul class="auth-select__list" id="congregation_list" role="listbox" aria-labelledby="congregation_label" hidden>
+                            @foreach ($membershipLinks as $value => $label)
+                                <li role="presentation">
+                                    <button
+                                        type="button"
+                                        class="auth-select__option"
+                                        role="option"
+                                        data-value="{{ $value }}"
+                                        aria-selected="{{ $selectedLink === $value ? 'true' : 'false' }}"
+                                    >{{ $label }}</button>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <p class="auth-error" id="congregation_error" role="alert"></p>
                 </div>
             </div>
 
             <div class="auth-checks">
-                <label class="auth-check">
-                    <input type="checkbox" name="is_church_member" value="1" {{ old('is_church_member') ? 'checked' : '' }}>
-                    <span>Sou membro batizado da Igreja Adventista do Sétimo Dia.</span>
-                </label>
-
                 <div id="guardianBlock">
                     <label class="auth-check" id="guardianCheckLabel">
                         <input type="checkbox" name="guardian_consent" id="guardian_consent" value="1" {{ old('guardian_consent') ? 'checked' : '' }}>
@@ -421,7 +534,7 @@
         </form>
 
         <div class="auth-foot">
-            Já tem conta? <a href="{{ route('member.login') }}">Entrar</a>
+            Já tem conta? <a href="{{ route('member.login', request()->only('redirect')) }}">Entrar</a>
         </div>
     </div>
 </div>
@@ -433,7 +546,6 @@
     var form = document.getElementById('registerForm');
     if (!form) return;
 
-    var invite = document.getElementById('invite_code');
     var nameEl = document.getElementById('name');
     var email = document.getElementById('email');
     var phone = document.getElementById('phone');
@@ -478,6 +590,9 @@
         var wrap = form.querySelector('[data-field="' + fieldName + '"]');
         var input = document.getElementById(fieldName);
         var err = document.getElementById(fieldName + '_error');
+        var trigger = fieldName === 'congregation'
+            ? document.getElementById('congregation_trigger')
+            : null;
         if (wrap) wrap.classList.toggle('has-error', !!message);
         if (input) {
             input.classList.toggle('is-invalid', !!message);
@@ -485,19 +600,16 @@
             else input.classList.remove('is-valid');
             input.setAttribute('aria-invalid', message ? 'true' : 'false');
         }
+        if (trigger) {
+            trigger.classList.toggle('is-invalid', !!message);
+            if (!message && input && input.value) trigger.classList.add('is-valid');
+            else trigger.classList.remove('is-valid');
+            trigger.setAttribute('aria-invalid', message ? 'true' : 'false');
+        }
         if (err) {
             err.textContent = message || '';
             err.style.display = message ? 'block' : 'none';
         }
-    }
-
-    function maskInviteCode(value) {
-        var raw = String(value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
-        var parts = [];
-        for (var i = 0; i < raw.length; i += 4) {
-            parts.push(raw.slice(i, i + 4));
-        }
-        return parts.join('-');
     }
 
     function maskPhone(value) {
@@ -523,17 +635,12 @@
         }
     }
 
-    invite.addEventListener('input', function () {
-        applyMask(invite, maskInviteCode);
-        if (invite.dataset.touched) validateInvite();
-    });
     phone.addEventListener('input', function () {
         applyMask(phone, maskPhone);
         if (phone.dataset.touched) validatePhone();
     });
 
     // Prefill masks
-    if (invite.value) invite.value = maskInviteCode(invite.value);
     if (phone.value) phone.value = maskPhone(phone.value);
 
     nameEl.addEventListener('input', function () {
@@ -558,9 +665,6 @@
         syncGuardian();
         if (birth.dataset.touched) validateBirth();
     });
-    congregation.addEventListener('input', function () {
-        if (congregation.value.length > 120) congregation.value = congregation.value.slice(0, 120);
-    });
     acceptTerms.addEventListener('change', function () {
         if (acceptTerms.dataset.touched) validateAcceptTerms();
     });
@@ -570,20 +674,80 @@
 
     function markTouched(el) { el.dataset.touched = '1'; }
 
-    [invite, nameEl, email, phone, password, passwordConfirm, birth].forEach(function (el) {
+    (function initAuthSelect() {
+        var root = form.querySelector('[data-auth-select]');
+        if (!root || !congregation) return;
+
+        var trigger = document.getElementById('congregation_trigger');
+        var list = document.getElementById('congregation_list');
+        var valueEl = document.getElementById('congregation_value');
+        var options = root.querySelectorAll('.auth-select__option');
+
+        function closeSelect() {
+            root.classList.remove('is-open');
+            if (list) list.hidden = true;
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        function openSelect() {
+            root.classList.add('is-open');
+            if (list) list.hidden = false;
+            if (trigger) trigger.setAttribute('aria-expanded', 'true');
+        }
+
+        function selectOption(option) {
+            var value = option.getAttribute('data-value') || '';
+            var label = option.textContent.trim();
+            congregation.value = value;
+            if (valueEl) {
+                valueEl.textContent = label;
+                valueEl.classList.remove('is-placeholder');
+            }
+            options.forEach(function (opt) {
+                opt.setAttribute('aria-selected', opt === option ? 'true' : 'false');
+            });
+            markTouched(congregation);
+            validateCongregation();
+            closeSelect();
+        }
+
+        if (trigger) {
+            trigger.addEventListener('click', function () {
+                if (root.classList.contains('is-open')) closeSelect();
+                else openSelect();
+            });
+        }
+
+        options.forEach(function (option) {
+            option.addEventListener('click', function () {
+                selectOption(option);
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!root.contains(e.target)) closeSelect();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSelect();
+        });
+
+        if (congregation.value) {
+            validateCongregation();
+        }
+    })();
+
+    [nameEl, email, phone, password, passwordConfirm, birth].forEach(function (el) {
         el.addEventListener('blur', function () {
             markTouched(el);
             validateField(el.id);
         });
     });
 
-    function validateInvite() {
-        var v = invite.value.trim();
-        if (!v) return setFieldError('invite_code', 'Informe o código de convite.'), false;
-        if (!/^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(v)) {
-            return setFieldError('invite_code', 'Use o formato XXXX-XXXX-XXXX.'), false;
-        }
-        return setFieldError('invite_code', ''), true;
+    function validateCongregation() {
+        var v = congregation.value.trim();
+        if (!v) return setFieldError('congregation', 'Selecione seu vínculo com a igreja.'), false;
+        return setFieldError('congregation', ''), true;
     }
 
     function validateName() {
@@ -686,13 +850,13 @@
 
     function validateField(id) {
         switch (id) {
-            case 'invite_code': return validateInvite();
             case 'name': return validateName();
             case 'email': return validateEmail();
             case 'phone': return validatePhone();
             case 'password': return validatePassword();
             case 'password_confirmation': return validatePasswordConfirm();
             case 'birth_date': return validateBirth();
+            case 'congregation': return validateCongregation();
             default: return true;
         }
     }
@@ -747,24 +911,24 @@
     });
 
     form.addEventListener('submit', function (e) {
-        markTouched(invite);
         markTouched(nameEl);
         markTouched(email);
         markTouched(phone);
         markTouched(password);
         markTouched(passwordConfirm);
         markTouched(birth);
+        markTouched(congregation);
         acceptTerms.dataset.touched = '1';
         guardianConsent.dataset.touched = '1';
 
         var ok = true;
-        ok = validateInvite() && ok;
         ok = validateName() && ok;
         ok = validateEmail() && ok;
         ok = validatePhone() && ok;
         ok = validatePassword() && ok;
         ok = validatePasswordConfirm() && ok;
         ok = validateBirth() && ok;
+        ok = validateCongregation() && ok;
         ok = validateGuardian() && ok;
         ok = validateAcceptTerms() && ok;
 

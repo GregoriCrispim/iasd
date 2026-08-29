@@ -566,7 +566,7 @@ function initGaleriaEventoPage() {
         renderPagination();
 
         if (scroll) {
-            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     };
 
