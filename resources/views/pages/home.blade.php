@@ -15,11 +15,14 @@
 <div class="slider">
     <div class="list">
         <div class="item">
-            <img src="{{ asset('img/carrousel/1.webp') }}" alt="Slide 1 - IASD Central de Brasília" fetchpriority="high" decoding="async" width="1280" height="720">
+            <img src="{{ asset('img/carrousel/series-coisas-estranhas.webp') }}" alt="Slide 1 - Nova série dos domingos especiais: Coisas Estranhas, agosto e setembro, 19h" fetchpriority="high" decoding="async" width="1920" height="700">
+        </div>
+        <div class="item">
+            <img src="{{ asset('img/carrousel/1.webp') }}" alt="Slide 2 - IASD Central de Brasília" decoding="async" width="1280" height="720">
         </div>
         <div class="item">
             <a href="{{ route('cemab') }}" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/cemab.webp') }}" alt="Slide 2 - CEMAB, Centro Musical Adventista de Brasília: matricule-se, (61) 99612-5450" decoding="async" width="1920" height="700">
+                <img src="{{ asset('img/carrousel/cemab.webp') }}" alt="Slide 3 - CEMAB, Centro Musical Adventista de Brasília: matricule-se, (61) 99612-5450" decoding="async" width="1920" height="700">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -29,7 +32,7 @@
         </div>
         <div class="item">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOx1UFYwKkJhHYkPQzXiUHCMZBxTKQjanOfLQtXZc27uZi2Q/viewform" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/corais.webp') }}" alt="Slide 3 - Participe de um coral: infantil, juvenil, adolescente, jovem, adventista de Brasília, feminino, masculino e madrigal" decoding="async" width="1920" height="700">
+                <img src="{{ asset('img/carrousel/corais.webp') }}" alt="Slide 4 - Participe de um coral: infantil, juvenil, adolescente, jovem, adventista de Brasília, feminino, masculino e madrigal" decoding="async" width="1920" height="700">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -39,7 +42,7 @@
         </div>
         <div class="item">
             <a href="https://forms.gle/nmZztx1nZiij6i2E7" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/4.webp') }}" alt="Slide 4 - ASA" decoding="async" width="1280" height="720">
+                <img src="{{ asset('img/carrousel/4.webp') }}" alt="Slide 5 - ASA" decoding="async" width="1280" height="720">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -48,10 +51,7 @@
             </a>
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/5.webp') }}" alt="Slide 5" decoding="async" width="1280" height="720">
-        </div>
-        <div class="item">
-            <img src="{{ asset('img/carrousel/series-coisas-estranhas.webp') }}" alt="Slide 6 - Nova série dos domingos especiais: Coisas Estranhas, agosto e setembro, 19h" decoding="async" width="1920" height="700">
+            <img src="{{ asset('img/carrousel/5.webp') }}" alt="Slide 6" decoding="async" width="1280" height="720">
         </div>
     </div>
 
