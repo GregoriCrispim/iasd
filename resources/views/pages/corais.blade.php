@@ -146,8 +146,8 @@ $orchestras = [
     .corais-intro {
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         padding: 50px 40px;
-        border-radius: 15px;
-        margin-bottom: 50px;
+        border-radius: 15px 15px 0 0;
+        margin-bottom: 0;
         text-align: center;
     }
 
@@ -167,6 +167,52 @@ $orchestras = [
         text-align: justify;
         max-width: 900px;
         margin: 0 auto;
+    }
+
+    .corais-cta-section {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        padding: 45px 40px;
+        border-radius: 0 0 15px 15px;
+        margin: 0 0 50px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 8px 25px rgba(30, 58, 138, 0.25);
+    }
+
+    .corais-cta-section h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: 2.2em;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+
+    .corais-cta-section p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto 25px;
+        opacity: 0.95;
+    }
+
+    .corais-cta-button {
+        display: inline-block;
+        background: #ffffff;
+        color: #1e3a8a;
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .corais-cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: #f8f9fa;
     }
 
     .section-title {
@@ -263,6 +309,10 @@ $orchestras = [
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         gap: 15px;
         margin-bottom: 15px;
+    }
+
+    .group-images-gallery--three {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .image-wrapper {
@@ -467,6 +517,23 @@ $orchestras = [
             font-size: 2.2em;
         }
 
+        .corais-cta-section {
+            padding: 35px 25px;
+        }
+
+        .corais-cta-section h2 {
+            font-size: 1.8em;
+        }
+
+        .corais-cta-section p {
+            font-size: 0.95rem;
+        }
+
+        .corais-cta-button {
+            padding: 14px 30px;
+            font-size: 0.95rem;
+        }
+
         .section-title {
             font-size: 2em;
             margin: 40px 0 30px 0;
@@ -486,6 +553,10 @@ $orchestras = [
         }
 
         .group-images-gallery {
+            grid-template-columns: 1fr;
+        }
+
+        .group-images-gallery--three {
             grid-template-columns: 1fr;
         }
 
@@ -592,6 +663,15 @@ $orchestras = [
         </p>
     </div>
 
+    <!-- Seção de Inscrição -->
+    <div class="corais-cta-section acb-fullbleed">
+        <h2>Faça Parte dos Nossos Corais!</h2>
+        <p>Você tem dom para o canto e deseja servir a Deus através da música? Junte-se a um dos nossos corais e viva essa experiência transformadora!</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOx1UFYwKkJhHYkPQzXiUHCMZBxTKQjanOfLQtXZc27uZi2Q/viewform" target="_blank" rel="noopener noreferrer" class="corais-cta-button">
+            Inscreva-se Aqui
+        </a>
+    </div>
+
     <!-- Seção de Corais -->
     <h2 class="section-title acb-title-serif">Nossos Corais</h2>
 
@@ -605,7 +685,7 @@ $orchestras = [
                 <h3 class="group-name">{{ $choir['name'] }}</h3>
             </div>
             @if(isset($choir['images']) && count($choir['images']) > 0)
-            <div class="group-images-gallery">
+            <div class="group-images-gallery{{ count($choir['images']) === 3 ? ' group-images-gallery--three' : '' }}">
                 @foreach($choir['images'] as $index => $image)
                 <div class="image-wrapper">
                     <img src="{{ asset('img/corais/' . $image) }}" alt="{{ $choir['name'] }}" loading="lazy" decoding="async" class="group-image lightbox-trigger" data-full="{{ asset('img/corais/' . $image) }}">
@@ -643,7 +723,7 @@ $orchestras = [
                 <h3 class="group-name">{{ $orchestra['name'] }}</h3>
             </div>
             @if(isset($orchestra['images']) && count($orchestra['images']) > 0)
-            <div class="group-images-gallery">
+            <div class="group-images-gallery{{ count($orchestra['images']) === 3 ? ' group-images-gallery--three' : '' }}">
                 @foreach($orchestra['images'] as $image)
                 <div class="image-wrapper">
                     <img src="{{ asset('img/corais/' . $image) }}" alt="{{ $orchestra['name'] }}" loading="lazy" decoding="async" class="group-image lightbox-trigger" data-full="{{ asset('img/corais/' . $image) }}">
