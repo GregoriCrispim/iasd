@@ -13,27 +13,7 @@
       "Bash(ls -lh bootstrap/cache/*.php)",
       "Bash(ls -lh config/*.php)",
       "Bash(ls -lh app/Providers/*.php)",
-      "Bash(ls -lh storage/framework/views/*.php)",
-      "PowerShell(git merge *)",
-      "PowerShell(git stash *)",
-      "PowerShell(git *)",
-      "PowerShell(php artisan serve --host=127.0.0.1 --port=8000)",
-      "PowerShell(npm run *)",
-      "PowerShell(Invoke-WebRequest -Uri \"http://127.0.0.1:8000\" -Method HEAD -UseBasicParsing | Select-Object StatusCode)",
-      "PowerShell(wc *)",
-      "PowerShell(\\(git log origin/main..main --oneline\\).Count)",
-      "Bash(curl -s http://localhost:8000 -o /dev/null -w \"%{http_code}\")",
-      "Bash(git checkout *)",
-      "Bash(gh repo *)",
-      "Bash(curl -s http://127.0.0.1:8000)",
-      "Bash(gh pr *)",
-      "Bash(gh auth *)",
-      "Bash(git remote *)",
-      "Bash(git fetch *)",
-      "Bash(git cherry-pick *)",
-      "Bash(timeout 5 bash -c \"until curl -s http://127.0.0.1:8000 > /dev/null; do sleep 0.5; done && echo 'Servidor está rodando'\")",
-      "Bash(file C:/Users/formi/site_iasd/public/img/carrousel/*.webp)",
-      "Bash(git stash *)"
+      "Bash(ls -lh storage/framework/views/*.php)"
     ]
   }
 }
