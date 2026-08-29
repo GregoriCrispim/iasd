@@ -18,11 +18,11 @@
             <img src="{{ asset('img/carrousel/1.webp') }}" alt="Slide 1 - IASD Central de Brasília" fetchpriority="high" decoding="async" width="1280" height="720">
         </div>
         <div class="item">
-            <img src="{{ asset('img/carrousel/2.webp') }}" alt="Slide 2" decoding="async" width="1280" height="720">
+            <img src="{{ asset('img/carrousel/cemab.webp') }}" alt="Slide 2 - CEMAB, Centro Musical Adventista de Brasília: matricule-se, (61) 99612-5450" decoding="async" width="1920" height="700">
         </div>
         <div class="item">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOx1UFYwKkJhHYkPQzXiUHCMZBxTKQjanOfLQtXZc27uZi2Q/viewform" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/3.webp') }}" alt="Slide 3 - Corais" decoding="async" width="1280" height="720">
+                <img src="{{ asset('img/carrousel/corais.webp') }}" alt="Slide 3 - Participe de um coral: infantil, juvenil, adolescente, jovem, adventista de Brasília, feminino, masculino e madrigal" decoding="async" width="1920" height="700">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
