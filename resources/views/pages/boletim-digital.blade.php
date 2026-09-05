@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_29_08_2026';
+    $boletimBase = 'img/boletim/boletim_05_09_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
 
     $linkify = static function (?string $text): ?string {
@@ -22,10 +22,17 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da PRIMEIRA semana de SETEMBRO: Ore por constância e fidelidade na vida devocional, mantendo tempo diário de oração e leitura da Bíblia.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da SEGUNDA semana de SETEMBRO: Ore por fidelidade nos relacionamentos, especialmente no casamento e na família, sendo leal nas atitudes e palavras.';
 
     $boletins = [
-        // Com descrição (script DOCX)
+        // Com descrição (script DOCX) — Tela inicial sem texto
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Tela inicial.jpg',
+            'alt' => 'Tela inicial do boletim digital',
+            'title' => '',
+            'text' => '',
+        ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/ON VOICE.jpeg',
@@ -35,10 +42,24 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.23 (1).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.26.jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Entre Elas.jpg',
+            'alt' => 'Entre Elas — encontro feminino',
+            'title' => 'Entre Elas',
+            'text' => 'Vem aí o ENTRE ELAS! Prepare-se: nosso encontro será no dia 18/10. Reserve esta data!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/QS.jpg',
+            'alt' => 'Quebrando o Silêncio',
+            'title' => 'Quebrando o Silêncio',
+            'text' => 'No próximo sábado, dia 12/09, teremos uma programação especial do Quebrando o Silêncio. Participe conosco!',
         ],
         [
             'type' => 'image',
@@ -91,17 +112,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Aventureiros Pais.jpeg',
-            'alt' => 'Clube de Aventureiros — manhã especial com os pais',
-            'title' => 'Aventureiros',
-            'text' => 'O CLUBE DE AVENTUREIROS CRUZEIRO DO SUL convida para uma manhã muito especial! No domingo, dia 30/08/26, a partir das 9h, todas as classes estarão reunidas para aprender novas especialidades e, acima de tudo, descobrir ainda mais sobre o amor de Jesus. Às 10h: teremos uma palestra em homenagem aos pais, no Salão Jovem. Às 11h: será a hora do nosso Circuito de Brincadeiras com os pais! Preparem-se para uma manhã muito divertida, com alegria e muita diversão! Este será o último encontro do Clube antes do acampamento! Por isso, queremos muito contar com a presença de cada Aventureiro. Será um momento de muita alegria, aprendizado, amizade e comunhão e, claro, de estarmos cada vez mais perto de Jesus!',
+            'src' => $boletimBase . '/DOUTORES.jpeg',
+            'alt' => 'Doutores de Esperança',
+            'title' => 'Doutores de Esperança',
+            'text' => 'Junte-se aos Doutores de Esperança! Você já sentiu o desejo de levar um abraço, um sorriso e uma palavra de conforto para quem mais precisa? Nossos plantões estão de volta, e queremos convidar você para fazer parte dessa missão transformadora! Quer participar, mas ainda não faz parte do grupo? Esta é a sua oportunidade! Você pode começar acompanhando a nossa equipe como observador, conhecendo de perto a dinâmica do projeto antes de dar o próximo passo. Venha vivenciar essa experiência cheia de amor, empatia e alegria com a gente. Como posso me inscrever? Entre em contato agora mesmo com a Lu Mesquita pelo link https://wa.me/message/7M6UOXXMBRWRI1 e garanta as informações para participar. Venha fazer a diferença na vida de alguém e descubra a alegria de servir!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/DOUTORES.jpeg',
-            'alt' => 'Doutores de Esperança — plantão Hospital Santa Lúcia Sul',
-            'title' => 'Doutores de Esperança',
-            'text' => 'Junte-se aos Doutores de Esperança! Você já sentiu o desejo de levar um abraço, um sorriso e uma palavra de conforto para quem mais precisa? Nossos plantões estão de volta, e queremos convidar você para fazer parte dessa missão transformadora! Quando: 30 de agosto, às 13h30. Onde: Hospital Santa Lúcia Sul. Quer participar, mas ainda não faz parte do grupo? Esta é a sua oportunidade! Você pode começar acompanhando a nossa equipe como observador, conhecendo de perto a dinâmica do projeto antes de dar o próximo passo. Venha vivenciar essa experiência cheia de amor, empatia e alegria com a gente. Como posso me inscrever? Entre em contato agora mesmo com a Lu Mesquita pelo link https://wa.me/message/7M6UOXXMBRWRI1 e garanta as informações para participar. Venha fazer a diferença na vida de alguém e descubra a alegria de servir!',
+            'src' => $boletimBase . '/Classe de Saúde.jpeg',
+            'alt' => 'Classe de Saúde — temperança',
+            'title' => 'Classe de Saúde',
+            'text' => 'Viver com temperança não é sobre privação, mas sobre conquistar o equilíbrio que traz paz. Venha descobrir como o domínio próprio pode transformar suas escolhas, suas emoções e seus relacionamentos. "Mas o fruto do Espírito é: amor, alegria, paz, longanimidade, benignidade, bondade, fidelidade, mansidão, domínio próprio." — Gálatas 5:22-23. A maior vitória de uma pessoa não é controlar o mundo ao seu redor, mas aprender a dominar a si mesma. Participe da nossa palestra sobre temperança e fortaleça a sua mente para fazer escolhas mais sábias. "Melhor é o homem paciente do que o guerreiro, e o que domina o seu espírito do que o que toma uma cidade." — Provérbios 16:32. Em um mundo cheio de excessos e apressado, a temperança é a chave para uma vida leve, saudável e com propósito. Junte-se a nós nesta reflexão e assuma o controle do que realmente importa. "Pois Deus não nos deu um espírito de covardia, mas de poder, de amor e de domínio próprio." — 2 Timóteo 1:7.',
         ],
         [
             'type' => 'image',
@@ -112,7 +133,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Maná.jpeg',
+            'src' => $boletimBase . '/Cópia de Projeto Maná 2027  - TelãoYoutube.jpg',
             'alt' => 'Projeto Maná — assinatura da Lição da Escola Sabatina',
             'title' => 'Projeto Maná',
             'text' => 'A vida é feita de escolhas. E uma delas é decidir o que vai ocupar um espaço na nossa rotina. Assinar a Lição da Escola Sabatina é mais do que receber um material em casa. É escolher alimentar a fé, aprofundar o conhecimento da Palavra e reservar, todos os dias, um momento para estar com Deus. No Projeto Maná, queremos incentivar uma igreja que não apenas ouve sobre a Bíblia, mas que a estuda, vive e compartilha. Faça parte desse movimento. Assine a Lição da Escola Sabatina e transforme seu estudo em um compromisso diário com Deus. Acesse: https://projetomana.cpb.com.br/ ou pelo WhatsApp: (61) 98235-0008 ou ligue: (61) 3321-2021 ou 0800 979 0666.',
@@ -143,7 +164,7 @@
             'src' => $boletimBase . '/Série Coisas Estranhas.png',
             'alt' => 'Série Coisas Estranhas — Domingos Especiais',
             'title' => 'Coisas Estranhas',
-            'text' => 'Ao longo da história, milagres, curas e manifestações extraordinárias desafiaram explicações convencionais e continuam despertando fé, esperança e questionamentos. Mas uma pergunta permanece: todo fenômeno que parece sobrenatural revela necessariamente a ação de Deus? Nesse estudo, vamos além das aparências para investigar o significado dos sinais à luz das Escrituras. Descubra como a Bíblia apresenta o verdadeiro poder divino, por que alguns sinais podem impressionar sem revelar a verdade e qual é o papel do discernimento em um mundo cada vez mais fascinado pelo sobrenatural. À luz das Escrituras, este tema convida a uma reflexão profunda sobre o mundo invisível, o discernimento espiritual e a diferença entre mistério, engano e verdade. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
+            'text' => 'Poucos temas no cristianismo despertam tanta curiosidade e controvérsia quanto o fenômeno das "línguas estranhas". Seria uma evidência incontestável da presença do Espírito Santo, uma experiência emocional intensa ou uma prática que precisa ser compreendida à luz da verdade bíblica? Nesta mensagem, vamos investigar a origem e o propósito desse dom, compreender seu significado na experiência cristã e descobrir se o verdadeiro sinal da atuação de Deus está apenas em manifestações extraordinárias ou em uma vida transformada. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
         ],
         [
             'type' => 'image',
@@ -189,13 +210,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Criacionismo.jpg',
-            'alt' => 'Sábado da Criação — Ciência, Fé e Verdade',
-            'title' => 'Sábado da Criação',
-            'text' => 'Ciência, Fé e Verdade - Será que ciência e religião precisam estar em lados opostos? No Sábado da Criação, duas palestras vão provocar reflexões profundas sobre aquilo que ouvimos, aquilo em que acreditamos e a maneira como compreendemos alguns aspetos da criação. Às 10h ocorrerá a palestra com o tema: “Quem tem ouvidos, ouça!” e às 16h a palestra intitulada “Ciência versus religião: Um falso dilema.” Com Tiago Alves Jorge Souza, Mestre e Doutor em Genética pela USP. Uma programação para quem gosta de pensar, questionar e ir além das respostas prontas. Com o encontro da ciência e da fé, talvez você descubra que algumas questões são mais complexas e mais fascinantes do que parecem. Acontecerá na Igreja Adventista do Lago Sul, no sábado, dia 29 de agosto de 2026. Participe!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Clube do Livro.jpg',
             'alt' => 'Clube do Livro Cristão',
             'title' => 'Clube do Livro',
@@ -210,7 +224,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/PG Liberdade Religiosa .jpeg',
+            'src' => $boletimBase . '/Liberdade Religiosa.jpg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
             'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. O próximo encontro será no dia 27 de agosto, via Microsoft Teams. Contaremos com a ilustre presença do Pr. Hélio Carnassale — conferencista e uma das principais referências da Igreja Adventista do Sétimo Dia na área de Liberdade Religiosa —, que ministrará sobre o instigante tema: "Haverá liberdade religiosa após o decreto dominical?" Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
@@ -227,35 +241,21 @@
             'src' => $boletimBase . '/Firmados na Palavra.jpeg',
             'alt' => 'Curso Bíblico Firmados na Palavra',
             'title' => 'Firmados na Palavra',
-            'text' => 'Queridos irmãos, temos um convite especial para toda a família! A partir do dia 30 de agosto, aos domingos, às 18h, teremos o Curso Bíblico "Firmados na Palavra". Será um momento precioso para conhecer, compreender e viver as verdades da Bíblia, fortalecer a fé e crescermos juntos na caminhada com Deus. Local: Igreja Adventista Central de Brasília. Todos os domingos, às 18h. Traga sua família e seus amigos para estudar a Palavra conosco! "Ensina-me, SENHOR, o caminho dos teus mandamentos..." — Salmo 119:33. Esperamos vocês!',
+            'text' => 'Queridos irmãos, temos um convite especial para toda a família! Aos domingos, às 18h, teremos o Curso Bíblico "Firmados na Palavra". Será um momento precioso para conhecer, compreender e viver as verdades da Bíblia, fortalecer a fé e crescermos juntos na caminhada com Deus. Local: Igreja Adventista Central de Brasília. Todos os domingos, às 18h. Traga sua família e seus amigos para estudar a Palavra conosco! "Ensina-me, SENHOR, o caminho dos teus mandamentos..." — Salmo 119:33. Esperamos vocês!',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/SEMINÁRIO.jpeg',
             'alt' => 'Seminário Eventos Finais do Juízo',
             'title' => 'Seminário Eventos Finais do Juízo',
-            'text' => 'No próximo sábado, dia 5 de setembro, às 10h45, na sala da Classe Novo Tempo, teremos o início do nosso primeiro seminário sobre os eventos finais do juízo. Neste encontro, vamos explorar profundamente os capítulos 12 e 13 do livro de Apocalipse, sob a condução especial do professor Manuel Morais. Venha descobrir e aprender mais sobre os fascinantes símbolos apocalípticos: O Dragão, A Mulher e As Bestas. Sua presença é muito importante! Venha e traga seus amigos para esse momento de aprendizado e comunhão. Esperamos você!',
+            'text' => 'Nos sábados, às 10h45, na sala da Classe Novo Tempo, teremos o nosso primeiro seminário sobre os eventos finais do juízo. Vamos explorar profundamente os capítulos 12 e 13 do livro de Apocalipse, sob a condução especial do professor Manuel Morais. Venha descobrir e aprender mais sobre os fascinantes símbolos apocalípticos: O Dragão, A Mulher e As Bestas. Sua presença é muito importante! Venha e traga seus amigos para esse momento de aprendizado e comunhão. Esperamos você!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/UNIVERSITÁRIOS.jpg',
-            'alt' => 'Encontro de Universitários — UCOB',
-            'title' => 'Encontro de Universitários',
-            'text' => 'É hoje o nosso Encontro da Igreja Universitária Adventista! Um momento especial pra gente se encontrar, fortalecer nossa comunidade, compartilhar experiências e crescer juntos! Sábado, dia 29 de agosto, às 17h. Local: UCOB. E depois do encontro ainda teremos lanche e jogos pra fechar a noite daquele jeito! Confirma sua presença aqui: https://eventos.adventistasbrasilia.org.br/event/evento/394. Chama a galera e vem com a gente!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Comunidade.jpeg',
-            'alt' => 'Comunidade Jovem — Espaço Jovem',
+            'src' => $boletimBase . '/Super Sexta.jpeg',
+            'alt' => 'Super Sexta — Comunidade Jovem',
             'title' => 'Comunidade Jovem',
-            'text' => 'Neste sábado, teremos um encontro muito especial da nossa comunidade jovem! Será um momento incrível para aprendermos mais sobre Deus e fortalecermos a nossa fé juntos. Sábado, 29 de agosto de 2026, às 17h30. Local: Espaço Jovem, na Igreja Adventista Central de Brasília. Esperamos por você e seus amigos para estarmos juntos! Vem com a gente!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/convite_jotinha_18h_16_9.png',
-            'alt' => 'Jotinha — bandinha infantil',
-            'title' => 'Jotinha',
-            'text' => 'Convite Especial para as Famílias! Neste sábado, 29 de agosto de 2026, às 18h, teremos mais um Jotinha! Nossa bandinha continua crescendo, e é uma alegria ver crianças e jovens cantando, tocando instrumentos e desenvolvendo os talentos que Deus lhes deu. No Jotinha, seu filho tem a oportunidade de desenvolver seus talentos, fazer novas amizades, fortalecer os valores cristãos, crescer no amor a Deus e participar ativamente da igreja. Traga seus filhos e convide também amigos, vizinhos, sobrinhos e netos! Sábado, 29 de agosto de 2026, às 18h. Esperamos sua família para um fim de tarde especial de louvor, aprendizado, amizade e muita alegria!',
+            'text' => 'A Super Sexta vem aí! Uma noite como nunca tivemos antes! Muito louvor, adoração, conexão e uma experiência preparada especialmente para jovens e adolescentes. Convide seus amigos para viverem essa experiência com você. Queremos todos juntos nessa noite especial! Sexta-feira, dia 11/09, às 19h30 no Espaço Jovem. Participe!',
         ],
         [
             'type' => 'image',
