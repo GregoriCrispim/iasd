@@ -31,6 +31,7 @@ class SitemapController extends Controller
             url('/clube-do-livro'),
             url('/corais'),
             url('/doutores-da-esperanca'),
+            url('/map'),
             url('/time-de-desenvolvimento'),
             url('/faq'),
         ];
