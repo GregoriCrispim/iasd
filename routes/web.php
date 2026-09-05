@@ -169,6 +169,7 @@ Route::get('/programacoes', [PageController::class, 'programacoes'])->name('prog
 Route::view('/boletim-digital', 'pages.boletim-digital')->name('boletim-digital');
 Route::get('/cpb', [PageController::class, 'cpb'])->name('cpb');
 Route::get('/asa', [PageController::class, 'asa'])->name('asa');
+Route::get('/map', [PageController::class, 'map'])->name('map');
 Route::get('/secretaria', [PageController::class, 'secretaria'])->name('secretaria');
 Route::get('/criacionismo', [PageController::class, 'criacionismo'])->name('criacionismo');
 Route::get('/evidencias-biblicas', [PageController::class, 'evidenciasBiblicas'])->name('evidencias-biblicas');

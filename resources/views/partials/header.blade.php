@@ -16,7 +16,7 @@
                     <li><a href="{{ route('corais') }}">Corais</a></li>
                     <!-- <li><a href="">Cursos</a></li> -->
                     <li><a href="{{ route('doutores-da-esperanca') }}">Doutores da esperança</a></li>
-                    <!-- <li><a href="">MAP</a></li> -->
+                    <li><a href="{{ route('map') }}">MAP</a></li>
                     <!-- <li><a href="">Ministério de Oração</a></li> -->
                     <li><a href="{{ route('desbravadores-cruzeiro-do-sul') }}">Clube de Desbravadores</a></li>
                     <li><a href="{{ route('ministerio-mulher') }}">Mulher Plena</a></li>
