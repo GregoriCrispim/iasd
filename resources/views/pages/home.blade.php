@@ -22,7 +22,7 @@
         </div>
         <div class="item">
             <a href="{{ route('cemab') }}" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/cemab.webp') }}" alt="Slide 3 - CEMAB, Centro Musical Adventista de Brasília: matricule-se, (61) 99612-5450" decoding="async" width="1920" height="700">
+                <img src="{{ asset('img/carrousel/cemab.webp') }}" alt="Slide 3 - CEMAB, Centro Musical Adventista de Brasília: matricule-se, (61) 98435-8201" decoding="async" width="1600" height="583">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>

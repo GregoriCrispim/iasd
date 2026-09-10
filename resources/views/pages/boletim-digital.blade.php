@@ -7,8 +7,9 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_05_09_2026';
+    $boletimBase = 'img/boletim/boletim_12_09_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
+    $oracaoMinBase = $boletimBase . '/M. Oração';
 
     $linkify = static function (?string $text): ?string {
         if ($text === null || $text === '') {
@@ -22,7 +23,7 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da SEGUNDA semana de SETEMBRO: Ore por fidelidade nos relacionamentos, especialmente no casamento e na família, sendo leal nas atitudes e palavras.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da TERCEIRA semana de SETEMBRO é: Ore por um coração generoso, disposto a compartilhar, tempo, atenção, recursos.';
 
     $boletins = [
         // Com descrição (script DOCX) — Tela inicial sem texto
@@ -42,7 +43,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.26.jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.25 (2).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -59,7 +60,7 @@
             'src' => $boletimBase . '/QS.jpg',
             'alt' => 'Quebrando o Silêncio',
             'title' => 'Quebrando o Silêncio',
-            'text' => 'No próximo sábado, dia 12/09, teremos uma programação especial do Quebrando o Silêncio. Participe conosco!',
+            'text' => 'No dia 12/09, teremos uma programação especial do Quebrando o Silêncio. Participe conosco!',
         ],
         [
             'type' => 'image',
@@ -91,6 +92,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (9).jpeg',
+            'alt' => 'Reunião de Oração',
+            'title' => 'Reunião de Oração',
+            'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Quartas da Família (1).jpg',
             'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
             'title' => 'Quartas da Família',
@@ -108,11 +116,11 @@
             'src' => $boletimBase . '/Entrega de livros.jpg',
             'alt' => 'Entrega de livros missionários',
             'title' => 'Entrega de Livros',
-            'text' => 'O descanso acabou, mas a nossa missão só está começando! Agosto chegou e, com ele, renovamos nossas energias para o maior compromisso do nosso ano. As férias ficaram para trás, e agora o convite é direto para você: liderar e continuar o trabalho transformador de levar esperança às pessoas através do Impacto Esperança. Cada livro entregue é uma semente de transformação, uma resposta a uma oração e uma mensagem que atravessa vidas. A contagem regressiva já começou! Não deixe para depois. Ajuste sua agenda e junte-se a nós nessa corrente de fé e ação. A mensagem não pode parar, e a sua voz e suas mãos fazem toda a diferença nessa missão! Quem está pronto para fazer a diferença neste mês? Passe no Centro White e retire os livros que pretende entregar durante a semana.',
+            'text' => 'O descanso de agosto ficou para trás, mas a nossa missão não para! Setembro chegou trazendo um novo fôlego e o grande momento de avançarmos ainda mais com o Impacto Esperança. Cada livro entregue é uma semente plantada, uma resposta a uma oração e uma oportunidade real de levar esperança a quem precisa. A contagem regressiva já começou e a sua participação é indispensável para que essa mensagem continue transformando vidas. Ajuste sua agenda, una-se a nós nessa corrente de fé e ação e faça a diferença neste mês de setembro! Passe no Centro White, retire os livros que pretende entregar durante a semana e venha ser uma voz ativa nessa missão. Quem está pronto?',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/DOUTORES.jpeg',
+            'src' => $boletimBase . '/Doutores.jpeg',
             'alt' => 'Doutores de Esperança',
             'title' => 'Doutores de Esperança',
             'text' => 'Junte-se aos Doutores de Esperança! Você já sentiu o desejo de levar um abraço, um sorriso e uma palavra de conforto para quem mais precisa? Nossos plantões estão de volta, e queremos convidar você para fazer parte dessa missão transformadora! Quer participar, mas ainda não faz parte do grupo? Esta é a sua oportunidade! Você pode começar acompanhando a nossa equipe como observador, conhecendo de perto a dinâmica do projeto antes de dar o próximo passo. Venha vivenciar essa experiência cheia de amor, empatia e alegria com a gente. Como posso me inscrever? Entre em contato agora mesmo com a Lu Mesquita pelo link https://wa.me/message/7M6UOXXMBRWRI1 e garanta as informações para participar. Venha fazer a diferença na vida de alguém e descubra a alegria de servir!',
@@ -120,9 +128,9 @@
         [
             'type' => 'image',
             'src' => $boletimBase . '/Classe de Saúde.jpeg',
-            'alt' => 'Classe de Saúde — temperança',
+            'alt' => 'Classe de Saúde — saúde mental',
             'title' => 'Classe de Saúde',
-            'text' => 'Viver com temperança não é sobre privação, mas sobre conquistar o equilíbrio que traz paz. Venha descobrir como o domínio próprio pode transformar suas escolhas, suas emoções e seus relacionamentos. "Mas o fruto do Espírito é: amor, alegria, paz, longanimidade, benignidade, bondade, fidelidade, mansidão, domínio próprio." — Gálatas 5:22-23. A maior vitória de uma pessoa não é controlar o mundo ao seu redor, mas aprender a dominar a si mesma. Participe da nossa palestra sobre temperança e fortaleça a sua mente para fazer escolhas mais sábias. "Melhor é o homem paciente do que o guerreiro, e o que domina o seu espírito do que o que toma uma cidade." — Provérbios 16:32. Em um mundo cheio de excessos e apressado, a temperança é a chave para uma vida leve, saudável e com propósito. Junte-se a nós nesta reflexão e assuma o controle do que realmente importa. "Pois Deus não nos deu um espírito de covardia, mas de poder, de amor e de domínio próprio." — 2 Timóteo 1:7.',
+            'text' => 'A CORAGEM DE OLHAR PARA DENTRO. Neste sábado, vamos conversar sobre saúde mental e sobre a coragem de reconhecer o que acontece dentro de nós. Olhar para dentro não é fraqueza. É o primeiro passo para compreender emoções, identificar padrões, cuidar das feridas e construir uma vida com mais equilíbrio, consciência e saúde. Cuidar da mente também é cuidar da vida. Sábado, 12/09/26, às 11h. Uma reflexão para quem deseja se conhecer, se cuidar e viver melhor.',
         ],
         [
             'type' => 'image',
@@ -137,6 +145,13 @@
             'alt' => 'Projeto Maná — assinatura da Lição da Escola Sabatina',
             'title' => 'Projeto Maná',
             'text' => 'A vida é feita de escolhas. E uma delas é decidir o que vai ocupar um espaço na nossa rotina. Assinar a Lição da Escola Sabatina é mais do que receber um material em casa. É escolher alimentar a fé, aprofundar o conhecimento da Palavra e reservar, todos os dias, um momento para estar com Deus. No Projeto Maná, queremos incentivar uma igreja que não apenas ouve sobre a Bíblia, mas que a estuda, vive e compartilha. Faça parte desse movimento. Assine a Lição da Escola Sabatina e transforme seu estudo em um compromisso diário com Deus. Acesse: https://projetomana.cpb.com.br/ ou pelo WhatsApp: (61) 98235-0008 ou ligue: (61) 3321-2021 ou 0800 979 0666.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Curso de Pão de Santa Ceia.jpg',
+            'alt' => 'Curso de Pães de Santa Ceia — ASA',
+            'title' => 'Curso de Pães de Santa Ceia',
+            'text' => 'Aprenda a fazer o tradicional Pãozinho de Santa Ceia! A ASA - Ação Solidária Adventista convida você para uma manhã especial com a tia Lourdes Castanho, acontecerá no dia 27/09, às 09h, na cozinha da ASA. O evento dispõe de 25 vagas e a inscrição é solidária: doe 1 litro de leite e garanta a sua inscrição. Acesse o link para se inscrever: https://forms.gle/DkaVwq9wbFjKoqm8A',
         ],
         [
             'type' => 'image',
@@ -189,7 +204,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/CEMAB.jpg',
+            'src' => $boletimBase . '/Aulas CEMAB.jpg',
             'alt' => 'CEMAB — matrículas abertas',
             'title' => 'CEMAB',
             'text' => 'O Centro Musical Adventista de Brasília está com matrículas abertas. O futuro musical do seu filho começa aqui! Queridos pais e responsáveis, as matrículas para o 2º módulo de 2026 do CEMAB já estão abertas! Sabemos como a música é fundamental para o desenvolvimento do foco, da criatividade e da disciplina das crianças e jovens. Por isso, preparamos um semestre com muita prática e aprendizado! Vagas limitadas: Garanta o melhor horário para a rotina do seu filho. Clique no link e garanta agora mesmo sua vaga: https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAbJLm9tUNzdTWjRUSzZPNzFUUVlOODRYOFdGRVRRNC4u',
@@ -224,14 +239,14 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Liberdade Religiosa.jpg',
+            'src' => $boletimBase . '/PG LR.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
-            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. O próximo encontro será no dia 27 de agosto, via Microsoft Teams. Contaremos com a ilustre presença do Pr. Hélio Carnassale — conferencista e uma das principais referências da Igreja Adventista do Sétimo Dia na área de Liberdade Religiosa —, que ministrará sobre o instigante tema: "Haverá liberdade religiosa após o decreto dominical?" Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. O próximo encontro será no dia 17 de setembro, via Microsoft Teams. Contaremos com a presença de Manassés Queiroz, teólogo, terapeuta familiar, individual e de casais, e sexólogo, com especializações em relacionamentos, sexualidade e dinâmica familiar. Com formação em Teologia e Publicidade, reúne mais de 34 anos de experiência pessoal e profissional dedicados ao estudo, à compreensão e ao cuidado das relações humanas, ajudando pessoas, casais e famílias a construírem relacionamentos mais saudáveis, conscientes e significativos. Tema do encontro: O diagnóstico da liberdade. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Código 318.png',
+            'src' => $boletimBase . '/Código 318.jpeg',
             'alt' => 'Código 318 — círculo de homens',
             'title' => 'Código 318',
             'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. Primeira reunião: 12 de setembro, 16h30, Salão Jovem. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
