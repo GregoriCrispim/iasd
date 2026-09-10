@@ -137,6 +137,14 @@ class PageController extends Controller
     }
 
     /**
+     * Exibe a página do MAP (Ministério Adventista das Possibilidades)
+     */
+    public function map()
+    {
+        return view('pages.map');
+    }
+
+    /**
      * Exibe a página da Secretaria
      */
     public function secretaria()
