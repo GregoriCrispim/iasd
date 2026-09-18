@@ -7,9 +7,8 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_12_09_2026';
+    $boletimBase = 'img/boletim/boltetim_19_09_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
-    $oracaoMinBase = $boletimBase . '/M. Oração';
 
     $linkify = static function (?string $text): ?string {
         if ($text === null || $text === '') {
@@ -23,17 +22,10 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da TERCEIRA semana de SETEMBRO é: Ore por um coração generoso, disposto a compartilhar, tempo, atenção, recursos.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da QUARTA semana de SETEMBRO é: Ore para permanecer firme nos seus valores e princípios, mesmo quando ninguém está observando.';
 
     $boletins = [
-        // Com descrição (script DOCX) — Tela inicial sem texto
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Tela inicial.jpg',
-            'alt' => 'Tela inicial do boletim digital',
-            'title' => '',
-            'text' => '',
-        ],
+        // Com descrição (script DOCX)
         [
             'type' => 'image',
             'src' => $boletimBase . '/ON VOICE.jpeg',
@@ -43,7 +35,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.25 (2).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.25 (3).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -54,13 +46,6 @@
             'alt' => 'Entre Elas — encontro feminino',
             'title' => 'Entre Elas',
             'text' => 'Vem aí o ENTRE ELAS! Prepare-se: nosso encontro será no dia 18/10. Reserve esta data!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/QS.jpg',
-            'alt' => 'Quebrando o Silêncio',
-            'title' => 'Quebrando o Silêncio',
-            'text' => 'No dia 12/09, teremos uma programação especial do Quebrando o Silêncio. Participe conosco!',
         ],
         [
             'type' => 'image',
@@ -89,13 +74,6 @@
             'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
             'title' => 'Oi Amiga',
             'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. As reuniões serão on-line. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve a sua agenda. Acesse o link e inscreva-se: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform',
-        ],
-        [
-            'type' => 'image',
-            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (9).jpeg',
-            'alt' => 'Reunião de Oração',
-            'title' => 'Reunião de Oração',
-            'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
         ],
         [
             'type' => 'image',
@@ -128,9 +106,16 @@
         [
             'type' => 'image',
             'src' => $boletimBase . '/Classe de Saúde.jpeg',
-            'alt' => 'Classe de Saúde — saúde mental',
+            'alt' => 'Classe de Saúde — Por que nós dormimos?',
             'title' => 'Classe de Saúde',
-            'text' => 'A CORAGEM DE OLHAR PARA DENTRO. Neste sábado, vamos conversar sobre saúde mental e sobre a coragem de reconhecer o que acontece dentro de nós. Olhar para dentro não é fraqueza. É o primeiro passo para compreender emoções, identificar padrões, cuidar das feridas e construir uma vida com mais equilíbrio, consciência e saúde. Cuidar da mente também é cuidar da vida. Sábado, 12/09/26, às 11h. Uma reflexão para quem deseja se conhecer, se cuidar e viver melhor.',
+            'text' => 'POR QUE NÓS DORMIMOS? Uma visão científica e espiritual do sono. Todas as noites, quando fechamos os olhos, entramos em um estado que ainda guarda muitos mistérios. Enquanto aparentemente estamos apenas descansando, o nosso organismo continua em atividade, seguindo processos essenciais à vida. O que realmente acontece? O que acontece durante esse período de repouso? Por que o sono ocupa uma parte tão significativa da nossa existência? O que podemos aprender ao observar o sono pela ciência e pela espiritualidade? Nesta palestra, vamos lançar um olhar diferente sobre esse momento tão comum e, ao mesmo tempo, tão extraordinário. Ciência e espiritualidade se encontram para nos conduzir a uma reflexão profunda. Descubra mais sobre o sono, o descanso e o cuidado integral com o ser humano. Prepare-se para enxergar suas noites de sono de uma maneira que talvez você nunca tenha imaginado! Qual é o seu maior interesse ao explorar esse tema: os mistérios da mente na ciência ou a visão espiritual?',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/CEVISA.jpeg',
+            'alt' => 'Excursão especial de bem-estar — CEVISA',
+            'title' => 'Excursão CEVISA',
+            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA)! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações: https://wa.me/qr/XSR5HTOUQV4JA1 Venha viver essa experiência de renovação e comunhão!',
         ],
         [
             'type' => 'image',
@@ -145,6 +130,13 @@
             'alt' => 'Projeto Maná — assinatura da Lição da Escola Sabatina',
             'title' => 'Projeto Maná',
             'text' => 'A vida é feita de escolhas. E uma delas é decidir o que vai ocupar um espaço na nossa rotina. Assinar a Lição da Escola Sabatina é mais do que receber um material em casa. É escolher alimentar a fé, aprofundar o conhecimento da Palavra e reservar, todos os dias, um momento para estar com Deus. No Projeto Maná, queremos incentivar uma igreja que não apenas ouve sobre a Bíblia, mas que a estuda, vive e compartilha. Faça parte desse movimento. Assine a Lição da Escola Sabatina e transforme seu estudo em um compromisso diário com Deus. Acesse: https://projetomana.cpb.com.br/ ou pelo WhatsApp: (61) 98235-0008 ou ligue: (61) 3321-2021 ou 0800 979 0666.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Tersouros do Céu.jpeg',
+            'alt' => 'App Tesouros do Céu — APlaC',
+            'title' => 'Tesouros do Céu',
+            'text' => 'A APlaC lança APP gratuito para ensinar educação financeira para as novas gerações. "Tesouros do Céu" é uma ferramenta didática e divertida que reúne tarefas, pontos, avatares bíblicos e devocional diário para ajudar os pais a ensinar mordomia cristã desde a infância. https://noticias.adventistas.org/pt/tesouros-do-ceu/',
         ],
         [
             'type' => 'image',
@@ -180,13 +172,6 @@
             'alt' => 'Série Coisas Estranhas — Domingos Especiais',
             'title' => 'Coisas Estranhas',
             'text' => 'Poucos temas no cristianismo despertam tanta curiosidade e controvérsia quanto o fenômeno das "línguas estranhas". Seria uma evidência incontestável da presença do Espírito Santo, uma experiência emocional intensa ou uma prática que precisa ser compreendida à luz da verdade bíblica? Nesta mensagem, vamos investigar a origem e o propósito desse dom, compreender seu significado na experiência cristã e descobrir se o verdadeiro sinal da atuação de Deus está apenas em manifestações extraordinárias ou em uma vida transformada. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/cientistas adventistas.jpg',
-            'alt' => 'VII Congresso Internacional de Cientistas Adventistas',
-            'title' => 'Congresso de Cientistas Adventistas',
-            'text' => 'Ciência, Fé e Redenção: interpretando o mundo à luz do grande conflito. A sétima edição do Congresso Internacional Multidisciplinar dos Cientistas Adventistas será realizada de 11 a 13 de setembro de 2026 em Cachoeira–BA, e promete ser tão grandiosa quanto suas edições anteriores. Sob o tema geral "Ciência, Fé e Redenção: interpretando o mundo à luz do grande conflito", o congresso convida especialistas de várias disciplinas para debater os mais recentes avanços e desafios. Com um leque diversificado de palestras, o evento será uma plataforma excepcional para troca de ideias pioneiras e fomento de parcerias produtivas. Representa uma chance única para aqueles que desejam ampliar seus horizontes intelectuais e espirituais, sejam profissionais, estudantes ou entusiastas. Faça sua inscrição pelo link: https://www.even3.com.br/vii-congresso-internacional-de-cientistas-adventistas-715277/',
         ],
         [
             'type' => 'image',
@@ -239,17 +224,24 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/PG LR.jpeg',
+            'src' => $boletimBase . '/Liberdade Religiosa capa divulgação.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
             'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. O próximo encontro será no dia 17 de setembro, via Microsoft Teams. Contaremos com a presença de Manassés Queiroz, teólogo, terapeuta familiar, individual e de casais, e sexólogo, com especializações em relacionamentos, sexualidade e dinâmica familiar. Com formação em Teologia e Publicidade, reúne mais de 34 anos de experiência pessoal e profissional dedicados ao estudo, à compreensão e ao cuidado das relações humanas, ajudando pessoas, casais e famílias a construírem relacionamentos mais saudáveis, conscientes e significativos. Tema do encontro: O diagnóstico da liberdade. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Código 318.jpeg',
+            'src' => $boletimBase . '/318 capa.jpeg',
             'alt' => 'Código 318 — círculo de homens',
             'title' => 'Código 318',
-            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. Primeira reunião: 12 de setembro, 16h30, Salão Jovem. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Série Criacionismo.jpeg',
+            'alt' => 'Série Criacionismo — outubro',
+            'title' => 'Criacionismo',
+            'text' => 'Vem aí uma série especial sobre o criacionismo! Em outubro, teremos um mês dedicado a relembrar as obras do nosso Criador. No dia 24/10, ápice da programação, às 9h, teremos a palestra: \'Trocando as lentes: A Diferença entre a Visão Humana e a Divina\', à tarde \'Uma Viagem no Tempo\', tendo como palestrante Tiago Alves Jorge de Souza. Programe-se para participar!',
         ],
         [
             'type' => 'image',
@@ -267,10 +259,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Super Sexta.jpeg',
-            'alt' => 'Super Sexta — Comunidade Jovem',
-            'title' => 'Comunidade Jovem',
-            'text' => 'A Super Sexta vem aí! Uma noite como nunca tivemos antes! Muito louvor, adoração, conexão e uma experiência preparada especialmente para jovens e adolescentes. Convide seus amigos para viverem essa experiência com você. Queremos todos juntos nessa noite especial! Sexta-feira, dia 11/09, às 19h30 no Espaço Jovem. Participe!',
+            'src' => $boletimBase . '/Roda de conversa.jpeg',
+            'alt' => 'Roda de conversa — Setembro Amarelo',
+            'title' => 'Roda de Conversa',
+            'text' => 'A Unidade 5 da Escola Sabatina da Igreja Central de Brasília convida para a roda de conversa do Setembro Amarelo, mês de prevenção ao suicídio. O encontro abordará o tema \'Como abordar pessoas com depressão e quais os limites do apoio\', com a participação do pastor Lucas Alves e das psicólogas Nathalia Almeida e Gleice Barros. O evento será realizado no dia 19/09/26, às 16h, na Sala de Saúde. Acesse o link para participar: https://forms.gle/yiUdhg2ayFNJFXmE6',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/O Semeador.jpg',
+            'alt' => 'Bíblias para Semeadores',
+            'title' => 'Bíblias',
+            'text' => 'Queridos professores da Escola Sabatina e amigos semeadores da Palavra de Deus: aqueles que precisarem de Bíblias para seus trabalhos podem procurar o líder dos Semeadores irmão Josias Gonsioroski para obter o material.',
         ],
         [
             'type' => 'image',
