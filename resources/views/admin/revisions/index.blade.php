@@ -8,7 +8,7 @@
 @section('heading', 'Revisões')
 
 @section('actions')
-    @if ($user->isSuperAdmin() || $user->pages()->wherePivot('can_edit', true)->exists())
+    @if ($user->hasFullAdminAccess() || $user->pages()->wherePivot('can_edit', true)->exists())
         <a href="{{ route('admin.revisions.create') }}" class="btn"><i class="bi bi-plus-lg"></i> Nova revisão</a>
     @endif
 @endsection
@@ -85,7 +85,7 @@
                                         <button type="button" class="btn btn-danger btn-sm" onclick="admOpenDialog('reject-{{ $revision->id }}')"><i class="bi bi-x-lg"></i></button>
                                     @endif
 
-                                    @if ($user->isSuperAdmin())
+                                    @if ($user->hasFullAdminAccess())
                                         <form method="POST" action="{{ route('admin.revisions.destroy', $revision) }}" onsubmit="return confirm('Remover esta revisão?');">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-ghost btn-sm" title="Remover"><i class="bi bi-trash"></i></button>

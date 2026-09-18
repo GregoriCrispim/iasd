@@ -4,8 +4,8 @@
     $activeNav = 'users';
     $editing = true;
     $auth = auth('admin')->user();
-    $canAssignAdvanced = $auth->isSuperAdmin();
-    $canManagePagePerms = $canManagePagePerms ?? ($auth->isSuperAdmin() || $auth->isManager());
+    $canAssignAdvanced = $canAssignAdvanced ?? ($auth->hasFullAdminAccess());
+    $canManagePagePerms = $canManagePagePerms ?? ($auth->hasFullAdminAccess() || $auth->isManager());
 @endphp
 @section('title', 'Editar usuário')
 @section('heading', 'Editar usuário')

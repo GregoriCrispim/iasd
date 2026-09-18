@@ -20,7 +20,7 @@ class DashboardController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $isCmsUser = $user->hasAnyRoleName(['super_admin', 'manager', 'collaborator']);
+        $isCmsUser = $user->hasAnyRoleName(['super_admin', 'admin', 'manager', 'collaborator']);
         $canGaleria = $user->canManageGaleria();
 
         $stats = [];
@@ -29,12 +29,12 @@ class DashboardController extends Controller
             $stats['my_revisions'] = CmsRevision::query()->where('created_by', $user->id)->count();
         }
 
-        if ($user->isSuperAdmin()) {
+        if ($user->hasFullAdminAccess()) {
             $stats['pages'] = CmsPage::query()->count();
             $stats['blocks'] = CmsBlock::query()->count();
         }
 
-        if ($user->hasAnyRoleName(['super_admin', 'manager'])) {
+        if ($user->hasAnyRoleName(['super_admin', 'admin', 'manager'])) {
             $stats['pending'] = CmsWorkflow::pendingApprovalsCount($user);
         }
 
@@ -45,7 +45,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', [
             'stats' => $stats,
-            'isSuper' => $user->isSuperAdmin(),
+            'isSuper' => $user->hasFullAdminAccess(),
             'isManager' => $user->isManager(),
             'isCmsUser' => $isCmsUser,
             'canGaleria' => $canGaleria,

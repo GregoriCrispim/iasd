@@ -105,6 +105,19 @@ class User extends Authenticatable
         return $this->roles->contains('name', 'super_admin');
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->roles->contains('name', 'admin');
+    }
+
+    /**
+     * Super Admin ou Admin: acesso total ao painel (exceto exclusão do Super Admin).
+     */
+    public function hasFullAdminAccess(): bool
+    {
+        return $this->hasAnyRoleName(['super_admin', 'admin']);
+    }
+
     public function isManager(): bool
     {
         return $this->roles->contains('name', 'manager');
@@ -155,6 +168,7 @@ class User extends Authenticatable
             'roles',
             fn ($q) => $q->whereIn('name', [
                 'super_admin',
+                'admin',
                 'manager',
                 'collaborator',
                 'fotografia_lider',
@@ -170,6 +184,7 @@ class User extends Authenticatable
     {
         return $this->hasAnyRoleName([
             'super_admin',
+            'admin',
             'manager',
             'collaborator',
             'fotografia_lider',
@@ -232,6 +247,7 @@ class User extends Authenticatable
     {
         return $this->hasAnyRoleName([
             'super_admin',
+            'admin',
             'manager',
             'fotografia_lider',
             'fotografia_colaborador',
@@ -243,7 +259,46 @@ class User extends Authenticatable
      */
     public function canManageGalleryAlbums(): bool
     {
-        return $this->hasAnyRoleName(['super_admin', 'manager', 'fotografia_lider']);
+        return $this->hasAnyRoleName(['super_admin', 'admin', 'manager', 'fotografia_lider']);
+    }
+
+    /**
+     * Conta protegida: Super Admin não pode ser excluído.
+     */
+    public function isProtectedFromDeletion(): bool
+    {
+        return $this->isSuperAdmin();
+    }
+
+    /**
+     * Quem pode editar/gerenciar esta conta no painel de usuários.
+     * - Super Admin gerencia todos
+     * - Ninguém além do Super Admin gerencia o Super Admin
+     * - Admin não gerencia outro Admin (pode gerenciar a si e perfis inferiores)
+     */
+    public function canManageUser(User $target): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        if ($target->isSuperAdmin()) {
+            return false;
+        }
+
+        if ($this->isAdmin()) {
+            if ($target->isAdmin() && $target->id !== $this->id) {
+                return false;
+            }
+
+            return true;
+        }
+
+        if ($this->isManager() || $this->isFotografiaLider()) {
+            return $target->manager_id === $this->id || $target->id === $this->id;
+        }
+
+        return $target->id === $this->id;
     }
 
     /**

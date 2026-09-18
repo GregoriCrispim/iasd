@@ -25,7 +25,7 @@ class CmsPreviewController extends Controller
             abort(404);
         }
 
-        if (! $user->isSuperAdmin()) {
+        if (! $user->hasFullAdminAccess()) {
             // Gestores podem visualizar revisões dos seus colaboradores e as próprias.
             if ($user->isManager()) {
                 $author = $cmsRevision->author;

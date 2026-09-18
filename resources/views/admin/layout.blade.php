@@ -2,11 +2,12 @@
     /** @var \App\Models\User|null $authUser */
     $authUser = auth('admin')->user();
     $isSuper = $authUser && $authUser->isSuperAdmin();
+    $isFullAdmin = $authUser && $authUser->hasFullAdminAccess();
     $isManager = $authUser && $authUser->isManager();
     $isFotoLider = $authUser && $authUser->isFotografiaLider();
     $canGaleria = $authUser && $authUser->canManageGaleria();
-    $canManageUsers = $isSuper || $isManager || $isFotoLider;
-    $isCmsUser = $authUser && $authUser->hasAnyRoleName(['super_admin', 'manager', 'collaborator']);
+    $canManageUsers = $isFullAdmin || $isManager || $isFotoLider;
+    $isCmsUser = $authUser && $authUser->hasAnyRoleName(['super_admin', 'admin', 'manager', 'collaborator']);
     $active = $activeNav ?? '';
 @endphp
 <!DOCTYPE html>
@@ -43,7 +44,7 @@
                 <a href="{{ route('admin.revisions.index') }}" class="{{ $active === 'revisions' ? 'active' : '' }}">
                     <i class="bi bi-pencil-square"></i> Revisões
                 </a>
-                @if ($isSuper || $isManager)
+                @if ($isFullAdmin || $isManager)
                     <a href="{{ route('admin.approvals.index') }}" class="{{ $active === 'approvals' ? 'active' : '' }}">
                         <i class="bi bi-inbox"></i> Aprovações
                         @if (!empty($pendingApprovalsCount))
@@ -51,7 +52,7 @@
                         @endif
                     </a>
                 @endif
-                @if ($isSuper)
+                @if ($isFullAdmin)
                     <a href="{{ route('admin.blocks.index') }}" class="{{ $active === 'blocks' ? 'active' : '' }}">
                         <i class="bi bi-grid-1x2"></i> Blocos
                     </a>
@@ -82,6 +83,7 @@
                     {{ $authUser->name }}
                     <small>
                         @if ($isSuper) Super Admin
+                        @elseif ($authUser->isAdmin()) Admin
                         @elseif ($isManager) Gestor
                         @elseif ($authUser->isFotografiaLider()) Líder de Fotografia
                         @elseif ($authUser->isFotografiaColaborador()) Colaborador de Fotografia

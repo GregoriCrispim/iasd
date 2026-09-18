@@ -57,11 +57,11 @@ Route::middleware(['auth:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-        Route::middleware('role:super_admin,manager,collaborator,fotografia_lider,fotografia_colaborador')->group(function () {
+        Route::middleware('role:super_admin,admin,manager,collaborator,fotografia_lider,fotografia_colaborador')->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         });
 
-        Route::middleware('role:super_admin,manager,collaborator')->group(function () {
+        Route::middleware('role:super_admin,admin,manager,collaborator')->group(function () {
             // Uploads (editor)
             Route::middleware('throttle:20,1')->group(function () {
                 Route::post('/uploads/image', [UploadsController::class, 'image'])->name('uploads.image');
@@ -84,15 +84,15 @@ Route::middleware(['auth:admin'])
             Route::post('/cms/revisions/{revision}/reject', [CmsRevisionController::class, 'reject'])->name('revisions.reject');
             Route::delete('/cms/revisions/{revision}', [CmsRevisionController::class, 'destroy'])->name('revisions.destroy');
 
-            // Aprovações (super-admin e gestor)
-            Route::middleware('role:super_admin,manager')->group(function () {
+            // Aprovações (super-admin, admin e gestor)
+            Route::middleware('role:super_admin,admin,manager')->group(function () {
                 Route::get('/cms/approvals', [ApprovalsController::class, 'index'])->name('approvals.index');
                 Route::post('/cms/approvals/{revision}/approve', [ApprovalsController::class, 'approve'])->name('approvals.approve');
                 Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
             });
 
-            // Somente super-admin
-            Route::middleware('role:super_admin')->group(function () {
+            // Super Admin e Admin
+            Route::middleware('role:super_admin,admin')->group(function () {
                 Route::get('/cms/pages', [CmsPageController::class, 'index'])->name('pages.index');
                 Route::post('/cms/pages/sync', [CmsPageController::class, 'sync'])->name('pages.sync');
                 Route::get('/cms/pages/{page}/edit', [CmsPageController::class, 'edit'])->name('pages.edit');
@@ -107,8 +107,8 @@ Route::middleware(['auth:admin'])
             });
         });
 
-        // Usuários: super-admin, gestor CMS e líder de fotografia
-        Route::middleware('role:super_admin,manager,fotografia_lider')->group(function () {
+        // Usuários: super-admin, admin, gestor CMS e líder de fotografia
+        Route::middleware('role:super_admin,admin,manager,fotografia_lider')->group(function () {
             Route::get('/users', [UserController::class, 'index'])->name('users.index');
             Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
             Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -123,7 +123,7 @@ Route::middleware(['auth:admin'])
         });
 
         // Galeria de fotos
-        Route::middleware('role:super_admin,manager,fotografia_lider,fotografia_colaborador')->group(function () {
+        Route::middleware('role:super_admin,admin,manager,fotografia_lider,fotografia_colaborador')->group(function () {
             Route::get('/galeria', [GalleryAlbumController::class, 'index'])->name('galeria.index');
             Route::get('/galeria/create', [GalleryAlbumController::class, 'create'])->name('galeria.create');
             Route::post('/galeria', [GalleryAlbumController::class, 'store'])->name('galeria.store');

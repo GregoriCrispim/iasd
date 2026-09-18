@@ -25,7 +25,7 @@ class CmsCompareController extends Controller
             abort(404);
         }
 
-        if (! $user->isSuperAdmin()) {
+        if (! $user->hasFullAdminAccess()) {
             if ($user->isManager()) {
                 $author = $cmsRevision->author;
                 if (! $author || ($author->manager_id !== $user->id && $author->id !== $user->id)) {

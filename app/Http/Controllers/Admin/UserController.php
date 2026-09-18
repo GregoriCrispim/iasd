@@ -82,11 +82,12 @@ class UserController extends Controller
 
         return view('admin.users.form', [
             'user' => $user,
-            'roleOptions' => $this->roleOptions($authUser),
+            'roleOptions' => $this->roleOptions($authUser, $user),
             'currentRole' => $user->roles->pluck('name')->first(),
             'attached' => $attached,
             'available' => $available,
             'canManagePagePerms' => $canManagePagePerms,
+            'canAssignAdvanced' => $this->canAssignAdvancedFields($authUser),
         ]);
     }
 
@@ -97,7 +98,7 @@ class UserController extends Controller
         $this->authorizeManage($authUser, $user);
 
         $data = $this->validateData($request, $user, $authUser);
-        [$role, $managerId] = $this->resolveAssignment($authUser, $data);
+        [$role, $managerId] = $this->resolveAssignment($authUser, $data, $user);
 
         $payload = [
             'name' => $data['name'],
@@ -123,12 +124,21 @@ class UserController extends Controller
         /** @var User $authUser */
         $authUser = $request->user();
 
-        if (! $authUser->isSuperAdmin()) {
+        if (! $authUser->hasFullAdminAccess()) {
             abort(403);
+        }
+
+        if ($user->isProtectedFromDeletion()) {
+            return back()->with('error', 'O Super Admin não pode ser excluído.');
         }
 
         if ($user->id === $authUser->id) {
             return back()->with('error', 'Você não pode excluir o próprio usuário.');
+        }
+
+        // Admin não exclui outro Admin — somente o Super Admin.
+        if ($authUser->isAdmin() && $user->isAdmin()) {
+            return back()->with('error', 'Apenas o Super Admin pode excluir um Admin.');
         }
 
         $user->delete();
@@ -229,7 +239,7 @@ class UserController extends Controller
     {
         $query = User::query();
 
-        if ($authUser->isSuperAdmin()) {
+        if ($authUser->hasFullAdminAccess()) {
             return $query;
         }
 
@@ -242,16 +252,9 @@ class UserController extends Controller
 
     protected function authorizeManage(User $authUser, User $target): void
     {
-        if ($authUser->isSuperAdmin()) {
-            return;
+        if (! $authUser->canManageUser($target)) {
+            abort(403);
         }
-
-        if (($authUser->isManager() || $authUser->isFotografiaLider())
-            && ($target->manager_id === $authUser->id || $target->id === $authUser->id)) {
-            return;
-        }
-
-        abort(403);
     }
 
     /**
@@ -279,7 +282,7 @@ class UserController extends Controller
         ];
 
         if ($this->canAssignAdvancedFields($authUser)) {
-            $rules['role'] = ['required', Rule::in(array_keys($this->roleOptions($authUser)))];
+            $rules['role'] = ['required', Rule::in(array_keys($this->roleOptions($authUser, $user)))];
         }
 
         return $request->validate($rules);
@@ -287,12 +290,12 @@ class UserController extends Controller
 
     /**
      * Hierarquia automática: gestor/líder vinculam subordinados a si.
-     * Super admin não define responsável pelo formulário (false = não alterar no update).
+     * Super admin / Admin não definem responsável pelo formulário (false = não alterar no update).
      *
      * @param  array<string, mixed>  $data
      * @return array{0: string, 1: int|null|false}
      */
-    protected function resolveAssignment(User $authUser, array $data): array
+    protected function resolveAssignment(User $authUser, array $data, ?User $target = null): array
     {
         if ($authUser->isManager()) {
             return ['collaborator', $authUser->id];
@@ -302,21 +305,34 @@ class UserController extends Controller
             return ['fotografia_colaborador', $authUser->id];
         }
 
+        // Super Admin editing themselves keeps super_admin (role is not assignable via form).
+        if ($target?->isSuperAdmin()) {
+            return ['super_admin', false];
+        }
+
         return [$data['role'], false];
     }
 
     protected function canAssignAdvancedFields(User $authUser): bool
     {
-        return $authUser->isSuperAdmin();
+        return $authUser->hasFullAdminAccess();
     }
 
     protected function canManagePagePerms(User $authUser): bool
     {
-        return $authUser->isSuperAdmin() || $authUser->isManager();
+        return $authUser->hasFullAdminAccess() || $authUser->isManager();
     }
 
     protected function defaultRole(User $authUser): ?string
     {
+        if ($authUser->isSuperAdmin()) {
+            return 'admin';
+        }
+
+        if ($authUser->isAdmin()) {
+            return 'manager';
+        }
+
         if ($authUser->isManager()) {
             return 'collaborator';
         }
@@ -331,7 +347,7 @@ class UserController extends Controller
     /**
      * @return array<string, string>
      */
-    protected function roleOptions(User $authUser): array
+    protected function roleOptions(User $authUser, ?User $target = null): array
     {
         if ($authUser->isManager()) {
             return ['collaborator' => 'Colaborador'];
@@ -341,12 +357,28 @@ class UserController extends Controller
             return ['fotografia_colaborador' => 'Colaborador de Fotografia'];
         }
 
-        return [
+        // Super Admin editing themselves: role is locked.
+        if ($target?->isSuperAdmin()) {
+            return ['super_admin' => 'Super Admin'];
+        }
+
+        $options = [
             'manager' => 'Gestor',
             'collaborator' => 'Colaborador',
             'fotografia_lider' => 'Líder de Fotografia',
             'fotografia_colaborador' => 'Colaborador de Fotografia',
         ];
+
+        // Somente o Super Admin pode criar/atribuir Admins.
+        if ($authUser->isSuperAdmin()) {
+            return ['admin' => 'Admin'] + $options;
+        }
+
+        if ($authUser->isAdmin()) {
+            return $options;
+        }
+
+        return $options;
     }
 
     /**

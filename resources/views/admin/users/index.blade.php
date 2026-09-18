@@ -4,6 +4,7 @@
     $activeNav = 'users';
     $roleLabels = [
         'super_admin' => 'Super Admin',
+        'admin' => 'Admin',
         'manager' => 'Gestor',
         'collaborator' => 'Colaborador',
         'fotografia_lider' => 'Líder de Fotografia',
@@ -11,6 +12,7 @@
     ];
     $roleBadges = [
         'super_admin' => 'badge-purple',
+        'admin' => 'badge-blue',
         'manager' => 'badge-blue',
         'collaborator' => 'badge-gray',
         'fotografia_lider' => 'badge-amber',
@@ -74,8 +76,15 @@
                             <td class="text-muted">{{ $u->manager?->name ?? '—' }}</td>
                             <td class="col-actions">
                                 <div class="row-actions">
-                                    <a href="{{ route('admin.users.edit', $u) }}" class="btn btn-secondary btn-sm" title="Editar"><i class="bi bi-pencil"></i></a>
-                                    @if ($authUser->isSuperAdmin() && $u->id !== $authUser->id)
+                                    @if ($authUser->canManageUser($u))
+                                        <a href="{{ route('admin.users.edit', $u) }}" class="btn btn-secondary btn-sm" title="Editar"><i class="bi bi-pencil"></i></a>
+                                    @endif
+                                    @if (
+                                        $authUser->hasFullAdminAccess()
+                                        && ! $u->isProtectedFromDeletion()
+                                        && $u->id !== $authUser->id
+                                        && ! ($authUser->isAdmin() && $u->isAdmin())
+                                    )
                                         <form method="POST" action="{{ route('admin.users.destroy', $u) }}" onsubmit="return confirm('Remover este usuário?');">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" title="Remover"><i class="bi bi-trash"></i></button>
