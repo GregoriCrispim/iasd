@@ -166,7 +166,7 @@
         position: fixed;
         top: var(--header-height);
         left: 0;
-        right: 14.28%;
+        right: 0;
         bottom: 0;
         z-index: 10001;
         display: none;
@@ -268,18 +268,14 @@
         display: inline-flex;
     }
 
-    @media (max-width: 1100px) {
-        .galeria-face-search-overlay { right: 0; }
-    }
-
-    /* Modal de busca facial — respeita o header fixo e a coluna lateral (aside),
+    /* Modal de busca facial — respeita o header fixo,
        no mesmo padrão do lightbox / form-overlay do site */
     .galeria-face-modal {
         --galeria-face-pad: 16px;
         position: fixed;
         top: var(--header-height);
         left: 0;
-        right: 14.28%;
+        right: 0;
         bottom: 0;
         z-index: 10000;
         display: none;
@@ -577,11 +573,6 @@
         justify-content: center;
     }
 
-    @media (max-width: 1100px) {
-        .galeria-face-modal { right: 0; }
-        .galeria-face-search-overlay { right: 0; }
-    }
-
     @media (max-width: 768px) {
         .galeria-face-modal { --galeria-face-pad: 12px; }
         .galeria-face-dialog {
@@ -837,8 +828,7 @@
         padding: 3rem 0;
     }
 
-    /* Lightbox (mesmo padrão de overlay usado em /asa: respeita o header fixo
-       e a coluna do logo lateral fixo, evitando sobreposição) */
+    /* Lightbox (mesmo padrão de overlay usado em /asa: respeita o header fixo) */
     .galeria-lightbox {
         --galeria-lightbox-right-gap: 0px;
         position: fixed;

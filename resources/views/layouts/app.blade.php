@@ -196,7 +196,6 @@
 
         @include('partials.footer')
     </main>
-    <aside style="position: fixed; right: 0;"><img src="{{ asset('img/logo-7-coluna.svg') }}" alt="" style="width: 50%;" loading="lazy"></aside>
 
     @include('partials.form_overlay')
 
