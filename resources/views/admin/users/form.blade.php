@@ -6,6 +6,9 @@
     $auth = auth('admin')->user();
     $canAssignAdvanced = $canAssignAdvanced ?? ($auth->hasFullAdminAccess());
     $canManagePagePerms = $canManagePagePerms ?? ($auth->hasFullAdminAccess() || $auth->isManager());
+    if ($canManagePagePerms && isset($user) && $user instanceof \App\Models\User) {
+        $canManagePagePerms = $user->hasAnyRoleName(['manager', 'collaborator']);
+    }
 @endphp
 @section('title', 'Editar usuário')
 @section('heading', 'Editar usuário')

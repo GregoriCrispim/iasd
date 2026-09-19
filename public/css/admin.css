@@ -552,17 +552,78 @@ dialog.adm-dialog.adm-dialog--album::backdrop {
     .adm-album-modal-body .form-row { grid-template-columns: 1fr; }
 }
 
-/* ---------- User create modal ---------- */
+/* ---------- User create / edit modal ---------- */
 dialog.adm-dialog.adm-dialog--user {
     width: min(560px, 94vw);
     border-radius: 18px;
-    overflow: visible;
+    overflow: hidden;
     box-shadow: 0 24px 64px rgba(15, 23, 42, .28);
     animation: admDialogIn .22s ease-out;
+    padding: 0;
+    max-height: min(92vh, 920px);
+}
+dialog.adm-dialog.adm-dialog--user-edit {
+    width: min(760px, 96vw);
+}
+dialog.adm-dialog.adm-dialog--user[open],
+dialog.adm-dialog.adm-dialog--user-edit[open] {
+    display: flex;
+    flex-direction: column;
+}
+/* O form (criação) precisa ser a coluna flex; senão o body não rola. */
+dialog.adm-dialog.adm-dialog--user[open] > form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
+}
+dialog.adm-dialog.adm-dialog--user .adm-album-modal-head,
+dialog.adm-dialog.adm-dialog--user .adm-album-modal-foot {
+    flex: 0 0 auto;
+}
+dialog.adm-dialog.adm-dialog--user .adm-album-modal-body,
+dialog.adm-dialog.adm-dialog--user .adm-user-edit-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 dialog.adm-dialog.adm-dialog--user::backdrop {
     background: rgba(15, 23, 42, .58);
     backdrop-filter: blur(6px);
+}
+.adm-user-edit-form {
+    display: grid;
+    gap: 20px;
+}
+.adm-user-perm-table {
+    border: 1px solid var(--adm-border, #e2e8f0);
+    border-radius: 12px;
+}
+.adm-user-attach-block {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--adm-border, #e2e8f0);
+    display: grid;
+    gap: 14px;
+}
+.adm-user-attach-block h5 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 650;
+}
+.adm-user-switch-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.hidden-form {
+    display: none;
 }
 .adm-user-modal-title {
     display: flex;
@@ -592,6 +653,9 @@ dialog.adm-dialog.adm-dialog--user::backdrop {
     border: 1px solid var(--adm-border);
     border-radius: 14px;
     background: linear-gradient(180deg, #f8fafc, #fff);
+}
+.adm-user-modal-section[hidden] {
+    display: none !important;
 }
 .adm-user-modal-section h4 {
     margin: 0;

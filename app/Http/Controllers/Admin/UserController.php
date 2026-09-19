@@ -30,12 +30,54 @@ class UserController extends Controller
             ->paginate(30)
             ->withQueryString();
 
+        $editUser = null;
+        $editRoleOptions = [];
+        $editCurrentRole = null;
+        $editAttached = collect();
+        $editAvailable = collect();
+        $canManagePagePerms = false;
+
+        $editId = $request->integer('editar');
+        if ($editId <= 0 && old('_form') === 'edit') {
+            $editId = (int) old('_user_id');
+        }
+
+        if ($editId > 0) {
+            $candidate = $this->scopedQuery($authUser)->with(['roles', 'manager'])->find($editId);
+            if ($candidate && $authUser->canManageUser($candidate)) {
+                $editUser = $candidate;
+                $editRoleOptions = $this->roleOptions($authUser, $editUser);
+                $editCurrentRole = $editUser->roles->pluck('name')->first();
+                $canManagePagePerms = $this->canManagePagePerms($authUser, $editUser);
+
+                if ($canManagePagePerms) {
+                    $editAttached = $editUser->pages()->orderBy('label')->get();
+                    $editAvailable = $this->availablePages($authUser)
+                        ->whereNotIn('id', $editAttached->pluck('id'));
+                }
+            }
+        }
+
+        $createAvailablePages = collect();
+        $canAssignCreatePagePerms = $authUser->hasFullAdminAccess() || $authUser->isManager();
+        if ($canAssignCreatePagePerms) {
+            $createAvailablePages = $this->availablePages($authUser);
+        }
+
         return view('admin.users.index', [
             'users' => $users,
             'authUser' => $authUser,
             'roleOptions' => $this->roleOptions($authUser),
             'defaultRole' => $this->defaultRole($authUser),
             'canAssignAdvanced' => $this->canAssignAdvancedFields($authUser),
+            'editUser' => $editUser,
+            'editRoleOptions' => $editRoleOptions,
+            'editCurrentRole' => $editCurrentRole,
+            'editAttached' => $editAttached,
+            'editAvailable' => $editAvailable,
+            'canManagePagePerms' => $canManagePagePerms,
+            'createAvailablePages' => $createAvailablePages,
+            'canAssignCreatePagePerms' => $canAssignCreatePagePerms,
         ]);
     }
 
@@ -48,10 +90,20 @@ class UserController extends Controller
     {
         $authUser = $this->authUser();
 
-        $data = $this->validateData($request, null, $authUser);
+        try {
+            $data = $this->validateData($request, null, $authUser);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e->redirectTo(route('admin.users.index', ['novo' => 1]));
+        }
+
         [$role, $managerId] = $this->resolveAssignment($authUser, $data);
 
         $this->ensureRoleExists($role);
+
+        $pageSync = [];
+        if ($this->roleUsesPagePermissions($role) && ($authUser->hasFullAdminAccess() || $authUser->isManager())) {
+            $pageSync = $this->validatedPageLinks($request, $authUser);
+        }
 
         $user = User::create([
             'name' => $data['name'],
@@ -63,33 +115,22 @@ class UserController extends Controller
 
         $user->syncRoles([$role]);
 
+        if ($pageSync !== []) {
+            $user->pages()->syncWithoutDetaching($pageSync);
+        }
+
         return redirect()->route('admin.users.index')->with('success', 'Usuário criado.');
     }
 
-    public function edit(Request $request, User $user): View
+    public function edit(Request $request, User $user): RedirectResponse
     {
         $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
-        $canManagePagePerms = $this->canManagePagePerms($authUser);
-        $attached = collect();
-        $available = collect();
-
-        if ($canManagePagePerms) {
-            $attached = $user->pages()->orderBy('label')->get();
-            $available = $this->availablePages($authUser)
-                ->whereNotIn('id', $attached->pluck('id'));
-        }
-
-        return view('admin.users.form', [
-            'user' => $user,
-            'roleOptions' => $this->roleOptions($authUser, $user),
-            'currentRole' => $user->roles->pluck('name')->first(),
-            'attached' => $attached,
-            'available' => $available,
-            'canManagePagePerms' => $canManagePagePerms,
-            'canAssignAdvanced' => $this->canAssignAdvancedFields($authUser),
-        ]);
+        return redirect()->route('admin.users.index', array_filter([
+            'editar' => $user->id,
+            'q' => $request->query('q'),
+        ]));
     }
 
     public function update(Request $request, User $user): RedirectResponse
@@ -97,7 +138,12 @@ class UserController extends Controller
         $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
-        $data = $this->validateData($request, $user, $authUser);
+        try {
+            $data = $this->validateData($request, $user, $authUser);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e->redirectTo(route('admin.users.index', ['editar' => $user->id]));
+        }
+
         [$role, $managerId] = $this->resolveAssignment($authUser, $data, $user);
 
         $this->ensureRoleExists($role);
@@ -154,11 +200,11 @@ class UserController extends Controller
         $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
-        if (! $this->canManagePagePerms($authUser)) {
+        if (! $this->canManagePagePerms($authUser, $user)) {
             abort(403);
         }
 
-        return redirect()->route('admin.users.edit', $user)->withFragment('permissoes-paginas');
+        return redirect()->route('admin.users.index', ['editar' => $user->id]);
     }
 
     public function attachPage(Request $request, User $user): RedirectResponse
@@ -166,7 +212,7 @@ class UserController extends Controller
         $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
-        if (! $this->canManagePagePerms($authUser)) {
+        if (! $this->canManagePagePerms($authUser, $user)) {
             abort(403);
         }
 
@@ -189,7 +235,7 @@ class UserController extends Controller
             ],
         ]);
 
-        return back()->with('success', 'Página vinculada.');
+        return redirect()->route('admin.users.index', ['editar' => $user->id])->with('success', 'Página vinculada.');
     }
 
     public function updatePage(Request $request, User $user, CmsPage $page): RedirectResponse
@@ -197,7 +243,7 @@ class UserController extends Controller
         $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
-        if (! $this->canManagePagePerms($authUser)) {
+        if (! $this->canManagePagePerms($authUser, $user)) {
             abort(403);
         }
 
@@ -213,7 +259,7 @@ class UserController extends Controller
             'can_approve' => $request->boolean('can_approve'),
         ]);
 
-        return back()->with('success', 'Permissões atualizadas.');
+        return redirect()->route('admin.users.index', ['editar' => $user->id])->with('success', 'Permissões atualizadas.');
     }
 
     public function detachPage(Request $request, User $user, CmsPage $page): RedirectResponse
@@ -221,13 +267,13 @@ class UserController extends Controller
         $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
-        if (! $this->canManagePagePerms($authUser)) {
+        if (! $this->canManagePagePerms($authUser, $user)) {
             abort(403);
         }
 
         $user->pages()->detach($page->id);
 
-        return back()->with('success', 'Página removida do usuário.');
+        return redirect()->route('admin.users.index', ['editar' => $user->id])->with('success', 'Página removida do usuário.');
     }
 
     /* ---------------- Helpers ---------------- */
@@ -344,9 +390,79 @@ class UserController extends Controller
         return $authUser->hasFullAdminAccess();
     }
 
-    protected function canManagePagePerms(User $authUser): bool
+    protected function canManagePagePerms(User $authUser, ?User $target = null): bool
     {
-        return $authUser->hasFullAdminAccess() || $authUser->isManager();
+        if (! ($authUser->hasFullAdminAccess() || $authUser->isManager())) {
+            return false;
+        }
+
+        // Permissões de páginas só existem para perfis CMS (gestor / colaborador).
+        if ($target) {
+            return $this->userUsesPagePermissions($target);
+        }
+
+        return true;
+    }
+
+    /**
+     * Perfis que usam vínculo de páginas no CMS.
+     */
+    protected function userUsesPagePermissions(User $user): bool
+    {
+        return $user->hasAnyRoleName(['manager', 'collaborator']);
+    }
+
+    protected function roleUsesPagePermissions(string $role): bool
+    {
+        return in_array($role, ['manager', 'collaborator'], true);
+    }
+
+    /**
+     * @return array<int, array{can_access: bool, can_edit: bool, can_approve: bool}>
+     */
+    protected function validatedPageLinks(Request $request, User $authUser): array
+    {
+        $allowedIds = $this->availablePages($authUser)->pluck('id')->map(fn ($id) => (int) $id)->all();
+
+        $links = $request->input('page_links', []);
+        if (! is_array($links)) {
+            $links = [];
+        }
+
+        // Remove linhas vazias do formulário dinâmico.
+        $links = array_values(array_filter($links, function ($link) {
+            return is_array($link) && ! empty($link['cms_page_id']);
+        }));
+
+        $request->merge(['page_links' => $links]);
+
+        try {
+            $validated = $request->validate([
+                'page_links' => ['nullable', 'array'],
+                'page_links.*.cms_page_id' => ['required', 'integer', 'exists:cms_pages,id'],
+                'page_links.*.can_access' => ['nullable', 'boolean'],
+                'page_links.*.can_edit' => ['nullable', 'boolean'],
+                'page_links.*.can_approve' => ['nullable', 'boolean'],
+            ])['page_links'] ?? [];
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            throw $e->redirectTo(route('admin.users.index', ['novo' => 1]));
+        }
+
+        $sync = [];
+        foreach ($validated as $link) {
+            $pageId = (int) ($link['cms_page_id'] ?? 0);
+            if ($pageId <= 0 || ! in_array($pageId, $allowedIds, true)) {
+                continue;
+            }
+
+            $sync[$pageId] = [
+                'can_access' => (bool) ($link['can_access'] ?? false),
+                'can_edit' => (bool) ($link['can_edit'] ?? false),
+                'can_approve' => (bool) ($link['can_approve'] ?? false),
+            ];
+        }
+
+        return $sync;
     }
 
     protected function defaultRole(User $authUser): ?string
