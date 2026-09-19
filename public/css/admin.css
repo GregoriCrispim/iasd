@@ -556,7 +556,7 @@ dialog.adm-dialog.adm-dialog--album::backdrop {
 dialog.adm-dialog.adm-dialog--user {
     width: min(560px, 94vw);
     border-radius: 18px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 24px 64px rgba(15, 23, 42, .28);
     animation: admDialogIn .22s ease-out;
 }

@@ -39,7 +39,7 @@
                         @if ($editing)<span class="hint">Deixe em branco para manter a senha atual.</span>@endif
                     </div>
 
-                    @if ($canAssignAdvanced)
+                    @if ($canAssignAdvanced || count($roleOptions) > 1)
                         <div class="field">
                             <label>Perfil <span class="req">*</span></label>
                             <select name="role" class="select" required>
@@ -52,6 +52,7 @@
                         <div class="field">
                             <label>Perfil</label>
                             <input type="text" class="input" value="{{ reset($roleOptions) }}" disabled>
+                            <input type="hidden" name="role" value="{{ array_key_first($roleOptions) }}">
                         </div>
                     @endif
                 </div>

@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CmsPage;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -16,8 +18,7 @@ class UserController extends Controller
 {
     public function index(Request $request): View
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
 
         $users = $this->scopedQuery($authUser)
             ->with(['roles', 'manager'])
@@ -45,11 +46,12 @@ class UserController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
 
         $data = $this->validateData($request, null, $authUser);
         [$role, $managerId] = $this->resolveAssignment($authUser, $data);
+
+        $this->ensureRoleExists($role);
 
         $user = User::create([
             'name' => $data['name'],
@@ -66,8 +68,7 @@ class UserController extends Controller
 
     public function edit(Request $request, User $user): View
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
         $canManagePagePerms = $this->canManagePagePerms($authUser);
@@ -93,12 +94,13 @@ class UserController extends Controller
 
     public function update(Request $request, User $user): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
         $data = $this->validateData($request, $user, $authUser);
         [$role, $managerId] = $this->resolveAssignment($authUser, $data, $user);
+
+        $this->ensureRoleExists($role);
 
         $payload = [
             'name' => $data['name'],
@@ -121,8 +123,7 @@ class UserController extends Controller
 
     public function destroy(Request $request, User $user): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
 
         if (! $authUser->hasFullAdminAccess()) {
             abort(403);
@@ -150,8 +151,7 @@ class UserController extends Controller
 
     public function pages(Request $request, User $user): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
         if (! $this->canManagePagePerms($authUser)) {
@@ -163,8 +163,7 @@ class UserController extends Controller
 
     public function attachPage(Request $request, User $user): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
         if (! $this->canManagePagePerms($authUser)) {
@@ -195,8 +194,7 @@ class UserController extends Controller
 
     public function updatePage(Request $request, User $user, CmsPage $page): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
         if (! $this->canManagePagePerms($authUser)) {
@@ -220,8 +218,7 @@ class UserController extends Controller
 
     public function detachPage(Request $request, User $user, CmsPage $page): RedirectResponse
     {
-        /** @var User $authUser */
-        $authUser = $request->user();
+        $authUser = $this->authUser();
         $this->authorizeManage($authUser, $user);
 
         if (! $this->canManagePagePerms($authUser)) {
@@ -234,6 +231,27 @@ class UserController extends Controller
     }
 
     /* ---------------- Helpers ---------------- */
+
+    protected function authUser(): User
+    {
+        $user = Auth::guard('admin')->user() ?? request()->user('admin');
+
+        if (! $user instanceof User) {
+            abort(403);
+        }
+
+        $user->loadMissing('roles');
+
+        return $user;
+    }
+
+    protected function ensureRoleExists(string $role): void
+    {
+        Role::query()->firstOrCreate([
+            'name' => $role,
+            'guard_name' => 'web',
+        ]);
+    }
 
     protected function scopedQuery(User $authUser): Builder
     {
@@ -278,11 +296,13 @@ class UserController extends Controller
                     }
                 },
             ],
-            'password' => [$user ? 'nullable' : 'required', 'string', 'min:6'],
+            'password' => [$user ? 'nullable' : 'required', 'string', 'min:5'],
         ];
 
-        if ($this->canAssignAdvancedFields($authUser)) {
+        if ($this->canAssignAdvancedFields($authUser) || count($this->roleOptions($authUser, $user)) > 1) {
             $rules['role'] = ['required', Rule::in(array_keys($this->roleOptions($authUser, $user)))];
+        } elseif (count($this->roleOptions($authUser, $user)) === 1) {
+            $rules['role'] = ['nullable', Rule::in(array_keys($this->roleOptions($authUser, $user)))];
         }
 
         return $request->validate($rules);
@@ -310,7 +330,13 @@ class UserController extends Controller
             return ['super_admin', false];
         }
 
-        return [$data['role'], false];
+        $role = $data['role'] ?? $this->defaultRole($authUser);
+
+        if (! is_string($role) || $role === '' || ! array_key_exists($role, $this->roleOptions($authUser, $target))) {
+            abort(422, 'Perfil inválido.');
+        }
+
+        return [$role, false];
     }
 
     protected function canAssignAdvancedFields(User $authUser): bool
@@ -349,6 +375,27 @@ class UserController extends Controller
      */
     protected function roleOptions(User $authUser, ?User $target = null): array
     {
+        // Super Admin editing themselves: role is locked.
+        if ($target?->isSuperAdmin()) {
+            return ['super_admin' => 'Super Admin'];
+        }
+
+        // Super Admin / Admin: todos os perfis operacionais (Admin só o Super Admin cria).
+        if ($authUser->hasFullAdminAccess()) {
+            $options = [
+                'manager' => 'Gestor',
+                'collaborator' => 'Colaborador',
+                'fotografia_lider' => 'Líder de Fotografia',
+                'fotografia_colaborador' => 'Colaborador de Fotografia',
+            ];
+
+            if ($authUser->isSuperAdmin()) {
+                return ['admin' => 'Admin'] + $options;
+            }
+
+            return $options;
+        }
+
         if ($authUser->isManager()) {
             return ['collaborator' => 'Colaborador'];
         }
@@ -357,28 +404,7 @@ class UserController extends Controller
             return ['fotografia_colaborador' => 'Colaborador de Fotografia'];
         }
 
-        // Super Admin editing themselves: role is locked.
-        if ($target?->isSuperAdmin()) {
-            return ['super_admin' => 'Super Admin'];
-        }
-
-        $options = [
-            'manager' => 'Gestor',
-            'collaborator' => 'Colaborador',
-            'fotografia_lider' => 'Líder de Fotografia',
-            'fotografia_colaborador' => 'Colaborador de Fotografia',
-        ];
-
-        // Somente o Super Admin pode criar/atribuir Admins.
-        if ($authUser->isSuperAdmin()) {
-            return ['admin' => 'Admin'] + $options;
-        }
-
-        if ($authUser->isAdmin()) {
-            return $options;
-        }
-
-        return $options;
+        return [];
     }
 
     /**

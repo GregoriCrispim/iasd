@@ -179,7 +179,7 @@
                                     name="password"
                                     class="input {{ $createError('password') ? 'has-error' : '' }}"
                                     required
-                                    minlength="6"
+                                    minlength="5"
                                     autocomplete="new-password"
                                     placeholder="Mínimo de 6 caracteres"
                                 >
@@ -191,10 +191,10 @@
                                     aria-label="Mostrar senha"
                                 ><i class="bi bi-eye"></i></button>
                             </div>
-                            <span class="hint">Use no mínimo 6 caracteres.</span>
+                            <span class="hint">Use no mínimo 5 caracteres.</span>
                         </div>
 
-                        @if ($canAssignAdvanced)
+                        @if ($canAssignAdvanced || count($roleOptions) > 1)
                             <div class="field">
                                 <label for="user-role">Perfil <span class="req">*</span></label>
                                 <select id="user-role" name="role" class="select {{ $createError('role') ? 'has-error' : '' }}" required>
@@ -207,6 +207,7 @@
                             <div class="field">
                                 <label>Perfil</label>
                                 <input type="text" class="input" value="{{ array_values($roleOptions)[0] ?? '' }}" disabled>
+                                <input type="hidden" name="role" value="{{ array_key_first($roleOptions) }}">
                             </div>
                         @endif
                     </div>
