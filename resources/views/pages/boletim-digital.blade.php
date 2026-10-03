@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_26_09_2026';
+    $boletimBase = 'img/boletim/boletim_03_10_2026_1';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
     $oracaoMinBase = $boletimBase . '/M. Oração';
 
@@ -23,7 +23,7 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da PRIMEIRA semana de OUTUBRO é: Ore para responder com calma e sabedoria quando for provocado ou contrariado.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da SEGUNDA semana de OUTUBRO é: Ore para controlar a raiva e vencer o orgulho nas situações difíceis.';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -32,11 +32,11 @@
             'src' => $boletimBase . '/ON VOICE.jpeg',
             'alt' => 'One Voice 27 — mobilização missionária global',
             'title' => 'One Voice',
-            'text' => 'O OneVoice27 é o projeto global de mobilização missionária da Igreja Adventista do Sétimo Dia, que conduzirá toda a igreja mundial a um mesmo esforço evangelístico. O lançamento oficial acontece em 5 de setembro deste ano. Lançada no segundo semestre de 2025 e planejada para ser uma grande celebração em setembro de 2027, marcando os 2.000 anos do batismo de Jesus Cristo. A Divisão Sul-Americana lidera a mobilização de todas as suas Uniões, Associações, Missões e igrejas locais para que participem em uma estratégia digital unificada. Participe conosco deste projeto.',
+            'text' => 'O OneVoice27 é o projeto global de mobilização missionária da Igreja Adventista do Sétimo Dia, que conduzirá toda a igreja mundial a um mesmo esforço evangelístico. O lançamento oficial aconteceu no dia 5 de setembro deste ano. Lançada no segundo semestre de 2025 e planejada para ser uma grande celebração em setembro de 2027, marcando os 2.000 anos do batismo de Jesus Cristo. A Divisão Sul-Americana lidera a mobilização de todas as suas Uniões, Associações, Missões e igrejas locais para que participem em uma estratégia digital unificada. Participe conosco deste projeto.',
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.23 (1).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.23 (2).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -46,14 +46,14 @@
             'src' => $boletimBase . '/OUTUBRO ROSA.jpg',
             'alt' => 'Outubro Rosa — conscientização e prevenção',
             'title' => 'Outubro Rosa',
-            'text' => 'O amor ao próximo se manifesta em gestos de cuidado, acolhimento e partilha. No mês dedicado à conscientização e prevenção ao câncer de mama, a nossa igreja preparou uma programação especial para abraçar as mulheres e abençoar vidas. No próximo sábado, dia 3 de outubro, o Ministério da Mulher de nossa igreja iniciará a realização de ações especiais voltadas ao Outubro Rosa, mês dedicado à conscientização e prevenção do câncer de mama. O evento tem como principal objetivo conscientizar sobre a importância do diagnóstico precoce do câncer de mama e do colo do útero, além de proporcionar um espaço de cuidado integral físico, emocional e espiritual.',
+            'text' => 'O amor ao próximo se manifesta em gestos de cuidado, acolhimento e partilha. No mês dedicado à conscientização e prevenção ao câncer de mama, a nossa igreja preparou uma programação especial para abraçar as mulheres e abençoar vidas. No sábado, dia 4 de outubro, o Ministério da Mulher de nossa igreja iniciará a realização de ações especiais voltadas ao Outubro Rosa, mês dedicado à conscientização e prevenção do câncer de mama. O evento tem como principal objetivo conscientizar sobre a importância do diagnóstico precoce do câncer de mama e do colo do útero, além de proporcionar um espaço de cuidado integral físico, emocional e espiritual.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/OFICINA DO PÃO.jpg',
             'alt' => 'Oficina do Pão Artesanal — Outubro Rosa',
             'title' => 'Oficina do Pão',
-            'text' => 'No dia 18/10, às 15h no espaço ASA, teremos a oficina do pão artesanal, um momento gostoso de aprendizado e comunhão. Atenção: as vagas são limitadas! Acesse o link https://forms.gle/n1ktj7kXaBPBbTMPA e garanta a sua vaga!',
+            'text' => 'A oficina do pão artesanal atingiu o número de vagas. Agradecemos pela participação.',
         ],
         [
             'type' => 'image',
@@ -99,7 +99,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (28).jpeg',
+            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (5).jpeg',
             'alt' => 'Reunião de Oração',
             'title' => 'Reunião de Oração',
             'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
@@ -110,13 +110,6 @@
             'alt' => 'Pesquisa do Ministério da Família',
             'title' => 'Ministério da Família',
             'text' => 'O Ministério da Família da Igreja Central de Brasília deseja ouvir você. Queremos saber quais temas têm impactado os casamentos para que possamos abordá-los de forma relevante em nossas programações. Participe da nossa pesquisa, acesse o link e responda https://forms.gle/c8osbfRcEivGvKcZ9 , leva poucos minutos para responder. Contamos com você!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Oficina do Bem.jpg',
-            'alt' => 'Oficina do Bem — Doutores de Esperança',
-            'title' => 'Coração do Bem',
-            'text' => 'Participe da Oficina do Bem, às 9h, na sala dos Doutores de Esperança. Onde voluntários se reúnem para confeccionar corações de feltro que serão distribuídos aos pacientes durante os Plantões dos Doutores de Esperança. Qualquer pessoa pode participar. Venha! Nossa oficina acontece a cada 15 dias, siga nosso calendário e venha ser um voluntário.',
         ],
         [
             'type' => 'image',
@@ -134,17 +127,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Classe de Saúde.jpeg',
-            'alt' => 'Classe de Saúde — O Poder da Decisão',
+            'src' => $boletimBase . '/Saúde.jpeg',
+            'alt' => 'Classe de Saúde — Saúde Integral',
             'title' => 'Classe de Saúde',
-            'text' => 'O Poder da Decisão é uma conversa sobre escolhas que podem mudar a vida. Quantas vezes você já pensou: "Preciso mudar", "Quero voltar a estudar", "Vou cuidar melhor da minha saúde" ou "Ainda dá tempo de recomeçar"? Muitas mudanças começam assim, com um desejo. Mas chega um momento em que precisamos decidir dar o primeiro passo. Neste sábado, na Classe Saúde, o Dr. Nilson Alvarenga vai apresentar o tema "O Poder da Decisão". A conversa vai muito além da saúde: vamos refletir sobre as escolhas que fazemos nos estudos, no trabalho, na família, nos relacionamentos e na vida espiritual. Pode ser a decisão de se preparar para um concurso, retomar um sonho, mudar um hábito ou enfrentar uma dificuldade que vem sendo adiada. Também vamos falar sobre algo que todos nós vivemos: nem toda escolha dá certo de primeira. É possível aprender, corrigir a direção e recomeçar. Com fé, apoio e atitudes possíveis no dia a dia, uma decisão pode se transformar em ação e a ação pode abrir novos caminhos. Talvez você não precise resolver a vida inteira agora. Talvez precise apenas decidir qual será o seu próximo passo. Venha participar e convide alguém para essa conversa!',
+            'text' => 'SAÚDE INTEGRAL — A ESCOLHA É SUA! Nem tudo o que determina nossa saúde está sob nosso controle. Existem fatores genéticos, ambientais, sociais e circunstanciais que atravessam a nossa história. Mas há uma dimensão sobre a qual podemos exercer influência: a maneira como respondemos às circunstâncias, os hábitos que cultivamos e a atenção que dedicamos aos sinais do nosso próprio organismo. Cuidar da saúde não é esperar que o corpo adoeça para então agir. É desenvolver consciência antes que o desequilíbrio se estabeleça. Talvez a pergunta não seja apenas "O que fazer quando a doença aparece?", mas: "Que escolhas estou fazendo hoje que participam da construção da minha saúde de amanhã?"',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/CEVISA.jpeg',
             'alt' => 'Excursão especial de bem-estar — CEVISA',
             'title' => 'Excursão CEVISA',
-            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA), de 22 a 29 de novembro de 2026! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações: https://wa.me/qr/XSR5HTOUQV4JA1 Venha viver essa experiência de renovação e comunhão!',
+            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA), de 22 a 29 de novembro de 2026! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações https://forms.gle/ZNbidJmaihpgYqNY8 Venha viver essa experiência de renovação e comunhão!',
         ],
         [
             'type' => 'image',
@@ -165,14 +158,7 @@
             'src' => $boletimBase . '/Tersouros do Céu.jpeg',
             'alt' => 'App Tesouros do Céu — APlaC',
             'title' => 'Tesouros do Céu',
-            'text' => 'A APlaC lança APP gratuito para ensinar educação financeira para as novas gerações. "Tesouros do Céu" é uma ferramenta didática e divertida que reúne tarefas, pontos, avatares bíblicos e devocional diário para ajudar os pais a ensinar mordomia cristã desde a infância. https://noticias.adventistas.org/pt/tesouros-do-ceu/',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Curso de Pão de Santa Ceia.jpg',
-            'alt' => 'Curso de Pães de Santa Ceia — ASA',
-            'title' => 'Curso de Pães de Santa Ceia',
-            'text' => 'Domingo, 27/09/26, às 9h, teremos o curso de pãezinhos de Santa Ceia. Se você já fez a sua inscrição, não deixe de comparecer, será uma bênção! Te esperamos lá!',
+            'text' => 'A APLaC lança APP gratuito para ensinar educação financeira para as novas gerações. "Tesouros do Céu" é uma ferramenta didática e divertida que reúne tarefas, pontos, avatares bíblicos e devocional diário para ajudar os pais a ensinar mordomia cristã desde a infância. https://noticias.adventistas.org/pt/tesouros-do-ceu/',
         ],
         [
             'type' => 'image',
@@ -194,13 +180,6 @@
             'alt' => 'Quartas de Poder — O Mover do Espírito',
             'title' => 'Quartas de Poder',
             'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30, com o tema "O Mover do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Série Coisas Estranhas.png',
-            'alt' => 'Série Coisas Estranhas — Domingos Especiais',
-            'title' => 'Coisas Estranhas',
-            'text' => 'O Apocalipse revela muito mais do que símbolos e mistérios: apresenta o destino da humanidade e a esperança de um futuro sem morte, sofrimento ou injustiça. Em meio às incertezas do mundo, suas profecias apontam para o acontecimento que mudará a história para sempre: a volta de Jesus. Mas o que realmente está por trás dessas revelações? E estamos preparados para o maior reencontro de todos os tempos? Assista ao último episódio da série dos domingos especiais intitulada COISAS ESTRANHAS, às 19h.',
         ],
         [
             'type' => 'image',
@@ -256,35 +235,42 @@
             'src' => $boletimBase . '/Liberdade Religiosa capa divulgação.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
-            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17 Nosso próximo encontro - Palestrante convidado: Pr. Roberto Roefero — 23 anos de ministério. Evangelista na Associação Sul Paranaense. Mestre em Teologia. Atua na pregação, evangelismo e no estudo das profecias bíblicas relacionadas à liberdade religiosa e aos eventos finais. Casado há 29 anos com Pauline Roefero, pedagoga. Pai de Paulo Roberto e Maria Carolina.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/318 capa.jpeg',
+            'src' => $boletimBase . '/318.jpeg',
             'alt' => 'Código 318 — círculo de homens',
             'title' => 'Código 318',
-            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. No sábado, dia 10/10, às 15h30, teremos mais um encontro do Código 318. Contaremos com a participação especial do Pastor Adenilton Aguiar. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Série Criacionismo.jpeg',
-            'alt' => 'Série Criacionismo — outubro',
-            'title' => 'Criacionismo',
-            'text' => 'Vem aí uma série especial sobre o criacionismo! Em outubro, teremos um mês dedicado a relembrar as obras do nosso Criador. No dia 24/10, ápice da programação, às 9h, teremos a palestra: \'Trocando as lentes: A Diferença entre a Visão Humana e a Divina\', à tarde \'Uma Viagem no Tempo\', tendo como palestrante Tiago Alves Jorge de Souza. Programe-se para participar!',
+            'src' => $boletimBase . '/Criacionismo final.jpeg',
+            'alt' => 'Sábado da Criação — 24/10',
+            'title' => 'Sábado da Criação',
+            'text' => 'No dia 24/10, pela manhã teremos a celebração do Sábado da Criação, acontecerá a palestra: \'Trocando as lentes: A Diferença entre a Visão Humana e a Divina\' com o Dr. Nahor Neves, e à tarde uma programação super especial com o Dr. Tiago Alves Jorge de Souza. Programe-se para participar!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Firmados na Palavra.jpeg',
-            'alt' => 'Curso Bíblico Firmados na Palavra',
-            'title' => 'Firmados na Palavra',
-            'text' => 'Queridos irmãos, temos um convite especial para toda a família! Aos domingos, às 18h, teremos o Curso Bíblico "Firmados na Palavra". Será um momento precioso para conhecer, compreender e viver as verdades da Bíblia, fortalecer a fé e crescermos juntos na caminhada com Deus. Local: Igreja Adventista Central de Brasília. Todos os domingos, às 18h. Traga sua família e seus amigos para estudar a Palavra conosco! "Ensina-me, SENHOR, o caminho dos teus mandamentos..." — Salmo 119:33. Esperamos vocês!',
+            'src' => $boletimBase . '/darwin.png',
+            'alt' => 'Série A Caixa de Darwin — criacionismo',
+            'title' => 'A Caixa de Darwin',
+            'text' => 'Nos domingos do mês de outubro, às 19h, teremos uma nova série especial sobre o criacionismo! Será um mês dedicado a relembrar as obras do nosso Criador. Venha assistir a nova série dos domingos especiais, A Caixa de Darwin, amanhã, dia 04/10, às 19h. Traga a sua família!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/SEMINÁRIO.jpeg',
-            'alt' => 'Seminário Eventos Finais do Juízo',
-            'title' => 'Seminário Eventos Finais do Juízo',
-            'text' => 'Nos sábados, às 10h45, na sala da Classe Novo Tempo, temos o seminário sobre os eventos finais do juízo. Venha explorar profundamente os capítulos 12 e 13 do livro de Apocalipse, sob a condução especial do professor Manuel Morais. Venha descobrir e aprender mais sobre os fascinantes símbolos apocalípticos: O Dragão, A Mulher e As Bestas. Sua presença é muito importante! Venha e traga seus amigos para esse momento de aprendizado e comunhão. Esperamos você!',
+            'src' => $boletimBase . '/SUPER SEXTA.jpg',
+            'alt' => 'Super Sexta — 2ª edição',
+            'title' => 'Super Sexta',
+            'text' => 'A Super Sexta está de volta! Vem aí a 2ª edição! Uma noite de muito louvor, adoração, conexão e reflexão, com a participação especial do Pastor Igo Rocha e do Grupo Puro Louvor, do IABC. Convide seus amigos e venha viver essa noite com a gente! Dia 23 de outubro, sexta-feira, às 19h30 no Espaço Jovem da Igreja Adventista Central de Brasília. SUPER SEXTA, você não vai querer ficar de fora!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/CORAL CANTO JOVEM.jpg',
+            'alt' => 'Coral Canto Jovem do IAP',
+            'title' => 'Coral Canto Jovem',
+            'text' => 'Prepare-se para uma manhã especial de louvor, música e adoração. No dia 17/10, estaremos recebendo em nossa igreja o Coral Canto Jovem do IAP, venha e participe deste grande louvor!',
         ],
         [
             'type' => 'image',
