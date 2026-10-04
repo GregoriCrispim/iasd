@@ -189,7 +189,7 @@ class CmsRevisionController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        if (!$user->isSuperAdmin()) {
+        if (!$user->hasFullAdminAccess()) {
             abort(403);
         }
 
@@ -200,7 +200,7 @@ class CmsRevisionController extends Controller
 
     protected function canCreate(User $user): bool
     {
-        if ($user->isSuperAdmin()) {
+        if ($user->hasFullAdminAccess()) {
             return true;
         }
 
@@ -211,7 +211,7 @@ class CmsRevisionController extends Controller
     {
         $query = CmsRevision::query();
 
-        if ($user->isSuperAdmin()) {
+        if ($user->hasFullAdminAccess()) {
             return $query;
         }
 
@@ -243,7 +243,7 @@ class CmsRevisionController extends Controller
             ->whereHas('page', fn (Builder $pageQuery) => $pageQuery->where('cms_enabled', true))
             ->orderBy('cms_page_id');
 
-        if (!$user->isSuperAdmin()) {
+        if (!$user->hasFullAdminAccess()) {
             $query->whereHas('page.users', function (Builder $userQuery) use ($user) {
                 $userQuery
                     ->where('users.id', $user->id)

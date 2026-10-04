@@ -18,7 +18,7 @@
 .list .item {
     position: relative;
     width: 100%;
-    max-width: 85.72vw;
+    max-width: 100vw;
     height: 100%;
 }
 
@@ -148,7 +148,7 @@
 .list .item > img,
 .list .item a > img {
     width: 100%;
-    max-width: 85.72vw;
+    max-width: 100vw;
     height: 100%;
     object-fit: cover;
     display: block;
@@ -200,20 +200,116 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    background: linear-gradient(180deg, #f4f7fa 0%, #ffffff 100%);
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .boletim-home{
+    --boletim-home-bg: #151d27;
+    position: relative;
     display: block;
     width: 100%;
+    overflow: hidden;
+    isolation: isolate;
     text-decoration: none;
-    background: #151d27;
+    background: var(--boletim-home-bg);
     color: #fff;
 }
 
+.boletim-home__bg{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.boletim-home__bg-solid{
+    position: absolute;
+    inset: 0;
+    background: var(--boletim-home-bg);
+}
+
+.boletim-home__bg-grid-wrap{
+    position: absolute;
+    top: -8%;
+    right: 0;
+    bottom: -8%;
+    width: 46%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.15) 12%,
+        rgba(0, 0, 0, 0.55) 28%,
+        rgba(0, 0, 0, 0.85) 48%,
+        #000 70%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.15) 12%,
+        rgba(0, 0, 0, 0.55) 28%,
+        rgba(0, 0, 0, 0.85) 48%,
+        #000 70%
+    );
+}
+
+.boletim-home__bg-grid-wrap::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, var(--boletim-home-bg) 0%, rgba(21, 29, 39, 0.72) 28%, rgba(21, 29, 39, 0.38) 62%, rgba(21, 29, 39, 0.55) 100%),
+        linear-gradient(180deg, rgba(21, 29, 39, 0.35) 0%, transparent 28%, transparent 72%, rgba(21, 29, 39, 0.4) 100%);
+    z-index: 1;
+}
+
+.boletim-home__bg-grid{
+    position: absolute;
+    top: 50%;
+    left: 52%;
+    width: 168%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.55rem;
+    transform: translate(-50%, -50%) rotate(16deg) scale(1.08);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.boletim-home__bg-tile{
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.35rem;
+    aspect-ratio: 3 / 4;
+    background: #0d131a;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+}
+
+.boletim-home__bg-tile img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.72) saturate(0.92) contrast(1.05);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+}
+
+.boletim-home:hover .boletim-home__bg-tile img{
+    filter: brightness(0.8) saturate(1) contrast(1.05);
+}
+
+.boletim-home:hover .boletim-home__bg-grid{
+    transform: translate(-50%, -50%) rotate(14deg) scale(1.12);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .boletim-home__content{
+    position: relative;
+    z-index: 1;
     width: min(100%, 1200px);
     margin: 0 auto;
-    padding: clamp(28px, 5vw, 58px) clamp(20px, 6vw, 72px);
+    padding: clamp(34px, 5.5vw, 68px) clamp(20px, 6vw, 72px);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -221,7 +317,7 @@
 }
 
 .boletim-home__text{
-    max-width: 690px;
+    max-width: 640px;
 }
 
 .boletim-home__eyebrow{
@@ -244,6 +340,7 @@
     letter-spacing: .03em;
     color: #f6f1e7;
     text-transform: uppercase;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 
 .boletim-home p{
@@ -252,6 +349,7 @@
     font-size: clamp(0.95rem, 1.5vw, 1.08rem);
     line-height: 1.6;
     color: #f2f5f8;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
 }
 
 .boletim-home__button{
@@ -269,14 +367,20 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: .03em;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
     transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
 .boletim-home:hover .boletim-home__button,
 .boletim-home:focus-visible .boletim-home__button{
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(0,0,0,.24);
+    box-shadow: 0 14px 32px rgba(0,0,0,.28);
     background: #f6f1e7;
+}
+
+.boletim-home:active .boletim-home__button{
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(0,0,0,.22);
 }
 
 .boletim-home:focus-visible{
@@ -284,77 +388,207 @@
     outline-offset: -6px;
 }
 
+@media (prefers-reduced-motion: reduce){
+    .boletim-home__bg-grid,
+    .boletim-home__bg-tile img,
+    .boletim-home__button{
+        transition: none;
+    }
+
+    .boletim-home:hover .boletim-home__bg-grid{
+        transform: translate(-50%, -50%) rotate(16deg) scale(1.08);
+    }
+}
+
 .container_cards{
-    width: 95%;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 7vh;
-    margin-bottom: 3vh;
-    flex-wrap: wrap;
+    width: min(100% - 2.5rem, 1180px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 
 .card{
-    width: 28%;
-    border-radius: 10px;
-    padding-bottom: 20px;
-    box-shadow: 6px 5px 20px #6b6b6b;
-    position: relative;
-    margin-bottom: 3.5em;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    border: 1px solid rgba(0, 51, 102, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 51, 102, 0.08);
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
 }
 
-.card img{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-    border-radius: 5px 5px 0 0;
+.card:hover{
+    transform: translateY(-6px);
+    border-color: rgba(0, 51, 102, 0.16);
+    box-shadow: 0 14px 36px rgba(0, 51, 102, 0.16);
 }
 
-.card h2{
-    font-family: 'Bebas neue', 'Arial Narrow', sans-serif;
-    font-size: 28px;
-    font-weight: 500;
-    padding: 0 15px;
-}
-
-.card p{
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-    text-align: start;
-    margin: 10px 0 30px;
-    padding: 0 15px;
-}
-
-.card_cta{
-    text-decoration: none;
-    border: 2px solid #003366;
-    background-color: #003366;
-    border-radius: 7px;
-    color: #fff;
-    padding: 5px 12px;
-    margin-top: 5px;
-    margin-left: 15px;
-    position: absolute;
-    bottom: 15px;
-    transition: .1s ease-in-out;
-}
-
-.card:hover .card_cta,
-.card:focus-visible .card_cta{
-    background-color: #fff;
-    color: #003366;
+.card:active{
+    transform: translateY(-2px);
+    border-color: rgba(0, 51, 102, 0.22);
+    box-shadow: 0 8px 22px rgba(0, 51, 102, 0.14);
 }
 
 .card:focus-visible{
     outline: 3px solid #003366;
     outline-offset: 4px;
+}
+
+.card__media{
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #e8eef5;
+}
+
+.card__media img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .card__media img{
+    transform: scale(1.06);
+}
+
+.card:active .card__media img{
+    transform: scale(1.03);
+}
+
+.card__body{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: clamp(1.15rem, 2.2vw, 1.5rem);
+}
+
+.card h2{
+    margin: 0 0 0.65rem;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #151d27;
+    letter-spacing: 0;
+    transition: color 0.25s ease;
+}
+
+.card:hover h2{
+    color: #003366;
+}
+
+.card p{
+    margin: 0 0 1.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #555;
+    text-align: start;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1 1 auto;
+}
+
+.card_cta{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    gap: 0.45rem;
+    margin-top: auto;
+    padding: 0.55rem 1.05rem;
+    border: 1.5px solid #003366;
+    background: #003366;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 2px 0 rgba(0, 31, 64, 0.25);
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card_cta .bi{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95em;
+    line-height: 1;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .card_cta,
+.card:focus-visible .card_cta{
+    background: #fff;
+    color: #003366;
+    border-color: #003366;
+    box-shadow: 0 6px 16px rgba(0, 51, 102, 0.18);
+    transform: translateY(-2px);
+}
+
+.card:hover .card_cta .bi,
+.card:focus-visible .card_cta .bi{
+    transform: translateX(4px);
+}
+
+.card:active .card_cta{
+    background: #00264d;
+    color: #fff;
+    border-color: #00264d;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+}
+
+.card:active .card_cta .bi{
+    transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+    .card,
+    .card__media img,
+    .card h2,
+    .card_cta,
+    .card_cta .bi{
+        transition: none;
+    }
+
+    .card:hover,
+    .card:active{
+        transform: none;
+    }
+
+    .card:hover .card__media img,
+    .card:active .card__media img,
+    .card:hover .card_cta,
+    .card:focus-visible .card_cta,
+    .card:active .card_cta,
+    .card:hover .card_cta .bi,
+    .card:focus-visible .card_cta .bi,
+    .card:active .card_cta .bi{
+        transform: none;
+    }
 }
 
 .btn_canais{
@@ -594,6 +828,22 @@
 
 }
 
+@media (max-width: 960px){
+    .container_cards{
+        width: min(100% - 2rem, 1180px);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.15rem;
+    }
+
+    .card h2{
+        font-size: 1.25rem;
+    }
+
+    .card p{
+        -webkit-line-clamp: 3;
+    }
+}
+
 @media (max-width: 700px){
     .slider{
         margin-bottom: 0;
@@ -604,15 +854,25 @@
         pointer-events: none;
     }
 
-    .container_cards{
-        margin-top: 2vh;
-        margin-bottom: 2vh;
-    }
-
     .boletim-home__content{
         flex-direction: column;
         align-items: flex-start;
         padding: 30px 22px;
+    }
+
+    .boletim-home__bg-grid-wrap{
+        width: 58%;
+    }
+
+    .boletim-home__bg-grid{
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        width: 190%;
+        gap: 0.4rem;
+        transform: translate(-50%, -50%) rotate(14deg) scale(1.12);
+    }
+
+    .boletim-home:hover .boletim-home__bg-grid{
+        transform: translate(-50%, -50%) rotate(12deg) scale(1.16);
     }
 
     .boletim-home__button{
@@ -623,21 +883,6 @@
         padding-left: 0;
         padding-right: 0;
         text-align: center;
-    }
-
-    .card{
-        width: 45%;
-        margin-bottom: 2.2em;
-    }
-
-    .card h2{
-        font-size: 24px;
-    }
-
-    .card p{
-        font-size: 0.95rem;
-        line-height: 1.55;
-        margin: 10px 0 54px;
     }
 
     .content_yt{
@@ -677,6 +922,69 @@
     }
 }
 
+@media (max-width: 640px){
+    .boletim-home__bg-grid-wrap{
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 35%,
+            rgba(0, 0, 0, 0.65) 62%,
+            #000 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 35%,
+            rgba(0, 0, 0, 0.65) 62%,
+            #000 100%
+        );
+    }
+
+    .boletim-home__bg-grid-wrap::after{
+        background:
+            linear-gradient(90deg, var(--boletim-home-bg) 0%, rgba(21, 29, 39, 0.82) 42%, rgba(21, 29, 39, 0.5) 100%),
+            linear-gradient(180deg, rgba(21, 29, 39, 0.45) 0%, transparent 30%, transparent 70%, rgba(21, 29, 39, 0.5) 100%);
+    }
+
+    .boletim-home__bg-grid{
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        width: 210%;
+        left: 58%;
+    }
+
+    .span_cards{
+        padding: 1.75rem 0 1.25rem;
+    }
+
+    .container_cards{
+        width: min(100% - 1.5rem, 1180px);
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .card__body{
+        padding: 1.15rem;
+    }
+
+    .card h2{
+        font-size: 1.25rem;
+    }
+
+    .card p{
+        font-size: 0.95rem;
+        -webkit-line-clamp: 4;
+        margin-bottom: 1.1rem;
+    }
+
+    .card_cta{
+        padding: 0.6rem 1.1rem;
+        font-size: 0.84rem;
+    }
+}
+
 @media (max-width: 500px){
     .buttons{
         top: 38%;
@@ -688,30 +996,6 @@
 }
 
 @media (max-width: 470px){
-    .card{
-        width: 86%;
-        padding-bottom: 16px;
-        box-shadow: 5px 4px 16px #6b6b6b;
-    }
-
-    .card h2{
-        font-size: 22px;
-        padding: 0 14px;
-    }
-
-    .card p{
-        font-size: 0.95rem;
-        margin: 10px 0 52px;
-        padding: 0 14px;
-    }
-
-    .card_cta{
-        padding: 5px 10px;
-        margin-left: 14px;
-        bottom: 12px;
-        font-size: 0.95rem;
-    }
-
     .buttons{
         top: 35%;
     }

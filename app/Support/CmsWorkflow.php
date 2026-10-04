@@ -16,7 +16,7 @@ class CmsWorkflow
     {
         $query = CmsRevision::query()->with(['block.page', 'author']);
 
-        if ($user->isSuperAdmin()) {
+        if ($user->hasFullAdminAccess()) {
             return $query->where('status', CmsRevision::STATUS_PENDING_SUPER_ADMIN);
         }
 
@@ -34,7 +34,7 @@ class CmsWorkflow
 
     public static function pendingApprovalsCount(User $user): int
     {
-        if (!$user->hasAnyRoleName(['super_admin', 'manager'])) {
+        if (!$user->hasAnyRoleName(['super_admin', 'admin', 'manager'])) {
             return 0;
         }
 
@@ -46,7 +46,7 @@ class CmsWorkflow
      */
     public static function canEdit(User $user, CmsRevision $revision): bool
     {
-        if ($user->isSuperAdmin()) {
+        if ($user->hasFullAdminAccess()) {
             return true;
         }
 
@@ -71,7 +71,7 @@ class CmsWorkflow
             return false;
         }
 
-        if ($user->isSuperAdmin()) {
+        if ($user->hasFullAdminAccess()) {
             return true;
         }
 
@@ -79,11 +79,11 @@ class CmsWorkflow
     }
 
     /**
-     * Submit a revision. Super admins publish immediately.
+     * Submit a revision. Super Admin / Admin publish immediately.
      */
     public static function submit(User $user, CmsRevision $revision): void
     {
-        if ($user->isSuperAdmin()) {
+        if ($user->hasFullAdminAccess()) {
             self::publish($user, $revision, submittedNow: true);
             return;
         }
@@ -131,7 +131,7 @@ class CmsWorkflow
 
     public static function canApproveAsSuperAdmin(User $user, CmsRevision $revision): bool
     {
-        return $user->isSuperAdmin() && $revision->status === CmsRevision::STATUS_PENDING_SUPER_ADMIN;
+        return $user->hasFullAdminAccess() && $revision->status === CmsRevision::STATUS_PENDING_SUPER_ADMIN;
     }
 
     public static function approveAsSuperAdmin(User $user, CmsRevision $revision): void
@@ -141,7 +141,7 @@ class CmsWorkflow
 
     public static function reject(User $user, CmsRevision $revision, ?string $comment): void
     {
-        $stage = $user->isSuperAdmin() ? 'super_admin' : 'manager';
+        $stage = $user->hasFullAdminAccess() ? 'super_admin' : 'manager';
 
         CmsApproval::create([
             'cms_revision_id' => $revision->id,

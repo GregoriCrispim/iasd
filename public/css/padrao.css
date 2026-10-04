@@ -18,7 +18,7 @@ body{
 }
 
 main{
-    width: 85.72%;
+    width: 100%;
     padding-top: var(--header-height);
     overflow-x: clip;
 }
@@ -37,7 +37,7 @@ main video{
 .app-toast{
     position: fixed;
     top: calc(var(--header-height) + 14px);
-    right: calc(14.28% + 14px);
+    right: 14px;
     width: min(420px, calc(100vw - 40px));
     background: #ffffff;
     border: 1px solid #cfeedd;
@@ -119,38 +119,6 @@ main video{
 .app-toast.is-hidden{
     opacity: 0;
     transform: translateY(-6px);
-}
-
-aside{
-    width: 14.28%;
-    min-height: 100vh;
-    background-color: #003366;
-    z-index: 10;
-    display: flex;
-    align-items: self-start;
-    justify-content: center;
-}
-
-aside img{
-    margin-top: 3vh;
-}
-
-@media (max-width: 1100px){
-    aside{
-        display: none;
-    }
-
-    .app-toast{
-        right: 14px;
-    }
-
-    main{
-        width: 100%;
-    }
-
-    header{
-        width: 100% !important;
-    }
 }
 
 @media (max-width: 768px){

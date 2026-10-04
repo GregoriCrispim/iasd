@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Role::query()->firstOrCreate(['name' => 'super_admin', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'manager', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'collaborator', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'fotografia_lider', 'guard_name' => 'web']);

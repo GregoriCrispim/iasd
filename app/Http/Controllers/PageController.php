@@ -13,7 +13,9 @@ class PageController extends Controller
      */
     public function home()
     {
-        return view('pages.home');
+        return view('pages.home', [
+            'boletimCoverImages' => \App\Support\BoletimDigital::coverImages(12, 20),
+        ]);
     }
 
     /**
