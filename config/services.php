@@ -38,6 +38,7 @@ return [
     'google_sheets' => [
         'credentials_path' => env('GOOGLE_SHEETS_CREDENTIALS_PATH'),
         'spreadsheet_id' => env('GOOGLE_SHEETS_SPREADSHEET_ID'),
+        'spreadsheet_id_extra' => env('GOOGLE_SHEETS_SPREADSHEET_ID_EXTRA'),
         'sheet_name' => env('GOOGLE_SHEETS_SHEET_NAME', 'Respostas'),
     ],
 

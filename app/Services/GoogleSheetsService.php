@@ -10,6 +10,7 @@ use Google\Service\Sheets\Request as SheetsRequest;
 use Google\Service\Sheets\ValueRange;
 use Google\Service\Exception as GoogleServiceException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 use GuzzleHttp\Client;
 
@@ -17,12 +18,14 @@ class GoogleSheetsService
 {
     private Sheets $sheets;
     private string $spreadsheetId;
+    private string $extraSpreadsheetId;
     private string $sheetName;
 
     public function __construct()
     {
         $credentialsPath = (string) config('services.google_sheets.credentials_path', '');
         $this->spreadsheetId = (string) config('services.google_sheets.spreadsheet_id', '');
+        $this->extraSpreadsheetId = (string) config('services.google_sheets.spreadsheet_id_extra', '');
         $this->sheetName = (string) config('services.google_sheets.sheet_name', 'Respostas');
 
         if ($credentialsPath === '' || $this->spreadsheetId === '') {
@@ -53,37 +56,9 @@ class GoogleSheetsService
      */
     public function appendRow(array $row): void
     {
-        $body = new ValueRange([
-            'values' => [Arr::wrap($row)],
-        ]);
+        $this->appendPrimary($this->sheetName, $row);
 
-        $params = [
-            'valueInputOption' => 'USER_ENTERED',
-            'insertDataOption' => 'INSERT_ROWS',
-        ];
-
-        try {
-            $this->sheets->spreadsheets_values->append(
-                $this->spreadsheetId,
-                $this->rangeForSheet($this->sheetName),
-                $body,
-                $params
-            );
-        } catch (GoogleServiceException $e) {
-            // Se o nome da aba estiver diferente do configurado (ex.: "Página1"),
-            // tenta automaticamente a primeira aba do arquivo.
-            $firstSheet = $this->getFirstSheetTitle();
-            if ($firstSheet === '' || $firstSheet === $this->sheetName) {
-                throw $e;
-            }
-
-            $this->sheets->spreadsheets_values->append(
-                $this->spreadsheetId,
-                $this->rangeForSheet($firstSheet),
-                $body,
-                $params
-            );
-        }
+        $this->appendExtra($this->sheetName, $row, 'appendRow');
     }
 
     /**
@@ -96,8 +71,63 @@ class GoogleSheetsService
             throw new RuntimeException('Nome da aba do Google Sheets não pode ser vazio.');
         }
 
-        $this->ensureSheetExists($sheetName);
+        $this->ensureSheetExists($this->spreadsheetId, $sheetName);
+        $this->appendValueRange($this->spreadsheetId, $sheetName, $row);
 
+        $this->appendExtra($sheetName, $row, 'appendRowToSheet');
+    }
+
+    /**
+     * Grava na planilha principal. Se o nome da aba estiver diferente do
+     * configurado (ex.: "Página1"), tenta automaticamente a primeira aba.
+     *
+     * @param  array<int, mixed>  $row
+     */
+    private function appendPrimary(string $sheetName, array $row): void
+    {
+        try {
+            $this->appendValueRange($this->spreadsheetId, $sheetName, $row);
+        } catch (GoogleServiceException $e) {
+            $firstSheet = $this->getFirstSheetTitle($this->spreadsheetId);
+            if ($firstSheet === '' || $firstSheet === $sheetName) {
+                throw $e;
+            }
+
+            $this->appendValueRange($this->spreadsheetId, $firstSheet, $row);
+        }
+    }
+
+    /**
+     * Grava também na planilha secundária (GOOGLE_SHEETS_SPREADSHEET_ID_EXTRA).
+     * A aba é criada automaticamente se não existir. Falhas são registradas
+     * no log sem interromper o envio para a planilha principal.
+     *
+     * @param  array<int, mixed>  $row
+     */
+    private function appendExtra(string $sheetName, array $row, string $context): void
+    {
+        if ($this->extraSpreadsheetId === '') {
+            return;
+        }
+
+        try {
+            $this->ensureSheetExists($this->extraSpreadsheetId, $sheetName);
+            $this->appendValueRange($this->extraSpreadsheetId, $sheetName, $row);
+        } catch (\Throwable $e) {
+            Log::warning('Falha ao gravar na planilha secundária do Google Sheets', [
+                'context' => $context,
+                'spreadsheet_id' => $this->extraSpreadsheetId,
+                'sheet' => $sheetName,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * @param  array<int, mixed>  $row
+     */
+    private function appendValueRange(string $spreadsheetId, string $sheetName, array $row): void
+    {
         $body = new ValueRange([
             'values' => [Arr::wrap($row)],
         ]);
@@ -108,7 +138,7 @@ class GoogleSheetsService
         ];
 
         $this->sheets->spreadsheets_values->append(
-            $this->spreadsheetId,
+            $spreadsheetId,
             $this->rangeForSheet($sheetName),
             $body,
             $params
@@ -128,9 +158,9 @@ class GoogleSheetsService
         return "'{$escaped}'!A:Z";
     }
 
-    private function getFirstSheetTitle(): string
+    private function getFirstSheetTitle(string $spreadsheetId): string
     {
-        $spreadsheet = $this->sheets->spreadsheets->get($this->spreadsheetId);
+        $spreadsheet = $this->sheets->spreadsheets->get($spreadsheetId);
         $sheets = $spreadsheet->getSheets();
         if (!is_array($sheets) || empty($sheets)) {
             return '';
@@ -140,9 +170,9 @@ class GoogleSheetsService
         return $props ? (string) $props->getTitle() : '';
     }
 
-    private function ensureSheetExists(string $sheetTitle): void
+    private function ensureSheetExists(string $spreadsheetId, string $sheetTitle): void
     {
-        $spreadsheet = $this->sheets->spreadsheets->get($this->spreadsheetId);
+        $spreadsheet = $this->sheets->spreadsheets->get($spreadsheetId);
         $sheets = $spreadsheet->getSheets();
 
         if (is_array($sheets)) {
@@ -166,7 +196,7 @@ class GoogleSheetsService
             ],
         ]);
 
-        $this->sheets->spreadsheets->batchUpdate($this->spreadsheetId, $batch);
+        $this->sheets->spreadsheets->batchUpdate($spreadsheetId, $batch);
     }
 
     private function resolveCredentialsPath(string $path): string
@@ -184,4 +214,3 @@ class GoogleSheetsService
         return base_path($path);
     }
 }
-
