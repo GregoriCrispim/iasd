@@ -2,610 +2,607 @@
 
 @section('title', 'IASD Central de Brasília - Estudo Bíblico')
 
-@section('meta-description', 'Solicite seu estudo bíblico gratuito na IASD Central de Brasília. Estudos presenciais, online ou por telefone. Conecte-se com Deus através da Palavra.')
+@section('meta-description', 'Solicite seu estudo bíblico gratuito na IASD Central de Brasília. Estudos presenciais, online ou por telefone. Conecte-se com Deus por meio da Palavra.')
 @section('og-title', 'Estudo Bíblico - IASD Central de Brasília')
-@section('og-description', 'Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais? O Estudo Bíblico é o caminho!')
+@section('og-description', 'Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais? O estudo bíblico é o caminho!')
 @section('page-name', 'Estudo Bíblico')
 
 @push('styles')
 <style>
+    .eb {
+        --eb-navy: #003366;
+        --eb-navy-deep: #001531;
+        --eb-accent: #d35400;
+        --eb-accent-deep: #ba4a00;
+        --eb-ink: #1a2332;
+        --eb-muted: #5a6577;
+        --eb-line: rgba(0, 51, 102, 0.12);
+        --eb-surface: #f5f7fa;
+        --eb-max: 1080px;
+        color: var(--eb-ink);
+    }
 
-    .estudo-biblico-container {
+    .eb * { box-sizing: border-box; }
+
+    .eb-wrap {
         width: 100%;
-        max-width: 1200px;
+        max-width: var(--eb-max);
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 0 20px 64px;
     }
 
-    .estudo-intro {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        padding: 50px 40px;
-        border-radius: 15px;
-        margin-bottom: 50px;
-        text-align: center;
+    /* —— CTA principal (logo após o header) —— */
+    .eb-cta {
+        margin: 28px auto 48px;
+        max-width: var(--eb-max);
+        padding: 0 20px;
+        position: relative;
+        z-index: 2;
     }
 
-    .estudo-intro h1 {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 3em;
-        color: #003366;
-        margin-bottom: 25px;
-        font-weight: 500;
-    }
-
-    .estudo-intro p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #333;
-        text-align: justify;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .motivos-section {
-        margin: 60px 0;
-    }
-
-    .motivos-section h2 {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 2.5em;
-        color: #003366;
-        text-align: center;
-        margin-bottom: 40px;
-        font-weight: 500;
-    }
-
-    .motivos-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    .motivo-card {
+    .eb-cta__panel {
         background: #fff;
-        border: 2px solid #e0e0e0;
-        border-radius: 15px;
-        padding: 30px 25px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .motivo-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        border-color: rgba(211, 84, 0, 0.4);
-    }
-
-    .motivo-card .emoji {
-        font-size: 3em;
-        margin-bottom: 20px;
-        display: block;
-        color: #d35400;
-    }
-
-    .motivo-card h3 {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.3em;
-        color: #003366;
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-
-    .motivo-card p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1rem;
-        color: #666;
-        line-height: 1.6;
-    }
-
-    .experiencia-section {
-        background: linear-gradient(135deg, #003366 0%, #001531 100%);
-        padding: 60px 40px;
-        border-radius: 15px;
-        margin: 50px 0;
-        text-align: center;
-        color: #fff;
-    }
-
-    .experiencia-section h2 {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 2.5em;
-        color: #fff;
-        margin-bottom: 30px;
-        font-weight: 500;
-    }
-
-    .experiencia-section p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #f8f9fa;
-        margin-bottom: 20px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .experiencia-cards {
+        border: 1px solid var(--eb-line);
+        border-radius: 18px;
+        box-shadow: 0 18px 50px rgba(0, 21, 49, 0.12);
+        padding: clamp(28px, 4vw, 40px);
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-        gap: 30px;
-        margin: 40px auto;
-        max-width: 900px;
-        width: 100%;
-    }
-
-    .experiencia-card {
-        background: rgba(255,255,255,0.1);
-        padding: 30px;
-        border-radius: 12px;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        min-width: 0;
-        overflow: hidden;
-        color: #fff;
-        text-align: left;
-    }
-
-    .experiencia-card i {
-        font-size: 3em;
-        display: block;
-        margin-bottom: 15px;
-    }
-
-    .experiencia-card h3 {
-        color: #fff;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.3em;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-
-    .experiencia-card p {
-        color: #f8f9fa;
-        margin: 0;
-        line-height: 1.7;
-        max-width: none;
-    }
-
-    .experiencia-highlight {
-        background: rgba(255,255,255,0.15);
-        padding: 30px 40px;
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.22);
-        max-width: 800px;
-        margin: 0 auto;
-        box-sizing: border-box;
-    }
-
-    .experiencia-highlight p {
-        color: #fff;
-        font-size: 1.2em;
-        font-weight: 600;
-        margin: 0;
-        text-align: center;
-        max-width: none;
-    }
-
-    .como-funciona-section {
-        margin: 60px 0;
-    }
-
-    .como-funciona-section h2 {
-        font-family: 'Bebas neue', sans-serif;
-        font-size: 2.5em;
-        color: #003366;
-        text-align: center;
-        margin-bottom: 40px;
-        font-weight: 500;
-    }
-
-    .steps-container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .step {
-        background: #fff;
-        border: 2px solid #e0e0e0;
-        border-radius: 12px;
-        padding: 25px 20px;
-        margin-bottom: 25px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        transition: transform 0.3s, box-shadow 0.3s;
-        display: flex;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .step:hover {
-        transform: translateX(5px);
-        box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-    }
-
-    .step-number {
-        background: #003366;
-        color: #fff;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
+        grid-template-columns: 1.35fr 0.9fr;
+        gap: clamp(24px, 4vw, 40px);
         align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 1.3em;
-        flex-shrink: 0;
-        font-family: 'Bebas neue', sans-serif;
     }
 
-    .step-content h3 {
+    .eb-cta__kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         font-family: 'Roboto', sans-serif;
-        font-size: 1.3em;
-        color: #003366;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--eb-accent);
         margin-bottom: 10px;
-        font-weight: 600;
     }
 
-    .step-content p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1rem;
-        color: #666;
-        line-height: 1.6;
-    }
+    .eb-cta__kicker i { font-size: 1rem; }
 
-    .materiais-section {
-        background: radial-gradient(900px circle at 10% 0%, rgba(0, 51, 102, 0.06) 0%, rgba(0, 51, 102, 0) 55%),
-        #f8f9fa;
-        padding: 44px 40px 34px;
-        border-radius: 16px;
-        margin: 50px 0 0;
-        border: 1px solid rgba(0, 51, 102, 0.10);
-    }
-
-    .materiais-section h2 {
+    .eb-cta h1 {
         font-family: 'Bebas neue', sans-serif;
-        font-size: 2.5em;
-        color: #003366;
-        text-align: center;
-        margin-bottom: 40px;
+        font-size: clamp(2.1rem, 4.2vw, 3rem);
+        line-height: 1.05;
+        color: var(--eb-navy);
         font-weight: 500;
+        margin: 0 0 14px;
+        letter-spacing: 0.01em;
     }
 
-    .materiais-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 16px;
-        margin-bottom: 16px;
-    }
-
-    .material-card {
-        background: rgba(255,255,255,0.94);
-        border: 1px solid rgba(0, 51, 102, 0.12);
-        border-radius: 14px;
-        padding: 18px 16px 16px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-        text-decoration: none;
-        color: inherit;
-        display: block;
-    }
-
-    .material-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(0, 51, 102, 0.22);
-        background: #fff;
-        box-shadow: 0 14px 40px rgba(0,0,0,0.12);
-    }
-
-    .material-card:focus-visible {
-        outline: 3px solid rgba(0, 51, 102, 0.28);
-        outline-offset: 3px;
-    }
-
-    .material-card .emoji {
-        width: 52px;
-        height: 52px;
-        margin: 0 auto 12px;
-        border-radius: 14px;
-        display: grid;
-        place-items: center;
-        background: rgba(0, 51, 102, 0.08);
-        color: #003366;
-        font-size: 1.55rem;
-    }
-
-    .material-card h4 {
+    .eb-cta__lead {
         font-family: 'Roboto', sans-serif;
         font-size: 1.05rem;
-        color: #003366;
-        margin-bottom: 0;
-        font-weight: 700;
-        line-height: 1.35;
+        line-height: 1.65;
+        color: var(--eb-muted);
+        margin: 0 0 22px;
+        max-width: 36em;
     }
 
-    .btn-material-destaque {
-        display: block;
-        text-align: center;
-        background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%);
-        color: #fff;
-        padding: 18px 50px;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.2em;
-        margin: 0 auto 24px auto;
-        max-width: 450px;
-        transition: transform 0.3s, box-shadow 0.3s;
+    .eb-cta__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .eb-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
         font-family: 'Roboto', sans-serif;
-        border-bottom: 3px solid #ba4a00;
-    }
-
-    .btn-material-destaque:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(211, 84, 0, 0.3);
-        border-bottom-color: #9e4100;
-    }
-
-    .estudo-request {
-        background: radial-gradient(900px circle at 20% 0%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 55%),
-        linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-        padding: 44px 40px;
-        border-radius: 16px;
-        margin: 0 0 56px;
-        border: 1px solid rgba(0, 51, 102, 0.12);
-        border-bottom: 3px solid rgba(211, 84, 0, 0.4);
-    }
-
-    .estudo-request__inner {
-        max-width: 980px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .estudo-request__title {
-        font-size: clamp(1.9rem, 3.2vw, 2.6rem);
-        color: #003366;
-        margin-bottom: 14px;
         font-weight: 800;
-        letter-spacing: -0.02em;
+        font-size: 1.05rem;
+        text-decoration: none;
+        border-radius: 12px;
+        padding: 15px 26px;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        border: 0;
+        cursor: pointer;
     }
 
-    .estudo-request__lead {
+    .eb-btn--primary {
+        background: linear-gradient(135deg, var(--eb-accent) 0%, var(--eb-accent-deep) 100%);
+        color: #fff;
+        box-shadow: 0 12px 28px rgba(211, 84, 0, 0.28);
+    }
+
+    .eb-btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 34px rgba(211, 84, 0, 0.34);
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .eb-btn--ghost {
+        background: transparent;
+        color: var(--eb-navy);
+        border: 1.5px solid var(--eb-line);
+        padding: 13px 20px;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .eb-btn--ghost:hover {
+        background: var(--eb-surface);
+        color: var(--eb-navy);
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+
+    .eb-cta__modes {
+        display: grid;
+        gap: 12px;
+    }
+
+    .eb-mode {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: var(--eb-surface);
+        border: 1px solid transparent;
+        transition: border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .eb-mode:hover {
+        border-color: rgba(0, 51, 102, 0.16);
+        background: #fff;
+    }
+
+    .eb-mode__icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        background: rgba(0, 51, 102, 0.08);
+        color: var(--eb-navy);
+        font-size: 1.25rem;
+    }
+
+    .eb-mode h3 {
         font-family: 'Roboto', sans-serif;
-        font-size: 1.1rem;
-        line-height: 1.75;
-        color: rgba(0,0,0,0.78);
-        margin: 0 auto 22px;
-        max-width: 860px;
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: var(--eb-navy);
+        margin: 0 0 2px;
     }
 
-    .estudo-request__modes {
+    .eb-mode p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.88rem;
+        color: var(--eb-muted);
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* —— Seções —— */
+    .eb-section {
+        margin: 0 0 52px;
+    }
+
+    .eb-section__head {
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto 28px;
+    }
+
+    .eb-section__head h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: clamp(1.85rem, 3vw, 2.35rem);
+        color: var(--eb-navy);
+        font-weight: 500;
+        margin: 0 0 10px;
+    }
+
+    .eb-section__head p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.02rem;
+        line-height: 1.6;
+        color: var(--eb-muted);
+        margin: 0;
+    }
+
+    .eb-reasons {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 16px;
-        margin: 22px auto 18px;
-        max-width: 980px;
     }
 
-    .estudo-request__mode {
-        background: rgba(255,255,255,0.92);
-        border: 1px solid rgba(0, 51, 102, 0.10);
+    .eb-reason {
+        padding: 22px 20px;
         border-radius: 14px;
-        padding: 18px 18px 16px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        border: 1px solid var(--eb-line);
+        background: #fff;
         text-align: left;
-        min-width: 0;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
 
-    .estudo-request__mode-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
+    .eb-reason:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(0, 21, 49, 0.08);
+    }
+
+    .eb-reason__icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
         display: grid;
         place-items: center;
-        background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%);
-        color: #fff;
-        font-size: 1.55rem;
-        margin-bottom: 12px;
-        box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
+        background: rgba(211, 84, 0, 0.1);
+        color: var(--eb-accent);
+        font-size: 1.35rem;
+        margin-bottom: 14px;
     }
 
-    .estudo-request__mode h3 {
+    .eb-reason h3 {
         font-family: 'Roboto', sans-serif;
-        font-size: 1.05rem;
-        color: #003366;
+        font-size: 1.08rem;
         font-weight: 700;
-        margin-bottom: 6px;
-        transition: color 0.18s ease;
+        color: var(--eb-navy);
+        margin: 0 0 8px;
     }
 
-    .estudo-request__mode p {
+    .eb-reason p {
         font-family: 'Roboto', sans-serif;
         font-size: 0.95rem;
-        color: rgba(0,0,0,0.62);
+        line-height: 1.55;
+        color: var(--eb-muted);
         margin: 0;
-        line-height: 1.5;
     }
 
-    .estudo-request .container_form {
-        margin-top: 10px;
+    /* Como funciona */
+    .eb-steps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+        counter-reset: eb-step;
+        border: 1px solid var(--eb-line);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fff;
     }
 
-    .estudo-request .form-open-btn {
-        appearance: none;
-        border: 0;
-        background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%);
-        color: #fff;
-        padding: 14px 22px;
-        margin: 6px 0 0;
-        border-radius: 12px;
-        font-weight: 800;
-        letter-spacing: 0.01em;
-        box-shadow: 0 14px 30px rgba(211, 84, 0, 0.3);
-        transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-        border-bottom: 3px solid rgba(186, 74, 0, 0.6);
-        display: inline-block;
-        text-decoration: none;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .estudo-request .form-open-btn:hover {
-        transform: none;
-        box-shadow: 0 14px 30px rgba(211, 84, 0, 0.3);
-        filter: none;
-        border-bottom-color: rgba(186, 74, 0, 0.6);
-        background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%);
-    }
-
-    .estudo-request .form-open-btn:focus-visible {
-        outline: 3px solid rgba(249, 160, 27, 0.55);
-        outline-offset: 3px;
-    }
-
-    .estudo-request a.btn-primary-solid:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(211, 84, 0, 0.3);
-    }
-
-    .container_form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .container_label {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-    }
-
-    label {
-        margin-bottom: 4px;
-        font-family: 'Roboto';
-    }
-
-    .container_input {
+    .eb-step {
+        padding: 26px 22px;
         position: relative;
+        counter-increment: eb-step;
     }
 
-    .container_input i {
-        position: absolute;
-        bottom: 6px;
-        left: 6px;
+    .eb-step:not(:last-child) {
+        border-right: 1px solid var(--eb-line);
     }
 
-    input {
-        width: 100%;
-        padding: 6px 0;
-        border: 1px solid rgb(192, 191, 191);
-        text-indent: 26px;
-        border-radius: 8px;
-    }
-
-    textarea {
-        text-indent: 6px;
-        border: 1px solid rgb(192, 191, 191);
-        padding: 6px 0;
-        border-radius: 8px;
-    }
-
-    button {
-        background-color: #d35400;
+    .eb-step::before {
+        content: counter(eb-step);
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--eb-navy);
         color: #fff;
-        margin: 15px 0 25px 0;
-        padding: 12px 50px;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: .4s;
-        border-bottom: 3px solid #ba4a00;
+        font-family: 'Bebas neue', sans-serif;
+        font-size: 1.15rem;
+        margin-bottom: 14px;
     }
 
-    button:hover {
-        background-color: #ba4a00;
-        border-bottom-color: #9e4100;
+    .eb-step h3 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--eb-navy);
+        margin: 0 0 8px;
     }
 
-    @media (max-width: 768px) {
-        .estudo-biblico-container {
-            padding: 20px 15px;
+    .eb-step p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.94rem;
+        line-height: 1.55;
+        color: var(--eb-muted);
+        margin: 0;
+    }
+
+    /* Experiência */
+    .eb-experience {
+        background: linear-gradient(145deg, var(--eb-navy) 0%, var(--eb-navy-deep) 100%);
+        border-radius: 18px;
+        padding: clamp(28px, 4vw, 40px);
+        color: #fff;
+    }
+
+    .eb-experience__head {
+        max-width: 560px;
+        margin-bottom: 24px;
+    }
+
+    .eb-experience__head h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: clamp(1.85rem, 3vw, 2.35rem);
+        font-weight: 500;
+        color: #fff;
+        margin: 0 0 10px;
+    }
+
+    .eb-experience__head p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.02rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.82);
+        margin: 0;
+    }
+
+    .eb-experience__list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .eb-experience__list li {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 18px 16px;
+    }
+
+    .eb-experience__list i {
+        display: block;
+        font-size: 1.4rem;
+        color: #f9a01b;
+        margin-bottom: 10px;
+    }
+
+    .eb-experience__list strong {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    .eb-experience__list span {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.78);
+    }
+
+    /* Materiais */
+    .eb-materials {
+        background: var(--eb-surface);
+        border: 1px solid var(--eb-line);
+        border-radius: 18px;
+        padding: clamp(24px, 3.5vw, 36px);
+    }
+
+    .eb-materials__featured {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--eb-line);
+    }
+
+    .eb-materials__featured h3 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--eb-navy);
+        margin: 0 0 4px;
+    }
+
+    .eb-materials__featured p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.95rem;
+        color: var(--eb-muted);
+        margin: 0;
+    }
+
+    .eb-materials__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .eb-material {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid var(--eb-line);
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .eb-material:hover {
+        border-color: rgba(0, 51, 102, 0.28);
+        transform: translateY(-2px);
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .eb-material i {
+        font-size: 1.35rem;
+        color: var(--eb-navy);
+        flex-shrink: 0;
+    }
+
+    .eb-material span {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--eb-navy);
+        line-height: 1.35;
+    }
+
+    /* FAQ doutrina */
+    .eb-faq {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 28px 30px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--eb-navy) 0%, var(--eb-navy-deep) 100%);
+        color: #fff;
+    }
+
+    .eb-faq__copy {
+        flex: 1;
+        min-width: min(100%, 280px);
+    }
+
+    .eb-faq__copy h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: clamp(1.6rem, 2.5vw, 2rem);
+        font-weight: 500;
+        color: #fff;
+        margin: 0 0 8px;
+    }
+
+    .eb-faq__copy p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.98rem;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.82);
+        margin: 0;
+        max-width: 42em;
+    }
+
+    .eb-btn--on-dark {
+        background: #fff;
+        color: var(--eb-navy);
+        box-shadow: none;
+    }
+
+    .eb-btn--on-dark:hover {
+        background: #f0f4f8;
+        color: var(--eb-navy);
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    /* CTA final */
+    .eb-final {
+        text-align: center;
+        padding: 36px 24px;
+        border-radius: 18px;
+        border: 1px solid var(--eb-line);
+        background:
+            radial-gradient(600px circle at 50% 0%, rgba(211, 84, 0, 0.08) 0%, transparent 60%),
+            #fff;
+    }
+
+    .eb-final h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: clamp(1.85rem, 3vw, 2.35rem);
+        color: var(--eb-navy);
+        font-weight: 500;
+        margin: 0 0 10px;
+    }
+
+    .eb-final p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: var(--eb-muted);
+        margin: 0 auto 22px;
+        max-width: 34em;
+    }
+
+    /* Motion */
+    @media (prefers-reduced-motion: no-preference) {
+        .eb-reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
         }
 
-        .estudo-intro {
-            padding: 30px 20px;
+        .eb-reveal.is-visible {
+            opacity: 1;
+            transform: none;
         }
 
-        .estudo-intro h1 {
-            font-size: 2.2em;
+        .eb-cta__panel {
+            animation: eb-rise 0.55s ease both;
+        }
+    }
+
+    @keyframes eb-rise {
+        from { opacity: 0; transform: translateY(18px); }
+        to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 860px) {
+        .eb-cta {
+            margin-top: 20px;
+            margin-bottom: 36px;
         }
 
-        .motivos-grid,
-        .materiais-grid {
+        .eb-cta__panel {
+            grid-template-columns: 1fr;
+            gap: 22px;
+        }
+
+        .eb-reasons,
+        .eb-steps,
+        .eb-experience__list,
+        .eb-materials__grid {
             grid-template-columns: 1fr;
         }
 
-        .experiencia-section {
-            padding: 40px 20px;
+        .eb-step:not(:last-child) {
+            border-right: 0;
+            border-bottom: 1px solid var(--eb-line);
         }
 
-        .experiencia-cards {
-            gap: 16px;
-            margin: 24px auto;
-        }
-
-        .experiencia-card {
-            padding: 22px 18px;
-            text-align: center;
-        }
-
-        .experiencia-highlight {
-            padding: 22px 18px;
-        }
-
-        .step {
+        .eb-faq {
             flex-direction: column;
             text-align: center;
+            padding: 26px 22px;
         }
 
-        .step-number {
-            margin: 0 auto;
+        .eb-faq__copy p {
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .materiais-section {
-            padding: 28px 18px 22px;
-            margin: 38px 0 0;
+        .eb-materials__featured {
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .eb-cta__actions {
+            flex-direction: column;
+            align-items: stretch;
         }
 
-        .btn-material-destaque {
-            padding: 16px 18px;
-            font-size: 1.08em;
-            margin: 0 auto 18px auto;
-        }
-
-        .estudo-request {
-            padding: 28px 18px;
-            margin: 0 0 38px;
-        }
-
-        .estudo-request__modes {
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin: 18px auto 14px;
-        }
-
-        .estudo-request__mode {
-            text-align: center;
-            padding: 16px 16px 14px;
-        }
-
-        .estudo-request__mode-icon {
-            margin: 0 auto 10px;
+        .eb-btn {
+            width: 100%;
         }
     }
 </style>
@@ -614,189 +611,217 @@
 @section('content')
 <img src="{{ asset('img/cards/estudo_biblico/estudo_biblico_header.webp') }}" alt="Estudo Bíblico" style="width: 100%;" fetchpriority="high" decoding="async">
 
-<div class="estudo-biblico-container">
-
-    <!-- Seção Introdutória -->
-    <div class="estudo-intro acb-fullbleed">
-        <h1>Estudo Bíblico: Uma Jornada para Conectar-se com Deus</h1>
-        <p>
-            Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais? O Estudo Bíblico é o caminho! Seja qual for sua idade ou momento de vida, aqui você encontrará um espaço acolhedor, dinâmico e adaptado às suas necessidades. Encontros presenciais na sua residência, na igreja ou online — <strong>você escolhe como participar!</strong>
-        </p>
-    </div>
-
-    <!-- Seção Por Que Estudar a Bíblia -->
-    <div class="motivos-section">
-        <h2 class="acb-title-serif">Por que estudar a Bíblia?</h2>
-        <div class="motivos-grid">
-            <div class="motivo-card">
-                <i class="bi bi-book-half emoji"></i>
-                <h3>Aprendizado Simples</h3>
-                <p>Aprenda de forma simples como os ensinamentos de Jesus transformam vidas.</p>
-            </div>
-
-            <div class="motivo-card">
-                <i class="bi bi-patch-question-fill emoji"></i>
-                <h3>Respostas Reais</h3>
-                <p>Descubra respostas para questões pessoais e espirituais, guiado pelo amor de Cristo.</p>
-            </div>
-
-            <div class="motivo-card">
-                <i class="bi bi-people-fill emoji"></i>
-                <h3>Conexão Autêntica</h3>
-                <p>Conecte-se com Deus de maneira prática e autêntica, em comunidade.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Seção Experiência -->
-    <div class="experiencia-section acb-fullbleed">
-        <h2 class="acb-title-serif">Mais que estudo, uma experiência!</h2>
-
-        <div class="experiencia-cards">
-            <div class="experiencia-card">
-                <i class="bi bi-stars"></i>
-                <h3>Transformação Diária</h3>
-                <p>Cada lição é um passo para entender melhor a Palavra de Deus e seu propósito para você.</p>
-            </div>
-
-            <div class="experiencia-card">
-                <i class="bi bi-stars"></i>
-                <h3>Renovação e Esperança</h3>
-                <p>Venha renovar sua esperança, encontrar apoio e caminhar mais perto dEle.</p>
-            </div>
-
-            <div class="experiencia-card">
-                <i class="bi bi-heart"></i>
-                <h3>Crescimento Espiritual</h3>
-                <p>Venha estudar, compartilhar e crescer na graça de Deus!</p>
-            </div>
-        </div>
-
-        <div class="experiencia-highlight">
-            <p>
-                <i class="bi bi-star-fill"></i> Sua jornada espiritual começa agora! Descubra como a Bíblia pode iluminar sua vida!
-            </p>
-        </div>
-    </div>
-
-    <!-- Seção Como Funciona -->
-    <div class="como-funciona-section">
-        <h2 class="acb-title-serif">Como funciona?</h2>
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Ambiente Leve</h3>
-                    <p>Materiais como Bíblia e guias são fornecidos. Suas dúvidas e experiências são sempre bem-vindas!</p>
+<div class="eb">
+    {{-- Ação principal: solicitar estudo — acima de todo o conteúdo explicativo --}}
+    <div class="eb-cta">
+        <div class="eb-cta__panel">
+            <div>
+                <div class="eb-cta__kicker">
+                    <i class="bi bi-book" aria-hidden="true"></i>
+                    Gratuito e sem compromisso
+                </div>
+                <h1>Estudo bíblico: uma jornada para se conectar com Deus</h1>
+                <p class="eb-cta__lead">
+                    Procurando respostas, fortalecimento espiritual ou alívio para desafios emocionais?
+                    Oferecemos encontros presenciais, na igreja ou online. <strong>Você escolhe como participar.</strong>
+                </p>
+                <div class="eb-cta__actions">
+                    <a href="{{ route('estudo-biblico.formulario') }}" class="eb-btn eb-btn--primary">
+                        <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                        Solicitar estudo bíblico
+                    </a>
+                    <a href="#como-funciona" class="eb-btn eb-btn--ghost">
+                        Como funciona
+                    </a>
                 </div>
             </div>
 
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Encontros Envolventes</h3>
+            <div class="eb-cta__modes" aria-label="Formas de participação">
+                <article class="eb-mode">
+                    <div class="eb-mode__icon" aria-hidden="true"><i class="bi bi-house"></i></div>
+                    <div>
+                        <h3>Presencial</h3>
+                        <p>Na sua residência ou na igreja</p>
+                    </div>
+                </article>
+                <article class="eb-mode">
+                    <div class="eb-mode__icon" aria-hidden="true"><i class="bi bi-laptop"></i></div>
+                    <div>
+                        <h3>Online</h3>
+                        <p>Por videoconferência</p>
+                    </div>
+                </article>
+                <article class="eb-mode">
+                    <div class="eb-mode__icon" aria-hidden="true"><i class="bi bi-phone"></i></div>
+                    <div>
+                        <h3>Remoto</h3>
+                        <p>Por telefone ou mensagem</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div class="eb-wrap">
+        <section class="eb-section eb-reveal" aria-labelledby="eb-motivos-title">
+            <div class="eb-section__head">
+                <h2 id="eb-motivos-title" class="acb-title-serif">Por que estudar a Bíblia?</h2>
+                <p>Seja qual for a sua idade ou o momento de vida, aqui você encontra um espaço acolhedor e adaptado às suas necessidades.</p>
+            </div>
+            <div class="eb-reasons">
+                <article class="eb-reason">
+                    <div class="eb-reason__icon" aria-hidden="true"><i class="bi bi-book-half"></i></div>
+                    <h3>Aprendizado simples</h3>
+                    <p>Aprenda de forma simples como os ensinamentos de Jesus transformam vidas.</p>
+                </article>
+                <article class="eb-reason">
+                    <div class="eb-reason__icon" aria-hidden="true"><i class="bi bi-patch-question-fill"></i></div>
+                    <h3>Respostas reais</h3>
+                    <p>Descubra respostas para questões pessoais e espirituais, com a orientação do amor de Cristo.</p>
+                </article>
+                <article class="eb-reason">
+                    <div class="eb-reason__icon" aria-hidden="true"><i class="bi bi-people-fill"></i></div>
+                    <h3>Conexão autêntica</h3>
+                    <p>Conecte-se com Deus de maneira prática e autêntica, em comunidade.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="eb-section eb-reveal" id="como-funciona" aria-labelledby="eb-como-title">
+            <div class="eb-section__head">
+                <h2 id="eb-como-title" class="acb-title-serif">Como funciona?</h2>
+                <p>Um caminho claro, acolhedor e sem pressão, do primeiro contato à aplicação no dia a dia.</p>
+            </div>
+            <div class="eb-steps">
+                <article class="eb-step">
+                    <h3>Ambiente leve</h3>
+                    <p>Materiais como a Bíblia e os guias são fornecidos. Suas dúvidas e experiências são sempre bem-vindas!</p>
+                </article>
+                <article class="eb-step">
+                    <h3>Encontros envolventes</h3>
                     <p>Começamos com oração, exploramos passagens bíblicas e refletimos juntos.</p>
+                </article>
+                <article class="eb-step">
+                    <h3>Transformação real</h3>
+                    <p>Ao final, você é incentivado a aplicar os aprendizados no dia a dia e a crescer na fé.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="eb-section eb-reveal" aria-labelledby="eb-exp-title">
+            <div class="eb-experience">
+                <div class="eb-experience__head">
+                    <h2 id="eb-exp-title" class="acb-title-serif">Mais que estudo, uma experiência</h2>
+                    <p>Sua jornada espiritual começa agora. Descubra como a Bíblia pode iluminar a sua vida.</p>
+                </div>
+                <ul class="eb-experience__list">
+                    <li>
+                        <i class="bi bi-stars" aria-hidden="true"></i>
+                        <strong>Transformação diária</strong>
+                        <span>Cada lição é um passo para entender melhor a Palavra de Deus e o propósito Dele para você.</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-brightness-high" aria-hidden="true"></i>
+                        <strong>Renovação e esperança</strong>
+                        <span>Venha renovar a sua esperança, encontrar apoio e caminhar mais perto Dele.</span>
+                    </li>
+                    <li>
+                        <i class="bi bi-heart" aria-hidden="true"></i>
+                        <strong>Crescimento espiritual</strong>
+                        <span>Venha estudar, compartilhar e crescer na graça de Deus.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="eb-section eb-reveal" aria-labelledby="eb-mat-title">
+            <div class="eb-section__head">
+                <h2 id="eb-mat-title" class="acb-title-serif">Materiais de estudo</h2>
+                <p>Acesse os nossos conteúdos e solicite materiais gratuitos.</p>
+            </div>
+            <div class="eb-materials">
+                <div class="eb-materials__featured">
+                    <div>
+                        <h3>Cursos e guias bíblicos</h3>
+                        <p>Acervo oficial de estudos para evangelismo e crescimento espiritual.</p>
+                    </div>
+                    <a href="https://downloads.adventistas.org/pt/evangelismo/estudos-biblicos/cursos-biblicos/" target="_blank" rel="noopener" class="eb-btn eb-btn--primary">
+                        <i class="bi bi-journals" aria-hidden="true"></i>
+                        Ver materiais
+                    </a>
+                </div>
+                <div class="eb-materials__grid">
+                    <a href="https://cursos.novotempo.com/" target="_blank" rel="noopener" class="eb-material">
+                        <i class="bi bi-gift" aria-hidden="true"></i>
+                        <span>Materiais impressos ou digitais gratuitos</span>
+                    </a>
+                    <a href="https://www.youtube.com/user/BibliaFacil" target="_blank" rel="noopener" class="eb-material">
+                        <i class="bi bi-camera-video" aria-hidden="true"></i>
+                        <span>Canal Bíblia Fácil</span>
+                    </a>
+                    <a href="https://www.youtube.com/@NaMiradaVerdadeNT" target="_blank" rel="noopener" class="eb-material">
+                        <i class="bi bi-search" aria-hidden="true"></i>
+                        <span>Canal Na Mira da Verdade</span>
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Transformação Real</h3>
-                    <p>Ao final, você é incentivado a aplicar os aprendizados no dia a dia e crescer na fé.</p>
+        <section class="eb-section eb-reveal" aria-labelledby="eb-faq-title">
+            <div class="eb-faq">
+                <div class="eb-faq__copy">
+                    <h2 id="eb-faq-title" class="acb-title-serif">Tem perguntas sobre doutrina?</h2>
+                    <p>
+                        Explore a nossa seção de perguntas frequentes: sábado, dom de profecia, juízo investigativo, estado dos mortos e muito mais.
+                    </p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Seção Materiais de Estudo -->
-    <div class="materiais-section acb-fullbleed">
-        <h2 class="acb-title-serif">Materiais de Estudo</h2>
-        <p style="text-align: center; font-family: 'Roboto', sans-serif; font-size: 1.1rem; color: #666; margin-bottom: 30px;">
-            Acesse nossos conteúdos e solicite materiais gratuitos.
-        </p>
-
-        <a href="https://downloads.adventistas.org/pt/evangelismo/estudos-biblicos/cursos-biblicos/" target="_blank" class="btn-material-destaque">
-            <i class="bi bi-journals"></i> Materiais para Estudo Bíblico
-        </a>
-
-        <div class="materiais-grid">
-            <a href="https://cursos.novotempo.com/" target="_blank" class="material-card">
-                <i class="bi bi-gift emoji"></i>
-                <h4>Solicite materiais impressos ou digitais gratuitamente</h4>
-            </a>
-
-            <a href="https://www.youtube.com/user/BibliaFacil" target="_blank" class="material-card">
-                <i class="bi bi-camera-video emoji"></i>
-                <h4>Canal Bíblia Fácil</h4>
-            </a>
-
-            <a href="https://www.youtube.com/@NaMiradaVerdadeNT" target="_blank" class="material-card">
-                <i class="bi bi-search emoji"></i>
-                <h4>Canal Na Mira da Verdade</h4>
-            </a>
-        </div>
-    </div>
-
-    <!-- Seção Solicitação de Estudo Bíblico -->
-    <section class="estudo-request acb-fullbleed" aria-labelledby="estudo-request-title" style="margin-bottom: 0;">
-        <div class="estudo-request__inner">
-            <h2 id="estudo-request-title" class="acb-title-serif estudo-request__title">
-                Solicite Seu Estudo Bíblico Gratuito
-            </h2>
-
-            <p class="estudo-request__lead">
-                Deseja aprofundar seu conhecimento na Palavra de Deus? Oferecemos <strong>estudos bíblicos gratuitos</strong> que podem ser realizados da forma que preferir!
-            </p>
-
-            <div class="estudo-request__modes" aria-label="Formas de participação">
-                <article class="estudo-request__mode">
-                    <div class="estudo-request__mode-icon" aria-hidden="true">
-                        <i class="bi bi-house"></i>
-                    </div>
-                    <h3>Presencial</h3>
-                    <p>Na sua residência ou na igreja</p>
-                </article>
-
-                <article class="estudo-request__mode">
-                    <div class="estudo-request__mode-icon" aria-hidden="true">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <h3>Online</h3>
-                    <p>Por videoconferência</p>
-                </article>
-
-                <article class="estudo-request__mode">
-                    <div class="estudo-request__mode-icon" aria-hidden="true">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                    <h3>Remoto</h3>
-                    <p>Por telefone ou mensagem</p>
-                </article>
-            </div>
-
-            <!-- FORMULÁRIO -->
-            <div class="container_form">
-                <a href="{{ route('estudo-biblico.formulario') }}" class="btn-primary-solid form-open-btn">
-                    Preencher Formulário
+                <a href="{{ route('faq') }}#doutrina" class="eb-btn eb-btn--on-dark">
+                    <i class="bi bi-question-circle" aria-hidden="true"></i>
+                    Ver questões sobre doutrina
                 </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Seção Questões sobre Doutrina -->
-    <section class="estudo-request acb-fullbleed" style="background: linear-gradient(135deg, #003366 0%, #001531 100%); color: #fff; text-align: center; padding: 60px 40px; margin: 0 0 56px;">
-        <div style="max-width: 980px; margin: 0 auto;">
-            <i class='bx bx-book-open' style="font-size: 3rem; color: #fff; margin-bottom: 20px; display: block;"></i>
-            <h2 class="acb-title-serif" style="font-size: 2.5em; color: #fff; margin-bottom: 25px; font-weight: 700;">Tem perguntas sobre doutrina?</h2>
-            <p style="font-family: 'Roboto', sans-serif; font-size: 1.15rem; line-height: 1.8; color: #f8f9fa; margin-bottom: 30px; max-width: 860px; margin-left: auto; margin-right: auto;">
-                Explore nossa seção de Perguntas Frequentes para encontrar respostas detalhadas sobre as doutrinas bíblicas adventistas. Descubra mais sobre sábado, dom de profecia, juízo investigativo, estado dos mortos e muito mais!
+        <section class="eb-final eb-reveal" aria-labelledby="eb-final-title">
+            <h2 id="eb-final-title" class="acb-title-serif">Pronto para começar?</h2>
+            <p>
+                Solicite o seu estudo bíblico gratuito. A nossa equipe entrará em contato e você escolhe a forma que preferir.
             </p>
-            <a href="{{ route('faq') }}#doutrina" class="btn-primary-solid" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #d35400 0%, #ba4a00 100%); color: #fff; border: none; border-radius: 12px; font-family: 'Roboto', sans-serif; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; border-bottom: 3px solid rgba(186, 74, 0, 0.6);">
-                <i class='bx bx-help-circle'></i> Ver Questões sobre Doutrina
+            <a href="{{ route('estudo-biblico.formulario') }}" class="eb-btn eb-btn--primary">
+                <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                Preencher formulário
             </a>
-        </div>
-    </section>
-
+        </section>
+    </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.eb-reveal').forEach(function (el) {
+            el.classList.add('is-visible');
+        });
+        return;
+    }
+
+    var nodes = document.querySelectorAll('.eb-reveal');
+    if (!('IntersectionObserver' in window) || !nodes.length) {
+        nodes.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    nodes.forEach(function (el) { observer.observe(el); });
+})();
+</script>
+@endpush
