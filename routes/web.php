@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ApprovalsController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CampaignMetricsController;
 use App\Http\Controllers\Admin\CmsBlockController;
 use App\Http\Controllers\Admin\CmsCompareController;
 use App\Http\Controllers\Admin\CmsPageController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Admin\GalleryFaceController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\MemberAuthController;
+use App\Http\Controllers\CampaignRedirectController;
 use App\Http\Controllers\FaceSearchController;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PageController;
@@ -89,6 +91,8 @@ Route::middleware(['auth:admin'])
                 Route::get('/cms/approvals', [ApprovalsController::class, 'index'])->name('approvals.index');
                 Route::post('/cms/approvals/{revision}/approve', [ApprovalsController::class, 'approve'])->name('approvals.approve');
                 Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
+
+                Route::get('/campanhas/{slug}', [CampaignMetricsController::class, 'show'])->name('campanhas.show');
             });
 
             // Super Admin e Admin
@@ -151,6 +155,14 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 // Página inicial
 Route::get('/', [PageController::class, 'home'])->name('home');
+
+// Campanhas QR (tracking + redirect)
+Route::middleware('throttle:120,1')->group(function () {
+    Route::get('/sementes', [CampaignRedirectController::class, 'sementes'])->name('campanha.sementes');
+    Route::get('/c/{slug}', [CampaignRedirectController::class, 'show'])
+        ->where('slug', '[a-z0-9\-]+')
+        ->name('campanha.redirect');
+});
 
 // Páginas do site
 Route::get('/igreja', [PageController::class, 'igreja'])->name('igreja');
