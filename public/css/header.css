@@ -16,16 +16,23 @@ header{
 
 .header-brand{
     width: 25%;
+    height: 100%;
     display: flex;
     align-items: center;
     flex: 0 0 auto;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .header-brand img{
-    width: 58%;
-    margin: 10px 0 10px 20px;
-    max-width: 100%;
-    height: auto;
+    width: auto;
+    height: calc(var(--header-height) - 16px);
+    max-height: calc(var(--header-height) - 16px);
+    max-width: min(100%, 280px);
+    margin: 0 0 0 20px;
+    object-fit: contain;
+    object-position: left center;
+    display: block;
 }
 
 nav{
@@ -143,12 +150,15 @@ li:hover ul.dropdown{
 
     .header-brand{
         width: auto;
+        max-width: calc(100% - 72px);
     }
 
     .header-brand img{
         width: auto;
-        height: 50px;
-        margin: 10px 0 10px 12px;
+        height: calc(var(--header-height) - 20px);
+        max-height: calc(var(--header-height) - 20px);
+        max-width: 100%;
+        margin: 0 0 0 12px;
     }
 
     .menu-toggle{

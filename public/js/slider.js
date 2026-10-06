@@ -49,6 +49,12 @@ if (!slider) {
                 return Array.from(list.querySelectorAll('.item'));
             }
 
+            function syncSlideWidths() {
+                const slideWidth = slider.clientWidth;
+                if (!slideWidth) return;
+                slider.style.setProperty('--slide-width', `${slideWidth}px`);
+            }
+
             function setPosition(index, animate = true) {
                 const all = getAllItems();
                 const target = all[index];
@@ -245,6 +251,7 @@ if (!slider) {
             // Posiciona inicialmente no primeiro slide real (sem animação)
             // Fazemos isso após o layout para garantir offsetLeft correto.
             const init = () => {
+                syncSlideWidths();
                 currentIndex = 1;
                 setPosition(currentIndex, false);
                 syncDots();
@@ -253,7 +260,10 @@ if (!slider) {
 
             requestAnimationFrame(init);
             window.addEventListener('load', init, { once: true });
-            window.addEventListener('resize', () => setPosition(currentIndex, false));
+            window.addEventListener('resize', () => {
+                syncSlideWidths();
+                setPosition(currentIndex, false);
+            });
         }
     }
 }
