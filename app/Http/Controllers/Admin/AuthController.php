@@ -16,7 +16,10 @@ class AuthController extends Controller
     public function showLogin(): View|RedirectResponse
     {
         if (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dashboard');
+            /** @var User $user */
+            $user = Auth::guard('admin')->user();
+
+            return redirect()->route($user->adminHomeRouteName());
         }
 
         return view('admin.login');
@@ -58,7 +61,7 @@ class AuthController extends Controller
         // Regenera o ID da sessão sem invalidá-la, para preservar a sessão do site (web).
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.dashboard'));
+        return redirect()->intended(route($user->adminHomeRouteName()));
     }
 
     public function logout(Request $request): RedirectResponse

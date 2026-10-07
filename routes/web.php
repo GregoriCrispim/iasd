@@ -13,12 +13,14 @@ use App\Http\Controllers\Admin\GalleryAlbumController;
 use App\Http\Controllers\Admin\GalleryFaceController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\TalentoController;
 use App\Http\Controllers\Auth\MemberAuthController;
 use App\Http\Controllers\CampaignRedirectController;
 use App\Http\Controllers\FaceSearchController;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\VolunteerApplicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +95,8 @@ Route::middleware(['auth:admin'])
                 Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
 
                 Route::get('/campanhas/{slug}', [CampaignMetricsController::class, 'show'])->name('campanhas.show');
+
+                Route::get('/talento', [TalentoController::class, 'index'])->name('talento.index');
             });
 
             // Super Admin e Admin
@@ -212,6 +216,13 @@ Route::get('/galeria/{evento}', [GaleriaController::class, 'show'])->name('galer
 Route::view('/time-de-desenvolvimento', 'pages.time-desenvolvimento')->name('time-desenvolvimento');
 Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/politica-de-privacidade', 'pages.politica-privacidade')->name('privacidade');
+
+// Meu Talento, Meu Ministério (página solo, sem layout geral)
+Route::get('/talento', [VolunteerApplicationController::class, 'show'])->name('talento.show');
+Route::post('/talento', [VolunteerApplicationController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('talento.store');
+Route::redirect('/voluntariado', '/talento', 301);
 
 // Formulários
 Route::post('/contato/enviar', [PageController::class, 'enviarContato'])->name('contato.enviar');

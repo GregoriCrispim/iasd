@@ -37,14 +37,14 @@ class GalleryAlbumController extends Controller
 
     public function create(Request $request): RedirectResponse
     {
-        $this->authorizeAlbumManage($request);
+        $this->authorizeAlbumCreate($request);
 
         return redirect()->route('admin.galeria.index', ['novo' => 1]);
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $this->authorizeAlbumManage($request);
+        $this->authorizeAlbumCreate($request);
 
         /** @var User $user */
         $user = $request->user();
@@ -86,14 +86,14 @@ class GalleryAlbumController extends Controller
 
     public function edit(Request $request, GalleryAlbum $album): RedirectResponse
     {
-        $this->authorizeAlbumManage($request);
+        $this->authorizeAlbumEdit($request, $album);
 
         return redirect()->route('admin.galeria.index', ['editar' => $album->id]);
     }
 
     public function update(Request $request, GalleryAlbum $album): RedirectResponse
     {
-        $this->authorizeAlbumManage($request);
+        $this->authorizeAlbumEdit($request, $album);
 
         $data = $this->validateAlbum($request, $album);
 
@@ -123,7 +123,7 @@ class GalleryAlbumController extends Controller
 
     public function destroy(Request $request, GalleryAlbum $album): RedirectResponse
     {
-        $this->authorizeAlbumManage($request);
+        $this->authorizeAlbumDelete($request, $album);
 
         $albumId = $album->id;
 
@@ -361,12 +361,32 @@ class GalleryAlbumController extends Controller
         Storage::disk(GalleryPhoto::DISK)->delete($photo->allFilePaths());
     }
 
-    protected function authorizeAlbumManage(Request $request): void
+    protected function authorizeAlbumCreate(Request $request): void
     {
         /** @var User|null $user */
         $user = $request->user();
 
-        if (! $user || ! $user->canManageGalleryAlbums()) {
+        if (! $user || ! $user->canCreateGalleryAlbums()) {
+            abort(403);
+        }
+    }
+
+    protected function authorizeAlbumEdit(Request $request, GalleryAlbum $album): void
+    {
+        /** @var User|null $user */
+        $user = $request->user();
+
+        if (! $user || ! $user->canEditGalleryAlbum($album)) {
+            abort(403);
+        }
+    }
+
+    protected function authorizeAlbumDelete(Request $request, GalleryAlbum $album): void
+    {
+        /** @var User|null $user */
+        $user = $request->user();
+
+        if (! $user || ! $user->canDeleteGalleryAlbum($album)) {
             abort(403);
         }
     }

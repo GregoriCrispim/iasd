@@ -8,6 +8,7 @@
     $canGaleria = $authUser && $authUser->canManageGaleria();
     $canManageUsers = $isFullAdmin || $isManager || $isFotoLider;
     $isCmsUser = $authUser && $authUser->hasAnyRoleName(['super_admin', 'admin', 'manager', 'collaborator']);
+    $showDashboard = $authUser && $authUser->shouldSeeAdminDashboard();
     $active = $activeNav ?? '';
 @endphp
 <!DOCTYPE html>
@@ -35,9 +36,11 @@
         </div>
 
         <nav class="adm-nav">
-            <a href="{{ route('admin.dashboard') }}" class="{{ $active === 'dashboard' ? 'active' : '' }}">
-                <i class="bi bi-speedometer2"></i> Início
-            </a>
+            @if ($showDashboard)
+                <a href="{{ route('admin.dashboard') }}" class="{{ $active === 'dashboard' ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Início
+                </a>
+            @endif
 
             @if ($isCmsUser)
                 <div class="adm-nav-group">CMS</div>
@@ -77,6 +80,9 @@
                 @if ($isFullAdmin || $isManager)
                     <a href="{{ route('admin.campanhas.show', 'sementes') }}" class="{{ $active === 'campanhas' ? 'active' : '' }}">
                         <i class="bi bi-qr-code-scan"></i> Campanhas
+                    </a>
+                    <a href="{{ route('admin.talento.index') }}" class="{{ $active === 'talento' ? 'active' : '' }}">
+                        <i class="bi bi-person-hearts"></i> Meu Talento
                     </a>
                 @endif
             @endif
