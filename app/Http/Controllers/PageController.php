@@ -242,8 +242,18 @@ class PageController extends Controller
             'nome' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'telefone' => 'required|string|max:20',
+            'formato' => 'required|in:presencial,online,remoto',
             'mensagem' => 'required|string|max:1000',
+        ], [
+            'formato.required' => 'Selecione o formato do estudo bíblico.',
+            'formato.in' => 'Formato de estudo bíblico inválido.',
         ]);
+
+        $formatos = [
+            'presencial' => 'Presencial (na residência ou na igreja)',
+            'online' => 'Online (por videoconferência)',
+            'remoto' => 'Remoto (por telefone ou mensagem)',
+        ];
 
         $googleSheetsError = false;
 
@@ -257,6 +267,7 @@ class PageController extends Controller
                     $validated['nome'],
                     $validated['email'],
                     $validated['telefone'],
+                    $formatos[$validated['formato']],
                     $validated['mensagem'],
                 ]);
             } catch (\Throwable $e) {

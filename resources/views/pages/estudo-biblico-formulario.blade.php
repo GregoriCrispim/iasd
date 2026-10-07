@@ -112,6 +112,65 @@
         min-height: 150px;
     }
 
+    .formato-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .formato-option {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        background: #f8f9fa;
+        cursor: pointer;
+        transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    .formato-option:hover {
+        border-color: #003366;
+    }
+
+    .formato-option:has(input:checked) {
+        border-color: #003366;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+    }
+
+    .formato-option input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        margin-right: 10px;
+        flex-shrink: 0;
+        accent-color: #003366;
+        cursor: pointer;
+    }
+
+    .formato-option .formato-texto {
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+    }
+
+    .formato-option .formato-texto {
+        display: inline; /* footer.css aplica display:flex a todos os <span>, o que descarta o espaço entre os elementos */
+        justify-content: flex-start;
+    }
+
+    .formato-option .formato-texto strong {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .formato-option .formato-texto small {
+        display: inline;
+        font-size: 0.875rem;
+        color: #666;
+    }
+
     .form-group input:focus,
     .form-group textarea:focus {
         outline: none;
@@ -261,6 +320,26 @@
                     <input type="tel" name="telefone" id="telefone" placeholder="(00) 00000-0000" required value="{{ old('telefone') }}">
                 </div>
             </div>
+
+            <fieldset class="form-group" style="border: none; padding: 0; margin: 0 0 25px;">
+                <legend style="font-family: 'Roboto', sans-serif; font-size: 1rem; color: #333; margin-bottom: 8px; font-weight: 500; padding: 0;">
+                    Formato do estudo bíblico
+                </legend>
+                <div class="formato-options">
+                    <label class="formato-option">
+                        <input type="radio" name="formato" value="presencial" required {{ old('formato') === 'presencial' ? 'checked' : '' }}>
+                        <span class="formato-texto"><strong>1. Presencial</strong> <small>(Na sua residência ou na igreja)</small></span>
+                    </label>
+                    <label class="formato-option">
+                        <input type="radio" name="formato" value="online" {{ old('formato') === 'online' ? 'checked' : '' }}>
+                        <span class="formato-texto"><strong>2. Online</strong> <small>(Por videoconferência)</small></span>
+                    </label>
+                    <label class="formato-option">
+                        <input type="radio" name="formato" value="remoto" {{ old('formato') === 'remoto' ? 'checked' : '' }}>
+                        <span class="formato-texto"><strong>3. Remoto</strong> <small>(Por telefone ou mensagem)</small></span>
+                    </label>
+                </div>
+            </fieldset>
 
             <div class="form-group">
                 <label for="mensagem">Mensagem</label>
