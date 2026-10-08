@@ -60,8 +60,30 @@
                 </div>
             @endif
 
-            <form id="volForm" method="POST" action="{{ route('talento.store') }}" novalidate>
+            <form
+                id="volForm"
+                method="POST"
+                action="{{ route('talento.store') }}"
+                novalidate
+                autocomplete="on"
+                data-check-url="{{ route('talento.check') }}"
+            >
                 @csrf
+                <input type="hidden" name="form_nonce" value="{{ $formNonce }}">
+                {{-- Honeypot anti-bot: deve permanecer vazio --}}
+                <div class="vol-hp" aria-hidden="true">
+                    <label for="website">Website</label>
+                    <input
+                        type="text"
+                        id="website"
+                        name="website"
+                        value=""
+                        tabindex="-1"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                    >
+                </div>
                 <div id="volChoicesInputs" hidden></div>
 
                 <section class="vol-panel" aria-labelledby="vol-dados-title">

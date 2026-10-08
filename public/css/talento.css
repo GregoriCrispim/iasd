@@ -33,6 +33,18 @@
     box-sizing: border-box;
 }
 
+/* Honeypot: invisível para humanos, atrativo para bots */
+.vol-hp {
+    position: absolute !important;
+    left: -10000px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -567,6 +579,13 @@ body.solo-page {
 .vol-mod-btn:focus-visible {
     outline: 2px solid var(--vol-accent);
     outline-offset: 2px;
+}
+
+.vol-mod-btn.is-disabled,
+.vol-mod-btn:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .vol-empty-filter {

@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_03_10_2026_1';
+    $boletimBase = 'img/boletim/boletim_10_10_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
     $oracaoMinBase = $boletimBase . '/M. Oração';
 
@@ -23,20 +23,27 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da SEGUNDA semana de OUTUBRO é: Ore para controlar a raiva e vencer o orgulho nas situações difíceis.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da TERCEIRA semana de OUTUBRO é: Ore por humildade para reconhecer erros e ter coragem de pedir perdão quando necessário.';
 
     $boletins = [
         // Com descrição (script DOCX)
         [
             'type' => 'image',
-            'src' => $boletimBase . '/ON VOICE.jpeg',
+            'src' => $boletimBase . '/One Voice.jpg',
             'alt' => 'One Voice 27 — mobilização missionária global',
             'title' => 'One Voice',
             'text' => 'O OneVoice27 é o projeto global de mobilização missionária da Igreja Adventista do Sétimo Dia, que conduzirá toda a igreja mundial a um mesmo esforço evangelístico. O lançamento oficial aconteceu no dia 5 de setembro deste ano. Lançada no segundo semestre de 2025 e planejada para ser uma grande celebração em setembro de 2027, marcando os 2.000 anos do batismo de Jesus Cristo. A Divisão Sul-Americana lidera a mobilização de todas as suas Uniões, Associações, Missões e igrejas locais para que participem em uma estratégia digital unificada. Participe conosco deste projeto.',
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.23 (2).jpeg',
+            'src' => $boletimBase . '/CAMISETAS ONVOICE27.png',
+            'alt' => 'Camisetas One Voice 27',
+            'title' => 'Camisetas One Voice 27',
+            'text' => 'One Voice27 nos une em uma grande missão global: apresentar Jesus Cristo ao mundo com uma mensagem bíblica unificada. Faça parte deste movimento e leve essa identidade no peito! Adquira sua camiseta OneVoice27. Vamos juntos falar em uma só voz, afinal, Jesus faz tudo novo. Acesse o link https://forms.gle/4W8Q2e8YoeGQ8nKJA e encomende a sua!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.24 (1).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -46,28 +53,21 @@
             'src' => $boletimBase . '/OUTUBRO ROSA.jpg',
             'alt' => 'Outubro Rosa — conscientização e prevenção',
             'title' => 'Outubro Rosa',
-            'text' => 'O amor ao próximo se manifesta em gestos de cuidado, acolhimento e partilha. No mês dedicado à conscientização e prevenção ao câncer de mama, a nossa igreja preparou uma programação especial para abraçar as mulheres e abençoar vidas. No sábado, dia 4 de outubro, o Ministério da Mulher de nossa igreja iniciará a realização de ações especiais voltadas ao Outubro Rosa, mês dedicado à conscientização e prevenção do câncer de mama. O evento tem como principal objetivo conscientizar sobre a importância do diagnóstico precoce do câncer de mama e do colo do útero, além de proporcionar um espaço de cuidado integral físico, emocional e espiritual.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/OFICINA DO PÃO.jpg',
-            'alt' => 'Oficina do Pão Artesanal — Outubro Rosa',
-            'title' => 'Oficina do Pão',
-            'text' => 'A oficina do pão artesanal atingiu o número de vagas. Agradecemos pela participação.',
+            'text' => 'O amor ao próximo se manifesta em gestos de cuidado, acolhimento e partilha. No mês dedicado à conscientização e prevenção ao câncer de mama, a nossa igreja preparou uma programação especial para abraçar as mulheres e abençoar vidas. O Ministério da Mulher de nossa igreja realizará ações especiais voltadas ao Outubro Rosa, mês dedicado à conscientização e prevenção do câncer de mama. O evento tem como principal objetivo conscientizar sobre a importância do diagnóstico precoce do câncer de mama e do colo do útero, além de proporcionar um espaço de cuidado integral físico, emocional e espiritual.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Entre Elas.jpg',
             'alt' => 'Entre Elas — encontro feminino',
             'title' => 'Entre Elas',
-            'text' => 'Encontro "Entre Elas" (no Espaço Jovem): Um bate-papo abençoado, voltado especialmente para nós, mulheres. Venha fortalecer a sua fé e trocar experiências! No dia 18/10, às 17h. Garanta já a sua vaga acessando o link: https://forms.gle/UZfqi7LgAKFgYssq5',
+            'text' => 'Encontro "Entre Elas": Um bate-papo abençoado, voltado especialmente para nós, mulheres. Venha fortalecer a sua fé e trocar experiências! No dia 18/10, às 17h, no Espaço Jovem. Garanta já a sua vaga acessando o link: https://forms.gle/UZfqi7LgAKFgYssq5',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/visita missionária.jpg',
             'alt' => 'Visita missionária — Outubro Rosa',
             'title' => 'Visita Missionária',
-            'text' => 'E para finalizar a programação do Outubro Rosa no dia 24/10, faremos uma visita especial a mulheres que estão enfrentando o câncer. O nosso objetivo é levar amor, solidariedade, oração e um mimo para aquecer o coração de cada uma delas. Haverá inscrições para quem deseja participar deste momento de amor ao próximo. Fique atenta!',
+            'text' => 'E para finalizar a programação do Outubro Rosa, no dia 24/10 faremos uma visita especial a mulheres que estão enfrentando o câncer de mama, com o objetivo de levar amor, solidariedade, oração e um mimo para aquecer o coração de cada uma delas; haverá inscrições para quem deseja participar deste momento de amor ao próximo, por isso fique atenta!',
         ],
         [
             'type' => 'image',
@@ -78,10 +78,17 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Costura.jpg',
+            'alt' => 'Oficina de Costura Criativa',
+            'title' => 'Oficina Criativa',
+            'text' => 'Use sua criatividade para criar! Faça o curso Oficina de Costura Criativa e aprenda a confeccionar lindas peças, com duração de apenas dois meses (outubro e novembro). Não perca essa chance, acesse o link: https://wa.me/qr/ZME25VEMZLTBI1 e faça já a sua inscrição! Para iniciantes e aprendizes. Dias e horário: terças e quintas-feiras, pela manhã. Outubro (Módulo 1) — Peças: estojo, ecobag, scrunchie, mochila, viseira e chapéu para praia de tecido. Datas: 06/10 e 08/10, 13/10 e 15/10, 20/10 e 22/10, 27/10 e 29/10. Novembro (Módulo 2) — Peças: mesa posta para o Natal. Datas: 03/11 e 05/11, 10/11 e 12/11, 17/11 e 19/11, 24/11 e 26/11. Materiais necessários: tecido, manta R1 colante, tesoura, linha, agulha, viés, zíper de metro, cursor, elástico médio, fita para alças da ecobag e mochila, metal para regular alça. Investimento: R$ 120,00 por mês. Pagamento: pix.centralbsb.aplac@adventistas.org Atenção! Após o pagamento, por favor envie o comprovante no WhatsApp da Professora Annelise Tisi.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Voluntariado.jpeg',
             'alt' => 'Voluntariado nos ministérios da igreja',
             'title' => 'Voluntariado',
-            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o link/QR Code e escolha o departamento da igreja que mais combina com você. https://forms.gle/yBKYhMg3V7Rcd8uY6',
+            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o link e escolha o departamento da igreja que mais combina com você. https://forms.gle/yBKYhMg3V7Rcd8uY6',
         ],
         [
             'type' => 'image',
@@ -127,17 +134,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Saúde.jpeg',
-            'alt' => 'Classe de Saúde — Saúde Integral',
-            'title' => 'Classe de Saúde',
-            'text' => 'SAÚDE INTEGRAL — A ESCOLHA É SUA! Nem tudo o que determina nossa saúde está sob nosso controle. Existem fatores genéticos, ambientais, sociais e circunstanciais que atravessam a nossa história. Mas há uma dimensão sobre a qual podemos exercer influência: a maneira como respondemos às circunstâncias, os hábitos que cultivamos e a atenção que dedicamos aos sinais do nosso próprio organismo. Cuidar da saúde não é esperar que o corpo adoeça para então agir. É desenvolver consciência antes que o desequilíbrio se estabeleça. Talvez a pergunta não seja apenas "O que fazer quando a doença aparece?", mas: "Que escolhas estou fazendo hoje que participam da construção da minha saúde de amanhã?"',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/CEVISA.jpeg',
             'alt' => 'Excursão especial de bem-estar — CEVISA',
             'title' => 'Excursão CEVISA',
             'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA), de 22 a 29 de novembro de 2026! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações https://forms.gle/ZNbidJmaihpgYqNY8 Venha viver essa experiência de renovação e comunhão!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Bazar.jpg',
+            'alt' => 'Bazar da ASA',
+            'title' => 'Bazar ASA',
+            'text' => 'No dia 08/11, teremos o bazar da ASA, peças selecionadas a preços acessíveis. Programe-se para participar!',
         ],
         [
             'type' => 'image',
@@ -176,10 +183,17 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Capas  Série Permanecer em Jesus.jpg',
+            'alt' => 'Quartas Especiais — Permanecer em Jesus',
+            'title' => 'Quartas Especiais',
+            'text' => 'Nas quartas-feiras do mês de outubro, às 19h30, teremos a nova série Permanecer em Jesus, onde nossos jovens estarão responsáveis por toda a programação. Baseada no livro 2 da série Passos Para o Reavivamento Pessoal de Helmut Haubeil, inspirado na célebre passagem bíblica "Permaneça em mim, e Eu permanecerei em vocês", o livro mergulha nas verdades atemporais contidas nessas palavras, revelando insights transformadores sobre a conexão espiritual e a busca pela plenitude da vida. Participe com sua família!',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Quartas de Poder 2026.jpg',
-            'alt' => 'Quartas de Poder — O Mover do Espírito',
+            'alt' => 'Quartas de Poder — O Poder do Espírito',
             'title' => 'Quartas de Poder',
-            'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30, com o tema "O Mover do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
+            'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30, com o tema "O Poder do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
         ],
         [
             'type' => 'image',
@@ -211,6 +225,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Canal APLAC.jpeg',
+            'alt' => 'Canal Adventistas Brasília no WhatsApp',
+            'title' => 'Canal APlaC',
+            'text' => 'Você já segue o canal Adventistas Brasília no WhatsApp? É o jeito mais fácil de ficar por dentro de tudo o que acontece na nossa região da APlaC: eventos, programações e avisos importantes, direto no seu celular. Escaneie o QR Code e clique em “Seguir”.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Desbravadores.jpg',
             'alt' => 'Apoie um Desbravador — Campori DSA 2027',
             'title' => 'Rumo ao Campori da DSA 2027',
@@ -235,42 +256,42 @@
             'src' => $boletimBase . '/Liberdade Religiosa capa divulgação.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
-            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17 Nosso próximo encontro - Palestrante convidado: Pr. Roberto Roefero — 23 anos de ministério. Evangelista na Associação Sul Paranaense. Mestre em Teologia. Atua na pregação, evangelismo e no estudo das profecias bíblicas relacionadas à liberdade religiosa e aos eventos finais. Casado há 29 anos com Pauline Roefero, pedagoga. Pai de Paulo Roberto e Maria Carolina.',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/318.jpeg',
             'alt' => 'Código 318 — círculo de homens',
             'title' => 'Código 318',
-            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. No sábado, dia 10/10, às 15h30, teremos mais um encontro do Código 318. Contaremos com a participação especial do Pastor Adenilton Aguiar. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. No sábado, dia 10/10, às 15h30, no salão jovem, teremos mais um encontro do Código 318. Contaremos com a participação especial do Pastor Adenilton Aguiar. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Criacionismo final.jpeg',
-            'alt' => 'Sábado da Criação — 24/10',
-            'title' => 'Sábado da Criação',
-            'text' => 'No dia 24/10, pela manhã teremos a celebração do Sábado da Criação, acontecerá a palestra: \'Trocando as lentes: A Diferença entre a Visão Humana e a Divina\' com o Dr. Nahor Neves, e à tarde uma programação super especial com o Dr. Tiago Alves Jorge de Souza. Programe-se para participar!',
+            'alt' => 'JA Criacionismo — Uma Viagem no Tempo',
+            'title' => 'JA Criacionismo',
+            'text' => 'Atenção, universitários de todo o DF! Reservem a data de 24 de outubro, às 16h: será o Sábado da Criação na Igreja Central de Brasília. O programa trará o tema “Uma Viagem no Tempo”, com o Dr. Tiago Alves de Souza, Doutor em Genética pela USP. Pré-universitários, universitários, quem já concluiu a faculdade, professores e todos os interessados no tema estão convidados para este momento especial. Um programa que você não pode perder!',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/darwin.png',
-            'alt' => 'Série A Caixa de Darwin — criacionismo',
-            'title' => 'A Caixa de Darwin',
-            'text' => 'Nos domingos do mês de outubro, às 19h, teremos uma nova série especial sobre o criacionismo! Será um mês dedicado a relembrar as obras do nosso Criador. Venha assistir a nova série dos domingos especiais, A Caixa de Darwin, amanhã, dia 04/10, às 19h. Traga a sua família!',
+            'alt' => 'Série A Caixa Preta de Darwin',
+            'title' => 'A Caixa Preta de Darwin',
+            'text' => 'Você já parou para pensar se a complexidade da vida ao nosso redor poderia surgir por acaso? Nos domingos especiais de outubro, a nova série de estudos A Caixa Preta de Darwin aborda a origem da vida, a complexidade do universo e a perspectiva criacionista à luz das Escrituras. Acompanhe os temas: 04/10 — A Origem da Vida (Dr. Davi Reis Lopes); 11/10 — O Universo Sobre o Fio da Navalha (Dr. Alexsander Silva); 18/10 — O Mistério da Vida (Dr. Davi Reis Lopes); 25/10 — A Grande Extinção em Massa (Dr. Nahor Neves). Ative as notificações do nosso Canal do WhatsApp para não perder nenhum episódio desta jornada sobre fé, ciência e criação! No YouTube, inscreva-se no nosso canal e compartilhe a mensagem de fé e esperança.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/SUPER SEXTA.jpg',
             'alt' => 'Super Sexta — 2ª edição',
             'title' => 'Super Sexta',
-            'text' => 'A Super Sexta está de volta! Vem aí a 2ª edição! Uma noite de muito louvor, adoração, conexão e reflexão, com a participação especial do Pastor Igo Rocha e do Grupo Puro Louvor, do IABC. Convide seus amigos e venha viver essa noite com a gente! Dia 23 de outubro, sexta-feira, às 19h30 no Espaço Jovem da Igreja Adventista Central de Brasília. SUPER SEXTA, você não vai querer ficar de fora!',
+            'text' => 'A Super Sexta está de volta! Vem aí a 2ª edição! Uma noite de muito louvor, adoração, conexão e reflexão, com a participação especial do Pastor Igo Rocha e do Grupo Puro Louvor, do IABC. Convide seus amigos e venha viver essa noite com a gente! Dia 23 de outubro, sexta-feira, às 19h30, no Espaço Jovem da Igreja Adventista Central de Brasília. SUPER SEXTA, você não vai querer ficar de fora!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/CORAL CANTO JOVEM.jpg',
+            'src' => $boletimBase . '/Coral Jovem.jpeg',
             'alt' => 'Coral Canto Jovem do IAP',
-            'title' => 'Coral Canto Jovem',
-            'text' => 'Prepare-se para uma manhã especial de louvor, música e adoração. No dia 17/10, estaremos recebendo em nossa igreja o Coral Canto Jovem do IAP, venha e participe deste grande louvor!',
+            'title' => 'Canto Jovem',
+            'text' => 'Prepare-se para uma manhã especial de louvor, música e adoração. No próximo sábado, dia 17/10, às 9h, estaremos recebendo em nossa igreja o Coral Canto Jovem diretamente do IAP (Instituto Adventista Paranaense), venha e participe deste grande louvor conosco!',
         ],
         [
             'type' => 'image',
@@ -285,6 +306,13 @@
             'alt' => 'Canal Central Informa no WhatsApp',
             'title' => 'Canal WhatsApp',
             'text' => 'Perdeu algum detalhe dos nossos anúncios? Não se preocupe. O Central Informa está disponível no nosso canal oficial no WhatsApp para manter você atualizado. Siga o canal: Adventistas Central Brasília! Acesse o link https://whatsapp.com/channel/0029VaY6Z5UJJhzdkYF51D1T e faça parte desta comunidade.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/ASA Aberta.jpg',
+            'alt' => 'ASA Aberta — pizzas e lanches',
+            'title' => 'ASA Aberta',
+            'text' => 'No sábado, dia 10/10/26, após o pôr do sol, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
         ],
     ];
 

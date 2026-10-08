@@ -12,7 +12,6 @@ class VolunteerApplicationChoice extends Model
     public const MODALITY_EQUIPE = 'equipe';
 
     protected $fillable = [
-        'volunteer_application_id',
         'ministry_slug',
         'modality',
     ];

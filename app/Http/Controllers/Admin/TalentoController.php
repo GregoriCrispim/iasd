@@ -7,6 +7,7 @@ use App\Models\VolunteerApplication;
 use App\Models\VolunteerApplicationChoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class TalentoController extends Controller
@@ -17,7 +18,7 @@ class TalentoController extends Controller
         $viewMode = $request->string('view')->toString() === 'ministerio' ? 'ministerio' : 'lista';
         $ministryFilter = $request->string('ministry')->toString();
         $modalityFilter = $request->string('modality')->toString();
-        $q = $request->string('q')->toString();
+        $q = Str::limit(trim($request->string('q')->toString()), 100, '');
 
         if ($ministryFilter !== '' && ! array_key_exists($ministryFilter, $ministries)) {
             $ministryFilter = '';
@@ -29,7 +30,9 @@ class TalentoController extends Controller
 
         $baseQuery = VolunteerApplication::query()
             ->when($q !== '', function ($query) use ($q) {
-                $term = '%'.$q.'%';
+                // Escapa curingas do LIKE para evitar abusos de busca ampla.
+                $escaped = str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $q);
+                $term = '%'.$escaped.'%';
                 $query->where(function ($inner) use ($term) {
                     $inner->where('name', 'like', $term)
                         ->orWhere('email', 'like', $term)

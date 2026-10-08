@@ -218,10 +218,15 @@ Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/politica-de-privacidade', 'pages.politica-privacidade')->name('privacidade');
 
 // Meu Talento, Meu Ministério (página solo, sem layout geral)
-Route::get('/talento', [VolunteerApplicationController::class, 'show'])->name('talento.show');
+Route::get('/talento', [VolunteerApplicationController::class, 'show'])
+    ->middleware('throttle:60,1')
+    ->name('talento.show');
 Route::post('/talento', [VolunteerApplicationController::class, 'store'])
-    ->middleware('throttle:10,1')
+    ->middleware('throttle:5,1')
     ->name('talento.store');
+Route::post('/talento/verificar', [VolunteerApplicationController::class, 'check'])
+    ->middleware('throttle:30,1')
+    ->name('talento.check');
 Route::redirect('/voluntariado', '/talento', 301);
 
 // Formulários

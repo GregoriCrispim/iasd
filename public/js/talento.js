@@ -57,11 +57,21 @@
     });
   }
 
-  /* —— Field validation (clear while typing, re-check on idle/blur) —— */
+  /* —— Field validation (format + uniqueness for email/phone) —— */
   const VALIDATE_IDLE_MS = 450;
+  const UNIQUE_FIELDS = new Set(['email', 'phone']);
+  const checkUrl = form.dataset.checkUrl || '';
+  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
   const validatedFields = Array.from(form.querySelectorAll('[data-validate]'));
+
   /** @type {Map<HTMLElement, number>} */
   const validateTimers = new Map();
+  /** @type {Map<string, AbortController>} */
+  const uniqueControllers = new Map();
+  /** @type {Map<string, string>} last value confirmed available */
+  const uniqueAvailableCache = new Map();
+  /** @type {Map<string, string>} last value confirmed taken */
+  const uniqueTakenCache = new Map();
 
   function getErrorEl(input) {
     const key = input.dataset.validate || input.name;
@@ -88,6 +98,36 @@
     }
   }
 
+  function normalizeEmail(value) {
+    return String(value || '').trim().toLowerCase();
+  }
+
+  function normalizePhoneValue(value) {
+    return onlyDigits(value).slice(0, 11);
+  }
+
+  function uniqueKey(input) {
+    return input.dataset.validate || input.name;
+  }
+
+  function canonicalUniqueValue(input) {
+    const type = uniqueKey(input);
+    if (type === 'email') return normalizeEmail(input.value);
+    if (type === 'phone') return normalizePhoneValue(input.value);
+    return String(input.value || '').trim();
+  }
+
+  function invalidateUniqueState(input) {
+    const key = uniqueKey(input);
+    uniqueAvailableCache.delete(key);
+    uniqueTakenCache.delete(key);
+    const controller = uniqueControllers.get(key);
+    if (controller) {
+      controller.abort();
+      uniqueControllers.delete(key);
+    }
+  }
+
   function validateName(value) {
     const trimmed = value.trim();
     if (!trimmed) return 'Informe seu nome completo.';
@@ -108,14 +148,13 @@
   function validateEmail(value) {
     const trimmed = value.trim();
     if (!trimmed) return 'Informe seu e-mail.';
-    // Aligned with common HTML email shape (Laravel email rule is similar)
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) {
       return 'Informe um e-mail válido.';
     }
     return null;
   }
 
-  function getFieldError(input) {
+  function getFormatError(input) {
     const type = input.dataset.validate;
     const value = input.value || '';
     if (type === 'name') return validateName(value);
@@ -124,13 +163,108 @@
     return null;
   }
 
-  function runFieldValidation(input) {
-    const message = getFieldError(input);
-    if (message) {
-      showFieldError(input, message);
+  async function checkUniqueness(input) {
+    const key = uniqueKey(input);
+    if (!UNIQUE_FIELDS.has(key) || !checkUrl) return true;
+
+    const formatError = getFormatError(input);
+    if (formatError) return false;
+
+    const value = canonicalUniqueValue(input);
+    if (!value) return false;
+
+    if (uniqueAvailableCache.get(key) === value) {
+      clearFieldError(input);
+      return true;
+    }
+    if (uniqueTakenCache.get(key) === value) {
+      showFieldError(
+        input,
+        key === 'email'
+          ? 'Este e-mail já foi usado em uma inscrição.'
+          : 'Este WhatsApp já foi usado em uma inscrição.'
+      );
       return false;
     }
+
+    const previous = uniqueControllers.get(key);
+    if (previous) previous.abort();
+
+    const controller = new AbortController();
+    uniqueControllers.set(key, controller);
+
+    try {
+      const body = new URLSearchParams();
+      body.set('field', key);
+      body.set('value', input.value || '');
+
+      const response = await fetch(checkUrl, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'X-CSRF-TOKEN': csrfToken,
+          'X-Requested-With': 'XMLHttpRequest',
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: body.toString(),
+        signal: controller.signal,
+        credentials: 'same-origin',
+      });
+
+      if (!response.ok) {
+        return true; // não bloqueia o usuário por falha transitória; o backend valida no envio
+      }
+
+      const data = await response.json();
+      if (canonicalUniqueValue(input) !== value) {
+        return true; // valor mudou enquanto a request rodava
+      }
+
+      if (data.valid === false) {
+        showFieldError(input, data.message || 'Valor inválido.');
+        return false;
+      }
+
+      if (data.available === false) {
+        uniqueTakenCache.set(key, value);
+        uniqueAvailableCache.delete(key);
+        showFieldError(
+          input,
+          data.message ||
+            (key === 'email'
+              ? 'Este e-mail já foi usado em uma inscrição.'
+              : 'Este WhatsApp já foi usado em uma inscrição.')
+        );
+        return false;
+      }
+
+      uniqueAvailableCache.set(key, value);
+      uniqueTakenCache.delete(key);
+      clearFieldError(input);
+      return true;
+    } catch (error) {
+      if (error && error.name === 'AbortError') return true;
+      return true;
+    } finally {
+      if (uniqueControllers.get(key) === controller) {
+        uniqueControllers.delete(key);
+      }
+    }
+  }
+
+  async function runFieldValidation(input, { checkUnique = true } = {}) {
+    const formatError = getFormatError(input);
+    if (formatError) {
+      showFieldError(input, formatError);
+      return false;
+    }
+
     clearFieldError(input);
+
+    if (checkUnique && UNIQUE_FIELDS.has(uniqueKey(input))) {
+      return checkUniqueness(input);
+    }
+
     return true;
   }
 
@@ -154,6 +288,7 @@
 
   function bindFieldValidation(input) {
     input.addEventListener('input', () => {
+      invalidateUniqueState(input);
       clearFieldError(input);
       scheduleFieldValidation(input);
     });
@@ -164,21 +299,30 @@
     });
   }
 
-  function validateAllFields() {
+  async function validateAllFields() {
     let ok = true;
     let firstInvalid = null;
-    validatedFields.forEach((input) => {
+
+    for (const input of validatedFields) {
       cancelScheduledValidation(input);
-      const valid = runFieldValidation(input);
+      const valid = await runFieldValidation(input);
       if (!valid) {
         ok = false;
         if (!firstInvalid) firstInvalid = input;
       }
-    });
+    }
+
     return { ok, firstInvalid };
   }
 
   validatedFields.forEach(bindFieldValidation);
+
+  function liderancaSlug() {
+    for (const item of selections.values()) {
+      if (item.modality === 'lideranca') return item.slug;
+    }
+    return null;
+  }
 
   function setModality(slug, name, modality) {
     const existing = selections.get(slug);
@@ -186,12 +330,22 @@
 
     if (isSame) {
       selections.delete(slug);
-    } else if (existing) {
-      selections.set(slug, { slug, name, modality });
-    } else if (selections.size >= MAX) {
-      return;
     } else {
-      selections.set(slug, { slug, name, modality });
+      // No máximo 1 liderança no total (as demais devem ser equipe).
+      if (modality === 'lideranca') {
+        const currentLideranca = liderancaSlug();
+        if (currentLideranca && currentLideranca !== slug) {
+          return;
+        }
+      }
+
+      if (existing) {
+        selections.set(slug, { slug, name, modality });
+      } else if (selections.size >= MAX) {
+        return;
+      } else {
+        selections.set(slug, { slug, name, modality });
+      }
     }
 
     render();
@@ -199,6 +353,7 @@
 
   function renderCards() {
     const atLimit = selections.size >= MAX;
+    const currentLideranca = liderancaSlug();
 
     cards.forEach((card) => {
       const slug = card.dataset.slug;
@@ -210,8 +365,16 @@
 
       buttons.forEach((btn) => {
         const active = selected && selected.modality === btn.dataset.modality;
+        const liderancaBlocked =
+          btn.dataset.modality === 'lideranca' &&
+          Boolean(currentLideranca) &&
+          currentLideranca !== slug;
+
         btn.classList.toggle('is-active', Boolean(active));
+        btn.classList.toggle('is-disabled', liderancaBlocked);
+        btn.disabled = liderancaBlocked;
         btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        btn.setAttribute('aria-disabled', liderancaBlocked ? 'true' : 'false');
       });
     });
   }
@@ -311,7 +474,7 @@
     }
 
     const btn = e.target.closest('.vol-mod-btn');
-    if (!btn) return;
+    if (!btn || btn.disabled || btn.classList.contains('is-disabled')) return;
 
     const card = btn.closest('.vol-ministry');
     if (!card || card.classList.contains('is-locked')) return;
@@ -321,11 +484,16 @@
 
   searchInput.addEventListener('input', filterMinistries);
 
-  form.addEventListener('submit', (e) => {
-    const { ok, firstInvalid } = validateAllFields();
+  let submitting = false;
+
+  form.addEventListener('submit', async (e) => {
+    if (submitting) return;
+
+    e.preventDefault();
+
+    const { ok, firstInvalid } = await validateAllFields();
 
     if (!ok || selections.size < 1 || selections.size > MAX) {
-      e.preventDefault();
       if (firstInvalid) {
         firstInvalid.focus({ preventScroll: false });
         firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -333,10 +501,13 @@
       return;
     }
 
+    submitting = true;
     submitBtn.classList.add('is-loading');
     submitBtn.disabled = true;
     const label = submitBtn.querySelector('.btn-label');
     if (label) label.textContent = 'Enviando…';
+
+    form.submit();
   });
 
   applyPhoneMask();
