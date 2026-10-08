@@ -19,7 +19,17 @@
         </div>
         <div class="item">
             <a href="https://whatsapp.com/channel/0029VaY6Z5UJJhzdkYF51D1T" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/1.webp') }}" alt="Slide 2 - Canal no WhatsApp da IASD Central de Brasília" decoding="async" width="1280" height="720">
+                <img src="{{ asset('img/carrousel/darwin.webp') }}" alt="Slide 2 - Série A Caixa Preta de Darwin: domingos de outubro, 19h" decoding="async" width="1920" height="800">
+                <span class="carousel-click-overlay" aria-hidden="true">
+                    <span class="carousel-click-hint">
+                        <i class="bi bi-hand-index"></i>
+                    </span>
+                </span>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://whatsapp.com/channel/0029VaY6Z5UJJhzdkYF51D1T" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
+                <img src="{{ asset('img/carrousel/1.webp') }}" alt="Slide 3 - Canal no WhatsApp da IASD Central de Brasília" decoding="async" width="1280" height="720">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -29,7 +39,7 @@
         </div>
         <div class="item">
             <a href="{{ route('cemab') }}" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/cemab.webp') }}" alt="Slide 3 - CEMAB, Centro Musical Adventista de Brasília: matricule-se, (61) 98435-8201" decoding="async" width="1600" height="583">
+                <img src="{{ asset('img/carrousel/cemab.webp') }}" alt="Slide 4 - CEMAB, Centro Musical Adventista de Brasília: matricule-se, (61) 98345-0402" decoding="async" width="1920" height="700">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -39,7 +49,7 @@
         </div>
         <div class="item">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOx1UFYwKkJhHYkPQzXiUHCMZBxTKQjanOfLQtXZc27uZi2Q/viewform" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/corais.webp') }}" alt="Slide 4 - Participe de um coral: infantil, juvenil, adolescente, jovem, adventista de Brasília, feminino, masculino e madrigal" decoding="async" width="1920" height="700">
+                <img src="{{ asset('img/carrousel/corais.webp') }}" alt="Slide 5 - Participe de um coral: infantil, juvenil, adolescente, jovem, adventista de Brasília, feminino, masculino e madrigal" decoding="async" width="1920" height="700">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -49,7 +59,7 @@
         </div>
         <div class="item">
             <a href="https://forms.gle/nmZztx1nZiij6i2E7" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/4.webp') }}" alt="Slide 5 - ASA" decoding="async" width="1280" height="720">
+                <img src="{{ asset('img/carrousel/4.webp') }}" alt="Slide 6 - ASA" decoding="async" width="1280" height="720">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -59,7 +69,7 @@
         </div>
         <div class="item">
             <a href="https://forms.gle/yBKYhMg3V7Rcd8uY6" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/5.webp') }}" alt="Slide 6 - Voluntariado" decoding="async" width="1280" height="720">
+                <img src="{{ asset('img/carrousel/5.webp') }}" alt="Slide 7 - Voluntariado" decoding="async" width="1280" height="720">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
@@ -76,6 +86,7 @@
 
     <ul class="dots">
         <li class="active"></li>
+        <li></li>
         <li></li>
         <li></li>
         <li></li>
