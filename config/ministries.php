@@ -17,6 +17,11 @@ return [
         'name' => 'ASA - Ação Solidária Adventista',
         'description' => 'O braço social e de assistência humanitária da igreja local. Arrecada e distribui alimentos, roupas e itens básicos, cadastra e acompanha famílias em situação de vulnerabilidade e organiza mutirões de solidariedade (como o Mutirão de Natal).',
     ],
+    'ancionato' => [
+        'name' => 'Ancionato',
+        'description' => 'Atua na liderança espiritual e administrativa da congregação, auxiliando diretamente o pastor distrital. Os anciãos são responsáveis pelo pastoreio dos membros, visitação, pregação da Palavra, apoio e supervisão dos demais ministérios, além de zelar pela liturgia, ordem e pureza doutrinária da igreja.',
+        'allows_lideranca' => false,
+    ],
     'doutores-esperanca' => [
         'name' => 'Doutores de Esperança',
         'description' => 'Ministério voluntário de humanização e capelania criativa (ligado à rede solidária/ADRA) que atua com bom humor, afeto, música e acolhimento em visitas a hospitais, asilos, orfanatos e ações sociais, levando alegria e esperança a pacientes, familiares e profissionais de saúde.',

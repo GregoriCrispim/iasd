@@ -120,6 +120,24 @@ class VolunteerApplicationController extends Controller
             ]);
         }
 
+        $ministriesConfig = config('ministries');
+        foreach ($choices as $choice) {
+            $ministryConfig = $ministriesConfig[$choice['ministry']] ?? null;
+            $allowsLideranca = ! is_array($ministryConfig) || ($ministryConfig['allows_lideranca'] ?? true);
+            if (
+                $choice['modality'] === VolunteerApplicationChoice::MODALITY_LIDERANCA
+                && ! $allowsLideranca
+            ) {
+                $ministryName = is_array($ministryConfig)
+                    ? ($ministryConfig['name'] ?? $choice['ministry'])
+                    : $choice['ministry'];
+
+                throw ValidationException::withMessages([
+                    'choices' => "O ministério {$ministryName} aceita apenas candidatura à Equipe.",
+                ]);
+            }
+        }
+
         $name = $this->sanitizePlainText($validated['name'], self::MAX_NAME_LENGTH);
         $email = Str::lower(trim($validated['email']));
         $phone = $this->normalizePhone($validated['phone']);

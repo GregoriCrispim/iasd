@@ -543,6 +543,10 @@ body.solo-page {
     border-radius: 11px;
 }
 
+.vol-modality--single {
+    grid-template-columns: 1fr;
+}
+
 .vol-mod-btn {
     display: inline-flex;
     align-items: center;

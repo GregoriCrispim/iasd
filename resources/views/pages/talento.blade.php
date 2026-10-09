@@ -188,11 +188,13 @@
                             @php
                                 $label = is_array($ministry) ? ($ministry['name'] ?? $slug) : $ministry;
                                 $description = is_array($ministry) ? ($ministry['description'] ?? '') : '';
+                                $allowsLideranca = ! is_array($ministry) || ($ministry['allows_lideranca'] ?? true);
                             @endphp
                             <article
-                                class="vol-ministry"
+                                class="vol-ministry {{ $allowsLideranca ? '' : 'vol-ministry--equipe-only' }}"
                                 data-slug="{{ $slug }}"
                                 data-name="{{ $label }}"
+                                data-allows-lideranca="{{ $allowsLideranca ? '1' : '0' }}"
                             >
                                 <div class="vol-ministry-top">
                                     <h3 class="vol-ministry-name" id="min-title-{{ $slug }}">{{ $label }}</h3>
@@ -221,15 +223,17 @@
                                     </div>
                                 </div>
 
-                                <div class="vol-modality" role="group" aria-label="Como servir em {{ $label }}">
-                                    <button
-                                        type="button"
-                                        class="vol-mod-btn"
-                                        data-modality="lideranca"
-                                        aria-pressed="false"
-                                    >
-                                        Liderança
-                                    </button>
+                                <div class="vol-modality {{ $allowsLideranca ? '' : 'vol-modality--single' }}" role="group" aria-label="Como servir em {{ $label }}">
+                                    @if ($allowsLideranca)
+                                        <button
+                                            type="button"
+                                            class="vol-mod-btn"
+                                            data-modality="lideranca"
+                                            aria-pressed="false"
+                                        >
+                                            Liderança
+                                        </button>
+                                    @endif
                                     <button
                                         type="button"
                                         class="vol-mod-btn"

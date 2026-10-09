@@ -252,6 +252,49 @@
     }
   }
 
+  let returnToSubmitPending = false;
+  let returnToSubmitTimer = 0;
+  let submitting = false;
+
+  function scrollToSubmitZone() {
+    if (!submitZone) return;
+    submitZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  async function areAllPendenciesResolved() {
+    for (const input of validatedFields) {
+      if (getFormatError(input)) return false;
+
+      const key = uniqueKey(input);
+      if (UNIQUE_FIELDS.has(key)) {
+        const value = canonicalUniqueValue(input);
+        if (!value) return false;
+        if (uniqueTakenCache.get(key) === value) return false;
+        if (uniqueAvailableCache.get(key) !== value) {
+          const uniqueOk = await checkUniqueness(input);
+          if (!uniqueOk) return false;
+        }
+      } else if (input.classList.contains('is-invalid')) {
+        return false;
+      }
+    }
+
+    return selections.size >= 1 && selections.size <= MAX;
+  }
+
+  function maybeReturnToSubmit() {
+    if (!returnToSubmitPending || submitting) return;
+
+    window.clearTimeout(returnToSubmitTimer);
+    returnToSubmitTimer = window.setTimeout(async () => {
+      if (!returnToSubmitPending || submitting) return;
+      if (!(await areAllPendenciesResolved())) return;
+
+      returnToSubmitPending = false;
+      scrollToSubmitZone();
+    }, 180);
+  }
+
   async function runFieldValidation(input, { checkUnique = true } = {}) {
     const formatError = getFormatError(input);
     if (formatError) {
@@ -261,11 +304,13 @@
 
     clearFieldError(input);
 
+    let ok = true;
     if (checkUnique && UNIQUE_FIELDS.has(uniqueKey(input))) {
-      return checkUniqueness(input);
+      ok = await checkUniqueness(input);
     }
 
-    return true;
+    if (ok) maybeReturnToSubmit();
+    return ok;
   }
 
   function scheduleFieldValidation(input) {
@@ -305,7 +350,7 @@
 
     for (const input of validatedFields) {
       cancelScheduledValidation(input);
-      const valid = await runFieldValidation(input);
+      const valid = await runFieldValidation(input, { checkUnique: true });
       if (!valid) {
         ok = false;
         if (!firstInvalid) firstInvalid = input;
@@ -324,6 +369,11 @@
     return null;
   }
 
+  function ministryAllowsLideranca(slug) {
+    const card = cards.find((item) => item.dataset.slug === slug);
+    return !card || card.dataset.allowsLideranca !== '0';
+  }
+
   function setModality(slug, name, modality) {
     const existing = selections.get(slug);
     const isSame = existing && existing.modality === modality;
@@ -331,6 +381,11 @@
     if (isSame) {
       selections.delete(slug);
     } else {
+      // Ministérios sem liderança (ex.: Ancionato) só aceitam equipe.
+      if (modality === 'lideranca' && !ministryAllowsLideranca(slug)) {
+        return;
+      }
+
       // No máximo 1 liderança no total (as demais devem ser equipe).
       if (modality === 'lideranca') {
         const currentLideranca = liderancaSlug();
@@ -435,6 +490,7 @@
     renderCards();
     renderSubmitZone();
     renderHiddenInputs();
+    maybeReturnToSubmit();
   }
 
   function filterMinistries() {
@@ -484,8 +540,6 @@
 
   searchInput.addEventListener('input', filterMinistries);
 
-  let submitting = false;
-
   form.addEventListener('submit', async (e) => {
     if (submitting) return;
 
@@ -494,13 +548,18 @@
     const { ok, firstInvalid } = await validateAllFields();
 
     if (!ok || selections.size < 1 || selections.size > MAX) {
+      returnToSubmitPending = true;
       if (firstInvalid) {
         firstInvalid.focus({ preventScroll: false });
         firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else if (selections.size < 1 && submitZone) {
+        // Pendência de ministérios: mantém o contexto próximo ao envio.
+        submitZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       return;
     }
 
+    returnToSubmitPending = false;
     submitting = true;
     submitBtn.classList.add('is-loading');
     submitBtn.disabled = true;
