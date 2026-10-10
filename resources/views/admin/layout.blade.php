@@ -28,11 +28,8 @@
 <div class="adm-shell">
     <aside class="adm-sidebar" id="admSidebar">
         <div class="adm-brand">
-            <img src="{{ asset('img/logo_iasd.png') }}" alt="IASD Central" onerror="this.style.display='none'">
-            <div>
-                <strong>IASD Central</strong>
-                <span>Painel de gestão</span>
-            </div>
+            <img src="{{ asset('img/central-de-brasilia-logo-iasd.svg') }}" alt="IASD Central de Brasília" onerror="this.style.display='none'">
+            <span>Painel de gestão</span>
         </div>
 
         <nav class="adm-nav">

@@ -14,7 +14,7 @@
 <div class="adm-login-wrap">
     <div class="adm-login-card">
         <div class="login-brand">
-            <img src="{{ asset('img/logo_iasd.png') }}" alt="IASD Central" onerror="this.style.display='none'">
+            <img src="{{ asset('img/central-de-brasilia-logo-iasd.svg') }}" alt="IASD Central" onerror="this.style.display='none'">
             <h1>Painel IASD Central</h1>
             <p>Entre para gerenciar o conteúdo</p>
         </div>

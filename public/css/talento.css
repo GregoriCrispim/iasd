@@ -111,30 +111,20 @@ body.solo-page {
 }
 
 .vol-brand-mark {
-    width: 78px;
-    height: 78px;
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid var(--vol-border);
-    box-shadow: var(--vol-shadow-sm);
+    width: 72px;
+    height: 72px;
+    margin-bottom: 16px;
+    border: none;
+    background: transparent;
     display: grid;
     place-items: center;
-    margin-bottom: 16px;
-    backdrop-filter: blur(8px);
 }
 
 .vol-brand-mark img {
-    width: 52px;
-    height: auto;
-}
-
-.vol-eyebrow {
-    margin: 0 0 8px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--vol-accent);
+    width: 72px;
+    height: 72px;
+    display: block;
+    object-fit: contain;
 }
 
 .vol-brand h1 {
@@ -371,14 +361,14 @@ body.solo-page {
 }
 
 .vol-ministry.is-selected {
-    border-color: rgba(42, 122, 176, 0.45);
+    border-color: var(--vol-border);
     background: #fff;
     box-shadow: 0 8px 24px rgba(15, 35, 60, 0.08);
     transform: translateY(-1px);
 }
 
 .vol-ministry.is-selected::before {
-    background: linear-gradient(180deg, var(--vol-primary), var(--vol-accent));
+    background: transparent;
 }
 
 .vol-ministry.is-hidden {
@@ -537,10 +527,10 @@ body.solo-page {
 .vol-modality {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    padding: 3px;
-    background: rgba(19, 51, 102, 0.05);
-    border-radius: 11px;
+    gap: 8px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
 }
 
 .vol-modality--single {
@@ -552,15 +542,15 @@ body.solo-page {
     align-items: center;
     justify-content: center;
     padding: 10px 8px;
-    border: none;
+    border: 1.5px solid var(--vol-border-strong);
     border-radius: 9px;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.92);
     font-family: inherit;
     font-size: 0.82rem;
     font-weight: 650;
     color: var(--vol-muted);
     cursor: pointer;
-    transition: background 0.15s, color 0.15s, box-shadow 0.15s, transform 0.12s;
+    transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.12s;
     -webkit-tap-highlight-color: transparent;
 }
 

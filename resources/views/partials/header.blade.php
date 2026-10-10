@@ -1,6 +1,6 @@
 <header>
     <a href="{{ route('home') }}" class="header-brand" aria-label="Ir para a página inicial">
-        <img src="{{ asset('img/CENTRAL DE BRASÍLIA (200 x 67 px).svg') }}" alt="Logo IASD Central de Brasília">
+        <img src="{{ asset('img/central-de-brasilia-logo-iasd.svg') }}" alt="Logo IASD Central de Brasília">
     </a>
     <nav class="navegation">
         <ul>

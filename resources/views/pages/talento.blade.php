@@ -14,9 +14,8 @@
     <div class="vol-wrap">
         <header class="vol-brand">
             <div class="vol-brand-mark">
-                <img src="{{ asset('img/logo_iasd.png') }}" alt="IASD Central Brasília" onerror="this.style.display='none'">
+                <img src="{{ asset('img/Simbolo Adventista-SVG/adventist-symbol-circle.png') }}" alt="Símbolo Igreja Adventista do Sétimo Dia" width="72" height="72" onerror="this.style.display='none'">
             </div>
-            <p class="vol-eyebrow">IASD Central Brasília</p>
             <h1>Meu Talento,<br><em>Meu Ministério</em></h1>
             <p class="vol-tagline">Compartilhe seus dons e escolha até 3 ministérios onde gostaria de servir.</p>
         </header>

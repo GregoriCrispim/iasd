@@ -1,13 +1,25 @@
 <?php
 
 return [
-    'pessoal' => [
-        'name' => 'Ministério Pessoal',
-        'description' => 'Planeja, treina e mobiliza a igreja para o evangelismo e discipulado prático. Coordena classes bíblicas, duplas missionárias, pequenos grupos, distribuição de literaturas e campanhas de colheita para levar pessoas a Cristo.',
+    'jovem' => [
+        'name' => 'Ministério Jovem',
+        'description' => 'Cuida do crescimento espiritual, social e missionário dos jovens da igreja. Organiza cultos jovens, acampamentos, projetos de evangelismo, discipulado e ações de serviço, fortalecendo a identidade adventista e o protagonismo da juventude na missão.',
+    ],
+    'musica' => [
+        'name' => 'Ministério de Música',
+        'description' => 'Conduz a adoração congregacional por meio do louvor. Organiza e ensaia equipes de canto, instrumentistas, corais e grupos musicais, selecionando repertórios reverentes e inspiradores que preparem o coração da igreja para ouvir a Palavra de Deus.',
     ],
     'escola-sabatina' => [
         'name' => 'Escola Sabatina',
         'description' => 'O coração do estudo da Bíblia e do pastoreio na igreja aos sábados pela manhã. Organiza as unidades de ação, apoia os professores, incentiva o estudo diário da Lição, promove a confraternização entre os membros e impulsiona os projetos missionários mundiais.',
+    ],
+    'midia' => [
+        'name' => 'Ministério de Mídia',
+        'description' => 'Responsável pela projeção visual nos telões (letras de músicas, versículos bíblicos, avisos e vídeos) e pela transmissão ao vivo dos cultos (streaming/cortes de vídeo), garantindo dinamismo visual e levando a mensagem para quem acompanha online.',
+    ],
+    'sonorizacao' => [
+        'name' => 'Ministério de Sonorização',
+        'description' => 'Cuida de toda a engenharia de áudio dos cultos e eventos. Opera a mesa de som, gerencia microfones, retornos e instrumentos, realiza a passagem de som antes das programações e zela pela clareza acústica para que a mensagem e o louvor sejam ouvidos com perfeição.',
     ],
     'missao-urbana' => [
         'name' => 'Missão Urbana',
@@ -50,17 +62,9 @@ return [
         'name' => 'Ministério de Mordomia',
         'description' => 'Educa e inspira a igreja sobre a fidelidade integral a Deus no uso do tempo, dos talentos, do cuidado com o corpo (templo do Espírito) e das finanças (dízimos e ofertas), promovendo uma vida espiritual de comunhão diária ("Manhã com Deus") e gratidão.',
     ],
-    'musica' => [
-        'name' => 'Ministério de Música',
-        'description' => 'Conduz a adoração congregacional por meio do louvor. Organiza e ensaia equipes de canto, instrumentistas, corais e grupos musicais, selecionando repertórios reverentes e inspiradores que preparem o coração da igreja para ouvir a Palavra de Deus.',
-    ],
-    'midia' => [
-        'name' => 'Ministério de Mídia',
-        'description' => 'Responsável pela projeção visual nos telões (letras de músicas, versículos bíblicos, avisos e vídeos) e pela transmissão ao vivo dos cultos (streaming/cortes de vídeo), garantindo dinamismo visual e levando a mensagem para quem acompanha online.',
-    ],
-    'sonorizacao' => [
-        'name' => 'Ministério de Sonorização',
-        'description' => 'Cuida de toda a engenharia de áudio dos cultos e eventos. Opera a mesa de som, gerencia microfones, retornos e instrumentos, realiza a passagem de som antes das programações e zela pela clareza acústica para que a mensagem e o louvor sejam ouvidos com perfeição.',
+    'pessoal' => [
+        'name' => 'Ministério Pessoal',
+        'description' => 'Planeja, treina e mobiliza a igreja para o evangelismo e discipulado prático. Coordena classes bíblicas, duplas missionárias, pequenos grupos, distribuição de literaturas e campanhas de colheita para levar pessoas a Cristo.',
     ],
     'cerimonial' => [
         'name' => 'Ministério do Cerimonial',
