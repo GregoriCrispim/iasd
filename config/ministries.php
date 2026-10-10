@@ -90,6 +90,30 @@ return [
         'name' => 'Ministério dos Homens',
         'description' => 'Mobiliza os homens da igreja para assumirem seu papel como líderes espirituais no lar, na igreja e na sociedade. Promove encontros de fortalecimento espiritual, companheirismo cristão, mentoria e projetos práticos de serviço.',
     ],
+    'diaconato-masculino' => [
+        'name' => 'Diaconato Masculino',
+        'description' => 'Responsável pelo cuidado, reverência e ordem do templo. Auxilia diretamente na logística dos cultos, recolhimento dos dízimos e ofertas, e na preparação e execução das cerimônias sagradas (Santa Ceia e Batismos). Também atua na visitação aos membros e no apoio aos necessitados.',
+    ],
+    'diaconato-feminino' => [
+        'name' => 'Diaconato Feminino',
+        'description' => 'Atua no acolhimento e cuidado amoroso da congregação. É responsável por preparar os elementos da Santa Ceia (pão e suco de uva), organizar a cerimônia do lava-pés feminino, auxiliar as candidatas nos batismos e realizar um trabalho ativo de visitação e assistência aos enfermos e necessitados.',
+    ],
+    'patrimonio' => [
+        'name' => 'Ministério de Expansão Patrimonial',
+        'description' => 'Gerencia os bens físicos da igreja. É responsável por planejar, coordenar e executar projetos de construção, reforma e manutenção predial, além de zelar pelos móveis e equipamentos, garantindo que o templo seja um ambiente seguro, limpo e adequado para a adoração.',
+    ],
+    'aventureiros' => [
+        'name' => 'Aventureiros',
+        'description' => 'Ministério focado no desenvolvimento físico, mental e espiritual de crianças de 6 a 9 anos, envolvendo diretamente os pais no processo educativo. Promove atividades recreativas, trabalhos manuais, estudo da Bíblia e amor à natureza, fortalecendo os vínculos familiares.',
+    ],
+    'desbravadores' => [
+        'name' => 'Desbravadores',
+        'description' => 'Focado no desenvolvimento holístico de juvenis e adolescentes de 10 a 15 anos. Realiza atividades ao ar livre (acampamentos, caminhadas, ordem unida), ensina liderança, disciplina, trabalho em equipe e serviço à comunidade, com o lema de "salvar do pecado e guiar no serviço".',
+    ],
+    'ornamentacao' => [
+        'name' => 'Ministério da Ornamentação',
+        'description' => 'Cuida da decoração e ambientação do templo e dos espaços da igreja para cultos e eventos especiais. Prepara arranjos, cenários e elementos visuais que valorizem a reverência, a mensagem e a experiência de adoração da congregação.',
+    ],
     'map' => [
         'name' => 'Ministério das Possibilidades - MAP',
         'description' => 'Promove a inclusão plena, a acessibilidade e o cuidado com pessoas com deficiência (física, auditiva/Libras, visual, intelectual), enlutados, cuidadores e órfãos, garantindo que todos tenham espaço para adorar, pertencer e usar seus dons na igreja.',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VolunteerApplication;
 use App\Models\VolunteerApplicationChoice;
+use App\Support\PersonNameFormatter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -138,7 +139,9 @@ class VolunteerApplicationController extends Controller
             }
         }
 
-        $name = $this->sanitizePlainText($validated['name'], self::MAX_NAME_LENGTH);
+        $name = PersonNameFormatter::format(
+            $this->sanitizePlainText($validated['name'], self::MAX_NAME_LENGTH)
+        );
         $email = Str::lower(trim($validated['email']));
         $phone = $this->normalizePhone($validated['phone']);
 

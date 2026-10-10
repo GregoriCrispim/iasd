@@ -67,7 +67,11 @@ class TalentoController extends Controller
 
         if ($viewMode === 'lista') {
             $applications = (clone $baseQuery)
-                ->with(['choices' => fn ($q) => $q->orderBy('id')])
+                ->with(['choices' => function ($q) {
+                    $q->orderByRaw("CASE WHEN modality = ? THEN 0 ELSE 1 END", [
+                        VolunteerApplicationChoice::MODALITY_LIDERANCA,
+                    ])->orderBy('id');
+                }])
                 ->orderByDesc('created_at')
                 ->paginate(30)
                 ->withQueryString();
@@ -89,6 +93,9 @@ class TalentoController extends Controller
                 ->whereIn('volunteer_application_id', (clone $baseQuery)->select('id'))
                 ->when($ministryFilter !== '', fn ($q) => $q->where('ministry_slug', $ministryFilter))
                 ->when($modalityFilter !== '', fn ($q) => $q->where('modality', $modalityFilter))
+                ->orderByRaw("CASE WHEN modality = ? THEN 0 ELSE 1 END", [
+                    VolunteerApplicationChoice::MODALITY_LIDERANCA,
+                ])
                 ->orderBy('id')
                 ->get()
                 ->groupBy('ministry_slug');

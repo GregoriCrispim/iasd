@@ -57,6 +57,78 @@
     });
   }
 
+  const NAME_PARTICLES = new Set([
+    'a', 'as', 'à', 'às',
+    'o', 'os',
+    'de', 'da', 'das', 'do', 'dos',
+    'e', 'y',
+    'em', 'na', 'nas', 'no', 'nos',
+    'para', 'por',
+    'di', 'du', 'del', 'della', 'van', 'von',
+  ]);
+
+  function capitalizeWord(word) {
+    const apostrophe = word.match(/^([\p{L}]+)(['’])([\p{L}]+)$/u);
+    if (apostrophe) {
+      return (
+        apostrophe[1].charAt(0).toLocaleUpperCase('pt-BR') +
+        apostrophe[1].slice(1) +
+        apostrophe[2] +
+        apostrophe[3].charAt(0).toLocaleUpperCase('pt-BR') +
+        apostrophe[3].slice(1)
+      );
+    }
+
+    return word.charAt(0).toLocaleUpperCase('pt-BR') + word.slice(1);
+  }
+
+  function formatPersonName(value) {
+    const normalized = String(value || '').replace(/\s+/g, ' ').trim();
+    if (!normalized) return '';
+
+    const lower = normalized.toLocaleLowerCase('pt-BR');
+    const parts = lower.split(/(\s+|-+)/);
+    let isFirstWord = true;
+    let result = '';
+
+    parts.forEach((part) => {
+      if (/^\s+$/.test(part) || part === '-') {
+        result += part;
+        return;
+      }
+      if (!part) return;
+
+      if (!isFirstWord && NAME_PARTICLES.has(part)) {
+        result += part;
+      } else {
+        result += capitalizeWord(part);
+      }
+      isFirstWord = false;
+    });
+
+    return result;
+  }
+
+  function applyNameFormat() {
+    const input = form.querySelector('#name');
+    if (!input) return;
+
+    const apply = () => {
+      const next = formatPersonName(input.value);
+      if (input.value !== next) input.value = next;
+    };
+
+    input.addEventListener('blur', apply);
+    input.addEventListener('change', apply);
+    // Formata ao colar e após pausa curta na digitação (camel/title case de nomes).
+    let typingTimer = 0;
+    input.addEventListener('input', () => {
+      window.clearTimeout(typingTimer);
+      typingTimer = window.setTimeout(apply, 500);
+    });
+    input.addEventListener('paste', () => setTimeout(apply, 0));
+  }
+
   /* —— Field validation (format + uniqueness for email/phone) —— */
   const VALIDATE_IDLE_MS = 450;
   const UNIQUE_FIELDS = new Set(['email', 'phone']);
@@ -345,6 +417,11 @@
   }
 
   async function validateAllFields() {
+    const nameInput = form.querySelector('#name');
+    if (nameInput) {
+      nameInput.value = formatPersonName(nameInput.value);
+    }
+
     let ok = true;
     let firstInvalid = null;
 
@@ -570,5 +647,6 @@
   });
 
   applyPhoneMask();
+  applyNameFormat();
   render();
 })();

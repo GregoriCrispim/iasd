@@ -125,7 +125,7 @@
                                     <a href="mailto:{{ $app->email }}">{{ $app->email }}</a>
                                 </td>
                                 <td class="text-muted" style="white-space:nowrap;">
-                                    {{ $app->created_at?->timezone(config('app.timezone'))->format('d/m/Y H:i') }}
+                                    {{ $app->created_at?->timezone('America/Sao_Paulo')->format('d/m/Y H:i') }}
                                 </td>
                                 <td>
                                     <div style="display:flex;flex-wrap:wrap;gap:6px;">
