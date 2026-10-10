@@ -134,6 +134,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Classe de Saúde.jpeg',
+            'alt' => 'Classe de Saúde — Longevos sem doenças',
+            'title' => 'Classe de Saúde',
+            'text' => 'LONGEVOS SEM DOENÇAS - Viver muitos anos é realmente o nosso maior objetivo? Ou será que o verdadeiro sonho é chegar à velhice com autonomia, lucidez, disposição e qualidade de vida? A idade avança para todos. Mas o modo como envelhecemos não precisa ser igual. Há pessoas que acumulam anos… e há pessoas que acumulam vida. Pessoas que continuam aprendendo, caminhando, trabalhando, sorrindo, cuidando de si e desfrutando das pequenas coisas mesmo quando o calendário já revela muitas décadas. Longevidade não é apenas acrescentar anos à vida. É acrescentar vida aos anos. E talvez a pergunta mais importante não seja: “Quantos anos quero viver?”, mas: “Como quero estar quando esses anos chegarem?” Nosso organismo possui uma extraordinária capacidade de adaptação e manutenção. Não existe fórmula mágica, nem garantia de envelhecer sem nenhuma doença. Mas existe algo poderoso: a possibilidade de cuidar hoje do corpo que queremos ter amanhã. Porque envelhecer é inevitável. Envelhecer com saúde, autonomia e dignidade é uma construção diária.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/CEVISA.jpeg',
             'alt' => 'Excursão especial de bem-estar — CEVISA',
             'title' => 'Excursão CEVISA',
@@ -141,7 +148,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Bazar.jpg',
+            'src' => $boletimBase . '/Bazar ASA.jpg',
             'alt' => 'Bazar da ASA',
             'title' => 'Bazar ASA',
             'text' => 'No dia 08/11, teremos o bazar da ASA, peças selecionadas a preços acessíveis. Programe-se para participar!',
@@ -264,6 +271,13 @@
             'alt' => 'Código 318 — círculo de homens',
             'title' => 'Código 318',
             'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. No sábado, dia 10/10, às 15h30, no salão jovem, teremos mais um encontro do Código 318. Contaremos com a participação especial do Pastor Adenilton Aguiar. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Culto 24-10 - 9h.jpg',
+            'alt' => 'Sábado da Criação — 24/10 às 9h',
+            'title' => 'Sábado da Criação',
+            'text' => 'No dia 24/10, às 9h, teremos a celebração do Sábado da Criação, acontecerá a palestra: \'Trocando as lentes: A Diferença entre a Visão Humana e a Divina\' com a participação especial do Dr. Tiago Alves de Souza. Programe-se para participar!',
         ],
         [
             'type' => 'image',
