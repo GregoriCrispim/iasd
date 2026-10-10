@@ -27,8 +27,7 @@
                 </div>
                 <h2>Inscrição enviada!</h2>
                 <p>
-                    Obrigado, <strong>{{ $success['name'] }}</strong>.
-                    Recebemos sua disposição com alegria — em breve a liderança entra em contato.
+                    <strong>{{ $success['name'] }}</strong>, agradecemos a sua inscrição. Em breve entraremos em contato.
                 </p>
 
                 <div class="vol-success-summary">
@@ -165,7 +164,7 @@
                     <div class="vol-panel-head">
                         <span class="vol-step">2</span>
                         <div>
-                            <h2 id="vol-min-title">Onde você quer servir</h2>
+                            <h2 id="vol-min-title">Onde você deseja servir</h2>
                             <p class="vol-lead">Toque em Liderança ou Equipe em cada ministério. Até 3 opções.</p>
                         </div>
                     </div>
