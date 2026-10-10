@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "labels": {
+    "result_title": "Resultado",
+    "gift_header": "Dom Espiritual",
+    "proportion_header": "Proporção",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "finish": "Resultado",
+    "start": "Começar o teste!",
+    "restart": "Retomar o teste",
+    "show_last_result": "Mostrar último resultado",
+    "clear_data": "Limpar dados armazenados"
+  },
+  "instructions_html": "<blockquote class=\"cite-intro\"><em>Qual é o meu <strong>chamado ministerial,</strong> o meu <strong>dom espiritual?</strong></em></blockquote><h2>Instruções</h2> <ul> <li>Responda com <strong>calma,</strong> com <strong>paciência,</strong> em espírito de <strong>oração.</strong> (São 76 questões, vai levar um tempinho mesmo...)</li> <li><strong>Seja sincero.</strong> Não responda <em>“como deveria ser”;</em> responda <em>“como é”.</em> Não existe resposta errada.</li> <li>Há diferentes maneiras para descobrir dons. Um teste auxilia, a opinião de irmãos e irmãs mais maduros na fé ajuda, mas é <strong>no exercício dos dons,</strong> ao se lançar pela fé ao serviço do Senhor, que vêm a convicção e o chamado.</li> <li><strong>Não tenha medo</strong> de cometer erros no uso dos dons: comece a usá-los, e esteja atento ao Espírito Santo! Ellen White diz: <q>“é melhor cometermos erros ao tentar avançar a causa do Senhor, do que esperar até que todas as circunstâncias excluam qualquer possibilidade de erro.” <cite>(AS, 229)</cite></q></li> <li>Existem inúmeros <strong>outros dons espirituais,</strong> diferentes dos relacionados aqui. Esta lista não é exaustiva. A criatividade de Deus não tem limites.</li> </ul>",
+  "start_comments_html": "<p><strong class=\"label\">Nota do <a href=\"https://www.unasp.br/ec/nucleo-de-missao/\" target=\"_blank\"><abbr title=\"Núcleo de Missões &amp; Crescimento de Igreja\">NUMCI</abbr>:</a></strong></p><p>Há testes muito bons disponíveis em livros, na internet e em material solto. Ao estudar o assunto percebemos que havia uma grande quantidade de testes, mas nenhum que contemplava a compreensão adventista dos dons. Utilizando o teste e a lógica de Christian Schwarz, compusemos um teste com uma abordagem adventista aos dons de línguas, interpretação, cura, discernimento de espíritos, profecia, etc.</p><ul><!--<li><a href=\"http://arquivoadventista.com.br/descubra-o-seu-dom-espiritual/\">Artigo: \"Descubra o seu dom espiritual\"</a></li>--><li><a href=\"https://amzn.to/2Q3CWB4\" target=\"_blank\">Livro \"Impacto dos Dons\" (Casa Publicadora Brasileira)</a></li></ul>",
+  "result_comment_html": "<p><small><strong class=\"label\">Nota do <a href=\"https://www.unasp.br/ec/nucleo-de-missao/\" target=\"_blank\"><abbr title=\"Núcleo de Missões &amp; Crescimento de Igreja\">NUMCI</abbr>:</a></strong></small></p><p><small>Os três primeiros tendem a ser os seus principais dons. Disponha-se a ajudar em diferentes frentes de trabalho dentro e fora da igreja, para servir os irmãos e pessoas que não conhecem a Deus. Ao trabalhar você perceberá uma satisfação enorme, uma convicção e uma paz não experimentada quando você exercer o seu(s) dom(ns).</small></p>",
+  "messages": {
+    "no_answer": "É preciso escolher uma resposta para continuar.",
+    "calculation_error": "Ocorreu um erro ao calcular o resultado! Aparentemente, uma ou mais questões não foram respondidas. Vamos tentar retomar o teste...",
+    "clear_data_confirm": "Tem certeza de que deseja descartar todas as respostas que você já deu?\n\n(Esta operação NÃO PODE SER DESFEITA!)"
+  },
+  "answer_labels_html": [
+    "não<br>nunca<br>discordo totalmente",
+    "pouco<br>raramente<br>discordo um pouco",
+    "muito<br>com frequência<br>concordo",
+    "sim<br>sempre<br>concordo totalmente"
+  ]
+}

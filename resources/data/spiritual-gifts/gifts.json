@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "gifts": [
+    {
+      "id": 1,
+      "name": "Liberalidade",
+      "description": "O dom do Espírito para dar liberalmente, com alegria, e com regularidade às necessidades da Igreja e de indivíduos. Todos são chamados a dar, mas o dom capacita para mais."
+    },
+    {
+      "id": 2,
+      "name": "Profecia",
+      "description": "É o dom através do qual o Espírito transmite conselhos e instruções para a igreja por meio de visões e sonhos. Deus manifesta a Sua vontade através deste dom (Amós 3:7) para um grupo menor ou para a igreja como um todo. A inspiração profética pode ser usada por Deus como e quando Lhe apraz."
+    },
+    {
+      "id": 3,
+      "name": "Liderança",
+      "description": "É o dom de envolver pessoas em uma visão, estabelecer objetivos, desenvolver estratégias para alcançá-los e vê-los realizados para a edificação da igreja; trazendo crescimento do reino de Deus."
+    },
+    {
+      "id": 4,
+      "name": "Hospitalidade",
+      "description": "O dom do Espírito para acolher o abandonado e necessitado, fazendo com que cada pessoa sinta-se querida e confortável. Habilidade de amar e servir desinteressadamente."
+    },
+    {
+      "id": 5,
+      "name": "Línguas",
+      "description": "Capacitação especial e sobrenatural para comunicar verbalmente o Evangelho em um idioma estrangeiro, até mesmo sem treinamento, quando há uma extrema necessidade de fazê-lo de maneira rápida e eficiente, a fim de fazer avançar a obra do evangelho e testemunhar da obra expiatória de Jesus às pessoas de diversas etnias."
+    },
+    {
+      "id": 6,
+      "name": "Missionário",
+      "description": "É o dom para compartilhar o Evangelho de maneira eficaz noutro país, adaptando-se com espontaneidade e a diferentes culturas, climas e circunstâncias. Está associado ao dom de línguas."
+    },
+    {
+      "id": 7,
+      "name": "Evangelismo",
+      "description": "O dom do Espírito para compartilhar o Evangelho e ver os descrentes se encontrarem com Jesus, unindo-se à igreja como membros responsáveis."
+    },
+    {
+      "id": 8,
+      "name": "Ensino",
+      "description": "O dom para conceder instrução espiritual às pessoas (membros de igreja ou não) de modo que o evangelho seja compreendido e seguido, promovendo crescimento espiritual e unidade na fé."
+    },
+    {
+      "id": 9,
+      "name": "Cura",
+      "description": "É o dom de entender o funcionamento do corpo humano, discernir doenças, aplicar tratamentos e ajudar o doente a cuidar de seu corpo para que tenha saúde. Pode estar associado ao dom de milagres."
+    },
+    {
+      "id": 10,
+      "name": "Pastoral",
+      "description": "O dom do Espírito para ministrar, tanto direta como indiretamente, a todas as necessidades de cada membro da congregação e a pessoas que necessitem ser pastoreadas. Está ligado com o dom de exortação, da palavra, da sabedoria, da misericórdia e da liderança (entre outros)."
+    },
+    {
+      "id": 11,
+      "name": "Administração",
+      "description": "O dom do Espírito que concebe e supervisiona planos para o trabalho de Deus, trazendo progresso à causa e condições (materiais e humanas) para que sejam administrados."
+    },
+    {
+      "id": 12,
+      "name": "Discernimento",
+      "description": "É o dom de perceber o espírito que move as pessoas. Por “intuição” (Espírito Santo) percebe o estado espiritual de outros e ministra conforme a necessidade. Associado ao dom de exortação."
+    },
+    {
+      "id": 13,
+      "name": "Apostolado",
+      "description": "O dom do Espírito Santo para pioneiro, líder, que inicia igrejas ou as desenvolve, indo para lugares onde outros não iriam. <em lang=\"gr\">Apostello</em> quer dizer: “enviado para pregar”. Paulo é o exemplo típico."
+    },
+    {
+      "id": 14,
+      "name": "Exortação",
+      "description": "O dom do Espírito que traz conforto, encorajamento e instrução àqueles que precisam de alguma ajuda, cura interior e nos relacionamentos. Ouvir e aconselhar oportunamente é a marca deste dom."
+    },
+    {
+      "id": 15,
+      "name": "Fé",
+      "description": "O dom do Espírito para reclamar as promessas de Deus com inabalável confiança de que serão cumpridas. Está baseado num profundo conhecimento de Deus e de seu modo de agir encontrado na Bíblia."
+    },
+    {
+      "id": 16,
+      "name": "Socorro e Misericórdia",
+      "description": "O dom do Espírito para se ter sensibilidade aos sentimentos e necessidades dos outros, dando-lhes auxilio que traz conforto e cura."
+    },
+    {
+      "id": 17,
+      "name": "Conhecimento",
+      "description": "O dom concedido pelo Espírito capacitando o crente a reter conhecimento. Geralmente está (ou deveria estar) associado ao dom de ensino."
+    },
+    {
+      "id": 18,
+      "name": "Sabedoria",
+      "description": "Dom que habilita para o entendimento de pessoas e/ou a igreja em partes e como um todo em sua complexidade, trazendo solução para problemas, libertação, harmonia, progresso e crescimento."
+    },
+    {
+      "id": 19,
+      "name": "Intercessão",
+      "description": "Pessoas são chamadas para se importar e interceder em oração por outras, por atividades internas e externas à igreja. É o dom de apoio ao evangelismo e ao pastorado."
+    }
+  ]
+}
