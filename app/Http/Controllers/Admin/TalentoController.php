@@ -116,6 +116,13 @@ class TalentoController extends Controller
                     ->first(fn ($row) => $row->ministry_slug === $slug && $row->modality === VolunteerApplicationChoice::MODALITY_EQUIPE)
                     ?->total;
 
+                $total = $lideranca + $equipe;
+
+                // Com filtro de modalidade, omitir ministérios sem candidaturas nessa modalidade.
+                if ($modalityFilter !== '' && $total === 0) {
+                    continue;
+                }
+
                 $candidates = ($namesByMinistry->get($slug) ?? collect())->map(fn ($choice) => [
                     'name' => $choice->application?->name ?? '—',
                     'modality' => $choice->modality,
@@ -127,7 +134,7 @@ class TalentoController extends Controller
                     'label' => $label,
                     'lideranca' => $lideranca,
                     'equipe' => $equipe,
-                    'total' => $lideranca + $equipe,
+                    'total' => $total,
                     'candidates' => $candidates,
                 ];
             }
