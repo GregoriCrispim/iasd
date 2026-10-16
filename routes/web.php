@@ -97,6 +97,7 @@ Route::middleware(['auth:admin'])
                 Route::get('/campanhas/{slug}', [CampaignMetricsController::class, 'show'])->name('campanhas.show');
 
                 Route::get('/talento', [TalentoController::class, 'index'])->name('talento.index');
+                Route::get('/talento/pdf', [TalentoController::class, 'pdf'])->name('talento.pdf');
             });
 
             // Super Admin e Admin

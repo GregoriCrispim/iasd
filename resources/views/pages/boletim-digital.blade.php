@@ -7,9 +7,8 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_10_10_2026';
+    $boletimBase = 'img/boletim/boletim_17_10_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
-    $oracaoMinBase = $boletimBase . '/M. Oração';
 
     $linkify = static function (?string $text): ?string {
         if ($text === null || $text === '') {
@@ -23,7 +22,7 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da TERCEIRA semana de OUTUBRO é: Ore por humildade para reconhecer erros e ter coragem de pedir perdão quando necessário.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da QUARTA semana de OUTUBRO é: Ore para ser alguém que transmite paz, equilíbrio e segurança por onde passa.';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -43,7 +42,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.24 (1).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.24 (2).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -85,6 +84,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Meu Talento.jpeg',
+            'alt' => 'Meu Talento, Meu Ministério',
+            'title' => 'Meu Talento, Meu Ministério',
+            'text' => 'Sirva com propósito em um de nossos ministérios! Todos nós fomos presenteados com dons únicos para edificar a comunidade e glorificar a Deus. Convidamos você a dedicar seus talentos e fazer a diferença em nossa igreja. Escaneie acesse o link https://adventistascentralbrasilia.org/talento e inscreva-se para servir. "Cada um exerça o dom que recebeu para servir aos outros, administrando fielmente a graça de Deus nas suas múltiplas formas." 1 Pedro 4:10',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Voluntariado.jpeg',
             'alt' => 'Voluntariado nos ministérios da igreja',
             'title' => 'Voluntariado',
@@ -103,13 +109,6 @@
             'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
             'title' => 'Oi Amiga',
             'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. As reuniões serão on-line. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve a sua agenda. Acesse o link e inscreva-se: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform',
-        ],
-        [
-            'type' => 'image',
-            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (5).jpeg',
-            'alt' => 'Reunião de Oração',
-            'title' => 'Reunião de Oração',
-            'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
         ],
         [
             'type' => 'image',
@@ -134,17 +133,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Classe de Saúde.jpeg',
-            'alt' => 'Classe de Saúde — Longevos sem doenças',
+            'src' => $boletimBase . '/Classe de Saúde.jpg',
+            'alt' => 'Classe de Saúde — Como ser forte quando me sinto fraco?',
             'title' => 'Classe de Saúde',
-            'text' => 'LONGEVOS SEM DOENÇAS - Viver muitos anos é realmente o nosso maior objetivo? Ou será que o verdadeiro sonho é chegar à velhice com autonomia, lucidez, disposição e qualidade de vida? A idade avança para todos. Mas o modo como envelhecemos não precisa ser igual. Há pessoas que acumulam anos… e há pessoas que acumulam vida. Pessoas que continuam aprendendo, caminhando, trabalhando, sorrindo, cuidando de si e desfrutando das pequenas coisas mesmo quando o calendário já revela muitas décadas. Longevidade não é apenas acrescentar anos à vida. É acrescentar vida aos anos. E talvez a pergunta mais importante não seja: “Quantos anos quero viver?”, mas: “Como quero estar quando esses anos chegarem?” Nosso organismo possui uma extraordinária capacidade de adaptação e manutenção. Não existe fórmula mágica, nem garantia de envelhecer sem nenhuma doença. Mas existe algo poderoso: a possibilidade de cuidar hoje do corpo que queremos ter amanhã. Porque envelhecer é inevitável. Envelhecer com saúde, autonomia e dignidade é uma construção diária.',
+            'text' => 'PALESTRA: COMO SER FORTE QUANDO ME SINTO FRACO? Você já se perguntou de onde vem a força necessária para continuar quando a vida parece exigir mais do que conseguimos oferecer? Existem momentos em que até as pessoas mais fortes enfrentam dúvidas, inseguranças e desafios que ninguém percebe. Mas será que a força está em suportar tudo ou existe algo mais profundo que ainda precisamos descobrir? Esta palestra é um convite para olhar a vida sob uma perspectiva Bíblica, refletir sobre nossas fragilidades e descobrir possibilidades que podem transformar a maneira como enfrentamos os desafios do dia a dia. Prepare-se para uma reflexão que poderá surpreender você e ampliar sua maneira de enxergar a si mesmo e a vida. Venha descobrir!',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/CEVISA.jpeg',
             'alt' => 'Excursão especial de bem-estar — CEVISA',
             'title' => 'Excursão CEVISA',
-            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA), de 22 a 29 de novembro de 2026! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações https://forms.gle/ZNbidJmaihpgYqNY8 Venha viver essa experiência de renovação e comunhão!',
+            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para todas as idades para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA), de 22 a 29 de novembro de 2026! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações https://forms.gle/ZNbidJmaihpgYqNY8 Venha viver essa experiência de renovação e comunhão!',
         ],
         [
             'type' => 'image',
@@ -204,10 +203,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Rádio NT.jpeg',
+            'src' => $boletimBase . '/NT.jpg',
             'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
             'title' => 'Rádio Novo Tempo',
-            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama. E no dia 07/11/26, às 15h30, na Igreja Adventista Central de Brasília, SGAS 611 Módulo 75, Avenida L2 Sul - Brasília/DF, teremos o Programa de inauguração da Rádio Novo Tempo Brasília — 92.9 FM! Vamos agradecer a Deus e celebrar juntos essa oportunidade de levar Sua mensagem de amor a tantos lares. Convide sua família e seus amigos! Sua presença vai tornar esse momento ainda mais especial. Um novo tempo de esperança para Brasília, e queremos você pertinho da gente nessa celebração! Faça sua inscrição: https://eventos.adventistasbrasilia.org.br/event/evento/400 Esperamos você com muito carinho!',
         ],
         [
             'type' => 'image',
@@ -267,13 +266,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/318.jpeg',
-            'alt' => 'Código 318 — círculo de homens',
-            'title' => 'Código 318',
-            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. No sábado, dia 10/10, às 15h30, no salão jovem, teremos mais um encontro do Código 318. Contaremos com a participação especial do Pastor Adenilton Aguiar. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Culto 24-10 - 9h.jpg',
             'alt' => 'Sábado da Criação — 24/10 às 9h',
             'title' => 'Sábado da Criação',
@@ -284,12 +276,12 @@
             'src' => $boletimBase . '/Criacionismo final.jpeg',
             'alt' => 'JA Criacionismo — Uma Viagem no Tempo',
             'title' => 'JA Criacionismo',
-            'text' => 'Atenção, universitários de todo o DF! Reservem a data de 24 de outubro, às 16h: será o Sábado da Criação na Igreja Central de Brasília. O programa trará o tema “Uma Viagem no Tempo”, com o Dr. Tiago Alves de Souza, Doutor em Genética pela USP. Pré-universitários, universitários, quem já concluiu a faculdade, professores e todos os interessados no tema estão convidados para este momento especial. Um programa que você não pode perder!',
+            'text' => 'Venha participar de uma VIAGEM NO TEMPO com o Dr. Tiago Alves de Souza, doutor em Genética pela USP! Será no Sábado da Criação, 24 de outubro, às 16h, aqui na igreja. Um encontro especial para toda a turma jovem: pré-universitários, universitários, formados, professores e todos os interessados no tema estão convidados! Após o pôr do sol, teremos um momento com jogos e esportes, venha preparado! Além disso, teremos uma cantina com lanches a um preço bem acessível: pizza, suco, cachorro-quente, picolé e pipoca grátis!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/darwin.png',
-            'alt' => 'Série A Caixa Preta de Darwin',
+            'src' => $boletimBase . '/darwin-18 out.png',
+            'alt' => 'Série A Caixa Preta de Darwin — 18/10',
             'title' => 'A Caixa Preta de Darwin',
             'text' => 'Você já parou para pensar se a complexidade da vida ao nosso redor poderia surgir por acaso? Nos domingos especiais de outubro, a nova série de estudos A Caixa Preta de Darwin aborda a origem da vida, a complexidade do universo e a perspectiva criacionista à luz das Escrituras. Acompanhe os temas: 04/10 — A Origem da Vida (Dr. Davi Reis Lopes); 11/10 — O Universo Sobre o Fio da Navalha (Dr. Alexsander Silva); 18/10 — O Mistério da Vida (Dr. Davi Reis Lopes); 25/10 — A Grande Extinção em Massa (Dr. Nahor Neves). Ative as notificações do nosso Canal do WhatsApp para não perder nenhum episódio desta jornada sobre fé, ciência e criação! No YouTube, inscreva-se no nosso canal e compartilhe a mensagem de fé e esperança.',
         ],
@@ -305,7 +297,7 @@
             'src' => $boletimBase . '/Coral Jovem.jpeg',
             'alt' => 'Coral Canto Jovem do IAP',
             'title' => 'Canto Jovem',
-            'text' => 'Prepare-se para uma manhã especial de louvor, música e adoração. No próximo sábado, dia 17/10, às 9h, estaremos recebendo em nossa igreja o Coral Canto Jovem diretamente do IAP (Instituto Adventista Paranaense), venha e participe deste grande louvor conosco!',
+            'text' => 'Prepare-se para uma manhã especial de louvor, música e adoração. Sábado, dia 17/10, às 9h, estaremos recebendo em nossa igreja o Coral Canto Jovem diretamente do IAP (Instituto Adventista Paranaense), venha e participe deste grande louvor conosco!',
         ],
         [
             'type' => 'image',
@@ -320,13 +312,6 @@
             'alt' => 'Canal Central Informa no WhatsApp',
             'title' => 'Canal WhatsApp',
             'text' => 'Perdeu algum detalhe dos nossos anúncios? Não se preocupe. O Central Informa está disponível no nosso canal oficial no WhatsApp para manter você atualizado. Siga o canal: Adventistas Central Brasília! Acesse o link https://whatsapp.com/channel/0029VaY6Z5UJJhzdkYF51D1T e faça parte desta comunidade.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/ASA Aberta.jpg',
-            'alt' => 'ASA Aberta — pizzas e lanches',
-            'title' => 'ASA Aberta',
-            'text' => 'No sábado, dia 10/10/26, após o pôr do sol, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
         ],
     ];
 

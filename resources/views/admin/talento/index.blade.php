@@ -26,6 +26,12 @@
 
 @section('actions')
     <a
+        href="{{ route('admin.talento.pdf', $filterQuery) }}"
+        class="btn talento-pdf-btn"
+    >
+        <i class="bi bi-file-earmark-pdf"></i> Relatório PDF
+    </a>
+    <a
         href="{{ route('talento.show') }}"
         class="btn btn-secondary talento-public-btn"
         target="_blank"
@@ -213,6 +219,18 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
+        .talento-pdf-btn {
+            background: #b91c1c;
+            border-color: #b91c1c;
+            color: #fff;
+        }
+        .talento-pdf-btn:hover {
+            background: #991b1b;
+            border-color: #991b1b;
+            color: #fff;
+        }
+        .talento-pdf-btn-mobile { display: none; }
 
         .talento-view-tabs {
             display: flex;
@@ -423,6 +441,7 @@
         @media (max-width: 900px) {
             .talento-public-btn,
             .adm-topbar .adm-actions { display: none !important; }
+            .talento-pdf-btn-mobile { display: inline-flex; }
             .adm-topbar {
                 grid-template-columns: auto minmax(0, 1fr);
                 grid-template-areas: "burger title";
@@ -578,6 +597,13 @@
                     <i class="bi bi-grid-3x3-gap"></i>
                     <span class="tab-label-long">Por ministério</span>
                     <span class="tab-label-short">Ministérios</span>
+                </a>
+                <a
+                    href="{{ route('admin.talento.pdf', $filterQuery) }}"
+                    class="btn btn-sm talento-pdf-btn talento-pdf-btn-mobile"
+                >
+                    <i class="bi bi-file-earmark-pdf"></i>
+                    <span>PDF</span>
                 </a>
             </div>
 
