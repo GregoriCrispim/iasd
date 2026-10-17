@@ -53,7 +53,9 @@
         <div class="card-body">
             <div style="display:flex;gap:12px;flex-wrap:wrap;">
                 @if ($canGaleria ?? false)
-                    <a href="{{ route('admin.galeria.index', ['novo' => 1]) }}" class="btn"><i class="bi bi-plus-lg"></i> Novo álbum</a>
+                    @if (auth('admin')->user()?->canCreateGalleryAlbums())
+                        <a href="{{ route('admin.galeria.index', ['novo' => 1]) }}" class="btn"><i class="bi bi-plus-lg"></i> Novo álbum</a>
+                    @endif
                     <a href="{{ route('admin.galeria.index') }}" class="btn btn-secondary"><i class="bi bi-images"></i> Galeria</a>
                 @endif
                 @if ($isCmsUser ?? false)

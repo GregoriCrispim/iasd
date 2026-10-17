@@ -105,7 +105,9 @@ class CampaignRedirectTest extends TestCase
             ->assertOk()
             ->assertSee('Entrega de sementes', false)
             ->assertSee('/sementes', false)
-            ->assertSee('Total de scans', false);
+            ->assertSee('Total de scans', false)
+            ->assertSee('Scans por dia (últimos 30 dias)', false)
+            ->assertSee('campaignScansByDayChart', false);
     }
 
     public function test_guest_cannot_view_campaign_metrics(): void

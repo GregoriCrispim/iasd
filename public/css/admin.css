@@ -55,13 +55,20 @@ a:hover { text-decoration: underline; }
 
 .adm-brand {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
     padding: 20px 20px 16px;
     border-bottom: 1px solid rgba(148, 163, 184, .15);
 }
-.adm-brand img { width: 34px; height: 34px; object-fit: contain; }
-.adm-brand strong { color: #fff; font-size: 15px; line-height: 1.2; }
+.adm-brand img {
+    width: 100%;
+    height: auto;
+    max-height: 52px;
+    object-fit: contain;
+    object-position: left center;
+    filter: brightness(0) invert(1);
+}
 .adm-brand span { display: block; font-size: 12px; color: #94a3b8; font-weight: 400; }
 
 .adm-nav { padding: 14px 12px; overflow-y: auto; flex: 1; }
@@ -387,14 +394,70 @@ textarea.input { resize: vertical; min-height: 90px; }
 
 /* ---------- Pagination ---------- */
 .adm-pagination { padding: 14px 20px; }
-.adm-pagination nav { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.adm-pagination a, .adm-pagination span {
-    padding: 6px 11px; border-radius: 8px; border: 1px solid var(--adm-border);
-    font-size: 13px; color: var(--adm-text); background: #fff;
+
+.adm-pager {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
-.adm-pagination a:hover { background: #f1f5f9; text-decoration: none; }
-.adm-pagination .active span, .adm-pagination [aria-current] span { background: var(--adm-primary); color: #fff; border-color: var(--adm-primary); }
-.adm-pagination .disabled span { color: #cbd5e1; }
+.adm-pager__info {
+    margin: 0;
+    font-size: 13px;
+    color: var(--adm-muted);
+    line-height: 1.4;
+}
+.adm-pager__info strong {
+    color: var(--adm-text);
+    font-weight: 600;
+}
+.adm-pager__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.adm-pager__item { display: inline-flex; }
+.adm-pager__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--adm-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--adm-text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition: background .15s, border-color .15s, color .15s;
+}
+.adm-pager__btn i {
+    font-size: 14px;
+    line-height: 1;
+}
+a.adm-pager__btn:hover {
+    background: #f1f5f9;
+    text-decoration: none;
+    color: var(--adm-text);
+}
+.adm-pager__item.is-active .adm-pager__btn {
+    background: var(--adm-primary);
+    border-color: var(--adm-primary);
+    color: #fff;
+}
+.adm-pager__item.is-disabled .adm-pager__btn {
+    color: #cbd5e1;
+    cursor: default;
+    background: #fff;
+}
 
 /* ---------- Dialog (modais de rejeição/confirmação) ---------- */
 dialog.adm-dialog {
@@ -714,7 +777,12 @@ dialog.adm-dialog.adm-dialog--user::backdrop {
     width: min(420px, 100%); padding: 34px 30px;
 }
 .adm-login-card .login-brand { text-align: center; margin-bottom: 24px; }
-.adm-login-card .login-brand img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 10px; }
+.adm-login-card .login-brand img {
+    width: min(220px, 70vw);
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
 .adm-login-card .login-brand h1 { font-size: 20px; margin: 0; }
 .adm-login-card .login-brand p { color: var(--adm-muted); font-size: 14px; margin: 4px 0 0; }
 
@@ -735,11 +803,103 @@ dialog.adm-dialog.adm-dialog--user::backdrop {
     .adm-sidebar { transform: translateX(-100%); }
     .adm-sidebar.open { transform: translateX(0); }
     .adm-main { margin-left: 0; }
-    .adm-burger { display: inline-flex; }
+    .adm-burger { display: inline-flex; align-items: center; justify-content: center; padding: 4px; }
     .form-row { grid-template-columns: 1fr; }
     .adm-overlay.show {
         display: block; position: fixed; inset: 0; background: rgba(15, 23, 42, .5); z-index: 35;
     }
+
+    .adm-topbar {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-areas: "burger title actions";
+        align-items: center;
+        gap: 10px 12px;
+        padding: 12px 16px;
+    }
+    .adm-burger { grid-area: burger; }
+    .adm-topbar h1 {
+        grid-area: title;
+        font-size: 16px;
+        line-height: 1.25;
+        min-width: 0;
+    }
+    .adm-topbar .adm-actions {
+        grid-area: actions;
+        margin-left: 0;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+    }
+    .adm-topbar .adm-actions .btn {
+        white-space: nowrap;
+    }
+    .adm-content { padding: 16px; }
+}
+
+@media (max-width: 640px) {
+    .adm-topbar {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-areas: "burger title actions";
+        gap: 8px 10px;
+        padding: 12px 14px;
+    }
+    .adm-topbar h1 {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.25;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .adm-topbar .adm-actions:empty { display: none; }
+    .adm-topbar .adm-actions .btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    .adm-content { padding: 14px 12px 24px; }
+
+    .stat-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .stat { padding: 16px 18px; }
+    .stat .stat-value { font-size: 28px; }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    .filters .field {
+        min-width: 0;
+        width: 100%;
+    }
+    .filters .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .card-head {
+        flex-wrap: wrap;
+        padding: 14px 16px;
+        gap: 10px;
+    }
+    .card-head .adm-actions {
+        margin-left: 0;
+        width: 100%;
+    }
+    .card-body { padding: 16px; }
+
+    .adm-pagination { padding: 12px 14px; }
+    .adm-pager {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .adm-pager__info { text-align: center; }
+    .adm-pager__list { justify-content: center; }
 }
 
 /* ---------- Gallery upload (drag & drop) ---------- */

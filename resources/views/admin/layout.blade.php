@@ -8,6 +8,7 @@
     $canGaleria = $authUser && $authUser->canManageGaleria();
     $canManageUsers = $isFullAdmin || $isManager || $isFotoLider;
     $isCmsUser = $authUser && $authUser->hasAnyRoleName(['super_admin', 'admin', 'manager', 'collaborator']);
+    $showDashboard = $authUser && $authUser->shouldSeeAdminDashboard();
     $active = $activeNav ?? '';
 @endphp
 <!DOCTYPE html>
@@ -27,17 +28,16 @@
 <div class="adm-shell">
     <aside class="adm-sidebar" id="admSidebar">
         <div class="adm-brand">
-            <img src="{{ asset('img/logo_iasd.png') }}" alt="IASD Central" onerror="this.style.display='none'">
-            <div>
-                <strong>IASD Central</strong>
-                <span>Painel de gestão</span>
-            </div>
+            <img src="{{ asset('img/central-de-brasilia-logo-iasd.svg') }}" alt="IASD Central de Brasília" onerror="this.style.display='none'">
+            <span>Painel de gestão</span>
         </div>
 
         <nav class="adm-nav">
-            <a href="{{ route('admin.dashboard') }}" class="{{ $active === 'dashboard' ? 'active' : '' }}">
-                <i class="bi bi-speedometer2"></i> Início
-            </a>
+            @if ($showDashboard)
+                <a href="{{ route('admin.dashboard') }}" class="{{ $active === 'dashboard' ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Início
+                </a>
+            @endif
 
             @if ($isCmsUser)
                 <div class="adm-nav-group">CMS</div>
@@ -77,6 +77,9 @@
                 @if ($isFullAdmin || $isManager)
                     <a href="{{ route('admin.campanhas.show', 'sementes') }}" class="{{ $active === 'campanhas' ? 'active' : '' }}">
                         <i class="bi bi-qr-code-scan"></i> Campanhas
+                    </a>
+                    <a href="{{ route('admin.talento.index') }}" class="{{ $active === 'talento' ? 'active' : '' }}">
+                        <i class="bi bi-person-hearts"></i> Meu Talento
                     </a>
                 @endif
             @endif

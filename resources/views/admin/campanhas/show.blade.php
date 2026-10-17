@@ -105,36 +105,28 @@
         </div>
     </div>
 
+    @php
+        $byDayLabels = [];
+        $byDayValues = [];
+        foreach ($byDay as $day => $count) {
+            $byDayLabels[] = \Carbon\Carbon::parse($day)->format('d/m');
+            $byDayValues[] = (int) $count;
+        }
+    @endphp
     <div class="card" style="margin-bottom:24px;">
-        <div class="card-head"><h2>Scans por dia (30 dias)</h2></div>
+        <div class="card-head"><h2>Scans por dia (últimos 30 dias)</h2></div>
         <div class="card-body">
-            <div class="table-wrap">
-                <table class="adm-table">
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th style="width:50%;">Volume</th>
-                            <th class="text-right">Scans</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (array_reverse($byDay, true) as $day => $count)
-                            @php $pct = $count ? max(4, (int) round(($count / $maxDay) * 100)) : 0; @endphp
-                            <tr>
-                                <td>{{ \Carbon\Carbon::parse($day)->format('d/m/Y') }}</td>
-                                <td>
-                                    <div style="background:#e2e8f0;border-radius:999px;height:8px;overflow:hidden;">
-                                        <div style="width:{{ $pct }}%;height:100%;background:var(--adm-primary);"></div>
-                                    </div>
-                                </td>
-                                <td class="text-right">{{ number_format($count, 0, ',', '.') }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="campaign-day-chart-wrap">
+                <canvas
+                    id="campaignScansByDayChart"
+                    aria-label="Gráfico de scans por dia nos últimos 30 dias"
+                    role="img"
+                    height="110"
+                ></canvas>
             </div>
         </div>
     </div>
+    <script type="application/json" id="campaignScansByDayData">@json(['labels' => $byDayLabels, 'values' => $byDayValues])</script>
 
     <div class="card">
         <div class="card-head"><h2>Visitas recentes</h2></div>
@@ -173,21 +165,140 @@
     </div>
 @endsection
 
+@push('styles')
+<style>
+    .campaign-day-chart-wrap {
+        position: relative;
+        width: 100%;
+        min-height: 280px;
+    }
+    .campaign-day-chart-wrap canvas {
+        width: 100% !important;
+        max-height: 320px;
+    }
+</style>
+@endpush
+
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script>
 (function () {
     var btn = document.getElementById('copyTrackingUrl');
     var el = document.getElementById('campaignTrackingUrl');
-    if (!btn || !el) return;
-    btn.addEventListener('click', async function () {
-        try {
-            await navigator.clipboard.writeText(el.textContent.trim());
-            btn.innerHTML = '<i class="bi bi-check2"></i> Copiado';
-            setTimeout(function () {
-                btn.innerHTML = '<i class="bi bi-clipboard"></i> Copiar';
-            }, 1600);
-        } catch (e) {
-            btn.innerHTML = '<i class="bi bi-x"></i> Falhou';
+    if (btn && el) {
+        btn.addEventListener('click', async function () {
+            try {
+                await navigator.clipboard.writeText(el.textContent.trim());
+                btn.innerHTML = '<i class="bi bi-check2"></i> Copiado';
+                setTimeout(function () {
+                    btn.innerHTML = '<i class="bi bi-clipboard"></i> Copiar';
+                }, 1600);
+            } catch (e) {
+                btn.innerHTML = '<i class="bi bi-x"></i> Falhou';
+            }
+        });
+    }
+
+    var canvas = document.getElementById('campaignScansByDayChart');
+    var dataEl = document.getElementById('campaignScansByDayData');
+    if (!canvas || !dataEl || typeof Chart === 'undefined') return;
+
+    var payload;
+    try {
+        payload = JSON.parse(dataEl.textContent || '{}');
+    } catch (e) {
+        return;
+    }
+
+    var labels = payload.labels || [];
+    var values = payload.values || [];
+    var ctx = canvas.getContext('2d');
+    var fillCache = { top: null, bottom: null, gradient: null };
+
+    function areaFill(context) {
+        var chart = context.chart;
+        var area = chart.chartArea;
+        if (!area) return 'rgba(66, 153, 225, 0.2)';
+        if (fillCache.gradient && fillCache.top === area.top && fillCache.bottom === area.bottom) {
+            return fillCache.gradient;
+        }
+        var gradient = chart.ctx.createLinearGradient(0, area.top, 0, area.bottom);
+        gradient.addColorStop(0, 'rgba(66, 153, 225, 0.38)');
+        gradient.addColorStop(1, 'rgba(66, 153, 225, 0.02)');
+        fillCache = { top: area.top, bottom: area.bottom, gradient: gradient };
+        return gradient;
+    }
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Scans',
+                data: values,
+                borderColor: '#4299e1',
+                backgroundColor: areaFill,
+                borderWidth: 2.5,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#4299e1',
+                pointBorderColor: '#4299e1',
+                pointBorderWidth: 0,
+                pointHitRadius: 10,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1e293b',
+                    titleColor: '#f8fafc',
+                    bodyColor: '#e2e8f0',
+                    padding: 10,
+                    displayColors: false,
+                    callbacks: {
+                        title: function (items) {
+                            return items[0] ? items[0].label : '';
+                        },
+                        label: function (item) {
+                            var n = item.parsed.y || 0;
+                            return n + (n === 1 ? ' scan' : ' scans');
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: '#94a3b8',
+                        maxRotation: 0,
+                        autoSkip: true,
+                        maxTicksLimit: 10,
+                        font: { size: 11 }
+                    },
+                    border: { display: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    grace: '8%',
+                    ticks: {
+                        color: '#94a3b8',
+                        precision: 0,
+                        font: { size: 11 }
+                    },
+                    grid: {
+                        color: '#e2e8f0',
+                        drawBorder: false
+                    },
+                    border: { display: false }
+                }
+            }
         }
     });
 })();

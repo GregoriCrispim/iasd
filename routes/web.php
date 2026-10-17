@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\GalleryAlbumController;
 use App\Http\Controllers\Admin\GalleryFaceController;
 use App\Http\Controllers\Admin\UploadsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\TalentoController;
 use App\Http\Controllers\Auth\MemberAuthController;
 use App\Http\Controllers\CampaignRedirectController;
 use App\Http\Controllers\FaceSearchController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SpiritualGiftsController;
+use App\Http\Controllers\VolunteerApplicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,6 +96,9 @@ Route::middleware(['auth:admin'])
                 Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
 
                 Route::get('/campanhas/{slug}', [CampaignMetricsController::class, 'show'])->name('campanhas.show');
+
+                Route::get('/talento', [TalentoController::class, 'index'])->name('talento.index');
+                Route::get('/talento/pdf', [TalentoController::class, 'pdf'])->name('talento.pdf');
             });
 
             // Super Admin e Admin
@@ -219,6 +224,18 @@ Route::post('/teste-de-dons/resultado', [SpiritualGiftsController::class, 'resul
 Route::view('/time-de-desenvolvimento', 'pages.time-desenvolvimento')->name('time-desenvolvimento');
 Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/politica-de-privacidade', 'pages.politica-privacidade')->name('privacidade');
+
+// Meu Talento, Meu Ministério (página solo, sem layout geral)
+Route::get('/talento', [VolunteerApplicationController::class, 'show'])
+    ->middleware('throttle:60,1')
+    ->name('talento.show');
+Route::post('/talento', [VolunteerApplicationController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('talento.store');
+Route::post('/talento/verificar', [VolunteerApplicationController::class, 'check'])
+    ->middleware('throttle:30,1')
+    ->name('talento.check');
+Route::redirect('/voluntariado', '/talento', 301);
 
 // Formulários
 Route::post('/contato/enviar', [PageController::class, 'enviarContato'])->name('contato.enviar');

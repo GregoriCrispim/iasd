@@ -255,11 +255,62 @@ class User extends Authenticatable
     }
 
     /**
-     * Criar, editar e remover álbuns (não inclui upload/capa/remoção de fotos).
+     * Gestão plena de álbuns: criar, editar qualquer um e remover.
+     * (Não inclui upload/capa/remoção de fotos — isso é canManageGaleria.)
      */
     public function canManageGalleryAlbums(): bool
     {
-        return $this->hasAnyRoleName(['super_admin', 'admin', 'manager', 'fotografia_lider']);
+        return $this->hasAnyRoleName([
+            'super_admin',
+            'admin',
+            'manager',
+            'fotografia_lider',
+        ]);
+    }
+
+    public function canCreateGalleryAlbums(): bool
+    {
+        return $this->canManageGalleryAlbums() || $this->isFotografiaColaborador();
+    }
+
+    public function canEditGalleryAlbum(GalleryAlbum $album): bool
+    {
+        if ($this->canManageGalleryAlbums()) {
+            return true;
+        }
+
+        return $this->isFotografiaColaborador()
+            && (int) $album->created_by === (int) $this->id;
+    }
+
+    public function canDeleteGalleryAlbum(GalleryAlbum $album): bool
+    {
+        return $this->canManageGalleryAlbums();
+    }
+
+    /**
+     * Colaborador de fotografia só usa a Galeria — sem dashboard/Início.
+     */
+    public function shouldSeeAdminDashboard(): bool
+    {
+        if (! $this->isFotografiaColaborador()) {
+            return true;
+        }
+
+        return $this->hasAnyRoleName([
+            'super_admin',
+            'admin',
+            'manager',
+            'collaborator',
+            'fotografia_lider',
+        ]);
+    }
+
+    public function adminHomeRouteName(): string
+    {
+        return $this->shouldSeeAdminDashboard()
+            ? 'admin.dashboard'
+            : 'admin.galeria.index';
     }
 
     /**

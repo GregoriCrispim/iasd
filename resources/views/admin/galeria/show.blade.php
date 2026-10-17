@@ -4,14 +4,14 @@
     $activeNav = 'galeria';
     $albumEditReturn = 'show';
     $authUser = auth('admin')->user();
-    $canManageAlbums = $authUser && $authUser->canManageGalleryAlbums();
+    $canEditAlbum = $authUser && $authUser->canEditGalleryAlbum($album);
 @endphp
 @section('title', $album->title)
 @section('heading', $album->title)
 
 @section('actions')
     <a href="{{ route('admin.galeria.index') }}" class="btn btn-secondary" title="Voltar aos álbuns"><i class="bi bi-arrow-left"></i> Álbuns</a>
-    @if ($canManageAlbums)
+    @if ($canEditAlbum)
         <button
             type="button"
             class="btn btn-secondary"

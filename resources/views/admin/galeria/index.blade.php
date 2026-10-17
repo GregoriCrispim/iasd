@@ -3,13 +3,22 @@
 @php
     $activeNav = 'galeria';
     $authUser = auth('admin')->user();
-    $canManageAlbums = $authUser && $authUser->canManageGalleryAlbums();
-    $openCreateAlbum = $canManageAlbums && (request()->boolean('novo') || ($errors->any() && old('_form') === 'create'));
+    $canCreateAlbums = $authUser && $authUser->canCreateGalleryAlbums();
+    $canDeleteAlbums = $authUser && $authUser->canManageGalleryAlbums();
+    $openCreateAlbum = $canCreateAlbums && (request()->boolean('novo') || ($errors->any() && old('_form') === 'create'));
     if ($openCreateAlbum && $errors->any()) {
         view()->share('hideGlobalErrors', true);
     }
     $albumEditReturn = 'index';
-    $albumEditOpenId = $canManageAlbums ? request('editar') : null;
+    $albumEditOpenId = null;
+    if ($authUser && request()->filled('editar')) {
+        $editId = (int) request('editar');
+        $editCandidate = $albums->firstWhere('id', $editId)
+            ?? \App\Models\GalleryAlbum::query()->find($editId);
+        if ($editCandidate && $authUser->canEditGalleryAlbum($editCandidate)) {
+            $albumEditOpenId = $editCandidate->id;
+        }
+    }
 
     // Só reaproveita os valores antigos se a falha de validação veio deste formulário.
     $createOld = fn (string $field, $default = null) => old('_form') === 'create' ? old($field, $default) : $default;
@@ -19,7 +28,7 @@
 @section('heading', 'Galeria de fotos')
 
 @section('actions')
-    @if ($canManageAlbums)
+    @if ($canCreateAlbums)
         <button type="button" class="btn" title="Novo álbum" onclick="admOpenAlbumCreateModal()">
             <i class="bi bi-plus-lg"></i> Novo álbum
         </button>
@@ -77,7 +86,7 @@
                             <td class="col-actions">
                                 <div class="row-actions">
                                     <a href="{{ route('admin.galeria.show', $album) }}" class="btn btn-secondary btn-sm" title="Abrir fotos"><i class="bi bi-images"></i></a>
-                                    @if ($canManageAlbums)
+                                    @if ($authUser && $authUser->canEditGalleryAlbum($album))
                                         <button
                                             type="button"
                                             class="btn btn-secondary btn-sm"
@@ -91,6 +100,8 @@
                                             data-album-published="{{ $album->is_published ? '1' : '0' }}"
                                             onclick="admOpenAlbumEditModal(this)"
                                         ><i class="bi bi-pencil"></i></button>
+                                    @endif
+                                    @if ($canDeleteAlbums)
                                         <form method="POST" action="{{ route('admin.galeria.destroy', $album) }}" onsubmit="return admConfirm('Remover este álbum e todas as fotos? Esta ação não pode ser desfeita.', this, { title: 'Remover álbum' });">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" title="Remover álbum"><i class="bi bi-trash"></i></button>

@@ -22,8 +22,8 @@ jobs:
           coverage: none
 
       # Valida o composer.lock e regenera o discovery sem Spatie/Filament.
-      # O vendor da Hostgator já tem o Laravel; não enviamos vendor via FTP
-      # (upload enorme e lento). O packages.php limpo sobrescreve o cache antigo.
+      # Na HostGator (shared) não roda composer; o vendor base já está no servidor.
+      # Pacotes novos (ex.: DomPDF) + autoload do Composer sobem como delta via FTP.
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
@@ -35,7 +35,35 @@ jobs:
             echo "FAIL: packages.php ainda referencia Spatie/Filament"
             exit 1
           fi
+          if grep -q 'Barryvdh\\\\DomPDF\\\\ServiceProvider' bootstrap/cache/packages.php; then
+            test -d vendor/barryvdh/laravel-dompdf
+            echo "DomPDF discovered and present in vendor."
+          fi
           echo "Package discovery OK (sem Spatie/Filament)."
+
+      # FTP-Deploy-Action não suporta exclusão com negação (!vendor/foo).
+      # Por isso removemos o vendor completo e deixamos só o delta que a HostGator
+      # ainda não tem (ou cujo autoload precisa ser atualizado).
+      - name: Prune vendor to HostGator delta
+        run: |
+          set -euo pipefail
+          # Top-level entries that must be synced when composer.lock adds packages
+          # that the shared host cannot install itself.
+          keep='autoload.php|composer|barryvdh|dompdf|sabberworm'
+          for entry in vendor/* vendor/.[!.]*; do
+            [ -e "$entry" ] || continue
+            name=$(basename "$entry")
+            if ! printf '%s\n' "$name" | grep -Eq "^($keep)$"; then
+              rm -rf "$entry"
+            fi
+          done
+          test -f vendor/autoload.php
+          test -d vendor/composer
+          test -d vendor/barryvdh/laravel-dompdf
+          test -d vendor/dompdf/dompdf
+          test -d vendor/sabberworm/php-css-parser
+          echo "Vendor delta for FTP:"
+          du -sh vendor vendor/* | sort -h
 
       - name: Verify deploy payload
         run: |
@@ -46,6 +74,9 @@ jobs:
           test -f public/models/human/3.3.6/models.json
           test ! -d vendor/filament
           test ! -d vendor/spatie/laravel-permission
+          test -d vendor/barryvdh/laravel-dompdf
+          test -f bootstrap/cache/packages.php
+          grep -q 'Barryvdh\\\\DomPDF\\\\ServiceProvider' bootstrap/cache/packages.php
           echo "Deploy payload ready."
 
       - name: Sync files via FTP
@@ -62,7 +93,6 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            vendor/**
             .github/**
             .env
             .env.*

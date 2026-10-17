@@ -10,15 +10,20 @@ use App\Models\GalleryAlbum;
 use App\Models\GalleryPhoto;
 use App\Models\User;
 use App\Support\CmsWorkflow;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request): View|RedirectResponse
     {
         /** @var User $user */
         $user = $request->user();
+
+        if (! $user->shouldSeeAdminDashboard()) {
+            return redirect()->route($user->adminHomeRouteName());
+        }
 
         $isCmsUser = $user->hasAnyRoleName(['super_admin', 'admin', 'manager', 'collaborator']);
         $canGaleria = $user->canManageGaleria();
