@@ -2,9 +2,9 @@
 
 @section('title', 'IASD Central de Brasília - Teste de Dons Espirituais')
 
-@section('meta-description', 'Descubra seu dom espiritual com o teste de dons da IASD Central de Brasília. 76 afirmações, respostas rápidas e resultado na hora. Refletir sobre seu chamado ministerial.')
+@section('meta-description', 'Descubra seu dom espiritual com o teste de dons da IASD Central de Brasília. 125 afirmações, respostas rápidas e resultado na hora. Refletir sobre seu chamado ministerial.')
 @section('og-title', 'Teste de Dons Espirituais - IASD Central de Brasília')
-@section('og-description', 'Descubra seu dom espiritual: 76 afirmações em espírito de oração, com resultado imediato.')
+@section('og-description', 'Descubra seu dom espiritual: 125 afirmações em espírito de oração, com resultado imediato.')
 @section('page-name', 'Teste de Dons Espirituais')
 
 @push('styles')
@@ -290,6 +290,76 @@
         scroll-margin-top: calc(var(--header-height, 80px) + 12px);
     }
 
+    /* Chamada para a página Talento (Meu Talento, Meu Ministério) */
+    .td-talento {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        background: linear-gradient(135deg, #003366 0%, #001531 100%);
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 51, 102, 0.25);
+        padding: 28px 32px;
+        margin: 0 auto 45px;
+        max-width: 760px;
+        text-align: left;
+    }
+
+    .td-talento__icon {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(245, 166, 35, 0.15);
+        font-size: 1.9rem;
+        color: #f5a623;
+    }
+
+    .td-talento__body h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: 1.9em;
+        font-weight: 500;
+        color: #fff;
+        margin: 0 0 8px;
+    }
+
+    .td-talento__body p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #cfe0f2;
+        margin: 0 0 16px;
+    }
+
+    .td-talento__body .td-btn {
+        padding: 11px 26px;
+        font-size: 1em;
+    }
+
+    .td-btn--gold {
+        background: linear-gradient(135deg, #f5a623 0%, #d98c0a 100%);
+        color: #001531;
+    }
+
+    .td-btn--gold:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(245, 166, 35, 0.35);
+    }
+
+    @media (max-width: 560px) {
+        .td-talento {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 24px 20px;
+        }
+
+        .td-talento__body .td-btn {
+            width: 100%;
+        }
+    }
+
     .td-error {
         margin: 0 0 30px;
         padding: 16px 20px;
@@ -508,6 +578,18 @@
         <button type="button" class="td-btn td-btn--primary" id="td-home" hidden>Volta para a página inicial</button>
     </div>
 
+    {{-- Chamada para a página Talento: inscrever-se em ministérios --}}
+    <section class="td-talento" id="td-talento" aria-label="Inscreva-se em um ministério">
+        <span class="td-talento__icon" aria-hidden="true"><i class="bi bi-person-hearts"></i></span>
+        <div class="td-talento__body">
+            <h2>Meu Talento, Meu Ministério</h2>
+            <p>Descobriu seu dom? Dê o próximo passo: escolha até três ministérios da igreja onde gostaria de servir e envie sua inscrição.</p>
+            <a href="{{ route('talento.show') }}" class="td-btn td-btn--gold">
+                <i class="bi bi-hand-thumbs-up" aria-hidden="true"></i> Quero servir em um ministério
+            </a>
+        </div>
+    </section>
+
     {{-- Tela do quiz: uma pergunta por vez --}}
     <section class="td-quiz" id="td-quiz" hidden aria-label="Questionário do teste de dons">
         <div class="td-progress-info">
@@ -515,7 +597,7 @@
             <span id="td-progress-percent"></span>
         </div>
         <div class="td-progress-track" role="progressbar" id="td-progress"
-             aria-valuemin="0" aria-valuemax="76" aria-valuenow="0" aria-label="Progresso do teste">
+             aria-valuemin="0" aria-valuemax="125" aria-valuenow="0" aria-label="Progresso do teste">
             <div class="td-progress-fill" id="td-progress-fill"></div>
         </div>
 
@@ -545,7 +627,7 @@
     'use strict';
 
     var questions = @json($questions['questions']);
-    var total = questions.length; // 76
+    var total = questions.length; // 125
     var answerLabels = @json($texts['answer_labels_html']);
     var messages = @json($texts['messages']);
     var labels = {
@@ -555,6 +637,7 @@
     var STORAGE_KEY = 'teste-dons:answers';
 
     var intro = document.getElementById('td-intro');
+    var talentoCard = document.getElementById('td-talento');
     var quiz = document.getElementById('td-quiz');
     var startBtn = document.getElementById('td-start');
     var homeLink = document.getElementById('td-home');
@@ -598,12 +681,14 @@
     function showIntro() {
         quiz.hidden = true;
         intro.hidden = false;
+        talentoCard.hidden = false;
         startBtn.hidden = false;
         homeLink.hidden = true;
     }
 
     function showQuiz(atIndex) {
         intro.hidden = true;
+        talentoCard.hidden = true;
         startBtn.hidden = true;
         homeLink.hidden = false;
         quiz.hidden = false;
@@ -629,7 +714,9 @@
         optionsWrap.innerHTML = '';
         var selected = answers[index];
 
-        answerLabels.forEach(function (labelHtml, value) {
+        // Cada opção vale de 1 a 4 pontos (0-based na lista, enviado como 1-based).
+        answerLabels.forEach(function (labelHtml, position) {
+            var value = position + 1;
             var option = document.createElement('label');
             option.className = 'td-option';
 

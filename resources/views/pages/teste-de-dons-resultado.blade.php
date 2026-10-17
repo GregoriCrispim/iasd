@@ -240,13 +240,13 @@
 <div class="tdr-container">
     <header class="tdr-header">
         <h1>{{ $texts['labels']['result_title'] }}</h1>
-        <p>Soma de cada dom: 4 afirmações × 0 a 3 pontos (máximo de {{ $scored['max_points_per_gift'] }} pontos por dom).</p>
+        <p>Soma de cada dom: 5 afirmações × 1 a 4 pontos (máximo de {{ $scored['max_points_per_gift'] }} pontos por dom).</p>
     </header>
 
     <section class="tdr-top" aria-label="Tendência dos principais dons">
         <h2>Tendência dos seus principais dons</h2>
         <p>
-            @forelse ($results->take(3) as $row)
+            @forelse ($results->sortByDesc('points')->take(3) as $row)
                 {{ $row['name'] }}@if(!$loop->last), @endif
             @empty
                 —
@@ -254,7 +254,8 @@
         </p>
     </section>
 
-    <ol class="tdr-list">
+    {{-- Lista completa do maior para o menor (empates na ordem do questionário) --}}
+    <ol class="tdr-list" aria-label="Pontuação de cada dom, do maior para o menor">
         @foreach ($results as $row)
             <li class="tdr-item {{ $row['rank'] <= 3 ? 'tdr-item--top' : '' }}">
                 <div class="tdr-rank-row">

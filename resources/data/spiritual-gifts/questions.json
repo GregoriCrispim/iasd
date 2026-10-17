@@ -1,563 +1,889 @@
 {
-  "version": 1,
-  "total_questions": 76,
-  "total_gifts": 19,
-  "statements_per_gift": 4,
-  "answer_scale": [
-    {
-      "value": 0,
-      "label": "não / nunca / discordo totalmente"
-    },
-    {
-      "value": 1,
-      "label": "pouco / raramente / discordo um pouco"
-    },
-    {
-      "value": 2,
-      "label": "muito / com frequência / concordo"
-    },
-    {
-      "value": 3,
-      "label": "sim / sempre / concordo totalmente"
-    }
-  ],
-  "ordering": {
-    "question_index_zero_based": "q",
-    "gift_index": "q % 19",
-    "statement_index_zero_based": "floor(q / 19)"
+ "version": 2,
+ "total_questions": 125,
+ "total_gifts": 25,
+ "statements_per_gift": 5,
+ "answer_scale": {
+  "options": 4,
+  "min_points": 1,
+  "max_points": 4
+ },
+ "ordering": "Cada dom é avaliado por 5 afirmações (perguntas N, N+25, N+50, N+75, N+100). O resultado apresenta os 25 dons na ordem da lista do questionário.",
+ "questions": [
+  {
+   "id": 1,
+   "gift": "Profecia",
+   "gift_index": 0,
+   "statement_index": 1,
+   "text": "Gostaria de falar com as pessoas e apresentar-lhes a vontade de Deus para Elas?"
   },
-  "questions": [
-    {
-      "id": 1,
-      "gift": "Liberalidade",
-      "gift_index": 0,
-      "statement_index": 1,
-      "text": "Sempre tento ajudar pessoas em dificuldades, mesmo que minhas próprias necessidades sejam muitas."
-    },
-    {
-      "id": 2,
-      "gift": "Profecia",
-      "gift_index": 1,
-      "statement_index": 1,
-      "text": "Tenho sonhos e visões contendo mensagens em plena concordância com a Bíblia."
-    },
-    {
-      "id": 3,
-      "gift": "Liderança",
-      "gift_index": 2,
-      "statement_index": 1,
-      "text": "Gosto de liderar e servir. Se a igreja precisa de alguém para dirigir atividades, motivar pessoas, me encontro entre os primeiros com quem se pode contar."
-    },
-    {
-      "id": 4,
-      "gift": "Hospitalidade",
-      "gift_index": 3,
-      "statement_index": 1,
-      "text": "Sinto satisfação em ajudar as pessoas, proporcionando-lhes moradia e alimento."
-    },
-    {
-      "id": 5,
-      "gift": "Línguas",
-      "gift_index": 4,
-      "statement_index": 1,
-      "text": "Tenho facilidades para aprender línguas de outros países e povos."
-    },
-    {
-      "id": 6,
-      "gift": "Missionário",
-      "gift_index": 5,
-      "statement_index": 1,
-      "text": "Sinto grande responsabilidade em levar o Evangelho a pessoas não alcançadas."
-    },
-    {
-      "id": 7,
-      "gift": "Evangelismo",
-      "gift_index": 6,
-      "statement_index": 1,
-      "text": "Tenho facilidade em persuadir alguém a tomar uma decisão ao lado de Cristo."
-    },
-    {
-      "id": 8,
-      "gift": "Ensino",
-      "gift_index": 7,
-      "statement_index": 1,
-      "text": "Gosto de ensinar e muitos me procuram para estudar a Bíblia comigo, pois entendem bem quando eu explico."
-    },
-    {
-      "id": 9,
-      "gift": "Cura",
-      "gift_index": 8,
-      "statement_index": 1,
-      "text": "Gosto de estudar o corpo humano, conheço os órgãos e funções e fico me aperfeiçoando na compreensão do corpo."
-    },
-    {
-      "id": 10,
-      "gift": "Pastoral",
-      "gift_index": 9,
-      "statement_index": 1,
-      "text": "Gosto de visitar os membros da Igreja regularmente, em suas casas, participando de suas vidas e fases."
-    },
-    {
-      "id": 11,
-      "gift": "Administração",
-      "gift_index": 10,
-      "statement_index": 1,
-      "text": "Diante de problemas complexos sou capaz de identificar os fatores que os influenciam, achando soluções práticas."
-    },
-    {
-      "id": 12,
-      "gift": "Discernimento",
-      "gift_index": 11,
-      "statement_index": 1,
-      "text": "Eu posso facilmente dizer se um profeta fala inspirado pelo Espírito Santo ou não."
-    },
-    {
-      "id": 13,
-      "gift": "Apostolado",
-      "gift_index": 12,
-      "statement_index": 1,
-      "text": "Tenho sido chamado por Deus para iniciar trabalhos para Jesus onde outros hesitariam em ir."
-    },
-    {
-      "id": 14,
-      "gift": "Exortação",
-      "gift_index": 13,
-      "statement_index": 1,
-      "text": "Quando alguém está sofrendo, sou capaz de identificar o que necessita e lhe dizer algo que o ajudará."
-    },
-    {
-      "id": 15,
-      "gift": "Fé",
-      "gift_index": 14,
-      "statement_index": 1,
-      "text": "Tenho coragem de ousar coisas grandes para Deus, de andar numa direção desconhecida e iniciar projetos, pois eu conheço a direção de Deus e confio que Ele está me guiando."
-    },
-    {
-      "id": 16,
-      "gift": "Socorro e Misericórdia",
-      "gift_index": 15,
-      "statement_index": 1,
-      "text": "Eu gosto de ajudar rejeitados da sociedade, por exemplo: bêbados, viciados em drogas e outros."
-    },
-    {
-      "id": 17,
-      "gift": "Conhecimento",
-      "gift_index": 16,
-      "statement_index": 1,
-      "text": "Conheço a Bíblia e outros escritos proféticos em seu contexto histórico e cultural."
-    },
-    {
-      "id": 18,
-      "gift": "Sabedoria",
-      "gift_index": 17,
-      "statement_index": 1,
-      "text": "Quando enfrento os dilemas da vida consigo encontrar soluções práticas que ajudam sem complicar as coisas."
-    },
-    {
-      "id": 19,
-      "gift": "Intercessão",
-      "gift_index": 18,
-      "statement_index": 1,
-      "text": "Gasto muito do meu tempo de oração intercedendo pelas necessidades de outros diante de Deus."
-    },
-    {
-      "id": 20,
-      "gift": "Liberalidade",
-      "gift_index": 0,
-      "statement_index": 2,
-      "text": "Sou fiel e generoso nos dízimos e ofertas, pois conheço a generosidade de Deus. Sinto prazer em doar."
-    },
-    {
-      "id": 21,
-      "gift": "Profecia",
-      "gift_index": 1,
-      "statement_index": 2,
-      "text": "Quando falo em público, os ouvintes me consideram mais do que um professor ou do que um orador ou pregador. A igreja reconhece o dom de profecia em mim."
-    },
-    {
-      "id": 22,
-      "gift": "Liderança",
-      "gift_index": 2,
-      "statement_index": 2,
-      "text": "Quando tenho idéias que creio serem vindas de Deus, aconselho-me com irmãos, avalio as conseqüências, tomo a decisão e creio na decisão tomada como se fosse de Deus, mesmo que ela seja impopular."
-    },
-    {
-      "id": 23,
-      "gift": "Hospitalidade",
-      "gift_index": 3,
-      "statement_index": 2,
-      "text": "Se alguém confiável (talvez um conhecido) bater a minha porta, precisando de lugar para pernoitar, convido-o para entrar, ainda que para acomodá-lo fosse necessário ceder minha cama e eu dormir no chão."
-    },
-    {
-      "id": 24,
-      "gift": "Línguas",
-      "gift_index": 4,
-      "statement_index": 2,
-      "text": "Entendo o sentido do que as pessoas estão falando, mesmo que eu não saiba falar a sua língua."
-    },
-    {
-      "id": 25,
-      "gift": "Missionário",
-      "gift_index": 5,
-      "statement_index": 2,
-      "text": "Fico inquieto quando vejo quantas pessoas ainda não conhecem Jesus e vivo com idéias para alcançar pessoas ao meu redor. Gosto de dar estudos bíblicos para descrentes, creio que a Palavra transforma suas vidas."
-    },
-    {
-      "id": 26,
-      "gift": "Evangelismo",
-      "gift_index": 6,
-      "statement_index": 2,
-      "text": "Facilmente sei transformar uma conversa normal numa conversa espiritual conduzindo a pessoa a Cristo."
-    },
-    {
-      "id": 27,
-      "gift": "Ensino",
-      "gift_index": 7,
-      "statement_index": 2,
-      "text": "Consigo explicar diversos temas de tal maneira que as pessoas incorporam os ensinos em suas vidas."
-    },
-    {
-      "id": 28,
-      "gift": "Cura",
-      "gift_index": 8,
-      "statement_index": 2,
-      "text": "Deus quer que tenhamos saúde, pois um intelecto vigoroso e uma vida espiritual abundante apenas ocorrem num corpo saudável. Conheço a lógica de nosso corpo e recomendo a prevenção da saúde."
-    },
-    {
-      "id": 29,
-      "gift": "Pastoral",
-      "gift_index": 9,
-      "statement_index": 2,
-      "text": "Gosto de dar estudos bíblicos para ajudar os membros da igreja a crescer em sua fé."
-    },
-    {
-      "id": 30,
-      "gift": "Administração",
-      "gift_index": 10,
-      "statement_index": 2,
-      "text": "Tenho facilidade para descobrir recursos e pessoas para realizar certa atividade."
-    },
-    {
-      "id": 31,
-      "gift": "Discernimento",
-      "gift_index": 11,
-      "statement_index": 2,
-      "text": "Sei quando uma pessoa está sofrendo, mesmo que esteja sorrindo."
-    },
-    {
-      "id": 32,
-      "gift": "Apostolado",
-      "gift_index": 12,
-      "statement_index": 2,
-      "text": "Sou facilmente impressionável pelo Espírito Santo e sigo as Suas instruções sem temer distância, dificuldade, obstáculos e desvantagens pessoais. Quando Ele chama não temo o que terei que sacrificar."
-    },
-    {
-      "id": 33,
-      "gift": "Exortação",
-      "gift_index": 13,
-      "statement_index": 2,
-      "text": "Posso ajudar a um causador de problemas a voltar a cooperar com o grupo sob minha liderança."
-    },
-    {
-      "id": 34,
-      "gift": "Fé",
-      "gift_index": 14,
-      "statement_index": 2,
-      "text": "Sei que ao confiar em Deus Ele me guiará inclusive através de problemas. Tenho convicção de que inclusive as perdas e lutas vão colaborar para o meu bem."
-    },
-    {
-      "id": 35,
-      "gift": "Socorro e Misericórdia",
-      "gift_index": 15,
-      "statement_index": 2,
-      "text": "Quando me pedem ajuda, mesmo ocupado, tento ajudar. Sinto que Deus espera de mim e gosto de ajudar."
-    },
-    {
-      "id": 36,
-      "gift": "Conhecimento",
-      "gift_index": 16,
-      "statement_index": 2,
-      "text": "Memorizo textos bíblicos e textos relacionados facilmente e entendo o raciocínio dos autores inspirados."
-    },
-    {
-      "id": 37,
-      "gift": "Sabedoria",
-      "gift_index": 17,
-      "statement_index": 2,
-      "text": "Quando aconselho pessoas em conflito ajudo-as a tirar o foco do problema e ganhar foco na solução."
-    },
-    {
-      "id": 38,
-      "gift": "Intercessão",
-      "gift_index": 18,
-      "statement_index": 2,
-      "text": "Freqüentemente, quando pessoas têm problemas, pedem para eu orar por elas."
-    },
-    {
-      "id": 39,
-      "gift": "Liberalidade",
-      "gift_index": 0,
-      "statement_index": 3,
-      "text": "Os membros da minha congregação sabem que tenho prazer em ajudar aqueles que têm necessidades materiais e financeiras, que gosto de financiar projetos da igreja, mesmo que eu tenha pouco dinheiro."
-    },
-    {
-      "id": 40,
-      "gift": "Profecia",
-      "gift_index": 1,
-      "statement_index": 3,
-      "text": "Recebo mensagens específicas de Deus com conteúdo para a igreja como um todo, bem como para indivíduos, conforme Deus me mostra. Estas mensagens nunca contradizem material já revelado por Deus."
-    },
-    {
-      "id": 41,
-      "gift": "Liderança",
-      "gift_index": 2,
-      "statement_index": 3,
-      "text": "Tem havido espírito de unidade, entusiasmo e progresso do reino de Deus quando ocupo um cargo de liderança. Gosto de liderar servindo e coordenando outros."
-    },
-    {
-      "id": 42,
-      "gift": "Hospitalidade",
-      "gift_index": 3,
-      "statement_index": 3,
-      "text": "Quando eu tenho um hóspede me dedico a seu bem estar e a sua salvação de todo coração."
-    },
-    {
-      "id": 43,
-      "gift": "Línguas",
-      "gift_index": 4,
-      "statement_index": 3,
-      "text": "Interesso-me muito por outras línguas e não me custa memorizar palavras."
-    },
-    {
-      "id": 44,
-      "gift": "Missionário",
-      "gift_index": 5,
-      "statement_index": 3,
-      "text": "Gosto de estar com pessoas e aceito o jeito diferente de cada um ser. Procuro entendê-las para ajudá-las melhor. Nunca julgo ou condeno alguém, mesmo pelo pior pecado. Busco instruir com paciência e persistência."
-    },
-    {
-      "id": 45,
-      "gift": "Evangelismo",
-      "gift_index": 6,
-      "statement_index": 3,
-      "text": "Se eu tenho um tempo extra, meu primeiro pensamento é dedicar-me ao trabalho do Evangelho. Sinto desejo de compartilhar aquilo que me fez tão bem: Jesus!"
-    },
-    {
-      "id": 46,
-      "gift": "Ensino",
-      "gift_index": 7,
-      "statement_index": 3,
-      "text": "Quando ensino, percebo que as pessoas ficam envolvidas por inteiro, elas não entendem apenas com a cabeça, mas com o coração, aplicando o tema às suas vidas."
-    },
-    {
-      "id": 47,
-      "gift": "Cura",
-      "gift_index": 8,
-      "statement_index": 3,
-      "text": "Muitas vezes quando oro pela saúde de alguém, ela melhora. Creio na cura por vias naturais e sobrenaturais."
-    },
-    {
-      "id": 48,
-      "gift": "Pastoral",
-      "gift_index": 9,
-      "statement_index": 3,
-      "text": "Gosto de elaborar sermões, de pregá-los e observar o efeito na vida das pessoas."
-    },
-    {
-      "id": 49,
-      "gift": "Administração",
-      "gift_index": 10,
-      "statement_index": 3,
-      "text": "Eu resolvo os problemas de pessoas e da igreja de tal forma que elas se sintam satisfeitas e a igreja encontre caminhos para funcionar melhor."
-    },
-    {
-      "id": 50,
-      "gift": "Discernimento",
-      "gift_index": 11,
-      "statement_index": 3,
-      "text": "Posso dizer se determinadas decisões estão ou não de acordo com os princípios bíblicos."
-    },
-    {
-      "id": 51,
-      "gift": "Apostolado",
-      "gift_index": 12,
-      "statement_index": 3,
-      "text": "Já fundei ou tenho muita vontade de fundar uma congregação em um lugar onde antes nada existia."
-    },
-    {
-      "id": 52,
-      "gift": "Exortação",
-      "gift_index": 13,
-      "statement_index": 3,
-      "text": "Freqüentemente tenho sido solicitado para ajudar aqueles que estão em problemas para resolvê-los."
-    },
-    {
-      "id": 53,
-      "gift": "Fé",
-      "gift_index": 14,
-      "statement_index": 3,
-      "text": "Aceito as promessas de Deus como válidas e creio nelas, ainda que o seu cumprimento pareça impossível."
-    },
-    {
-      "id": 54,
-      "gift": "Socorro e Misericórdia",
-      "gift_index": 15,
-      "statement_index": 3,
-      "text": "Sou extremamente sensível às necessidades dos menos favorecidos, sinto satisfação em falar com eles, oferecendo-lhes minha ajuda. Sou cuidadoso para ajudar com sabedoria."
-    },
-    {
-      "id": 55,
-      "gift": "Conhecimento",
-      "gift_index": 16,
-      "statement_index": 3,
-      "text": "A igreja me conhece pelo meu conhecimento bíblico e me consulta se necessário."
-    },
-    {
-      "id": 56,
-      "gift": "Sabedoria",
-      "gift_index": 17,
-      "statement_index": 3,
-      "text": "Quando pessoas me procuram, penso nas diferentes opções que elas têm, mas deixo elas decidirem."
-    },
-    {
-      "id": 57,
-      "gift": "Intercessão",
-      "gift_index": 18,
-      "statement_index": 3,
-      "text": "Nomes, regularmente, vêm à minha mente quando estou em oração, aos quais dedico a Deus."
-    },
-    {
-      "id": 58,
-      "gift": "Liberalidade",
-      "gift_index": 0,
-      "statement_index": 4,
-      "text": "Poucas coisas me trazem tanta alegria quanto dar parte do que tenho para pessoas que necessitam ou para a igreja e o avanço do evangelho."
-    },
-    {
-      "id": 59,
-      "gift": "Profecia",
-      "gift_index": 1,
-      "statement_index": 4,
-      "text": "Nunca pedi para ter o dom de profecia. Cumpro com o meu dever em humildade. Sirvo à igreja se ela quiser."
-    },
-    {
-      "id": 60,
-      "gift": "Liderança",
-      "gift_index": 2,
-      "statement_index": 4,
-      "text": "Sei que as críticas fazem parte da liderança e tenho aprendido com elas em humildade. Tenho me esforçado pelo melhor e procuro entender e ser sensível às idéias de outros."
-    },
-    {
-      "id": 61,
-      "gift": "Hospitalidade",
-      "gift_index": 3,
-      "statement_index": 4,
-      "text": "Gosto de convidar pessoas e dar o que tenho de melhor em minha casa, comida, pouso ou o que for necessário."
-    },
-    {
-      "id": 62,
-      "gift": "Línguas",
-      "gift_index": 4,
-      "statement_index": 4,
-      "text": "Gosto de estar no meio de pessoas de outros países; quando tenho que me comunicar com eles, faço o melhor que consigo, mesmo sem saber a língua."
-    },
-    {
-      "id": 63,
-      "gift": "Missionário",
-      "gift_index": 5,
-      "statement_index": 4,
-      "text": "Consigo aceitar e amar descrentes como estão e com facilidade ajudá-los a conhecer Jesus."
-    },
-    {
-      "id": 64,
-      "gift": "Evangelismo",
-      "gift_index": 6,
-      "statement_index": 4,
-      "text": "Regularmente levo pessoas a Cristo, acompanhando-as ao batismo e confirmando-as na fé e na doutrina bíblica."
-    },
-    {
-      "id": 65,
-      "gift": "Ensino",
-      "gift_index": 7,
-      "statement_index": 4,
-      "text": "Empolgo-me em ler livros e me desenvolver em didática e psicologia do ensino."
-    },
-    {
-      "id": 66,
-      "gift": "Cura",
-      "gift_index": 8,
-      "statement_index": 4,
-      "text": "Conheço tratamentos simples, sem contra-indicação para muitas doenças e males."
-    },
-    {
-      "id": 67,
-      "gift": "Pastoral",
-      "gift_index": 9,
-      "statement_index": 4,
-      "text": "Eu gosto de aconselhar pessoas nas diferentes fases de suas vidas. Elas também apreciam e tiram proveito para sua experiência espiritual e de vida."
-    },
-    {
-      "id": 68,
-      "gift": "Administração",
-      "gift_index": 10,
-      "statement_index": 4,
-      "text": "Gosto de administrar as coisas da igreja: prédios, finanças, pessoas. Penso que quando eu me envolvo nesta área a igreja fica mais organizada e um lugar melhor para adorar. Os membros vêem esta qualidade em mim."
-    },
-    {
-      "id": 69,
-      "gift": "Discernimento",
-      "gift_index": 11,
-      "statement_index": 4,
-      "text": "Muitas vezes posso discernir os motivos das pessoas para ajudá-las, sem julgá-las por isso."
-    },
-    {
-      "id": 70,
-      "gift": "Apostolado",
-      "gift_index": 12,
-      "statement_index": 4,
-      "text": "Sinto-me desassossegado quando fico muito tempo em um mesmo lugar."
-    },
-    {
-      "id": 71,
-      "gift": "Exortação",
-      "gift_index": 13,
-      "statement_index": 4,
-      "text": "Acho fácil aplicar os princípios bíblicos aos problemas das pessoas de tal forma que possa ajudá-las."
-    },
-    {
-      "id": 72,
-      "gift": "Fé",
-      "gift_index": 14,
-      "statement_index": 4,
-      "text": "Deus responde minhas orações, principalmente quando eu avanço pela fé com confiança inabalável nEle."
-    },
-    {
-      "id": 73,
-      "gift": "Socorro e Misericórdia",
-      "gift_index": 15,
-      "statement_index": 4,
-      "text": "Os membros da igreja sabem que sinto prazer em visitar os doentes e necessitados, ajudando-os."
-    },
-    {
-      "id": 74,
-      "gift": "Conhecimento",
-      "gift_index": 16,
-      "statement_index": 4,
-      "text": "Conheço a história bíblica em seus detalhes e creio na ação de Deus em cada momento desta história. Conheço o plano profético e fico maravilhado com o plano da salvação em Jesus."
-    },
-    {
-      "id": 75,
-      "gift": "Sabedoria",
-      "gift_index": 17,
-      "statement_index": 4,
-      "text": "Princípios Bíblicos me vêm rápido á mente quando me deparo com problemas."
-    },
-    {
-      "id": 76,
-      "gift": "Intercessão",
-      "gift_index": 18,
-      "statement_index": 4,
-      "text": "Minhas orações pelos outros, muitas vezes são respondidas e a igreja sabe disto e me procuram para orar."
-    }
-  ]
+  {
+   "id": 2,
+   "gift": "Serviço",
+   "gift_index": 1,
+   "statement_index": 1,
+   "text": "Gosta quando lhe pedem para fazer trabalhos manuais especiais em sua igreja?"
+  },
+  {
+   "id": 3,
+   "gift": "Ensino",
+   "gift_index": 2,
+   "statement_index": 1,
+   "text": "Compreende em detalhes as doutrinas bíblicas da igreja?"
+  },
+  {
+   "id": 4,
+   "gift": "Exortação",
+   "gift_index": 3,
+   "statement_index": 1,
+   "text": "Sente-se capaz de consolar aquele que está perplexo ou sofrendo?"
+  },
+  {
+   "id": 5,
+   "gift": "Dádivas",
+   "gift_index": 4,
+   "statement_index": 1,
+   "text": "Administra bem o seu dinheiro de modo que pode dar liberalmente à causa de Deus?"
+  },
+  {
+   "id": 6,
+   "gift": "Liderança",
+   "gift_index": 5,
+   "statement_index": 1,
+   "text": "Gosta de estar entre as pessoas e participar de suas atividades?"
+  },
+  {
+   "id": 7,
+   "gift": "Misericórdia",
+   "gift_index": 6,
+   "statement_index": 1,
+   "text": "Sente compaixão e trata de ajudar a viciados, sozinhos, etc.?"
+  },
+  {
+   "id": 8,
+   "gift": "Sabedoria",
+   "gift_index": 7,
+   "statement_index": 1,
+   "text": "Descobre facilmente novas verdades por si mesmo?"
+  },
+  {
+   "id": 9,
+   "gift": "Conhecimento",
+   "gift_index": 8,
+   "statement_index": 1,
+   "text": "É fácil para você escolher entre as diferentes alternativas bíblicas para problemas complicados?"
+  },
+  {
+   "id": 10,
+   "gift": "Fé",
+   "gift_index": 9,
+   "statement_index": 1,
+   "text": "Crê firmemente nas promessas divinas?"
+  },
+  {
+   "id": 11,
+   "gift": "Curas",
+   "gift_index": 10,
+   "statement_index": 1,
+   "text": "Sente compaixão pelos que sofrem enfermidades?"
+  },
+  {
+   "id": 12,
+   "gift": "Milagres",
+   "gift_index": 11,
+   "statement_index": 1,
+   "text": "Deus responde suas orações de maneira sobrenatural?"
+  },
+  {
+   "id": 13,
+   "gift": "Discernimento",
+   "gift_index": 12,
+   "statement_index": 1,
+   "text": "Percebe claramente a diferença entre a verdade e o erro?"
+  },
+  {
+   "id": 14,
+   "gift": "Línguas",
+   "gift_index": 13,
+   "statement_index": 1,
+   "text": "Tem orado secretamente em algum idioma desconhecido para você?"
+  },
+  {
+   "id": 15,
+   "gift": "Interpretação",
+   "gift_index": 14,
+   "statement_index": 1,
+   "text": "Tem declarado em seu próprio idioma alguma mensagem que foi dada em um idioma desconhecido para você?"
+  },
+  {
+   "id": 16,
+   "gift": "Apostolado",
+   "gift_index": 15,
+   "statement_index": 1,
+   "text": "Sente-se chamado por Deus para ser responsável pelo cuidado e liderança do povo de Deus?"
+  },
+  {
+   "id": 17,
+   "gift": "Ajudas",
+   "gift_index": 16,
+   "statement_index": 1,
+   "text": "Gosta de ajudar os dirigentes para que eles possam dedicar mais tempo a assuntos essenciais?"
+  },
+  {
+   "id": 18,
+   "gift": "Administração",
+   "gift_index": 17,
+   "statement_index": 1,
+   "text": "Gosta de solucionar problemas complicados da igreja?"
+  },
+  {
+   "id": 19,
+   "gift": "Evangelismo",
+   "gift_index": 18,
+   "statement_index": 1,
+   "text": "Gosta de compartilhar com outros a Palavra de Deus?"
+  },
+  {
+   "id": 20,
+   "gift": "Pastorado",
+   "gift_index": 19,
+   "statement_index": 1,
+   "text": "Gosta da ideia de visitar os irmãos regularmente?"
+  },
+  {
+   "id": 21,
+   "gift": "Celibato",
+   "gift_index": 20,
+   "statement_index": 1,
+   "text": "Agrada-lhe a ideia de ficar sem casar para dedicar todo o seu tempo à igreja?"
+  },
+  {
+   "id": 22,
+   "gift": "Hospitalidade",
+   "gift_index": 21,
+   "statement_index": 1,
+   "text": "Interessa-se em procurar e descobrir pessoas que não tem comida ou casa?"
+  },
+  {
+   "id": 23,
+   "gift": "Missionário",
+   "gift_index": 22,
+   "statement_index": 1,
+   "text": "Adapta-se facilmente a outras culturas?"
+  },
+  {
+   "id": 24,
+   "gift": "Intercessão",
+   "gift_index": 23,
+   "statement_index": 1,
+   "text": "Perde a noção do tempo quando ora?"
+  },
+  {
+   "id": 25,
+   "gift": "Exorcismo",
+   "gift_index": 24,
+   "statement_index": 1,
+   "text": "Sente que sua fé é suficientemente forte para poder expulsar o diabo de algum possesso?"
+  },
+  {
+   "id": 26,
+   "gift": "Profecia",
+   "gift_index": 0,
+   "statement_index": 2,
+   "text": "Sente que pode fortalecer e animar os desanimados?"
+  },
+  {
+   "id": 27,
+   "gift": "Serviço",
+   "gift_index": 1,
+   "statement_index": 2,
+   "text": "Gosta de participar da ordem e limpeza de sua igreja?"
+  },
+  {
+   "id": 28,
+   "gift": "Ensino",
+   "gift_index": 2,
+   "statement_index": 2,
+   "text": "Gosta de ler comentários bíblicos e estudar a fundo passagens difíceis da Bíblia?"
+  },
+  {
+   "id": 29,
+   "gift": "Exortação",
+   "gift_index": 3,
+   "statement_index": 2,
+   "text": "As pessoas o procuram para se aconselhar a respeito de seus problemas?"
+  },
+  {
+   "id": 30,
+   "gift": "Dádivas",
+   "gift_index": 4,
+   "statement_index": 2,
+   "text": "Dá com muita liberalidade objetos ou dinheiro para a igreja?"
+  },
+  {
+   "id": 31,
+   "gift": "Liderança",
+   "gift_index": 5,
+   "statement_index": 2,
+   "text": "Gosta de planejar atividades para a igreja e realizá-las?"
+  },
+  {
+   "id": 32,
+   "gift": "Misericórdia",
+   "gift_index": 6,
+   "statement_index": 2,
+   "text": "É sensível às necessidades dos idosos e deficientes e procura ajudá-los de alguma maneira?"
+  },
+  {
+   "id": 33,
+   "gift": "Sabedoria",
+   "gift_index": 7,
+   "statement_index": 2,
+   "text": "Gosta de procurar soluções para problemas complicados?"
+  },
+  {
+   "id": 34,
+   "gift": "Conhecimento",
+   "gift_index": 8,
+   "statement_index": 2,
+   "text": "Estuda e lê bastante para aprender verdades bíblicas?"
+  },
+  {
+   "id": 35,
+   "gift": "Fé",
+   "gift_index": 9,
+   "statement_index": 2,
+   "text": "Sente-se seguro em conhecer a vontade específica de Deus para o futuro de Sua obra, mesmo quando outros hesitam?"
+  },
+  {
+   "id": 36,
+   "gift": "Curas",
+   "gift_index": 10,
+   "statement_index": 2,
+   "text": "Sente-se inclinado a orar pelos enfermos?"
+  },
+  {
+   "id": 37,
+   "gift": "Milagres",
+   "gift_index": 11,
+   "statement_index": 2,
+   "text": "Crê que no nome de Deus, mediante a fé e a oração você é capaz de alterar a ordem natural das coisas?"
+  },
+  {
+   "id": 38,
+   "gift": "Discernimento",
+   "gift_index": 12,
+   "statement_index": 2,
+   "text": "Pode discernir os motivos que movem as pessoas?"
+  },
+  {
+   "id": 39,
+   "gift": "Línguas",
+   "gift_index": 13,
+   "statement_index": 2,
+   "text": "Sente a necessidade de dar alguma mensagem à igreja em um idioma não conhecido por você?"
+  },
+  {
+   "id": 40,
+   "gift": "Interpretação",
+   "gift_index": 14,
+   "statement_index": 2,
+   "text": "Já experimentou alguma vez entender algum idioma não conhecido por você?"
+  },
+  {
+   "id": 41,
+   "gift": "Apostolado",
+   "gift_index": 15,
+   "statement_index": 2,
+   "text": "É capaz de iniciar uma nova obra ou consolidar alguma já existente?"
+  },
+  {
+   "id": 42,
+   "gift": "Ajudas",
+   "gift_index": 16,
+   "statement_index": 2,
+   "text": "Gosta de ajudar no escritório do pastor?"
+  },
+  {
+   "id": 43,
+   "gift": "Administração",
+   "gift_index": 17,
+   "statement_index": 2,
+   "text": "Pode predizer com exatidão o resultado de suas decisões?"
+  },
+  {
+   "id": 44,
+   "gift": "Evangelismo",
+   "gift_index": 18,
+   "statement_index": 2,
+   "text": "Sente-se à vontade ao pedir a alguém que aceite a Jesus?"
+  },
+  {
+   "id": 45,
+   "gift": "Pastorado",
+   "gift_index": 19,
+   "statement_index": 2,
+   "text": "Acha que gostaria de visitar os interessados da igreja e estudar a Bíblia com eles?"
+  },
+  {
+   "id": 46,
+   "gift": "Celibato",
+   "gift_index": 20,
+   "statement_index": 2,
+   "text": "É fácil para você controlar as inclinações diante do sexo oposto?"
+  },
+  {
+   "id": 47,
+   "gift": "Hospitalidade",
+   "gift_index": 21,
+   "statement_index": 2,
+   "text": "Alegra-se quando alguém o visita e pede para ficar alguns dias em sua casa?"
+  },
+  {
+   "id": 48,
+   "gift": "Missionário",
+   "gift_index": 22,
+   "statement_index": 2,
+   "text": "Sente-se a vontade entre as pessoas de outra raça ou nacionalidade?"
+  },
+  {
+   "id": 49,
+   "gift": "Intercessão",
+   "gift_index": 23,
+   "statement_index": 2,
+   "text": "Toma os pedidos de oração com muita seriedade e ora por eles em seu lar?"
+  },
+  {
+   "id": 50,
+   "gift": "Exorcismo",
+   "gift_index": 24,
+   "statement_index": 2,
+   "text": "Não tem medo da ideia de estar frente a frente com um endemoninhado?"
+  },
+  {
+   "id": 51,
+   "gift": "Profecia",
+   "gift_index": 0,
+   "statement_index": 3,
+   "text": "Tem costume de admoestar outros, produzindo correção e arrependimento?"
+  },
+  {
+   "id": 52,
+   "gift": "Serviço",
+   "gift_index": 1,
+   "statement_index": 3,
+   "text": "Sente satisfação ao realizar trabalhos domésticos na casa do Senhor?"
+  },
+  {
+   "id": 53,
+   "gift": "Ensino",
+   "gift_index": 2,
+   "statement_index": 3,
+   "text": "Gosta de partilhar com outros suas descobertas ou seu entendimento da Palavra de Deus?"
+  },
+  {
+   "id": 54,
+   "gift": "Exortação",
+   "gift_index": 3,
+   "statement_index": 3,
+   "text": "Acha fácil aplicar os princípios bíblicos aos problemas?"
+  },
+  {
+   "id": 55,
+   "gift": "Dádivas",
+   "gift_index": 4,
+   "statement_index": 3,
+   "text": "Gosta de animar a outros para que deem com liberalidade?"
+  },
+  {
+   "id": 56,
+   "gift": "Liderança",
+   "gift_index": 5,
+   "statement_index": 3,
+   "text": "Sente-se a vontade ao delegar responsabilidade a outros?"
+  },
+  {
+   "id": 57,
+   "gift": "Misericórdia",
+   "gift_index": 6,
+   "statement_index": 3,
+   "text": "Gostaria de pertencer ao grupo “Ministério dos Encarcerados”?"
+  },
+  {
+   "id": 58,
+   "gift": "Sabedoria",
+   "gift_index": 7,
+   "statement_index": 3,
+   "text": "É fácil para você entender as verdades bíblicas que são difíceis para outros?"
+  },
+  {
+   "id": 59,
+   "gift": "Conhecimento",
+   "gift_index": 8,
+   "statement_index": 3,
+   "text": "Sente-se seguro de conhecer a vontade de Deus para o progresso da obra?"
+  },
+  {
+   "id": 60,
+   "gift": "Fé",
+   "gift_index": 9,
+   "statement_index": 3,
+   "text": "Confia plenamente no poder de Deus durante situações difíceis?"
+  },
+  {
+   "id": 61,
+   "gift": "Curas",
+   "gift_index": 10,
+   "statement_index": 3,
+   "text": "Em nome de Deus, você se sente capaz de curar enfermos?"
+  },
+  {
+   "id": 62,
+   "gift": "Milagres",
+   "gift_index": 11,
+   "statement_index": 3,
+   "text": "Sua vida está em tal relacionamento com Deus que Ele pode usá-lo para realizar atos sobrenaturais?"
+  },
+  {
+   "id": 63,
+   "gift": "Discernimento",
+   "gift_index": 12,
+   "statement_index": 3,
+   "text": "Sabe quando uma pessoa é influenciada por Deus ou pelo diabo?"
+  },
+  {
+   "id": 64,
+   "gift": "Línguas",
+   "gift_index": 13,
+   "statement_index": 3,
+   "text": "Já falou em algum idioma desconhecido por você?"
+  },
+  {
+   "id": 65,
+   "gift": "Interpretação",
+   "gift_index": 14,
+   "statement_index": 3,
+   "text": "Tem desejo de poder interpretar alguma mensagem apresentada em algum idioma desconhecido por você?"
+  },
+  {
+   "id": 66,
+   "gift": "Apostolado",
+   "gift_index": 15,
+   "statement_index": 3,
+   "text": "Você é consultado por outros irmãos a respeito de problemas eclesiásticos ou doutrinários?"
+  },
+  {
+   "id": 67,
+   "gift": "Ajudas",
+   "gift_index": 16,
+   "statement_index": 3,
+   "text": "Preocupa-se com os necessitados e procura satisfazer suas necessidades?"
+  },
+  {
+   "id": 68,
+   "gift": "Administração",
+   "gift_index": 17,
+   "statement_index": 3,
+   "text": "Sente-se capaz de desenvolver planos e leva-los a bom termo?"
+  },
+  {
+   "id": 69,
+   "gift": "Evangelismo",
+   "gift_index": 18,
+   "statement_index": 3,
+   "text": "Prefere dedicar seu tempo livre a pregar o evangelho?"
+  },
+  {
+   "id": 70,
+   "gift": "Pastorado",
+   "gift_index": 19,
+   "statement_index": 3,
+   "text": "Gostaria de ocupar o púlpito todas as semanas?"
+  },
+  {
+   "id": 71,
+   "gift": "Celibato",
+   "gift_index": 20,
+   "statement_index": 3,
+   "text": "Acredita que não perderia uma bênção se ficasse sem casar?"
+  },
+  {
+   "id": 72,
+   "gift": "Hospitalidade",
+   "gift_index": 21,
+   "statement_index": 3,
+   "text": "“Minha casa é sua casa”. Este é o seu lema prático?"
+  },
+  {
+   "id": 73,
+   "gift": "Missionário",
+   "gift_index": 22,
+   "statement_index": 3,
+   "text": "Aprecia a vida em um país estrangeiro?"
+  },
+  {
+   "id": 74,
+   "gift": "Intercessão",
+   "gift_index": 23,
+   "statement_index": 3,
+   "text": "Gosta de orar pela igreja e o faz constantemente?"
+  },
+  {
+   "id": 75,
+   "gift": "Exorcismo",
+   "gift_index": 24,
+   "statement_index": 3,
+   "text": "Gostaria de enfrentar o demônio cara a cara e dominá-lo em nome de Jesus?"
+  },
+  {
+   "id": 76,
+   "gift": "Profecia",
+   "gift_index": 0,
+   "statement_index": 4,
+   "text": "Tem se sentido impressionado com mensagens especiais as quais você transmite sem se importar com as consequências?"
+  },
+  {
+   "id": 77,
+   "gift": "Serviço",
+   "gift_index": 1,
+   "statement_index": 4,
+   "text": "Está pronto para obedecer ordens, em vez de dá-las?"
+  },
+  {
+   "id": 78,
+   "gift": "Ensino",
+   "gift_index": 2,
+   "statement_index": 4,
+   "text": "Sente-se capaz de explicar a outros claramente os ensinos bíblicos?"
+  },
+  {
+   "id": 79,
+   "gift": "Exortação",
+   "gift_index": 3,
+   "statement_index": 4,
+   "text": "Anima aos inconstantes e desanimados?"
+  },
+  {
+   "id": 80,
+   "gift": "Dádivas",
+   "gift_index": 4,
+   "statement_index": 4,
+   "text": "Sente-se comovido a procura fazer algo quando a igreja necessita de ajuda financeira?"
+  },
+  {
+   "id": 81,
+   "gift": "Liderança",
+   "gift_index": 5,
+   "statement_index": 4,
+   "text": "Sente que sua influência afeta a outros para trabalhar pelo Senhor?"
+  },
+  {
+   "id": 82,
+   "gift": "Misericórdia",
+   "gift_index": 6,
+   "statement_index": 4,
+   "text": "É impossível para você passar por alto algum esmoler?"
+  },
+  {
+   "id": 83,
+   "gift": "Sabedoria",
+   "gift_index": 7,
+   "statement_index": 4,
+   "text": "Você acha fácil apresentar alternativas sem tomar posições?"
+  },
+  {
+   "id": 84,
+   "gift": "Conhecimento",
+   "gift_index": 8,
+   "statement_index": 4,
+   "text": "Domina completamente as verdades bíblicas?"
+  },
+  {
+   "id": 85,
+   "gift": "Fé",
+   "gift_index": 9,
+   "statement_index": 4,
+   "text": "Geralmente não se desanima quando as coisas não vão bem?"
+  },
+  {
+   "id": 86,
+   "gift": "Curas",
+   "gift_index": 10,
+   "statement_index": 4,
+   "text": "Você ora de tal maneira que os doentes se sentem melhor?"
+  },
+  {
+   "id": 87,
+   "gift": "Milagres",
+   "gift_index": 11,
+   "statement_index": 4,
+   "text": "Você já realizou algum milagre pelo poder de Deus?"
+  },
+  {
+   "id": 88,
+   "gift": "Discernimento",
+   "gift_index": 12,
+   "statement_index": 4,
+   "text": "Pode reconhecer os dons espirituais nos demais?"
+  },
+  {
+   "id": 89,
+   "gift": "Línguas",
+   "gift_index": 13,
+   "statement_index": 4,
+   "text": "A ideia de poder falar em línguas o atrai?"
+  },
+  {
+   "id": 90,
+   "gift": "Interpretação",
+   "gift_index": 14,
+   "statement_index": 4,
+   "text": "Acredita que os dons de línguas e interpretação são realmente necessários nestes dias para a proclamação do evangelho?"
+  },
+  {
+   "id": 91,
+   "gift": "Apostolado",
+   "gift_index": 15,
+   "statement_index": 4,
+   "text": "São suas opiniões tomadas a sério e seguidas pelo resto dos irmãos?"
+  },
+  {
+   "id": 92,
+   "gift": "Ajudas",
+   "gift_index": 16,
+   "statement_index": 4,
+   "text": "Gosta de distribuir literatura, revistas, folhetos, etc.?"
+  },
+  {
+   "id": 93,
+   "gift": "Administração",
+   "gift_index": 17,
+   "statement_index": 4,
+   "text": "Prefere presidir reuniões e apresentar alvos em vez de ser só um participante?"
+  },
+  {
+   "id": 94,
+   "gift": "Evangelismo",
+   "gift_index": 18,
+   "statement_index": 4,
+   "text": "Sente o desejo de falar com incrédulos a finalidade de ganha-los?"
+  },
+  {
+   "id": 95,
+   "gift": "Pastorado",
+   "gift_index": 19,
+   "statement_index": 4,
+   "text": "Fica emocionado com a ideia de poder ser o pastor da igreja?"
+  },
+  {
+   "id": 96,
+   "gift": "Celibato",
+   "gift_index": 20,
+   "statement_index": 4,
+   "text": "Acha que se você se casasse, sua família seria um estorvo em seu ministério em vez de uma bênção?"
+  },
+  {
+   "id": 97,
+   "gift": "Hospitalidade",
+   "gift_index": 21,
+   "statement_index": 4,
+   "text": "Gosta de cumprimentar os visitantes da igreja e convidá-los a comer e/ou dormir em sua casa, se for necessário?"
+  },
+  {
+   "id": 98,
+   "gift": "Missionário",
+   "gift_index": 22,
+   "statement_index": 4,
+   "text": "Sente a necessidade de ser um pregador em outros países?"
+  },
+  {
+   "id": 99,
+   "gift": "Intercessão",
+   "gift_index": 23,
+   "statement_index": 4,
+   "text": "É a oração seu exercício espiritual favorito?"
+  },
+  {
+   "id": 100,
+   "gift": "Exorcismo",
+   "gift_index": 24,
+   "statement_index": 4,
+   "text": "Já utilizou o poder de Deus para expulsar o demônio de alguma pessoa?"
+  },
+  {
+   "id": 101,
+   "gift": "Profecia",
+   "gift_index": 0,
+   "statement_index": 5,
+   "text": "É o progresso geral da obra e a satisfação das necessidades dos irmãos a grande obsessão de sua vida?"
+  },
+  {
+   "id": 102,
+   "gift": "Serviço",
+   "gift_index": 1,
+   "statement_index": 5,
+   "text": "Sente alegria e satisfação quando poder servir a alguém?"
+  },
+  {
+   "id": 103,
+   "gift": "Ensino",
+   "gift_index": 2,
+   "statement_index": 5,
+   "text": "Prefere ensinar que ser ajudante, e seus alunos praticam seus ensinos?"
+  },
+  {
+   "id": 104,
+   "gift": "Exortação",
+   "gift_index": 3,
+   "statement_index": 5,
+   "text": "Sente o desejo de chamar a atenção dos que estão procedendo mal?"
+  },
+  {
+   "id": 105,
+   "gift": "Dádivas",
+   "gift_index": 4,
+   "statement_index": 5,
+   "text": "Você é capaz de ganhar muito dinheiro para a causa de Deus?"
+  },
+  {
+   "id": 106,
+   "gift": "Liderança",
+   "gift_index": 5,
+   "statement_index": 5,
+   "text": "Sente-se capaz de recrutar cristãos e pô-los para trabalhar?"
+  },
+  {
+   "id": 107,
+   "gift": "Misericórdia",
+   "gift_index": 6,
+   "statement_index": 5,
+   "text": "Percorre facilmente a segunda milha e/ou oferece a outra face?"
+  },
+  {
+   "id": 108,
+   "gift": "Sabedoria",
+   "gift_index": 7,
+   "statement_index": 5,
+   "text": "Os dirigentes e líderes geralmente buscam seus conselhos, você lhes mostra os planos que devem seguir, os quais regularmente dão certo?"
+  },
+  {
+   "id": 109,
+   "gift": "Conhecimento",
+   "gift_index": 8,
+   "statement_index": 5,
+   "text": "Você é procurado pelos demais irmãos para responder suas perguntas?"
+  },
+  {
+   "id": 110,
+   "gift": "Fé",
+   "gift_index": 9,
+   "statement_index": 5,
+   "text": "Entre as graças cristãs, a fé é a sua favorita?"
+  },
+  {
+   "id": 111,
+   "gift": "Curas",
+   "gift_index": 10,
+   "statement_index": 5,
+   "text": "Preocupa-se com a saúde física de seus semelhantes?"
+  },
+  {
+   "id": 112,
+   "gift": "Milagres",
+   "gift_index": 11,
+   "statement_index": 5,
+   "text": "Alguma vez já sentiu o desejo ou a inclinação de pedir a Deus que efetue algum ato sobrenatural para proveito de outro, crendo que Deus atenderá seu pedido?"
+  },
+  {
+   "id": 113,
+   "gift": "Discernimento",
+   "gift_index": 12,
+   "statement_index": 5,
+   "text": "Percebe a presença do mal antes que seja evidente?"
+  },
+  {
+   "id": 114,
+   "gift": "Línguas",
+   "gift_index": 13,
+   "statement_index": 5,
+   "text": "O dom de línguas é atualmente necessário para a edificação do corpo de Cristo?"
+  },
+  {
+   "id": 115,
+   "gift": "Interpretação",
+   "gift_index": 14,
+   "statement_index": 5,
+   "text": "Acha que é necessário ou benéfico para a igreja apresentar mensagens em idiomas desconhecidos e interpretá-los?"
+  },
+  {
+   "id": 116,
+   "gift": "Apostolado",
+   "gift_index": 15,
+   "statement_index": 5,
+   "text": "Sente que é seu dever chamar a atenção de algum administrador que não está agindo bem?"
+  },
+  {
+   "id": 117,
+   "gift": "Ajudas",
+   "gift_index": 16,
+   "statement_index": 5,
+   "text": "Prefere ser ajudante e não o professor de uma classe bíblica?"
+  },
+  {
+   "id": 118,
+   "gift": "Administração",
+   "gift_index": 17,
+   "statement_index": 5,
+   "text": "Sente-se capacitado para presidir ou supervisionar os irmãos?"
+  },
+  {
+   "id": 119,
+   "gift": "Evangelismo",
+   "gift_index": 18,
+   "statement_index": 5,
+   "text": "Entende claramente os passos que levam uma pessoa à salvação?"
+  },
+  {
+   "id": 120,
+   "gift": "Pastorado",
+   "gift_index": 19,
+   "statement_index": 5,
+   "text": "Gostaria de organizar, planejar e supervisionar todas as atividades da igreja?"
+  },
+  {
+   "id": 121,
+   "gift": "Celibato",
+   "gift_index": 20,
+   "statement_index": 5,
+   "text": "Considera-se capaz de ficar sem casar sem passar por tentações?"
+  },
+  {
+   "id": 122,
+   "gift": "Hospitalidade",
+   "gift_index": 21,
+   "statement_index": 5,
+   "text": "Tem, de maneira regular, hóspedes em sua mesa, principalmente aos sábados?"
+  },
+  {
+   "id": 123,
+   "gift": "Missionário",
+   "gift_index": 22,
+   "statement_index": 5,
+   "text": "Ou para sempre, gostaria de pregar o evangelho em outros países?"
+  },
+  {
+   "id": 124,
+   "gift": "Intercessão",
+   "gift_index": 23,
+   "statement_index": 5,
+   "text": "Deus responde suas orações frequentemente de maneira tangível?"
+  },
+  {
+   "id": 125,
+   "gift": "Exorcismo",
+   "gift_index": 24,
+   "statement_index": 5,
+   "text": "Sente-se atraído a situações onde há endemoninhados e é procurado para expulsar o demônio pelo uso que você faz do poder de Deus?"
+  }
+ ]
 }

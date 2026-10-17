@@ -30,13 +30,16 @@ class SpiritualGiftsController extends Controller
         // no servidor, sem confiar em qualquer pontuação recebida.
         $answers = json_decode((string) $request->input('answers_json', ''), true);
 
-        if (! is_array($answers) || count($answers) !== 76) {
+        $questionCount = count($questions['questions']);
+        $giftIndexes = array_column($questions['questions'], 'gift_index');
+
+        if (! is_array($answers) || count($answers) !== $questionCount) {
             return $this->redirectWithCalculationError($texts);
         }
 
         foreach ($answers as $value) {
             if (! is_numeric($value) || (string) (int) $value !== (string) $value
-                || (int) $value < 0 || (int) $value > 3) {
+                || (int) $value < 1 || (int) $value > 4) {
                 return $this->redirectWithCalculationError($texts);
             }
             // normaliza para inteiro antes de pontuar
@@ -44,7 +47,7 @@ class SpiritualGiftsController extends Controller
         $answers = array_map('intval', array_values($answers));
 
         try {
-            $scored = $scorer->score($answers, $gifts['gifts']);
+            $scored = $scorer->score($answers, $gifts['gifts'], $giftIndexes);
         } catch (InvalidArgumentException) {
             return $this->redirectWithCalculationError($texts);
         }
@@ -53,8 +56,12 @@ class SpiritualGiftsController extends Controller
             fn (array $gift) => [$gift['name'] => $gift['description']]
         );
 
+        // Tela de resultado: do maior para o menor (1º dom no início da lista;
+        // empates mantêm a ordem da lista do questionário).
         $results = collect($scored['results'])
-            ->map(fn (array $row) => $row + ['description' => $descriptions->get($row['name'], '')]);
+            ->map(fn (array $row) => $row + ['description' => $descriptions->get($row['name'], '')])
+            ->sortByDesc(fn (array $row) => $row['points'])
+            ->values();
 
         return view('pages.teste-de-dons-resultado', [
             'questions' => $questions,
