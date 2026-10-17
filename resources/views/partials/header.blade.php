@@ -20,6 +20,7 @@
                     <!-- <li><a href="">Ministério de Oração</a></li> -->
                     <li><a href="{{ route('desbravadores-cruzeiro-do-sul') }}">Clube de Desbravadores</a></li>
                     <li><a href="{{ route('ministerio-mulher') }}">Mulher Plena</a></li>
+                    <li><a href="{{ route('teste-de-dons') }}">Teste de Dons</a></li>
                 </ul>
             </li>
             <li class="btn_drop"><a href="#" onclick="return false;">Mídias <i class='bx bx-chevron-down'></i></a>
