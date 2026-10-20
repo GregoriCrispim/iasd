@@ -20,6 +20,7 @@ use App\Http\Controllers\FaceSearchController;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SpiritualGiftsController;
 use App\Http\Controllers\VolunteerApplicationController;
 use Illuminate\Support\Facades\Route;
 
@@ -212,6 +213,12 @@ Route::post('/galeria/{evento}/busca-facial', [FaceSearchController::class, 'sea
     ->middleware(['auth:web', 'throttle:20,1'])
     ->name('galeria.busca-facial');
 Route::get('/galeria/{evento}', [GaleriaController::class, 'show'])->name('galeria.show');
+
+// Teste de dons espirituais
+Route::get('/teste-de-dons', [SpiritualGiftsController::class, 'show'])->name('teste-de-dons');
+Route::post('/teste-de-dons/resultado', [SpiritualGiftsController::class, 'result'])
+    ->middleware('throttle:10,1')
+    ->name('teste-de-dons.resultado');
 
 // Time de desenvolvimento
 Route::view('/time-de-desenvolvimento', 'pages.time-desenvolvimento')->name('time-desenvolvimento');
