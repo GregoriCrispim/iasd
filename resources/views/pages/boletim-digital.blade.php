@@ -7,8 +7,9 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_17_10_2026';
+    $boletimBase = 'img/boletim/boletim_24_10_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
+    $oracaoMinBase = $boletimBase . '/M. Oração';
 
     $linkify = static function (?string $text): ?string {
         if ($text === null || $text === '') {
@@ -22,7 +23,7 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da QUARTA semana de OUTUBRO é: Ore para ser alguém que transmite paz, equilíbrio e segurança por onde passa.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da QUINTA semana de OUTUBRO é: Ore para seguir o exemplo de Jesus, tratando as pessoas com mansidão e amor, mesmo diante de palavras ou atitudes que machucam.';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -56,31 +57,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Entre Elas.jpg',
-            'alt' => 'Entre Elas — encontro feminino',
-            'title' => 'Entre Elas',
-            'text' => 'Encontro "Entre Elas": Um bate-papo abençoado, voltado especialmente para nós, mulheres. Venha fortalecer a sua fé e trocar experiências! No dia 18/10, às 17h, no Espaço Jovem. Garanta já a sua vaga acessando o link: https://forms.gle/UZfqi7LgAKFgYssq5',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/visita missionária.jpg',
-            'alt' => 'Visita missionária — Outubro Rosa',
-            'title' => 'Visita Missionária',
-            'text' => 'E para finalizar a programação do Outubro Rosa, no dia 24/10 faremos uma visita especial a mulheres que estão enfrentando o câncer de mama, com o objetivo de levar amor, solidariedade, oração e um mimo para aquecer o coração de cada uma delas; haverá inscrições para quem deseja participar deste momento de amor ao próximo, por isso fique atenta!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Bordado.jpg',
-            'alt' => 'Curso de bordado ASA',
-            'title' => 'Curso de Bordado',
-            'text' => 'Oportunidade Imperdível: Curso de Bordado ASA! Venha aprender técnicas exclusivas para confeccionar lindas peças. Aprender a bordar é uma excelente oportunidade para empreender e conquistar uma renda extra. Todos os domingos às 9h. Invista no seu talento e transforme o seu domingo em um momento de aprendizado e crescimento. Esperamos por você!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Costura.jpg',
             'alt' => 'Oficina de Costura Criativa',
             'title' => 'Oficina Criativa',
-            'text' => 'Use sua criatividade para criar! Faça o curso Oficina de Costura Criativa e aprenda a confeccionar lindas peças, com duração de apenas dois meses (outubro e novembro). Não perca essa chance, acesse o link: https://wa.me/qr/ZME25VEMZLTBI1 e faça já a sua inscrição! Para iniciantes e aprendizes. Dias e horário: terças e quintas-feiras, pela manhã. Outubro (Módulo 1) — Peças: estojo, ecobag, scrunchie, mochila, viseira e chapéu para praia de tecido. Datas: 06/10 e 08/10, 13/10 e 15/10, 20/10 e 22/10, 27/10 e 29/10. Novembro (Módulo 2) — Peças: mesa posta para o Natal. Datas: 03/11 e 05/11, 10/11 e 12/11, 17/11 e 19/11, 24/11 e 26/11. Materiais necessários: tecido, manta R1 colante, tesoura, linha, agulha, viés, zíper de metro, cursor, elástico médio, fita para alças da ecobag e mochila, metal para regular alça. Investimento: R$ 120,00 por mês. Pagamento: pix.centralbsb.aplac@adventistas.org Atenção! Após o pagamento, por favor envie o comprovante no WhatsApp da Professora Annelise Tisi.',
+            'text' => 'Use sua criatividade para criar! Faça um curso da Oficina de Costura Criativa e aprenda a confeccionar lindas peças, com duração de apenas dois meses (outubro e novembro). Não perca essa chance, acesse o link: https://wa.me/qr/ZME25VEMZLTBI1 e faça já a sua inscrição! Para iniciantes e aprendizes. Dias e horário: terças e quintas-feiras, pela manhã. Outubro (Módulo 1) — Peças: estojo, ecobag, scrunchie, mochila, viseira e chapéu para praia de tecido. Datas: 06/10 e 08/10, 13/10 e 15/10, 20/10 e 22/10, 27/10 e 29/10. Novembro (Módulo 2) — Peças: mesa posta para o Natal. Datas: 03/11 e 05/11, 10/11 e 12/11, 17/11 e 19/11, 24/11 e 26/11. Materiais necessários: tecido, manta R1 colante, tesoura, linha, agulha, viés, zíper de metro, cursor, elástico médio, fita para alças da ecobag e mochila, metal para regular alça. Investimento: R$ 120,00 por mês. Pagamento: pix.centralbsb.aplac@adventistas.org Atenção! Após o pagamento, por favor envie o comprovante no WhatsApp da Professora Annelise Tisi.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Oficina de Costura Criativa.jpg',
+            'alt' => 'Cursos de artesanato — costura, modelagem e bordado',
+            'title' => 'Oficina de Costura Criativa',
+            'text' => 'Você tem vontade de aprender, desenvolver um talento ou, simplesmente, reservar um tempinho para criar e conviver? A Igreja Adventista Central de Brasília está oferecendo novos cursos de artesanato, com opções para diferentes interesses e habilidades! Costura Criativa: terças e quintas-feiras, das 9h às 12h, professora Annelise, R$ 120,00 mensais. Modelagem: domingos, das 9h às 12h, professora Sheila, R$ 50,00 mensais. Bordado e crochê à mão livre: domingos, das 9h às 12h, professora Maricélia, R$ 50,00 mensais. Pagamento: pix.centralbsb.aplac@adventistas.org. Após o pagamento, envie o comprovante no WhatsApp da professora Sheila. Mais do que aprender uma técnica, queremos proporcionar um espaço de criatividade, aprendizado, convivência e troca de experiências. Se você gosta de artesanato ou sempre teve vontade de aprender, venha participar com a gente! Inscrições e informações: Sheila – Coordenadora dos cursos – (61) 98361-9519. Venha aprender, criar e descobrir novos talentos!',
         ],
         [
             'type' => 'image',
@@ -112,6 +99,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (24).jpeg',
+            'alt' => 'Reunião de Oração',
+            'title' => 'Reunião de Oração',
+            'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/PESQUISA.jpg',
             'alt' => 'Pesquisa do Ministério da Família',
             'title' => 'Ministério da Família',
@@ -130,13 +124,6 @@
             'alt' => 'Doutores de Esperança',
             'title' => 'Doutores de Esperança',
             'text' => 'Junte-se aos Doutores de Esperança! Você já sentiu o desejo de levar um abraço, um sorriso e uma palavra de conforto para quem mais precisa? Nossos plantões estão de volta, e queremos convidar você para fazer parte dessa missão transformadora! Quer participar, mas ainda não faz parte do grupo? Esta é a sua oportunidade! Você pode começar acompanhando a nossa equipe como observador, conhecendo de perto a dinâmica do projeto antes de dar o próximo passo. Venha vivenciar essa experiência cheia de amor, empatia e alegria com a gente. Como posso me inscrever? Entre em contato agora mesmo com a Lu Mesquita pelo link https://wa.me/message/7M6UOXXMBRWRI1 e garanta as informações para participar. Venha fazer a diferença na vida de alguém e descubra a alegria de servir!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Classe de Saúde.jpg',
-            'alt' => 'Classe de Saúde — Como ser forte quando me sinto fraco?',
-            'title' => 'Classe de Saúde',
-            'text' => 'PALESTRA: COMO SER FORTE QUANDO ME SINTO FRACO? Você já se perguntou de onde vem a força necessária para continuar quando a vida parece exigir mais do que conseguimos oferecer? Existem momentos em que até as pessoas mais fortes enfrentam dúvidas, inseguranças e desafios que ninguém percebe. Mas será que a força está em suportar tudo ou existe algo mais profundo que ainda precisamos descobrir? Esta palestra é um convite para olhar a vida sob uma perspectiva Bíblica, refletir sobre nossas fragilidades e descobrir possibilidades que podem transformar a maneira como enfrentamos os desafios do dia a dia. Prepare-se para uma reflexão que poderá surpreender você e ampliar sua maneira de enxergar a si mesmo e a vida. Venha descobrir!',
         ],
         [
             'type' => 'image',
@@ -189,13 +176,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Capas  Série Permanecer em Jesus.jpg',
-            'alt' => 'Quartas Especiais — Permanecer em Jesus',
-            'title' => 'Quartas Especiais',
-            'text' => 'Nas quartas-feiras do mês de outubro, às 19h30, teremos a nova série Permanecer em Jesus, onde nossos jovens estarão responsáveis por toda a programação. Baseada no livro 2 da série Passos Para o Reavivamento Pessoal de Helmut Haubeil, inspirado na célebre passagem bíblica "Permaneça em mim, e Eu permanecerei em vocês", o livro mergulha nas verdades atemporais contidas nessas palavras, revelando insights transformadores sobre a conexão espiritual e a busca pela plenitude da vida. Participe com sua família!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/Quartas de Poder 2026.jpg',
             'alt' => 'Quartas de Poder — O Poder do Espírito',
             'title' => 'Quartas de Poder',
@@ -204,9 +184,9 @@
         [
             'type' => 'image',
             'src' => $boletimBase . '/NT.jpg',
-            'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
+            'alt' => 'Inauguração da Rádio Novo Tempo Brasília — 92.9 FM',
             'title' => 'Rádio Novo Tempo',
-            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama. E no dia 07/11/26, às 15h30, na Igreja Adventista Central de Brasília, SGAS 611 Módulo 75, Avenida L2 Sul - Brasília/DF, teremos o Programa de inauguração da Rádio Novo Tempo Brasília — 92.9 FM! Vamos agradecer a Deus e celebrar juntos essa oportunidade de levar Sua mensagem de amor a tantos lares. Convide sua família e seus amigos! Sua presença vai tornar esse momento ainda mais especial. Um novo tempo de esperança para Brasília, e queremos você pertinho da gente nessa celebração! Faça sua inscrição: https://eventos.adventistasbrasilia.org.br/event/evento/400 Esperamos você com muito carinho!',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama. E no dia 07/11/26, às 15h30, na Igreja Adventista Central de Brasília, SGAS 611 Módulo 75, Avenida L2 Sul - Brasília/DF, teremos o Programa de inauguração da Rádio Novo Tempo Brasília — 92.9 FM, com a presença do Quarteto Arautos do Rei! Vamos agradecer a Deus e celebrar juntos essa oportunidade de levar Sua mensagem de amor a tantos lares. Convide sua família e seus amigos! Sua presença vai tornar esse momento ainda mais especial. Um novo tempo de esperança para Brasília, e queremos você pertinho da gente nessa celebração! Faça sua inscrição: https://eventos.adventistasbrasilia.org.br/event/evento/400 Esperamos você com muito carinho!',
         ],
         [
             'type' => 'image',
@@ -245,6 +225,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/ENEM (Apresentação).jpg',
+            'alt' => 'Marca a Resposta — culto de oração para o ENEM',
+            'title' => 'Marca a Resposta',
+            'text' => 'Atenção, jovens que farão o ENEM 2026! No sábado, dia 07/11, às 18h30, acontecerá no Salão Jovem um culto especial de oração dedicado aos estudantes. O encontro oferecerá apoio espiritual e emocional para aliviar a ansiedade antes das provas. Na prova, marque a resposta certa; na vida, lembre-se de que Deus já marcou o seu caminho! Garanta acessando o link: https://forms.gle/mkrwBqx2w3GyPcWYA',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Clube do Livro.jpg',
             'alt' => 'Clube do Livro Cristão',
             'title' => 'Clube do Livro',
@@ -259,45 +246,31 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Liberdade Religiosa capa divulgação.jpeg',
+            'src' => $boletimBase . '/PG Liberdade Religiosa.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
-            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Culto 24-10 - 9h.jpg',
-            'alt' => 'Sábado da Criação — 24/10 às 9h',
-            'title' => 'Sábado da Criação',
-            'text' => 'No dia 24/10, às 9h, teremos a celebração do Sábado da Criação, acontecerá a palestra: \'Trocando as lentes: A Diferença entre a Visão Humana e a Divina\' com a participação especial do Dr. Tiago Alves de Souza. Programe-se para participar!',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 20h, sempre em formato online. Nossa próxima reunião será no dia 27 de outubro, com a presença especial do Doutor Yuri Schmitke. Advogado e mestre em Direito, com 20 anos de experiência em Liberdade Religiosa, incluindo a publicação de livros e artigos e a organização e participação em eventos nacionais e internacionais sobre o tema. Membro da Igreja Adventista do Sétimo Dia Central de Brasília. Casado há 14 anos com Annelise Schmitke e pai de Daniel e Anna Victoria. Tema do encontro: Liberdade Religiosa para todos: acontecimentos atuais no contexto profético de Apocalipse 13. Vamos refletir sobre a liberdade religiosa e os acontecimentos atuais à luz da Bíblia, com atenção à mensagem profética de Apocalipse 13. Participe, divulgue e ore por este projeto! "Orai sem cessar." — 1 Tessalonicenses 5:17. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Criacionismo final.jpeg',
             'alt' => 'JA Criacionismo — Uma Viagem no Tempo',
             'title' => 'JA Criacionismo',
-            'text' => 'Venha participar de uma VIAGEM NO TEMPO com o Dr. Tiago Alves de Souza, doutor em Genética pela USP! Será no Sábado da Criação, 24 de outubro, às 16h, aqui na igreja. Um encontro especial para toda a turma jovem: pré-universitários, universitários, formados, professores e todos os interessados no tema estão convidados! Após o pôr do sol, teremos um momento com jogos e esportes, venha preparado! Além disso, teremos uma cantina com lanches a um preço bem acessível: pizza, suco, cachorro-quente, picolé e pipoca grátis!',
+            'text' => 'Venha participar de uma VIAGEM NO TEMPO com o Dr. Tiago Alves de Souza, doutor em Genética pela USP! Sábado, dia 24/10, às 16h, aqui na igreja. Um encontro especial para toda a turma jovem: pré-universitários, universitários, formados, professores e todos os interessados no tema estão convidados! Neste encontro, haverá um painel de perguntas e debates e muita música, com os grupos Simetria Vocal, Redimidos, Puro e Simples e Voices Teen. Após o pôr-do-sol, teremos um espaço com jogos e esportes. E nessa hora, você poderá saborear um lanche muito top com um precinho bem pequeno, incluindo pizza, cachorro-quente, suco, picolé e a pipoca é grátis! Para quem fizer a inscrição haverá sorteio de brindes. Aproveite e faça já a sua inscrição escaneando o QR Code.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/darwin-18 out.png',
-            'alt' => 'Série A Caixa Preta de Darwin — 18/10',
+            'src' => $boletimBase . '/25 out.png',
+            'alt' => 'Série A Caixa Preta de Darwin — 25/10',
             'title' => 'A Caixa Preta de Darwin',
             'text' => 'Você já parou para pensar se a complexidade da vida ao nosso redor poderia surgir por acaso? Nos domingos especiais de outubro, a nova série de estudos A Caixa Preta de Darwin aborda a origem da vida, a complexidade do universo e a perspectiva criacionista à luz das Escrituras. Acompanhe os temas: 04/10 — A Origem da Vida (Dr. Davi Reis Lopes); 11/10 — O Universo Sobre o Fio da Navalha (Dr. Alexsander Silva); 18/10 — O Mistério da Vida (Dr. Davi Reis Lopes); 25/10 — A Grande Extinção em Massa (Dr. Nahor Neves). Ative as notificações do nosso Canal do WhatsApp para não perder nenhum episódio desta jornada sobre fé, ciência e criação! No YouTube, inscreva-se no nosso canal e compartilhe a mensagem de fé e esperança.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/SUPER SEXTA.jpg',
-            'alt' => 'Super Sexta — 2ª edição',
-            'title' => 'Super Sexta',
-            'text' => 'A Super Sexta está de volta! Vem aí a 2ª edição! Uma noite de muito louvor, adoração, conexão e reflexão, com a participação especial do Pastor Igo Rocha e do Grupo Puro Louvor, do IABC. Convide seus amigos e venha viver essa noite com a gente! Dia 23 de outubro, sexta-feira, às 19h30, no Espaço Jovem da Igreja Adventista Central de Brasília. SUPER SEXTA, você não vai querer ficar de fora!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Coral Jovem.jpeg',
-            'alt' => 'Coral Canto Jovem do IAP',
-            'title' => 'Canto Jovem',
-            'text' => 'Prepare-se para uma manhã especial de louvor, música e adoração. Sábado, dia 17/10, às 9h, estaremos recebendo em nossa igreja o Coral Canto Jovem diretamente do IAP (Instituto Adventista Paranaense), venha e participe deste grande louvor conosco!',
+            'src' => $boletimBase . '/culto 31-10.jpeg',
+            'alt' => 'Culto especial — Restaurando a santidade de Deus',
+            'title' => 'Culto Especial',
+            'text' => 'Você é nosso convidado especial para participar de uma programação muito abençoada no próximo sábado, dia 31/10, às 9h e às 15h. Teremos a presença do Pastor Demóstenes Neves ministrando sobre o tema "Restaurando a santidade de Deus na minha vida". Traga sua família e convide seus amigos!',
         ],
         [
             'type' => 'image',
