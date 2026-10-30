@@ -27,8 +27,8 @@
                 </div>
                 <h2>Inscrição enviada!</h2>
                 <p>
-                    <strong>{{ $success['name'] }}</strong>, agradecemos a sua inscrição. Em breve entraremos em contato.
-                </p>
+                        <strong>{{ $success['name'] }}</strong>, agradecemos a sua inscrição. Em breve entraremos em contato.
+                    </p>
 
                 <div class="vol-success-summary">
                     <h3>Seus ministérios</h3>

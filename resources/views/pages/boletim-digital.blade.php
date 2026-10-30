@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_24_10_2026';
+    $boletimBase = 'img/boletim/boletim_31_10_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
     $oracaoMinBase = $boletimBase . '/M. Oração';
 
@@ -23,7 +23,7 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: MANSIDÃO. O desafio da QUINTA semana de OUTUBRO é: Ore para seguir o exemplo de Jesus, tratando as pessoas com mansidão e amor, mesmo diante de palavras ou atitudes que machucam.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: DOMÍNIO PRÓPRIO. O desafio da PRIMEIRA semana de NOVEMBRO é: Ore por domínio próprio nas palavras, evitando reclamações, críticas impensadas e respostas precipitadas.';
 
     $boletins = [
         // Com descrição (script DOCX)
@@ -43,17 +43,17 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.24 (2).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-10-13 at 19.13.23 (1).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/OUTUBRO ROSA.jpg',
-            'alt' => 'Outubro Rosa — conscientização e prevenção',
-            'title' => 'Outubro Rosa',
-            'text' => 'O amor ao próximo se manifesta em gestos de cuidado, acolhimento e partilha. No mês dedicado à conscientização e prevenção ao câncer de mama, a nossa igreja preparou uma programação especial para abraçar as mulheres e abençoar vidas. O Ministério da Mulher de nossa igreja realizará ações especiais voltadas ao Outubro Rosa, mês dedicado à conscientização e prevenção do câncer de mama. O evento tem como principal objetivo conscientizar sobre a importância do diagnóstico precoce do câncer de mama e do colo do útero, além de proporcionar um espaço de cuidado integral físico, emocional e espiritual.',
+            'src' => $boletimBase . '/Entre Elas.jpg',
+            'alt' => 'Entre Elas — última edição do ano',
+            'title' => 'Entre Elas',
+            'text' => 'Atenção, mulheres! Vem aí a última edição do Entre Elas deste ano, e o tema está incrível! No dia 29/11, teremos a presença especial da influenciadora Juliana Cesário, que vai compartilhar dicas valiosas sobre combinação de cores, roupas e estilo. Será um encontro leve, cheio de comunhão e aprendizado para fechar o ano com chave de ouro. Guarde essa data e convide suas amigas!',
         ],
         [
             'type' => 'image',
@@ -99,17 +99,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (24).jpeg',
+            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (1).jpeg',
             'alt' => 'Reunião de Oração',
             'title' => 'Reunião de Oração',
             'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/PESQUISA.jpg',
-            'alt' => 'Pesquisa do Ministério da Família',
-            'title' => 'Ministério da Família',
-            'text' => 'O Ministério da Família da Igreja Central de Brasília deseja ouvir você. Queremos saber quais temas têm impactado os casamentos para que possamos abordá-los de forma relevante em nossas programações. Participe da nossa pesquisa, acesse o link e responda https://forms.gle/c8osbfRcEivGvKcZ9 , leva poucos minutos para responder. Contamos com você!',
         ],
         [
             'type' => 'image',
@@ -127,6 +120,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/SAÚDE.jpeg',
+            'alt' => 'Classe de Saúde — Razão e emoção',
+            'title' => 'Classe de Saúde',
+            'text' => 'RAZÃO E EMOÇÃO: COMO FAZÊ-LAS ANDAR DE MÃOS DADAS. Entre o que sentimos e o que pensamos, existem conflitos silenciosos que influenciam nossas escolhas e relações. Compreender essa dinâmica é essencial para entender melhor a nós mesmos e ao mundo ao nosso redor. Equilibrar razão e emoção não significa reprimir sentimentos nem agir apenas pela lógica, mas aprender a reconhecer emoções e refletir antes de decidir. Quando mente e coração caminham em harmonia, desenvolvemos mais consciência, maturidade emocional e sabedoria para viver e nos relacionar melhor. Palestra com a Doutora Arlene S. Carvalho, psicóloga clínica e organizacional.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/CEVISA.jpeg',
             'alt' => 'Excursão especial de bem-estar — CEVISA',
             'title' => 'Excursão CEVISA',
@@ -137,7 +137,7 @@
             'src' => $boletimBase . '/Bazar ASA.jpg',
             'alt' => 'Bazar da ASA',
             'title' => 'Bazar ASA',
-            'text' => 'No dia 08/11, teremos o bazar da ASA, peças selecionadas a preços acessíveis. Programe-se para participar!',
+            'text' => 'No domingo, dia 08/11, teremos o bazar da ASA, peças selecionadas a preços acessíveis. Programe-se para participar!',
         ],
         [
             'type' => 'image',
@@ -183,7 +183,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/NT.jpg',
+            'src' => $boletimBase . '/NT com Arautos 16X9.jpeg',
             'alt' => 'Inauguração da Rádio Novo Tempo Brasília — 92.9 FM',
             'title' => 'Rádio Novo Tempo',
             'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama. E no dia 07/11/26, às 15h30, na Igreja Adventista Central de Brasília, SGAS 611 Módulo 75, Avenida L2 Sul - Brasília/DF, teremos o Programa de inauguração da Rádio Novo Tempo Brasília — 92.9 FM, com a presença do Quarteto Arautos do Rei! Vamos agradecer a Deus e celebrar juntos essa oportunidade de levar Sua mensagem de amor a tantos lares. Convide sua família e seus amigos! Sua presença vai tornar esse momento ainda mais especial. Um novo tempo de esperança para Brasília, e queremos você pertinho da gente nessa celebração! Faça sua inscrição: https://eventos.adventistasbrasilia.org.br/event/evento/400 Esperamos você com muito carinho!',
@@ -246,31 +246,45 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/PG Liberdade Religiosa.jpeg',
+            'src' => $boletimBase . '/Liberdade Religiosa capa divulgação.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
-            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 20h, sempre em formato online. Nossa próxima reunião será no dia 27 de outubro, com a presença especial do Doutor Yuri Schmitke. Advogado e mestre em Direito, com 20 anos de experiência em Liberdade Religiosa, incluindo a publicação de livros e artigos e a organização e participação em eventos nacionais e internacionais sobre o tema. Membro da Igreja Adventista do Sétimo Dia Central de Brasília. Casado há 14 anos com Annelise Schmitke e pai de Daniel e Anna Victoria. Tema do encontro: Liberdade Religiosa para todos: acontecimentos atuais no contexto profético de Apocalipse 13. Vamos refletir sobre a liberdade religiosa e os acontecimentos atuais à luz da Bíblia, com atenção à mensagem profética de Apocalipse 13. Participe, divulgue e ore por este projeto! "Orai sem cessar." — 1 Tessalonicenses 5:17. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 20h, sempre em formato online. Participe, divulgue e ore por este projeto! "Orai sem cessar." — 1 Tessalonicenses 5:17. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Criacionismo final.jpeg',
-            'alt' => 'JA Criacionismo — Uma Viagem no Tempo',
-            'title' => 'JA Criacionismo',
-            'text' => 'Venha participar de uma VIAGEM NO TEMPO com o Dr. Tiago Alves de Souza, doutor em Genética pela USP! Sábado, dia 24/10, às 16h, aqui na igreja. Um encontro especial para toda a turma jovem: pré-universitários, universitários, formados, professores e todos os interessados no tema estão convidados! Neste encontro, haverá um painel de perguntas e debates e muita música, com os grupos Simetria Vocal, Redimidos, Puro e Simples e Voices Teen. Após o pôr-do-sol, teremos um espaço com jogos e esportes. E nessa hora, você poderá saborear um lanche muito top com um precinho bem pequeno, incluindo pizza, cachorro-quente, suco, picolé e a pipoca é grátis! Para quem fizer a inscrição haverá sorteio de brindes. Aproveite e faça já a sua inscrição escaneando o QR Code.',
+            'src' => $boletimBase . '/Mutirão de Natal 2026.jpg',
+            'alt' => 'Mutirão de Natal 2026',
+            'title' => 'Mutirão de Natal',
+            'text' => 'Participe do Mutirão de Natal 2026! Período: 31/10 a 19/12 de 2026. Tema: "Amarás o teu próximo como a ti mesmo." Mateus 22:39. Objetivos: ajudar nas despesas das instituições CEPAI, Instituto Crescer, Creche Semeando Esperança, ASA (Ação Social Adventista) da Igreja Adventista do Sétimo Dia Central de Brasília e outras, e levar o amor de Cristo por meio de ações solidárias. Meta: arrecadar R$ 450.000,00. Como participar: faça um PIX programado (12 parcelas) para a conta da Igreja no valor sugerido de R$ 190,00 por mês (pode ser mais ou menos). É possível doar via cartão de crédito em até 12 vezes sem juros. As doações serão distribuídas entre as instituições. Outras formas de ajudar: doe roupas, calçados, brinquedos, móveis e utensílios em bom estado. Esses itens serão vendidos em bazar solidário, com valores simbólicos, para ajudar as famílias carentes e arrecadar fundos para cestas básicas. PIX: 61 99612-5450 (PIX exclusivo para o Mutirão de Natal). Enviar comprovante para o WhatsApp: (61) 99612-5450, Igreja Adventista Central de Brasília - Administração. Cartão de crédito: disponível no hall da Igreja, aos sábados, pela manhã. Dúvidas e contatos: Márcio Amorim (61) 98116-9297; Cezar Degraf (61) 99983-9658; Karin Gorski (ASA) (61) 98158-4700.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/25 out.png',
-            'alt' => 'Série A Caixa Preta de Darwin — 25/10',
-            'title' => 'A Caixa Preta de Darwin',
-            'text' => 'Você já parou para pensar se a complexidade da vida ao nosso redor poderia surgir por acaso? Nos domingos especiais de outubro, a nova série de estudos A Caixa Preta de Darwin aborda a origem da vida, a complexidade do universo e a perspectiva criacionista à luz das Escrituras. Acompanhe os temas: 04/10 — A Origem da Vida (Dr. Davi Reis Lopes); 11/10 — O Universo Sobre o Fio da Navalha (Dr. Alexsander Silva); 18/10 — O Mistério da Vida (Dr. Davi Reis Lopes); 25/10 — A Grande Extinção em Massa (Dr. Nahor Neves). Ative as notificações do nosso Canal do WhatsApp para não perder nenhum episódio desta jornada sobre fé, ciência e criação! No YouTube, inscreva-se no nosso canal e compartilhe a mensagem de fé e esperança.',
+            'src' => $boletimBase . '/Domingos da Família.jpg',
+            'alt' => 'Domingos da Família — As 5 marcas de uma família saudável',
+            'title' => 'Domingos da Família',
+            'text' => 'Vivemos dias desafiadores, onde a correria, as preocupações e a falta de tempo afetam nossos relacionamentos. Mas a Palavra de Deus nos mostra que é sim possível construir um lar forte, saudável e harmonioso! Em novembro, sempre às 19h, teremos os Domingos da Família com uma série muito especial: As 5 Marcas de Uma Família Saudável – O Segredo para a Harmonia do Lar. Vamos orar e convidar! Cada membro da igreja é desafiado a trazer uma família não adventista para participar conosco. Essa é a nossa missão! Todas as famílias convidadas não adventistas que nos visitarem ganharão um livro de meditação preparado com muito carinho pelo Ministério da Família. Vamos juntos transformar nossos lares e abençoar outras famílias? Compartilhe essa mensagem e comece a orar pelos seus convidados!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/culto 31-10.jpeg',
-            'alt' => 'Culto especial — Restaurando a santidade de Deus',
+            'src' => $boletimBase . '/Demóstenes.jpg',
+            'alt' => 'Culto especial com o pastor Demóstenes Neves',
             'title' => 'Culto Especial',
-            'text' => 'Você é nosso convidado especial para participar de uma programação muito abençoada no próximo sábado, dia 31/10, às 9h e às 15h. Teremos a presença do Pastor Demóstenes Neves ministrando sobre o tema "Restaurando a santidade de Deus na minha vida". Traga sua família e convide seus amigos!',
+            'text' => 'Você é nosso convidado especial para participar de uma programação muito abençoada no sábado, dia 31/10, às 9h e às 16h. Teremos a presença do Pastor Demóstenes Neves ministrando sobre o tema "Restaurando a santidade de Deus na minha vida". O Pastor Demóstenes Neves é um respeitado teólogo, educador e preletor da Igreja Adventista do Sétimo Dia. Com sólida formação acadêmica, ele é graduado em Pedagogia e Teologia, mestre em Família na Sociedade Contemporânea pela UCSAL e doutor em Psicologia Social pela UFBA. Atualmente, exerce forte influência na formação de novos líderes. Além disso, o Pastor Demóstenes é amplamente conhecido por seu ministério itinerante, viajando pelo Brasil como palestrante em semanas de oração e eventos focados em família, fidelidade e temas sobre os quais também escreve. Faça sua inscrição através do link para garantir sua participação e materiais do evento: https://forms.gle/LpNWXo2VWYLiNy5M7 Traga sua família e convide seus amigos!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/SAVE THE DATE.png',
+            'alt' => 'Só Para Jovens — 13 e 14 de novembro',
+            'title' => 'Só Para Jovens',
+            'text' => 'Jovem, anote essa data! Nos dias 13 e 14 de novembro, vai rolar o Só Para Jovens! Um encontro imperdível para conversarmos, aprendermos e crescermos juntos na fé. Programação: sexta-feira (13/11), às 19h30; sábado (14/11), às 09h. Local: Igreja Adventista do Sétimo Dia Central de Brasília - SGAS 611, Módulo 75, Avenida L2 Sul - Brasília/DF. Separe a data, chame seus amigos e venha curtir esse momento com a gente. Te esperamos lá!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/convite_jotinha_18h_16_9.png',
+            'alt' => 'Jotinha — bandinha infantil',
+            'title' => 'Jotinha',
+            'text' => 'No sábado, dia 31/10/26, às 18h teremos nosso maravilhoso Jotinha! Esperamos as crianças e jovens para mais um momento especial de música, amizade e aprendizado, desenvolvendo seus talentos e crescendo no amor a Deus. Traga seus filhos e convide também amigos e familiares! Esperamos vocês!',
         ],
         [
             'type' => 'image',
