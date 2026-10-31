@@ -29,6 +29,13 @@
         // Com descrição (script DOCX)
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Dia-do-Pastor-2026.jpg',
+            'alt' => 'Dia do Pastor Adventista — 31 de outubro',
+            'title' => 'Dia do Pastor',
+            'text' => 'Hoje é dia de homenagear nossos pastores e suas famílias! Cuidar da igreja é uma missão preciosa dada por Deus, e cabe a nós apoiar e interceder por eles. Aos pastores da nossa igreja, um Feliz Dia do Pastor Adventista!',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/One Voice.jpg',
             'alt' => 'One Voice 27 — mobilização missionária global',
             'title' => 'One Voice',
@@ -173,6 +180,13 @@
             'alt' => 'Classe de Escola Sabatina em Francês',
             'title' => 'Classe de Francês',
             'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta! Todo sábado, às 10h, na Igreja Adventista Internacional "BIC", espaço dedicado a adultos que desejam aprofundar seu conhecimento no idioma francês enquanto estudamos a Bíblia juntos. É uma oportunidade maravilhosa para aprender e compartilhar em comunidade. Entre no nosso grupo de WhatsApp para receber todos os detalhes e materiais. https://chat.whatsapp.com/KcWLeUItuvWEnZ27s6Xs67?mode=gi_t À bientôt!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Capas  Série Permanecer em Jesus_20261030_205426_0000.jpg',
+            'alt' => 'Quartas Especiais de novembro — Permanecer em Jesus',
+            'title' => 'Quartas Especiais',
+            'text' => 'Nas quartas-feiras do mês de novembro, às 19h30, apresentamos a nova série Permanecer em Jesus, onde nossos jovens estarão responsáveis por toda a programação. Baseada no livro 2 da série Passos Para o Reavivamento Pessoal de Helmut Haubeil, inspirado na célebre passagem bíblica "Permaneça em mim, e Eu permanecerei em vocês", o livro mergulha nas verdades atemporais contidas nessas palavras, revelando insights transformadores sobre a conexão espiritual e a busca pela plenitude da vida. Participe com sua família!',
         ],
         [
             'type' => 'image',
