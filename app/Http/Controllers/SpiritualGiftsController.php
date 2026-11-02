@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\SpiritualGiftsScorer;
+use App\Support\SiteAnalytics;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 
@@ -62,6 +63,8 @@ class SpiritualGiftsController extends Controller
             ->map(fn (array $row) => $row + ['description' => $descriptions->get($row['name'], '')])
             ->sortByDesc(fn (array $row) => $row['points'])
             ->values();
+
+        app(SiteAnalytics::class)->recordFormSubmission($request, 'teste-de-dons');
 
         return view('pages.teste-de-dons-resultado', [
             'questions' => $questions,

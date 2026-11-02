@@ -75,6 +75,9 @@
                     <i class="bi bi-people"></i> Usuários
                 </a>
                 @if ($isFullAdmin || $isManager)
+                    <a href="{{ route('admin.analytics.index') }}" class="{{ $active === 'analytics' ? 'active' : '' }}">
+                        <i class="bi bi-graph-up"></i> Tráfego
+                    </a>
                     <a href="{{ route('admin.campanhas.show', 'sementes') }}" class="{{ $active === 'campanhas' ? 'active' : '' }}">
                         <i class="bi bi-qr-code-scan"></i> Campanhas
                     </a>

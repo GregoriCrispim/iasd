@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\VolunteerApplication;
 use App\Models\VolunteerApplicationChoice;
 use App\Support\PersonNameFormatter;
+use App\Support\SiteAnalytics;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -188,6 +189,10 @@ class VolunteerApplicationController extends Controller
                 ? VolunteerApplicationChoice::MODALITY_LIDERANCA
                 : VolunteerApplicationChoice::MODALITY_EQUIPE,
         ])->all();
+
+        app(SiteAnalytics::class)->recordFormSubmission($request, 'talento', true, [
+            'choices_count' => count($successChoices),
+        ]);
 
         return redirect()
             ->route('talento.show')

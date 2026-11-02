@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\ApprovalsController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CampaignMetricsController;
@@ -96,6 +97,7 @@ Route::middleware(['auth:admin'])
                 Route::post('/cms/approvals/{revision}/reject', [ApprovalsController::class, 'reject'])->name('approvals.reject');
 
                 Route::get('/campanhas/{slug}', [CampaignMetricsController::class, 'show'])->name('campanhas.show');
+                Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 
                 Route::get('/talento', [TalentoController::class, 'index'])->name('talento.index');
                 Route::get('/talento/pdf', [TalentoController::class, 'pdf'])->name('talento.pdf');

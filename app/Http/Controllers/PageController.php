@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\GoogleSheetsService;
+use App\Support\SiteAnalytics;
 use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
@@ -230,6 +231,8 @@ class PageController extends Controller
             }
         }
 
+        app(SiteAnalytics::class)->recordFormSubmission($request, 'contato');
+
         return back()->with('success', 'Mensagem enviada com sucesso! Entraremos em contato em breve.');
     }
 
@@ -283,6 +286,11 @@ class PageController extends Controller
             ? 'Solicitação recebida! Houve um problema ao registrar na planilha, mas entramos em contato em breve.'
             : 'Solicitação de estudo bíblico enviada com sucesso! Entraremos em contato em breve.';
 
+        app(SiteAnalytics::class)->recordFormSubmission($request, 'estudo-biblico', true, [
+            'formato' => $validated['formato'],
+            'sheets_error' => $googleSheetsError,
+        ]);
+
         return redirect()->route('estudo-biblico.formulario')->with('success', $message);
     }
 
@@ -327,6 +335,10 @@ class PageController extends Controller
             ? 'Pedido recebido! Houve um problema ao registrar na planilha, mas estaremos orando por você.'
             : 'Pedido de oração enviado com sucesso! Estaremos orando por você.';
 
+        app(SiteAnalytics::class)->recordFormSubmission($request, 'oracao-visita', true, [
+            'sheets_error' => $googleSheetsError,
+        ]);
+
         return back()->with('success', $message);
     }
 
@@ -365,6 +377,8 @@ class PageController extends Controller
                     ->withInput();
             }
         }
+
+        app(SiteAnalytics::class)->recordFormSubmission($request, 'secretaria');
 
         return back()->with('success', 'Dados atualizados com sucesso! Entraremos em contato em breve.');
     }
