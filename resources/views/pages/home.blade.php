@@ -95,7 +95,18 @@
     </ul>
 </div>
 
-<a class="boletim-home" href="{{ route('boletim-digital') }}" aria-label="Acessar boletim digital">
+@php
+    $boletimPreviewCards = $boletimPreviewCards ?? [];
+    $boletimPreviewCount = count($boletimPreviewCards);
+    $boletimPreviewCols = max(1, min(4, $boletimPreviewCount ?: 1));
+    $boletimHasIntro = $boletimPreviewCount > 0;
+@endphp
+<a
+    class="boletim-home{{ $boletimHasIntro ? ' boletim-home--intro' : ' boletim-home--settled' }}"
+    href="{{ route('boletim-digital') }}"
+    aria-label="Acessar boletim digital"
+    @if ($boletimHasIntro) data-boletim-home @endif
+>
     <div class="boletim-home__bg" aria-hidden="true">
         <div class="boletim-home__bg-solid"></div>
         @if (!empty($boletimCoverImages ?? []))
@@ -118,6 +129,46 @@
             </div>
         @endif
     </div>
+
+    @if ($boletimHasIntro)
+        <div class="boletim-home__intro" aria-hidden="true">
+            <div class="boletim-home__intro-header">
+                <span class="boletim-home__eyebrow">Central Informa</span>
+                <h2 class="acb-title-serif">Boletim Informativo</h2>
+                <p>Um olhar rápido nas programações da semana.</p>
+            </div>
+            <div
+                class="boletim-home__intro-grid"
+                style="--boletim-cols: {{ $boletimPreviewCols }}; --boletim-count: {{ $boletimPreviewCount }};"
+                data-count="{{ $boletimPreviewCount }}"
+            >
+                @foreach ($boletimPreviewCards as $index => $card)
+                    <article
+                        class="boletim-home__intro-card{{ empty($card['title']) ? ' boletim-home__intro-card--media-only' : '' }}"
+                        style="--i: {{ $index }}"
+                    >
+                        <div class="boletim-home__intro-media">
+                            <img
+                                src="{{ asset($card['src']) }}"
+                                alt=""
+                                width="320"
+                                height="200"
+                                loading="{{ $index < 8 ? 'eager' : 'lazy' }}"
+                                decoding="async"
+                                @if ($index < 4) fetchpriority="high" @endif
+                            >
+                            @if (!empty($card['title']))
+                                <div class="boletim-home__intro-caption">
+                                    <span>{{ $card['title'] }}</span>
+                                </div>
+                            @endif
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
     <div class="boletim-home__content">
         <div class="boletim-home__text">
             <span class="boletim-home__eyebrow">Central Informa</span>
@@ -347,6 +398,7 @@
 
 @push('scripts')
 <script src="{{ asset('js/slider.js') }}?v={{ filemtime(public_path('js/slider.js')) }}" defer></script>
+<script src="{{ asset('js/boletim-home.js') }}?v={{ filemtime(public_path('js/boletim-home.js')) }}" defer></script>
 <script src="{{ asset('js/canais.js') }}" defer></script>
 <script src="{{ asset('js/videos_youtube.js') }}" defer></script>
 @endpush

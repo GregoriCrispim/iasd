@@ -28,6 +28,41 @@ class BoletimDigital
     }
 
     /**
+     * Miniature feed cards for the home intro stage (max 3 rows × 4 cols).
+     *
+     * @return list<array{src: string, alt: string, title: string|null}>
+     */
+    public static function previewCards(int $limit = 12): array
+    {
+        $limit = max(1, $limit);
+        $cards = [];
+
+        foreach (self::items() as $item) {
+            if (($item['type'] ?? '') !== 'image') {
+                continue;
+            }
+
+            $src = $item['src'] ?? null;
+            if (!is_string($src) || $src === '') {
+                continue;
+            }
+
+            $title = $item['title'] ?? null;
+            $cards[] = [
+                'src' => $src,
+                'alt' => is_string($item['alt'] ?? null) ? $item['alt'] : '',
+                'title' => is_string($title) && $title !== '' ? $title : null,
+            ];
+
+            if (count($cards) >= $limit) {
+                break;
+            }
+        }
+
+        return $cards;
+    }
+
+    /**
      * Image paths relative to public/, for the home section background grid.
      * Uses a small unique set (repeated for density) so the wall stays rich
      * without downloading every boletim poster.

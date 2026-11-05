@@ -16,6 +16,7 @@ class PageController extends Controller
     {
         return view('pages.home', [
             'boletimCoverImages' => \App\Support\BoletimDigital::coverImages(12, 20),
+            'boletimPreviewCards' => \App\Support\BoletimDigital::previewCards(12),
         ]);
     }
 

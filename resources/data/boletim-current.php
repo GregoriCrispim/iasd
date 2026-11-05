@@ -1,22 +1,30 @@
 <?php
 
-$boletimBase = 'img/boletim/boltetim_19_09_2026';
+    $boletimBase = 'img/boletim/Boletim_07_11_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
+    $oracaoMinBase = $boletimBase . '/M. Oração';
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: FIDELIDADE. O desafio da QUARTA semana de SETEMBRO é: Ore para permanecer firme nos seus valores e princípios, mesmo quando ninguém está observando.';
+        $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: DOMÍNIO PRÓPRIO. O desafio da SEGUNDA semana de NOVEMBRO é: Ore por equilíbrio emocional, pedindo a Deus controle sobre a ansiedade, a raiva e o medo.';
 
     $boletins = [
         // Com descrição (script DOCX)
         [
             'type' => 'image',
-            'src' => $boletimBase . '/ON VOICE.jpeg',
+            'src' => $boletimBase . '/One Voice.jpg',
             'alt' => 'One Voice 27 — mobilização missionária global',
             'title' => 'One Voice',
-            'text' => 'O OneVoice27 é o projeto global de mobilização missionária da Igreja Adventista do Sétimo Dia, que conduzirá toda a igreja mundial a um mesmo esforço evangelístico. O lançamento oficial acontece em 5 de setembro deste ano. Lançada no segundo semestre de 2025 e planejada para ser uma grande celebração em setembro de 2027, marcando os 2.000 anos do batismo de Jesus Cristo. A Divisão Sul-Americana lidera a mobilização de todas as suas Uniões, Associações, Missões e igrejas locais para que participem em uma estratégia digital unificada. Participe conosco deste projeto.',
+            'text' => 'O OneVoice27 é o projeto global de mobilização missionária da Igreja Adventista do Sétimo Dia, que conduzirá toda a igreja mundial a um mesmo esforço evangelístico. O lançamento oficial aconteceu no dia 5 de setembro deste ano. Lançada no segundo semestre de 2025 e planejada para ser uma grande celebração em setembro de 2027, marcando os 2.000 anos do batismo de Jesus Cristo. A Divisão Sul-Americana lidera a mobilização de todas as suas Uniões, Associações, Missões e igrejas locais para que participem em uma estratégia digital unificada. Participe conosco deste projeto.',
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-08-16 at 13.42.25 (3).jpeg',
+            'src' => $boletimBase . '/CAMISETAS ONVOICE27.png',
+            'alt' => 'Camisetas One Voice 27',
+            'title' => 'Camisetas One Voice 27',
+            'text' => 'One Voice27 nos une em uma grande missão global: apresentar Jesus Cristo ao mundo com uma mensagem bíblica unificada. Faça parte deste movimento e leve essa identidade no peito! Adquira sua camiseta OneVoice27. Vamos juntos falar em uma só voz, afinal, Jesus faz tudo novo. Acesse o link https://forms.gle/4W8Q2e8YoeGQ8nKJA e encomende a sua!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-10-13 at 19.13.23 (3).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -24,23 +32,37 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
         [
             'type' => 'image',
             'src' => $boletimBase . '/Entre Elas.jpg',
-            'alt' => 'Entre Elas — encontro feminino',
+            'alt' => 'Entre Elas — última edição do ano',
             'title' => 'Entre Elas',
-            'text' => 'Vem aí o ENTRE ELAS! Prepare-se: nosso encontro será no dia 18/10. Reserve esta data!',
+            'text' => 'Atenção, mulheres! Vem aí a última edição do Entre Elas deste ano, e o tema está incrível! No dia 29/11, teremos a presença especial da influenciadora Juliana Cesário, que vai compartilhar dicas valiosas sobre combinação de cores, roupas e estilo. Será um encontro leve, cheio de comunhão e aprendizado para fechar o ano com chave de ouro. Guarde essa data e convide suas amigas!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Bordado.jpg',
-            'alt' => 'Curso de bordado ASA',
-            'title' => 'Curso de Bordado',
-            'text' => 'Oportunidade Imperdível: Curso de Bordado ASA! Venha aprender técnicas exclusivas para confeccionar lindas peças. Aprender a bordar é uma excelente oportunidade para empreender e conquistar uma renda extra. Todos os domingos às 9h. Invista no seu talento e transforme o seu domingo em um momento de aprendizado e crescimento. Esperamos por você!',
+            'src' => $boletimBase . '/Costura.jpg',
+            'alt' => 'Oficina de Costura Criativa',
+            'title' => 'Oficina Criativa',
+            'text' => 'Use sua criatividade para criar! Faça um curso da Oficina de Costura Criativa e aprenda a confeccionar lindas peças, com duração de apenas dois meses (outubro e novembro). Não perca essa chance, acesse o link: https://wa.me/qr/ZME25VEMZLTBI1 e faça já a sua inscrição! Para iniciantes e aprendizes. Dias e horário: terças e quintas-feiras, pela manhã. Outubro (Módulo 1) — Peças: estojo, ecobag, scrunchie, mochila, viseira e chapéu para praia de tecido. Datas: 06/10 e 08/10, 13/10 e 15/10, 20/10 e 22/10, 27/10 e 29/10. Novembro (Módulo 2) — Peças: mesa posta para o Natal. Datas: 03/11 e 05/11, 10/11 e 12/11, 17/11 e 19/11, 24/11 e 26/11. Materiais necessários: tecido, manta R1 colante, tesoura, linha, agulha, viés, zíper de metro, cursor, elástico médio, fita para alças da ecobag e mochila, metal para regular alça. Investimento: R$ 120,00 por mês. Pagamento: pix.centralbsb.aplac@adventistas.org Atenção! Após o pagamento, por favor envie o comprovante no WhatsApp da Professora Annelise Tisi.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Oficina de Costura Criativa.jpg',
+            'alt' => 'Cursos de artesanato — costura, modelagem e bordado',
+            'title' => 'Oficina de Costura Criativa',
+            'text' => 'Você tem vontade de aprender, desenvolver um talento ou, simplesmente, reservar um tempinho para criar e conviver? A Igreja Adventista Central de Brasília está oferecendo novos cursos de artesanato, com opções para diferentes interesses e habilidades! Costura Criativa: terças e quintas-feiras, das 9h às 12h, professora Annelise, R$ 120,00 mensais. Modelagem: domingos, das 9h às 12h, professora Sheila, R$ 50,00 mensais. Bordado e crochê à mão livre: domingos, das 9h às 12h, professora Maricélia, R$ 50,00 mensais. Pagamento: pix.centralbsb.aplac@adventistas.org. Após o pagamento, envie o comprovante no WhatsApp da professora Sheila. Mais do que aprender uma técnica, queremos proporcionar um espaço de criatividade, aprendizado, convivência e troca de experiências. Se você gosta de artesanato ou sempre teve vontade de aprender, venha participar com a gente! Inscrições e informações: Sheila – Coordenadora dos cursos – (61) 98361-9519. Venha aprender, criar e descobrir novos talentos!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Meu Talento.jpeg',
+            'alt' => 'Meu Talento, Meu Ministério',
+            'title' => 'Meu Talento, Meu Ministério',
+            'text' => 'Sirva com propósito em um de nossos ministérios! Todos nós fomos presenteados com dons únicos para edificar a comunidade e glorificar a Deus. Convidamos você a dedicar seus talentos e fazer a diferença em nossa igreja. Escaneie acesse o link https://adventistascentralbrasilia.org/talento e inscreva-se para servir. "Cada um exerça o dom que recebeu para servir aos outros, administrando fielmente a graça de Deus nas suas múltiplas formas." 1 Pedro 4:10',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Voluntariado.jpeg',
             'alt' => 'Voluntariado nos ministérios da igreja',
             'title' => 'Voluntariado',
-            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o link/QR Code e escolha o departamento da igreja que mais combina com você. https://forms.gle/yBKYhMg3V7Rcd8uY6',
+            'text' => 'Seja voluntário em um de nossos ministérios! Acesse o link e escolha o departamento da igreja que mais combina com você. https://forms.gle/yBKYhMg3V7Rcd8uY6',
         ],
         [
             'type' => 'image',
@@ -58,24 +80,17 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Quartas da Família (1).jpg',
-            'alt' => 'Quartas da Família — Chaves da Felicidade Familiar',
-            'title' => 'Quartas da Família',
-            'text' => 'Queridos irmãos, o Ministério da Família da Igreja Central de Brasília convida você e sua família para a série "Chaves da Felicidade Familiar", que acontecerá de 05 de agosto a 23 de setembro; serão 8 quartas-feiras especiais dedicadas à consagração, ao fortalecimento espiritual e ao aprendizado da Palavra de Deus. Venha interceder por sua família e traga convidados para buscarem juntos essa bênção, teremos presentes especiais para todos os visitantes não adventistas! Participem!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Oficina do Bem.jpg',
-            'alt' => 'Oficina do Bem — Doutores de Esperança',
-            'title' => 'Coração do Bem',
-            'text' => 'Participe da Oficina do Bem, às 9h, na sala dos Doutores de Esperança. Onde voluntários se reúnem para confeccionar corações de feltro que serão distribuídos aos pacientes durante os Plantões dos Doutores de Esperança. Qualquer pessoa pode participar. Venha! Nossa oficina acontece a cada 15 dias, siga nosso calendário e venha ser um voluntário.',
+            'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (1).jpeg',
+            'alt' => 'Reunião de Oração',
+            'title' => 'Reunião de Oração',
+            'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Entrega de livros.jpg',
             'alt' => 'Entrega de livros missionários',
             'title' => 'Entrega de Livros',
-            'text' => 'O descanso de agosto ficou para trás, mas a nossa missão não para! Setembro chegou trazendo um novo fôlego e o grande momento de avançarmos ainda mais com o Impacto Esperança. Cada livro entregue é uma semente plantada, uma resposta a uma oração e uma oportunidade real de levar esperança a quem precisa. A contagem regressiva já começou e a sua participação é indispensável para que essa mensagem continue transformando vidas. Ajuste sua agenda, una-se a nós nessa corrente de fé e ação e faça a diferença neste mês de setembro! Passe no Centro White, retire os livros que pretende entregar durante a semana e venha ser uma voz ativa nessa missão. Quem está pronto?',
+            'text' => 'A marcha do ano não diminui o passo e o nosso propósito segue firme! Novembro se apresenta renovando as nossas energias e abrindo espaço para multiplicarmos ainda mais a mensagem do Impacto Esperança. Cada livro espalhado funciona como uma semente de mudança, o atendimento a um clamor em oração e um ponto de luz no caminho de quem busca respostas. A hora do engajamento chegou, e o seu apoio é fundamental para fazermos essa rede de fé tocar um número ainda maior de vidas. Organize o seu tempo, una forças conosco nessa verdadeira força-tarefa e deixe a sua marca neste mês de novembro! Faça uma visita ao Centro White, garanta os materiais da sua semana e seja um verdadeiro agente de transformação. Vamos juntos vestir essa camisa e encarar esse desafio em novembro?',
         ],
         [
             'type' => 'image',
@@ -86,17 +101,17 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Classe de Saúde.jpeg',
-            'alt' => 'Classe de Saúde — Por que nós dormimos?',
-            'title' => 'Classe de Saúde',
-            'text' => 'POR QUE NÓS DORMIMOS? Uma visão científica e espiritual do sono. Todas as noites, quando fechamos os olhos, entramos em um estado que ainda guarda muitos mistérios. Enquanto aparentemente estamos apenas descansando, o nosso organismo continua em atividade, seguindo processos essenciais à vida. O que realmente acontece? O que acontece durante esse período de repouso? Por que o sono ocupa uma parte tão significativa da nossa existência? O que podemos aprender ao observar o sono pela ciência e pela espiritualidade? Nesta palestra, vamos lançar um olhar diferente sobre esse momento tão comum e, ao mesmo tempo, tão extraordinário. Ciência e espiritualidade se encontram para nos conduzir a uma reflexão profunda. Descubra mais sobre o sono, o descanso e o cuidado integral com o ser humano. Prepare-se para enxergar suas noites de sono de uma maneira que talvez você nunca tenha imaginado! Qual é o seu maior interesse ao explorar esse tema: os mistérios da mente na ciência ou a visão espiritual?',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/CEVISA.jpeg',
             'alt' => 'Excursão especial de bem-estar — CEVISA',
             'title' => 'Excursão CEVISA',
-            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA)! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações: https://wa.me/qr/XSR5HTOUQV4JA1 Venha viver essa experiência de renovação e comunhão!',
+            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para todas as idades para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA), de 22 a 29 de novembro de 2026! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações https://forms.gle/ZNbidJmaihpgYqNY8 Venha viver essa experiência de renovação e comunhão!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Bazar ASA.jpg',
+            'alt' => 'Bazar da ASA',
+            'title' => 'Bazar ASA',
+            'text' => 'No domingo, dia 08/11, das 9h às 14h, teremos o bazar da ASA, peças selecionadas a preços acessíveis. Programe-se para participar!',
         ],
         [
             'type' => 'image',
@@ -117,14 +132,7 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
             'src' => $boletimBase . '/Tersouros do Céu.jpeg',
             'alt' => 'App Tesouros do Céu — APlaC',
             'title' => 'Tesouros do Céu',
-            'text' => 'A APlaC lança APP gratuito para ensinar educação financeira para as novas gerações. "Tesouros do Céu" é uma ferramenta didática e divertida que reúne tarefas, pontos, avatares bíblicos e devocional diário para ajudar os pais a ensinar mordomia cristã desde a infância. https://noticias.adventistas.org/pt/tesouros-do-ceu/',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Curso de Pão de Santa Ceia.jpg',
-            'alt' => 'Curso de Pães de Santa Ceia — ASA',
-            'title' => 'Curso de Pães de Santa Ceia',
-            'text' => 'Aprenda a fazer o tradicional Pãozinho de Santa Ceia! A ASA - Ação Solidária Adventista convida você para uma manhã especial com a tia Lourdes Castanho, acontecerá no dia 27/09, às 09h, na cozinha da ASA. O evento dispõe de 25 vagas e a inscrição é solidária: doe 1 litro de leite e garanta a sua inscrição. Acesse o link para se inscrever: https://forms.gle/DkaVwq9wbFjKoqm8A',
+            'text' => 'A APLaC lança APP gratuito para ensinar educação financeira para as novas gerações. "Tesouros do Céu" é uma ferramenta didática e divertida que reúne tarefas, pontos, avatares bíblicos e devocional diário para ajudar os pais a ensinar mordomia cristã desde a infância. https://noticias.adventistas.org/pt/tesouros-do-ceu/',
         ],
         [
             'type' => 'image',
@@ -138,28 +146,28 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
             'src' => $boletimBase . '/Francês.jpeg',
             'alt' => 'Classe de Escola Sabatina em Francês',
             'title' => 'Classe de Francês',
-            'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta! No sábado, 04/07/26, às 10h, na Igreja Adventista Internacional "BIC", retomaremos esse espaço dedicado a adultos que desejam aprofundar seu conhecimento no idioma francês enquanto estudamos a Bíblia juntos. É uma oportunidade maravilhosa para aprender e compartilhar em comunidade. Entre no nosso grupo de WhatsApp para receber todos os detalhes e materiais. https://chat.whatsapp.com/KcWLeUItuvWEnZ27s6Xs67?mode=gi_t À bientôt!',
+            'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta! Todo sábado, às 10h, na Igreja Adventista Internacional "BIC", espaço dedicado a adultos que desejam aprofundar seu conhecimento no idioma francês enquanto estudamos a Bíblia juntos. É uma oportunidade maravilhosa para aprender e compartilhar em comunidade. Entre no nosso grupo de WhatsApp para receber todos os detalhes e materiais. https://chat.whatsapp.com/KcWLeUItuvWEnZ27s6Xs67?mode=gi_t À bientôt!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Capas  Série Permanecer em Jesus_20261030_205426_0000.jpg',
+            'alt' => 'Quartas Especiais de novembro — Permanecer em Jesus',
+            'title' => 'Quartas Especiais',
+            'text' => 'Nas quartas-feiras do mês de novembro, às 19h30, apresentamos a nova série Permanecer em Jesus, onde nossos jovens estarão responsáveis por toda a programação. Baseada no livro 2 da série Passos Para o Reavivamento Pessoal de Helmut Haubeil, inspirado na célebre passagem bíblica "Permaneça em mim, e Eu permanecerei em vocês", o livro mergulha nas verdades atemporais contidas nessas palavras, revelando insights transformadores sobre a conexão espiritual e a busca pela plenitude da vida. Participe com sua família!',
         ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/Quartas de Poder 2026.jpg',
-            'alt' => 'Quartas de Poder — O Mover do Espírito',
+            'alt' => 'Quartas de Poder — O Poder do Espírito',
             'title' => 'Quartas de Poder',
-            'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30, com o tema "O Mover do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
+            'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30, com o tema "O Poder do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Série Coisas Estranhas.png',
-            'alt' => 'Série Coisas Estranhas — Domingos Especiais',
-            'title' => 'Coisas Estranhas',
-            'text' => 'Poucos temas no cristianismo despertam tanta curiosidade e controvérsia quanto o fenômeno das "línguas estranhas". Seria uma evidência incontestável da presença do Espírito Santo, uma experiência emocional intensa ou uma prática que precisa ser compreendida à luz da verdade bíblica? Nesta mensagem, vamos investigar a origem e o propósito desse dom, compreender seu significado na experiência cristã e descobrir se o verdadeiro sinal da atuação de Deus está apenas em manifestações extraordinárias ou em uma vida transformada. Assista a nova série dos domingos especiais de agosto e setembro intitulada COISAS ESTRANHAS, sempre às 19h.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Rádio NT.jpeg',
-            'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
+            'src' => $boletimBase . '/NT com Arautos 16X9.jpeg',
+            'alt' => 'Inauguração da Rádio Novo Tempo Brasília — 92.9 FM',
             'title' => 'Rádio Novo Tempo',
-            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama. E no dia 07/11/26, às 15h30, na Igreja Adventista Central de Brasília, SGAS 611 Módulo 75, Avenida L2 Sul - Brasília/DF, teremos o Programa de inauguração da Rádio Novo Tempo Brasília — 92.9 FM, com a presença do Quarteto Arautos do Rei! Vamos agradecer a Deus e celebrar juntos essa oportunidade de levar Sua mensagem de amor a tantos lares. Convide sua família e seus amigos! Sua presença vai tornar esse momento ainda mais especial. Um novo tempo de esperança para Brasília, e queremos você pertinho da gente nessa celebração! Faça sua inscrição: https://eventos.adventistasbrasilia.org.br/event/evento/400 Esperamos você com muito carinho!',
         ],
         [
             'type' => 'image',
@@ -184,10 +192,31 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Recital CEMAB.jpg',
+            'alt' => 'Recital CEMAB — 08 e 10 de dezembro',
+            'title' => 'Recital CEMAB',
+            'text' => 'Vem aí o Recital CEMAB, um momento muito especial repleto de música, talento e emoção! O evento acontecerá nos dias 08 e 10 de dezembro, às 19h30, no Salão Jovem. Venha vivenciar essa experiência inesquecível e celebrar conosco o empenho e a dedicação de nossos alunos e artistas; sua presença tornará esta noite ainda mais brilhante!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Canal APLAC.jpeg',
+            'alt' => 'Canal Adventistas Brasília no WhatsApp',
+            'title' => 'Canal APlaC',
+            'text' => 'Você já segue o canal Adventistas Brasília no WhatsApp? É o jeito mais fácil de ficar por dentro de tudo o que acontece na nossa região da APlaC: eventos, programações e avisos importantes, direto no seu celular. Escaneie o QR Code e clique em “Seguir”.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Desbravadores.jpg',
             'alt' => 'Apoie um Desbravador — Campori DSA 2027',
             'title' => 'Rumo ao Campori da DSA 2027',
             'text' => 'O Clube de Desbravadores Cruzeiro do Sul já está se preparando para participar do Campori da Divisão Sul-Americana, o maior encontro de Desbravadores, que será realizado de 5 a 10 de janeiro de 2027, em Barretos/SP. Mais do que uma viagem, o Campori representa uma oportunidade de crescimento espiritual, desenvolvimento de valores cristãos, fortalecimento da fé e formação do caráter de nossas crianças e adolescentes. Por isso, convidamos toda a igreja a fazer parte desse projeto! Adote um Desbravador e apoie a campanha "Rumo ao Campori da DSA 2027". Sua contribuição ajudará nossos desbravadores a viver essa experiência transformadora. Se você deseja colaborar ou saber mais sobre como participar, entre em contato com a Direção do Clube de Desbravadores Cruzeiro do Sul. Celular: (61) 99117-4444 – Rozi Manzi.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/ENEM (Apresentação).jpg',
+            'alt' => 'Marca a Resposta — culto de oração para o ENEM',
+            'title' => 'Marca a Resposta',
+            'text' => 'Atenção, jovens que farão o ENEM 2026! No sábado, dia 07/11, às 18h30, acontecerá no Salão Jovem um culto especial de oração dedicado aos estudantes. O encontro oferecerá apoio espiritual e emocional para aliviar a ansiedade antes das provas. Na prova, marque a resposta certa; na vida, lembre-se de que Deus já marcou o seu caminho! Garanta acessando o link: https://forms.gle/mkrwBqx2w3GyPcWYA',
         ],
         [
             'type' => 'image',
@@ -208,42 +237,35 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
             'src' => $boletimBase . '/Liberdade Religiosa capa divulgação.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
-            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às quintas-feiras, às 20h, sempre em formato online. O próximo encontro será no dia 17 de setembro, via Microsoft Teams. Contaremos com a presença de Manassés Queiroz, teólogo, terapeuta familiar, individual e de casais, e sexólogo, com especializações em relacionamentos, sexualidade e dinâmica familiar. Com formação em Teologia e Publicidade, reúne mais de 34 anos de experiência pessoal e profissional dedicados ao estudo, à compreensão e ao cuidado das relações humanas, ajudando pessoas, casais e famílias a construírem relacionamentos mais saudáveis, conscientes e significativos. Tema do encontro: O diagnóstico da liberdade. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t "Orai sem cessar." — 1 Tessalonicenses 5:17',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 20h, sempre em formato online. Participe, divulgue e ore por este projeto! "Orai sem cessar." — 1 Tessalonicenses 5:17. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/318 capa.jpeg',
-            'alt' => 'Código 318 — círculo de homens',
-            'title' => 'Código 318',
-            'text' => 'Cansado de carregar tudo sozinho? O CÓDIGO 318 é um círculo de homens que se reúnem para serem treinados por Deus e formarem uns aos outros. Não é mais um evento. É um lugar para você ser visto, ouvido e fortalecido. Traga a sua história e traga um amigo. Homens treinados por Deus. Homens que formam homens. CÓDIGO 318. O seu lugar é no círculo. Entre para o nosso grupo acesse o link: https://chat.whatsapp.com/FTLmis6gSdsKXbqCafHcrd?s=cl&p=i&mlu=0&ilr=0',
+            'src' => $boletimBase . '/Mutirão de Natal 2026.jpg',
+            'alt' => 'Mutirão de Natal 2026',
+            'title' => 'Mutirão de Natal',
+            'text' => 'Participe do Mutirão de Natal 2026! Período: 31/10 a 19/12 de 2026. Tema: "Amarás o teu próximo como a ti mesmo." Mateus 22:39. Objetivos: ajudar nas despesas das instituições CEPAI, Instituto Crescer, Creche Semeando Esperança, ASA (Ação Social Adventista) da Igreja Adventista do Sétimo Dia Central de Brasília e outras, e levar o amor de Cristo por meio de ações solidárias. Meta: arrecadar R$ 450.000,00. Como participar: faça um PIX programado (12 parcelas) para a conta da Igreja no valor sugerido de R$ 190,00 por mês (pode ser mais ou menos). É possível doar via cartão de crédito em até 12 vezes sem juros. As doações serão distribuídas entre as instituições. Outras formas de ajudar: doe roupas, calçados, brinquedos, móveis e utensílios em bom estado. Esses itens serão vendidos em bazar solidário, com valores simbólicos, para ajudar as famílias carentes e arrecadar fundos para cestas básicas. PIX: 61 99612-5450 (PIX exclusivo para o Mutirão de Natal). Enviar comprovante para o WhatsApp: (61) 99612-5450, Igreja Adventista Central de Brasília - Administração. Cartão de crédito: disponível no hall da Igreja, aos sábados, pela manhã. Dúvidas e contatos: Márcio Amorim (61) 98116-9297; Cezar Degraf (61) 99983-9658; Karin Gorski (ASA) (61) 98158-4700.',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Série Criacionismo.jpeg',
-            'alt' => 'Série Criacionismo — outubro',
-            'title' => 'Criacionismo',
-            'text' => 'Vem aí uma série especial sobre o criacionismo! Em outubro, teremos um mês dedicado a relembrar as obras do nosso Criador. No dia 24/10, ápice da programação, às 9h, teremos a palestra: \'Trocando as lentes: A Diferença entre a Visão Humana e a Divina\', à tarde \'Uma Viagem no Tempo\', tendo como palestrante Tiago Alves Jorge de Souza. Programe-se para participar!',
+            'src' => $boletimBase . '/Domingos da Família.jpg',
+            'alt' => 'Domingos da Família — As 5 marcas de uma família saudável',
+            'title' => 'Domingos da Família',
+            'text' => 'Vivemos dias desafiadores, onde a correria, as preocupações e a falta de tempo afetam nossos relacionamentos. Mas a Palavra de Deus nos mostra que é sim possível construir um lar forte, saudável e harmonioso! Em novembro, sempre às 19h, teremos os Domingos da Família com uma série muito especial: As 5 Marcas de Uma Família Saudável – O Segredo para a Harmonia do Lar. Vamos orar e convidar! Cada membro da igreja é desafiado a trazer uma família não adventista para participar conosco. Essa é a nossa missão! Todas as famílias convidadas não adventistas que nos visitarem ganharão um livro de meditação preparado com muito carinho pelo Ministério da Família. Vamos juntos transformar nossos lares e abençoar outras famílias? Compartilhe essa mensagem e comece a orar pelos seus convidados!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Firmados na Palavra.jpeg',
-            'alt' => 'Curso Bíblico Firmados na Palavra',
-            'title' => 'Firmados na Palavra',
-            'text' => 'Queridos irmãos, temos um convite especial para toda a família! Aos domingos, às 18h, teremos o Curso Bíblico "Firmados na Palavra". Será um momento precioso para conhecer, compreender e viver as verdades da Bíblia, fortalecer a fé e crescermos juntos na caminhada com Deus. Local: Igreja Adventista Central de Brasília. Todos os domingos, às 18h. Traga sua família e seus amigos para estudar a Palavra conosco! "Ensina-me, SENHOR, o caminho dos teus mandamentos..." — Salmo 119:33. Esperamos vocês!',
+            'src' => $boletimBase . '/SAVE THE DATE.png',
+            'alt' => 'Só Para Jovens — 13 e 14 de novembro',
+            'title' => 'Só Para Jovens',
+            'text' => 'Jovem, anote essa data! Nos dias 13 e 14 de novembro, vai rolar o Só Para Jovens! Um encontro imperdível para conversarmos, aprendermos e crescermos juntos na fé. Programação: sexta-feira (13/11), às 19h30; sábado (14/11), às 09h. Local: Igreja Adventista do Sétimo Dia Central de Brasília - SGAS 611, Módulo 75, Avenida L2 Sul - Brasília/DF. Separe a data, chame seus amigos e venha curtir esse momento com a gente. Te esperamos lá!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/SEMINÁRIO.jpeg',
-            'alt' => 'Seminário Eventos Finais do Juízo',
-            'title' => 'Seminário Eventos Finais do Juízo',
-            'text' => 'Nos sábados, às 10h45, na sala da Classe Novo Tempo, teremos o nosso primeiro seminário sobre os eventos finais do juízo. Vamos explorar profundamente os capítulos 12 e 13 do livro de Apocalipse, sob a condução especial do professor Manuel Morais. Venha descobrir e aprender mais sobre os fascinantes símbolos apocalípticos: O Dragão, A Mulher e As Bestas. Sua presença é muito importante! Venha e traga seus amigos para esse momento de aprendizado e comunhão. Esperamos você!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Roda de conversa.jpeg',
-            'alt' => 'Roda de conversa — Setembro Amarelo',
-            'title' => 'Roda de Conversa',
-            'text' => 'A Unidade 5 da Escola Sabatina da Igreja Central de Brasília convida para a roda de conversa do Setembro Amarelo, mês de prevenção ao suicídio. O encontro abordará o tema \'Como abordar pessoas com depressão e quais os limites do apoio\', com a participação do pastor Lucas Alves e das psicólogas Nathalia Almeida e Gleice Barros. O evento será realizado no dia 19/09/26, às 16h, na Sala de Saúde. Acesse o link para participar: https://forms.gle/yiUdhg2ayFNJFXmE6',
+            'src' => $boletimBase . '/BISCOITOS NATALINOS.jpg',
+            'alt' => 'Concerto O Messias e curso de biscoitos natalinos',
+            'title' => 'O Messias',
+            'text' => 'No dia 06/12, convidamos você e sua família para assistir ao grande concerto O Messias, de Handel, interpretado pelo tradicional Coral Adventista de Brasília! E, para tornar esse dia ainda mais inesquecível, à tarde teremos um delicioso curso de biscoitos natalinos com a professora Rosa Vono e um encantador presépio vivo, perfeito para registrar aquelas fotos instagramáveis! Garanta já a sua vaga na oficina de biscoitos natalinos, pois são apenas 25 vagas! Inscreva-se no link: https://forms.gle/vaQoWQ1cAwitPNVp6 Reserve essa data e prepare-se para grandes surpresas!',
         ],
         [
             'type' => 'image',
@@ -261,4 +283,4 @@ $boletimBase = 'img/boletim/boltetim_19_09_2026';
         ],
     ];
 
-return $boletins;
+    return $boletins;
