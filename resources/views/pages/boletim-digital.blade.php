@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_31_10_2026';
+    $boletimBase = 'img/boletim/Boletim_07_11_2026';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
     $oracaoMinBase = $boletimBase . '/M. Oração';
 
@@ -23,17 +23,10 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: DOMÍNIO PRÓPRIO. O desafio da PRIMEIRA semana de NOVEMBRO é: Ore por domínio próprio nas palavras, evitando reclamações, críticas impensadas e respostas precipitadas.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: DOMÍNIO PRÓPRIO. O desafio da SEGUNDA semana de NOVEMBRO é: Ore por equilíbrio emocional, pedindo a Deus controle sobre a ansiedade, a raiva e o medo.';
 
     $boletins = [
         // Com descrição (script DOCX)
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Dia-do-Pastor-2026.jpg',
-            'alt' => 'Dia do Pastor Adventista — 31 de outubro',
-            'title' => 'Dia do Pastor',
-            'text' => 'Hoje é dia de homenagear nossos pastores e suas famílias! Cuidar da igreja é uma missão preciosa dada por Deus, e cabe a nós apoiar e interceder por eles. Aos pastores da nossa igreja, um Feliz Dia do Pastor Adventista!',
-        ],
         [
             'type' => 'image',
             'src' => $boletimBase . '/One Voice.jpg',
@@ -50,7 +43,7 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-10-13 at 19.13.23 (1).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-10-13 at 19.13.23 (3).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
@@ -116,7 +109,7 @@
             'src' => $boletimBase . '/Entrega de livros.jpg',
             'alt' => 'Entrega de livros missionários',
             'title' => 'Entrega de Livros',
-            'text' => 'O ritmo acelerado do ano continua e a nossa missão não pode parar! Outubro chegou trazendo um novo gás e a grande oportunidade de expandirmos o alcance do Impacto Esperança. Cada exemplar entregue representa uma semente de transformação, uma resposta às orações de alguém e um raio de luz para quem mais precisa. O momento de agir é agora e a sua presença faz toda a diferença para que essa corrente de fé alcance ainda mais corações. Prepare a sua agenda, junte-se a nós nesta grande mobilização e faça história neste mês de outubro! Dê uma passada no Centro White, retire os livros da sua semana e venha ser um instrumento ativo de esperança. Quem assume esse compromisso com a gente em outubro?',
+            'text' => 'A marcha do ano não diminui o passo e o nosso propósito segue firme! Novembro se apresenta renovando as nossas energias e abrindo espaço para multiplicarmos ainda mais a mensagem do Impacto Esperança. Cada livro espalhado funciona como uma semente de mudança, o atendimento a um clamor em oração e um ponto de luz no caminho de quem busca respostas. A hora do engajamento chegou, e o seu apoio é fundamental para fazermos essa rede de fé tocar um número ainda maior de vidas. Organize o seu tempo, una forças conosco nessa verdadeira força-tarefa e deixe a sua marca neste mês de novembro! Faça uma visita ao Centro White, garanta os materiais da sua semana e seja um verdadeiro agente de transformação. Vamos juntos vestir essa camisa e encarar esse desafio em novembro?',
         ],
         [
             'type' => 'image',
@@ -124,13 +117,6 @@
             'alt' => 'Doutores de Esperança',
             'title' => 'Doutores de Esperança',
             'text' => 'Junte-se aos Doutores de Esperança! Você já sentiu o desejo de levar um abraço, um sorriso e uma palavra de conforto para quem mais precisa? Nossos plantões estão de volta, e queremos convidar você para fazer parte dessa missão transformadora! Quer participar, mas ainda não faz parte do grupo? Esta é a sua oportunidade! Você pode começar acompanhando a nossa equipe como observador, conhecendo de perto a dinâmica do projeto antes de dar o próximo passo. Venha vivenciar essa experiência cheia de amor, empatia e alegria com a gente. Como posso me inscrever? Entre em contato agora mesmo com a Lu Mesquita pelo link https://wa.me/message/7M6UOXXMBRWRI1 e garanta as informações para participar. Venha fazer a diferença na vida de alguém e descubra a alegria de servir!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/SAÚDE.jpeg',
-            'alt' => 'Classe de Saúde — Razão e emoção',
-            'title' => 'Classe de Saúde',
-            'text' => 'RAZÃO E EMOÇÃO: COMO FAZÊ-LAS ANDAR DE MÃOS DADAS. Entre o que sentimos e o que pensamos, existem conflitos silenciosos que influenciam nossas escolhas e relações. Compreender essa dinâmica é essencial para entender melhor a nós mesmos e ao mundo ao nosso redor. Equilibrar razão e emoção não significa reprimir sentimentos nem agir apenas pela lógica, mas aprender a reconhecer emoções e refletir antes de decidir. Quando mente e coração caminham em harmonia, desenvolvemos mais consciência, maturidade emocional e sabedoria para viver e nos relacionar melhor. Palestra com a Doutora Arlene S. Carvalho, psicóloga clínica e organizacional.',
         ],
         [
             'type' => 'image',
@@ -144,7 +130,7 @@
             'src' => $boletimBase . '/Bazar ASA.jpg',
             'alt' => 'Bazar da ASA',
             'title' => 'Bazar ASA',
-            'text' => 'No domingo, dia 08/11, teremos o bazar da ASA, peças selecionadas a preços acessíveis. Programe-se para participar!',
+            'text' => 'No domingo, dia 08/11, das 9h às 14h, teremos o bazar da ASA, peças selecionadas a preços acessíveis. Programe-se para participar!',
         ],
         [
             'type' => 'image',
@@ -225,6 +211,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Recital CEMAB.jpg',
+            'alt' => 'Recital CEMAB — 08 e 10 de dezembro',
+            'title' => 'Recital CEMAB',
+            'text' => 'Vem aí o Recital CEMAB, um momento muito especial repleto de música, talento e emoção! O evento acontecerá nos dias 08 e 10 de dezembro, às 19h30, no Salão Jovem. Venha vivenciar essa experiência inesquecível e celebrar conosco o empenho e a dedicação de nossos alunos e artistas; sua presença tornará esta noite ainda mais brilhante!',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Canal APLAC.jpeg',
             'alt' => 'Canal Adventistas Brasília no WhatsApp',
             'title' => 'Canal APlaC',
@@ -281,13 +274,6 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Demóstenes.jpg',
-            'alt' => 'Culto especial com o pastor Demóstenes Neves',
-            'title' => 'Culto Especial',
-            'text' => 'Você é nosso convidado especial para participar de uma programação muito abençoada no sábado, dia 31/10, às 9h e às 16h. Teremos a presença do Pastor Demóstenes Neves ministrando sobre o tema "Restaurando a santidade de Deus na minha vida". O Pastor Demóstenes Neves é um respeitado teólogo, educador e preletor da Igreja Adventista do Sétimo Dia. Com sólida formação acadêmica, ele é graduado em Pedagogia e Teologia, mestre em Família na Sociedade Contemporânea pela UCSAL e doutor em Psicologia Social pela UFBA. Atualmente, exerce forte influência na formação de novos líderes. Além disso, o Pastor Demóstenes é amplamente conhecido por seu ministério itinerante, viajando pelo Brasil como palestrante em semanas de oração e eventos focados em família, fidelidade e temas sobre os quais também escreve. Faça sua inscrição através do link para garantir sua participação e materiais do evento: https://forms.gle/LpNWXo2VWYLiNy5M7 Traga sua família e convide seus amigos!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/SAVE THE DATE.png',
             'alt' => 'Só Para Jovens — 13 e 14 de novembro',
             'title' => 'Só Para Jovens',
@@ -295,10 +281,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/convite_jotinha_18h_16_9.png',
-            'alt' => 'Jotinha — bandinha infantil',
-            'title' => 'Jotinha',
-            'text' => 'No sábado, dia 31/10/26, às 18h teremos nosso maravilhoso Jotinha! Esperamos as crianças e jovens para mais um momento especial de música, amizade e aprendizado, desenvolvendo seus talentos e crescendo no amor a Deus. Traga seus filhos e convide também amigos e familiares! Esperamos vocês!',
+            'src' => $boletimBase . '/BISCOITOS NATALINOS.jpg',
+            'alt' => 'Concerto O Messias e curso de biscoitos natalinos',
+            'title' => 'O Messias',
+            'text' => 'No dia 06/12, convidamos você e sua família para assistir ao grande concerto O Messias, de Handel, interpretado pelo tradicional Coral Adventista de Brasília! E, para tornar esse dia ainda mais inesquecível, à tarde teremos um delicioso curso de biscoitos natalinos com a professora Rosa Vono e um encantador presépio vivo, perfeito para registrar aquelas fotos instagramáveis! Garanta já a sua vaga na oficina de biscoitos natalinos, pois são apenas 25 vagas! Inscreva-se no link: https://forms.gle/vaQoWQ1cAwitPNVp6 Reserve essa data e prepare-se para grandes surpresas!',
         ],
         [
             'type' => 'image',
