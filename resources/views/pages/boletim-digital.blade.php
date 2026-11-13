@@ -204,6 +204,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/NT.jpg',
+            'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
+            'title' => 'Rádio Novo Tempo',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Sementes Musicais.jpg',
             'alt' => 'Sementes Musicais — flautas doces no CEMAB',
             'title' => 'Sementes Musicais',
@@ -278,6 +285,13 @@
             'alt' => 'Palestra para casais — Saúde Emocional do Casal',
             'title' => 'Palestra para Casais',
             'text' => 'Invista na harmonia do seu casamento participando da palestra "Saúde Emocional do Casal", dia 28/11, às 17h, e aproveite a oportunidade para convidar uma família não adventista para receber um presente especial de fé e esperança.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Renovação de Votos.jpg',
+            'alt' => 'Culto de Renovação de Votos Matrimoniais — 29/11',
+            'title' => 'Renovação de Votos',
+            'text' => 'Celebre o amor e o compromisso eterno com seu cônjuge no Culto de Renovação de Votos Matrimoniais, dia 29/11, às 19h, na Igreja Central de Brasília; traga uma família convidada para vivenciar essa noite emocionante e ser presenteada com uma meditação especial.',
         ],
         [
             'type' => 'image',
