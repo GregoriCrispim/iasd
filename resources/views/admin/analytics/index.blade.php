@@ -6,11 +6,11 @@
 
 @section('actions')
     @if ($includeBots)
-        <a href="{{ route('admin.analytics.index') }}" class="btn btn-secondary">
+        <a href="{{ route('admin.analytics.index', array_filter(['route_sort' => $routeSort !== 'views_desc' ? $routeSort : null])) }}" class="btn btn-secondary">
             <i class="bi bi-funnel"></i> Só humanos
         </a>
     @else
-        <a href="{{ route('admin.analytics.index', ['bots' => 1]) }}" class="btn btn-secondary">
+        <a href="{{ route('admin.analytics.index', array_filter(['bots' => 1, 'route_sort' => $routeSort !== 'views_desc' ? $routeSort : null])) }}" class="btn btn-secondary">
             <i class="bi bi-robot"></i> Incluir bots
         </a>
     @endif
@@ -140,7 +140,23 @@
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:24px;">
         <div class="card" style="margin:0;">
-            <div class="card-head"><h2>Tráfego por rota</h2></div>
+            <div class="card-head">
+                <h2>Tráfego por rota</h2>
+                <form method="get" action="{{ route('admin.analytics.index') }}" class="analytics-route-sort">
+                    @if ($includeBots)
+                        <input type="hidden" name="bots" value="1">
+                    @endif
+                    <label for="route_sort">Ordenar</label>
+                    <select id="route_sort" name="route_sort" class="select" onchange="this.form.submit()">
+                        @foreach ($routeSortOptions as $value => $label)
+                            <option value="{{ $value }}" @selected($routeSort === $value)>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    <noscript>
+                        <button type="submit" class="btn btn-secondary">Aplicar</button>
+                    </noscript>
+                </form>
+            </div>
             <div class="card-body" style="padding:0;">
                 <div class="table-wrap">
                     <table class="adm-table">
@@ -284,6 +300,34 @@
     .analytics-day-chart-wrap canvas {
         width: 100% !important;
         max-height: 320px;
+    }
+    .analytics-route-sort {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+    }
+    .analytics-route-sort label {
+        font-size: 12px;
+        color: var(--adm-muted);
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .analytics-route-sort .select {
+        width: auto;
+        min-width: 190px;
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    @media (max-width: 640px) {
+        .analytics-route-sort {
+            margin-left: 0;
+            width: 100%;
+        }
+        .analytics-route-sort .select {
+            width: 100%;
+            min-width: 0;
+        }
     }
 </style>
 @endpush

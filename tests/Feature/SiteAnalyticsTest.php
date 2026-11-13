@@ -6,6 +6,7 @@ use App\Models\FormSubmission;
 use App\Models\PageView;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\CarbonInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -130,5 +131,69 @@ class SiteAnalyticsTest extends TestCase
             ->get(route('admin.analytics.index'))
             ->assertOk()
             ->assertSee('Tráfego do site');
+    }
+
+    public function test_admin_analytics_can_sort_traffic_by_route(): void
+    {
+        $now = now();
+        $this->seedPageViews('home', '/', 3, 2, $now);
+        $this->seedPageViews('igreja', '/igreja', 4, 4, $now);
+        $this->seedPageViews('faq', '/faq', 1, 1, $now);
+
+        $admin = User::create([
+            'name' => 'Admin',
+            'email' => 'admin-route-sort@ex.com',
+            'password' => 'senha12345',
+            'is_active' => true,
+        ]);
+        $admin->syncRoles(['admin']);
+
+        $default = $this->actingAs($admin, 'admin')
+            ->get(route('admin.analytics.index'))
+            ->assertOk()
+            ->assertSee('Ordenar')
+            ->viewData('byRoute')
+            ->pluck('route_key')
+            ->all();
+        $this->assertSame(['igreja', 'home', 'faq'], $default);
+
+        $byViewsAsc = $this->actingAs($admin, 'admin')
+            ->get(route('admin.analytics.index', ['route_sort' => 'views_asc']))
+            ->assertOk()
+            ->viewData('byRoute')
+            ->pluck('route_key')
+            ->all();
+        $this->assertSame(['faq', 'home', 'igreja'], $byViewsAsc);
+
+        $byRouteName = $this->actingAs($admin, 'admin')
+            ->get(route('admin.analytics.index', ['route_sort' => 'route_desc']))
+            ->assertOk()
+            ->viewData('byRoute')
+            ->pluck('route_key')
+            ->all();
+        $this->assertSame(['igreja', 'home', 'faq'], $byRouteName);
+
+        $byUniques = $this->actingAs($admin, 'admin')
+            ->get(route('admin.analytics.index', ['route_sort' => 'uniques_desc']))
+            ->assertOk()
+            ->viewData('byRoute')
+            ->pluck('route_key')
+            ->all();
+        $this->assertSame(['igreja', 'home', 'faq'], $byUniques);
+    }
+
+    private function seedPageViews(string $routeName, string $path, int $total, int $uniques, CarbonInterface $viewedAt): void
+    {
+        for ($i = 0; $i < $total; $i++) {
+            PageView::query()->create([
+                'viewed_at' => $viewedAt,
+                'method' => 'GET',
+                'path' => $path,
+                'route_name' => $routeName,
+                'status' => 200,
+                'visitor_key' => $routeName.'-visitor-'.($i % $uniques),
+                'is_bot' => false,
+            ]);
+        }
     }
 }

@@ -11,9 +11,20 @@ use Illuminate\View\View;
 
 class AnalyticsController extends Controller
 {
+    /** @var array<string, array{0: string, 1: string}> */
+    private const ROUTE_SORTS = [
+        'views_desc' => ['total', 'desc'],
+        'views_asc' => ['total', 'asc'],
+        'uniques_desc' => ['uniques', 'desc'],
+        'uniques_asc' => ['uniques', 'asc'],
+        'route_asc' => ['route_key', 'asc'],
+        'route_desc' => ['route_key', 'desc'],
+    ];
+
     public function index(Request $request): View
     {
         $includeBots = $request->boolean('bots');
+        $routeSort = $this->resolveRouteSort($request->string('route_sort')->toString());
         $now = now();
         $todayStart = $now->copy()->startOfDay();
         $last7Start = $now->copy()->subDays(6)->startOfDay();
@@ -37,15 +48,19 @@ class AnalyticsController extends Controller
         $formsToday = (clone $forms)->where('submitted_at', '>=', $todayStart)->count();
         $formsLast7 = (clone $forms)->where('submitted_at', '>=', $last7Start)->count();
 
-        $byRoute = (clone $views)
+        $byRouteQuery = (clone $views)
             ->select(
                 DB::raw("COALESCE(route_name, path) as route_key"),
                 DB::raw('MIN(path) as sample_path'),
                 DB::raw('COUNT(*) as total'),
                 DB::raw('COUNT(DISTINCT visitor_key) as uniques')
             )
-            ->groupBy(DB::raw("COALESCE(route_name, path)"))
-            ->orderByDesc('total')
+            ->groupBy(DB::raw("COALESCE(route_name, path)"));
+
+        [$sortColumn, $sortDirection] = self::ROUTE_SORTS[$routeSort];
+        $byRoute = $byRouteQuery
+            ->orderBy($sortColumn, $sortDirection)
+            ->orderBy($sortColumn === 'route_key' ? 'total' : 'route_key')
             ->limit(40)
             ->get();
 
@@ -124,6 +139,15 @@ class AnalyticsController extends Controller
 
         return view('admin.analytics.index', [
             'includeBots' => $includeBots,
+            'routeSort' => $routeSort,
+            'routeSortOptions' => [
+                'views_desc' => 'Mais visualizações',
+                'views_asc' => 'Menos visualizações',
+                'uniques_desc' => 'Mais únicos',
+                'uniques_asc' => 'Menos únicos',
+                'route_asc' => 'Rota A–Z',
+                'route_desc' => 'Rota Z–A',
+            ],
             'stats' => [
                 'views_total' => $viewsTotal,
                 'views_unique' => $viewsUnique,
@@ -144,5 +168,10 @@ class AnalyticsController extends Controller
             'recentViews' => $recentViews,
             'recentForms' => $recentForms,
         ]);
+    }
+
+    private function resolveRouteSort(string $value): string
+    {
+        return array_key_exists($value, self::ROUTE_SORTS) ? $value : 'views_desc';
     }
 }
