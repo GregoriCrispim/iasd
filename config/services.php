@@ -40,6 +40,10 @@ return [
         'spreadsheet_id' => env('GOOGLE_SHEETS_SPREADSHEET_ID'),
         'spreadsheet_id_extra' => env('GOOGLE_SHEETS_SPREADSHEET_ID_EXTRA'),
         'sheet_name' => env('GOOGLE_SHEETS_SHEET_NAME', 'Respostas'),
+        'asa_spreadsheet_id' => env('GOOGLE_SHEETS_ASA_SPREADSHEET_ID', '1ZF4UiDVQLN5AtMgadlpAMgO77jMotXmFkN_v9UiyclI'),
+        'asa_sheet_id' => (int) env('GOOGLE_SHEETS_ASA_SHEET_ID', 1449603265),
+        'communion_spreadsheet_id' => env('GOOGLE_SHEETS_COMMUNION_SPREADSHEET_ID', '1ZF4UiDVQLN5AtMgadlpAMgO77jMotXmFkN_v9UiyclI'),
+        'communion_sheet_id' => (int) env('GOOGLE_SHEETS_COMMUNION_SHEET_ID', 443878736),
     ],
 
     'youtube' => [

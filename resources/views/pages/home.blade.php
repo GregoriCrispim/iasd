@@ -58,7 +58,7 @@
             </a>
         </div>
         <div class="item">
-            <a href="https://forms.gle/nmZztx1nZiij6i2E7" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
+            <a href="{{ route('asa.formulario') }}" class="carousel-cta-link">
                 <img src="{{ asset('img/carrousel/4.webp') }}" alt="Slide 6 - ASA" decoding="async" width="1280" height="720">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
@@ -265,8 +265,8 @@
                 <img src="{{ asset('img/cards/secretaria.webp') }}" alt="Secretaria da Igreja" loading="lazy" decoding="async" width="400" height="300">
             </div>
             <div class="card__body">
-                <h2 class="acb-title-serif">Fale com a secretaria</h2>
-                <p>Na Igreja Adventista do Sétimo Dia, cada membro é parte essencial da família de Deus. Para cuidar bem uns dos outros e garantir que nossa missão avance com eficiência, é fundamental que seus dados estejam sempre atualizados.</p>
+                <h2 class="acb-title-serif">Serviços Disponíveis</h2>
+                <p>Transferência de Membros, Casamentos Religiosos, Batismos e Profissão de Fé, Dedicatória de Crianças, Cartas de Mudança, Registros e Certificados, Estatísticas e Relatórios e Atendimento Geral.</p>
                 <span class="card_cta">Saiba mais <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
             </div>
         </a>

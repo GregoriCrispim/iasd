@@ -109,6 +109,21 @@
         box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
 
+    .servico-card .servico-link {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 12px 18px;
+        border-radius: 8px;
+        background: #003366;
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .servico-card .servico-link:hover { background: #1b4472; }
+    .servico-card .servico-link:focus-visible { outline: 3px solid #d35400; outline-offset: 3px; }
+
     .servico-card h4 {
         font-family: 'Bebas neue', sans-serif;
         font-size: 1.4em;
@@ -412,6 +427,15 @@ HTML;
         <h2 class="acb-title-serif">SERVIÇOS DISPONÍVEIS</h2>
 
         <div class="servicos-grid">
+            <div class="servico-card">
+                <h4><i class="bi bi-house-heart" aria-hidden="true"></i> Santa Ceia em Casa</h4>
+                <ul>
+                    <li>Solicitação de Santa Ceia para quem não pode comparecer presencialmente por motivos de saúde</li>
+                    <li>Informe seu endereço e o melhor dia e horário para receber a visita pastoral</li>
+                </ul>
+                <a href="{{ route('santa-ceia.formulario') }}" class="servico-link">Solicitar Santa Ceia em Casa</a>
+            </div>
+
             <div class="servico-card">
                 <h4><i class="bi bi-clipboard"></i> Transferência de Membros</h4>
                 <ul>
