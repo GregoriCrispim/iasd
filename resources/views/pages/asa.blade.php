@@ -536,7 +536,7 @@
         <p>Você já pensou em transformar seu tempo livre em momentos criativos e produtivos? A ASA tem o curso ideal para você! São cursos incríveis que vão despertar seus talentos e renovar sua rotina e até abrir portas para uma possível renda extra!</p>
         <p style="margin-top: 15px;">Aproveite essa oportunidade para aprender, crescer e se reinventar. Seu talento pode ir muito além do que você imagina!</p>
         <p style="font-weight: 600; margin-top: 20px; margin-bottom: 25px;"><em>Atenção! Os cursos são presenciais e realizados em Brasília</em></p>
-        <a href="https://forms.gle/nmZztx1nZiij6i2E7" target="_blank" rel="noopener noreferrer" class="asa-cta-button">
+        <a href="{{ route('asa.formulario') }}" class="asa-cta-button">
             Inscreva-se em um Curso
         </a>
     </div>

@@ -20,6 +20,8 @@ use App\Http\Controllers\CampaignRedirectController;
 use App\Http\Controllers\FaceSearchController;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AsaCourseController;
+use App\Http\Controllers\CommunionRequestController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SpiritualGiftsController;
 use App\Http\Controllers\VolunteerApplicationController;
@@ -189,8 +191,14 @@ Route::get('/programacoes', [PageController::class, 'programacoes'])->name('prog
 Route::view('/boletim-digital', 'pages.boletim-digital')->name('boletim-digital');
 Route::get('/cpb', [PageController::class, 'cpb'])->name('cpb');
 Route::get('/asa', [PageController::class, 'asa'])->name('asa');
+Route::get('/asa/formulario', [AsaCourseController::class, 'show'])->name('asa.formulario');
+Route::post('/asa/formulario', [AsaCourseController::class, 'store'])
+    ->middleware('throttle:5,1')->name('asa.enviar');
 Route::get('/map', [PageController::class, 'map'])->name('map');
 Route::get('/secretaria', [PageController::class, 'secretaria'])->name('secretaria');
+Route::get('/secretaria/santa-ceia', [CommunionRequestController::class, 'show'])->name('santa-ceia.formulario');
+Route::post('/secretaria/santa-ceia', [CommunionRequestController::class, 'store'])
+    ->middleware('throttle:5,1')->name('santa-ceia.enviar');
 Route::get('/criacionismo', [PageController::class, 'criacionismo'])->name('criacionismo');
 Route::get('/evidencias-biblicas', [PageController::class, 'evidenciasBiblicas'])->name('evidencias-biblicas');
 Route::get('/filmes-series', [PageController::class, 'filmesSeries'])->name('filmes-series');

@@ -145,6 +145,61 @@ class GoogleSheetsService
         );
     }
 
+    /** Prepare only the specified worksheet; never fall back to another destination. */
+    public function prepareWorksheet(string $spreadsheetId, int $sheetId, array $headers): string
+    {
+        if ($spreadsheetId === '' || count($headers) < 1 || count($headers) > 26) {
+            throw new RuntimeException('Destino ou cabeçalhos do formulário inválidos.');
+        }
+
+        $lastColumn = chr(64 + count($headers));
+
+        $book = $this->sheets->spreadsheets->get($spreadsheetId, ['fields' => 'sheets.properties']);
+        foreach ($book->getSheets() as $sheet) {
+            if ($sheet->getProperties()->getSheetId() !== $sheetId) {
+                continue;
+            }
+
+            $title = str_replace("'", "''", $sheet->getProperties()->getTitle());
+            $range = "'{$title}'!A1:{$lastColumn}1";
+            $existing = $this->sheets->spreadsheets_values->get($spreadsheetId, $range)->getValues()[0] ?? [];
+            if (count(array_filter($existing, fn ($value) => $value !== '')) === 0) {
+                $this->sheets->spreadsheets_values->update($spreadsheetId, $range,
+                    new ValueRange(['values' => [$headers]]), ['valueInputOption' => 'RAW']);
+            } elseif ($existing !== $headers) {
+                throw new RuntimeException('A aba do formulário possui cabeçalhos diferentes dos esperados.');
+            }
+
+            return "'{$title}'!A:{$lastColumn}";
+        }
+
+        throw new RuntimeException('A aba do formulário não foi encontrada na planilha.');
+    }
+
+    /** Append exclusively to the ASA destination, preserving phone numbers and literal text. */
+    public function appendAsaRegistration(array $headers, array $row): void
+    {
+        $this->appendConfiguredForm('asa', $headers, $row);
+    }
+
+    public function appendCommunionRequest(array $headers, array $row): void
+    {
+        $this->appendConfiguredForm('communion', $headers, $row);
+    }
+
+    private function appendConfiguredForm(string $form, array $headers, array $row): void
+    {
+        if (count($row) !== count($headers)) {
+            throw new RuntimeException('Formulário com quantidade de campos inválida.');
+        }
+
+        $spreadsheetId = (string) config("services.google_sheets.{$form}_spreadsheet_id");
+        $range = $this->prepareWorksheet($spreadsheetId, (int) config("services.google_sheets.{$form}_sheet_id"), $headers);
+        $this->sheets->spreadsheets_values->append($spreadsheetId, $range,
+            new ValueRange(['values' => [$row]]),
+            ['valueInputOption' => 'RAW', 'insertDataOption' => 'INSERT_ROWS']);
+    }
+
     private function rangeForSheet(string $sheetName): string
     {
         $sheetName = trim($sheetName);
