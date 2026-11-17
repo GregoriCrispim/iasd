@@ -65,6 +65,10 @@ class SiteAnalytics
             if (str_starts_with($routeName, 'admin.')) {
                 return false;
             }
+            // Downloads/binários do Doutores não contam como visualização de página.
+            if (str_ends_with($routeName, '.download') || str_contains($routeName, '.anexos.download')) {
+                return false;
+            }
             if (in_array($routeName, self::SKIP_ROUTE_NAMES, true)) {
                 return false;
             }

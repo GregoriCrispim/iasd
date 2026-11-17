@@ -23,7 +23,7 @@ class FaceSearchTest extends TestCase
         $this->descriptors = new FaceDescriptorService;
 
         foreach (['super_admin', 'member'] as $role) {
-            Role::query()->create(['name' => $role, 'guard_name' => 'web']);
+            Role::query()->firstOrCreate(['name' => $role, 'guard_name' => 'web']);
         }
     }
 

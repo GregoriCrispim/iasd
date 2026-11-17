@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         Role::query()->firstOrCreate(['name' => 'fotografia_lider', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'fotografia_colaborador', 'guard_name' => 'web']);
         Role::query()->firstOrCreate(['name' => 'member', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'doutores_admin', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'doutores_coordenador', 'guard_name' => 'web']);
+        Role::query()->firstOrCreate(['name' => 'doutores_voluntario', 'guard_name' => 'web']);
 
         $user = User::query()->updateOrCreate(
             ['email' => 'gregoridesbravador@gmail.com'],

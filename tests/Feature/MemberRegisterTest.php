@@ -16,7 +16,7 @@ class MemberRegisterTest extends TestCase
         parent::setUp();
 
         foreach (['super_admin', 'member'] as $role) {
-            Role::query()->create(['name' => $role, 'guard_name' => 'web']);
+            Role::query()->firstOrCreate(['name' => $role, 'guard_name' => 'web']);
         }
     }
 

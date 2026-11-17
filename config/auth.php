@@ -49,6 +49,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        // Sessão do módulo Doutores da Esperança — pode coexistir com 'admin' e 'web'.
+        'doutores' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
     ],
 
     /*

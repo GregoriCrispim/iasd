@@ -58,6 +58,17 @@ return [
             'report' => false,
         ],
 
+        // Mesma estratégia da galeria: mídia pública do Doutores em public/,
+        // sem depender de symlink (HostGator / hospedagem compartilhada).
+        'doutores' => [
+            'driver' => 'local',
+            'root' => public_path('img/doutores/uploads'),
+            'url' => '/img/doutores/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

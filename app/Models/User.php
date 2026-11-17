@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Doutores\Polo;
+use App\Models\Doutores\Profile as DoutoresProfile;
+use App\Support\DoutoresAuth;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -192,6 +196,97 @@ class User extends Authenticatable
         ]);
     }
 
+    public function doutoresProfile(): HasOne
+    {
+        return $this->hasOne(DoutoresProfile::class);
+    }
+
+    public function doutoresPolos(): BelongsToMany
+    {
+        return $this->belongsToMany(Polo::class, 'doutores_coordenador_polo', 'user_id', 'polo_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function doutoresRoleNames(): array
+    {
+        return $this->roles
+            ->pluck('name')
+            ->filter(fn (string $name) => in_array($name, DoutoresAuth::doutoresRoleNames(), true))
+            ->values()
+            ->all();
+    }
+
+    /**
+     * Atualiza apenas papéis doutores_*, preservando papéis do CMS/site no mesmo usuário.
+     * O mesmo e-mail pode operar nos dois portais; a separação é por guard + papel.
+     *
+     * @param  list<string>  $doutoresRoles
+     */
+    public function syncDoutoresRoles(array $doutoresRoles): static
+    {
+        $allowed = DoutoresAuth::doutoresRoleNames();
+        $doutoresRoles = array_values(array_unique(array_filter(
+            $doutoresRoles,
+            fn ($r) => is_string($r) && in_array($r, $allowed, true)
+        )));
+
+        $this->loadMissing('roles');
+        $siteRoles = $this->roles
+            ->pluck('name')
+            ->reject(fn (string $name) => in_array($name, $allowed, true))
+            ->values()
+            ->all();
+
+        return $this->syncRoles(array_values(array_unique(array_merge($siteRoles, $doutoresRoles))));
+    }
+
+    /**
+     * Atualiza o papel do CMS/site, preservando papéis doutores_* no mesmo usuário.
+     *
+     * @param  list<string>|string  $siteRoles
+     */
+    public function syncSiteRoles(array|string $siteRoles): static
+    {
+        $allowedDoutores = DoutoresAuth::doutoresRoleNames();
+        $siteRoles = array_values(array_unique(array_filter(
+            is_array($siteRoles) ? $siteRoles : [$siteRoles],
+            fn ($r) => is_string($r) && $r !== '' && ! in_array($r, $allowedDoutores, true)
+        )));
+
+        $this->loadMissing('roles');
+        $doutoresRoles = $this->doutoresRoleNames();
+
+        return $this->syncRoles(array_values(array_unique(array_merge($siteRoles, $doutoresRoles))));
+    }
+
+    public function hasDoutoresAccess(): bool
+    {
+        return DoutoresAuth::canAccessDoutoresLogin($this);
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function doutoresPerfis(): array
+    {
+        return DoutoresAuth::availablePerfis($this);
+    }
+
+    public function canActAsDoutoresAdmin(): bool
+    {
+        return DoutoresAuth::canActAsAdmin($this);
+    }
+
+    public function adminHomeRouteName(): string
+    {
+        return $this->shouldSeeAdminDashboard()
+            ? 'admin.dashboard'
+            : 'admin.galeria.index';
+    }
+
     /**
      * Membro ativo do site (papel member + conta ativa).
      */
@@ -304,13 +399,6 @@ class User extends Authenticatable
             'collaborator',
             'fotografia_lider',
         ]);
-    }
-
-    public function adminHomeRouteName(): string
-    {
-        return $this->shouldSeeAdminDashboard()
-            ? 'admin.dashboard'
-            : 'admin.galeria.index';
     }
 
     /**

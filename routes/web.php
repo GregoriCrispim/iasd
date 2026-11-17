@@ -22,6 +22,8 @@ use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AsaCourseController;
 use App\Http\Controllers\CommunionRequestController;
+use App\Http\Controllers\Doutores as D;
+use App\Http\Controllers\Doutores\CadastroPublicoController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SpiritualGiftsController;
 use App\Http\Controllers\VolunteerApplicationController;
@@ -159,6 +161,171 @@ Route::middleware(['auth:admin'])
                 ->name('galeria.faces.store');
         });
     });
+
+/*
+|--------------------------------------------------------------------------
+| Doutores da Esperança — portal próprio (guard: doutores)
+|--------------------------------------------------------------------------
+| Totalmente separado do painel do CMS (/admin) e do site de membros.
+*/
+Route::prefix('doutores')->name('doutores.')->group(function () {
+    // Autenticação própria
+    Route::get('/entrar', [D\AuthController::class, 'showLogin'])->name('login');
+    Route::post('/entrar', [D\AuthController::class, 'login'])
+        ->middleware('throttle:10,1')
+        ->name('login.post');
+    Route::post('/sair', [D\AuthController::class, 'logout'])
+        ->middleware('auth:doutores')
+        ->name('logout');
+
+    // Cadastro público de voluntários
+    Route::get('/cadastrar', [CadastroPublicoController::class, 'show'])->name('cadastrar');
+    Route::post('/cadastrar', [CadastroPublicoController::class, 'store'])
+        ->middleware('throttle:5,1')
+        ->name('cadastrar.store');
+
+    // Publicações públicas + comentários
+    Route::get('/publicacoes', [D\PortalPublicController::class, 'index'])->name('public.publicacoes.index');
+    Route::get('/publicacoes/{publicacao}', [D\PortalPublicController::class, 'show'])
+        ->whereNumber('publicacao')
+        ->name('public.publicacoes.show');
+    Route::post('/publicacoes/{publicacao}/comentarios', [D\PortalPublicController::class, 'comentar'])
+        ->whereNumber('publicacao')
+        ->middleware('throttle:5,1')
+        ->name('public.publicacoes.comentar');
+
+    // Área segura
+    Route::middleware(['auth:doutores'])->group(function () {
+        // Disponíveis para qualquer perfil Doutores autenticado
+        Route::middleware('doutores.perfil')->group(function () {
+            Route::get('/perfil/escolher', [D\AuthController::class, 'escolherPerfil'])->name('perfil.escolher');
+            Route::post('/perfil/trocar', [D\PerfilSwitchController::class, 'switch'])->name('perfil.trocar');
+
+            Route::get('/anexos', [D\AnexoController::class, 'index'])->name('anexos.index');
+            Route::post('/anexos', [D\AnexoController::class, 'store'])
+                ->middleware('throttle:30,1')
+                ->name('anexos.store');
+            Route::get('/anexos/{anexo}/download', [D\AnexoController::class, 'download'])->name('anexos.download');
+            Route::delete('/anexos/{anexo}', [D\AnexoController::class, 'destroy'])->name('anexos.destroy');
+        });
+
+        // Área do voluntário
+        Route::middleware('doutores.perfil:voluntario')->prefix('area')->name('area.')->group(function () {
+            Route::get('/', [D\VoluntarioAreaController::class, 'inicio'])->name('inicio');
+            Route::get('/perfil', [D\VoluntarioAreaController::class, 'perfil'])->name('perfil');
+            Route::put('/perfil', [D\VoluntarioAreaController::class, 'updatePerfil'])->name('perfil.update');
+            Route::get('/termos', [D\VoluntarioAreaController::class, 'termos'])->name('termos');
+            Route::post('/termos', [D\VoluntarioAreaController::class, 'aceitarTermos'])->name('termos.aceitar');
+
+            Route::get('/plantoes', [D\PlantaoController::class, 'areaIndex'])->name('plantoes');
+
+            Route::get('/inscricoes', [D\InscricaoController::class, 'index'])->name('inscricoes');
+            Route::post('/inscricoes', [D\InscricaoController::class, 'store'])->name('inscricoes.store');
+            Route::delete('/inscricoes/{inscricao}', [D\InscricaoController::class, 'destroy'])->name('inscricoes.destroy');
+            Route::post('/inscricoes/{inscricao}/confirmar-presenca', [D\InscricaoController::class, 'confirmAttendance'])->name('inscricoes.confirmar');
+
+            Route::get('/testemunhos', [D\TestemunhoController::class, 'index'])->name('testemunhos');
+            Route::post('/testemunhos', [D\TestemunhoController::class, 'store'])->name('testemunhos.store');
+            Route::put('/testemunhos/{testemunho}', [D\TestemunhoController::class, 'update'])->name('testemunhos.update');
+
+            Route::get('/avisos', [D\AvisoController::class, 'areaIndex'])->name('avisos');
+            Route::post('/avisos/{aviso}/lido', [D\AvisoController::class, 'markRead'])->name('avisos.lido');
+        });
+
+        // Coordenação e administração
+        Route::middleware('doutores.perfil:manager')->group(function () {
+            Route::get('/', [D\HomeController::class, 'index'])->name('home');
+            Route::get('/dashboard', [D\DashboardController::class, 'index'])->name('dashboard');
+
+            Route::get('/voluntarios', [D\VoluntarioController::class, 'index'])->name('voluntarios.index');
+            Route::post('/voluntarios', [D\VoluntarioController::class, 'store'])->name('voluntarios.store');
+            Route::get('/voluntarios/{profile}', [D\VoluntarioController::class, 'show'])->name('voluntarios.show');
+            Route::put('/voluntarios/{profile}', [D\VoluntarioController::class, 'update'])->name('voluntarios.update');
+            Route::post('/voluntarios/{profile}/aprovar', [D\VoluntarioController::class, 'approve'])->name('voluntarios.approve');
+            Route::post('/voluntarios/{profile}/reprovar', [D\VoluntarioController::class, 'reject'])->name('voluntarios.reject');
+
+            Route::get('/plantoes', [D\PlantaoController::class, 'index'])->name('plantoes.index');
+            Route::get('/plantoes/create', [D\PlantaoController::class, 'create'])->name('plantoes.create');
+            Route::post('/plantoes', [D\PlantaoController::class, 'store'])->name('plantoes.store');
+            Route::get('/plantoes/{plantao}', [D\PlantaoController::class, 'show'])->name('plantoes.show');
+            Route::get('/plantoes/{plantao}/edit', [D\PlantaoController::class, 'edit'])->name('plantoes.edit');
+            Route::put('/plantoes/{plantao}', [D\PlantaoController::class, 'update'])->name('plantoes.update');
+            Route::delete('/plantoes/{plantao}', [D\PlantaoController::class, 'destroy'])->name('plantoes.destroy');
+            Route::put('/plantoes/{plantao}/resultados', [D\PlantaoController::class, 'registerResults'])->name('plantoes.resultados');
+            Route::get('/plantoes/{plantao}/equipes', [D\PlantaoController::class, 'equipes'])->name('plantoes.equipes');
+            Route::post('/plantoes/{plantao}/equipes', [D\PlantaoController::class, 'gerarEquipes'])->name('plantoes.equipes.gerar');
+
+            Route::put('/inscricoes/{inscricao}/status', [D\InscricaoController::class, 'updateStatus'])->name('inscricoes.status');
+            Route::put('/anexos/{anexo}/revisar', [D\AnexoController::class, 'review'])->name('anexos.revisar');
+
+            Route::get('/avisos', [D\AvisoController::class, 'index'])->name('avisos.index');
+            Route::get('/avisos/create', [D\AvisoController::class, 'create'])->name('avisos.create');
+            Route::post('/avisos', [D\AvisoController::class, 'store'])->name('avisos.store');
+            Route::delete('/avisos/{aviso}', [D\AvisoController::class, 'destroy'])->name('avisos.destroy');
+
+            Route::get('/estudos', [D\EstudoController::class, 'index'])->name('estudos.index');
+            Route::post('/estudos', [D\EstudoController::class, 'store'])->name('estudos.store');
+            Route::get('/estudos/{estudo}', [D\EstudoController::class, 'show'])->name('estudos.show');
+            Route::put('/estudos/{estudo}', [D\EstudoController::class, 'update'])->name('estudos.update');
+            Route::delete('/estudos/{estudo}', [D\EstudoController::class, 'destroy'])->name('estudos.destroy');
+
+            Route::get('/relatorios', [D\RelatorioController::class, 'index'])->name('relatorios.index');
+            Route::get('/relatorios/exportar', [D\RelatorioController::class, 'export'])->name('relatorios.export');
+        });
+
+        // Somente administradores do módulo
+        Route::middleware('doutores.perfil:administrador')->group(function () {
+            Route::get('/usuarios', [D\UsuarioController::class, 'index'])->name('usuarios.index');
+            Route::post('/usuarios', [D\UsuarioController::class, 'store'])->name('usuarios.store');
+            Route::put('/usuarios/{usuario}', [D\UsuarioController::class, 'update'])->name('usuarios.update');
+            Route::delete('/usuarios/{usuario}', [D\UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+            Route::get('/polos', [D\PoloController::class, 'index'])->name('polos.index');
+            Route::get('/polos/create', [D\PoloController::class, 'create'])->name('polos.create');
+            Route::post('/polos', [D\PoloController::class, 'store'])->name('polos.store');
+            Route::get('/polos/{polo}/edit', [D\PoloController::class, 'edit'])->name('polos.edit');
+            Route::put('/polos/{polo}', [D\PoloController::class, 'update'])->name('polos.update');
+            Route::delete('/polos/{polo}', [D\PoloController::class, 'destroy'])->name('polos.destroy');
+
+            Route::get('/hospitais', [D\HospitalController::class, 'index'])->name('hospitais.index');
+            Route::get('/hospitais/create', [D\HospitalController::class, 'create'])->name('hospitais.create');
+            Route::post('/hospitais', [D\HospitalController::class, 'store'])->name('hospitais.store');
+            Route::get('/hospitais/{hospital}/edit', [D\HospitalController::class, 'edit'])->name('hospitais.edit');
+            Route::put('/hospitais/{hospital}', [D\HospitalController::class, 'update'])->name('hospitais.update');
+            Route::delete('/hospitais/{hospital}', [D\HospitalController::class, 'destroy'])->name('hospitais.destroy');
+
+            Route::get('/dominios', [D\DominioController::class, 'index'])->name('dominios.index');
+            Route::post('/dominios', [D\DominioController::class, 'store'])->name('dominios.store');
+            Route::put('/dominios/{dominio}', [D\DominioController::class, 'update'])->name('dominios.update');
+            Route::delete('/dominios/{dominio}', [D\DominioController::class, 'destroy'])->name('dominios.destroy');
+
+            Route::get('/gestao/publicacoes', [D\PublicacaoController::class, 'index'])->name('publicacoes.index');
+            Route::get('/gestao/publicacoes/create', [D\PublicacaoController::class, 'create'])->name('publicacoes.create');
+            Route::post('/gestao/publicacoes', [D\PublicacaoController::class, 'store'])->name('publicacoes.store');
+            Route::get('/gestao/publicacoes/{publicacao}/edit', [D\PublicacaoController::class, 'edit'])->name('publicacoes.edit');
+            Route::put('/gestao/publicacoes/{publicacao}', [D\PublicacaoController::class, 'update'])->name('publicacoes.update');
+            Route::delete('/gestao/publicacoes/{publicacao}', [D\PublicacaoController::class, 'destroy'])->name('publicacoes.destroy');
+            Route::put('/gestao/publicacoes/comentarios/{comentario}', [D\PublicacaoController::class, 'moderarComentario'])->name('publicacoes.comentarios.moderar');
+            Route::delete('/gestao/publicacoes/comentarios/{comentario}', [D\PublicacaoController::class, 'destroyComentario'])->name('publicacoes.comentarios.destroy');
+
+            Route::get('/portal', [D\PortalController::class, 'edit'])->name('portal.edit');
+            Route::put('/portal', [D\PortalController::class, 'update'])->name('portal.update');
+
+            Route::get('/logs', [D\LogController::class, 'index'])->name('logs.index');
+        });
+    });
+});
+
+// Compatibilidade: marketing mantém o cadastro antigo e URLs antigas do painel.
+Route::redirect('/doutores-da-esperanca/cadastrar', '/doutores/cadastrar', 301);
+Route::get('/admin/doutores/{path?}', function (?string $path = null) {
+    $path = trim((string) $path, '/');
+    if (str_starts_with($path, 'publicacoes')) {
+        $path = 'gestao/'.$path;
+    }
+
+    return redirect('/doutores'.($path !== '' ? '/'.$path : ''), 301);
+})->where('path', '.*');
 
 // Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');

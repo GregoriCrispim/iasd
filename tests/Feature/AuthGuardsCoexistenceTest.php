@@ -16,7 +16,7 @@ class AuthGuardsCoexistenceTest extends TestCase
         parent::setUp();
 
         foreach (['super_admin', 'member'] as $role) {
-            Role::query()->create(['name' => $role, 'guard_name' => 'web']);
+            Role::query()->firstOrCreate(['name' => $role, 'guard_name' => 'web']);
         }
     }
 
@@ -206,5 +206,41 @@ class AuthGuardsCoexistenceTest extends TestCase
 
         $this->assertSame(1, User::query()->where('email', $admin->email)->count());
         $this->assertGuest('web');
+    }
+
+    public function test_admin_login_does_not_create_doutores_session(): void
+    {
+        $admin = $this->admin();
+
+        $this->post(route('admin.login.post'), [
+            'email' => $admin->email,
+            'password' => 'senha12345',
+        ])->assertRedirect(route('admin.dashboard'));
+
+        $this->assertAuthenticatedAs($admin, 'admin');
+        $this->assertGuest('doutores');
+        $this->assertNull(session('doutores_perfil_ativo'));
+    }
+
+    public function test_admin_logout_does_not_touch_doutores_session(): void
+    {
+        $admin = $this->admin();
+        $doutoresUser = User::create([
+            'name' => 'Voluntário',
+            'email' => 'vol@ex.com',
+            'password' => 'senha12345',
+            'is_active' => true,
+        ]);
+        Role::query()->firstOrCreate(['name' => 'doutores_voluntario', 'guard_name' => 'web']);
+        $doutoresUser->syncRoles(['doutores_voluntario']);
+        \App\Models\Doutores\Profile::create(['user_id' => $doutoresUser->id, 'status' => 'ativo']);
+
+        $this->post(route('admin.login.post'), ['email' => $admin->email, 'password' => 'senha12345']);
+        $this->post(route('doutores.login.post'), ['email' => $doutoresUser->email, 'password' => 'senha12345']);
+
+        $this->post(route('admin.logout'))->assertRedirect(route('admin.login'));
+
+        $this->assertGuest('admin');
+        $this->assertAuthenticatedAs($doutoresUser, 'doutores');
     }
 }

@@ -10,26 +10,39 @@
 @push('styles')
 <style>
 
+    .doutores-header-img {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        vertical-align: top;
+    }
+
     .doutores-container {
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 40px 20px 20px 20px;
+        padding: 0 20px 20px 20px; /* sem padding-top: cola na imagem do header */
     }
 
     .doutores-intro {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        /* Quase branco, com véu verde bem leve (identidade Doutores) */
+        background:
+            radial-gradient(ellipse 80% 60% at 15% 20%, rgba(34, 197, 94, 0.07) 0%, transparent 55%),
+            radial-gradient(ellipse 70% 50% at 90% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 40% at 50% 0%, rgba(250, 204, 21, 0.04) 0%, transparent 45%),
+            linear-gradient(180deg, #ffffff 0%, #fbfefc 55%, #f7fbf8 100%);
         padding: 30px 40px;
         border-radius: 15px;
         margin-bottom: 30px;
         text-align: center;
     }
 
-    /* Sem espaço entre a 1ª seção (intro) e a 2ª (identidade) */
+    /* Colada na imagem do header + sem espaço até a identidade */
     .doutores-container > .doutores-intro {
+        margin-top: 0;
         margin-bottom: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: 0;
     }
 
     .doutores-container > .identidade-section {
@@ -290,6 +303,163 @@
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(225,48,108,0.4);
         background-color: #c1275c;
+        text-decoration: none !important;
+        color: #fff !important;
+    }
+
+    .doutores-acesso {
+        position: relative;
+        z-index: 1;
+        isolation: isolate;
+        border-radius: 18px;
+        margin: 40px auto 50px;
+        max-width: 920px;
+        padding: 8px;
+        overflow: hidden;
+        box-shadow: 0 8px 28px rgba(26, 46, 35, 0.12);
+        background: #f3f6f4; /* fallback enquanto o ::before gira */
+    }
+
+    /* Gradiente cônico que gira — forma a borda animada */
+    .doutores-acesso::before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        top: 50%;
+        left: 50%;
+        width: 220%;
+        height: 220%;
+        transform: translate(-50%, -50%);
+        background: conic-gradient(
+            from 0deg,
+            #22c55e 0deg,
+            #facc15 72deg,
+            #ef4444 144deg,
+            #22c55e 216deg,
+            #3b82f6 288deg,
+            #22c55e 360deg
+        );
+        animation: doutores-borda-girar 4s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes doutores-borda-girar {
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .doutores-acesso::before {
+            animation: none;
+        }
+    }
+
+    .doutores-acesso-inner {
+        position: relative;
+        z-index: 1;
+        background: #f3f6f4;
+        border-radius: 11px;
+        padding: 36px 32px 40px;
+        text-align: center;
+    }
+
+    .doutores-acesso-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+    }
+
+    .doutores-acesso-brand img {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+    }
+
+    .doutores-acesso h2 {
+        font-family: 'Bebas neue', sans-serif;
+        font-size: 2.1em;
+        color: #15803d;
+        margin: 0 0 8px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+
+    .doutores-acesso-lead {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.05rem;
+        color: #4b5c52;
+        max-width: 620px;
+        margin: 0 auto 28px;
+        line-height: 1.6;
+    }
+
+    .doutores-acesso-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .doutores-acesso-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-width: 200px;
+        padding: 14px 28px;
+        border-radius: 999px;
+        text-decoration: none !important;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: box-shadow 0.2s, background 0.2s;
+    }
+
+    .doutores-acesso-btn--entrar {
+        background: #c2410c;
+        color: #fff !important;
+        box-shadow: 0 6px 16px rgba(194, 65, 12, 0.28);
+    }
+
+    .doutores-acesso-btn--entrar:hover {
+        background: #9a3412;
+        box-shadow: 0 8px 20px rgba(154, 52, 18, 0.4);
+        text-decoration: none !important;
+        color: #fff !important;
+    }
+
+    .doutores-acesso-btn--cadastrar {
+        background: #15803d;
+        color: #fff !important;
+        box-shadow: 0 6px 16px rgba(21, 128, 61, 0.28);
+    }
+
+    .doutores-acesso-btn--cadastrar:hover {
+        background: #166534;
+        text-decoration: none !important;
+        color: #fff !important;
+    }
+
+    .doutores-acesso-btn--pub {
+        background: #fff;
+        color: #166534 !important;
+        border: 2px solid #15803d;
+    }
+
+    .doutores-acesso-btn--pub:hover {
+        background: #f0fdf4;
+        text-decoration: none !important;
+        color: #166534 !important;
+    }
+
+    .doutores-acesso-hint {
+        margin-top: 18px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.92rem;
+        color: #637a6c;
     }
 
     .contato-section {
@@ -480,6 +650,20 @@
             font-size: 1rem;
         }
 
+        .doutores-acesso-inner {
+            padding: 28px 18px 32px;
+        }
+
+        .doutores-acesso h2 {
+            font-size: 1.75em;
+        }
+
+        .doutores-acesso-btn {
+            width: 100%;
+            max-width: 320px;
+            min-width: 0;
+        }
+
         .galeria-grid,
         .atividade-galeria {
             grid-template-columns: 1fr;
@@ -532,13 +716,24 @@
 @endpush
 
 @section('content')
-<img src="{{ asset('img/doutores/doutores_header.webp') }}" alt="Doutores de Esperança" style="width: 100%;" fetchpriority="high" decoding="async">
-
+<img
+    src="{{ asset('img/doutores/doutores_header.webp') }}"
+    alt="Doutores de Esperança"
+    class="doutores-header-img"
+    fetchpriority="high"
+    decoding="async"
+>
 <div class="doutores-container">
 
     <!-- Seção Introdutória -->
     <div class="doutores-intro acb-fullbleed">
-        <h1 class="acb-title-serif">Doutores de Esperança</h1>
+        <h1>{{ $portal?->titulo_hero ?: 'Doutores de Esperança' }}</h1>
+        @if ($portal?->subtitulo_hero)
+            <p><strong>{{ $portal->subtitulo_hero }}</strong></p>
+        @endif
+        @if ($portal?->texto_sobre)
+            <p style="white-space: pre-line;">{{ $portal->texto_sobre }}</p>
+        @endif
         <p>
             O Ministério Doutores de Esperança consiste em um projeto de humanização hospitalar cristão apoiado pela Ação Solidária Adventista - ASA da Igreja Adventista Central de Brasília. Idealizado e criado em 2013 em Volta Redonda/RJ pelo querido Betão, Dr Gentileza, o projeto nasceu em Brasília em fevereiro de 2018 e conta com voluntários da comunidade em geral treinados para atuar na área de humanização hospitalar, através da palhaçaria, oração e música.
         </p>
@@ -546,6 +741,52 @@
             Seu propósito é realizar atividades junto à comunidade no ambiente hospitalar, asilo, creche e outros, valorizando cada pessoa com o amor de Deus, mediante um olhar humano e cristão. Com alegria e esperança, utiliza a paródia do palhaço como médico para transformar o ambiente, abrindo caminho para que a música e a intercessão (oração) transmitam a paz e a esperança que vêm de Jesus.
         </p>
     </div>
+
+    <!-- Área de acesso ao sistema Doutores -->
+    <section class="doutores-acesso" aria-labelledby="doutores-acesso-titulo">
+        <div class="doutores-acesso-inner">
+            <div class="doutores-acesso-brand">
+                <img src="{{ asset('img/doutores/logo-Doutores.png') }}" alt="Logo Doutores da Esperança" loading="lazy" decoding="async">
+                <div>
+                    <h2 id="doutores-acesso-titulo" class="acb-title-serif">Área de acesso</h2>
+                    <p class="doutores-acesso-lead" style="margin-bottom:0;">
+                        Entre no sistema de voluntariado para plantões, documentos e avisos da equipe.
+                    </p>
+                </div>
+            </div>
+            <p class="doutores-acesso-lead">
+                Voluntários já cadastrados fazem login aqui. Novos interessados podem solicitar acesso pelo cadastro online.
+            </p>
+            <div class="doutores-acesso-actions">
+                @auth('doutores')
+                    @php
+                        $dUser = auth('doutores')->user();
+                        $dPerfil = \App\Support\DoutoresAuth::getActivePerfil(request())
+                            ?? \App\Support\DoutoresAuth::defaultPerfil($dUser);
+                        $dHome = $dPerfil === \App\Support\DoutoresAuth::PERFIL_VOL
+                            ? route('doutores.area.inicio')
+                            : route('doutores.home');
+                    @endphp
+                    <a href="{{ $dHome }}" class="doutores-acesso-btn doutores-acesso-btn--entrar">
+                        Ir para o sistema
+                    </a>
+                @else
+                    <a href="{{ route('doutores.login') }}" class="doutores-acesso-btn doutores-acesso-btn--entrar">
+                        Entrar
+                    </a>
+                    <a href="{{ route('doutores.cadastrar') }}" class="doutores-acesso-btn doutores-acesso-btn--cadastrar">
+                        Quero ser voluntário(a)
+                    </a>
+                @endauth
+                <a href="{{ route('doutores.public.publicacoes.index') }}" class="doutores-acesso-btn doutores-acesso-btn--pub">
+                    Publicações
+                </a>
+            </div>
+            <p class="doutores-acesso-hint">
+                Acesso exclusivo do ministério Doutores da Esperança — independente do painel do site.
+            </p>
+        </div>
+    </section>
 
     <!-- Seção Identidade Corporativa -->
     <div class="identidade-section acb-fullbleed">
@@ -696,9 +937,15 @@
             Se você tem mais de 16 anos e deseja ser voluntário(a), será muito bem-vindo(a)! Para participar, é necessário realizar o treinamento do grupo local e assinar o termo de responsabilidade para uso de voz e imagem.
         </p>
         <p style="margin-top: 20px;">
-            Acompanhe as chamadas para formação nas redes sociais do grupo:
+            Cadastre-se no sistema ou acompanhe as chamadas nas redes sociais:
         </p>
-        <div style="margin-top: 25px;">
+        <div style="margin-top: 25px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:center;">
+            <a href="{{ route('doutores.cadastrar') }}" class="btn-instagram" style="background:#15803d;">
+                Cadastro online
+            </a>
+            <a href="#doutores-acesso-titulo" class="btn-instagram" style="background:#c2410c;">
+                Área de acesso
+            </a>
             <a href="https://www.instagram.com/doutoresdeesperancabsb" target="_blank" class="btn-instagram">
                 @doutoresdeesperancabsb
             </a>
@@ -716,18 +963,19 @@
 
             <div class="contato-item">
                 <p><strong>E-mail:</strong></p>
-                <a href="mailto:doutoresdeesperancabsb@gmail.com">doutoresdeesperancabsb@gmail.com</a>
+                @php $dEmail = $portal?->contato_email ?: 'doutoresdeesperancabsb@gmail.com'; @endphp
+                <a href="mailto:{{ $dEmail }}">{{ $dEmail }}</a>
             </div>
 
             <div class="contato-item">
                 <p><strong>Telefone:</strong></p>
-                <p>(61) 99113-2590</p>
+                <p>{{ $portal?->contato_telefone ?: '(61) 99113-2590' }}</p>
             </div>
         </div>
 
         <div class="local-section">
             <h4 class="acb-title-serif">Local de Reunião</h4>
-            <p>IASD Central de Brasília — SGAS 611, sala Dr. de Esperança</p>
+            <p>{{ $portal?->contato_endereco ?: 'IASD Central de Brasília — SGAS 611, sala Dr. de Esperança' }}</p>
         </div>
     </div>
 

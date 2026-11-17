@@ -7,6 +7,9 @@
 # Fotos enviadas pelo painel: ficam apenas no servidor, nunca no repositório.
 /public/img/galeria/uploads/*
 !/public/img/galeria/uploads/.htaccess
+# Mídia pública do Doutores (mesma estratégia da galeria).
+/public/img/doutores/uploads/*
+!/public/img/doutores/uploads/.htaccess
 /storage/*.key
 /storage/pail
 /vendor

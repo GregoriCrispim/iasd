@@ -113,7 +113,7 @@ class UserController extends Controller
             'manager_id' => $managerId === false ? null : $managerId,
         ]);
 
-        $user->syncRoles([$role]);
+        $user->syncSiteRoles([$role]);
 
         if ($pageSync !== []) {
             $user->pages()->syncWithoutDetaching($pageSync);
@@ -162,7 +162,7 @@ class UserController extends Controller
         }
 
         $user->update($payload);
-        $user->syncRoles([$role]);
+        $user->syncSiteRoles([$role]);
 
         return redirect()->route('admin.users.index')->with('success', 'Usuário atualizado.');
     }

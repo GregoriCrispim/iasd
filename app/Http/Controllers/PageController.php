@@ -113,7 +113,9 @@ class PageController extends Controller
      */
     public function doutoresDaEsperanca()
     {
-        return view('pages.doutores-da-esperanca');
+        return view('pages.doutores-da-esperanca', [
+            'portal' => \App\Models\Doutores\PortalConfig::query()->find('portal'),
+        ]);
     }
 
     /**

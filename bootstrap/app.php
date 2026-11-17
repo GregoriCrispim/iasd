@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureDoutoresPerfil;
 use App\Http\Middleware\EnsureRole;
 use App\Http\Middleware\RecordPageView;
 use Illuminate\Foundation\Application;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'role' => EnsureRole::class,
+            'doutores.perfil' => EnsureDoutoresPerfil::class,
         ]);
 
         $middleware->appendToGroup('web', [
@@ -26,6 +28,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(function (Request $request) {
             if ($request->is('admin') || $request->is('admin/*')) {
                 return route('admin.login');
+            }
+
+            // Portal Doutores da Esperança tem login próprio (guard `doutores`).
+            if ($request->is('doutores') || $request->is('doutores/*')) {
+                return route('doutores.login');
             }
 
             return route('member.login');

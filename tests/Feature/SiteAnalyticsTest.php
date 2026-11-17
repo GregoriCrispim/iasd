@@ -73,6 +73,26 @@ class SiteAnalyticsTest extends TestCase
         $this->assertDatabaseCount('page_views', 0);
     }
 
+    public function test_doutores_pages_are_tracked_in_site_analytics(): void
+    {
+        $headers = [
+            'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept-Language' => 'pt-BR,pt;q=0.9',
+        ];
+
+        $this->withHeaders($headers)->get(route('doutores-da-esperanca'))->assertOk();
+        $this->withHeaders($headers)->get(route('doutores.login'))->assertOk();
+        $this->withHeaders($headers)->get(route('doutores.cadastrar'))->assertOk();
+        $this->withHeaders($headers)->get(route('doutores.public.publicacoes.index'))->assertOk();
+
+        $routes = PageView::query()->pluck('route_name')->all();
+        $this->assertContains('doutores-da-esperanca', $routes);
+        $this->assertContains('doutores.login', $routes);
+        $this->assertContains('doutores.cadastrar', $routes);
+        $this->assertContains('doutores.public.publicacoes.index', $routes);
+        $this->assertSame(4, PageView::query()->count());
+    }
+
     public function test_prefetch_requests_are_marked_as_bots(): void
     {
         $this->withHeaders([
