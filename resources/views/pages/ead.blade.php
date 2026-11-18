@@ -3,10 +3,21 @@
 @section('title', 'IASD Central de Brasília - EAD Adventista (UNASP)')
 
 @section('meta-description', 'Estude a distância com a EAD Adventista (UNASP) com apoio da IASD Central de Brasília. Graduação e pós-graduação — Black November com condições especiais.')
-@section('og-title', 'EAD Adventista UNASP — Central de Brasília')
-@section('og-description', 'Graduação e pós-graduação com tradição adventista. Fale conosco e descubra o curso ideal.')
+@section('og-title', 'Black November EAD Adventista — Central de Brasília')
+@section('og-description', 'Primeira mensalidade R$ 0,00, até 60% de desconto e 1 pós gratuita. Graduação e pós-graduação UNASP com apoio da IASD Central de Brasília.')
+@section('og-image', asset('img/carrousel/black-november-ead.webp'))
+@section('twitter-title', 'Black November EAD Adventista — Central de Brasília')
+@section('twitter-description', 'Primeira mensalidade R$ 0,00, até 60% de desconto e 1 pós gratuita. Graduação e pós-graduação UNASP com apoio da IASD Central de Brasília.')
+@section('twitter-image', asset('img/carrousel/black-november-ead.webp'))
 @section('page-name', 'EAD Adventista')
 @section('body-class', 'page-ead')
+
+@section('meta')
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="700">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:alt" content="Black November EAD Adventista: primeira mensalidade R$ 0,00, matricule-se já">
+@endsection
 
 @php
     $waPhone = '5561999352191';
