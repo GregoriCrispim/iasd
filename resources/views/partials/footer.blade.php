@@ -10,7 +10,13 @@
         <div class="info_contato">
             <span>
                 <img src="{{ asset('img/rodape/whatsapp-logo-36.png') }}" alt="WhatsApp" loading="lazy" decoding="async">
-                <p style="margin: 0;">(61) 98157-4702</p>
+                @if (request()->is('ead'))
+                    <p style="margin: 0;">
+                        <a href="https://wa.me/5561999352191?text={{ rawurlencode('Olá! Quero saber mais sobre os cursos do EAD. Meu nome é:') }}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">(61) 99935-2191</a>
+                    </p>
+                @else
+                    <p style="margin: 0;">(61) 98157-4702</p>
+                @endif
             </span>
             <span style="margin-bottom: 10px;">
                 <img src="{{ asset('img/rodape/envelope-solid-36.webp') }}" alt="" style="width: 10%;" loading="lazy" decoding="async">

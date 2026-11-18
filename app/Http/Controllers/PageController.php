@@ -109,6 +109,14 @@ class PageController extends Controller
     }
 
     /**
+     * Exibe a página da EAD Adventista (UNASP)
+     */
+    public function ead()
+    {
+        return view('pages.ead');
+    }
+
+    /**
      * Exibe a página dos Doutores da Esperança
      */
     public function doutoresDaEsperanca()

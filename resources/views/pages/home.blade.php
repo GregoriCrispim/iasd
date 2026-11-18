@@ -18,7 +18,7 @@
             <img src="{{ asset('img/carrousel/One-Voice.webp') }}" alt="Slide 1 - One Voice" fetchpriority="high" decoding="async" width="1920" height="700">
         </div>
         <div class="item">
-            <a href="https://wa.me/5561999352191?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20cursos%20do%20EAD.%20Meu%20nome%20%C3%A9%3A" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
+            <a href="{{ route('ead') }}" class="carousel-cta-link">
                 <img src="{{ asset('img/carrousel/black-november-ead.webp') }}" alt="Slide 2 - Black November EAD Adventista: primeira mensalidade R$ 0,00, matricule-se já" decoding="async" width="1920" height="700">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">

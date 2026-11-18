@@ -1,0 +1,1298 @@
+[
+  {
+    "nome": "Administração Hospitalar",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/administracao-hospitalar.webp",
+    "slug": "administracao-hospitalar",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Administração Pública",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/administracao-publica.webp",
+    "slug": "administracao-publica",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública"
+  },
+  {
+    "nome": "Administração de Recursos Humanos no Setor Público",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/administracao-de-recursos-humanos-no-setor-publico.webp",
+    "slug": "administracao-de-recursos-humanos-no-setor-publico",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública"
+  },
+  {
+    "nome": "Agromarketing, Tecnologia e Inovação",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/agromarketing-tecnologia-e-inovacao.webp",
+    "slug": "agromarketing-tecnologia-e-inovacao",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Análise de Cenários, Marketing Estratégico e Indústria 4.0",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/analise-de-cenarios-marketing-estrategico-e-industria-4-0.webp",
+    "slug": "analise-de-cenarios-marketing-estrategico-e-industria-4-0",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Análises Clínicas e Toxicológicas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/analises-clinicas-e-toxicologicas.webp",
+    "slug": "analises-clinicas-e-toxicologicas",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Aprendizado de Máquina",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/aprendizado-de-maquina.webp",
+    "slug": "aprendizado-de-maquina",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Arquitetura - Sustentabilidade e Meio Ambiente",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/arquitetura-sustentabilidade-e-meio-ambiente.webp",
+    "slug": "arquitetura-sustentabilidade-e-meio-ambiente",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Auditoria e Controladoria Governamental",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/auditoria-e-controladoria-governamental.webp",
+    "slug": "auditoria-e-controladoria-governamental",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública"
+  },
+  {
+    "nome": "Auditoria, Compliance e Gestão de Risco",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/auditoria-compliance-e-gestao-de-risco.webp",
+    "slug": "auditoria-compliance-e-gestao-de-risco",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Automação Residencial",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/automacao-residencial.webp",
+    "slug": "automacao-residencial",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Avaliação Educacional",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/avaliacao-educacional.webp",
+    "slug": "avaliacao-educacional",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Big Data e Marketing",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/big-data-e-marketing.webp",
+    "slug": "big-data-e-marketing",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Biomecânica e Cinesiologia Aplicada ao Movimento Humano",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/biomecanica-e-cinesiologia-aplicada-ao-movimento-humano.webp",
+    "slug": "biomecanica-e-cinesiologia-aplicada-ao-movimento-humano",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Branding e Marketing Digital para Comércio Eletrônico",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/branding-e-marketing-digital-para-comercio-eletronico.webp",
+    "slug": "branding-e-marketing-digital-para-comercio-eletronico",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Ciência de Dados e Big Data Analytics",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/ciencia-de-dados-e-big-data-analytics.webp",
+    "slug": "ciencia-de-dados-e-big-data-analytics",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Ciências Forenses",
+    "duracao": "360 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/ciencias-forenses.webp",
+    "slug": "ciencias-forenses",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Comércio Exterior e Relações Internacionais",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/comercio-exterior-e-relacoes-internacionais.webp",
+    "slug": "comercio-exterior-e-relacoes-internacionais",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Consultoria e Legislação Farmacêutica",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/consultoria-e-legislacao-farmaceutica.webp",
+    "slug": "consultoria-e-legislacao-farmaceutica",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Contabilidade Pública",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/contabilidade-publica.webp",
+    "slug": "contabilidade-publica",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública"
+  },
+  {
+    "nome": "Contabilidade, Auditoria e Controladoria",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/contabilidade-auditoria-e-controladoria.webp",
+    "slug": "contabilidade-auditoria-e-controladoria",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Finanças"
+  },
+  {
+    "nome": "Data Warehouse e Business Intelligence",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/data-warehouse-e-business-intelligence.webp",
+    "slug": "data-warehouse-e-business-intelligence",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Desenvolvimento de Software com Metodologias Ágeis",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/desenvolvimento-de-software-com-metodologias-ageis.webp",
+    "slug": "desenvolvimento-de-software-com-metodologias-ageis",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Desenvolvimento e Sustentabilidade",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/desenvolvimento-e-sustentabilidade.webp",
+    "slug": "desenvolvimento-e-sustentabilidade",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Design Educacional",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/design-educacional.webp",
+    "slug": "design-educacional",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Design Thinking e Criatividade nas Organizações",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/design-thinking-e-criatividade-nas-organizacoes.webp",
+    "slug": "design-thinking-e-criatividade-nas-organizacoes",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Direito Administrativo",
+    "duracao": "384 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-administrativo.webp",
+    "slug": "direito-administrativo",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Administrativo e Gestão Pública",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-administrativo-e-gestao-publica.webp",
+    "slug": "direito-administrativo-e-gestao-publica",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Ambiental",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-ambiental.webp",
+    "slug": "direito-ambiental",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Constitucional",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-constitucional.webp",
+    "slug": "direito-constitucional",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Contratual",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-contratual.webp",
+    "slug": "direito-contratual",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Digital",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-digital.webp",
+    "slug": "direito-digital",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Empresarial",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-empresarial.webp",
+    "slug": "direito-empresarial",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Penal e Criminologia",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-penal-e-criminologia.webp",
+    "slug": "direito-penal-e-criminologia",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Penal e Processo Penal",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-penal-e-processo-penal.webp",
+    "slug": "direito-penal-e-processo-penal",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Público",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-publico.webp",
+    "slug": "direito-publico",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito Tributário",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-tributario.webp",
+    "slug": "direito-tributario",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direito de Família e Sucessões",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direito-de-familia-e-sucessoes.webp",
+    "slug": "direito-de-familia-e-sucessoes",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Direitos Humanos",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/direitos-humanos.webp",
+    "slug": "direitos-humanos",
+    "qualification": "Especialista",
+    "interestArea": "Direito"
+  },
+  {
+    "nome": "Docência na Educação Infantil",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/docencia-na-educacao-infantil.webp",
+    "slug": "docencia-na-educacao-infantil",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Docência no Ensino Superior",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/docencia-no-ensino-superior.webp",
+    "slug": "docencia-no-ensino-superior",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Economia Criativa, Cultura e Inovação",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/economia-criativa-cultura-e-inovacao.webp",
+    "slug": "economia-criativa-cultura-e-inovacao",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Educação Especial Inclusiva",
+    "duracao": "360 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/educacao-especial-inclusiva-ead.webp",
+    "slug": "educacao-especial-inclusiva-ead",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Educação de Jovens e Adultos",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/educacao-de-jovens-e-adultos.webp",
+    "slug": "educacao-de-jovens-e-adultos",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Educação, Ludicidade e Desenvolvimento Infantil",
+    "duracao": "384 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/educacao-ludicidade-e-desenvolvimento-infantil.webp",
+    "slug": "educacao-ludicidade-e-desenvolvimento-infantil",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Enfermagem Estética",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/enfermagem-estetica.webp",
+    "slug": "enfermagem-estetica",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Enfermagem do Trabalho",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/enfermagem-do-trabalho.webp",
+    "slug": "enfermagem-do-trabalho",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Engenharia Ambiental e Saneamento Básico",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-ambiental-e-saneamento-basico.webp",
+    "slug": "engenharia-ambiental-e-saneamento-basico",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Engenharia Econômica e Finanças Corporativas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-economica-e-financas-corporativas.webp",
+    "slug": "engenharia-economica-e-financas-corporativas",
+    "qualification": "Especialista",
+    "interestArea": "Finanças"
+  },
+  {
+    "nome": "Engenharia da Manutenção",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-da-manutencao.webp",
+    "slug": "engenharia-da-manutencao",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Engenharia da Produção com Ênfase em Gestão",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-da-producao-com-enfase-em-gestao.webp",
+    "slug": "engenharia-da-producao-com-enfase-em-gestao",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Engenharia de Estruturas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-de-estruturas.webp",
+    "slug": "engenharia-de-estruturas",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Engenharia de Produção",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-de-producao.webp",
+    "slug": "engenharia-de-producao",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Engenharia de Redes de Computadores",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-de-redes-de-computadores.webp",
+    "slug": "engenharia-de-redes-de-computadores",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Engenharia de Requisitos de Software",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-de-requisitos-de-software.webp",
+    "slug": "engenharia-de-requisitos-de-software",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Engenharia de Software com Métodos Ágeis",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-de-software-com-metodos-ageis.webp",
+    "slug": "engenharia-de-software-com-metodos-ageis",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Engenharia de Soldagem",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/engenharia-de-soldagem.webp",
+    "slug": "engenharia-de-soldagem",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Ensino de História e Geografia",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/ensino-de-historia-e-geografia.webp",
+    "slug": "ensino-de-historia-e-geografia",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Estudos em Ortopedia e Traumatologia",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/estudos-em-ortopedia-e-traumatologia.webp",
+    "slug": "estudos-em-ortopedia-e-traumatologia",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Executivo em Finanças Corporativas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/executivo-em-financas-corporativas.webp",
+    "slug": "executivo-em-financas-corporativas",
+    "qualification": "Especialista",
+    "interestArea": "Finanças"
+  },
+  {
+    "nome": "Fisiologia e Prescrição do Exercício Clínico",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/fisiologia-e-prescricao-do-exercicio-clinico.webp",
+    "slug": "fisiologia-e-prescricao-do-exercicio-clinico",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Fisioterapia do Trabalho e Ergonomia",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/fisioterapia-do-trabalho-e-ergonomia.webp",
+    "slug": "fisioterapia-do-trabalho-e-ergonomia",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Formação de Gestores de Contratos",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/formacao-de-gestores-de-contratos.webp",
+    "slug": "formacao-de-gestores-de-contratos",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Geoprocessamento e Energias Renováveis",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/geoprocessamento-e-energias-renovaveis.webp",
+    "slug": "geoprocessamento-e-energias-renovaveis",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Gerenciamento de Crises",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gerenciamento-de-crises.webp",
+    "slug": "gerenciamento-de-crises",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Comunicação"
+  },
+  {
+    "nome": "Gestão Contemporânea em Saúde",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-contemporanea-em-saude.webp",
+    "slug": "gestao-contemporanea-em-saude",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Gestão Estratégica de Negócios",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-estrategica-de-negocios.webp",
+    "slug": "gestao-estrategica-de-negocios",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão Estratégica de Vendas, Negociação e Performance",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-estrategica-de-vendas-negociacao-e-performance.webp",
+    "slug": "gestao-estrategica-de-vendas-negociacao-e-performance",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão Estratégica em Compras",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-estrategica-em-compras.webp",
+    "slug": "gestao-estrategica-em-compras",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão Farmacêutica",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-farmaceutica.webp",
+    "slug": "gestao-farmaceutica",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão Financeira",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-financeira.webp",
+    "slug": "gestao-financeira",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão Financeira e Orçamentária em Organizações Públicas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-financeira-e-orcamentaria-em-organizacoes-publicas.webp",
+    "slug": "gestao-financeira-e-orcamentaria-em-organizacoes-publicas",
+    "qualification": "Especialista",
+    "interestArea": "Finanças"
+  },
+  {
+    "nome": "Gestão Industrial Farmacêutica",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-industrial-farmaceutica.webp",
+    "slug": "gestao-industrial-farmaceutica",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão da Qualidade",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-da-qualidade.webp",
+    "slug": "gestao-da-qualidade",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Engenharia"
+  },
+  {
+    "nome": "Gestão da Tecnologia da Informação",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-da-tecnologia-da-informacao.webp",
+    "slug": "gestao-da-tecnologia-da-informacao",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Gestão de Comunicação em Instituições Públicas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-comunicacao-em-instituicoes-publicas.webp",
+    "slug": "gestao-de-comunicacao-em-instituicoes-publicas",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública/Comunicação"
+  },
+  {
+    "nome": "Gestão de Comunicação na Saúde Pública",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-comunicacao-na-saude-publica.webp",
+    "slug": "gestao-de-comunicacao-na-saude-publica",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública/Comunicação"
+  },
+  {
+    "nome": "Gestão de Contratos",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-contratos.webp",
+    "slug": "gestao-de-contratos",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão de Cooperativas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-cooperativas.webp",
+    "slug": "gestao-de-cooperativas",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão de Custos e Formação de Preços",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-custos-e-formacao-de-precos.webp",
+    "slug": "gestao-de-custos-e-formacao-de-precos",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Finanças"
+  },
+  {
+    "nome": "Gestão de Farmácias e Drogarias",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-farmacias-e-drogarias.webp",
+    "slug": "gestao-de-farmacias-e-drogarias",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão de Investimentos",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-investimentos.webp",
+    "slug": "gestao-de-investimentos",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Finanças"
+  },
+  {
+    "nome": "Gestão de Laboratórios de Análises Clínicas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-laboratorios-de-analises-clinicas.webp",
+    "slug": "gestao-de-laboratorios-de-analises-clinicas",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar/Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão de Negócios em Saúde",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-negocios-em-saude.webp",
+    "slug": "gestao-de-negocios-em-saude",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão de Projetos - PMI PMBOK",
+    "duracao": "18 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-projetos-pmi-pmbok.webp",
+    "slug": "gestao-de-projetos-pmi-pmbok",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão do Agronegócio",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-do-agronegocio.webp",
+    "slug": "gestao-do-agronegocio",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Gestão e Auditoria Hospitalar",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-e-auditoria-hospitalar.webp",
+    "slug": "gestao-e-auditoria-hospitalar",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Gestão e Marketing em Esporte e Lazer",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-e-marketing-em-esporte-e-lazer.webp",
+    "slug": "gestao-e-marketing-em-esporte-e-lazer",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Inteligência Artificial, Processamento em Linguagem Natural e Blockchain",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/inteligencia-artificial-processamento-em-linguagem-natural-e-blockchain.webp",
+    "slug": "inteligencia-artificial-processamento-em-linguagem-natural-e-blockchain",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Lean Production",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/lean-production.webp",
+    "slug": "lean-production",
+    "qualification": "Especialista",
+    "interestArea": "Engenharia"
+  },
+  {
+    "nome": "Libras",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/libras.webp",
+    "slug": "libras",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Licitações e Compras Públicas Sustentáveis",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/licitacoes-e-compras-publicas-sustentaveis.webp",
+    "slug": "licitacoes-e-compras-publicas-sustentaveis",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública"
+  },
+  {
+    "nome": "Liderança na Contemporaneidade",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/lideranca-na-contemporaneidade.webp",
+    "slug": "lideranca-na-contemporaneidade",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Literatura",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/literatura.webp",
+    "slug": "literatura",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Literatura Infantil",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/literatura-infantil.webp",
+    "slug": "literatura-infantil",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Logística Farmacêutica",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/logistica-farmaceutica.webp",
+    "slug": "logistica-farmaceutica",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Logística Industrial",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/logistica-industrial.webp",
+    "slug": "logistica-industrial",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "MBA de Gestão de EAD e Tutoria Online",
+    "duracao": "360 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/gestao-de-ead-e-tutoria-online.webp",
+    "slug": "gestao-de-ead-e-tutoria-online",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "MBA em Auditoria e Finanças",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-auditoria-e-financas.webp",
+    "slug": "mba-em-auditoria-e-financas",
+    "qualification": "Especialista",
+    "interestArea": "Finanças"
+  },
+  {
+    "nome": "MBA em Comunicação Corporativa",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-comunicacao-corporativa.webp",
+    "slug": "mba-em-comunicacao-corporativa",
+    "qualification": "Especialista",
+    "interestArea": "Comunicação"
+  },
+  {
+    "nome": "MBA em Controladoria e Finanças",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-controladoria-e-financas.webp",
+    "slug": "mba-em-controladoria-e-financas",
+    "qualification": "Especialista",
+    "interestArea": "Finanças"
+  },
+  {
+    "nome": "MBA em Finanças Corporativas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-financas-corporativas.webp",
+    "slug": "mba-em-financas-corporativas",
+    "qualification": "Especialista",
+    "interestArea": "Finanças"
+  },
+  {
+    "nome": "MBA em Gestão Comercial de Produtos e Serviços de Instituições Financeiras",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-gestao-comercial-de-produtos-e-servicos-de-instituicoes-financeiras.webp",
+    "slug": "mba-em-gestao-comercial-de-produtos-e-servicos-de-instituicoes-financeiras",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "MBA em Gestão Estratégica em Compras",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-gestao-estrategica-em-compras.webp",
+    "slug": "mba-em-gestao-estrategica-em-compras",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "MBA em Gestão Financeira",
+    "duracao": "6 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-gestao-financeira.webp",
+    "slug": "mba-em-gestao-financeira",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Finanças"
+  },
+  {
+    "nome": "MBA em Gestão Organizacional",
+    "duracao": "6 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-gestao-organizacional.webp",
+    "slug": "mba-em-gestao-organizacional",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "MBA em Gestão de Pessoas por Competências",
+    "duracao": "6 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-gestao-de-pessoas-por-competencias.webp",
+    "slug": "mba-em-gestao-de-pessoas-por-competencias",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "MBA em Gestão de Voluntariado e Projetos Sociais",
+    "duracao": "6 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-gestao-de-voluntariadoe-projetos-sociais.webp",
+    "slug": "mba-em-gestao-de-voluntariadoe-projetos-sociais",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "MBA em Produtividade Pessoal e Liderança para Alcance de Resultados",
+    "duracao": "6 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/mba-em-produtividade-pessoal-e-lideranca-para-alcance-de-resultados.webp",
+    "slug": "mba-em-produtividade-pessoal-e-lideranca-para-alcance-de-resultados",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Marketing de Experiência",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/marketing-de-experiencia.webp",
+    "slug": "marketing-de-experiencia",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Marketing do Varejo Farmacêutico",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/marketing-do-varejo-farmaceutico.webp",
+    "slug": "marketing-do-varejo-farmaceutico",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Marketing e Inovação para Pequenas e Médias Empresas",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/marketing-e-inovacao-para-pequenas-e-medias-empresas.webp",
+    "slug": "marketing-e-inovacao-para-pequenas-e-medias-empresas",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Marketing e Varejo",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/marketing-e-varejo.webp",
+    "slug": "marketing-e-varejo",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Marketing, Criatividade e Inovação",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/marketing-criatividade-e-inovacao.webp",
+    "slug": "marketing-criatividade-e-inovacao",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Matemática Financeira e Estatística",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/matematica-financeira-e-estatistica.webp",
+    "slug": "matematica-financeira-e-estatistica",
+    "qualification": "Especialista",
+    "interestArea": "Finanças"
+  },
+  {
+    "nome": "Medicina do Trabalho",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/medicina-do-trabalho.webp",
+    "slug": "medicina-do-trabalho",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Metodologia da Aprendizagem para Educação Infantil e Ensino Fundamental",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/metodologia-da-aprendizagem-para-educacao-infantil-e-ensino-fundamental.webp",
+    "slug": "metodologia-da-aprendizagem-para-educacao-infantil-e-ensino-fundamental",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Metodologia de Ensino de Língua Inglesa",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/metodologia-de-ensino-de-lingua-inglesa.webp",
+    "slug": "metodologia-de-ensino-de-lingua-inglesa",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Metodologia e Avaliação da Aprendizagem na Educação Infantil",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/metodologia-e-avaliacao-da-aprendizagem-na-educacao-infantil.webp",
+    "slug": "metodologia-e-avaliacao-da-aprendizagem-na-educacao-infantil",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Metodologias Ativas e Prática Docente",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/metodologias-ativas-e-pratica-docente.webp",
+    "slug": "metodologias-ativas-e-pratica-docente",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Nutrição Aplicada à Estética",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/nutricao-aplicada-a-estetica.webp",
+    "slug": "nutricao-aplicada-a-estetica",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Neuromarketing",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/neuromarketing.webp",
+    "slug": "neuromarketing",
+    "qualification": "Especialista",
+    "interestArea": "Comunicação"
+  },
+  {
+    "nome": "Neuropsicopedagogia Institucional",
+    "duracao": "420 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/neuropsicopedagogia-institucional.webp",
+    "slug": "neuropsicopedagogia-institucional",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Pedagogia Empresarial e Educação Corporativa",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/pedagogia-empresarial-e-educacao-corporativa.webp",
+    "slug": "pedagogia-empresarial-e-educacao-corporativa",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Pedagogia Social e Gestão de Projetos Sociais",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/pedagogia-social-e-gestao-de-projetos-sociais.webp",
+    "slug": "pedagogia-social-e-gestao-de-projetos-sociais",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Perícia Contábil",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/pericia-contabil.webp",
+    "slug": "pericia-contabil",
+    "qualification": "Especialista",
+    "interestArea": "Finanças/Direito"
+  },
+  {
+    "nome": "Política Aplicada ao Direito",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/politica-aplicada-ao-direito.webp",
+    "slug": "politica-aplicada-ao-direito",
+    "qualification": "Especialista",
+    "interestArea": "Direito/Administração Pública"
+  },
+  {
+    "nome": "Políticas e Gestão em Segurança Pública",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/politicas-e-gestao-em-seguranca-publica.webp",
+    "slug": "politicas-e-gestao-em-seguranca-publica",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública/Direito"
+  },
+  {
+    "nome": "Pregação Bíblica e Evangelismo",
+    "duracao": "18 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/pregacao-biblica-e-evangelismo.webp",
+    "slug": "pregacao-biblica-e-evangelismo",
+    "qualification": "Especialista",
+    "interestArea": "Teologia"
+  },
+  {
+    "nome": "Princípios de Adoração e Fidelidade",
+    "duracao": "18 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/principios-de-adoracao-e-fidelidade.webp",
+    "slug": "principios-de-adoracao-e-fidelidade",
+    "qualification": "Especialista",
+    "interestArea": "Teologia"
+  },
+  {
+    "nome": "Prática de Metodologias Ágeis",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/pratica-de-metodologias-ageis.webp",
+    "slug": "pratica-de-metodologias-ageis",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação/Tecnologia"
+  },
+  {
+    "nome": "Psicomotricidade",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/psicomotricidade.webp",
+    "slug": "psicomotricidade",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Saúde Pública",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/saude-publica.webp",
+    "slug": "saude-publica",
+    "qualification": "Especialista",
+    "interestArea": "Administração Pública/Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Secretariado Executivo",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/secretariado-executivo.webp",
+    "slug": "secretariado-executivo",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Segurança Pública e Criminologia",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/seguranca-publica-e-criminologia.webp",
+    "slug": "seguranca-publica-e-criminologia",
+    "qualification": "Especialista",
+    "interestArea": "Direito/Administração Pública"
+  },
+  {
+    "nome": "Segurança da Informação",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/seguranca-da-informacao.webp",
+    "slug": "seguranca-da-informacao",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Serviço Social e Assistência Social na Saúde",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/servico-social-e-assistencia-social-na-saude.webp",
+    "slug": "servico-social-e-assistencia-social-na-saude",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Supply Chain Management: Gerenciamento de Cadeias de Suprimentos",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/supply-chain-management-gerenciamento-de-cadeias-de-suprimentos.webp",
+    "slug": "supply-chain-management-gerenciamento-de-cadeias-de-suprimentos",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Sustentabilidade Empresarial",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/sustentabilidade-empresarial.webp",
+    "slug": "sustentabilidade-empresarial",
+    "qualification": "Especialista",
+    "interestArea": "Gestão & Inovação"
+  },
+  {
+    "nome": "Tecnologias e Desenvolvimento Web e Mobile",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/tecnologias-e-desenvolvimento-web-e-mobile.webp",
+    "slug": "tecnologias-e-desenvolvimento-web-e-mobile",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Telecomunicações com Ênfase em Redes",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/telecomunicacoes-com-enfase-em-redes.webp",
+    "slug": "telecomunicacoes-com-enfase-em-redes",
+    "qualification": "Especialista",
+    "interestArea": "Tecnologia"
+  },
+  {
+    "nome": "Teorias da Aprendizagem e Ensino de Língua Portuguesa",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/teorias-da-aprendizagem-e-ensino-de-lingua-portuguesa.webp",
+    "slug": "teorias-da-aprendizagem-e-ensino-de-lingua-portuguesa",
+    "qualification": "Especialista",
+    "interestArea": "Educação"
+  },
+  {
+    "nome": "Treinamento Funcional para Saúde e Condicionamento",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/treinamento-funcional-para-saude-e-condicionamento.webp",
+    "slug": "treinamento-funcional-para-saude-e-condicionamento",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  },
+  {
+    "nome": "Vigilância Sanitária e Qualidade de Alimentos",
+    "duracao": "456 horas · 6 a 12 meses",
+    "tipo": "Pós-graduação",
+    "img": "pos/vigilancia-sanitaria-e-qualidade-de-alimentos.webp",
+    "slug": "vigilancia-sanitaria-e-qualidade-de-alimentos",
+    "qualification": "Especialista",
+    "interestArea": "Saúde e Bem-Estar"
+  }
+]

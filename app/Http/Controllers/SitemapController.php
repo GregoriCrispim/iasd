@@ -26,6 +26,7 @@ class SitemapController extends Controller
             url('/radio-tv-novo-tempo'),
             url('/cpb'),
             url('/cemab'),
+            url('/ead'),
             url('/classe-novo-tempo'),
             url('/classe-saude'),
             url('/clube-do-livro'),

@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1239" height="293" viewBox="0 0 1239 293" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="Rectangle 3" d="M0 0H1239V293H0V0Z" fill="url(#paint0_radial_0_6)"/>
+<defs>
+<radialGradient id="paint0_radial_0_6" cx="0" cy="0" r="1" gradientTransform="matrix(1291.59 301.91 -145.341 308.077 -36.4603 -8.91021)" gradientUnits="userSpaceOnUse">
+<stop stop-color="#02025B"/>
+<stop offset="1" stop-color="#0022A9"/>
+</radialGradient>
+</defs>
+</svg>

@@ -51,8 +51,8 @@
     <link rel="stylesheet" href="{{ asset('css/form_overlay.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
-    <!-- Quiz Bíblico (oculto na galeria de fotos) -->
-    @unless (request()->is('galeria', 'galeria/*'))
+    <!-- Quiz Bíblico (oculto na galeria de fotos e na página EAD) -->
+    @unless (request()->is('galeria', 'galeria/*', 'ead'))
         <link rel="stylesheet" href="{{ asset('quiz/quiz.css') }}?v={{ filemtime(public_path('quiz/quiz.css')) }}">
     @endunless
 
@@ -233,8 +233,8 @@
     <script src="{{ asset('js/menu_hamburguer.js') }}" defer></script>
     <script src="{{ asset('js/form_overlay.js') }}" defer></script>
 
-    <!-- Quiz Bíblico (oculto na galeria de fotos) -->
-    @unless (request()->is('galeria', 'galeria/*'))
+    <!-- Quiz Bíblico (oculto na galeria de fotos e na página EAD) -->
+    @unless (request()->is('galeria', 'galeria/*', 'ead'))
         <script src="{{ asset('quiz/quiz.js') }}?v={{ filemtime(public_path('quiz/quiz.js')) }}" defer></script>
     @endunless
 
