@@ -638,13 +638,15 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.85rem;
-    align-items: center;
+    align-items: start;
+    justify-items: stretch;
     padding: 1.15rem 1.2rem;
     border-radius: 1rem;
     border: 1px solid var(--ead-line);
     background: #fff;
     text-decoration: none;
     color: inherit;
+    text-align: left;
     box-shadow: 0 10px 28px rgba(0, 26, 51, 0.1);
     transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
@@ -660,22 +662,31 @@
 .ead-ingress-cta__content {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.3rem;
+    width: 100%;
     min-width: 0;
+    text-align: left;
 }
 
 .ead-ingress-cta__content strong {
+    display: block;
+    width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 1.12rem;
     font-weight: 800;
     color: var(--ead-navy);
+    text-align: left;
 }
 
 .ead-ingress-cta__content span {
+    display: block;
+    width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 0.95rem;
     line-height: 1.5;
     color: var(--ead-muted);
+    text-align: left;
 }
 
 .ead-ingress-cta__action {
@@ -685,6 +696,7 @@
     gap: 0.45rem;
     width: fit-content;
     justify-self: start;
+    margin-inline: 0;
     padding: 0.75rem 1.15rem;
     border-radius: 999px;
     background: var(--ead-orange);
@@ -703,7 +715,7 @@
 .ead-editais {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.75rem;
     margin-top: 1.75rem;
 }
@@ -849,6 +861,34 @@
             linear-gradient(180deg, rgba(0, 26, 51, 0.25) 0%, rgba(0, 26, 51, 0.55) 35%, rgba(0, 26, 51, 0.94) 68%, rgba(0, 26, 51, 0.98) 100%),
             linear-gradient(90deg, rgba(0, 26, 51, 0.55), transparent 70%);
     }
+
+    .ead-page #ingresso .ead-ingress-cta,
+    .ead-page #ingresso .ead-ingress-cta__content,
+    .ead-page #ingresso .ead-ingress-cta__content strong,
+    .ead-page #ingresso .ead-ingress-cta__content span {
+        text-align: left !important;
+    }
+
+    .ead-page #ingresso .ead-ingress-cta {
+        align-items: start;
+        justify-items: stretch;
+        text-align: left;
+    }
+
+    .ead-page #ingresso .ead-ingress-cta__content {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .ead-page #ingresso .ead-ingress-cta__content strong {
+        display: block;
+        width: 100%;
+    }
+
+    .ead-page #ingresso .ead-ingress-cta__action {
+        justify-self: start;
+        align-self: start;
+    }
 }
 
 /* Breakpoints */
@@ -892,11 +932,13 @@
     .ead-ingress-cta {
         grid-template-columns: 1fr auto;
         align-items: center;
+        justify-items: stretch;
         gap: 0.85rem 1rem;
     }
 
     .ead-ingress-cta__action {
         padding: 0.7rem 1.15rem;
+        justify-self: end;
     }
 }
 
@@ -914,6 +956,28 @@
         grid-column: 1 / -1;
         width: calc((100% - 0.85rem) / 2);
         justify-self: center;
+    }
+
+    .ead-editais {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 959px) {
+    #ingresso .ead-block__head,
+    #ingresso .ead-ingress-cta,
+    #ingresso .ead-ingress-cta__content,
+    #ingresso .ead-ingress-cta__content strong,
+    #ingresso .ead-ingress-cta__content span {
+        text-align: left;
+    }
+
+    #ingresso .ead-ingress-cta__action {
+        justify-self: start;
+    }
+
+    #ingresso .ead-editais {
+        justify-content: flex-start;
     }
 }
 
