@@ -7,7 +7,7 @@
 @endpush
 
 @php
-    $boletimBase = 'img/boletim/boletim_14_11_2026';
+    $boletimBase = 'img/boletim/boletim_21_11_26';
     $oracao365Base = $boletimBase . '/365 Dias de Oração';
     $oracaoMinBase = $boletimBase . '/M. Oração';
 
@@ -23,10 +23,10 @@
         );
     };
 
-    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: DOMÍNIO PRÓPRIO. O desafio da TERCEIRA semana de NOVEMBRO é: Ore por domínio próprio nos hábitos diários, buscando equilíbrio na alimentação, no uso do tempo e nas distrações.';
+    $texto365Dias = 'Continuamos envolvidos no projeto Jornada de Oração: Frutos do Espírito. Ao longo deste mês, vamos orar pedindo a Deus que desenvolva em nossa vida o fruto: DOMÍNIO PRÓPRIO. O desafio da QUARTA semana de NOVEMBRO é: Ore por uma vida disciplinada, guiada pelo Espírito Santo em decisões, atitudes e prioridades.';
 
     $boletins = [
-        // Com descrição (script DOCX)
+        // Com descrição (script DOCX) — ordem do script
         [
             'type' => 'image',
             'src' => $boletimBase . '/One Voice.jpg',
@@ -43,17 +43,31 @@
         ],
         [
             'type' => 'image',
-            'src' => $oracao365Base . '/WhatsApp Image 2026-10-13 at 19.13.23 (5).jpeg',
+            'src' => $oracao365Base . '/WhatsApp Image 2026-10-13 at 19.13.23 (7).jpeg',
             'alt' => '365 Dias de Oração — Jornada de Oração',
             'title' => '365 Dias de Oração',
             'text' => $texto365Dias,
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/PG FEm.jpeg',
+            'alt' => 'Pequeno Grupo Feminino',
+            'title' => 'PG Feminino',
+            'text' => 'Atenção mulheres! Temos um encontro especial a cada 15 dias no nosso PG Feminino, um espaço de acolhimento, amizade e fé. Fale com a líder do Ministério da Mulher Cristiane Barreto, para participar. Nos reunimos às quintas-feiras a cada 15 dias. Participe conosco!',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Entre Elas.jpg',
             'alt' => 'Entre Elas — encontro remarcado',
             'title' => 'Entre Elas',
-            'text' => 'Queridas mulheres, o encontro Entre Elas: Imagem com propósito, previsto para o dia 29 de novembro, será remarcado. Assim que a nova data for confirmada, vamos divulgá-la por aqui. Agradecemos a compreensão e esperamos vocês para esse momento especial! Ministério da Mulher | Igreja Adventista Central de Brasília',
+            'text' => 'Queridas mulheres, o encontro Entre Elas: Imagem com propósito, previsto para o dia 29 de novembro, será remarcado. Assim que a nova data for confirmada, vamos divulgá-la por aqui. Agradecemos a compreensão e esperamos vocês para esse momento especial! Ministério da Mulher | Igreja Adventista Central de Brasília.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Oi Amiga!.jpg',
+            'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
+            'title' => 'Oi Amiga',
+            'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. As reuniões serão on-line. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve a sua agenda. Acesse o link e inscreva-se: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform',
         ],
         [
             'type' => 'image',
@@ -85,24 +99,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/PG FEm.jpeg',
-            'alt' => 'Pequeno Grupo Feminino',
-            'title' => 'PG Feminino',
-            'text' => 'Atenção mulheres! Temos um encontro especial a cada 15 dias no nosso PG Feminino, um espaço de acolhimento, amizade e fé. Fale com a líder do Ministério da Mulher Cristiane Barreto, para participar. Nos reunimos às quintas-feiras a cada 15 dias. Participe conosco!',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Oi Amiga!.jpg',
-            'alt' => 'Oi Amiga — capacitação para estudos bíblicos',
-            'title' => 'Oi Amiga',
-            'text' => 'Se você tem o desejo de compartilhar a Palavra de Deus, mas nunca deu um estudo bíblico e não sabe por onde começar, este convite é para você. As reuniões serão on-line. Nosso objetivo é apresentar um material exclusivo e compartilhar dicas práticas e simples para capacitar você a iniciar estudos bíblicos com as amigas que têm participado dos eventos da nossa igreja. Não se preocupe com a falta de experiência: este será um espaço de apoio, aprendizado e encorajamento mútuo. Queremos caminhar de mãos dadas com você nessa missão. Reserve a sua agenda. Acesse o link e inscreva-se: https://docs.google.com/forms/d/e/1FAIpQLSfyTOpyHObLtKZi4doWD-2094Yoy5GAEN9cm0oSxQZK-isRZQ/viewform',
-        ],
-        [
-            'type' => 'image',
             'src' => $oracaoMinBase . '/WhatsApp Image 2026-01-06 at 18.19.43 (20).jpeg',
             'alt' => 'Reunião de Oração',
             'title' => 'Reunião de Oração',
-            'text' => 'Participe da nossa Reunião de Oração. Temos recebido grandes bênçãos do Senhor. Venha clamar pelo derramamento do Espírito Santo! Nossas reuniões acontecem a cada 15 dias, acompanhe e venha orar conosco.',
+            'text' => 'Sábado, dia 21/11/26, às 16h30, teremos nossa última reunião de oração do ano de 2026. Temos recebido grandes bênçãos do Senhor e queremos celebrar para que isso traga um lanche e confraternizar conosco. Venha clamar pelo derramamento do Espírito Santo!',
         ],
         [
             'type' => 'image',
@@ -120,17 +120,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Saúde.jpeg',
-            'alt' => 'Classe de Saúde — Escolhas que transformam a vida',
-            'title' => 'Classe de Saúde',
-            'text' => 'ESCOLHAS QUE TRANSFORMAM A VIDA: DA INFÂNCIA À MATURIDADE. Saúde integral e decisões em cada fase da vida. Da infância à terceira idade, cada etapa traz desafios, necessidades e escolhas que influenciam nossa saúde física, emocional, mental, familiar e social. Uma reflexão integrativa sobre o desenvolvimento humano, a educação dos filhos, a escolha profissional e da faculdade, o namoro, o noivado, a preparação para o casamento, a vida conjugal e o envelhecimento saudável. Uma jornada de conhecimento para fazer escolhas mais conscientes, construir relacionamentos saudáveis e viver melhor em todas as fases da vida. Palestrantes: Daniel e Keila. Naturopatas e Conselheiros Familiar.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/CEVISA.jpeg',
-            'alt' => 'Excursão especial de bem-estar — CEVISA',
-            'title' => 'Excursão CEVISA',
-            'text' => 'O Ministério do Idoso da Igreja Adventista Central de Brasília está promovendo uma oportunidade maravilhosa para todas as idades para cuidarmos da nossa saúde física, mental e espiritual: uma excursão inesquecível para o renomado Spa Médico Adventista (CEVISA), de 22 a 29 de novembro de 2026! Será uma semana inteira dedicada ao tratamento e renovação com o exclusivo Pacote de Bem-Estar – Linha Select. Sobre o CEVISA: Reconhecido nacional e internacionalmente como referência em estilo de vida saudável e tratamentos naturais, o CEVISA busca ajudar a renovar o corpo, a mente e o estado de espírito. Afinal, este é o caminho para uma vida plena e feliz! Inscrições e detalhes: Procure a professora Mariazinha, clique no link para obter mais informações https://forms.gle/ZNbidJmaihpgYqNY8 Venha viver essa experiência de renovação e comunhão!',
+            'src' => $boletimBase . '/Rádio NT.jpeg',
+            'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
+            'title' => 'Rádio Novo Tempo',
+            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
         ],
         [
             'type' => 'image',
@@ -155,6 +148,13 @@
         ],
         [
             'type' => 'image',
+            'src' => $boletimBase . '/Saúde.jpeg',
+            'alt' => 'Classe de Saúde — Alcalinização e acidificação',
+            'title' => 'Classe de Saúde',
+            'text' => 'ALCALINIZAÇÃO E ACIDIFICAÇÃO. O equilíbrio do organismo e o caminho para uma vida mais saudável. Suas escolhas alimentares podem influenciar o funcionamento do seu organismo. O equilíbrio interno do corpo é fundamental para a manutenção da saúde. Aquilo que colocamos no prato, nossos hábitos de vida, a hidratação e o funcionamento dos sistemas metabólicos participam diretamente dos processos que sustentam nossa vitalidade. Nesta abordagem, vamos compreender como os alimentos se relacionam com os mecanismos naturais de equilíbrio do organismo, o papel do intestino na regulação do pH e a importância da alimentação predominantemente natural, vegetal. Mais do que falar sobre alimentos, vamos ampliar nossa compreensão sobre como nutrir o corpo, favorecer seu funcionamento e construir hábitos que promovam saúde e qualidade de vida. Dra. Regina Carrion - PhD em Naturopatia.',
+        ],
+        [
+            'type' => 'image',
             'src' => $boletimBase . '/Classe pós-batismo.jpg',
             'alt' => 'Classe Pós-Batismo — Programa de Discipulado 2026',
             'title' => 'Classe Pós-Batismo',
@@ -162,31 +162,24 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/DBV.jpg',
-            'alt' => 'Apoie um Desbravador — Campori DSA 2027',
-            'title' => 'Apoie um Desbravador',
-            'text' => 'O Clube de Desbravadores Cruzeiro do Sul convida nossa amada igreja a investir no futuro espiritual de nossas crianças no Campori da DSA 2027, em Barretos/SP. Adote um desbravador com sua oferta generosa e ajude a fortalecer a fé, moldar o caráter cristão e proporcionar uma experiência transformadora. Unam-se a nós nesta linda missão e façam a diferença nessa jornada inesquecível. Doe pelo aplicativo 7me no campo ofertas Desbravadores. Sua contribuição fará toda a diferença!',
+            'src' => $boletimBase . '/Francês.jpeg',
+            'alt' => 'Classe de Escola Sabatina em Francês',
+            'title' => 'Classe de Francês',
+            'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta! Todo sábado, às 10h, na Igreja Adventista Internacional "BIC", espaço dedicado a adultos que desejam aprofundar seu conhecimento no idioma francês enquanto estudamos a Bíblia juntos. É uma oportunidade maravilhosa para aprender e compartilhar em comunidade. Entre no nosso grupo de WhatsApp para receber todos os detalhes e materiais. https://chat.whatsapp.com/KcWLeUItuvWEnZ27s6Xs67?mode=gi_t À bientôt!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/50 ANOS AVT.jpg',
+            'src' => $boletimBase . '/50 anos AVT.jpeg',
             'alt' => 'Celebra Cruzeiro do Sul — 50 anos',
             'title' => '50 Anos Aventureiros',
             'text' => 'CELEBRA CRUZEIRO DO SUL – 50 ANOS DE HISTÓRIA! Família Aventureira, essa história também é nossa! No dia 21 de novembro, às 16h, viveremos uma celebração muito especial, com batismos, investiduras, homenagens e o lançamento do nosso Aventuri. Queremos cada família conosco para celebrar tudo o que Deus tem realizado em nossa missão ao longo desses 50 anos. Pais, vocês fazem parte dessa história! Venham viver esse momento conosco! Por amor a Jesus, faremos sempre o nosso melhor. Essa é a nossa missão!',
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Coral Juvenil.jpg',
-            'alt' => 'Clipe Coral Juvenil de Brasília',
-            'title' => 'Coral Juvenil',
-            'text' => 'No dia 4 de dezembro, o Coral Juvenil de Brasília realizará o lançamento oficial de seu primeiro videoclipe. Convidamos a todos a reservarem esta data na agenda para prestigiar esse momento especial. Em breve, divulgaremos mais informações sobre a estreia.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/Francês.jpeg',
-            'alt' => 'Classe de Escola Sabatina em Francês',
-            'title' => 'Classe de Francês',
-            'text' => 'Temos uma excelente notícia para os amantes de idiomas e do estudo da Palavra: a Classe de Escola Sabatina em Francês está de volta! Todo sábado, às 10h, na Igreja Adventista Internacional "BIC", espaço dedicado a adultos que desejam aprofundar seu conhecimento no idioma francês enquanto estudamos a Bíblia juntos. É uma oportunidade maravilhosa para aprender e compartilhar em comunidade. Entre no nosso grupo de WhatsApp para receber todos os detalhes e materiais. https://chat.whatsapp.com/KcWLeUItuvWEnZ27s6Xs67?mode=gi_t À bientôt!',
+            'src' => $boletimBase . '/DBV.jpg',
+            'alt' => 'Apoie um Desbravador — Campori DSA 2027',
+            'title' => 'Apoie um Desbravador',
+            'text' => 'O Clube de Desbravadores Cruzeiro do Sul convida nossa amada igreja a investir no futuro espiritual de nossas crianças no Campori da DSA 2027, em Barretos/SP. Adote um desbravador com sua oferta generosa e ajude a fortalecer a fé, moldar o caráter cristão e proporcionar uma experiência transformadora. Unam-se a nós nesta linda missão e façam a diferença nessa jornada inesquecível. Doe pelo aplicativo 7me no campo ofertas Desbravadores. Sua contribuição fará toda a diferença!',
         ],
         [
             'type' => 'image',
@@ -201,13 +194,6 @@
             'alt' => 'Quartas de Poder — O Poder do Espírito',
             'title' => 'Quartas de Poder',
             'text' => 'Convidamos toda a comunidade para os cultos especiais do projeto Quartas de Poder, que serão realizados nas últimas quartas-feiras de cada mês, sempre às 19h30, com o tema "O Poder do Espírito". A programação das últimas quartas-feiras do mês é dedicada ao fortalecimento da vida de oração da igreja local, integrando momentos de louvor, orações de agradecimento e testemunhos de respostas de oração alcançadas pela nossa comunidade. Contamos com a sua presença para juntos buscarmos ao Senhor em oração.',
-        ],
-        [
-            'type' => 'image',
-            'src' => $boletimBase . '/NT.jpg',
-            'alt' => 'Rádio Novo Tempo em Brasília — 92.9 FM',
-            'title' => 'Rádio Novo Tempo',
-            'text' => 'É com muita alegria que anunciamos a chegada da Rádio Novo Tempo à capital federal, levando fé, música e mensagens que renovam as forças a cada dia. O lançamento oficial ocorreu no dia 24 de julho. Prepare o seu rádio, sintonize a 92.9 FM e compartilhe essa novidade com quem você ama.',
         ],
         [
             'type' => 'image',
@@ -249,7 +235,7 @@
             'src' => $boletimBase . '/Liberdade Religiosa capa divulgação.jpeg',
             'alt' => 'Pequeno Grupo — Liberdade Religiosa no Tempo do Fim',
             'title' => 'Liberdade Religiosa e Tempo do Fim',
-            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 20h, sempre em formato online. Participe, divulgue e ore por este projeto! "Orai sem cessar." — 1 Tessalonicenses 5:17. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3 Integre-se ao nosso grupo: https://chat.whatsapp.com/CYo7NkQ5jIMEpJ6BbSyl3X?mode=gi_t',
+            'text' => 'Convidamos você para participar do Pequeno Grupo de Oração: Liberdade Religiosa no Tempo do Fim, um espaço semanal dedicado à comunhão e ao estudo da Palavra de Deus à luz das profecias bíblicas e dos acontecimentos contemporâneos. Nossos encontros ocorrem quinzenalmente às terças-feiras, às 20h, sempre em formato online. Participe, divulgue e ore por este projeto! "Orai sem cessar." — 1 Tessalonicenses 5:17. Participe da reunião: https://teams.live.com/meet/9355849010881?p=1yeodiUPQHVWDUdvu3',
         ],
         [
             'type' => 'image',
@@ -260,17 +246,24 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/Domingos da Família.jpg',
-            'alt' => 'Domingos da Família — As 5 marcas de uma família saudável',
-            'title' => 'Domingos da Família',
-            'text' => 'Vivemos dias desafiadores, onde a correria, as preocupações e a falta de tempo afetam nossos relacionamentos. Mas a Palavra de Deus nos mostra que é sim possível construir um lar forte, saudável e harmonioso! Em novembro, sempre às 19h, teremos os Domingos da Família com uma série muito especial: As 5 Marcas de Uma Família Saudável – O Segredo para a Harmonia do Lar. Vamos orar e convidar! Cada membro da igreja é desafiado a trazer uma família não adventista para participar conosco. Essa é a nossa missão! Todas as famílias convidadas não adventistas que nos visitarem ganharão um livro de meditação preparado com muito carinho pelo Ministério da Família. Vamos juntos transformar nossos lares e abençoar outras famílias? Compartilhe essa mensagem e comece a orar pelos seus convidados!',
-        ],
-        [
-            'type' => 'image',
             'src' => $boletimBase . '/ADIADO SPJ.jpg',
             'alt' => 'Só Para Jovens — adiado',
             'title' => 'Só Para Jovens',
             'text' => 'ADIADO.',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Super Sexta.jpeg',
+            'alt' => 'Super Sexta — 3ª edição',
+            'title' => 'Super Sexta',
+            'text' => 'A SUPER SEXTA ESTÁ DE VOLTA! Vem aí a 3ª edição! Uma noite especial de louvor, adoração e reflexão, com Daniel Lüdtke e Pastor Matheus Tavares. Convide seus amigos e venha viver essa experiência com a gente! Próxima sexta, dia 27 de novembro às 19h30 aqui na Igreja Adventista Central de Brasília. SUPER SEXTA, você não vai querer ficar de fora!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/21-11 ASA Aberta.jpg',
+            'alt' => 'ASA Aberta — pizzas e lanches',
+            'title' => 'ASA Aberta',
+            'text' => 'Hoje, após o pôr do sol, a ASA estará aberta para receber você com pizzas e lanches deliciosos a preços acessíveis, em um ambiente acolhedor e descontraído, perfeito para reencontrar amigos e fazer novas conexões. Aproveite!',
         ],
         [
             'type' => 'image',
@@ -295,10 +288,10 @@
         ],
         [
             'type' => 'image',
-            'src' => $boletimBase . '/CORAL IABC.jpg',
-            'alt' => 'Coral do IABC',
-            'title' => 'Coral IABC',
-            'text' => 'No sábado, dia 14/11, a partir das 9h. Teremos a alegria de receber o Coral do IABC para uma programação verdadeiramente inesquecível. E às 17h30 um Culto Jovem muito especial. Venha celebrar conosco!',
+            'src' => $boletimBase . '/Coral Juvenil.jpg',
+            'alt' => 'Clipe Coral Juvenil de Brasília',
+            'title' => 'Coral Juvenil',
+            'text' => 'No dia 4 de dezembro, o Coral Juvenil de Brasília realizará o lançamento oficial de seu primeiro videoclipe. Convidamos a todos a reservarem esta data na agenda para prestigiar esse momento especial. Em breve, divulgaremos mais informações sobre a estreia.',
         ],
         [
             'type' => 'image',
@@ -306,6 +299,13 @@
             'alt' => 'Concerto O Messias e curso de biscoitos natalinos',
             'title' => 'O Messias',
             'text' => 'No dia 06/12, convidamos você e sua família para assistir ao grande concerto O Messias, de Handel, interpretado pelo tradicional Coral Adventista de Brasília! E, para tornar esse dia ainda mais inesquecível, à tarde teremos um delicioso curso de biscoitos natalinos com a professora Rosa Vono e um encantador presépio vivo, perfeito para registrar aquelas fotos instagramáveis! Garanta já a sua vaga na oficina de biscoitos natalinos, pois são apenas 25 vagas! Inscreva-se no link: https://forms.gle/vaQoWQ1cAwitPNVp6 Reserve essa data e prepare-se para grandes surpresas!',
+        ],
+        [
+            'type' => 'image',
+            'src' => $boletimBase . '/Domingos da Família.jpg',
+            'alt' => 'Domingos da Família — As 5 marcas de uma família saudável',
+            'title' => 'Domingos da Família',
+            'text' => 'Vivemos dias desafiadores, onde a correria, as preocupações e a falta de tempo afetam nossos relacionamentos. Mas a Palavra de Deus nos mostra que é sim possível construir um lar forte, saudável e harmonioso! Em novembro, sempre às 19h, teremos os Domingos da Família com uma série muito especial: As 5 Marcas de Uma Família Saudável – O Segredo para a Harmonia do Lar. Vamos orar e convidar! Cada membro da igreja é desafiado a trazer uma família não adventista para participar conosco. Essa é a nossa missão! Todas as famílias convidadas não adventistas que nos visitarem ganharão um livro de meditação preparado com muito carinho pelo Ministério da Família. Vamos juntos transformar nossos lares e abençoar outras famílias? Compartilhe essa mensagem e comece a orar pelos seus convidados!',
         ],
         [
             'type' => 'image',
