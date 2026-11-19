@@ -1,7 +1,6 @@
 const slider = document.querySelector('.slider');
 if (!slider) {
     // Este script é carregado em algumas páginas que não possuem carrossel.
-    // Se não existir `.slider`, não fazemos nada.
 } else {
     const list = slider.querySelector('.list');
     const prev = slider.querySelector('#prev');
@@ -11,19 +10,18 @@ if (!slider) {
     if (!list || !prev || !next) {
         // Estrutura incompleta: não inicializa.
     } else {
-        const baseTransition = getComputedStyle(list).transition || '1s';
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const SLIDE_DWELL_MS = 4000;
         const CLICK_HINT_MS = 2900;
+        const TRANSITION_MS = 1000;
+        const TRANSITION_FALLBACK_MS = TRANSITION_MS + 150;
 
-        // Itens originais (antes dos clones)
         const originalItems = Array.from(list.querySelectorAll('.item'));
         const originalCount = originalItems.length;
 
         if (originalCount <= 1) {
             // Com 0/1 slide não faz sentido animar/infinito.
         } else {
-            // Clones para efeito infinito
             const firstClone = originalItems[0].cloneNode(true);
             const lastClone = originalItems[originalCount - 1].cloneNode(true);
             firstClone.classList.add('clone');
@@ -31,18 +29,19 @@ if (!slider) {
             list.appendChild(firstClone);
             list.insertBefore(lastClone, originalItems[0]);
 
-            // Índice "real" dentro da lista com clones:
-            // 0 = clone do último
-            // 1..originalCount = slides reais
-            // originalCount+1 = clone do primeiro
+            // 0 = clone do último | 1..N = reais | N+1 = clone do primeiro
             let currentIndex = 1;
             let clickHintTimer = null;
             let clickPressTimers = [];
             let refreshSlider = null;
+            let settleTimer = null;
             let autoplayPausedByUser = false;
+            let isTransitioning = false;
+            let pendingSettle = false;
+            let initialized = false;
 
             function setTransitionEnabled(enabled) {
-                list.style.transition = enabled ? baseTransition : 'none';
+                list.style.transition = enabled ? `${TRANSITION_MS}ms` : 'none';
             }
 
             function getAllItems() {
@@ -75,9 +74,6 @@ if (!slider) {
             }
 
             function dotIndexFromCurrent() {
-                // currentIndex 1..originalCount -> 0..originalCount-1
-                // clone final (originalCount+1) -> 0
-                // clone inicial (0) -> originalCount-1
                 let idx = currentIndex - 1;
                 if (idx < 0) idx = originalCount - 1;
                 if (idx >= originalCount) idx = 0;
@@ -106,7 +102,7 @@ if (!slider) {
 
             function armAutoplay(extraDelay = 0) {
                 stopAutoSlider();
-                if (autoplayPausedByUser) return;
+                if (autoplayPausedByUser || document.hidden) return;
 
                 refreshSlider = setTimeout(() => {
                     goNext();
@@ -141,7 +137,6 @@ if (!slider) {
                 void overlay.offsetWidth;
                 overlay.classList.add('carousel-click-overlay--play');
 
-                // Sync a short "press" on the card with each tap of the hand
                 [320, 800, 1770, 2250].forEach((delay) => {
                     const pressOn = setTimeout(() => {
                         link.classList.add('carousel-cta-link--press');
@@ -162,25 +157,55 @@ if (!slider) {
 
             function onSlideSettled() {
                 const hintMs = playClickHint();
-                // O tempo da mãozinha NÃO consome o dwell do slide.
                 armAutoplay(hintMs);
             }
 
             function jumpWithoutAnimation(index) {
                 setTransitionEnabled(false);
                 setPosition(index, false);
-                // força reflow para garantir que a próxima transição seja aplicada
                 void list.offsetHeight;
                 setTransitionEnabled(true);
             }
 
-            let isTransitioning = false;
+            function wrapCloneIndex() {
+                if (currentIndex === 0) {
+                    currentIndex = originalCount;
+                    jumpWithoutAnimation(currentIndex);
+                } else if (currentIndex === originalCount + 1) {
+                    currentIndex = 1;
+                    jumpWithoutAnimation(currentIndex);
+                }
+            }
+
+            function finishTransition() {
+                if (!pendingSettle) return;
+                pendingSettle = false;
+
+                if (settleTimer) {
+                    clearTimeout(settleTimer);
+                    settleTimer = null;
+                }
+
+                wrapCloneIndex();
+                isTransitioning = false;
+                syncDots();
+                onSlideSettled();
+            }
+
+            function beginTransition() {
+                isTransitioning = true;
+                pendingSettle = true;
+
+                if (settleTimer) clearTimeout(settleTimer);
+                // Se transitionend falhar (aba em background, resize, etc.), não trava.
+                settleTimer = setTimeout(finishTransition, TRANSITION_FALLBACK_MS);
+            }
 
             function goNext() {
                 if (isTransitioning) return;
                 stopAutoSlider();
                 clearClickHintTimers();
-                isTransitioning = true;
+                beginTransition();
                 currentIndex += 1;
                 setPosition(currentIndex, true);
                 syncDots();
@@ -190,7 +215,7 @@ if (!slider) {
                 if (isTransitioning) return;
                 stopAutoSlider();
                 clearClickHintTimers();
-                isTransitioning = true;
+                beginTransition();
                 currentIndex -= 1;
                 setPosition(currentIndex, true);
                 syncDots();
@@ -199,34 +224,31 @@ if (!slider) {
             next.onclick = goNext;
             prev.onclick = goPrev;
 
-            // Clique nos dots (vai para slide real)
             dots.forEach((li, key) => {
                 li.addEventListener('click', function () {
                     if (isTransitioning) return;
+                    const targetIndex = key + 1;
+                    if (targetIndex === currentIndex) return;
+
                     stopAutoSlider();
                     clearClickHintTimers();
-                    isTransitioning = true;
-                    currentIndex = key + 1;
+                    beginTransition();
+                    currentIndex = targetIndex;
                     setPosition(currentIndex, true);
                     syncDots();
                 });
             });
 
-            // Corrige o "teleporte" após a transição para manter o infinito
             list.addEventListener('transitionend', (e) => {
-                // Ignora disparos de outras propriedades CSS (ex: opacity)
+                if (e.target !== list) return;
                 if (e.propertyName !== 'left') return;
+                finishTransition();
+            });
 
-                if (currentIndex === 0) {
-                    currentIndex = originalCount;
-                    jumpWithoutAnimation(currentIndex);
-                } else if (currentIndex === originalCount + 1) {
-                    currentIndex = 1;
-                    jumpWithoutAnimation(currentIndex);
-                }
-
-                isTransitioning = false;
-                onSlideSettled();
+            list.addEventListener('transitioncancel', (e) => {
+                if (e.target !== list) return;
+                if (e.propertyName && e.propertyName !== 'left') return;
+                finishTransition();
             });
 
             slider.addEventListener('mouseenter', () => {
@@ -235,6 +257,7 @@ if (!slider) {
             });
             slider.addEventListener('mouseleave', () => {
                 autoplayPausedByUser = false;
+                if (isTransitioning) return;
                 const overlayPlaying = getAllItems()[currentIndex]?.querySelector('.carousel-click-overlay--play');
                 armAutoplay(overlayPlaying ? CLICK_HINT_MS : 0);
             });
@@ -244,25 +267,50 @@ if (!slider) {
             });
             slider.addEventListener('focusout', () => {
                 autoplayPausedByUser = false;
+                if (isTransitioning) return;
                 const overlayPlaying = getAllItems()[currentIndex]?.querySelector('.carousel-click-overlay--play');
                 armAutoplay(overlayPlaying ? CLICK_HINT_MS : 0);
             });
 
-            // Posiciona inicialmente no primeiro slide real (sem animação)
-            // Fazemos isso após o layout para garantir offsetLeft correto.
-            const init = () => {
+            function syncLayoutOnly() {
+                syncSlideWidths();
+                // Interrompe transição em andamento sem resetar para o slide 1
+                if (isTransitioning || pendingSettle) {
+                    pendingSettle = false;
+                    if (settleTimer) {
+                        clearTimeout(settleTimer);
+                        settleTimer = null;
+                    }
+                    wrapCloneIndex();
+                    isTransitioning = false;
+                    setPosition(currentIndex, false);
+                    syncDots();
+                    onSlideSettled();
+                    return;
+                }
+                setPosition(currentIndex, false);
+            }
+
+            function initOnce() {
+                if (initialized) return;
+                initialized = true;
                 syncSlideWidths();
                 currentIndex = 1;
                 setPosition(currentIndex, false);
                 syncDots();
                 onSlideSettled();
-            };
+            }
 
-            requestAnimationFrame(init);
-            window.addEventListener('load', init, { once: true });
-            window.addEventListener('resize', () => {
-                syncSlideWidths();
-                setPosition(currentIndex, false);
+            requestAnimationFrame(initOnce);
+            window.addEventListener('load', syncLayoutOnly, { once: true });
+            window.addEventListener('resize', syncLayoutOnly);
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopAutoSlider();
+                    return;
+                }
+                syncLayoutOnly();
             });
         }
     }
