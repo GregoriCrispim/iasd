@@ -353,7 +353,8 @@ Route::get('/classe-saude', [PageController::class, 'classeSaude'])->name('class
 Route::get('/clube-do-livro', [PageController::class, 'clubeDoLivro'])->name('clube-do-livro');
 Route::get('/corais', [PageController::class, 'corais'])->name('corais');
 Route::get('/cemab', [PageController::class, 'cemab'])->name('cemab');
-Route::get('/ead', [PageController::class, 'ead'])->name('ead');
+// EAD fora do ar — view e PageController::ead preservados para reativação
+// Route::get('/ead', [PageController::class, 'ead'])->name('ead');
 Route::get('/doutores-da-esperanca', [PageController::class, 'doutoresDaEsperanca'])->name('doutores-da-esperanca');
 Route::get('/programacoes', [PageController::class, 'programacoes'])->name('programacoes');
 Route::view('/boletim-digital', 'pages.boletim-digital')->name('boletim-digital');

@@ -18,18 +18,8 @@
             <img src="{{ asset('img/carrousel/One-Voice.webp') }}" alt="Slide 1 - One Voice" fetchpriority="high" decoding="async" width="1920" height="700">
         </div>
         <div class="item">
-            <a href="{{ route('ead') }}" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/black-november-ead.webp') }}" alt="Slide 2 - Black November EAD Adventista: primeira mensalidade R$ 0,00, matricule-se já" decoding="async" width="1920" height="700">
-                <span class="carousel-click-overlay" aria-hidden="true">
-                    <span class="carousel-click-hint">
-                        <i class="bi bi-hand-index"></i>
-                    </span>
-                </span>
-            </a>
-        </div>
-        <div class="item">
             <a href="https://whatsapp.com/channel/0029VaY6Z5UJJhzdkYF51D1T" target="_blank" rel="noopener noreferrer" class="carousel-cta-link">
-                <img src="{{ asset('img/carrousel/1.webp') }}" alt="Slide 3 - Canal no WhatsApp da IASD Central de Brasília" decoding="async" width="1280" height="720">
+                <img src="{{ asset('img/carrousel/1.webp') }}" alt="Slide 2 - Canal no WhatsApp da IASD Central de Brasília" decoding="async" width="1280" height="720">
                 <span class="carousel-click-overlay" aria-hidden="true">
                     <span class="carousel-click-hint">
                         <i class="bi bi-hand-index"></i>
